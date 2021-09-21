@@ -1,0 +1,14 @@
+name: GitHub Actions Develop
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: wei/curl@master
+        with:
+          args: https://api.vercel.com/v1/integrations/deploy/prj_NPu0H4YmLUkGrdDiS6jg8nGhSN94/11fAxuzp1N
