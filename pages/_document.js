@@ -12,7 +12,7 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital@1&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400italic,700" rel="stylesheet" />
         </Head>
         <body>
           <Main />
