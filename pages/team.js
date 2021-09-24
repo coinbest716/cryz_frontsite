@@ -1,5 +1,5 @@
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import styles from 'styles/Home.module.scss'
+import styles from 'styles/Common.module.scss'
 
 const Team = () => {
   return <div className={styles.container}>Team page content</div>

@@ -1,5 +1,5 @@
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import styles from 'styles/Home.module.scss'
+import styles from 'styles/Common.module.scss'
 
 const Classland = () => {
   return <div className={styles.container}>Classland page content</div>
