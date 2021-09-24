@@ -1,3 +1,5 @@
+@import 'variable.module.scss';
+
 .container {
   height: 80px;
 }
@@ -5,15 +7,16 @@
   margin-left: 73px;
   font-family: 'Cartoon Marker';
   font-size: 16px;
+  color: $black-950-color;
 }
 .hamburgerMenu {
   width: 80px;
   height: 80px;
-  background-color: #818e8e;
+  background-color: $blue-gray-400-color;
   &:hover {
-    background-color: #8fa1a5;
+    background-color: $blue-gray-300-color;
   }
-  border-bottom: 1px solid #979797;
+  border-bottom: 1px solid $gray-500-color;
 }
 .menuItem {
   height: 80px;
@@ -24,9 +27,9 @@
   font-weight: 400;
   line-height: 18px;
   letter-spacing: 0.7px;
-  color: #4a4848;
+  color: $gray-800-color;
 }
 .active {
   font-weight: 700;
-  border-bottom: 3px solid #abbbbf;
+  border-bottom: 3px solid $gray-450-color;
 }

@@ -7,12 +7,13 @@ import { useDispatch } from 'react-redux'
 import CartIcon from 'assets/images/cart.svg'
 import AccountIcon from 'assets/images/account.svg'
 import AppsIcon from 'assets/images/apps.svg'
+// styles
 import styles from 'components/Header/Header.module.scss'
 
 const Header = () => {
   const router = useRouter()
-  console.log(router.pathname)
   const dispatch = useDispatch()
+
   const menus = [
     {
       title: 'Salud Fem',
