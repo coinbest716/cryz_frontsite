@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Images from 'next/image'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 
@@ -43,7 +43,9 @@ const Header = () => {
 
   return (
     <div className={'w-full flex justify-between items-center ' + styles.container}>
-      <div className={styles.logo}>CRYS DYAZ & CO</div>
+      <Link href={'/'}>
+        <p className={styles.logo}>CRYS DYAZ & CO</p>
+      </Link>
       <div className="flex">
         <ul className="flex flex-col sm:flex-row list-none items-center justify-end">
           {menus &&
@@ -59,7 +61,7 @@ const Header = () => {
                   key={key}
                 >
                   <Link href={menu.link}>
-                    <button name={menu.title} onClick={() => dispatch({ type: 'set', menu: menu.title })}>
+                    <button>
                       <a>{router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}</a>
                     </button>
                   </Link>
@@ -69,20 +71,20 @@ const Header = () => {
           <li className={'flex justify-center ml-16 ' + styles.menuItem}>
             <Link href={'/shop-cart'}>
               <button>
-                <Images src={CartIcon} alt="" width={22} height={19} />
+                <Image src={CartIcon} alt="" width={22} height={19} />
               </button>
             </Link>
           </li>
           <li className={'flex justify-center ' + styles.menuItem}>
             <Link href={'/account'}>
               <button>
-                <Images src={AccountIcon} alt="" width={22} height={20} />
+                <Image src={AccountIcon} alt="" width={22} height={20} />
               </button>
             </Link>
           </li>
         </ul>
         <button className={'flex justify-center items-center ' + styles.hamburgerMenu}>
-          <Images src={AppsIcon} alt="" width={32} height={32} />
+          <Image src={AppsIcon} alt="" width={32} height={32} />
         </button>
       </div>
     </div>

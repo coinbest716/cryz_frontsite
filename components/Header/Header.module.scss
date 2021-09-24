@@ -1,4 +1,4 @@
-@import 'variable.module.scss';
+@import 'Variable.module.scss';
 
 .container {
   height: 80px;
@@ -8,6 +8,7 @@
   font-family: 'Cartoon Marker';
   font-size: 16px;
   color: $black-950-color;
+  cursor: pointer;
 }
 .hamburgerMenu {
   width: 80px;
