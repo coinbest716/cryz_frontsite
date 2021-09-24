@@ -1,0 +1,39 @@
+@import 'Variable.module.scss';
+
+.footerArea {
+  width: 100%;
+  background-color: $gray-600-color;
+  padding-top: 31px;
+  padding-bottom: 31px;
+}
+
+.workWithUsButton {
+  padding: 8px 32px 6px 32px;
+  font-family: Montserrat;
+  font-size: 10px;
+  line-height: 26px;
+  letter-spacing: 0.5px;
+  color: $white-color;
+  background-color: transparent;
+  border: 1px solid $white-color;
+  &:hover {
+    background-color: $blue-gray-300-color;
+  }
+}
+
+.logo {
+  font-family: 'Cartoon Marker';
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.22px;
+  color: $white-color;
+  cursor: pointer;
+}
+
+.text {
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.26px;
+}
