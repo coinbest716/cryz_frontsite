@@ -2,6 +2,10 @@ import Link from 'next/link'
 import Images from 'next/image'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
+
+// images
+import CartIcon from 'assets/images/cart.svg'
+import AccountIcon from 'assets/images/account.svg'
 import AppsIcon from 'assets/images/apps.svg'
 import styles from 'components/Header/Header.module.scss'
 
@@ -38,7 +42,7 @@ const Header = () => {
 
   return (
     <div className={'w-full flex justify-between items-center ' + styles.container}>
-      <div className={styles.logo}> logo part</div>
+      <div className={styles.logo}>CRYS DYAZ & CO</div>
       <div className="flex">
         <ul className="flex flex-col sm:flex-row list-none items-center justify-end">
           {menus &&
@@ -61,6 +65,20 @@ const Header = () => {
                 </li>
               )
             })}
+          <li className={'flex justify-center ml-16 ' + styles.menuItem}>
+            <Link href={'/shop-cart'}>
+              <button>
+                <Images src={CartIcon} alt="" width={22} height={19} />
+              </button>
+            </Link>
+          </li>
+          <li className={'flex justify-center ' + styles.menuItem}>
+            <Link href={'/account'}>
+              <button>
+                <Images src={AccountIcon} alt="" width={22} height={20} />
+              </button>
+            </Link>
+          </li>
         </ul>
         <button className={'flex justify-center items-center ' + styles.hamburgerMenu}>
           <Images src={AppsIcon} alt="" width={32} height={32} />
