@@ -13,6 +13,7 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital@1&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400italic,700" rel="stylesheet" />
+          <link href="/fonts/style.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />
