@@ -4,3 +4,10 @@
   font-weight: 900;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'DrukWideCyWeb-Bold';
+  src: url('Druk-Wide-Cy-Web-Bold-Regular.ttf');
+  font-weight: 900;
+  font-style: normal;
+}
