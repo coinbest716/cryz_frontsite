@@ -40,7 +40,7 @@ const COSlider = () => {
       arrayOfArrays.push(COSliderData.slice(i, i + size))
     }
     setSliderData(arrayOfArrays)
-  }, [COSliderData])
+  }, [])
 
   const handleSetIsFlipped = (bool, id) => {
     setIsFlipped(isFlipped => ({ ...isFlipped, id: id }))
@@ -56,7 +56,6 @@ const COSlider = () => {
           showThumbs={false}
           autoPlay={false}
           stopOnHover={true}
-          showArrows={true}
           showStatus={false}
           showIndicators={false}
           infiniteLoop={true}
