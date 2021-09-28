@@ -11,7 +11,7 @@
     "linkedin": "https://www.linkedin.com"
   },
   {
-    "id": 1,
+    "id": 2,
     "image": "/images/02.png",
     "name": "Chloe Parker",
     "role": "Art Director",
@@ -22,7 +22,7 @@
     "linkedin": "https://www.linkedin.com"
   },
   {
-    "id": 1,
+    "id": 3,
     "image": "/images/03.png",
     "name": "Alex Bolson",
     "role": "Web Designer",
