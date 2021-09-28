@@ -22,7 +22,7 @@ const Footer = () => {
               <p className={'mr-4'}>Trabaja con nosotros</p>
               <Image src={ArrowLeftIcon} alt="" width={23} height={22} />
             </button>
-            <Link href={'/'}>
+            <Link href={'/'} passHref>
               <button className={styles.logo}>
                 <p className={styles.logo}>CRYS DYAZ & CO</p>
               </button>

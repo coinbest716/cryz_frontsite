@@ -1,3 +1,17 @@
 @import '~tailwindcss/base';
 @import '~tailwindcss/components';
 @import '~tailwindcss/utilities';
+
+@font-face {
+  font-family: 'Cartoon Marker';
+  src: url('../assets/fonts/Cartoon-Marker.ttf');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DrukWideCyWeb-Bold';
+  src: url('../assets/fonts/Druk-Wide-Cy-Web-Bold-Regular.ttf');
+  font-weight: 900;
+  font-style: normal;
+}

@@ -12,9 +12,11 @@ class MyDocument extends Document {
           </Fragment>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital@1&display=swap" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400italic,700" rel="stylesheet" />
-          <link href="/fonts/style.css" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Roboto&display=optional" rel="stylesheet" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,400italic,700&display=optional"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />

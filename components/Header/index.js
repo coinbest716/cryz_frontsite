@@ -43,7 +43,7 @@ const Header = () => {
 
   return (
     <div className={'w-full flex justify-between items-center ' + styles.container}>
-      <Link href={'/'}>
+      <Link href={'/'} passHref>
         <p className={styles.logo}>CRYS DYAZ & CO</p>
       </Link>
       <div className="flex">
@@ -60,7 +60,7 @@ const Header = () => {
                   }
                   key={key}
                 >
-                  <Link href={menu.link}>
+                  <Link href={menu.link} passHref>
                     <button>
                       <a>{router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}</a>
                     </button>
@@ -69,14 +69,14 @@ const Header = () => {
               )
             })}
           <li className={'flex justify-center ml-16 ' + styles.menuItem}>
-            <Link href={'/shop-cart'}>
+            <Link href={'/shop-cart'} passHref>
               <button>
                 <Image src={CartIcon} alt="" width={22} height={19} />
               </button>
             </Link>
           </li>
           <li className={'flex justify-center ' + styles.menuItem}>
-            <Link href={'/account'}>
+            <Link href={'/account'} passHref>
               <button>
                 <Image src={AccountIcon} alt="" width={22} height={20} />
               </button>
