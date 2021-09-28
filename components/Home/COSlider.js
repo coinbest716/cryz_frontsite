@@ -10,6 +10,10 @@ import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
 import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
 import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
+import PinterestIcon from 'assets/images/pinterest-gray.svg'
+import FacebookIcon from 'assets/images/facebook-gray.svg'
+import TwitterIcon from 'assets/images/twitter-gray.svg'
+import LinkedinIcon from 'assets/images/linkedin-gray.svg'
 
 // json data
 import COSliderData from 'assets/data/COSliderData'
@@ -90,10 +94,31 @@ const COSlider = () => {
                     >
                       {elem.id === isFlipped.id ? (
                         <ReactCardFlip isFlipped={isFlipped.bool} flipDirection="horizontal">
-                          <div className={styles.card}>
+                          <div>
                             <Image src={elem.image} alt="" width={364} height={364} />
                           </div>
-                          <div className={styles.card}></div>
+                          <div className={styles.card}>
+                            <Image src={elem.image} alt="" width={364} height={364} />
+                            <div className={styles.cardContent}>
+                              <div className="w-full inline-block text-center">Entrenador personal</div>
+                              <div className="w-full inline-block">{elem.name}</div>
+                              <div className="w-full inline-block">{elem.description}</div>
+                              <div className={'w-full flex justify-center'}>
+                                <div className={'cursor-pointer mx-1.5'}>
+                                  <Image src={PinterestIcon} alt="" with={24} height={24} />
+                                </div>
+                                <div className={'cursor-pointer mx-1.5'}>
+                                  <Image src={FacebookIcon} alt="" with={24} height={24} />
+                                </div>
+                                <div className={'cursor-pointer mx-1.5'}>
+                                  <Image src={TwitterIcon} alt="" with={24} height={24} />
+                                </div>
+                                <div className={'cursor-pointer ml-1.5'}>
+                                  <Image src={LinkedinIcon} alt="" with={24} height={24} />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </ReactCardFlip>
                       ) : (
                         <div>
