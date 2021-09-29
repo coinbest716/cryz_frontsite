@@ -99,9 +99,11 @@ const COSlider = () => {
                           <div className={styles.card}>
                             <Image src={elem.image} alt="" width={364} height={364} />
                             <div className={styles.cardContent}>
-                              <div className="w-full inline-block text-center">Entrenador personal</div>
-                              <div className="w-full inline-block">{elem.name}</div>
-                              <div className="w-full inline-block">{elem.description}</div>
+                              <div className={'w-full inline-block text-center ' + styles.cardText}>
+                                Entrenador personal
+                              </div>
+                              <div className={'w-full inline-block ' + styles.cardName}>{elem.name}</div>
+                              <div className={'w-full inline-block ' + styles.cardDescription}>{elem.description}</div>
                               <div className={'w-full flex justify-center'}>
                                 <div className={'cursor-pointer mx-1.5'}>
                                   <Image src={PinterestIcon} alt="" with={24} height={24} />
