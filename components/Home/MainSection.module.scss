@@ -1,0 +1,46 @@
+@import 'styles/variable.module.scss';
+
+.topToBottom {
+  animation: topToBottom ease 1s;
+  position: absolute;
+  top: 50%;
+  left: 67px;
+  color: $white-color;
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 90px;
+  line-height: 109px;
+  letter-spacing: 0px;
+}
+@keyframes topToBottom {
+  0% {
+    left: 67px;
+    top: 30%;
+  }
+  100% {
+    left: 67px;
+    top: 50%;
+  }
+}
+
+.bottomToTop {
+  animation: bottomToTop ease 1s;
+  position: absolute;
+  top: 40%;
+  left: 67px;
+  color: $gray-800-color;
+  font-style: 'italic';
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 80px;
+  line-height: 72px;
+  letter-spacing: 0px;
+}
+@keyframes bottomToTop {
+  0% {
+    left: 67px;
+    top: 60%;
+  }
+  100% {
+    left: 67px;
+    top: 40%;
+  }
+}

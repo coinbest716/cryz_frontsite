@@ -1,12 +1,14 @@
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
+
+// components
+import MainSection from 'components/Home/MainSection'
 import COSlider from 'components/Home/COSlider'
 import styles from 'styles/Home.module.scss'
 
 const Home = () => {
   return (
     <div className={styles.container}>
-      Home page content
-      <div style={{ height: '200px' }}></div>
+      <MainSection />
       <COSlider />
     </div>
   )

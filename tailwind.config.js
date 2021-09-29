@@ -6,7 +6,11 @@ module.exports = {
   },
   purge: ['./components/**/*.js', './pages/**/*.js'],
   theme: {
-    extend: {},
+    extend: {
+      zIndex: {
+        '-10': '-10',
+      },
+    },
   },
   variants: {},
   plugins: [require('tailwindcss'), require('precss'), require('autoprefixer')],
