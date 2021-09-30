@@ -8,6 +8,12 @@ import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
 import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
 import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
+import TeamMember01 from 'assets/images/team-member-01.png'
+import SignImg from 'assets/images/sign.svg'
+import PinterestIcon from 'assets/images/pinterest-gray.svg'
+import FacebookIcon from 'assets/images/facebook-gray.svg'
+import TwitterIcon from 'assets/images/twitter-gray.svg'
+import LinkedinIcon from 'assets/images/linkedin-gray.svg'
 
 // json data
 import TeamSectionData from 'assets/data/TeamSectionData'
@@ -74,6 +80,45 @@ const TeamSection = () => {
       ) : (
         <></>
       )}
+      <div className="w-full flex mt-20 mb-11">
+        <div className="w-full md:w-1/2 flex justify-center items-center">
+          <Image src={TeamMember01} alt="" width={355} height={368} />
+        </div>
+        <div className="w-full md:w-1/2 flex flex-wrap justify-start items-center">
+          <div className={styles.text}>
+            En mis años de dedicación como deportista de élite formando parte de la Selección Española de natación,
+            aprendí el valor del deporte y la importancia del cuidado y bienestar personal.
+            <br />
+            Ahora, mi objetivo principal es transmitir, junto a mi equipo, todo mi conocimiento en distintas áreas del
+            deporte, fisioterapia y nutrición para lograr que nuestros pacientes alcancen y superen sus metas
+            personales.
+          </div>
+          <div className="w-full flex justify-between my-4">
+            <Image src={SignImg} alt="" width={181} height={88} />
+            <div className={'w-full flex justify-end items-center'}>
+              <div className={'cursor-pointer mx-1.5'}>
+                <Image src={PinterestIcon} alt="" with={24} height={24} />
+              </div>
+              <div className={'cursor-pointer mx-1.5'}>
+                <Image src={FacebookIcon} alt="" with={24} height={24} />
+              </div>
+              <div className={'cursor-pointer mx-1.5'}>
+                <Image src={TwitterIcon} alt="" with={24} height={24} />
+              </div>
+              <div className={'cursor-pointer ml-1.5'}>
+                <Image src={LinkedinIcon} alt="" with={24} height={24} />
+              </div>
+            </div>
+          </div>
+          <div className={styles.text}>
+            Mis lemas son:
+            <br />
+            “Hoy es el día. Ahora el momento”
+            <br />
+            “Cuando amas lo que tienes, tienes todo lo que necesitas”
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
