@@ -1,0 +1,36 @@
+@import 'styles/variable.module.scss';
+
+.title {
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: 0px;
+  color: $blue-gray-400-color;
+  margin-top: 49px;
+}
+
+.divider {
+  width: 42px;
+  height: 8px;
+  margin-top: 24px;
+  margin-bottom: 38px;
+  background-color: $pink-100-color;
+}
+
+.text {
+  font-family: 'Montserrat';
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 0.71px;
+  color: $blue-gray-400-color;
+}
+
+.previousButton {
+  margin-left: calc(100% - 100px);
+}
+
+.nextButton {
+  position: absolute;
+  top: 0px;
+  margin-left: calc(100% - 20px);
+}
