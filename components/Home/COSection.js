@@ -16,13 +16,13 @@ import TwitterIcon from 'assets/images/twitter-gray.svg'
 import LinkedinIcon from 'assets/images/linkedin-gray.svg'
 
 // json data
-import COSliderData from 'assets/data/COSliderData'
+import COSectionData from 'assets/data/COSectionData'
 
 // styles
-import styles from 'components/Home/COSlider.module.scss'
+import styles from 'components/Home/COSection.module.scss'
 import globalStyles from 'styles/GlobalStyle.module.scss'
 
-const COSlider = () => {
+const COSection = () => {
   const [sliderData, setSliderData] = useState([])
   const [loadFlipCard, setLoadFlipCard] = useState(false)
   const [isFlipped, setIsFlipped] = useState({ id: 1, bool: false })
@@ -36,8 +36,8 @@ const COSlider = () => {
   useEffect(() => {
     var size = 6
     var arrayOfArrays = []
-    for (var i = 0; i < COSliderData.length; i += size) {
-      arrayOfArrays.push(COSliderData.slice(i, i + size))
+    for (var i = 0; i < COSectionData.length; i += size) {
+      arrayOfArrays.push(COSectionData.slice(i, i + size))
     }
     setSliderData(arrayOfArrays)
   }, [])
@@ -149,4 +149,4 @@ const COSlider = () => {
   )
 }
 
-export default COSlider
+export default COSection
