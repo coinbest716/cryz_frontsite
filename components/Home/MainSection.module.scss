@@ -1,15 +1,16 @@
 @import 'styles/variable.module.scss';
 
 .topToBottom {
-  animation: topToBottom ease 1s;
+  animation: topToBottom ease 2s;
   position: absolute;
   top: 50%;
   left: 67px;
   color: $white-color;
-  font-family: 'DrukWideCyWeb-Bold';
+  font-family: DrukWideCyWeb-Bold;
   font-size: 90px;
-  line-height: 109px;
+  line-height: 50px;
   letter-spacing: 0px;
+  text-shadow: 4px 7px 9px rgba(105, 102, 102, 0.5);
 }
 @keyframes topToBottom {
   0% {
@@ -23,15 +24,16 @@
 }
 
 .bottomToTop {
-  animation: bottomToTop ease 1s;
+  animation: bottomToTop ease 2s;
   position: absolute;
-  top: 40%;
+  top: calc(50% - 80px);
   left: 67px;
   color: $gray-800-color;
-  font-style: 'italic';
-  font-family: 'DrukWideCyWeb-Bold';
+  font-style: italic;
+  font-family: Roboto;
+  font-weight: 700;
   font-size: 80px;
-  line-height: 72px;
+  line-height: 80px;
   letter-spacing: 0px;
 }
 @keyframes bottomToTop {
@@ -41,6 +43,6 @@
   }
   100% {
     left: 67px;
-    top: 40%;
+    top: calc(50% - 80px);
   }
 }

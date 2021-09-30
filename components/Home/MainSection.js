@@ -14,7 +14,7 @@ const MainSection = () => {
         <Image src={MainImage} alt="" width={1440} height={898} layout="fill" objectFit="cover" />
       </div>
       <div id="topToBottom" className={styles.topToBottom}>
-        Tus metas
+        TUS METAS
       </div>
       <div id="bottomToTop" className={styles.bottomToTop}>
         Alcanza
