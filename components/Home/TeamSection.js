@@ -41,13 +41,14 @@ const TeamSection = () => {
         <Carousel
           showArrows={true}
           showThumbs={false}
-          autoPlay={false}
+          autoPlay={true}
           stopOnHover={true}
           showStatus={false}
           showIndicators={false}
           infiniteLoop={true}
           centerMode={true}
           centerSlidePercentage={80}
+          interval={1500}
           renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
             hasPrev ? (
               <button onClick={clickHandler} className={styles.previousButton}>
