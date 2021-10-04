@@ -1,0 +1,30 @@
+@import 'styles/variable.module.scss';
+
+.nextButton {
+  box-sizing: border-box;
+  height: 51px;
+  width: 128px;
+  border: 2px solid #b1989f;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: #dbcbd0;
+  }
+}
+.faqString {
+  height: 18px;
+  width: 32px;
+  color: #b1989f;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.7px;
+  line-height: 18px;
+  margin-right: 20px;
+}
+.faqButton {
+  display: flex;
+  justify-content: flex-end;
+}

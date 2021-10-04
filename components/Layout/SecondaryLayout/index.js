@@ -8,7 +8,7 @@ export default function Layout({ children }) {
       <Header />
       <Navbar />
       <main>{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

@@ -1,0 +1,23 @@
+@import 'styles/variable.module.scss';
+
+.workWithUsButton {
+  padding: 8px 25px 6px 36px;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  line-height: 26px;
+  box-sizing: border-box;
+  height: 41px;
+  border: 1px solid #818e8e;
+  color: #818e8e;
+  &:hover {
+    background-color: #818e8e;
+    color: #f3f3e9;
+  }
+}
+.label {
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  line-height: 26px;
+}
