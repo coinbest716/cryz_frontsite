@@ -1,18 +1,18 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
+// components
+import Menu from 'components/Menu/Menu'
 
 // images
 import CartIcon from 'assets/images/cart.svg'
 import AccountIcon from 'assets/images/account.svg'
-import AppsIcon from 'assets/images/apps.svg'
+
 // styles
 import styles from 'components/Header/Header.module.scss'
 
 const Header = () => {
   const router = useRouter()
-  const dispatch = useDispatch()
 
   const menus = [
     {
@@ -47,7 +47,7 @@ const Header = () => {
         <p className={styles.logo}>CRYS DYAZ & CO</p>
       </Link>
       <div className="flex">
-        <ul className="flex flex-col sm:flex-row list-none items-center justify-end">
+        <ul className="flex flex-col sm:flex-row list-none items-center justify-end mr-24">
           {menus &&
             menus.map((menu, key) => {
               return (
@@ -83,9 +83,7 @@ const Header = () => {
             </Link>
           </li>
         </ul>
-        <button className={'flex justify-center items-center ' + styles.hamburgerMenu}>
-          <Image src={AppsIcon} alt="" width={32} height={32} />
-        </button>
+        <Menu />
       </div>
     </div>
   )
