@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #b98a96;
+        font-size: 48px;
+        font-family: SegoeUI, Segoe UI;
+        letter-spacing: -0.024em;
+      }
+    </style>
+  </defs>
+  <text id="_-" data-name="-" class="cls-1" transform="translate(0 52)"><tspan x="0" y="0">-</tspan></text>
+</svg>

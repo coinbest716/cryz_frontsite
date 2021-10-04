@@ -10,16 +10,20 @@ import FaqButton from 'components/components/FaqButton'
 import CarouselTeam from 'components/components/CarouselTeam'
 import ArrowButton from 'components/components/ArrowButton'
 import ClassCard from 'components/components/ClassCard'
+import Accordian from 'components/components/Accordian'
 import TeamSectionData from 'assets/data/TeamSectionData'
 import ClassCardData from 'assets/data/ClassCardData'
+import AccordianFaqData from 'assets/data/AccordianFaqData'
 
 const Classland = () => {
   const [sliderData, setSliderData] = useState([])
   const [cardData, setCardData] = useState([])
+  const [faqData, setFaqData] = useState([])
 
   useEffect(() => {
     setSliderData(TeamSectionData)
     setCardData(ClassCardData)
+    setFaqData(AccordianFaqData)
   }, [])
 
   return (
@@ -56,11 +60,8 @@ const Classland = () => {
       </div>
       <div className={'w-full ' + globlaStyle.container}>
         <div className={styles.middleSection}>
-          <div className={styles.fullPass}>Full Pass</div>
           <CarouselTeam sliderData={sliderData} />
         </div>
-      </div>
-      <div className={'w-full ' + globlaStyle.container}>
         <div className={styles.buttonGroup}>
           <div className="mr-1">
             <ArrowButton label={'Actívate'} />
@@ -83,6 +84,14 @@ const Classland = () => {
               </div>
             ))}
           </div>
+        </div>
+        <div className={styles.divider} />
+        <div style={{ marginBottom: '100px' }}>
+          {faqData?.map((data, index) => (
+            <div style={{ padding: '7px 0px' }} key={index}>
+              <Accordian title={data.title} description={data.description} />
+            </div>
+          ))}
         </div>
       </div>
     </div>
