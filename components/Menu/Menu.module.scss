@@ -1,0 +1,191 @@
+@import 'styles/variable.module.scss';
+
+/* burger-icon */
+.burgerIcon01 {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 80px;
+  width: 80px;
+  background-color: $blue-gray-400-color;
+  cursor: pointer;
+  z-index: 130;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topLine,
+.bottomLine,
+.middleLine {
+  line-height: 0;
+  width: 30px;
+  border-bottom: 3px solid $white-color;
+  margin: 2.75px auto;
+  transition: all 0.25s ease-in-out;
+}
+
+.burgerIcon01.show .topLine {
+  -webkit-transform: rotate(-45deg) translate(-5px, 4px);
+  transform: rotate(-45deg) translate(-5px, 4px);
+}
+
+.burgerIcon01.show .middleLine {
+  opacity: 0;
+}
+
+.burgerIcon01.show .bottomLine {
+  -webkit-transform: rotate(45deg) translate(-7px, -6px);
+  transform: rotate(45deg) translate(-7px, -6px);
+}
+
+@keyframes menuOpen {
+  from {
+    transform: translateX(-100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes menuClose {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100vw);
+  }
+}
+
+.menu {
+  width: 100vw;
+  height: 100vh;
+  background-color: $blue-gray-400-color;
+  position: fixed;
+  top: 0;
+  left: -100vw;
+  z-index: 120;
+  overflow: hidden;
+}
+
+.menuOpen {
+  width: 100vw;
+  height: 100vh;
+  background-color: $blue-gray-400-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  animation-name: menuOpen;
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation-direction: alternate;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.menuClose {
+  width: 100vw;
+  height: 100vh;
+  background-color: $blue-gray-400-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  animation-name: menuClose;
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  overflow: hidden;
+}
+
+.menuItems {
+  min-height: 420px;
+}
+
+.menuItems a {
+  -webkit-text-stroke: 1px $white-color;
+  font-family: Montserrat;
+  font-size: 70px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 72px;
+  letter-spacing: -0.7px;
+  color: $blue-gray-400-color;
+  display: flex;
+}
+
+.menuItems a:hover {
+  color: $white-color;
+}
+
+.imageArea {
+  height: 482px;
+}
+
+.number {
+  -webkit-text-stroke: 1px $white-color;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 72px;
+  letter-spacing: normal;
+  color: $white-color;
+  margin-right: 20px;
+}
+
+.whiteLine {
+  width: 100%;
+  height: 1px;
+  margin-top: 22px;
+  margin-bottom: 22px;
+  background-color: $white-color;
+}
+
+.copyright {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.78;
+  letter-spacing: normal;
+  color: $white-color;
+}
+
+/* Mobile (xs) */
+@media (max-width: 639px) {
+  /* ... */
+}
+
+/* Small (sm) */
+@media (min-width: 640px) {
+  /* ... */
+}
+
+/* Medium (md) */
+@media (min-width: 768px) {
+  /* ... */
+}
+
+/* Large (lg) */
+@media (min-width: 1024px) {
+  /* ... */
+}
+
+/* Extra Large (xl) */
+@media (min-width: 1280px) {
+  /* ... */
+  .sublink {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+}
