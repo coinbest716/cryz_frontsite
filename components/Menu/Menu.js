@@ -29,6 +29,12 @@ const Menu = () => {
   const [visibility, setVisibility] = useState()
   const router = useRouter()
 
+  const [selectedMenu, setSelectedMenu] = useState({ id: '' })
+
+  const handleSetItem = id => {
+    setSelectedMenu(selectedMenu => ({ ...selectedMenu, id: id }))
+  }
+
   return (
     <>
       <BurgerIcon visibilty={visibility} setVisibility={setVisibility} router={router} />
@@ -36,10 +42,10 @@ const Menu = () => {
       <div className={visibility === true ? styles.menuOpen : visibility === false ? styles.menuClose : styles.menu}>
         <div className={globalStyles.container + ' mx-auto h-screen flex flex-wrap content-between'}>
           <div className={styles.menuItems + ' w-full mt-32 sm:mt-48'}>
-            <div className="grid grid-cols-2 cursor-pointer flex items-center h-full">
-              <div className="relative">
-                <div className="opacity-75 -z-10">
-                  <Image src={AcademyImage} alt="" width={482} height={482} />
+            <div className="grid grid-cols-2 flex items-center h-full">
+              <div className="relative" onMouseOver={() => handleSetItem('academy')}>
+                <div className={'opacity-75 -z-10 w-full flex justify-center ' + styles.imageArea}>
+                  {selectedMenu.id === 'academy' ? <Image src={AcademyImage} alt="" width={482} height={482} /> : <></>}
                 </div>
                 <div className="absolute inset-y-1/4 w-full flex justify-center">
                   <Link href="/academy">
@@ -50,9 +56,9 @@ const Menu = () => {
                   </Link>
                 </div>
               </div>
-              <div className="relative">
-                <div className="opacity-75 -z-10">
-                  <Image src={AcademyImage} alt="" width={482} height={482} />
+              <div className="relative" onMouseOver={() => handleSetItem('news')}>
+                <div className={'opacity-75 -z-10 w-full flex justify-center ' + styles.imageArea}>
+                  {selectedMenu.id === 'news' ? <Image src={AcademyImage} alt="" width={482} height={482} /> : <></>}
                 </div>
                 <div className="absolute inset-y-1/4 w-full flex justify-center">
                   <Link href="/news">
