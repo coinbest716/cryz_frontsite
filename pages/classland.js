@@ -9,13 +9,17 @@ import ContactMark from 'assets/images/contact-mark.svg'
 import FaqButton from 'components/components/FaqButton'
 import CarouselTeam from 'components/components/CarouselTeam'
 import ArrowButton from 'components/components/ArrowButton'
+import ClassCard from 'components/components/ClassCard'
 import TeamSectionData from 'assets/data/TeamSectionData'
+import ClassCardData from 'assets/data/ClassCardData'
 
 const Classland = () => {
   const [sliderData, setSliderData] = useState([])
+  const [cardData, setCardData] = useState([])
 
   useEffect(() => {
     setSliderData(TeamSectionData)
+    setCardData(ClassCardData)
   }, [])
 
   return (
@@ -72,7 +76,13 @@ const Classland = () => {
           </div>
         </div>
         <div className={styles.cardSection}>
-          <div className={styles.fullPass}>Full Pass</div>
+          <div className="grid grid-cols-12 gap-12">
+            {cardData?.map((card, index) => (
+              <div className={'col-span-12 flex  md:col-span-4 sm:col-span-12 ' + styles.cardAlign} key={index}>
+                <ClassCard data={card} key={index} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
