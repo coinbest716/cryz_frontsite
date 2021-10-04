@@ -1,12 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+// custom components
+import SocialButtonGroup from 'components/SocialButtonGroup'
+
 // images
 import ArrowLeftIcon from 'assets/images/arrow-left.svg'
-import PinterestIcon from 'assets/images/pinterest.svg'
-import FacebookIcon from 'assets/images/facebook.svg'
-import TwitterIcon from 'assets/images/twitter.svg'
-import LinkedinIcon from 'assets/images/linkedin.svg'
+
+// json data
+import SocialURLData from 'assets/data/SocialURLData'
 
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
@@ -27,20 +29,7 @@ const Footer = () => {
                 <p className={styles.logo}>CRYS DYAZ & CO</p>
               </button>
             </Link>
-            <div className={'flex justify-between'}>
-              <div className={'cursor-pointer mr-1.5'}>
-                <Image src={PinterestIcon} alt="" with={24} height={24} />
-              </div>
-              <div className={'cursor-pointer mx-1.5'}>
-                <Image src={FacebookIcon} alt="" with={24} height={24} />
-              </div>
-              <div className={'cursor-pointer mx-1.5'}>
-                <Image src={TwitterIcon} alt="" with={24} height={24} />
-              </div>
-              <div className={'cursor-pointer ml-1.5'}>
-                <Image src={LinkedinIcon} alt="" with={24} height={24} />
-              </div>
-            </div>
+            <SocialButtonGroup color="white" socialURL={SocialURLData[0]} />
           </div>
         </div>
       </div>
