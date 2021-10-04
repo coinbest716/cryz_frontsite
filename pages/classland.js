@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from 'pages/classland.module.scss'
 import Image from 'next/image'
-import topImage from 'assets/images/classland-top-image.svg'
-// import topImage from 'assets/images/main-placeholder.png'
-import ContactMark from 'assets/images/contact-mark.svg'
+// import topImage from 'assets/images/classland-top-image.svg'
+import topImage from 'assets/images/main-placeholder.png'
 import FaqButton from 'components/components/FaqButton'
 import CarouselTeam from 'components/components/CarouselTeam'
 import ArrowButton from 'components/components/ArrowButton'
 import ClassCard from 'components/components/ClassCard'
 import Accordian from 'components/components/Accordian'
+import CircularMark from 'components/components/CircularMark'
 import TeamSectionData from 'assets/data/TeamSectionData'
 import ClassCardData from 'assets/data/ClassCardData'
 import AccordianFaqData from 'assets/data/AccordianFaqData'
 
 const Classland = () => {
+  const faqRef = useRef(null)
   const [sliderData, setSliderData] = useState([])
   const [cardData, setCardData] = useState([])
   const [faqData, setFaqData] = useState([])
@@ -25,6 +26,10 @@ const Classland = () => {
     setCardData(ClassCardData)
     setFaqData(AccordianFaqData)
   }, [])
+
+  const executeScroll = () => {
+    faqRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' })
+  }
 
   return (
     <div className="flex flex-wrap justify-center">
@@ -48,10 +53,10 @@ const Classland = () => {
                   </div>
                   <div>
                     <div style={{ paddingTop: '20px' }}>
-                      <Image src={ContactMark} alt="" width={173} height={173} opacity={0.72} />
+                      <CircularMark />
                     </div>
-                    <div className="mt-10">
-                      <FaqButton />
+                    <div className="mt-6">
+                      <FaqButton onClick={executeScroll} />
                     </div>
                   </div>
                 </div>
@@ -90,6 +95,9 @@ const Classland = () => {
         </div>
         <div className={styles.divider} />
         <div style={{ marginBottom: '100px' }}>
+          <div ref={faqRef} className={styles.faqString}>
+            FAQ
+          </div>
           {faqData?.map((data, index) => (
             <div style={{ padding: '7px 0px' }} key={index}>
               <Accordian title={data.title} description={data.description} />

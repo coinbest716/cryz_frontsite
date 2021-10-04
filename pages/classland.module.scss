@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   background: linear-gradient(309.58deg, rgba(219, 203, 208, 0.3) 0%, #dbcbd0 100%);
-  padding-top: 80px;
+  margin-top: 80px;
 }
 .topSection {
   padding-top: 100px;
@@ -70,5 +70,15 @@
   background-color: #e0ced3;
   display: flex;
   justify-content: center;
-  margin: 85px 76px 76px 76px;
+  margin: 85px 76px 0px 76px;
+}
+.faqString {
+  color: #ab8e96;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: -0.58px;
+  line-height: 22px;
+  padding-bottom: 21px;
+  padding-top: 80px;
 }
