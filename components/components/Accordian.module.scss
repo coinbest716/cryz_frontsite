@@ -1,0 +1,37 @@
+@import 'styles/variable.module.scss';
+
+.accordianSection {
+  display: flex;
+}
+.button {
+  border: 1px solid #b18c96;
+  width: 85px;
+  border-left: none;
+  &:hover {
+    background-color: #b18c9649;
+  }
+}
+.title {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #b18c96;
+  color: #b18c96;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.62px;
+  text-align: justify;
+  padding: 28px 29px;
+}
+.description {
+  box-sizing: border-box;
+  border: 1px solid #b18c96;
+  padding: 15px 28px;
+  color: #b6b6b6;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.62px;
+  line-height: 28px;
+  text-align: justify;
+  border-top: none;
+}

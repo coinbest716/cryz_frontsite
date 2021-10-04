@@ -1,0 +1,74 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(309.58deg, rgba(219, 203, 208, 0.3) 0%, #dbcbd0 100%);
+  padding-top: 80px;
+}
+.topSection {
+  padding-top: 100px;
+}
+.topTitle {
+  background: linear-gradient(59.79deg, #c6a8b1 0%, #74676b 100%);
+  font-size: 42px;
+  // background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scale(1, 0.8);
+  font-weight: bold;
+}
+.topDash {
+  width: 42px;
+  height: 7px;
+  background-color: #bda1a9;
+  margin-top: 22px;
+}
+.topDescription {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.62px;
+  line-height: 28px;
+  text-align: justify;
+  margin-top: 48px;
+  margin-bottom: 20px;
+}
+.topRightSection {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+.topRightLetImage {
+  position: absolute;
+  right: 152px;
+  top: -25px;
+}
+.middleSection {
+  padding-top: 100px;
+}
+.fullPass {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: -0.43px;
+  line-height: 22px;
+}
+.buttonGroup {
+  display: flex;
+  margin-top: 55px;
+}
+.cardSection {
+  padding-top: 53px;
+}
+.cardAlign {
+  display: flex;
+  justify-content: center;
+}
+.divider {
+  height: 1px;
+  background-color: #e0ced3;
+  display: flex;
+  justify-content: center;
+  margin: 85px 76px 76px 76px;
+}
