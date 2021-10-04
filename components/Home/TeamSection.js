@@ -3,6 +3,9 @@ import Image from 'next/image'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 
+// custom components
+import SocialButtonGroup from 'components/SocialButtonGroup'
+
 // images
 import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
 import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
@@ -10,13 +13,10 @@ import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
 import TeamMember01 from 'assets/images/team-member-01.png'
 import SignImg from 'assets/images/sign.svg'
-import PinterestIcon from 'assets/images/pinterest-gray.svg'
-import FacebookIcon from 'assets/images/facebook-gray.svg'
-import TwitterIcon from 'assets/images/twitter-gray.svg'
-import LinkedinIcon from 'assets/images/linkedin-gray.svg'
 
 // json data
 import TeamSectionData from 'assets/data/TeamSectionData'
+import SocialURLData from 'assets/data/SocialURLData'
 
 // styles
 import styles from 'components/Home/TeamSection.module.scss'
@@ -97,18 +97,7 @@ const TeamSection = () => {
           <div className="w-full flex justify-between my-4">
             <Image src={SignImg} alt="" width={181} height={88} />
             <div className={'w-full flex justify-end items-center'}>
-              <div className={'cursor-pointer mx-1.5'}>
-                <Image src={PinterestIcon} alt="" with={24} height={24} />
-              </div>
-              <div className={'cursor-pointer mx-1.5'}>
-                <Image src={FacebookIcon} alt="" with={24} height={24} />
-              </div>
-              <div className={'cursor-pointer mx-1.5'}>
-                <Image src={TwitterIcon} alt="" with={24} height={24} />
-              </div>
-              <div className={'cursor-pointer ml-1.5'}>
-                <Image src={LinkedinIcon} alt="" with={24} height={24} />
-              </div>
+              <SocialButtonGroup color="gray" socialURL={SocialURLData[0]} />
             </div>
           </div>
           <div className={styles.text}>
