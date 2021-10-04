@@ -3,8 +3,8 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from 'pages/classland.module.scss'
 import Image from 'next/image'
-// import topImage from 'assets/images/classland-top-image.svg'
-import topImage from 'assets/images/main-placeholder.png'
+import topImage from 'assets/images/classland-top-image.svg'
+// import topImage from 'assets/images/main-placeholder.png'
 import ContactMark from 'assets/images/contact-mark.svg'
 import FaqButton from 'components/components/FaqButton'
 import CarouselTeam from 'components/components/CarouselTeam'
@@ -47,8 +47,10 @@ const Classland = () => {
                     <Image src={topImage} alt="" width={435} height={471} opacity={0.74} />
                   </div>
                   <div>
-                    <Image src={ContactMark} alt="" width={173} height={173} opacity={0.72} />
-                    <div className="mt-8">
+                    <div style={{ paddingTop: '20px' }}>
+                      <Image src={ContactMark} alt="" width={173} height={173} opacity={0.72} />
+                    </div>
+                    <div className="mt-10">
                       <FaqButton />
                     </div>
                   </div>
@@ -60,6 +62,7 @@ const Classland = () => {
       </div>
       <div className={'w-full ' + globlaStyle.container}>
         <div className={styles.middleSection}>
+          <div className={styles.fullPass}>Full Pass</div>
           <CarouselTeam sliderData={sliderData} />
         </div>
         <div className={styles.buttonGroup}>
