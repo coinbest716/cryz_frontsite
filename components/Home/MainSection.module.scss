@@ -46,10 +46,13 @@
     top: calc(50% - 80px);
   }
 }
-
-.mainCarouselArea {
+.mainCarouselOpacityArea {
   background-color: #637a76;
   opacity: 0.4;
+}
+
+.mainCarouselArea {
+  background-color: transparent;
   padding: 200px 80px 80px 20px;
 }
 

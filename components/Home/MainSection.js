@@ -18,7 +18,7 @@ const MainSection = () => {
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
-        <Image src={MainImage} alt="" width={1440} height={898} layout="fill" objectFit="cover" />
+        <Image src={MainImage} alt="" layout="fill" objectFit="cover" />
       </div>
       <div id="topToBottom" className={styles.topToBottom}>
         TUS METAS
@@ -27,6 +27,7 @@ const MainSection = () => {
         Alcanza
       </div>
       <div className={'absolute flex justify-end w-1/3 top-0 right-0 p-0 m-0 h-screen'}>
+        <div className={'absolute top-0 left-0 h-screen -z-10 w-full ' + styles.mainCarouselOpacityArea} />
         <div className={'w-full ' + styles.mainCarouselArea}>
           <Carousel
             showArrows={false}
