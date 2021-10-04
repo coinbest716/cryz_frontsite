@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+    "title": "Descubre la unidad<br />SALUD FEM.",
+    "content01": "Integrada por fisioterapeutas y entrenadoras especializadas en el cuidado integral de la mujer en todas las etapas de su vida.",
+    "content02": "En Crys Dyaz & CO defendemos la importancia de cuidarse desde dentro para sentirse fuerte y segura por fuera.",
+    "link": "/"
+  },
+  {
+    "id": 2,
+    "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+    "title": "Descubre la unidad<br />SALUD FEM.",
+    "content01": "Formada por fisioterapeutas y entrenadoras especializadas en el cuidado integral de la mujer en todas las etapas de su vida.    ",
+    "content02": "En Crys Dyaz & CO defendemos la importancia de cuidarse desde dentro para sentirse fuerte y segura por fuera : embarazo, preparación al parto, postparto, menopausia y muchas mas.",
+    "link": "/"
+  },
+  {
+    "id": 3,
+    "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+    "title": "Formación en suelo pélvico + embarazo + postparto.",
+    "content01": "2ºedición<br />De febrero a septiembre de 2022. ¡Infórmate aquí!",
+    "content02": "Especialización para profesionales : conocimiento práctico y teórico del entrenamiento del suelo pélvico masculino y femenino",
+    "link": "/"
+  }
+]
