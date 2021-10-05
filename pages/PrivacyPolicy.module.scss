@@ -1,0 +1,28 @@
+@import 'styles/variable.module.scss';
+
+.title {
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: 0px;
+  color: $blue-gray-400-color;
+  margin-top: 180px;
+}
+
+.divider {
+  width: 40px;
+  height: 4px;
+  background-color: $blue-gray-400-color;
+  margin-top: 16px;
+  margin-bottom: 28px;
+}
+
+.text {
+  font-family: 'Montserrat';
+  font-size: 14px;
+  line-height: 25px;
+  letter-spacing: 0.7px;
+  color: $gray-500-color;
+  display: flex;
+  justify-content: space-between;
+}
