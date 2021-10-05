@@ -37,8 +37,25 @@ const Footer = () => {
         <div className={globalStyles.container + ' pt-7'}>
           <div className={'w-full flex justify-between items-center'}>
             <div className={styles.text}>
-              Terminos y Condiciones&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Politica
-              Privacidad&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Legal&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Cookies&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Venta
+              <Link href={'/terms'} passHref>
+                <p>Terminos y Condiciones</p>
+              </Link>
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <Link href={'/privacy-policy'} passHref>
+                <p>Politica Privacidad</p>
+              </Link>
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <Link href={'/legal'} passHref>
+                <p>Legal</p>
+              </Link>
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <Link href={'/cookies'} passHref>
+                <p>Cookies</p>
+              </Link>
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+              <Link href={'/sale'} passHref>
+                <p>Venta</p>
+              </Link>
             </div>
             <div className={styles.text}>CrysDyaz&Co © Todos los derechos reservados</div>
           </div>
