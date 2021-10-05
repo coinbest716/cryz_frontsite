@@ -4,7 +4,11 @@ import Footer from 'components/Footer'
 export default function Layout({ children }) {
   return (
     <>
-      <Header />
+      <Header
+        changeColorOnScroll={{
+          height: 400,
+        }}
+      />
       <main>{children}</main>
       <Footer />
     </>

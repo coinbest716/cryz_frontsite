@@ -1,12 +1,27 @@
 @import 'styles/variable.module.scss';
 
-.container {
+.whiteContainer {
   height: 80px;
   position: fixed;
   width: 100%;
   z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $white-color;
+}
+
+.transparentContainer {
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: transparent;
 }
+
 .logo {
   margin-left: 73px;
   font-family: 'Cartoon Marker';

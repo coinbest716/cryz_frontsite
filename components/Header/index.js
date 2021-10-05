@@ -1,3 +1,4 @@
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -12,8 +13,10 @@ import AccountIcon from 'assets/images/account.svg'
 // styles
 import styles from 'components/Header/Header.module.scss'
 
-const Header = () => {
+const Header = props => {
   const router = useRouter()
+
+  const [changeHeaderColor, setChangeHeaderColor] = React.useState(false)
 
   const menus = [
     {
@@ -57,8 +60,29 @@ const Header = () => {
     }
   }
 
+  React.useEffect(() => {
+    if (props.changeColorOnScroll) {
+      window.addEventListener('scroll', headerColorChange)
+    }
+    return function cleanup() {
+      if (props.changeColorOnScroll) {
+        window.removeEventListener('scroll', headerColorChange)
+      }
+    }
+  })
+
+  const headerColorChange = () => {
+    const { changeColorOnScroll } = props
+    const windowsScrollTop = window.pageYOffset
+    if (windowsScrollTop > changeColorOnScroll.height) {
+      setChangeHeaderColor(true)
+    } else {
+      setChangeHeaderColor(false)
+    }
+  }
+
   return (
-    <div className={'w-full flex justify-between items-center ' + styles.container}>
+    <div className={changeHeaderColor === true ? styles.whiteContainer : styles.transparentContainer}>
       <Link href={'/'} passHref>
         <p className={styles.logo}>CRYS DYAZ & CO</p>
       </Link>
