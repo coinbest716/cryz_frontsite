@@ -10,6 +10,7 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <MainSection />
+      <div id="team" />
       <TeamSection />
       <COSection />
     </div>
