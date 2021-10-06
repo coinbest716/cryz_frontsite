@@ -147,9 +147,16 @@ const Header = props => {
                       </button>
                       <div className={styles.dropdownContent}>
                         {menu.subMenus.map((subMenu, idx) => (
-                          <Link href={subMenu.link} key={idx} passHref>
-                            <a>{router.pathname === subMenu.link ? <b>{subMenu.title}</b> : subMenu.title}</a>
-                          </Link>
+                          <div
+                            key={idx}
+                            className={
+                              router.pathname === subMenu.link || router.asPath === subMenu.link ? styles.active : ''
+                            }
+                          >
+                            <Link href={subMenu.link} passHref>
+                              <a>{router.pathname === subMenu.link ? <b>{subMenu.title}</b> : subMenu.title}</a>
+                            </Link>
+                          </div>
                         ))}
                       </div>
                     </div>
