@@ -17,18 +17,26 @@ const Services = () => {
   const placeholder1 = '/images/placeholder1.svg'
   const placeholder2 = '/images/placeholder2.svg'
   const placeholder3 = '/images/placeholder3.svg'
+  const [activeIimage, setActiveImage] = useState('')
+  const [activePlaceholder, setActivePlaceholder] = useState('')
 
   const [serverType, setServerType] = useState({ type1: false, type2: false, type3: false })
   const handleMouseOver = type => {
     switch (type) {
       case 'type1':
         setServerType({ type1: true, type2: false, type3: false })
+        setActiveImage(trainingImage)
+        setActivePlaceholder(placeholder1)
         break
       case 'type2':
         setServerType({ type1: false, type2: true, type3: false })
+        setActiveImage(physiotherapyImage)
+        setActivePlaceholder(placeholder2)
         break
       case 'type3':
         setServerType({ type1: false, type2: false, type3: true })
+        setActiveImage(nutritionImage)
+        setActivePlaceholder(placeholder3)
         break
     }
   }
@@ -79,7 +87,7 @@ const Services = () => {
                 onMouseOut={handleMouseOut}
                 onClick={() => handleClick('type1')}
               >
-                <img src={serverType.type1 ? trainingImage : placeholder1} />
+                <img src={serverType.type1 ? activeIimage : activePlaceholder} />
                 <div className={styles.serverText}>Entrenamiento</div>
                 {serverType.type1 ? (
                   <div className={styles.serverArrow}>
@@ -97,7 +105,7 @@ const Services = () => {
                 onMouseOut={handleMouseOut}
                 onClick={() => handleClick('type2')}
               >
-                <img src={serverType.type2 ? physiotherapyImage : placeholder2} />
+                <img src={serverType.type2 ? activeIimage : activePlaceholder} />
                 <div className={styles.serverText}>Fisioterapia</div>
                 {serverType.type2 ? (
                   <div className={styles.serverArrow}>
@@ -115,7 +123,7 @@ const Services = () => {
                 onMouseOut={handleMouseOut}
                 onClick={() => handleClick('type3')}
               >
-                <img src={serverType.type3 ? nutritionImage : placeholder3} />
+                <img src={serverType.type3 ? activeIimage : activePlaceholder} />
                 <div className={styles.serverText}>Nutrición</div>
                 {serverType.type3 ? (
                   <div className={styles.serverArrow}>

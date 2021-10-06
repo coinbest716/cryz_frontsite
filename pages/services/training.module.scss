@@ -34,7 +34,7 @@
   text-align: justify;
 }
 .verticalBottom {
-  padding: 415px 40px 40px 40px;
+  padding: 460px 40px 40px 40px;
   // display: flex;
   // height: 100%;
   // padding-bottom: 100px;
@@ -78,54 +78,17 @@
   transform: rotate(90deg);
   height: 25px;
 }
-
-.circularMark {
-  padding-top: 91px;
-  display: flex;
-  justify-content: flex-end;
-}
-.serverText {
+.circleImageCover {
   position: absolute;
-  color: #000000;
-  font-family: Montserrat;
-  font-size: 20px;
-  letter-spacing: 1px;
-  line-height: 26px;
-  top: 117px;
-  left: 48px;
+  left: 120px;
+  transition: 0.9s;
 }
-.serverArrow {
-  position: absolute;
-  top: 217px;
-  left: 45px;
-}
-.scontainer {
-  display: flex;
-  width: 100%;
+.circleImage {
+  width: 500px;
+  height: 500px;
+  border-radius: 250px;
   object-fit: cover;
   object-position: center;
-  box-sizing: border-box;
-  height: 288px;
-}
-.box {
-  flex: 1;
-  // overflow: hidden;
-  transition: 0.8s;
-  position: relative;
-}
-.box > img {
-  width: 200%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: 0.5s;
   opacity: 0.6;
-}
-
-.box:hover {
-  flex: 1 1 25%;
-}
-.box:hover > img {
-  width: 100%;
-  height: 100%;
+  transition: 0.9s;
 }
