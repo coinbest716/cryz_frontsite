@@ -10,7 +10,6 @@
   font-family: Montserrat;
   font-size: 14px;
   letter-spacing: 0.7px;
-  // line-height: 106px;
 }
 .topTitle {
   background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
@@ -25,16 +24,14 @@
 .topDash {
   width: 42px;
   height: 7px;
-  background-color: #decede;
+  background-color: #b5bfbf;
 }
 .topDescription {
-  margin-top: 52px;
-  margin-bottom: 20px;
-  color: $blue-gray-400-color;
+  color: #818e8e;
   font-family: Montserrat;
-  font-size: 14px;
-  letter-spacing: 0.62px;
-  line-height: 28px;
+  font-size: 16px;
+  letter-spacing: 0.71px;
+  line-height: 32px;
   text-align: justify;
 }
 .circularMark {

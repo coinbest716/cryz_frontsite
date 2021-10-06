@@ -23,6 +23,28 @@ const Training = () => {
             </button>
           </div>
           <div className={styles.topTitle}>Entrenamiento</div>
+          <div className={styles.topDash} />
+          <div className="grid grid-cols-12 gap-4">
+            <div className="col-span-12 md:col-span-4 sm:col-span-12 ">
+              <div className={styles.topDescription + ' mt-10 pb-20'}>
+                Entrenamiento 1 to 1 en streaming: Entrenamientos personalizados de una hora con tu entrenador, desde
+                nuestra plataforma. <br />
+                <br />
+                Entrenamiento presencial de una hora en el centro de Crys Dyaz o en el domicilio del paciente. <br />
+                <br />
+                Planes online personalizados, basado en videos de ejercicios, al cual el paciente accederá por medio de
+                la plataforma online <br />
+                <br />
+              </div>
+            </div>
+            <div className="col-span-12 md:col-span-8 sm:col-span-12 ">
+              <div className="flex flex-wrap ">
+                <div className="w-1/3 flex justify-center">sdfsdf</div>
+                <div className="w-1/3 flex justify-center">sdfsdf</div>
+                <div className="w-1/3 flex justify-center">sdfsdf</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
