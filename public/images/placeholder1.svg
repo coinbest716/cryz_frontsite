@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 285 285">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 286.492 285">
   <defs>
     <style>
       .cls-1 {
-        fill: #d6d8ce;
-        opacity: 0.483;
+        fill: #d4dada;
+        opacity: 0.8;
       }
     </style>
   </defs>
-  <path id="Placeholder_Copy_4" data-name="Placeholder Copy 4" class="cls-1" d="M2,1H287V286H2Z" transform="translate(-2 -1)"/>
+  <path id="Rectangle_Copy_6" data-name="Rectangle Copy 6" class="cls-1" d="M1.005,1H287.5V286H1.005Z" transform="translate(-1.006 -1)"/>
 </svg>
