@@ -6,8 +6,11 @@ import styles from './services.module.scss'
 import Image from 'next/image'
 import nextButtonPinkIcon from 'public/images/arrow-right-pink.svg'
 import ArrowRightUpGrayIcon from 'public/images/arrow-right-up.svg'
+import { useRouter } from 'next/router'
 
 const Services = () => {
+  const router = useRouter()
+
   const trainingImage = '/images/card2.svg'
   const physiotherapyImage = '/images/card3.svg'
   const nutritionImage = '/images/card1.svg'
@@ -31,6 +34,19 @@ const Services = () => {
   }
   const handleMouseOut = () => {
     setServerType({ type1: false, type2: false, type3: false })
+  }
+  const handleClick = type => {
+    switch (type) {
+      case 'type1':
+        router.push('/services/training')
+        break
+      case 'type2':
+        router.push('/services/physiotherapy')
+        break
+      case 'type3':
+        router.push('/services/nutrition')
+        break
+    }
   }
 
   return (
@@ -57,7 +73,12 @@ const Services = () => {
           </div>
           <div className={'w-full flex justify-center mt-5'}>
             <div className={styles.scontainer}>
-              <div className={styles.box} onMouseOver={() => handleMouseOver('type1')} onMouseOut={handleMouseOut}>
+              <div
+                className={styles.box}
+                onMouseOver={() => handleMouseOver('type1')}
+                onMouseOut={handleMouseOut}
+                onClick={() => handleClick('type1')}
+              >
                 <img src={serverType.type1 ? trainingImage : placeholder1} />
                 <div className={styles.serverText}>Entrenamiento</div>
                 {serverType.type1 ? (
@@ -70,7 +91,12 @@ const Services = () => {
                   </div>
                 )}
               </div>
-              <div className={styles.box} onMouseOver={() => handleMouseOver('type2')} onMouseOut={handleMouseOut}>
+              <div
+                className={styles.box}
+                onMouseOver={() => handleMouseOver('type2')}
+                onMouseOut={handleMouseOut}
+                onClick={() => handleClick('type2')}
+              >
                 <img src={serverType.type2 ? physiotherapyImage : placeholder2} />
                 <div className={styles.serverText}>Fisioterapia</div>
                 {serverType.type2 ? (
@@ -83,7 +109,12 @@ const Services = () => {
                   </div>
                 )}
               </div>
-              <div className={styles.box} onMouseOver={() => handleMouseOver('type3')} onMouseOut={handleMouseOut}>
+              <div
+                className={styles.box}
+                onMouseOver={() => handleMouseOver('type3')}
+                onMouseOut={handleMouseOut}
+                onClick={() => handleClick('type3')}
+              >
                 <img src={serverType.type3 ? nutritionImage : placeholder3} />
                 <div className={styles.serverText}>Nutrición</div>
                 {serverType.type3 ? (
