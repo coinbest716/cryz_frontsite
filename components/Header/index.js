@@ -22,6 +22,40 @@ const Header = props => {
     {
       title: 'Salud Fem',
       link: '/female-health',
+      subMenus: [
+        {
+          title: 'Preparación al parto',
+          link: '/female-health/preparation-for-childbirth',
+        },
+        {
+          title: 'Suelo pélvico',
+          link: '/female-health/pelvic-floor',
+        },
+        {
+          title: 'Postparto',
+          link: '/female-health/postpartum',
+        },
+        {
+          title: 'Embarazo',
+          link: '/female-health/pregnancy',
+        },
+        {
+          title: 'Asesoria de Lactancia',
+          link: '/female-health/lactation-counseling',
+        },
+        {
+          title: 'Menopausia',
+          link: '/female-health/menopause',
+        },
+        {
+          title: 'Asesoria del sueño',
+          link: '/female-health/sleep-counseling',
+        },
+        {
+          title: 'Entrena tu Diástasis',
+          link: '/female-health/train-your-diastasis',
+        },
+      ],
     },
     {
       title: 'Servicios',
@@ -104,6 +138,21 @@ const Header = props => {
                     <button onClick={() => gotoTeamSection()}>
                       <a>{router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}</a>
                     </button>
+                  ) : menu.subMenus !== undefined && menu.subMenus.length !== 0 ? (
+                    <div className={styles.dropdown}>
+                      <button className={styles.dropbtn}>
+                        <Link href={menu.link} passHref>
+                          <a>{router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}</a>
+                        </Link>
+                      </button>
+                      <div className={styles.dropdownContent}>
+                        {menu.subMenus.map((subMenu, idx) => (
+                          <Link href={subMenu.link} key={idx} passHref>
+                            <a>{router.pathname === subMenu.link ? <b>{subMenu.title}</b> : subMenu.title}</a>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                   ) : (
                     <button>
                       <Link href={menu.link} passHref>
