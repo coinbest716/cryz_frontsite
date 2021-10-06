@@ -2,17 +2,25 @@
 
 .container {
   padding-top: 80px;
-  padding-bottom: 119px;
+  padding-bottom: 70px;
+  background: linear-gradient(319.36deg, #e9e7e9 0%, #cecbce 100%);
+}
+.back {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  // line-height: 106px;
 }
 .topTitle {
-  background: linear-gradient(87.89deg, #e2d2e2 0%, #b7a1b7 100%);
+  background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
   font-size: 54px;
-  width: 246.71px;
+  width: 382.97px;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transform: scale(1, 0.8);
   font-weight: bold;
-  padding-top: 109px;
+  // padding-top: 109px;
 }
 .topDash {
   width: 42px;
@@ -62,7 +70,6 @@
   // overflow: hidden;
   transition: 0.8s;
   position: relative;
-  cursor: pointer;
 }
 .box > img {
   width: 200%;
