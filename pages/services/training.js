@@ -38,15 +38,29 @@ const Training = () => {
                 <br />
               </div>
             </div>
+            {/* <div className={'col-span-12 md:col-span-8 sm:col-span-12 ' + styles.verticalBottom}> */}
             <div className="col-span-12 md:col-span-8 sm:col-span-12 ">
-              <div className="flex">
-                <div className={'w-1/3 flex justify-center items-baseline ' + styles.verticalText}>
-                  <span className={styles.number}>01&nbsp;&nbsp;</span>
-                  <span className={styles.typograph}>Presencial&nbsp;</span>
-                  <img src={'/images/arrow-right-gray.svg'} alt="" className={styles.arrowIcon} />
+              <div className={styles.verticalBottom}>
+                <div className={styles.sortStart}>
+                  {/* <div className={'w-1/3 flex justify-center ' + styles.verticalText}> */}
+                  <div className={'w-1/3 ' + styles.verticalText}>
+                    <span className={styles.number}>01&nbsp;&nbsp;</span>
+                    <span className={styles.typograph}>Presencial&nbsp;</span>
+                    <img src={'/images/arrow-right-gray.svg'} alt="" className={styles.arrowIcon} />
+                  </div>
+                  {/* <div className={'w-1/3 flex justify-center ' + styles.verticalText}> */}
+                  <div className={'w-1/3 ' + styles.verticalText}>
+                    <span className={styles.number}>02&nbsp;&nbsp;</span>
+                    <span className={styles.typograph}>Planes online&nbsp;</span>
+                    <img src={'/images/arrow-right-gray.svg'} alt="" className={styles.arrowIcon} />
+                  </div>
+                  {/* <div className={'w-1/3 flex justify-center ' + styles.verticalText}> */}
+                  <div className={'w-1/3 ' + styles.verticalText}>
+                    <span className={styles.number}>03&nbsp;&nbsp;</span>
+                    <span className={styles.typograph}>1 to 1 en streaming&nbsp;</span>
+                    <img src={'/images/arrow-right-gray.svg'} alt="" className={styles.arrowIcon} />
+                  </div>
                 </div>
-                <div className="w-1/3 flex justify-center ">sdfsdf</div>
-                <div className="w-1/3 flex justify-center">sdfsdf</div>
               </div>
             </div>
           </div>

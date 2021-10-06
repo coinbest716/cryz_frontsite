@@ -19,7 +19,6 @@
   -webkit-text-fill-color: transparent;
   transform: scale(1, 0.8);
   font-weight: bold;
-  // padding-top: 109px;
 }
 .topDash {
   width: 42px;
@@ -34,11 +33,24 @@
   line-height: 32px;
   text-align: justify;
 }
+.verticalBottom {
+  padding: 415px 40px 40px 40px;
+  // display: flex;
+  // height: 100%;
+  // padding-bottom: 100px;
+  // align-items: flex-end;
+}
+.sortStart {
+  display: flex;
+}
 .verticalText {
   -webkit-transform: rotate(-90deg);
   transform: rotate(-90deg);
   cursor: pointer;
   align-items: flex-end;
+  justify-content: flex-start;
+  display: flex;
+  white-space: pre;
 }
 .verticalText:hover > .number {
   color: white;
@@ -51,19 +63,16 @@
 }
 .number {
   color: #818e8e;
-  font-family: Montserrat;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.8px;
-  padding-bottom: 9px;
+  padding-bottom: 5px;
 }
 .typograph {
   color: #818e8e;
-  font-family: Montserrat;
-  font-size: 40px;
+  font-size: 29px;
   font-weight: 900;
-  letter-spacing: 2.8px;
-  // line-height: 58px;
+  letter-spacing: 0.4px;
 }
 .arrowIcon {
   transform: rotate(90deg);
