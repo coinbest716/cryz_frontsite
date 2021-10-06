@@ -29,7 +29,7 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/female-health/preparation-for-childbirth/1-to-1',
+              link: '/female-health',
             },
             {
               title: 'Presencial',
@@ -48,6 +48,20 @@ const Header = props => {
         {
           title: 'Postparto',
           link: '/female-health/postpartum',
+          subMenus: [
+            {
+              title: '1 to 1ffff',
+              link: '/female-health',
+            },
+            {
+              title: 'Presencial',
+              link: '/female-health/preparation-for-childbirth/presencial',
+            },
+            {
+              title: 'Planes Online',
+              link: '/female-health/preparation-for-childbirth/planes-online',
+            },
+          ],
         },
         {
           title: 'Embarazo',
@@ -136,6 +150,7 @@ const Header = props => {
       </Link>
       <div className="flex">
         <ul className="flex flex-col sm:flex-row list-none items-center justify-end mr-24">
+          {/* text menu part */}
           {menus &&
             menus.map((menu, key) => {
               return (
@@ -168,23 +183,66 @@ const Header = props => {
                         </Link>
                       </button>
                       <div className={styles.dropdownContent}>
-                        {menu.subMenus.map((subMenu, idx) => (
-                          <div key={idx}>
-                            <Link href={subMenu.link} passHref>
-                              <a
-                                className={
-                                  styles.menuText +
-                                  ' ' +
-                                  (router.pathname === subMenu.link || router.asPath === subMenu.link
-                                    ? styles.active
-                                    : '')
-                                }
-                              >
-                                {router.pathname === subMenu.link ? <b>{subMenu.title}</b> : subMenu.title}
-                              </a>
-                            </Link>
-                          </div>
-                        ))}
+                        <div className="flex flex-wrap relative">
+                          {menu.subMenus.map((subMenu, idx) =>
+                            subMenu.subMenus !== undefined && subMenu.subMenus.length !== 0 ? (
+                              <div key={idx}>
+                                <div className={styles.subDropdown}>
+                                  <button className={styles.subDropbtn}>
+                                    <Link href={subMenu.link} passHref>
+                                      <a
+                                        className={
+                                          styles.menuText +
+                                          ' ' +
+                                          (router.pathname === subMenu.link || router.asPath === subMenu.link
+                                            ? styles.active
+                                            : '')
+                                        }
+                                      >
+                                        {router.pathname === subMenu.link ? <b>{subMenu.title}</b> : subMenu.title}
+                                      </a>
+                                    </Link>
+                                  </button>
+                                  <div className={styles.subDropdownContent}>
+                                    {subMenu.subMenus.map((item, index) => (
+                                      <div key={index}>
+                                        <Link href={item.link} passHref>
+                                          <a
+                                            className={
+                                              styles.menuText +
+                                              ' ' +
+                                              (router.pathname === item.link || router.asPath === item.link
+                                                ? styles.active
+                                                : '')
+                                            }
+                                          >
+                                            {router.pathname === item.link ? <b>{item.title}</b> : item.title}
+                                          </a>
+                                        </Link>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div key={idx}>
+                                <Link href={subMenu.link} passHref>
+                                  <a
+                                    className={
+                                      styles.menuText +
+                                      ' ' +
+                                      (router.pathname === subMenu.link || router.asPath === subMenu.link
+                                        ? styles.active
+                                        : '')
+                                    }
+                                  >
+                                    {router.pathname === subMenu.link ? <b>{subMenu.title}</b> : subMenu.title}
+                                  </a>
+                                </Link>
+                              </div>
+                            )
+                          )}
+                        </div>
                       </div>
                     </div>
                   ) : (
@@ -205,6 +263,7 @@ const Header = props => {
                 </li>
               )
             })}
+          {/* icon menu part */}
           <li className={'flex justify-center ml-16 ' + styles.iconMenuItem}>
             <Link href={'/shop-cart'} passHref>
               <button>
