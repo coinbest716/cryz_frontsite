@@ -38,20 +38,33 @@
   }
   border-bottom: 1px solid $gray-500-color;
 }
+
 .menuItem {
   height: 80px;
-  padding-left: 16px;
-  padding-right: 16px;
-  font-family: 'Montserrat';
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  letter-spacing: 0.7px;
-  color: $gray-800-color;
   &:hover {
     background-color: $blue-gray-300-color;
   }
 }
+
+.menuText {
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0.7px;
+  color: $gray-800-color;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 29px;
+  padding-bottom: 27px;
+}
+
+.iconMenuItem {
+  height: 80px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 .active {
   font-weight: 700;
   border-bottom: 3px solid $pink-100-color;
@@ -64,17 +77,8 @@
 
 .dropdown .dropbtn {
   height: 80px;
-  padding-left: 16px;
-  padding-right: 16px;
-  font-family: 'Montserrat';
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  letter-spacing: 0.7px;
-  color: $gray-800-color;
 }
 
-.navbar a:hover,
 .dropdown:hover .dropbtn {
   background-color: $blue-gray-300-color;
 }
@@ -90,17 +94,11 @@
   z-index: 1;
 }
 
-.dropdownContent a {
+.dropdownContent div {
   float: none;
-  font-family: 'Montserrat';
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  letter-spacing: 0.7px;
-  color: $gray-800-color;
-  padding: 37px 16px 16px 16px;
   text-decoration: none;
   display: flex;
+  flex-wrap: wrap;
   white-space: nowrap;
   text-align: left;
   &:hover {
