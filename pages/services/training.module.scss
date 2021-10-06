@@ -34,6 +34,42 @@
   line-height: 32px;
   text-align: justify;
 }
+.verticalText {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  cursor: pointer;
+  align-items: flex-end;
+}
+.verticalText:hover > .number {
+  color: white;
+}
+.verticalText:hover > .typograph {
+  color: white;
+}
+.verticalText:hover > .arrowIcon {
+  filter: brightness(0) invert(1);
+}
+.number {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  padding-bottom: 9px;
+}
+.typograph {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: 2.8px;
+  // line-height: 58px;
+}
+.arrowIcon {
+  transform: rotate(90deg);
+  height: 25px;
+}
+
 .circularMark {
   padding-top: 91px;
   display: flex;

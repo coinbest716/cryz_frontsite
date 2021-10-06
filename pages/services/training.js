@@ -1,7 +1,8 @@
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from './training.module.scss'
-import backGrayIcon from 'assets/images/arrow-left-gray.svg'
+import backGrayIcon from 'public/images/arrow-left-gray.svg'
+import forwardGrayIcon from 'public/images/arrow-right-gray.svg'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
@@ -38,9 +39,13 @@ const Training = () => {
               </div>
             </div>
             <div className="col-span-12 md:col-span-8 sm:col-span-12 ">
-              <div className="flex flex-wrap ">
-                <div className="w-1/3 flex justify-center">sdfsdf</div>
-                <div className="w-1/3 flex justify-center">sdfsdf</div>
+              <div className="flex">
+                <div className={'w-1/3 flex justify-center items-baseline ' + styles.verticalText}>
+                  <span className={styles.number}>01&nbsp;&nbsp;</span>
+                  <span className={styles.typograph}>Presencial&nbsp;</span>
+                  <img src={'/images/arrow-right-gray.svg'} alt="" className={styles.arrowIcon} />
+                </div>
+                <div className="w-1/3 flex justify-center ">sdfsdf</div>
                 <div className="w-1/3 flex justify-center">sdfsdf</div>
               </div>
             </div>
