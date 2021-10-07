@@ -48,7 +48,7 @@ const Classland = () => {
               <div className="col-span-12 md:col-span-8 sm:col-span-12 ">
                 <div className={styles.topRightSection}>
                   <div className={styles.topRightLetImage}>
-                    <Image src={topImage} alt="" width={435} height={471} opacity={0.74} />
+                    <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
                   </div>
                   <div>
                     <div style={{ paddingTop: '20px' }}>

@@ -1,0 +1,48 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding-top: 80px;
+  padding-bottom: 70px;
+  background: linear-gradient(90deg, #ffffff 68%, #d5d7ce 32%);
+  overflow: hidden;
+}
+.back {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+}
+.topTitle {
+  width: 304.16px;
+  background: linear-gradient(28.07deg, rgba(211, 216, 189, 0.8) 0%, #c3c7b0 100%);
+  font-size: 54px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scale(1, 0.8);
+  font-weight: bold;
+}
+.topDash {
+  width: 42px;
+  height: 7px;
+  background-color: #d6d8ce;
+}
+.topDescription {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 0.71px;
+  line-height: 32px;
+  text-align: justify;
+}
+.circularMark {
+  padding-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+.carouselSection {
+  width: 500px;
+  margin-top: -90px;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -12,6 +12,11 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      divideColor: ['group-hover'],
+      padding: ['hover'],
+    },
+  },
   plugins: [require('tailwindcss'), require('precss'), require('autoprefixer')],
 }

@@ -1,0 +1,94 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding-top: 80px;
+  padding-bottom: 70px;
+  background: linear-gradient(319.36deg, #e9e7e9 0%, #cecbce 100%);
+  overflow: hidden;
+}
+.back {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+}
+.topTitle {
+  background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
+  font-size: 54px;
+  width: 382.97px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scale(1, 0.8);
+  font-weight: bold;
+}
+.topDash {
+  width: 42px;
+  height: 7px;
+  background-color: #b5bfbf;
+}
+.topDescription {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 0.71px;
+  line-height: 32px;
+  text-align: justify;
+}
+.verticalBottom {
+  padding: 60vh 40px 0px 40px;
+}
+.sortStart {
+  display: flex;
+}
+.verticalText {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  cursor: pointer;
+  align-items: flex-end;
+  justify-content: flex-start;
+  display: flex;
+  white-space: pre;
+}
+.verticalText:hover .number {
+  color: white;
+  transition: 0.4s;
+}
+.verticalText:hover .typograph {
+  color: white;
+  transition: 0.4s;
+}
+.verticalText:hover .arrowIcon {
+  filter: brightness(0) invert(1);
+  transition: 0.4s;
+}
+.number {
+  color: #818e8e;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  padding-bottom: 5px;
+}
+.typograph {
+  color: #818e8e;
+  font-size: 29px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+}
+.arrowIcon {
+  transform: rotate(90deg);
+  height: 25px;
+}
+.circleImageCover {
+  position: relative;
+}
+.circleImage {
+  // top: 70px;
+  // left: 120px;
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 500px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.6;
+}

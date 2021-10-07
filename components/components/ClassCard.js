@@ -7,8 +7,8 @@ const ClassCard = props => {
 
   return (
     <div className={styles.singleCard}>
-      <div className={styles.cardImage}>
-        <Image src={data?.image} alt="" width={365} height={253} />
+      <div className={styles.cardImageLayer}>
+        <Image src={data?.image} alt="" width={365} height={253} className={styles.cardImage} />
         <div className={styles.cardPayment}>
           <span className={styles.cardPaymentType}>{data?.paymentType}s</span>
         </div>
