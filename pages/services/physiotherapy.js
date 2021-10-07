@@ -37,7 +37,7 @@ const Physiotherapy = () => {
 
   return (
     <div className={styles.container}>
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center pb-20">
         <div className={globlaStyle.container}>
           <div className="mt-9">
             <button className="flex justify-between items-center" onClick={handleClickBack}>
@@ -72,7 +72,7 @@ const Physiotherapy = () => {
           </div>
         </div>
       </div>
-      <div className="mr-1">
+      <div className="w-1/3 mr-1">
         <ArrowButton label={'Compra  presenciales'} />
       </div>
     </div>

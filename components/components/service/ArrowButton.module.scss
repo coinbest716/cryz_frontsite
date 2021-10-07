@@ -1,15 +1,17 @@
 @import 'styles/variable.module.scss';
 
 .workWithUsButton {
-  padding: 15px 50px 15px 80px;
+  padding: 20px 50px 20px 90px;
   font-family: Montserrat;
   font-size: 14px;
   letter-spacing: 0.7px;
   line-height: 26px;
   box-sizing: border-box;
-
   border: 1px solid #818e8e;
+  border-bottom: none;
   color: #818e8e;
+  display: flex;
+  justify-content: space-around;
   &:hover {
     background-color: #818e8e;
     color: #f3f3e9;
