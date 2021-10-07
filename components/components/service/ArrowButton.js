@@ -16,7 +16,7 @@ const ArrowButton = props => {
 
   return (
     <button
-      className={styles.workWithUsButton + ' flex justify-between'}
+      className={styles.workWithUsButton + ' flex justify-between w-full'}
       onMouseOver={handleSetWhiteIcon}
       onMouseOut={handleSetGrayIcon}
     >
