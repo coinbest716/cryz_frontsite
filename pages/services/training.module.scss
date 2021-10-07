@@ -4,6 +4,7 @@
   padding-top: 80px;
   padding-bottom: 70px;
   background: linear-gradient(319.36deg, #e9e7e9 0%, #cecbce 100%);
+  overflow: hidden;
 }
 .back {
   color: #818e8e;
@@ -35,10 +36,6 @@
 }
 .verticalBottom {
   padding: 60vh 40px 0px 40px;
-  // display: flex;
-  // height: 100%;
-  // padding-bottom: 100px;
-  // align-items: flex-end;
 }
 .sortStart {
   display: flex;
@@ -51,17 +48,6 @@
   justify-content: flex-start;
   display: flex;
   white-space: pre;
-}
-.verticalText:hover .circleImage {
-  // width: 130%;
-  // height: 130%;
-  transform: scale(1.2);
-  opacity: 0.1;
-  > img {
-    width: 140%;
-    display: block;
-    transition: opacity 0.3s linear, transform 4.4s cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
 }
 .verticalText:hover .number {
   color: white;
@@ -94,9 +80,6 @@
 }
 .circleImageCover {
   position: relative;
-  // cursor: pointer;
-  // overflow: hidden;
-  // display: block;
 }
 .circleImage {
   // top: 70px;
