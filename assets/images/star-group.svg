@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="29px" height="64px" viewBox="0 0 29 64" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <path d="M29 13.5C15.344 13.9341 14.9663 14.2859 14.5002 27C14.0339 14.2859 13.656 13.9341 0 13.5C13.656 13.0659 14.0339 12.7141 14.5002 0C14.9663 12.7141 15.344 13.0659 29 13.5" id="Fill-1" fill="#746F6D" fill-opacity="0.7848264" fill-rule="evenodd" stroke="none" />
+  <path d="M29 13.5C15.344 13.9341 14.9663 14.2859 14.5002 27C14.0339 14.2859 13.656 13.9341 0 13.5C13.656 13.0659 14.0339 12.7141 14.5002 0C14.9663 12.7141 15.344 13.0659 29 13.5" transform="translate(0 19)" id="Fill-1" fill="#746F6D" fill-opacity="0.5509498" fill-rule="evenodd" stroke="none" />
+  <path d="M0 13.5C13.656 13.066 14.0337 12.7141 14.4999 0C14.966 12.7141 15.344 13.066 29 13.5C15.344 13.934 14.966 14.2859 14.4999 27C14.0337 14.2859 13.656 13.934 0 13.5" transform="matrix(-1 -8.742278E-08 8.742278E-08 -1 29 64)" id="Fill-1-Copy" fill="#746F6D" fill-opacity="0.23681858" fill-rule="evenodd" stroke="none" />
+</svg>
