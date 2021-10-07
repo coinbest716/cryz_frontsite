@@ -8,7 +8,8 @@ import Image from 'next/image'
 import ReactReadMoreReadLess from 'react-read-more-read-less'
 import CircularMark from 'components/components/CircularMark'
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
-import CarouselService from 'components/components/CarouselService'
+import CarouselService from 'components/components/service/CarouselService'
+import ArrowButton from 'components/components/service/ArrowButton'
 
 const Physiotherapy = () => {
   const router = useRouter()
@@ -21,6 +22,10 @@ const Physiotherapy = () => {
   const handleClickBack = () => {
     router.push('/services')
   }
+  const handleClickBuy = () => {
+    router.push('/services')
+  }
+
   const description = `Nuestro equipo de fisioterapia y osteopatía integra el tratamiento de diferentes patologías, así como,
   dolores y molestias de nuestro día a día para distintos tipos de perfiles: embarazadas, ancianos, bebés,
   deportistas… En constante formación de las últimas tendencias y metodologías, realizamos una valoración
@@ -70,6 +75,9 @@ const Physiotherapy = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="w-1/3 mr-1">
+        <ArrowButton label={'Compra  presenciales'} onClick={handleClickBuy} />
       </div>
     </div>
   )
