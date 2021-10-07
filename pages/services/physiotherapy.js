@@ -22,6 +22,10 @@ const Physiotherapy = () => {
   const handleClickBack = () => {
     router.push('/services')
   }
+  const handleClickBuy = () => {
+    router.push('/services')
+  }
+
   const description = `Nuestro equipo de fisioterapia y osteopatía integra el tratamiento de diferentes patologías, así como,
   dolores y molestias de nuestro día a día para distintos tipos de perfiles: embarazadas, ancianos, bebés,
   deportistas… En constante formación de las últimas tendencias y metodologías, realizamos una valoración
@@ -73,7 +77,7 @@ const Physiotherapy = () => {
         </div>
       </div>
       <div className="w-1/3 mr-1">
-        <ArrowButton label={'Compra  presenciales'} />
+        <ArrowButton label={'Compra  presenciales'} onClick={handleClickBuy} />
       </div>
     </div>
   )
