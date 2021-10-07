@@ -34,7 +34,7 @@
   text-align: justify;
 }
 .verticalBottom {
-  padding: 460px 40px 40px 40px;
+  padding: 60vh 40px 0px 40px;
   // display: flex;
   // height: 100%;
   // padding-bottom: 100px;
@@ -52,14 +52,28 @@
   display: flex;
   white-space: pre;
 }
-.verticalText:hover > .number {
-  color: white;
+.verticalText:hover .circleImage {
+  // width: 130%;
+  // height: 130%;
+  transform: scale(1.2);
+  opacity: 0.1;
+  > img {
+    width: 140%;
+    display: block;
+    transition: opacity 0.3s linear, transform 4.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
 }
-.verticalText:hover > .typograph {
+.verticalText:hover .number {
   color: white;
+  transition: 0.4s;
 }
-.verticalText:hover > .arrowIcon {
+.verticalText:hover .typograph {
+  color: white;
+  transition: 0.4s;
+}
+.verticalText:hover .arrowIcon {
   filter: brightness(0) invert(1);
+  transition: 0.4s;
 }
 .number {
   color: #818e8e;
@@ -79,16 +93,25 @@
   height: 25px;
 }
 .circleImageCover {
-  position: absolute;
-  left: 120px;
-  transition: 0.9s;
+  position: relative;
+  // cursor: pointer;
+  // overflow: hidden;
+  // display: block;
 }
 .circleImage {
+  top: 70px;
+  left: 120px;
+  position: absolute;
   width: 500px;
   height: 500px;
-  border-radius: 250px;
+  border-radius: 500px;
   object-fit: cover;
   object-position: center;
   opacity: 0.6;
-  transition: 0.9s;
+
+  -webkit-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  -ms-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
 }

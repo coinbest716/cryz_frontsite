@@ -13,11 +13,10 @@ const Training = () => {
   const image01 = '/images/card1.svg'
   const image02 = '/images/card2.svg'
   const image03 = '/images/card4.svg'
-  const [activeImage, setActiveImage] = useState('')
+  const [activeImage, setActiveImage] = useState(image01)
 
   const [serverType, setServerType] = useState({ type1: false, type2: false, type3: false })
   const handleMouseOver = type => {
-    console.log(type)
     switch (type) {
       case 'type1':
         setServerType({ type1: true, type2: false, type3: false })
@@ -78,9 +77,11 @@ const Training = () => {
               </div>
             </div>
             <div className="col-span-12 md:col-span-8 sm:col-span-12 relative">
-              <div className={styles.circleImageCover}>
-                <img src={activeImage} alt="" className={styles.circleImage} />
-              </div>
+              {(serverType.type1 || serverType.type2 || serverType.type3) && (
+                <div className={styles.circleImageCover}>
+                  <img src={activeImage} alt="" className={styles.circleImage} />
+                </div>
+              )}
               <div className={styles.verticalBottom}>
                 <div className={styles.sortStart}>
                   <div
