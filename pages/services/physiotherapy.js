@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from './physiotherapy.module.scss'
@@ -5,9 +6,17 @@ import backGrayIcon from 'public/images/arrow-left-gray.svg'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import ReactReadMoreReadLess from 'react-read-more-read-less'
+import CircularMark from 'components/components/CircularMark'
+import TeamSectionData from 'assets/data/TeamSectionData'
+import CarouselService from 'components/components/CarouselService'
 
 const Physiotherapy = () => {
   const router = useRouter()
+  const [sliderData, setSliderData] = useState([])
+
+  useEffect(() => {
+    setSliderData(TeamSectionData)
+  }, [])
 
   const handleClickBack = () => {
     router.push('/services')
@@ -51,7 +60,14 @@ const Physiotherapy = () => {
                 </ReactReadMoreReadLess>
               </div>
             </div>
-            <div className="col-span-12 md:col-span-7 sm:col-span-12 "></div>
+            <div className="col-span-12 md:col-span-7 sm:col-span-12 ">
+              <div className={styles.circularMark}>
+                <CircularMark />
+              </div>
+              <div className={styles.middleSection}>
+                <CarouselService sliderData={sliderData} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
