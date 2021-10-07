@@ -13,7 +13,16 @@ const Training = () => {
   const image01 = '/images/card1.svg'
   const image02 = '/images/card2.svg'
   const image03 = '/images/card4.svg'
-  const [activeImage, setActiveImage] = useState(image01)
+  const [activeImage, setActiveImage] = useState('')
+
+  const handleMouseMover = event => {
+    if (activeImage === '') return
+    var x = event.clientX - 370
+    var y = event.clientY - 350
+    var shark = document.getElementById('shark')
+    shark.style.left = x + 'px'
+    shark.style.top = y + 'px'
+  }
 
   const [serverType, setServerType] = useState({ type1: false, type2: false, type3: false })
   const handleMouseOver = type => {
@@ -52,8 +61,13 @@ const Training = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className="flex flex-wrap justify-center">
+    <div className={styles.container} onMouseMove={handleMouseMover}>
+      {(serverType.type1 || serverType.type2 || serverType.type3) && (
+        <div className={styles.circleImageCover} id="shark">
+          <img src={activeImage} alt="" className={styles.circleImage} />
+        </div>
+      )}
+      <div className="flex flex-wrap justify-center pb-20">
         <div className={globlaStyle.container}>
           <div className="mt-9">
             <button className="flex justify-between items-center" onClick={handleClickBack}>
@@ -77,11 +91,6 @@ const Training = () => {
               </div>
             </div>
             <div className="col-span-12 md:col-span-8 sm:col-span-12 relative">
-              {(serverType.type1 || serverType.type2 || serverType.type3) && (
-                <div className={styles.circleImageCover}>
-                  <img src={activeImage} alt="" className={styles.circleImage} />
-                </div>
-              )}
               <div className={styles.verticalBottom}>
                 <div className={styles.sortStart}>
                   <div
