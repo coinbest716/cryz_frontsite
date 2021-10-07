@@ -17,9 +17,9 @@ const Training = () => {
 
   const handleMouseMover = event => {
     if (activeImage === '') return
-    var x = event.clientX - 250
-    var y = event.clientY - 330
-    var shark = document.getElementById('shark')
+    let x = event.clientX - 250
+    let y = event.clientY - 330
+    let shark = document.getElementById('shark')
     shark.style.left = x + 'px'
     shark.style.top = y + 'px'
   }

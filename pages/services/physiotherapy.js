@@ -8,7 +8,8 @@ import Image from 'next/image'
 import ReactReadMoreReadLess from 'react-read-more-read-less'
 import CircularMark from 'components/components/CircularMark'
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
-import CarouselService from 'components/components/CarouselService'
+import CarouselService from 'components/components/service/CarouselService'
+import ArrowButton from 'components/components/service/ArrowButton'
 
 const Physiotherapy = () => {
   const router = useRouter()
@@ -36,7 +37,7 @@ const Physiotherapy = () => {
 
   return (
     <div className={styles.container}>
-      <div className="flex flex-wrap justify-center pb-20">
+      <div className="flex flex-wrap justify-center">
         <div className={globlaStyle.container}>
           <div className="mt-9">
             <button className="flex justify-between items-center" onClick={handleClickBack}>
@@ -70,6 +71,9 @@ const Physiotherapy = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="mr-1">
+        <ArrowButton label={'Compra  presenciales'} />
       </div>
     </div>
   )
