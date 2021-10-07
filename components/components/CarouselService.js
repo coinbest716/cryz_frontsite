@@ -4,7 +4,6 @@ import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
 import styles from './CarouselService.module.scss'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
-// import './carouselOverrides.css'
 import { Carousel } from 'react-responsive-carousel'
 import Image from 'next/image'
 
