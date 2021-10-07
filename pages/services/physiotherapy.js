@@ -4,6 +4,7 @@ import styles from './physiotherapy.module.scss'
 import backGrayIcon from 'public/images/arrow-left-gray.svg'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import ReactReadMoreReadLess from 'react-read-more-read-less'
 
 const Physiotherapy = () => {
   const router = useRouter()
@@ -11,6 +12,18 @@ const Physiotherapy = () => {
   const handleClickBack = () => {
     router.push('/services')
   }
+  const description = `Nuestro equipo de fisioterapia y osteopatía integra el tratamiento de diferentes patologías, así como,
+  dolores y molestias de nuestro día a día para distintos tipos de perfiles: embarazadas, ancianos, bebés,
+  deportistas… En constante formación de las últimas tendencias y metodologías, realizamos una valoración
+  previa del paciente y utilizamos técnicas manuales, además de aparatología como INDIBA, ya sea lesiones
+  como postparto, kinesiotaping, punción seca...
+  Algunos de nuestros tratamientos son la terapia manual, terapia activa, osteopatía, INDIBA, crioterapia,
+  termoterapia, electroterapia (TENS)...
+  Todo ello para mejorar tu bienestar y llevar un estilo de vida con la mayor calidad posible– INDIBA:
+  Método que utiliza el sistema de transferencia eléctrica capacitiva resistiva al aplicar corrientes
+  eléctricas para el tratamiento de lesiones musculo esqueléticas. También tratamos los hipopresivos con
+  esta técnica. – OTROS SERVICIOS: Vendajes funcionales y neuromusculares, punción seca, crioterapia,
+  termoterapia, electroterapia (TENS).`
 
   return (
     <div className={styles.container}>
@@ -27,20 +40,15 @@ const Physiotherapy = () => {
               <div className={'pt-10 ' + styles.topTitle}>Fisioterapia</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription + ' mt-10 pb-20'}>
-                Nuestro equipo de fisioterapia y osteopatía integra el tratamiento de diferentes patologías, así como,
-                dolores y molestias de nuestro día a día para distintos tipos de perfiles: embarazadas, ancianos, bebés,
-                deportistas… En constante formación de las últimas tendencias y metodologías, realizamos una valoración
-                previa del paciente y utilizamos técnicas manuales, además de aparatología como INDIBA, ya sea lesiones
-                como postparto, kinesiotaping, punción seca...
-                <br />
-                Algunos de nuestros tratamientos son la terapia manual, terapia activa, osteopatía, INDIBA, crioterapia,
-                termoterapia, electroterapia (TENS)... <br />
-                Todo ello para mejorar tu bienestar y llevar un estilo de vida con la mayor calidad posible– INDIBA:
-                Método que utiliza el sistema de transferencia eléctrica capacitiva resistiva al aplicar corrientes
-                eléctricas para el tratamiento de lesiones musculo esqueléticas. También tratamos los hipopresivos con
-                esta técnica. – OTROS SERVICIOS: Vendajes funcionales y neuromusculares, punción seca, crioterapia,
-                termoterapia, electroterapia (TENS).
-                <br />
+                <ReactReadMoreReadLess
+                  charLimit={500}
+                  readMoreText={' [leer mas…] '}
+                  readLessText={' [Leer menos…]'}
+                  readMoreClassName="read-more-less--more"
+                  readLessClassName="read-more-less--less"
+                >
+                  {description}
+                </ReactReadMoreReadLess>
               </div>
             </div>
             <div className="col-span-12 md:col-span-7 sm:col-span-12 "></div>
