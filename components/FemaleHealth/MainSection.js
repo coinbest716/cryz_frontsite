@@ -1,14 +1,61 @@
 import React from 'react'
+import Image from 'next/image'
+import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
+import { Carousel } from 'react-responsive-carousel'
+
+// images
+import StarGroup from 'assets/images/star-group.svg'
+
+// json data
+import FemaleHealthCarouselData from 'assets/data/FemaleHealthCarouselData'
 
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
 import styles from 'components/FemaleHealth/MainSection.module.scss'
 
 const MainSection = () => {
+  const [sliderData, setSliderData] = React.useState([])
+
+  React.useEffect(() => {
+    setSliderData(FemaleHealthCarouselData)
+  }, [])
   return (
     <div className={'w-full p-0'}>
-      <div className={'w-full p-0 m-0 h-screen -z-10 flex justify-center ' + styles.container}>
-        <div className={globalStyles.container + ' pb-7'}>
+      <div className={'relative w-full p-0 m-0 h-screen flex flex-wrap justify-center ' + styles.container}>
+        {/* carousel part */}
+        <div className={'relative h-full grid grid-cols-12 gap-4'}>
+          <div className={'col-span-5 flex'}></div>
+          <div className={'col-span-7 flex'}>
+            <div className={'col-span-7 flex justify-center items-center'}>
+              <div>
+                {sliderData.length !== 0 ? (
+                  <Carousel
+                    showArrows={false}
+                    showThumbs={false}
+                    autoPlay={true}
+                    stopOnHover={true}
+                    showStatus={false}
+                    showIndicators={false}
+                    infiniteLoop={true}
+                    centerMode={true}
+                    centerSlidePercentage={33}
+                    interval={3000}
+                  >
+                    {sliderData.map((item, index) => (
+                      <div key={index} className="mx-1">
+                        <Image src={item.image} alt="" width={283} height={544} />
+                      </div>
+                    ))}
+                  </Carousel>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* text part */}
+        <div className={globalStyles.container + ' absolute '}>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-5 flex'}>
               <div className={'w-full'}>
@@ -37,7 +84,13 @@ const MainSection = () => {
                 </div>
               </div>
             </div>
-            <div className={'col-span-7'}>Carousel part</div>
+          </div>
+        </div>
+        {/* continue browsing part */}
+        <div className={globalStyles.container + ' absolute bottom-0'}>
+          <div className={'absolute bottom-0 block jusity-center cursor-pointer right-10 '}>
+            <div className={styles.continueBrowsing}>Seguir navegando</div>
+            <Image src={StarGroup} alt="" width={29} height={64} />
           </div>
         </div>
       </div>
