@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import ReactReadMoreReadLess from 'react-read-more-read-less'
 import CircularMark from 'components/components/CircularMark'
-import TeamSectionData from 'assets/data/TeamSectionData'
+import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import CarouselService from 'components/components/CarouselService'
 
 const Physiotherapy = () => {
@@ -15,7 +15,7 @@ const Physiotherapy = () => {
   const [sliderData, setSliderData] = useState([])
 
   useEffect(() => {
-    setSliderData(TeamSectionData)
+    setSliderData(ServerPhysiotherapy)
   }, [])
 
   const handleClickBack = () => {
@@ -64,7 +64,7 @@ const Physiotherapy = () => {
               <div className={styles.circularMark}>
                 <CircularMark />
               </div>
-              <div className={styles.middleSection}>
+              <div className={styles.carouselSection}>
                 <CarouselService sliderData={sliderData} />
               </div>
             </div>

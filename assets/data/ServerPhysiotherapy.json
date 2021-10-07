@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "image": "/images/card1.svg",
+    "name": "Mark Andersen",
+    "role": "CEO",
+    "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
+    "pintereset": "https://www.pinterest.com/",
+    "facebook": "https://www.facebook.com/",
+    "twitter": "https://twitter.com/?lang=en",
+    "linkedin": "https://www.linkedin.com"
+  },
+  {
+    "id": 2,
+    "image": "/images/card2.svg",
+    "name": "Chloe Parker",
+    "role": "Art Director",
+    "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
+    "pintereset": "https://www.pinterest.com/",
+    "facebook": "https://www.facebook.com/",
+    "twitter": "https://twitter.com/?lang=en",
+    "linkedin": "https://www.linkedin.com"
+  },
+  {
+    "id": 3,
+    "image": "/images/card3.svg",
+    "name": "Alex Bolson",
+    "role": "Web Designer",
+    "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
+    "pintereset": "https://www.pinterest.com/",
+    "facebook": "https://www.facebook.com/",
+    "twitter": "https://twitter.com/?lang=en",
+    "linkedin": "https://www.linkedin.com"
+  },
+  {
+    "id": 4,
+    "image": "/images/card5.svg",
+    "name": "Mark Andersen",
+    "role": "CEO",
+    "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
+    "pintereset": "https://www.pinterest.com/",
+    "facebook": "https://www.facebook.com/",
+    "twitter": "https://twitter.com/?lang=en",
+    "linkedin": "https://www.linkedin.com"
+  },
+  {
+    "id": 5,
+    "image": "/images/card2.svg",
+    "name": "Chloe Parker",
+    "role": "Art Director",
+    "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
+    "pintereset": "https://www.pinterest.com/",
+    "facebook": "https://www.facebook.com/",
+    "twitter": "https://twitter.com/?lang=en",
+    "linkedin": "https://www.linkedin.com"
+  },
+  {
+    "id": 6,
+    "image": "/images/card3.svg",
+    "name": "Alex Bolson",
+    "role": "Web Designer",
+    "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
+    "pintereset": "https://www.pinterest.com/",
+    "facebook": "https://www.facebook.com/",
+    "twitter": "https://twitter.com/?lang=en",
+    "linkedin": "https://www.linkedin.com"
+  },
+  {
+    "id": 7,
+    "image": "/images/card1.svg",
+    "name": "Mark Andersen",
+    "role": "CEO",
+    "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
+    "pintereset": "https://www.pinterest.com/",
+    "facebook": "https://www.facebook.com/",
+    "twitter": "https://twitter.com/?lang=en",
+    "linkedin": "https://www.linkedin.com"
+  }
+]
