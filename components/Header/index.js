@@ -22,6 +22,68 @@ const Header = props => {
     {
       title: 'Salud Fem',
       link: '/female-health',
+      subMenus: [
+        {
+          title: 'Preparación al parto',
+          link: '/female-health',
+          subMenus: [
+            {
+              title: '1 to 1',
+              link: '/female-health',
+            },
+            {
+              title: 'Presencial',
+              link: '/female-health/preparation-for-childbirth/presencial',
+            },
+            {
+              title: 'Planes Online',
+              link: '/female-health/preparation-for-childbirth/planes-online',
+            },
+          ],
+        },
+        {
+          title: 'Suelo pélvico',
+          link: '/female-health/pelvic-floor',
+        },
+        {
+          title: 'Postparto',
+          link: '/female-health/postpartum',
+          subMenus: [
+            {
+              title: '1 to 1ffff',
+              link: '/female-health',
+            },
+            {
+              title: 'Presencial',
+              link: '/female-health/preparation-for-childbirth/presencial',
+            },
+            {
+              title: 'Planes Online',
+              link: '/female-health/preparation-for-childbirth/planes-online',
+            },
+          ],
+        },
+        {
+          title: 'Embarazo',
+          link: '/female-health/pregnancy',
+        },
+        {
+          title: 'Asesoria de Lactancia',
+          link: '/female-health/lactation-counseling',
+        },
+        {
+          title: 'Menopausia',
+          link: '/female-health/menopause',
+        },
+        {
+          title: 'Asesoria del sueño',
+          link: '/female-health/sleep-counseling',
+        },
+        {
+          title: 'Entrena tu Diástasis',
+          link: '/female-health/train-your-diastasis',
+        },
+      ],
     },
     {
       title: 'Servicios',
@@ -88,40 +150,128 @@ const Header = props => {
       </Link>
       <div className="flex">
         <ul className="flex flex-col sm:flex-row list-none items-center justify-end mr-24">
+          {/* text menu part */}
           {menus &&
             menus.map((menu, key) => {
               return (
-                <li
-                  className={
-                    'flex justify-center ' +
-                    styles.menuItem +
-                    ' ' +
-                    (router.pathname === menu.link || router.asPath === menu.link ? styles.active : '')
-                  }
-                  key={key}
-                >
+                <li className={'flex justify-center ' + styles.menuItem} key={key}>
                   {menu.link === '/#team' ? (
                     <button onClick={() => gotoTeamSection()}>
-                      <a>{router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}</a>
+                      <a
+                        className={
+                          styles.menuText +
+                          ' ' +
+                          (router.pathname === menu.link || router.asPath === menu.link ? styles.active : '')
+                        }
+                      >
+                        {router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}
+                      </a>
                     </button>
+                  ) : menu.subMenus !== undefined && menu.subMenus.length !== 0 ? (
+                    <div className={styles.dropdown}>
+                      <button className={styles.dropbtn}>
+                        <Link href={menu.link} passHref>
+                          <a
+                            className={
+                              styles.menuText +
+                              ' ' +
+                              (router.pathname === menu.link || router.asPath === menu.link ? styles.active : '')
+                            }
+                          >
+                            {router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}
+                          </a>
+                        </Link>
+                      </button>
+                      <div className={styles.dropdownContent}>
+                        <div className="flex flex-wrap relative">
+                          {menu.subMenus.map((subMenu, idx) =>
+                            subMenu.subMenus !== undefined && subMenu.subMenus.length !== 0 ? (
+                              <div key={idx}>
+                                <div className={styles.subDropdown}>
+                                  <button className={styles.subDropbtn}>
+                                    <Link href={subMenu.link} passHref>
+                                      <a
+                                        className={
+                                          styles.menuText +
+                                          ' ' +
+                                          (router.pathname === subMenu.link || router.asPath === subMenu.link
+                                            ? styles.active
+                                            : '')
+                                        }
+                                      >
+                                        {router.pathname === subMenu.link ? <b>{subMenu.title}</b> : subMenu.title}
+                                      </a>
+                                    </Link>
+                                  </button>
+                                  <div className={styles.subDropdownContent}>
+                                    {subMenu.subMenus.map((item, index) => (
+                                      <div key={index}>
+                                        <Link href={item.link} passHref>
+                                          <a
+                                            className={
+                                              styles.menuText +
+                                              ' ' +
+                                              (router.pathname === item.link || router.asPath === item.link
+                                                ? styles.active
+                                                : '')
+                                            }
+                                          >
+                                            {router.pathname === item.link ? <b>{item.title}</b> : item.title}
+                                          </a>
+                                        </Link>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div key={idx}>
+                                <Link href={subMenu.link} passHref>
+                                  <a
+                                    className={
+                                      styles.menuText +
+                                      ' ' +
+                                      (router.pathname === subMenu.link || router.asPath === subMenu.link
+                                        ? styles.active
+                                        : '')
+                                    }
+                                  >
+                                    {router.pathname === subMenu.link ? <b>{subMenu.title}</b> : subMenu.title}
+                                  </a>
+                                </Link>
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   ) : (
                     <button>
                       <Link href={menu.link} passHref>
-                        <a>{router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}</a>
+                        <a
+                          className={
+                            styles.menuText +
+                            ' ' +
+                            (router.pathname === menu.link || router.asPath === menu.link ? styles.active : '')
+                          }
+                        >
+                          {router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}
+                        </a>
                       </Link>
                     </button>
                   )}
                 </li>
               )
             })}
-          <li className={'flex justify-center ml-16 ' + styles.menuItem}>
+          {/* icon menu part */}
+          <li className={'flex justify-center ml-16 ' + styles.iconMenuItem}>
             <Link href={'/shop-cart'} passHref>
               <button>
                 <Image src={CartIcon} alt="" width={22} height={19} />
               </button>
             </Link>
           </li>
-          <li className={'flex justify-center ' + styles.menuItem}>
+          <li className={'flex justify-center ' + styles.iconMenuItem}>
             <Link href={'/account'} passHref>
               <button>
                 <Image src={AccountIcon} alt="" width={22} height={20} />
