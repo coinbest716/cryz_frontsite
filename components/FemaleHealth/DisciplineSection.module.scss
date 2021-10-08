@@ -21,12 +21,19 @@
   margin-bottom: 37px;
 }
 
+.disciplineCard {
+  max-height: 576px;
+  overflow: hidden;
+}
+
 .box01 {
   width: 25%;
   height: 288px;
+  transition: 0.8s;
 }
 
 .box02 {
   width: 50%;
   height: 288px;
+  transition: 0.8s;
 }

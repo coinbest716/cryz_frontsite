@@ -1,19 +1,22 @@
 import React from 'react'
+import Image from 'next/image'
 
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
 import styles from 'components/FemaleHealth/DisciplineSection.module.scss'
 
 const DisciplineSection = () => {
+  const [isLoading, setIsLoading] = React.useState(false)
   const BoxInfo = [
-    { id: 1, bgColor: '#f8f5f4', title: 'Suelo pélvico' },
-    { id: 2, bgColor: '#F3F3EB', title: 'Preparación al parto' },
-    { id: 3, bgColor: '#F1F1F1', title: 'Menopausia' },
-    { id: 4, bgColor: '#99A7A9', title: 'Postparto' },
-    { id: 5, bgColor: '#d9dfdf', title: 'Embarazo' },
-    { id: 6, bgColor: '#e8ebeb', title: 'Asesoría del sueño infantil' },
-    { id: 7, bgColor: '#cecbce', title: 'Entrena tu diástasis' },
+    { id: 1, bgColor: '#f8f5f4', title: 'Suelo pélvico', image: '/images/card1.svg' },
+    { id: 2, bgColor: '#F3F3EB', title: 'Preparación al parto', image: '/images/card2.svg' },
+    { id: 3, bgColor: '#F1F1F1', title: 'Menopausia', image: '/images/card3.svg' },
+    { id: 4, bgColor: '#99A7A9', title: 'Postparto', image: '/images/card4.svg' },
+    { id: 5, bgColor: '#d9dfdf', title: 'Embarazo', image: '/images/card1.svg' },
+    { id: 6, bgColor: '#e8ebeb', title: 'Asesoría del sueño infantil', image: '/images/card2.svg' },
+    { id: 7, bgColor: '#cecbce', title: 'Entrena tu diástasis', image: '/images/card3.svg' },
   ]
+
   const BoxList = [
     // default
     {
@@ -127,10 +130,20 @@ const DisciplineSection = () => {
     setType(BoxList[0])
   }, [])
 
-  const handleSetType = item => {
-    console.log('selected item = ', item)
-    setType(BoxList[item.id])
+  const handleSetType = (id, index) => {
+    setIsLoading(true)
+    if (index === 4 && id !== 5) {
+      setType(BoxList[5])
+    } else {
+      setType(BoxList[id])
+    }
   }
+
+  React.useEffect(() => {
+    if (JSON.stringify(type) !== JSON.stringify({})) {
+      setIsLoading(false)
+    }
+  }, [type])
 
   return (
     <div className={globalStyles.container}>
@@ -138,31 +151,29 @@ const DisciplineSection = () => {
         <div className={styles.title}>Disciplinas</div>
         <div className={styles.divider} />
         {/* disciplines part */}
-        <div className="w-full flex flex-wrap">
+        <div className={'w-full flex flex-wrap justify-between ' + styles.disciplineCard}>
           {JSON.stringify(type) !== JSON.stringify({}) ? (
             type.elem.map((item, index) => (
               <div
                 key={index}
-                className={'cursor-pointer ' + (item.width === 1 ? styles.box01 : styles.box02)}
+                className={'relative cursor-pointer ' + (item.width === 1 ? styles.box01 : styles.box02)}
                 style={{ backgroundColor: BoxInfo[item.id - 1].bgColor }}
-                onClick={() => handleSetType(item)}
+                onMouseOver={() => (isLoading === false ? handleSetType(item.id, index) : '')}
               >
-                id:{item.id} width:{item.width} pos:{item.pos}
-                <br />
-                {typeof item.width}
+                <Image
+                  src={BoxInfo[item.id - 1].image}
+                  alt=""
+                  width={576}
+                  height={288}
+                  layout="fill"
+                  objectFit="cover"
+                  opacity={0.36}
+                />
               </div>
             ))
           ) : (
             <></>
           )}
-          {/* <div className={'cursor-pointer ' + styles.box01} style={{ backgroundColor: colorList[0].color }}></div>
-          <div className={'cursor-pointer ' + styles.box01} style={{ backgroundColor: colorList[1].color }}></div>
-          <div className={'cursor-pointer ' + styles.box01} style={{ backgroundColor: colorList[2].color }}></div>
-          <div className={'cursor-pointer ' + styles.box01} style={{ backgroundColor: colorList[3].color }}></div>
-          <div className={'cursor-pointer ' + styles.box02} style={{ backgroundColor: colorList[4].color }}></div>
-          <div className={'cursor-pointer ' + styles.box00} style={{ backgroundColor: colorList[5].color }}></div>
-          <div className={'cursor-pointer ' + styles.box01} style={{ backgroundColor: colorList[6].color }}></div>
-          <div className={'cursor-pointer ' + styles.box01} style={{ backgroundColor: colorList[7].color }}></div> */}
         </div>
       </div>
     </div>
