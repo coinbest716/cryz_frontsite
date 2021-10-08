@@ -1,0 +1,32 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding-top: 75px;
+  padding-bottom: 67px;
+}
+
+.title {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: $blue-gray-300-color;
+}
+
+.divider {
+  width: 40px;
+  height: 4px;
+  background-color: $blue-gray-300-color;
+  margin-top: 22px;
+  margin-bottom: 37px;
+}
+
+.box01 {
+  width: 25%;
+  height: 288px;
+}
+
+.box02 {
+  width: 50%;
+  height: 288px;
+}
