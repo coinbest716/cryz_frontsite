@@ -1,6 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 
+// images
+import ArrowRightGrayIcon from 'assets/images/arrow-right-black.svg'
+import ArrowRightUpGrayIcon from 'assets/images/arrow-right-up-black.svg'
+
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
 import styles from 'components/FemaleHealth/DisciplineSection.module.scss'
@@ -125,6 +129,7 @@ const DisciplineSection = () => {
   ]
 
   const [type, setType] = React.useState({})
+  const [selectedItem, setSelectedItem] = React.useState(5)
 
   React.useEffect(() => {
     setType(BoxList[0])
@@ -132,6 +137,7 @@ const DisciplineSection = () => {
 
   const handleSetType = (id, index) => {
     setIsLoading(true)
+    setSelectedItem(id)
     if (index === 4 && id !== 5) {
       setType(BoxList[5])
     } else {
@@ -160,15 +166,30 @@ const DisciplineSection = () => {
                 style={{ backgroundColor: BoxInfo[item.id - 1].bgColor }}
                 onMouseOver={() => (isLoading === false ? handleSetType(item.id, index) : '')}
               >
-                <Image
-                  src={BoxInfo[item.id - 1].image}
-                  alt=""
-                  width={576}
-                  height={288}
-                  layout="fill"
-                  objectFit="cover"
-                  opacity={0.36}
-                />
+                <div className="w-full h-full relative">
+                  <div className={'absolute ' + styles.cardTitle}>{BoxInfo[item.id - 1].title}</div>
+                  <div className={'absolute ' + styles.cardArrow}>
+                    <Image
+                      src={item.id === selectedItem ? ArrowRightGrayIcon : ArrowRightUpGrayIcon}
+                      alt=""
+                      width={item.id === selectedItem ? 30 : 40}
+                      height={item.id === selectedItem ? 24 : 32}
+                    />
+                  </div>
+                  {item.id === selectedItem ? (
+                    <Image
+                      src={BoxInfo[item.id - 1].image}
+                      alt=""
+                      width={576}
+                      height={288}
+                      layout="fill"
+                      objectFit="cover"
+                      className="opacity-40"
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </div>
             ))
           ) : (

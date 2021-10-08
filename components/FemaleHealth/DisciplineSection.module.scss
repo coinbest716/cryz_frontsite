@@ -37,3 +37,18 @@
   height: 288px;
   transition: 0.8s;
 }
+
+.cardTitle {
+  padding: 117px 40px 100px 40px;
+  font-family: Montserrat;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  color: $black-color;
+  z-index: 100;
+}
+
+.cardArrow {
+  bottom: 40px;
+  left: 40px;
+}
