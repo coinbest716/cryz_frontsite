@@ -3,6 +3,9 @@ import Image from 'next/image'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 
+// custom component
+import CircularMark from 'components/components/CircularMark'
+
 // images
 import StarGroup from 'assets/images/star-group.svg'
 
@@ -83,6 +86,9 @@ const MainSection = () => {
                   fuera.
                 </div>
               </div>
+            </div>
+            <div className={'col-span-7 flex justify-end'}>
+              <CircularMark />
             </div>
           </div>
         </div>
