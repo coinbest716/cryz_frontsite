@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import router from 'next/router'
 
 // images
 import ArrowRightGrayIcon from 'assets/images/arrow-right-black.svg'
@@ -12,13 +13,37 @@ import styles from 'components/FemaleHealth/DisciplineSection.module.scss'
 const DisciplineSection = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const BoxInfo = [
-    { id: 1, bgColor: '#f8f5f4', title: 'Suelo pélvico', image: '/images/card1.svg' },
-    { id: 2, bgColor: '#F3F3EB', title: 'Preparación al parto', image: '/images/card2.svg' },
-    { id: 3, bgColor: '#F1F1F1', title: 'Menopausia', image: '/images/card3.svg' },
-    { id: 4, bgColor: '#99A7A9', title: 'Postparto', image: '/images/card4.svg' },
-    { id: 5, bgColor: '#d9dfdf', title: 'Embarazo', image: '/images/card1.svg' },
-    { id: 6, bgColor: '#e8ebeb', title: 'Asesoría del sueño infantil', image: '/images/card2.svg' },
-    { id: 7, bgColor: '#cecbce', title: 'Entrena tu diástasis', image: '/images/card3.svg' },
+    {
+      id: 1,
+      bgColor: '#f8f5f4',
+      title: 'Suelo pélvico',
+      image: '/images/card1.svg',
+      link: '/female-health/pelvic-floor',
+    },
+    {
+      id: 2,
+      bgColor: '#F3F3EB',
+      title: 'Preparación al parto',
+      image: '/images/card2.svg',
+      link: '/female-health/preparation-for-childbirth',
+    },
+    { id: 3, bgColor: '#F1F1F1', title: 'Menopausia', image: '/images/card3.svg', link: '/female-health/menopause' },
+    { id: 4, bgColor: '#99A7A9', title: 'Postparto', image: '/images/card4.svg', link: '/female-health/postpartum' },
+    { id: 5, bgColor: '#d9dfdf', title: 'Embarazo', image: '/images/card1.svg', link: '/female-health/pregnancy' },
+    {
+      id: 6,
+      bgColor: '#e8ebeb',
+      title: 'Asesoría del sueño infantil',
+      image: '/images/card2.svg',
+      link: 'female-health/child-sleep-counseling',
+    },
+    {
+      id: 7,
+      bgColor: '#cecbce',
+      title: 'Entrena tu diástasis',
+      image: '/images/card3.svg',
+      link: '/female-health/train-your-diastasis',
+    },
   ]
 
   const BoxList = [
@@ -165,6 +190,7 @@ const DisciplineSection = () => {
                 className={'relative cursor-pointer ' + (item.width === 1 ? styles.box01 : styles.box02)}
                 style={{ backgroundColor: BoxInfo[item.id - 1].bgColor }}
                 onMouseOver={() => (isLoading === false ? handleSetType(item.id, index) : '')}
+                onClick={() => router.push(BoxInfo[item.id - 1].link)}
               >
                 <div className="w-full h-full relative">
                   <div className={'absolute ' + styles.cardTitle}>{BoxInfo[item.id - 1].title}</div>
