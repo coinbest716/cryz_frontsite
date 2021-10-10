@@ -87,7 +87,7 @@ const MainSection = () => {
                 </div>
               </div>
             </div>
-            <div className={'col-span-7 flex justify-end'}>
+            <div className={'col-span-7 flex justify-end z-10'}>
               <CircularMark />
             </div>
           </div>

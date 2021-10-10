@@ -34,15 +34,10 @@
   line-height: 32px;
   text-align: justify;
 }
-.circularMark {
-  padding-top: 40px;
-  display: flex;
-  justify-content: flex-end;
-}
 .carouselSection {
   width: 500px;
-  margin-top: -90px;
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
+  align-items: flex-end;
 }
