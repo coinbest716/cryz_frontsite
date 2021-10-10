@@ -1,0 +1,54 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding-top: 75px;
+  padding-bottom: 67px;
+}
+
+.title {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: $blue-gray-300-color;
+}
+
+.divider {
+  width: 40px;
+  height: 4px;
+  background-color: $blue-gray-300-color;
+  margin-top: 22px;
+  margin-bottom: 37px;
+}
+
+.disciplineCard {
+  max-height: 576px;
+  overflow: hidden;
+}
+
+.box01 {
+  width: 25%;
+  height: 288px;
+  transition: 0.8s;
+}
+
+.box02 {
+  width: 50%;
+  height: 288px;
+  transition: 0.8s;
+}
+
+.cardTitle {
+  padding: 117px 40px 100px 40px;
+  font-family: Montserrat;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  color: $black-color;
+  z-index: 100;
+}
+
+.cardArrow {
+  bottom: 40px;
+  left: 40px;
+}
