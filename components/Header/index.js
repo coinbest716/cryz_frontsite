@@ -77,7 +77,7 @@ const Header = props => {
         },
         {
           title: 'Asesoria del sueño',
-          link: '/female-health/sleep-counseling',
+          link: '/female-health/child-sleep-counseling',
         },
         {
           title: 'Entrena tu Diástasis',

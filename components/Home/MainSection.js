@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import router from 'next/router'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import ReactPlayer from 'react-player'
@@ -63,7 +64,7 @@ const MainSection = () => {
                   <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }}></div>
                   <div className={styles.pinkText}>{item.content01}</div>
                   <div className={styles.pinkButtonArea}>
-                    <button className={styles.pinkButton}>
+                    <button className={styles.pinkButton} onClick={() => router.push(item.link)}>
                       <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
                     </button>
                   </div>

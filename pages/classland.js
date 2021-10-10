@@ -51,7 +51,7 @@ const Classland = () => {
                     <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
                   </div>
                   <div>
-                    <div style={{ paddingTop: '20px' }}>
+                    <div className={'z-10'}>
                       <CircularMark />
                     </div>
                     <div className="mt-6">
