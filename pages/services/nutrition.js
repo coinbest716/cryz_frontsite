@@ -41,7 +41,7 @@ const Nutrition = () => {
       <div className="flex flex-wrap justify-center pb-20">
         <div className={globlaStyle.container}>
           <div className="mt-9">
-            <button className="flex justify-between items-center" onClick={handleClickBack}>
+            <button className="flex justify-between items-center hover:bg-gray-200 p-0.5 rounded-sm" onClick={handleClickBack}>
               <Image src={backGrayIcon} alt="" width={20} height={15} />
               <p className={styles.back}>&nbsp;&nbsp;Volver</p>
             </button>
