@@ -1,4 +1,4 @@
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
+import ContactLayout from 'components/Layout/ContactLayout'
 import styles from 'styles/Common.module.scss'
 
 const Contact = () => {
@@ -7,5 +7,5 @@ const Contact = () => {
 export default Contact
 
 Contact.getLayout = function getLayout(page) {
-  return <PrimaryLayout>{page}</PrimaryLayout>
+  return <ContactLayout>{page}</ContactLayout>
 }

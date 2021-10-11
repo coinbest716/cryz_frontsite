@@ -5,7 +5,8 @@ import Link from 'next/link'
 import SocialButtonGroup from 'components/SocialButtonGroup'
 
 // images
-import ArrowLeftIcon from 'assets/images/arrow-left.svg'
+// import ArrowLeftIcon from 'assets/images/arrow-left.svg'
+import ArrowLeftIcon from 'assets/images/arrow-right-up.svg'
 
 // json data
 import SocialURLData from 'assets/data/SocialURLData'
@@ -16,7 +17,7 @@ import styles from 'components/ContactFooter/ContactFooter.module.scss'
 
 const ContactFooter = () => {
   return (
-    <div className={'w-full flex flex-wrap justify-center items-center divide-y divide-white ' + styles.footerArea}>
+    <div className={'w-full flex flex-wrap justify-center items-center divide-y divide-gray-400 ' + styles.footerArea}>
       <div className={'w-full flex flex-wrap justify-center items-center'}>
         <div className={globalStyles.container + ' pb-7'}>
           <div className={'w-full flex justify-between items-center'}>
@@ -29,7 +30,7 @@ const ContactFooter = () => {
                 <p className={styles.logo}>CRYS DYAZ & CO</p>
               </button>
             </Link>
-            <SocialButtonGroup color="white" socialURL={SocialURLData[0]} />
+            <SocialButtonGroup color="gray" socialURL={SocialURLData[0]} />
           </div>
         </div>
       </div>
