@@ -6,13 +6,24 @@ import $ from 'jquery'
 // custom component
 import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
+import CircularMark from 'components/components/CircularMark'
+import CarouselFemaleHealth from 'components/FemaleHealth/CarouselFemaleHealth'
 
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
 import styles from 'pages/female-health/PreparationForChildbirth.module.scss'
 
+// json data
+import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
+
 const PreparationForChildbirth = () => {
+  const [sliderData, setSliderData] = React.useState([])
+
   const [readMoreCurrentState, setReadMoreCurrentState] = React.useState('less')
+
+  React.useEffect(() => {
+    setSliderData(ServerPhysiotherapy)
+  }, [])
 
   const handleReadMore = state => {
     setReadMoreCurrentState(state)
@@ -45,7 +56,20 @@ const PreparationForChildbirth = () => {
               <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
             </div>
           </div>
-          <div className={'col-span-7 flex'}>bbbb</div>
+          <div className={'col-span-7 relative flex justify-end'}>
+            <div className={'absolute top-10 z-10'}>
+              <CircularMark />
+            </div>
+            <div className={'w-full mt-20'}>
+              <CarouselFemaleHealth sliderData={sliderData} />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Button group part */}
+      <div className={'w-full'}>
+        <div className={'grid grid-cols-12 gap-4'}>
+          <div className={'col-span-4 w-full flex'}></div>
         </div>
       </div>
     </div>
