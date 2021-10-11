@@ -13,11 +13,11 @@
   font-size: 10px;
   line-height: 26px;
   letter-spacing: 0.5px;
-  color: $white-color;
+  color: $gray-600-color;
   background-color: transparent;
-  border: 1px solid $white-color;
+  border: 1px solid $gray-600-color;
   &:hover {
-    background-color: $blue-gray-300-color;
+    background-color: $gray-100-color;
   }
 }
 
@@ -26,12 +26,12 @@
   font-size: 12px;
   line-height: 24px;
   letter-spacing: 0.22px;
-  color: $white-color;
+  color: $black-950-color;
   cursor: pointer;
 }
 
 .text {
-  color: $white-color;
+  color: $gray-800-color;
   font-family: Montserrat;
   font-size: 12px;
   line-height: 16px;
