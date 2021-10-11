@@ -1,0 +1,31 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(309.58deg, rgba(219, 203, 208, 0.3) 0%, #dbcbd0 100%);
+  margin-top: 80px;
+}
+.topTitle {
+  color: $blue-gray-400-color;
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 44px;
+}
+.topDash {
+  width: 42px;
+  height: 7px;
+  background-color: $pink-100-color;
+  margin-top: 16px;
+}
+.topDescription {
+  color: $pink-100-color;
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 32px;
+}
