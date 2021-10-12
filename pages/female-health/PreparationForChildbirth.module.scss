@@ -1,0 +1,46 @@
+@import 'styles/variable.module.scss';
+
+.backButtonArea {
+  padding-top: 120px;
+}
+
+.strokeTitle {
+  -webkit-text-stroke: 1px $gray-500-color;
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 48px;
+  line-height: 120px;
+  letter-spacing: 2.4px;
+  color: transparent;
+}
+
+.pinkTitle {
+  margin-top: -46px;
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 1.5px;
+  color: #e3d1d2;
+}
+
+.divider {
+  width: 40px;
+  height: 4px;
+  background-color: #e3d1d2;
+  margin-top: 19px;
+  margin-bottom: 19px;
+}
+
+.text {
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 0.71px;
+  color: $blue-gray-400-color;
+  text-align: justify;
+  overflow: hidden;
+  padding-bottom: 50px;
+  max-height: 440px;
+}
+.expand {
+  max-height: 100%;
+}
