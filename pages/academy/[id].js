@@ -8,10 +8,17 @@ import backGrayIcon from 'public/images/arrow-left-gray.svg'
 import ArrowButton from 'components/components/Academy/ArrowButton'
 import Feature from 'components/components/Academy/Feature'
 import DownloadPDF from 'components/components/Academy/DownloadPDF'
+import CarouselAcademy from 'components/components/Academy/CarouselAcademy'
+import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 
 const Course = () => {
   const router = useRouter()
   const [feature, setFeature] = useState([])
+  const [sliderData, setSliderData] = useState([])
+
+  useEffect(() => {
+    setSliderData(ServerPhysiotherapy)
+  }, [])
 
   useEffect(() => {
     setFeature([
@@ -62,8 +69,8 @@ const Course = () => {
                 del entrenamiento personal de la mujer durante el embarazo y tras el parto.{' '}
               </div>
             </div>
-            <div className="col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end">
-              <div className="flex justify-start pt-10">
+            <div className="col-span-12 md:col-span-7 sm:col-span-12">
+              <div className="flex justify-end pt-10">
                 {feature.map((item, index) => (
                   <div className="mr-10" key={index}>
                     <Feature data={item} />
@@ -71,6 +78,11 @@ const Course = () => {
                 ))}
                 <div>
                   <DownloadPDF onClick={handleClickDownlodPDF} />
+                </div>
+              </div>
+              <div className="flex justify-end pt-10 relative">
+                <div style={{ width: '500px' }}>
+                  <CarouselAcademy sliderData={sliderData} />
                 </div>
               </div>
             </div>

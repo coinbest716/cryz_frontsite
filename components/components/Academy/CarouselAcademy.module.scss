@@ -1,0 +1,18 @@
+.previousButton {
+  position: absolute;
+  bottom: 6px;
+  // margin-left: 16px;
+  z-index: 1000;
+}
+
+.nextButton {
+  position: absolute;
+  bottom: 6px;
+  margin-left: calc(100% - 20px);
+  z-index: 1000;
+}
+
+.slideImage {
+  object-fit: cover;
+  object-position: center;
+}
