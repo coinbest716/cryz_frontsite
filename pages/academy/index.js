@@ -33,7 +33,6 @@ const Academy = () => {
   }
 
   const handleClickPayment = data => {
-    console.log(data)
     router.push(`/academy/${data.id}`)
   }
 
