@@ -1,0 +1,17 @@
+@import 'styles/variable.module.scss';
+
+.download {
+  border: 1px solid #7d8f8e;
+  box-sizing: border-box;
+  padding: 5px 15px;
+  &:hover {
+    background-color: $gray-100-color;
+  }
+}
+.label {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: -0.29px;
+  line-height: 22px;
+}
