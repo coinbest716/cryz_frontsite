@@ -1,0 +1,25 @@
+@import 'styles/variable.module.scss';
+
+.workWithUsButton {
+  padding: 14px 25px 14px 29px;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  line-height: 26px;
+  box-sizing: border-box;
+  border: 1px solid $blue-gray-400-color;
+  display: flex;
+  justify-content: space-around;
+  background-color: $blue-gray-400-color;
+  color: #f3f3e9;
+  &:hover {
+    background-color: $blue-gray-300-color;
+    // color: $blue-gray-400-color;
+  }
+}
+.label {
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 0.7px;
+  line-height: 26px;
+}
