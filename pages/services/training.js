@@ -10,9 +10,9 @@ const Training = () => {
   const router = useRouter()
   const forwardGrayIcon = '/images/arrow-right-gray.svg'
 
-  const image01 = '/images/card1.svg'
-  const image02 = '/images/card2.svg'
-  const image03 = '/images/card4.svg'
+  const image01 = '/images/card1.png'
+  const image02 = '/images/card2.png'
+  const image03 = '/images/card4.png'
   const [activeImage, setActiveImage] = useState('')
 
   const handleMouseMover = event => {

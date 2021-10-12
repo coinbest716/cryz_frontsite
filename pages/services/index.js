@@ -11,9 +11,9 @@ import { useRouter } from 'next/router'
 const Services = () => {
   const router = useRouter()
 
-  const trainingImage = '/images/card2.svg'
-  const physiotherapyImage = '/images/card3.svg'
-  const nutritionImage = '/images/card1.svg'
+  const trainingImage = '/images/card2.png'
+  const physiotherapyImage = '/images/card3.png'
+  const nutritionImage = '/images/card1.png'
   const placeholder1 = '/images/placeholder1.svg'
   const placeholder2 = '/images/placeholder2.svg'
   const placeholder3 = '/images/placeholder3.svg'
