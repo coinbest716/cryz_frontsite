@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
-import styles from 'pages/academy.module.scss'
+import styles from './academy.module.scss'
 import ArrowButton from 'components/components/ArrowButton'
 import AcademyCard from 'components/components/Academy/AcademyCard'
 import CircularMark from 'components/components/CircularMark'
@@ -9,7 +9,6 @@ import AcademyData from 'assets/data/AcademyData'
 import { useRouter } from 'next/router'
 
 const Academy = () => {
-  const faqRef = useRef(null)
   const router = useRouter()
 
   const [cardData, setCardData] = useState([])
@@ -35,7 +34,7 @@ const Academy = () => {
 
   const handleClickPayment = data => {
     console.log(data)
-    // router.push('/')
+    router.push(`/academy/${data.id}`, { state: data })
   }
 
   return (

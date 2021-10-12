@@ -1,0 +1,41 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding-top: 80px;
+  // padding-bottom: 70px;
+  background: linear-gradient(90deg, #ffffff 68%, #f3f3e9 32%);
+  overflow: hidden;
+}
+.back {
+  color: $blue-gray-400-color;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+}
+.topTitle {
+  color: $blue-gray-400-color;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: -0.38px;
+  line-height: 29px;
+}
+.duration {
+  color: $blue-gray-400-color;
+  font-family: Montserrat;
+  font-size: 18px;
+  letter-spacing: -0.29px;
+  line-height: 20px;
+}
+.topDescription {
+  color: $blue-gray-400-color;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.62px;
+  line-height: 28px;
+  text-align: justify;
+}
+.carouselSection {
+  width: 500px;
+  padding-top: 100px;
+}
