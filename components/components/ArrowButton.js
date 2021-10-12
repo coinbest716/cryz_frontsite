@@ -1,28 +1,26 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import styles from './ArrowButton.module.scss'
 import ArrowRightUpGray from 'assets/images/arrow-right-up.svg'
 import ArrowRightUpWhite from 'assets/images/arrow-left.svg'
 
 const ArrowButton = props => {
-  const { label } = props
-  const [defaultIcon, setDefautIcon] = useState(ArrowRightUpGray)
-  const handleSetGrayIcon = () => {
-    setDefautIcon(ArrowRightUpGray)
-  }
-  const handleSetWhiteIcon = () => {
-    setDefautIcon(ArrowRightUpWhite)
-  }
+  const { filter, onClick } = props
 
   return (
-    <button
-      className={styles.workWithUsButton + ' flex justify-between'}
-      onMouseOver={handleSetWhiteIcon}
-      onMouseOut={handleSetGrayIcon}
-    >
-      <p className={'mr-4 ' + styles.label}>{label}</p>
-      <Image src={defaultIcon} alt="" width={23} height={22} />
-    </button>
+    <>
+      {filter?.active ? (
+        <button className={styles.activeButton + ' flex justify-between'} onClick={() => onClick(filter.index)}>
+          <p className={'mr-4 ' + styles.label}>{filter?.label}</p>
+          <Image src={ArrowRightUpWhite} alt="" width={23} height={22} />
+        </button>
+      ) : (
+        <button className={styles.deactiveButton + ' flex justify-between'} onClick={() => onClick(filter.index)}>
+          <p className={'mr-4 ' + styles.label}>{filter?.label}</p>
+          <Image src={ArrowRightUpGray} alt="" width={23} height={22} />
+        </button>
+      )}
+    </>
   )
 }
 
