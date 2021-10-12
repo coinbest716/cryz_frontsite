@@ -31,55 +31,15 @@
   margin-top: 48px;
   margin-bottom: 20px;
 }
-.topRightSection {
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-}
-.topImage {
-  opacity: 0.73;
-}
-.topRightLetImage {
-  position: absolute;
-  right: 152px;
-  top: -25px;
-}
-.middleSection {
-  padding-top: 100px;
-}
-.fullPass {
-  color: #7d8f8e;
+.cardTitle {
+  color: #3a3939;
   font-family: Montserrat;
   font-size: 18px;
   font-weight: bold;
   letter-spacing: -0.43px;
   line-height: 22px;
 }
-.buttonGroup {
-  display: flex;
-  margin-top: 55px;
-}
-.cardSection {
-  padding-top: 53px;
-}
 .cardAlign {
   display: flex;
   justify-content: center;
-}
-.divider {
-  height: 1px;
-  background-color: #e0ced3;
-  display: flex;
-  justify-content: center;
-  margin: 85px 76px 0px 76px;
-}
-.faqString {
-  color: #ab8e96;
-  font-family: Montserrat;
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: -0.58px;
-  line-height: 22px;
-  padding-bottom: 21px;
-  padding-top: 80px;
 }

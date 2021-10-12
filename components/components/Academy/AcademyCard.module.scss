@@ -1,0 +1,59 @@
+@import 'styles/variable.module.scss';
+
+.singleCard {
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  border: 1px solid #818e8e;
+  max-width: 355px;
+}
+.cardImageLayer {
+  position: relative;
+}
+.cardImage {
+  opacity: 0.6;
+  object-fit: cover;
+  object-position: center;
+}
+.cardPayment {
+  position: absolute;
+  top: 40px;
+  left: 35px;
+  padding: 8px 24px 8px 16px;
+  background-color: #e3bbaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardPaymentType {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 13px;
+}
+.cardTitle {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  line-height: 19px;
+  padding: 23px 29px 0px 29px;
+}
+.cardDescripton {
+  color: #acb1b2;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.75px;
+  line-height: 19px;
+  padding: 5px 29px 0px 29px;
+}
+.cardName {
+  color: #acb1b2;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 19px;
+  padding: 24px 29px 19px 29px;
+}
