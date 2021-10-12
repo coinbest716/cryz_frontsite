@@ -25,11 +25,11 @@ const Header = props => {
       subMenus: [
         {
           title: 'Preparación al parto',
-          link: '/female-health',
+          link: '/female-health/preparation-for-childbirth',
           subMenus: [
             {
               title: '1 to 1',
-              link: '/female-health',
+              link: '/female-health/preparation-for-childbirth/1-to-1',
             },
             {
               title: 'Presencial',

@@ -1,0 +1,14 @@
+@import 'styles/variable.module.scss';
+
+.outlineButton {
+  width: 100%;
+  height: 106px;
+  background-color: transparent;
+  border: 1px solid $gray-500-color;
+
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  color: $blue-gray-400-color;
+}

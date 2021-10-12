@@ -1,0 +1,13 @@
+.previousButton {
+  position: absolute;
+  bottom: 6px;
+  margin-left: calc(12.5% + 10px);
+  z-index: 1000;
+}
+
+.nextButton {
+  position: absolute;
+  bottom: 6px;
+  margin-left: calc(100% - 36px);
+  z-index: 1000;
+}
