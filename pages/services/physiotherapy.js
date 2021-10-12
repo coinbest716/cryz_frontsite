@@ -44,7 +44,7 @@ const Physiotherapy = () => {
       <div className="flex flex-wrap justify-center pb-20">
         <div className={globlaStyle.container}>
           <div className="mt-9">
-            <button className="flex justify-between items-center" onClick={handleClickBack}>
+            <button className="flex justify-between items-center hover:bg-gray-200 p-0.5 rounded-sm" onClick={handleClickBack}>
               <Image src={backGrayIcon} alt="" width={20} height={15} />
               <p className={styles.back}>&nbsp;&nbsp;Volver</p>
             </button>
@@ -65,8 +65,8 @@ const Physiotherapy = () => {
                 </ReactReadMoreReadLess>
               </div>
             </div>
-            <div className="col-span-12 md:col-span-7 sm:col-span-12 ">
-              <div className={'z-10 ' + styles.circularMark}>
+            <div className="col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end">
+              <div className={'absolute top-10 z-10'}>
                 <CircularMark />
               </div>
               <div className={styles.carouselSection}>

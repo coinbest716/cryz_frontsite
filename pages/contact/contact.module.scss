@@ -1,0 +1,48 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: $blue-gray-300-color;
+  margin-top: 40px;
+}
+.topTitle {
+  color: $blue-gray-400-color;
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 44px;
+}
+.topDash {
+  width: 42px;
+  height: 7px;
+  background-color: $pink-100-color;
+  margin-top: 16px;
+}
+.topDescription {
+  color: $pink-100-color;
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 32px;
+}
+.lowTitle {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.9px;
+  line-height: 21px;
+}
+.lowDescription {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  line-height: 21px;
+  text-align: center;
+}
