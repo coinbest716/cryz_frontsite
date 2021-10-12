@@ -19,12 +19,24 @@ const Classland = () => {
   const [sliderData, setSliderData] = useState([])
   const [cardData, setCardData] = useState([])
   const [faqData, setFaqData] = useState([])
+  const [filter, setFilter] = useState([
+    { index: 0, label: 'Actívate', active: false },
+    { index: 1, label: 'Bienestar', active: false },
+    { index: 2, label: 'Embarazo', active: false },
+    { index: 3, label: 'Post parto', active: false },
+  ])
 
   useEffect(() => {
     setSliderData(TeamSectionData)
     setCardData(ClassCardData)
     setFaqData(AccordianFaqData)
   }, [])
+
+  const handleClickFilter = index => {
+    const newArr = JSON.parse(JSON.stringify(filter))
+    newArr[index].active = !newArr[index].active
+    setFilter(newArr)
+  }
 
   const executeScroll = () => {
     faqRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' })
@@ -70,18 +82,11 @@ const Classland = () => {
           <CarouselTeam sliderData={sliderData} />
         </div>
         <div className={styles.buttonGroup}>
-          <div className="mr-1">
-            <ArrowButton label={'Actívate'} />
-          </div>
-          <div className="mx-1">
-            <ArrowButton label={'Bienestar'} />
-          </div>
-          <div className="mx-1">
-            <ArrowButton label={'Embarazo'} />
-          </div>
-          <div className="ml-1">
-            <ArrowButton label={'Post parto'} />
-          </div>
+          {filter.map((item, index) => (
+            <div className="mr-2" key={index}>
+              <ArrowButton filter={item} onClick={handleClickFilter} key={index} />
+            </div>
+          ))}
         </div>
         <div className={styles.cardSection}>
           <div className="grid grid-cols-12 gap-12">

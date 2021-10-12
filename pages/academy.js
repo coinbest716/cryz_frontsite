@@ -24,7 +24,6 @@ const Academy = () => {
 
   const handleClickFilter = index => {
     const newArr = JSON.parse(JSON.stringify(filter))
-    console.log(!newArr[index].active)
     newArr[index].active = !newArr[index].active
     setFilter(newArr)
   }
