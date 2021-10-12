@@ -29,7 +29,7 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/female-health/preparation-for-childbirth/1-t0-1',
+              link: '/female-health/preparation-for-childbirth/1-to-1',
             },
             {
               title: 'Presencial',

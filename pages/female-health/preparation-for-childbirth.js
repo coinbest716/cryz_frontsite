@@ -8,6 +8,7 @@ import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
 import CircularMark from 'components/components/CircularMark'
 import CarouselFemaleHealth from 'components/FemaleHealth/CarouselFemaleHealth'
+import OutlineButton from 'components/components/OutlineButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
@@ -15,6 +16,7 @@ import styles from 'pages/female-health/PreparationForChildbirth.module.scss'
 
 // json data
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
+import router from 'next/router'
 
 const PreparationForChildbirth = () => {
   const [sliderData, setSliderData] = React.useState([])
@@ -30,7 +32,7 @@ const PreparationForChildbirth = () => {
   }
 
   return (
-    <div className={'w-full flex justify-center'}>
+    <div className={'w-full flex flex-wrap justify-center'}>
       <div className={globalStyles.container}>
         <div className={styles.backButtonArea}>
           <BackButton />
@@ -68,8 +70,21 @@ const PreparationForChildbirth = () => {
       </div>
       {/* Button group part */}
       <div className={'w-full'}>
-        <div className={'grid grid-cols-12 gap-4'}>
-          <div className={'col-span-4 w-full flex'}></div>
+        <div className={'grid grid-cols-12 gap-0'}>
+          <div className={'col-span-4 w-full flex'}>
+            <OutlineButton
+              title="Compra 1 to 1 en streaming"
+              link="/female-health/preparation-for-childbirth/1-to-1"
+              onClick={link => router.push(link)}
+            />
+          </div>
+          <div className={'col-span-4 w-full flex'}>
+            <OutlineButton
+              title="Compra presenciales"
+              link="/female-health/preparation-for-childbirth/1-to-1"
+              onClick={link => router.push(link)}
+            />
+          </div>
         </div>
       </div>
     </div>
