@@ -49,41 +49,17 @@ const Academy = () => {
             <div>
               <div className={styles.topTitle}>Academy</div>
               <div className={styles.topDash} />
-              <div className="flex justify-start">
-                <div className="mr-2">
-                  {filter.map((item, index) => (
+              <div className="flex justify-start mt-6">
+                {filter.map((item, index) => (
+                  <div className="mr-2">
                     <ArrowButton filter={item} onClick={handleClickFilter} key={index} />
-                  ))}
-                </div>
-                <div className="ml-1">{/* <ArrowButton filter={filter} onClick={handleClickFilter} /> */}</div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-          <div className={styles.topSection}>
-            <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 md:col-span-4 sm:col-span-12 ">
-                <div className={styles.topTitle}>Academy</div>
-                <div className={styles.topDash} />
-                <div className={styles.topDescription}>
-                  Academy es la plataforma de entrenamientos en streaming en la que el equipo de Crys Dyaz cuenta con
-                  más de 5.000 suscriptores que disfrutan cada semana de 34 clases de diferentes tipologías: fuerza,
-                  pilates, pérdida de peso, embarazo, post parto, entre otras.
-                </div>
-              </div>
-              <div className="col-span-12 md:col-span-8 sm:col-span-12 ">
-                <div className={styles.topRightSection}>
-                  <div className={styles.topRightLetImage}>
-                    {/* <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} /> */}
-                  </div>
-                  <div>
-                    <div className={'z-10'}>
-                      <CircularMark />
-                    </div>
-                    <div className="mt-6">
-                      <FaqButton onClick={executeScroll} />
-                    </div>
-                  </div>
-                </div>
+            <div>
+              <div className={'z-10'}>
+                <CircularMark />
               </div>
             </div>
           </div>
