@@ -1,0 +1,12 @@
+<svg id="Group" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <rect id="Rectangle" class="cls-1" width="16" height="2.143" rx="1.043" transform="translate(0 8.857)"/>
+  <rect id="Rectangle_Copy_3" data-name="Rectangle Copy 3" class="cls-1" width="12.522" height="2.143" rx="1.043" transform="translate(0 4.286)"/>
+  <rect id="Rectangle_Copy_4" data-name="Rectangle Copy 4" class="cls-1" width="8.348" height="2.143" rx="1.043"/>
+</svg>
