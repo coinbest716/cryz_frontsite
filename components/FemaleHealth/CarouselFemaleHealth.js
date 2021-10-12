@@ -61,7 +61,14 @@ const CarouselFemaleHealth = props => {
         >
           {sliderData?.map((item, index) => (
             <div key={index} className={'pb-12'}>
-              <Image src={item.image} alt="" width={500} height={500} objectFit="cover" />
+              <Image
+                src={item.image}
+                alt=""
+                width={500}
+                height={500}
+                objectFit="cover"
+                className={index % 2 === 0 ? styles.circleImage : ''}
+              />
             </div>
           ))}
         </Carousel>
