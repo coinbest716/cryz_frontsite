@@ -14,22 +14,28 @@ const Academy = () => {
 
   const [cardData, setCardData] = useState([])
   const [filter, setFilter] = useState([
-    { index: 0, label: 'filtro 1', active: false },
-    { index: 1, label: 'filtro 2', active: false },
+    { id: 0, label: 'filtro 1', active: false },
+    { id: 1, label: 'filtro 2', active: false },
   ])
 
   useEffect(() => {
     setCardData(AcademyData)
   }, [])
 
-  const handleClickFilter = index => {
+  const handleClickFilter = id => {
     const newArr = JSON.parse(JSON.stringify(filter))
-    newArr[index].active = !newArr[index].active
+    for (let i = 0; i < newArr.length; i++) {
+      if (newArr[i].id === id) {
+        newArr[i].active = !newArr[i].active
+        break
+      }
+    }
     setFilter(newArr)
   }
 
-  const handleClickPayment = () => {
-    router.push('/')
+  const handleClickPayment = data => {
+    console.log(data)
+    // router.push('/')
   }
 
   return (
