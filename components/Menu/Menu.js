@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -36,6 +35,11 @@ const Menu = () => {
     setSelectedMenu(selectedMenu => ({ ...selectedMenu, id: id }))
   }
 
+  const handleGotoLink = link => {
+    setVisibility(false)
+    router.push(link)
+  }
+
   return (
     <>
       <BurgerIcon visibilty={visibility} setVisibility={setVisibility} router={router} />
@@ -44,30 +48,34 @@ const Menu = () => {
         <div className={globalStyles.container + ' mx-auto h-screen flex flex-wrap content-between'}>
           <div className={styles.menuItems + ' w-full mt-32 sm:mt-48'}>
             <div className="grid grid-cols-2 flex items-center h-full">
-              <div className="relative" onMouseOver={() => handleSetItem('academy')}>
+              <div
+                className="relative cursor-pointer"
+                onMouseOver={() => handleSetItem('academy')}
+                onClick={() => handleGotoLink('/academy')}
+              >
                 <div className={'opacity-75 -z-10 w-full flex justify-center ' + styles.imageArea}>
                   {selectedMenu.id === 'academy' ? <Image src={AcademyImage} alt="" width={482} height={482} /> : <></>}
                 </div>
                 <div className="absolute inset-y-1/4 w-full flex justify-center">
-                  <Link href="/academy">
-                    <a id="academy">
-                      <div className={`${styles.number} invisible sm:visible mx-1`}>01</div>
-                      Academy
-                    </a>
-                  </Link>
+                  <a id="academy">
+                    <div className={`${styles.number} invisible sm:visible mx-1`}>01</div>
+                    Academy
+                  </a>
                 </div>
               </div>
-              <div className="relative" onMouseOver={() => handleSetItem('news')}>
+              <div
+                className="relative cursor-pointer"
+                onMouseOver={() => handleSetItem('news')}
+                onClick={() => handleGotoLink('/news')}
+              >
                 <div className={'opacity-75 -z-10 w-full flex justify-center ' + styles.imageArea}>
                   {selectedMenu.id === 'news' ? <Image src={AcademyImage} alt="" width={482} height={482} /> : <></>}
                 </div>
                 <div className="absolute inset-y-1/4 w-full flex justify-center">
-                  <Link href="/news">
-                    <a id="news">
-                      News
-                      <div className={`${styles.number} invisible sm:visible mx-1`}>02</div>
-                    </a>
-                  </Link>
+                  <a id="news">
+                    News
+                    <div className={`${styles.number} invisible sm:visible mx-1`}>02</div>
+                  </a>
                 </div>
               </div>
             </div>
