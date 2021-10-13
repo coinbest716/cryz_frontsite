@@ -1,1 +1,38 @@
 @import 'styles/variable.module.scss';
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.backButtonArea {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.title {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: $blue-gray-300-color;
+}
+
+.divider {
+  width: 40px;
+  height: 4px;
+  background-color: $blue-gray-300-color;
+  margin-top: 22px;
+  margin-bottom: 37px;
+}
+
+.text {
+  font-family: 'Montserrat';
+  font-size: 14px;
+  line-height: 28px;
+  letter-spacing: 0.71px;
+  color: $gray-500-color;
+}
