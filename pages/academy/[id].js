@@ -69,8 +69,8 @@ const Course = () => {
                 del entrenamiento personal de la mujer durante el embarazo y tras el parto.{' '}
               </div>
             </div>
-            <div className="col-span-12 md:col-span-7 sm:col-span-12">
-              <div className="flex justify-end pt-10">
+            <div className="col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end">
+              <div className="flex justify-start pt-10">
                 {feature.map((item, index) => (
                   <div className="mr-10" key={index}>
                     <Feature data={item} />
