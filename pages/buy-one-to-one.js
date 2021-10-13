@@ -12,7 +12,7 @@ import BuySessionData from 'assets/data/BuySessionData.json'
 
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
-import styles from 'pages/buy-one-to-one.module.scss'
+import styles from 'pages/buy.module.scss'
 
 const BuyOneToOne = () => {
   return (
