@@ -74,16 +74,12 @@ const PreparationForChildbirth = () => {
           <div className={'col-span-4 w-full flex'}>
             <OutlineButton
               title="Compra 1 to 1 en streaming"
-              link="/female-health/preparation-for-childbirth/1-to-1"
+              link="/buy-one-to-one"
               onClick={link => router.push(link)}
             />
           </div>
           <div className={'col-span-4 w-full flex'}>
-            <OutlineButton
-              title="Compra presenciales"
-              link="/female-health/preparation-for-childbirth/1-to-1"
-              onClick={link => router.push(link)}
-            />
+            <OutlineButton title="Compra presenciales" link="/buy-person" onClick={link => router.push(link)} />
           </div>
         </div>
       </div>

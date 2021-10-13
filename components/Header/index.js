@@ -29,15 +29,15 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/female-health/preparation-for-childbirth/1-to-1',
+              link: '/buy-one-to-one',
             },
             {
               title: 'Presencial',
-              link: '/female-health/preparation-for-childbirth/presencial',
+              link: '/buy-person',
             },
             {
               title: 'Planes Online',
-              link: '/female-health/preparation-for-childbirth/planes-online',
+              link: '/buy-plans-online',
             },
           ],
         },
