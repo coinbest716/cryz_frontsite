@@ -1,0 +1,33 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f3f3e9;
+  height: 100vh;
+}
+.topTitle {
+  font-size: 54px;
+  color: #818e8e;
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 44px;
+}
+.topDash {
+  width: 42px;
+  height: 7px;
+  background-color: #818e8e;
+}
+.description {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  line-height: 22px;
+  text-align: center;
+  top: calc(50% + 167px);
+  max-width: 656px;
+}
