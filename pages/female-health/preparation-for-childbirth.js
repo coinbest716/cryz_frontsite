@@ -67,7 +67,7 @@ const PreparationForChildbirth = () => {
         </div>
       </div>
       {/* Button group part */}
-      <div className={'w-full mt-14'}>
+      <div className={'w-full'}>
         <div className={'grid grid-cols-12 gap-0'}>
           <div className={'col-span-4 w-full flex'}>
             <OutlineButton
