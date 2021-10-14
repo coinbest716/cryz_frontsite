@@ -35,7 +35,7 @@ const Postpartum = () => {
         <div className={styles.backButtonArea}>
           <BackButton />
         </div>
-        <div className={'grid grid-cols-12 gap-4 mb-20'}>
+        <div className={'grid grid-cols-12 gap-4 mb-20'} style={{ minHeight: '634px' }}>
           <div className={'col-span-5 block'}>
             <div className={styles.strokeTitle}>EL</div>
             <div className={styles.pinkTitle}>POSTPARTO</div>
@@ -71,7 +71,7 @@ const Postpartum = () => {
         </div>
       </div>
       {/* Button group part */}
-      <div className={'w-full mt-14'}>
+      <div className={'w-full'}>
         <div className={'grid grid-cols-12 gap-0'}>
           <div className={'col-span-4 w-full flex'}>
             <OutlineButton
