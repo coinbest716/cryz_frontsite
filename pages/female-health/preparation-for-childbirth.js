@@ -1,8 +1,6 @@
 import React from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
-import $ from 'jquery'
-
 // custom component
 import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
