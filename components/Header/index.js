@@ -44,44 +44,128 @@ const Header = props => {
         {
           title: 'Suelo pélvico',
           link: '/female-health/pelvic-floor',
+          subMenus: [
+            {
+              title: '1 to 1',
+              link: '/buy-one-to-one',
+            },
+            {
+              title: 'Presencial',
+              link: '/buy-person',
+            },
+            {
+              title: 'Planes Online',
+              link: '/buy-plans-online',
+            },
+          ],
         },
         {
           title: 'Postparto',
           link: '/female-health/postpartum',
           subMenus: [
             {
-              title: '1 to 1ffff',
-              link: '/female-health',
+              title: '1 to 1',
+              link: '/buy-one-to-one',
             },
             {
               title: 'Presencial',
-              link: '/female-health/preparation-for-childbirth/presencial',
+              link: '/buy-person',
             },
             {
               title: 'Planes Online',
-              link: '/female-health/preparation-for-childbirth/planes-online',
+              link: '/buy-plans-online',
             },
           ],
         },
         {
           title: 'Embarazo',
           link: '/female-health/pregnancy',
+          subMenus: [
+            {
+              title: '1 to 1',
+              link: '/buy-one-to-one',
+            },
+            {
+              title: 'Presencial',
+              link: '/buy-person',
+            },
+            {
+              title: 'Planes Online',
+              link: '/buy-plans-online',
+            },
+          ],
         },
         {
           title: 'Asesoria de Lactancia',
           link: '/female-health/lactation-counseling',
+          subMenus: [
+            {
+              title: '1 to 1',
+              link: '/buy-one-to-one',
+            },
+            {
+              title: 'Presencial',
+              link: '/buy-person',
+            },
+            {
+              title: 'Planes Online',
+              link: '/buy-plans-online',
+            },
+          ],
         },
         {
           title: 'Menopausia',
           link: '/female-health/menopause',
+          subMenus: [
+            {
+              title: '1 to 1',
+              link: '/buy-one-to-one',
+            },
+            {
+              title: 'Presencial',
+              link: '/buy-person',
+            },
+            {
+              title: 'Planes Online',
+              link: '/buy-plans-online',
+            },
+          ],
         },
         {
           title: 'Asesoria del sueño',
           link: '/female-health/child-sleep-counseling',
+          subMenus: [
+            {
+              title: '1 to 1',
+              link: '/buy-one-to-one',
+            },
+            {
+              title: 'Presencial',
+              link: '/buy-person',
+            },
+            {
+              title: 'Planes Online',
+              link: '/buy-plans-online',
+            },
+          ],
         },
         {
           title: 'Entrena tu Diástasis',
           link: '/female-health/train-your-diastasis',
+          subMenus: [
+            {
+              title: '1 to 1',
+              link: '/buy-one-to-one',
+            },
+            {
+              title: 'Presencial',
+              link: '/buy-person',
+            },
+            {
+              title: 'Planes Online',
+              link: '/buy-plans-online',
+            },
+          ],
         },
       ],
     },
