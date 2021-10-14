@@ -131,14 +131,6 @@ const Header = props => {
               title: '1 to 1',
               link: '/buy-one-to-one',
             },
-            {
-              title: 'Presencial',
-              link: '/buy-person',
-            },
-            {
-              title: 'Planes Online',
-              link: '/buy-plans-online',
-            },
           ],
         },
         {
