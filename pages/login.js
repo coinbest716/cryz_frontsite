@@ -52,7 +52,7 @@ const Login = () => {
               <div className="flex justify-center">
                 <div className="pt-12" style={{ maxWidth: '300px', width: '100%' }}>
                   <div className="flex justify-start gap-4">
-                    <CommonButton handleClick={handleClickLogin} label={'login'} type={'login'} />
+                    <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'login'} />
                     <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'register'} />
                   </div>
                   <div className="pt-9">
@@ -67,7 +67,7 @@ const Login = () => {
                       <p className={styles.remember}>&nbsp;&nbsp;Recuerdame</p>
                     </div>
                     <div>
-                      <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'enter'} />
+                      <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'Entrar'} />
                     </div>
                   </div>
                   <div className="pt-2">
@@ -81,10 +81,10 @@ const Login = () => {
                     <div className={styles.divider} />
                   </div>
                   <div className="flex justify-between items-center pt-10">
-                    <CommonButton handleClick={handleClickFacebook} label={'Login con Facebook'} type={'facebook'} />
+                    <CommonButton handleClick={handleClickFacebook} label={'LOGIN CON FACEBOOK'} type={'facebook'} />
                   </div>
                   <div className="flex justify-between items-center pt-5">
-                    <CommonButton handleClick={handleClickGoogle} label={'Login con Google'} type={'google'} />
+                    <CommonButton handleClick={handleClickGoogle} label={'LOGIN CON GOOGLE'} type={'google'} />
                   </div>
                 </div>
               </div>
