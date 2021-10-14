@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from './physiotherapy.module.scss'
-import backGrayIcon from 'public/images/arrow-left-gray.svg'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import ReactReadMoreReadLess from 'react-read-more-read-less'
 import CircularMark from 'components/components/CircularMark'
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import CarouselService from 'components/components/service/CarouselService'
 import ArrowButton from 'components/components/service/ArrowButton'
+import BackButton from 'components/components/BackButton'
 
 const Physiotherapy = () => {
   const router = useRouter()
@@ -19,9 +18,6 @@ const Physiotherapy = () => {
     setSliderData(ServerPhysiotherapy)
   }, [])
 
-  const handleClickBack = () => {
-    router.push('/services')
-  }
   const handleClickBuy = () => {
     router.push('/services')
   }
@@ -44,10 +40,7 @@ const Physiotherapy = () => {
       <div className="flex flex-wrap justify-center pb-20">
         <div className={globlaStyle.container}>
           <div className="mt-9">
-            <button className="flex justify-between items-center hover:bg-gray-200 p-0.5 rounded-sm" onClick={handleClickBack}>
-              <Image src={backGrayIcon} alt="" width={20} height={15} />
-              <p className={styles.back}>&nbsp;&nbsp;Volver</p>
-            </button>
+            <BackButton />
           </div>
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-5 sm:col-span-12 ">
