@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -12,11 +12,16 @@ import AccountIcon from 'assets/images/account.svg'
 
 // styles
 import styles from 'components/Header/Header.module.scss'
+import ShoppingCart from 'components/components/ShoppingCart'
+import shoppingCartData from 'assets/data/ShoppingCartData'
 
 const Header = props => {
   const router = useRouter()
 
   const [changeHeaderColor, setChangeHeaderColor] = React.useState(false)
+
+  const [openCart, setOpenCart] = useState(false)
+  const [cartData, setCartData] = useState([])
 
   const menus = [
     {
@@ -171,6 +176,10 @@ const Header = props => {
     },
   ]
 
+  useEffect(() => {
+    setCartData(shoppingCartData)
+  }, [])
+
   const gotoTeamSection = () => {
     if (router.pathname === '/') {
       const sectionPosition = document.getElementById('team').offsetTop
@@ -205,6 +214,24 @@ const Header = props => {
     } else {
       setChangeHeaderColor(false)
     }
+  }
+
+  const handleClickShoppingCard = () => {
+    setOpenCart(!openCart)
+  }
+
+  const handleRemoveCart = index => {
+    let array = [...cartData]
+    array.splice(index, 1)
+    setCartData(array)
+  }
+
+  const handleBack = () => {
+    setOpenCart(false)
+  }
+
+  const handleCheckout = () => {
+    setOpenCart(false)
   }
 
   return (
@@ -328,12 +355,15 @@ const Header = props => {
               )
             })}
           {/* icon menu part */}
-          <li className={'flex justify-center ml-16 ' + styles.iconMenuItem}>
-            <Link href={'/shop-cart'} passHref>
-              <button>
-                <Image src={CartIcon} alt="" width={22} height={19} />
-              </button>
-            </Link>
+          <li className={'flex justify-center items-center ml-16 ' + styles.iconMenuItem}>
+            {/* <Link href={'/shop-cart'} passHref> */}
+            <button
+              className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
+              onClick={handleClickShoppingCard}
+            >
+              <Image src={CartIcon} alt="" width={22} height={19} />
+            </button>
+            {/* </Link> */}
           </li>
           <li className={'flex justify-center ' + styles.iconMenuItem}>
             <Link href={'/account'} passHref>
@@ -345,6 +375,16 @@ const Header = props => {
         </ul>
         <Menu />
       </div>
+      {openCart && (
+        <div className="absolute top-20 right-20">
+          <ShoppingCart
+            data={cartData}
+            handleRemoveCart={handleRemoveCart}
+            handleBack={handleBack}
+            handleCheckout={handleCheckout}
+          />
+        </div>
+      )}
     </div>
   )
 }
