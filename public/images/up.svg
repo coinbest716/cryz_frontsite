@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.461 6.937">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #78908e;
+        stroke-linecap: square;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <g id="Group" transform="translate(-0.27 0.207) rotate(90)">
+    <path id="Line" class="cls-1" d="M-.5,6.5-6.023.977" transform="rotate(180)"/>
+    <path id="Line-2" data-name="Line" class="cls-1" d="M-.5-6.5-6.023-.977" transform="translate(0 -13) rotate(180)"/>
+  </g>
+</svg>
