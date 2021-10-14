@@ -8,6 +8,7 @@ import DownloadPDF from 'components/components/Academy/DownloadPDF'
 import CarouselAcademy from 'components/components/Academy/CarouselAcademy'
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import BackButton from 'components/components/BackButton'
+import toast from 'react-hot-toast'
 
 const Course = () => {
   const [feature, setFeature] = useState([])
@@ -27,6 +28,7 @@ const Course = () => {
 
   const handleClickPayment = () => {
     console.log('handleClickPayment')
+    toast.success('This content added in Shopping Cart!')
   }
   const handleClickDownlodPDF = () => {
     console.log('handleClickDownlodPDF')
