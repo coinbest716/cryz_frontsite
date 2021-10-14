@@ -1,0 +1,99 @@
+@import 'styles/variable.module.scss';
+
+.loginButton {
+  border-radius: 6px;
+  background-color: #7a908e;
+  padding: 16px 25px;
+  &:hover {
+    background-color: #637573;
+  }
+}
+.loginLabel {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.registerButton {
+  box-sizing: border-box;
+  border: 1px solid #7a908e;
+  border-radius: 6px;
+  padding: 16px 25px;
+  &:hover {
+    background-color: #d9d9d8;
+  }
+}
+.registerLabel {
+  color: #7a908e;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.googleImage {
+  min-width: 52px;
+  height: 100%;
+  border-radius: 8px 0px 0px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eaeaea;
+}
+.googleButton {
+  width: 300px;
+  height: 52px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  background-color: #ffffff;
+  &:hover {
+    background-color: #d9d9d8;
+  }
+}
+.googleLabel {
+  width: 100%;
+  color: #303030;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.facebookImage {
+  background-color: #4057f2;
+  min-width: 52px;
+  height: 100%;
+  border-radius: 8px 0px 0px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.facebookButton {
+  width: 300px;
+  height: 52px;
+  border: 1px solid #576dff;
+  border-radius: 8px;
+  background-color: #576dff;
+  &:hover {
+    background-color: #4058f2b0;
+  }
+}
+.facebookLabel {
+  width: 100%;
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+  text-transform: uppercase;
+}

@@ -22,6 +22,7 @@ const Header = props => {
 
   const [openCart, setOpenCart] = useState(false)
   const [cartData, setCartData] = useState([])
+  const [loginStatus, setLoginStatus] = useState(false)
 
   const menus = [
     {
@@ -232,6 +233,9 @@ const Header = props => {
 
   const handleCheckout = () => {
     setOpenCart(false)
+    if (!loginStatus) {
+      router.push('/login')
+    }
   }
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './AcademyCard.module.scss'
-import ArrowButton from 'components/components/Academy/ArrowButton'
+import ArrowButton from 'components/components/academy/ArrowButton'
 
 const AcademyCard = props => {
   const { data, handleClickPayment } = props
