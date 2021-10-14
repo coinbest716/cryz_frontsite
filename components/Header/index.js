@@ -145,10 +145,6 @@ const Header = props => {
               title: 'Presencial',
               link: '/buy-person',
             },
-            {
-              title: 'Planes Online',
-              link: '/buy-plans-online',
-            },
           ],
         },
       ],
