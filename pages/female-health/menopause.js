@@ -35,7 +35,7 @@ const Menopause = () => {
         <div className={styles.backButtonArea}>
           <BackButton />
         </div>
-        <div className={'grid grid-cols-12 gap-4 mb-20'}>
+        <div className={'grid grid-cols-12 gap-4 mb-20'} style={{ minHeight: '634px' }}>
           <div className={'col-span-5 block'}>
             <div className={styles.strokeTitle}>La</div>
             <div className={styles.pinkTitle}>MENOPAUSIA</div>
