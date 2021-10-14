@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from './training.module.scss'
-import backGrayIcon from 'public/images/arrow-left-gray.svg'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
+import BackButton from 'components/components/BackButton'
 
 const Training = () => {
   const router = useRouter()
@@ -56,10 +55,6 @@ const Training = () => {
     }
   }
 
-  const handleClickBack = () => {
-    router.push('/services')
-  }
-
   return (
     <div className={styles.container} onMouseMove={handleMouseMover}>
       {(serverType.type1 || serverType.type2 || serverType.type3) && (
@@ -70,10 +65,7 @@ const Training = () => {
       <div className="flex flex-wrap justify-center pb-20">
         <div className={globlaStyle.container}>
           <div className="mt-9">
-            <button className="flex justify-between items-center hover:bg-gray-200 p-0.5 rounded-sm" onClick={handleClickBack}>
-              <Image src={backGrayIcon} alt="" width={20} height={15} />
-              <p className={styles.back}>&nbsp;&nbsp;Volver</p>
-            </button>
+            <BackButton />
           </div>
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-4 sm:col-span-12 ">

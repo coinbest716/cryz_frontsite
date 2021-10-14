@@ -10,7 +10,7 @@ import styles from 'components/components/BackButton.module.scss'
 
 const BackButton = () => {
   return (
-    <button className="flex justify-between items-center" onClick={() => router.back()}>
+    <button className="flex justify-between items-center hover:bg-gray-300 px-2 py-1" onClick={() => router.back()}>
       <Image src={backGrayIcon} alt="" width={20} height={15} />
       <p className={styles.back}>Volver</p>
     </button>
