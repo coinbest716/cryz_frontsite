@@ -8,6 +8,7 @@ import Image from 'next/image'
 import phoneIcon from 'public/images/phone.svg'
 import emailIcon from 'public/images/email.svg'
 import addressIcon from 'public/images/address.svg'
+import whatsapp from 'public/images/whatsapp.svg'
 
 const Contact = () => {
   const locations = [
@@ -26,6 +27,10 @@ const Contact = () => {
       },
     },
   ]
+
+  const handleClickWhatsapp = () => {
+    console.log('handleClickWhatsapp')
+  }
 
   return (
     <div className="flex flex-wrap justify-center pt-20">
@@ -47,7 +52,10 @@ const Contact = () => {
           <MapContainer locations={locations} />
         </div>
       </div>
-      <div className={styles.container}>
+      <div className={styles.container + ' relative'}>
+        <div className="absolute -top-9 right-9">
+          <Image src={whatsapp} alt="" width={69} height={69} onClick={handleClickWhatsapp} />
+        </div>
         <div className={globlaStyle.container}>
           <div className="grid grid-cols-12 gap-4 text-center">
             <div className="col-span-12 md:col-span-4 sm:col-span-12 pt-12">
