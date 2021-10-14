@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from './course.module.scss'
-import ArrowButton from 'components/components/Academy/ArrowButton'
-import Feature from 'components/components/Academy/Feature'
-import DownloadPDF from 'components/components/Academy/DownloadPDF'
-import CarouselAcademy from 'components/components/Academy/CarouselAcademy'
+import ArrowButton from 'components/components/academy/ArrowButton'
+import Feature from 'components/components/academy/Feature'
+import DownloadPDF from 'components/components/academy/DownloadPDF'
+import CarouselAcademy from 'components/components/academy/CarouselAcademy'
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import BackButton from 'components/components/BackButton'
+import toast from 'react-hot-toast'
 
 const Course = () => {
   const [feature, setFeature] = useState([])
@@ -27,6 +28,7 @@ const Course = () => {
 
   const handleClickPayment = () => {
     console.log('handleClickPayment')
+    toast.success('This content added in Shopping Cart!')
   }
   const handleClickDownlodPDF = () => {
     console.log('handleClickDownlodPDF')
