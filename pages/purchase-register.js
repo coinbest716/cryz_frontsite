@@ -68,7 +68,7 @@ const Register = () => {
                   </div>
                   <div className="pt-9">
                     <input
-                      type="text"
+                      type="email"
                       placeholder="Email"
                       className={styles.input}
                       value={email}
