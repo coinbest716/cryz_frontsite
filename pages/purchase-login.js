@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
-import styles from 'pages/login.module.scss'
-import CommonButton from 'components/components/login/CommonButton'
+import styles from 'pages/purchase-login.module.scss'
+import CommonButton from 'components/components/purchaseLogin/CommonButton'
 import Link from 'next/link'
 import router from 'next/router'
-import ShoppingCart from 'components/components/login/ShoppingCart'
+import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
-const Login = () => {
+const PurchaseLogin = () => {
   const [cartData, setCartData] = useState([])
   const [email, setEmail] = useState('')
   const [password, setPasssword] = useState('')
@@ -33,12 +33,12 @@ const Login = () => {
 
   const handleClickLogin = () => {
     console.log('handleClickLogin', email, password)
-    router.push('/login')
+    router.push('/purchase-login')
   }
 
   const handleClickRegister = () => {
     console.log('handleClickRegister')
-    router.push('/register')
+    router.push('/purchase-register')
   }
 
   const handleClickGoogle = () => {
@@ -124,8 +124,8 @@ const Login = () => {
     </div>
   )
 }
-export default Login
+export default PurchaseLogin
 
-Login.getLayout = function getLayout(page) {
+PurchaseLogin.getLayout = function getLayout(page) {
   return <PrimaryLayout>{page}</PrimaryLayout>
 }
