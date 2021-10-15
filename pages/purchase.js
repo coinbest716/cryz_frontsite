@@ -7,15 +7,14 @@ import Link from 'next/link'
 import router from 'next/router'
 import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 import shoppingCartData from 'assets/data/ShoppingCartData'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import dynamic from 'next/dynamic'
-
-// const Tabs = dynamic(
-//   import('react-tabs').then(mod => mod.Tabs),
-//   { ssr: false }
-// ) // disable ssr
-// import { Tab, TabList, TabPanel } from 'react-tabs'
+const Tabs = dynamic(
+  import('react-tabs').then(mod => mod.Tabs),
+  { ssr: false }
+) // disable ssr
+import { Tab, TabList, TabPanel } from 'react-tabs'
 
 const Purchase = () => {
   const [cartData, setCartData] = useState([])

@@ -12,12 +12,12 @@ const CommonButton = props => {
   const { handleClick, label, type } = props
   return (
     <>
-      {(type === 'login' || type === 'enter') && (
+      {type === 'fill' && (
         <button className={'flex justify-between items-center ' + styles.loginButton} onClick={handleClick}>
           <p className={styles.loginLabel}>{label}</p>
         </button>
       )}
-      {type === 'register' && (
+      {type === 'outline' && (
         <button className={'flex justify-between items-center ' + styles.registerButton} onClick={handleClick}>
           <p className={styles.registerLabel}>{label}</p>
         </button>

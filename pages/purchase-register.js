@@ -63,8 +63,8 @@ const Register = () => {
               <div className="flex justify-center">
                 <div className="pt-12" style={{ maxWidth: '300px', width: '100%' }}>
                   <div className="flex justify-start gap-4">
-                    <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'register'} />
-                    <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'login'} />
+                    <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'outline'} />
+                    <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'fill'} />
                   </div>
                   <div className="pt-9">
                     <input
@@ -94,7 +94,7 @@ const Register = () => {
                     />
                   </div>
                   <div className="flex justify-end pt-6">
-                    <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'enter'} />
+                    <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'fill'} />
                   </div>
                 </div>
               </div>
