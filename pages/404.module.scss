@@ -1,0 +1,41 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding-top: 180px;
+}
+
+.title {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: $blue-gray-400-color;
+}
+
+.divider {
+  width: 40px;
+  height: 4px;
+  background-color: $blue-gray-400-color;
+  margin-top: 16px;
+  margin-bottom: 44px;
+}
+
+.textArea {
+  margin-left: 23px;
+}
+
+.subTitle {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 21px;
+  line-height: 25px;
+  letter-spacing: 0px;
+  color: #d74f58;
+}
+
+.text {
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.8px;
+  color: $blue-gray-400-color;
+}
