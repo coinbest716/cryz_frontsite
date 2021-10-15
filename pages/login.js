@@ -59,7 +59,7 @@ const Login = () => {
                     <input type="text" placeholder="Email" className={styles.input} />
                   </div>
                   <div className="pt-5">
-                    <input type="text" placeholder="Contraseña" className={styles.input} />
+                    <input type="password" placeholder="Contraseña" className={styles.input} />
                   </div>
                   <div className="flex justify-between items-center pt-6">
                     <div className="flex justify-between items-center">
