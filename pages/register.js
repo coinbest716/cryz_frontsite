@@ -46,16 +46,9 @@ const Register = () => {
     router.push('/register')
   }
 
-  const handleClickGoogle = () => {
-    console.log('handleClickGoogle')
-  }
-
-  const handleClickFacebook = () => {
-    console.log('handleClickFacebook')
-  }
-
   const handleClickEnter = () => {
     console.log('handleClickEnter')
+    router.push('/purchase')
   }
 
   return (
