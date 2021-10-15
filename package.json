@@ -21,6 +21,7 @@
     "react-read-more-read-less": "^1.0.7",
     "react-redux": "^7.2.5",
     "react-responsive-carousel": "^3.2.21",
+    "react-tabs": "^3.2.2",
     "sass": "^1.42.1"
   },
   "devDependencies": {
