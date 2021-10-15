@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from 'pages/purchase.module.scss'
-import CommonButton from 'components/components/purchaseLogin/CommonButton'
 import Link from 'next/link'
 import router from 'next/router'
 import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
@@ -15,10 +14,17 @@ const Tabs = dynamic(
   { ssr: false }
 ) // disable ssr
 import { Tab, TabList, TabPanel } from 'react-tabs'
+import CommonButton from 'components/components/purchase/CommonButton'
+import CommonText from 'components/components/purchase/CommonText'
+import CommonSelect from 'components/components/purchase/CommonSelect'
 
 const Purchase = () => {
   const [cartData, setCartData] = useState([])
   const [tabIndex, setTabIndex] = useState(0)
+  const [value, setValue] = useState('')
+  const [date, setDate] = useState(new Date())
+  const [gender, setGender] = useState('')
+  const list = ['mail', 'female']
 
   useEffect(() => {
     setCartData(shoppingCartData)
@@ -28,6 +34,20 @@ const Purchase = () => {
     let array = [...cartData]
     array.splice(index, 1)
     setCartData(array)
+  }
+
+  const handleDiscard = () => {}
+  const handleSave = () => {}
+  const handleContinue = () => {}
+  const handleChange = event => {
+    console.log(event.target.velue)
+    setValue(event.target.value)
+  }
+  const handleChangeDate = event => {
+    setDate(event.target.value)
+  }
+  const handleChangeGender = event => {
+    setGender(event.target.value)
   }
 
   return (
@@ -48,7 +68,40 @@ const Purchase = () => {
                     <Tab>02 DIRECCIONES FACTURACIÓN</Tab>
                     <Tab>03 MÉTODO DE PAGO</Tab>
                   </TabList>
-                  <TabPanel>11111</TabPanel>
+                  <TabPanel>
+                    <CommonButton label={'sdfsdf'} handleClick={handleDiscard} type={'fill'} />
+                    <CommonButton label={'sdfsdf'} handleClick={handleSave} type={'outline'} />
+                    <CommonButton label={'sdfsdf'} handleClick={handleContinue} type={'continue'} />
+                    <CommonText
+                      handleChange={handleChange}
+                      label={'label'}
+                      placeholder={'placeholder'}
+                      type={'text'}
+                      value={value}
+                    />
+                    <CommonText
+                      handleChange={handleChange}
+                      label={'password'}
+                      placeholder={'password'}
+                      type={'password'}
+                      value={value}
+                    />
+                    <CommonText
+                      handleChange={handleChange}
+                      label={'tele'}
+                      placeholder={'tele'}
+                      type={'tel'} // number
+                      value={value}
+                    />
+                    <CommonText
+                      handleChange={handleChangeDate}
+                      label={'date'}
+                      placeholder={'date'}
+                      type={'date'}
+                      value={date}
+                    />
+                    <CommonSelect list={list} handleChange={handleChangeGender} value={gender} />
+                  </TabPanel>
                   <TabPanel>2222df</TabPanel>
                   <TabPanel>11111</TabPanel>
                 </Tabs>

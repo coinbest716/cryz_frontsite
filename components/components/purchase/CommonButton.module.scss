@@ -1,0 +1,51 @@
+@import 'styles/variable.module.scss';
+
+.fillButton {
+  border-radius: 6px;
+  padding: 11px 25px;
+  background-color: #818e8e;
+  &:hover {
+    background-color: #687373;
+  }
+}
+.fillLabel {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+.outlineButton {
+  box-sizing: border-box;
+  padding: 11px 25px;
+  border: 1px dashed #d4d4d4;
+  border-radius: 6px;
+  &:hover {
+    background-color: #e9ecec;
+  }
+}
+.outlineLabel {
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+.continueButton {
+  padding: 18px 70px;
+  border-radius: 3px;
+  background-color: #79908e;
+  box-shadow: 0 2px 7px 0 rgba(120, 137, 149, 0.25);
+  &:hover {
+    background-color: #687373;
+  }
+}
+.continueLabel {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
+}
