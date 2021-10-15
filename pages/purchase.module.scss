@@ -1,0 +1,44 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.tabs {
+  // .react-tabs__tab-list {
+  //   border-bottom: 1px solid #ff0000;
+  // }
+  // &.react-tabs__tab-list {
+  //   ul {
+  //     border-bottom: 1px solid #ff0000;
+  //   }
+  // }
+  // ul {
+  //   border-bottom: 1px solid #ff0000;
+  //   li {
+  //     color: rgb(170, 32, 32);
+  //     border: none;
+  //     border-bottom: blue;
+  //   }
+  // }
+}
+
+.tabsList {
+  border-bottom: 1px solid #ff0000;
+}
+
+.selectedTab {
+  border-bottom: 1px solid blue !important;
+  background: #fff;
+  color: black;
+}
+
+.selectedTab:focus {
+  border-bottom: 1px solid blue !important;
+  color: black !important;
+  box-shadow: none !important;
+  border-color: unset !important;
+  outline: none !important;
+}
