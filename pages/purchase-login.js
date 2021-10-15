@@ -66,8 +66,8 @@ const PurchaseLogin = () => {
               <div className="flex justify-center">
                 <div className="pt-12" style={{ maxWidth: '300px', width: '100%' }}>
                   <div className="flex justify-start gap-4">
-                    <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'login'} />
-                    <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'register'} />
+                    <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'fill'} />
+                    <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'outline'} />
                   </div>
                   <div className="pt-9">
                     <input
@@ -93,7 +93,7 @@ const PurchaseLogin = () => {
                       <p className={styles.remember}>&nbsp;&nbsp;Recuerdame</p>
                     </div>
                     <div>
-                      <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'enter'} />
+                      <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'fill'} />
                     </div>
                   </div>
                   <div className="pt-2 flex justify-end">
