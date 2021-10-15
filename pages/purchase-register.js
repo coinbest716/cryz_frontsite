@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
-import styles from 'pages/register.module.scss'
-import CommonButton from 'components/components/login/CommonButton'
+import styles from 'pages/purchase-register.module.scss'
+import CommonButton from 'components/components/purchaseLogin/CommonButton'
 import Link from 'next/link'
 import router from 'next/router'
-import ShoppingCart from 'components/components/login/ShoppingCart'
+import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
 const Register = () => {
@@ -38,12 +38,12 @@ const Register = () => {
 
   const handleClickLogin = () => {
     console.log('handleClickLogin')
-    router.push('/login')
+    router.push('/purchase-login')
   }
 
   const handleClickRegister = () => {
     console.log('handleClickRegister')
-    router.push('/register')
+    router.push('/purchase-register')
   }
 
   const handleClickEnter = () => {
