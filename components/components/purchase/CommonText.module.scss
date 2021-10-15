@@ -1,0 +1,21 @@
+@import 'styles/variable.module.scss';
+
+.input {
+  border: 1px solid #d0dae9;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 12px 14px;
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.23px;
+  line-height: 15px;
+}
+.label {
+  color: #c4c4c4;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.26px;
+  line-height: 18px;
+}
