@@ -217,8 +217,8 @@ const Header = props => {
     }
   }
 
-  const handleClickShoppingCard = () => {
-    setOpenCart(!openCart)
+  const handleClickShoppingCard = bool => {
+    setOpenCart(bool)
   }
 
   const handleRemoveCart = index => {
@@ -228,6 +228,7 @@ const Header = props => {
   }
 
   const handleBack = () => {
+    console.log('=-=================')
     setOpenCart(false)
   }
 
@@ -360,27 +361,23 @@ const Header = props => {
             })}
           {/* icon menu part */}
           <li className={'flex justify-center items-center ml-16 ' + styles.iconMenuItem}>
-            {/* <Link href={'/shop-cart'} passHref> */}
             <button
               className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
-              onClick={handleClickShoppingCard}
+              onMouseOver={() => handleClickShoppingCard(true)}
             >
               <Image src={CartIcon} alt="" width={22} height={19} />
             </button>
-            {/* </Link> */}
           </li>
-          <li className={'flex justify-center ' + styles.iconMenuItem}>
-            <Link href={'/account'} passHref>
-              <button>
-                <Image src={AccountIcon} alt="" width={22} height={20} />
-              </button>
-            </Link>
+          <li className={'flex justify-center items-center ' + styles.iconMenuItem}>
+            <button className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center">
+              <Image src={AccountIcon} alt="" width={22} height={20} />
+            </button>
           </li>
         </ul>
         <Menu />
       </div>
       {openCart && (
-        <div className="absolute top-20 right-20">
+        <div className="absolute top-20 right-20" onMouseLeave={handleBack}>
           <ShoppingCart
             data={cartData}
             handleRemoveCart={handleRemoveCart}
