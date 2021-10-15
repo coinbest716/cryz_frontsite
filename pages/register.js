@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
-import styles from 'pages/login.module.scss'
+import styles from 'pages/register.module.scss'
 import CommonButton from 'components/components/login/CommonButton'
 import Link from 'next/link'
 import router from 'next/router'
 import ShoppingCart from 'components/components/login/ShoppingCart'
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
-const Login = () => {
+const Register = () => {
   const [cartData, setCartData] = useState([])
   const [email, setEmail] = useState('')
   const [password, setPasssword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
   useEffect(() => {
     setCartData(shoppingCartData)
@@ -31,8 +32,12 @@ const Login = () => {
     setPasssword(event.target.value)
   }
 
+  const handleChangeConfirmPassword = event => {
+    setConfirmPassword(event.target.value)
+  }
+
   const handleClickLogin = () => {
-    console.log('handleClickLogin', email, password)
+    console.log('handleClickLogin')
     router.push('/login')
   }
 
@@ -51,7 +56,6 @@ const Login = () => {
 
   const handleClickEnter = () => {
     console.log('handleClickEnter')
-    router.push('/purchase')
   }
 
   return (
@@ -66,8 +70,8 @@ const Login = () => {
               <div className="flex justify-center">
                 <div className="pt-12" style={{ maxWidth: '300px', width: '100%' }}>
                   <div className="flex justify-start gap-4">
-                    <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'login'} />
-                    <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'register'} />
+                    <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'register'} />
+                    <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'login'} />
                   </div>
                   <div className="pt-9">
                     <input
@@ -87,30 +91,17 @@ const Login = () => {
                       onChange={handleChangePassword}
                     />
                   </div>
-                  <div className="flex justify-between items-center pt-6">
-                    <div className="flex justify-between items-center">
-                      <input type="checkbox" style={{ width: 20, height: 20 }} />
-                      <p className={styles.remember}>&nbsp;&nbsp;Recuerdame</p>
-                    </div>
-                    <div>
-                      <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'enter'} />
-                    </div>
+                  <div className="pt-5">
+                    <input
+                      type="password"
+                      placeholder="Repetir contraseña"
+                      className={styles.input}
+                      value={confirmPassword}
+                      onChange={handleChangeConfirmPassword}
+                    />
                   </div>
-                  <div className="pt-2 flex justify-end">
-                    <Link href={'/forgot-password'} passHref>
-                      <p className={styles.forgetPassword}>Olvidaste contraseña</p>
-                    </Link>
-                  </div>
-                  <div className="flex justify-between items-center pt-10">
-                    <div className={styles.divider} />
-                    <div className={styles.remember}>or</div>
-                    <div className={styles.divider} />
-                  </div>
-                  <div className="flex justify-between items-center pt-10">
-                    <CommonButton handleClick={handleClickFacebook} label={'LOGIN CON FACEBOOK'} type={'facebook'} />
-                  </div>
-                  <div className="flex justify-between items-center pt-5">
-                    <CommonButton handleClick={handleClickGoogle} label={'LOGIN CON GOOGLE'} type={'google'} />
+                  <div className="flex justify-end pt-6">
+                    <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'enter'} />
                   </div>
                 </div>
               </div>
@@ -124,8 +115,8 @@ const Login = () => {
     </div>
   )
 }
-export default Login
+export default Register
 
-Login.getLayout = function getLayout(page) {
+Register.getLayout = function getLayout(page) {
   return <PrimaryLayout>{page}</PrimaryLayout>
 }
