@@ -6,39 +6,37 @@
   justify-content: center;
 }
 
-.tabs {
-  // .react-tabs__tab-list {
-  //   border-bottom: 1px solid #ff0000;
-  // }
-  // &.react-tabs__tab-list {
-  //   ul {
-  //     border-bottom: 1px solid #ff0000;
-  //   }
-  // }
-  // ul {
-  //   border-bottom: 1px solid #ff0000;
-  //   li {
-  //     color: rgb(170, 32, 32);
-  //     border: none;
-  //     border-bottom: blue;
-  //   }
-  // }
-}
-
 .tabsList {
-  border-bottom: 1px solid #ff0000;
+  color: #d3d9dc;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #e4eaee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
+.tabs {
+  ul {
+    li {
+      padding: 27px 34px;
+      border: none;
+      &:focus {
+        box-shadow: none;
+        border: unset;
+        border-bottom: 1px solid #68928e !important;
+        bottom: -2px;
+      }
+    }
+  }
+}
 .selectedTab {
-  border-bottom: 1px solid blue !important;
-  background: #fff;
-  color: black;
-}
-
-.selectedTab:focus {
-  border-bottom: 1px solid blue !important;
-  color: black !important;
-  box-shadow: none !important;
-  border-color: unset !important;
-  outline: none !important;
+  bottom: -2px;
+  color: #78908e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #68928e !important;
 }

@@ -7,8 +7,14 @@ import Link from 'next/link'
 import router from 'next/router'
 import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 import shoppingCartData from 'assets/data/ShoppingCartData'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
+import dynamic from 'next/dynamic'
+const Tabs = dynamic(
+  import('react-tabs').then(mod => mod.Tabs),
+  { ssr: false }
+) // disable ssr
+import { Tab, TabList, TabPanel } from 'react-tabs'
 
 const Purchase = () => {
   const [cartData, setCartData] = useState([])
@@ -27,24 +33,26 @@ const Purchase = () => {
   return (
     <div className="flex flex-wrap justify-center">
       <div className={styles.container}>
-        <div className={globlaStyle.container + ' pt-18'}>
+        <div className={globlaStyle.container + ' pt-20'}>
           <div className="grid grid-cols-12 gap-4 ">
-            <div className="col-span-12 md:col-span-8 sm:col-span-12 pt-32 pb-44">
-              <Tabs
-                selectedIndex={tabIndex}
-                onSelect={index => setTabIndex(index)}
-                className={styles.tabs}
-                selectedTabClassName={styles.selectedTab}
-              >
-                <TabList className={styles.tabsList}>
-                  <Tab>01 INFORMACIÓN</Tab>
-                  <Tab>02 DIRECCIONES FACTURACIÓN</Tab>
-                  <Tab>03 MÉTODO DE PAGO</Tab>
-                </TabList>
-                <TabPanel>11111</TabPanel>
-                <TabPanel>2222df</TabPanel>
-                <TabPanel>11111</TabPanel>
-              </Tabs>
+            <div className="col-span-12 md:col-span-8 sm:col-span-12 pt-5 pb-44 px-5">
+              <div>
+                <Tabs
+                  selectedIndex={tabIndex}
+                  onSelect={index => setTabIndex(index)}
+                  className={styles.tabs}
+                  selectedTabClassName={styles.selectedTab}
+                >
+                  <TabList className={styles.tabsList}>
+                    <Tab>01 INFORMACIÓN</Tab>
+                    <Tab>02 DIRECCIONES FACTURACIÓN</Tab>
+                    <Tab>03 MÉTODO DE PAGO</Tab>
+                  </TabList>
+                  <TabPanel>11111</TabPanel>
+                  <TabPanel>2222df</TabPanel>
+                  <TabPanel>11111</TabPanel>
+                </Tabs>
+              </div>
             </div>
             <div className="col-span-12 md:col-span-4 sm:col-span-12">
               <ShoppingCart data={cartData} handleRemoveCart={handleRemoveCart} />
