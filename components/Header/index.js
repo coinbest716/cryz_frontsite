@@ -235,7 +235,7 @@ const Header = props => {
   const handleCheckout = () => {
     setOpenCart(false)
     if (!loginStatus) {
-      router.push('/login')
+      router.push('/purchase-login')
     }
   }
 

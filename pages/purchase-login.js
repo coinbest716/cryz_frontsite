@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
-import styles from 'pages/login.module.scss'
-import CommonButton from 'components/components/login/CommonButton'
+import styles from 'pages/purchase-login.module.scss'
+import CommonButton from 'components/components/purchaseLogin/CommonButton'
 import Link from 'next/link'
-import ShoppingCart from 'components/components/login/ShoppingCart'
+import router from 'next/router'
+import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
-const Login = () => {
+const PurchaseLogin = () => {
   const [cartData, setCartData] = useState([])
+  const [email, setEmail] = useState('')
+  const [password, setPasssword] = useState('')
 
   useEffect(() => {
     setCartData(shoppingCartData)
@@ -20,12 +23,22 @@ const Login = () => {
     setCartData(array)
   }
 
+  const handleChangeEmail = event => {
+    setEmail(event.target.value)
+  }
+
+  const handleChangePassword = event => {
+    setPasssword(event.target.value)
+  }
+
   const handleClickLogin = () => {
-    console.log('handleClickLogin')
+    console.log('handleClickLogin', email, password)
+    router.push('/purchase-login')
   }
 
   const handleClickRegister = () => {
     console.log('handleClickRegister')
+    router.push('/purchase-register')
   }
 
   const handleClickGoogle = () => {
@@ -38,6 +51,7 @@ const Login = () => {
 
   const handleClickEnter = () => {
     console.log('handleClickEnter')
+    router.push('/purchase')
   }
 
   return (
@@ -56,10 +70,22 @@ const Login = () => {
                     <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'register'} />
                   </div>
                   <div className="pt-9">
-                    <input type="text" placeholder="Email" className={styles.input} />
+                    <input
+                      type="text"
+                      placeholder="Email"
+                      className={styles.input}
+                      value={email}
+                      onChange={handleChangeEmail}
+                    />
                   </div>
                   <div className="pt-5">
-                    <input type="text" placeholder="Contraseña" className={styles.input} />
+                    <input
+                      type="password"
+                      placeholder="Contraseña"
+                      className={styles.input}
+                      value={password}
+                      onChange={handleChangePassword}
+                    />
                   </div>
                   <div className="flex justify-between items-center pt-6">
                     <div className="flex justify-between items-center">
@@ -67,11 +93,11 @@ const Login = () => {
                       <p className={styles.remember}>&nbsp;&nbsp;Recuerdame</p>
                     </div>
                     <div>
-                      <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'Entrar'} />
+                      <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'enter'} />
                     </div>
                   </div>
-                  <div className="pt-2">
-                    <Link href={'/forget-password'} passHref>
+                  <div className="pt-2 flex justify-end">
+                    <Link href={'/forgot-password'} passHref>
                       <p className={styles.forgetPassword}>Olvidaste contraseña</p>
                     </Link>
                   </div>
@@ -98,8 +124,8 @@ const Login = () => {
     </div>
   )
 }
-export default Login
+export default PurchaseLogin
 
-Login.getLayout = function getLayout(page) {
+PurchaseLogin.getLayout = function getLayout(page) {
   return <PrimaryLayout>{page}</PrimaryLayout>
 }

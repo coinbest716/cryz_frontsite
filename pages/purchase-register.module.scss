@@ -1,0 +1,27 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.title {
+  color: #7a908e;
+  font-family: Montserrat;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: -0.42px;
+  line-height: 32px;
+  text-align: center;
+}
+.input {
+  border: 1px solid #7a908e;
+  border-radius: 4px;
+  color: #7a908e;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 15px;
+  padding: 19px 18px;
+  width: 100%;
+}
