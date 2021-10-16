@@ -50,6 +50,9 @@ const Purchase = () => {
   const [countryBilling, setCountryBilling] = useState('')
   const [postalBilling, setPostalBilling] = useState('')
 
+  const [paymentType, setPaymentType] = useState('')
+  const [cardData, setCardData] = useState({ number: '', name: '', expiry: '', cvc: '' })
+
   useEffect(() => {
     setCartData(shoppingCartData)
   }, [])
@@ -108,7 +111,7 @@ const Purchase = () => {
   }
 
   const handleChangeFrame = event => {
-    setFrameType(event.target.value)
+    setFrameType(event.target.name)
   }
   const handleChangeNameBilling = event => {
     setNameBilling(event.target.value)
@@ -143,8 +146,6 @@ const Purchase = () => {
     setTabIndex(2)
   }
 
-  const [paymentType, setPaymentType] = useState('')
-  const [cardData, setCardData] = useState({ number: '', name: '', expiry: '', cvc: '' })
   const handleChangePaymentType = event => {
     setPaymentType(event.target.name)
   }
@@ -334,10 +335,10 @@ const Purchase = () => {
                       <div className={styles.tabTitle}>Direcciones facturación</div>
                       <div className="flex justify-between gap-8 pt-10">
                         <div className="w-1/2">
-                          <BillingDoc handleChangeFrame={handleChangeFrame} frameType={frameType} value={'frame1'} />
+                          <BillingDoc handleChangeFrame={handleChangeFrame} frameType={'frame1'} value={frameType} />
                         </div>
                         <div className="w-1/2">
-                          <BillingDoc handleChangeFrame={handleChangeFrame} frameType={frameType} value={'frame2'} />
+                          <BillingDoc handleChangeFrame={handleChangeFrame} frameType={'frame2'} value={frameType} />
                         </div>
                       </div>
                       <div className={'pt-6 ' + styles.newAddress}>Nueva dirección</div>

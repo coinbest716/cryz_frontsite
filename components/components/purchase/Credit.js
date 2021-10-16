@@ -22,17 +22,6 @@ const Credit = props => {
   return (
     <div className={'px-10 py-8 ' + styles.creditSection}>
       <div className="flex justify-between items-center">
-        {/* <div className="relative flex justify-between items-center">
-          <input
-            type="radio"
-            value={value}
-            name="card"
-            checked={value === 'card'}
-            onChange={handleChangePaymentType}
-            className={styles.inputRadio}
-          />
-          <p className={'pl-3 ' + styles.creditTitle}>Tarjeta bancaria</p>
-        </div> */}
         <div>
           <Radio handleChangeType={handleChangePaymentType} type={'card'} value={value} label={'Tarjeta bancaria'} />
         </div>
