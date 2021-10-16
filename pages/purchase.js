@@ -19,6 +19,8 @@ import CommonText from 'components/components/purchase/CommonText'
 import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
 import BillingDoc from 'components/components/purchase/BillingDoc'
 import PreviousButton from 'components/components/purchase/PreviousButton'
+import Credit from 'components/components/purchase/Credit'
+import Transfer from 'components/components/purchase/Transfer'
 
 const Purchase = () => {
   const [cartData, setCartData] = useState([])
@@ -135,11 +137,25 @@ const Purchase = () => {
   const handleDeleteBilling = () => {}
   const handleSaveBilling = () => {}
   const handleChangePrevious = () => {
-    setTabIndex(1)
+    setTabIndex(0)
   }
   const handleContinueBilling = () => {
     setTabIndex(2)
   }
+
+  const [paymentType, setPaymentType] = useState('')
+  const [cardData, setCardData] = useState({ number: '', name: '', expiry: '', cvc: '' })
+  const handleChangePaymentType = event => {
+    setPaymentType(event.target.name)
+  }
+  const handleChangeCardData = (name, value) => {
+    console.log(name, value)
+    setCardData({ ...cardData, [name]: value })
+  }
+  const handleChangeBillingPage = () => {
+    setTabIndex(1)
+  }
+  const handleFinishBilling = () => {}
 
   return (
     <div className="flex flex-wrap justify-center">
@@ -414,13 +430,36 @@ const Purchase = () => {
                       <div className={'w-full mt-20 ' + styles.divider} />
                       <div className="pt-24 flex justify-between items-center">
                         <div>
-                          <PreviousButton handleChangePrevious={handleChangePrevious} />
+                          <PreviousButton handleChangePrevious={handleChangePrevious} label={'Volver a Información'} />
                         </div>
                         <CommonButton label={'CONTINUAR'} handleClick={handleContinueBilling} type={'continue'} />
                       </div>
                     </div>
                   </TabPanel>
-                  <TabPanel>11111</TabPanel>
+                  <TabPanel>
+                    <div className="p-4 pt-16">
+                      <div className={styles.tabTitle}>Método de pago</div>
+                      <div className="pt-9">
+                        <Credit
+                          handleChangePaymentType={handleChangePaymentType}
+                          value={paymentType}
+                          handleChangeCardData={handleChangeCardData}
+                        />
+                      </div>
+                      <div className="pt-5">
+                        <Transfer handleChangePaymentType={handleChangePaymentType} value={paymentType} />
+                      </div>
+                    </div>
+                    <div className="pt-24 flex justify-between items-center">
+                      <div>
+                        <PreviousButton
+                          handleChangePrevious={handleChangeBillingPage}
+                          label={'Volver a Direcciones facturación'}
+                        />
+                      </div>
+                      <CommonButton label={'TERMINAR PEDIDO'} handleClick={handleFinishBilling} type={'continue'} />
+                    </div>
+                  </TabPanel>
                 </Tabs>
               </div>
             </div>
