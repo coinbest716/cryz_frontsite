@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './BillingDoc.module.scss'
+import Radio from './Radio'
 
 const BillingDoc = props => {
   const { handleChangeFrame, frameType, value } = props
@@ -8,15 +9,7 @@ const BillingDoc = props => {
     <div className={styles.billingSection}>
       <div className="flex justify-start p-2">
         <div className="w-full">
-          <div className="relative">
-            <input
-              type="radio"
-              value={value}
-              checked={frameType === value}
-              onChange={handleChangeFrame}
-              className={styles.inputRadio}
-            />
-          </div>
+          <Radio handleChangeType={handleChangeFrame} type={frameType} value={value} label={''} />
           <div className={'px-6 ' + styles.content}>
             <div>Jamy Larson</div>
             <div>JUnit 2 Green Mount Retail Park</div>

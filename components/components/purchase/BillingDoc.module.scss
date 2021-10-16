@@ -4,29 +4,6 @@
   border: 1px solid #72918e;
   border-radius: 3px;
 }
-.inputRadio {
-  -webkit-appearance: none;
-  min-width: 19px;
-  width: 19px;
-  height: 19px;
-  border: 2px solid #72918e;
-  border-radius: 50%;
-  outline: none;
-  &::before {
-    content: '';
-    display: block;
-    width: 50%;
-    height: 50%;
-    margin: 26% 26%;
-    border-radius: 50%;
-  }
-  &:checked:before {
-    background: #72918e;
-  }
-  &:hover {
-    cursor: pointer;
-  }
-}
 .content {
   color: #72918e;
   font-family: Montserrat;

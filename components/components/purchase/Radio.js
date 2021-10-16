@@ -6,7 +6,7 @@ const Radio = props => {
 
   return (
     <div className="flex">
-      <div>
+      <div className="relative">
         <input
           type="radio"
           value={value}
