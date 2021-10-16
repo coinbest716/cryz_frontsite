@@ -23,6 +23,8 @@ const CommonText = props => {
         </select>
       ) : (
         <input
+          // id={`${placeholder}`}
+          autoComplete={type === 'password' ? 'new-password' : 'off'}
           type={type}
           className={'w-full flex justify-between items-center ' + styles.input}
           value={value}
