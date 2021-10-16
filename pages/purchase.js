@@ -17,6 +17,8 @@ import { Tab, TabList, TabPanel } from 'react-tabs'
 import CommonButton from 'components/components/purchase/CommonButton'
 import CommonText from 'components/components/purchase/CommonText'
 import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
+import BillingDoc from 'components/components/purchase/BillingDoc'
+import PreviousButton from 'components/components/purchase/PreviousButton'
 
 const Purchase = () => {
   const [cartData, setCartData] = useState([])
@@ -36,6 +38,16 @@ const Purchase = () => {
   const [gender, setGender] = useState('')
   const list = ['male', 'female']
 
+  const [frameType, setFrameType] = useState('frame1')
+  const [nameBilling, setNameBilling] = useState('')
+  const [titleBilling, setTitleBilling] = useState('')
+  const [emailBilling, setEmailBilling] = useState('')
+  const [codeBilling, setCodeBilling] = useState('')
+  const [addressBilling, setAddressBilling] = useState('')
+  const [phoneBilling, setPhoneBilling] = useState('')
+  const [countryBilling, setCountryBilling] = useState('')
+  const [postalBilling, setPostalBilling] = useState('')
+
   useEffect(() => {
     setCartData(shoppingCartData)
   }, [])
@@ -48,7 +60,9 @@ const Purchase = () => {
 
   const handleDiscard = () => {}
   const handleSave = () => {}
-  const handleContinue = () => {}
+  const handleContinue = () => {
+    setTabIndex(1)
+  }
 
   const handleChangeBirthday = event => {
     setBirthday(event.target.value)
@@ -91,6 +105,42 @@ const Purchase = () => {
     setTown(event.target.value)
   }
 
+  const handleChangeFrame = event => {
+    setFrameType(event.target.value)
+  }
+  const handleChangeNameBilling = event => {
+    setNameBilling(event.target.value)
+  }
+  const handleChangeTitleBilling = event => {
+    setTitleBilling(event.target.value)
+  }
+  const handleChangeEmailBilling = event => {
+    setEmailBilling(event.target.value)
+  }
+  const handleChangeCodeBilling = event => {
+    setCodeBilling(event.target.value)
+  }
+  const handleChangeAddressBilling = event => {
+    setAddressBilling(event.target.value)
+  }
+  const handleChangePhoneBilling = event => {
+    setPhoneBilling(event.target.value)
+  }
+  const handleChangeCountryBilling = event => {
+    setCountryBilling(event.target.value)
+  }
+  const handleChangePostalBilling = event => {
+    setPostalBilling(event.target.value)
+  }
+  const handleDeleteBilling = () => {}
+  const handleSaveBilling = () => {}
+  const handleChangePrevious = () => {
+    setTabIndex(1)
+  }
+  const handleContinueBilling = () => {
+    setTabIndex(2)
+  }
+
   return (
     <div className="flex flex-wrap justify-center">
       <div className={styles.container}>
@@ -111,7 +161,7 @@ const Purchase = () => {
                   </TabList>
                   <TabPanel>
                     <div className="p-4 pt-16">
-                      <div className="flex justify-between gap-8 pt-4">
+                      <div className="flex justify-between gap-8">
                         <div className="w-full">
                           <div className={styles.tabTitle}>Información general</div>
                           <div className="w-full flex justify-between items-center pt-10">
@@ -263,7 +313,113 @@ const Purchase = () => {
                       </div>
                     </div>
                   </TabPanel>
-                  <TabPanel>2222df</TabPanel>
+                  <TabPanel>
+                    <div className="p-4 pt-16">
+                      <div className={styles.tabTitle}>Direcciones facturación</div>
+                      <div className="flex justify-between gap-8 pt-10">
+                        <div className="w-1/2">
+                          <BillingDoc handleChangeFrame={handleChangeFrame} frameType={frameType} value={'frame1'} />
+                        </div>
+                        <div className="w-1/2">
+                          <BillingDoc handleChangeFrame={handleChangeFrame} frameType={frameType} value={'frame2'} />
+                        </div>
+                      </div>
+                      <div className={'pt-6 ' + styles.newAddress}>Nueva dirección</div>
+                      <div className="flex justify-between gap-8 pt-6">
+                        <div className="w-7/12">
+                          <CommonText
+                            handleChange={handleChangeNameBilling}
+                            label={'Nombre completo'}
+                            placeholder={''}
+                            type={'text'}
+                            value={nameBilling}
+                          />
+                        </div>
+                        <div className="w-5/12 flex justify-end">
+                          <div className="w-2/3">
+                            <CommonText
+                              handleChange={handleChangeTitleBilling}
+                              label={'Titulo'}
+                              placeholder={''}
+                              type={'text'}
+                              value={titleBilling}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex justify-between gap-8 pt-6">
+                        <div className="w-7/12">
+                          <CommonText
+                            handleChange={handleChangeEmailBilling}
+                            label={'Email'}
+                            placeholder={''}
+                            type={'email'}
+                            value={emailBilling}
+                          />
+                        </div>
+                        <div className="w-5/12">
+                          <CommonText
+                            handleChange={handleChangeCodeBilling}
+                            label={'NIF/NIE'}
+                            placeholder={''}
+                            type={'password'}
+                            value={codeBilling}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex justify-between gap-8 pt-6">
+                        <div className="w-7/12">
+                          <CommonText
+                            handleChange={handleChangeAddressBilling}
+                            label={'Dirección facturación'}
+                            placeholder={''}
+                            type={'text'}
+                            value={addressBilling}
+                          />
+                        </div>
+                        <div className="w-5/12">
+                          <CommonText
+                            handleChange={handleChangePhoneBilling}
+                            label={'Teléfono'}
+                            placeholder={''}
+                            type={'text'}
+                            value={phoneBilling}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex justify-between gap-8 pt-6">
+                        <div className="w-7/12">
+                          <CommonText
+                            handleChange={handleChangeCountryBilling}
+                            label={'Pais'}
+                            placeholder={''}
+                            type={'text'}
+                            value={countryBilling}
+                          />
+                        </div>
+                        <div className="w-5/12">
+                          <CommonText
+                            handleChange={handleChangePostalBilling}
+                            label={'CP'}
+                            placeholder={''}
+                            type={'number'}
+                            value={postalBilling}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex justify-end gap-8 pt-6">
+                        <CommonButton label={'Borrar dirección'} handleClick={handleDeleteBilling} type={'icon'} />
+                        <CommonButton label={'Aceptar cambios'} handleClick={handleSaveBilling} type={'fill'} />
+                      </div>
+                      <div className={'w-full mt-20 ' + styles.divider} />
+                      <div className="pt-24 flex justify-between items-center">
+                        <div>
+                          <PreviousButton handleChangePrevious={handleChangePrevious} />
+                        </div>
+                        <CommonButton label={'CONTINUAR'} handleClick={handleContinueBilling} type={'continue'} />
+                      </div>
+                    </div>
+                  </TabPanel>
                   <TabPanel>11111</TabPanel>
                 </Tabs>
               </div>
