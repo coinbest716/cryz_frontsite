@@ -6,6 +6,7 @@
 }
 .inputRadio {
   -webkit-appearance: none;
+  min-width: 19px;
   width: 19px;
   height: 19px;
   border: 2px solid #72918e;
@@ -16,7 +17,7 @@
     display: block;
     width: 50%;
     height: 50%;
-    margin: 26% 24%;
+    margin: 26% 26%;
     border-radius: 50%;
   }
   &:checked:before {
@@ -45,6 +46,7 @@
   font-weight: 600;
   &:hover {
     background-color: #c9cacd;
+    cursor: pointer;
   }
 }
 .new {
@@ -57,5 +59,6 @@
   font-weight: 600;
   &:hover {
     background-color: #c9cacd;
+    cursor: pointer;
   }
 }
