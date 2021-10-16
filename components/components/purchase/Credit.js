@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styles from './Credit.module.scss'
 import cards from 'public/images/cards.png'
+import Radio from './Radio'
 import { formatCreditCardNumber, formatCVC, formatExpirationDate } from './utils'
 
 const Credit = props => {
@@ -21,7 +22,7 @@ const Credit = props => {
   return (
     <div className={'px-10 py-8 ' + styles.creditSection}>
       <div className="flex justify-between items-center">
-        <div className="relative flex justify-between items-center">
+        {/* <div className="relative flex justify-between items-center">
           <input
             type="radio"
             value={value}
@@ -31,6 +32,9 @@ const Credit = props => {
             className={styles.inputRadio}
           />
           <p className={'pl-3 ' + styles.creditTitle}>Tarjeta bancaria</p>
+        </div> */}
+        <div>
+          <Radio handleChangeType={handleChangePaymentType} type={'card'} value={value} label={'Tarjeta bancaria'} />
         </div>
         <Image src={cards} alt="" width={110} height={22} />
       </div>
