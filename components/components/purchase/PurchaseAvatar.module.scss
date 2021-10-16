@@ -1,0 +1,18 @@
+@import 'styles/variable.module.scss';
+
+.defaultAvatar {
+  border-radius: 100px;
+  background-color: $gray-100-color;
+}
+.edit {
+  background-color: $blue-gray-400-color;
+  border-radius: 20px;
+  padding: 3px;
+  &:hover {
+    background-color: $blue-gray-300-color;
+  }
+}
+.avatarSection {
+  width: 100px;
+  height: 100px;
+}
