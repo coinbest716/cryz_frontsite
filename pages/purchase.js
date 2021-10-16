@@ -158,6 +158,8 @@ const Purchase = () => {
   }
   const handleFinishBilling = () => {}
 
+  const handleAcceptDiscount = () => {}
+
   return (
     <div className="flex flex-wrap justify-center">
       <div className={styles.container}>
@@ -465,7 +467,11 @@ const Purchase = () => {
               </div>
             </div>
             <div className="col-span-12 md:col-span-4 sm:col-span-12">
-              <ShoppingCart data={cartData} handleRemoveCart={handleRemoveCart} />
+              <ShoppingCart
+                data={cartData}
+                handleRemoveCart={handleRemoveCart}
+                handleAcceptDiscount={handleAcceptDiscount}
+              />
             </div>
           </div>
         </div>

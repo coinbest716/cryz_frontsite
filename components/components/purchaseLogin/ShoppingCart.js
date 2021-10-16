@@ -4,9 +4,11 @@ import styles from './ShoppingCart.module.scss'
 import close from 'public/images/close.svg'
 import down from 'public/images/down.svg'
 import up from 'public/images/up.svg'
+import CommonButton from './CommonButton'
+import AcceptCommonButtom from 'components/components/purchase/CommonButton'
 
 const ShoppingCart = props => {
-  const { data, handleRemoveCart } = props
+  const { data, handleRemoveCart, handleAcceptDiscount } = props
   const [expend, setExpend] = useState(false)
 
   const handleClickExpand = () => {
@@ -64,8 +66,13 @@ const ShoppingCart = props => {
           </div>
         </div>
         {expend && (
-          <div className="flex justify-end mt-3">
-            <input type="text" id="discount" name="number" className={styles.inputDiscount} />
+          <div>
+            <div className="flex justify-end mt-3">
+              <input type="text" id="discount" name="number" className={styles.inputDiscount} />
+            </div>
+            <div className="flex justify-end mt-1">
+              <AcceptCommonButtom label={'Aplicar'} handleClick={handleAcceptDiscount} type={'fill'} />
+            </div>
           </div>
         )}
       </div>
