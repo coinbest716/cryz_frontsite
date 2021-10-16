@@ -1,14 +1,12 @@
 import React from 'react'
-import Image from 'next/image'
-import backGrayIcon from 'public/images/arrow-left-gray.svg'
 import styles from './Radio.module.scss'
 
 const Radio = props => {
   const { handleChangeType, type, value, label } = props
 
   return (
-    <div>
-      <div className="relative flex justify-start items-center">
+    <div className="flex">
+      <div>
         <input
           type="radio"
           value={value}
@@ -17,6 +15,8 @@ const Radio = props => {
           onChange={handleChangeType}
           className={styles.inputRadio}
         />
+      </div>
+      <div>
         <p className={'pl-3 ' + styles.creditTitle}>{label}</p>
       </div>
     </div>
