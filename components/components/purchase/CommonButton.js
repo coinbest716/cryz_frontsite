@@ -20,6 +20,12 @@ const CommonButton = props => {
           <p className={styles.continueLabel}>{label}</p>
         </button>
       )}
+      {type === 'icon' && (
+        <button className={'flex justify-between items-center ' + styles.outlineButton} onClick={handleClick}>
+          <p className={'pr-3 ' + styles.outlineLabel}>{label}</p>
+          <img src="/images/trash.svg" alt="" style={{ width: '12px', height: '12px' }} />
+        </button>
+      )}
     </>
   )
 }
