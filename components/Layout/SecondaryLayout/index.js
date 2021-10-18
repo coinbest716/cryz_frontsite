@@ -9,7 +9,7 @@ export default function Layout({ children }) {
         <div>
           <Navbar />
         </div>
-        <div style={{ width: 'calc(100% - 224px)' }}>
+        <div className="w-full">
           <main>{children}</main>
         </div>
       </div>

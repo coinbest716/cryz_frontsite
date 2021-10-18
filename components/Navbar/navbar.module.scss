@@ -31,3 +31,11 @@
   letter-spacing: 0.3px;
   line-height: 19px;
 }
+.hideSection {
+  max-width: 100px;
+  min-width: 100px;
+}
+.resize:hover {
+  filter: brightness(1) invert(0.07);
+  transition: 0.4s;
+}
