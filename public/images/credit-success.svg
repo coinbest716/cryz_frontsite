@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 268.873 246.942">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient-5);
+      }
+
+      .cls-6 {
+        filter: url(#Oval_4);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#818e8e"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <filter id="Oval_4" x="21.472" y="17.942" width="228" height="229" filterUnits="userSpaceOnUse">
+      <feOffset dy="16" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#0a1646" flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#939e9e"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#859191"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#919c9c"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-5" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#889494"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+  </defs>
+  <g id="logo" transform="translate(-0.028 -1.058)">
+    <g class="cls-6" transform="matrix(1, 0, 0, 1, 0.03, 1.06)">
+      <ellipse id="Oval_4-2" data-name="Oval 4" class="cls-1" cx="90" cy="90.5" rx="90" ry="90.5" transform="translate(45.47 25.94)"/>
+    </g>
+    <ellipse id="Oval_4-3" data-name="Oval 4" class="cls-2" cx="57.107" cy="57.055" rx="57.107" ry="57.055" transform="translate(162.844 45.444) rotate(81)"/>
+    <ellipse id="Oval_4-4" data-name="Oval 4" class="cls-3" cx="12.065" cy="12.054" rx="12.065" ry="12.054" transform="translate(23.839 1.058) rotate(81)"/>
+    <ellipse id="Oval_4-5" data-name="Oval 4" class="cls-4" cx="5.63" cy="5.625" rx="5.63" ry="5.625" transform="translate(77.034 208.983) rotate(81)"/>
+    <ellipse id="Oval_4-6" data-name="Oval 4" class="cls-5" cx="7.239" cy="7.232" rx="7.239" ry="7.232" transform="translate(266.637 29.915) rotate(81)"/>
+  </g>
+</svg>

@@ -9,17 +9,6 @@ const Transfer = props => {
 
   return (
     <div className={'px-10 py-8 ' + styles.creditSection}>
-      {/* <div className="relative flex justify-start items-center">
-        <input
-          type="radio"
-          value={value}
-          name="transfer"
-          checked={value === 'transfer'}
-          onChange={handleChangePaymentType}
-          className={styles.inputRadio}
-        />
-        <p className={'pl-3 ' + styles.creditTitle}>Transferencia bancaria</p>
-      </div> */}
       <div>
         <Radio
           handleChangeType={handleChangePaymentType}

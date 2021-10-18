@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
-import styles from 'pages/purchase.module.scss'
+import styles from './purchase.module.scss'
 import Link from 'next/link'
 import router from 'next/router'
 import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 import shoppingCartData from 'assets/data/ShoppingCartData'
-// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import dynamic from 'next/dynamic'
 const Tabs = dynamic(
@@ -21,6 +20,7 @@ import BillingDoc from 'components/components/purchase/BillingDoc'
 import PreviousButton from 'components/components/purchase/PreviousButton'
 import Credit from 'components/components/purchase/Credit'
 import Transfer from 'components/components/purchase/Transfer'
+import toast from 'react-hot-toast'
 
 const Purchase = () => {
   const [cartData, setCartData] = useState([])
@@ -50,11 +50,13 @@ const Purchase = () => {
   const [countryBilling, setCountryBilling] = useState('')
   const [postalBilling, setPostalBilling] = useState('')
 
+  const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('')
   const [cardData, setCardData] = useState({ number: '', name: '', expiry: '', cvc: '' })
 
   useEffect(() => {
     setCartData(shoppingCartData)
+    setRedsys(false)
   }, [])
 
   const handleRemoveCart = index => {
@@ -156,7 +158,16 @@ const Purchase = () => {
   const handleChangeBillingPage = () => {
     setTabIndex(1)
   }
-  const handleFinishBilling = () => {}
+  const handleFinishBilling = () => {
+    if (paymentType === '') {
+      toast.error('You should select payment type!')
+      return
+    } else if (paymentType === 'card') {
+      router.push('/purchase/credit-success')
+    } else if (paymentType === 'transfer') {
+      router.push('/purchase/transfer-success')
+    }
+  }
 
   const handleAcceptDiscount = () => {}
 
@@ -447,6 +458,7 @@ const Purchase = () => {
                           handleChangePaymentType={handleChangePaymentType}
                           value={paymentType}
                           handleChangeCardData={handleChangeCardData}
+                          redsys={redsys}
                         />
                       </div>
                       <div className="pt-5">
