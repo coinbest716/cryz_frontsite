@@ -1,0 +1,41 @@
+@import 'styles/variable.module.scss';
+
+.billingSection {
+  border: 1px solid #72918e;
+  border-radius: 3px;
+}
+.content {
+  color: #72918e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.26px;
+  line-height: 25px;
+}
+.edit {
+  border: 1px solid #72918e;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  color: #72918e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  &:hover {
+    background-color: #c9cacd;
+    cursor: pointer;
+  }
+}
+.new {
+  border: 1px solid #72918e;
+  border-bottom: none;
+  border-right: none;
+  color: #72918e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  &:hover {
+    background-color: #c9cacd;
+    cursor: pointer;
+  }
+}

@@ -4,9 +4,12 @@ import styles from './ShoppingCart.module.scss'
 import close from 'public/images/close.svg'
 import down from 'public/images/down.svg'
 import up from 'public/images/up.svg'
+import CommonButton from './CommonButton'
+import AcceptCommonButtom from 'components/components/purchase/CommonButton'
+import Radio from 'components/components/purchase/Radio'
 
 const ShoppingCart = props => {
-  const { data, handleRemoveCart } = props
+  const { data, handleRemoveCart, handleAcceptDiscount, tabIndex } = props
   const [expend, setExpend] = useState(false)
 
   const handleClickExpand = () => {
@@ -16,6 +19,7 @@ const ShoppingCart = props => {
   let total = 0
   data?.map(item => (total += item.price))
 
+  const handleChangeFrame = () => {}
   return (
     <div className={styles.shoppingCart}>
       <div className="flex justify-between">
@@ -64,8 +68,13 @@ const ShoppingCart = props => {
           </div>
         </div>
         {expend && (
-          <div className="flex justify-end mt-3">
-            <input type="text" id="discount" name="number" className={styles.inputDiscount} />
+          <div>
+            <div className="flex justify-end mt-3">
+              <input type="text" id="discount" name="number" className={styles.inputDiscount} />
+            </div>
+            <div className="flex justify-end mt-1">
+              <AcceptCommonButtom label={'Aplicar'} handleClick={handleAcceptDiscount} type={'fill'} />
+            </div>
           </div>
         )}
       </div>
@@ -74,6 +83,23 @@ const ShoppingCart = props => {
         <div className={styles.listDescription}>Total +IVA</div>
         <div className={styles.listPrice}>€&nbsp;{total.toFixed(2)}</div>
       </div>
+      {tabIndex === 2 && (
+        <div className="pt-36">
+          <Radio
+            handleChangeType={handleChangeFrame}
+            type={'billAddress'}
+            value={'billAddress'}
+            label={'Dirección facturación'}
+          />
+          <div className={'pt-2 pl-8 ' + styles.billAddress}>
+            <p>Jamy Larson</p>
+            <p>Unit 2 Green Mount Retail Park</p>
+            <p>Halifax</p>
+            <p>HX1 5QN</p>
+            <p>Tel: 0344 332 5931</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

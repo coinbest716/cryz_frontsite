@@ -1,0 +1,15 @@
+@import 'styles/variable.module.scss';
+
+.creditSection {
+  border: 1px solid #79908e;
+  border-radius: 3px;
+  background-color: #ffffff;
+  max-width: 740px;
+}
+.creditDescription {
+  color: #72918e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 26px;
+}

@@ -1,0 +1,36 @@
+@import 'styles/variable.module.scss';
+
+.creditSection {
+  border: 1px solid #79908e;
+  border-radius: 3px;
+  background-color: #ffffff;
+  max-width: 740px;
+}
+.creditDescription {
+  color: #72918e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 26px;
+}
+.label {
+  color: #d4d9dd;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 15px;
+  text-transform: uppercase;
+}
+.formControl {
+  border: 1px solid #72918e;
+  border-radius: 3px;
+  background-color: #ffffff;
+  padding: 12px 26px;
+  color: #011632;
+  font-family: 'Avenir Next';
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 22px;
+  width: 100%;
+}
