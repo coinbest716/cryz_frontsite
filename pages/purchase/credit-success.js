@@ -2,30 +2,24 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from './credit-success.module.scss'
 import Image from 'next/image'
-import news from 'public/images/news.svg'
+import successLogo from 'public/images/credit-success.svg'
 
 const CreditSuccess = () => {
   return (
     <div className="flex flex-wrap justify-center">
       <div className={styles.container}>
-        <div className={globlaStyle.container + ' pt-20'}>
-          <div className="h-full">
-            <div className="h-1/3 flex items-center">
-              <div>
-                <div className={styles.topTitle}>PROXIMAMENTE…</div>
-                <div className={styles.topDash + ' mt-4'} />
+        <div className={globlaStyle.container}>
+          <div className="flex justify-center items-center h-full">
+            <div className={styles.creditSection}>
+              <div className={styles.title}>¡GRACIAS POR TU COMPRA!</div>
+              <div className="pt-16 text-center">
+                <Image src={successLogo} alt="" width={270} height={222} />
+              </div>
+              <div className={'pt-16 ' + styles.orderNumber}>TU NÚMERO DE PEDIDO ES #45486</div>
+              <div className={'pt-4 ' + styles.description}>
+                Proin in mi maximus, tempus libero vitae, hendrerit nisl. Curabitur posuere, augue a feugiat convallis.
               </div>
             </div>
-            <div className="h-1/3 flex items-center justify-center">
-              <div>
-                <Image src={news} alt="" />
-                <div className={styles.description}>
-                  Un espacio exclusivo donde poder consultar todas las novedades y ultimas <br /> publicaciones de Crys
-                  & Co
-                </div>
-              </div>
-            </div>
-            <div className="h-1/3"></div>
           </div>
         </div>
       </div>
