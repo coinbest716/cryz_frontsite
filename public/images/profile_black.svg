@@ -1,0 +1,32 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        stroke: #2A2C36;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        stroke-dasharray: 0 0;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect id="icon_Background_Mask_" data-name="icon (Background/Mask)" class="cls-1" width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <rect id="icon_Background_Mask_2" data-name="icon (Background/Mask)" class="cls-1" width="24" height="24"/>
+  <g id="icon-2" data-name="icon" class="cls-2">
+    <g id="Group_1686" data-name="Group 1686" transform="translate(3.605 3.6)">
+      <path id="Vector" class="cls-3" d="M3.931,7.862A3.931,3.931,0,1,1,7.862,3.931,3.931,3.931,0,0,1,3.931,7.862Z" transform="translate(4.418)"/>
+      <path id="Vector-2" data-name="Vector" class="cls-3" d="M16.648,6.048a8.718,8.718,0,0,0-16.6,0A1.12,1.12,0,0,0,1.125,7.482H15.573A1.112,1.112,0,0,0,16.648,6.048Z" transform="translate(0 10.214)"/>
+    </g>
+  </g>
+</svg>

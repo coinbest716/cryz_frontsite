@@ -1,0 +1,15 @@
+@import 'styles/variable.module.scss';
+
+.ToolsContainer {
+  width: 100%;
+  display: flex;
+  // padding-top: 32px;
+}
+
+.ToolsNavbar {
+  width: 195px;
+}
+
+.ToolsContent {
+  width: calc(100% - 195px);
+}

@@ -1,0 +1,49 @@
+@import 'styles/variable.module.scss';
+
+.logo {
+  // margin-left: 73px;
+  font-family: 'Cartoon Marker';
+  font-size: 16px;
+  color: #2a2c36;
+  cursor: pointer;
+  opacity: 0.52;
+}
+.logoSmall {
+  // margin-left: 73px;
+  font-family: 'Cartoon Marker';
+  font-size: 9px;
+  color: #2a2c36;
+  cursor: pointer;
+  opacity: 0.52;
+}
+.itemLabel {
+  color: #2a2c37;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 21px;
+}
+.logoutLabel {
+  color: #ed5252;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 19px;
+}
+.hideSection {
+  max-width: 100px;
+  min-width: 100px;
+}
+.resize:hover {
+  filter: brightness(1) invert(0.07);
+  transition: 0.4s;
+}
+.activeLabel {
+  color: #2a2c37;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 21px;
+  font-weight: bold;
+}

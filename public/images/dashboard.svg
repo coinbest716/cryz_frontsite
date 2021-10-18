@@ -1,0 +1,44 @@
+<svg id="Frame_1731" data-name="Frame 1731" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        stroke: #999;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 0 0;
+      }
+
+      .cls-4 {
+        stroke: none;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect id="Frame_1731_Background_Mask_" data-name="Frame 1731 (Background/Mask)" class="cls-1" width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <rect id="Frame_1731_Background_Mask_2" data-name="Frame 1731 (Background/Mask)" class="cls-1" width="24" height="24"/>
+  <g id="Frame_1731-2" data-name="Frame 1731" class="cls-2">
+    <g id="Group_2105" data-name="Group 2105" transform="translate(2 2)">
+      <g id="Rectangle_841" data-name="Rectangle 841" class="cls-3">
+        <rect class="cls-4" width="9" height="9" rx="1"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="8" height="8" rx="0.5"/>
+      </g>
+      <g id="Rectangle_844" data-name="Rectangle 844" class="cls-3" transform="translate(0 11)">
+        <rect class="cls-4" width="9" height="9" rx="1"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="8" height="8" rx="0.5"/>
+      </g>
+      <g id="Rectangle_843" data-name="Rectangle 843" class="cls-3" transform="translate(11)">
+        <rect class="cls-4" width="9" height="20" rx="1"/>
+        <rect class="cls-1" x="0.5" y="0.5" width="8" height="19" rx="0.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

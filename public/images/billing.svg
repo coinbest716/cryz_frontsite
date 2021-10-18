@@ -1,0 +1,33 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        stroke: #999;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        stroke-dasharray: 0 0;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect id="icon_Background_Mask_" data-name="icon (Background/Mask)" class="cls-1" width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <rect id="icon_Background_Mask_2" data-name="icon (Background/Mask)" class="cls-1" width="24" height="24"/>
+  <g id="icon-2" data-name="icon" class="cls-2">
+    <g id="Group_1719" data-name="Group 1719" transform="translate(1.6 4.6)">
+      <path id="Vector" class="cls-3" d="M2,14.76a2.006,2.006,0,0,1-2-2V2A2.006,2.006,0,0,1,2,0H18.41a2.006,2.006,0,0,1,2,2V12.76a2.006,2.006,0,0,1-2,2Z"/>
+      <path id="Vector-2" data-name="Vector" class="cls-3" d="M20.41,0V2.57H0V0Z" transform="translate(0 3.66)"/>
+      <path id="Vector-3" data-name="Vector" class="cls-3" d="M0,0H4" transform="translate(13.03 11.96)"/>
+    </g>
+  </g>
+</svg>

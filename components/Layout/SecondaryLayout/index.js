@@ -1,14 +1,18 @@
-import Header from 'components/Header'
+import React from 'react'
 import Navbar from 'components/Navbar'
-import Footer from 'components/Footer'
+import styles from './secondary.module.scss'
 
 export default function Layout({ children }) {
   return (
     <>
-      <Header />
-      <Navbar />
-      <main>{children}</main>
-      {/* <Footer /> */}
+      <div className="flex">
+        <div>
+          <Navbar />
+        </div>
+        <div className="w-full">
+          <main>{children}</main>
+        </div>
+      </div>
     </>
   )
 }
