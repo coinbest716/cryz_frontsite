@@ -4,30 +4,31 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #f3f3e9;
-  height: 100vh;
 }
-.topTitle {
-  font-size: 54px;
-  color: #818e8e;
-  font-family: 'DrukWideCyWeb-Bold';
-  font-size: 36px;
+.title {
+  color: #7a908e;
+  font-family: Montserrat;
+  font-size: 26px;
   font-weight: bold;
-  letter-spacing: 0;
-  line-height: 44px;
+  letter-spacing: -0.42px;
+  line-height: 32px;
 }
-.topDash {
-  width: 42px;
-  height: 7px;
-  background-color: #818e8e;
-}
-.description {
+.detail {
   color: #818e8e;
   font-family: Montserrat;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 24px;
+  // text-align: center;
+}
+.description {
+  color: #8a94a6;
+  font-family: Montserrat;
   font-size: 14px;
-  letter-spacing: 0.7px;
-  line-height: 22px;
-  text-align: center;
-  top: calc(50% + 167px);
-  max-width: 656px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+.detailBank {
+  border: 1px solid #7a908e;
+  max-width: 540px;
 }

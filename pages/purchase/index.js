@@ -161,9 +161,9 @@ const Purchase = () => {
       toast.error('You should select payment type!')
       return
     } else if (paymentType === 'card') {
-      router.push('credit-success')
+      router.push('/purchase/credit-success')
     } else if (paymentType === 'transfer') {
-      router.push('transfer-success')
+      router.push('/purchase/transfer-success')
     }
   }
 
