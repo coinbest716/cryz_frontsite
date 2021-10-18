@@ -100,3 +100,29 @@
   line-height: 19px;
   text-align: center;
 }
+
+.forgotPass {
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: right;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.line {
+  width: calc((100% - 55px) / 2);
+  height: 1px;
+  background-color: $white-color;
+}
+
+.orText {
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: right;
+}

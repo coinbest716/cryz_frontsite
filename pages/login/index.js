@@ -4,6 +4,9 @@ import React from 'react'
 import Image from 'next/image'
 import router from 'next/router'
 
+// custom components
+import CommonButton from 'components/components/purchaseLogin/CommonButton'
+
 // styles
 import styles from 'pages/login/login.module.scss'
 
@@ -24,6 +27,15 @@ const Login = () => {
   const handleSetRememberMe = () => {
     setRememberMe(!rememberMe)
   }
+
+  const handleClickFacebook = () => {
+    console.log('handleClickFacebook')
+  }
+
+  const handleClickGoogle = () => {
+    console.log('handleClickGoogle')
+  }
+
   return (
     <div className="w-full h-screen flex grid grid-cols-12">
       <div className={'w-full col-span-6 flex flex-wrap justify-center items-center ' + styles.whiteArea}>
@@ -96,6 +108,27 @@ const Login = () => {
             <div>
               <button className={styles.enterButton}>Entrar</button>
             </div>
+          </div>
+          {/* forgot password part */}
+          <div
+            className={'mt-3.5 flex justify-end items-center ' + styles.forgotPass}
+            onClick={() => router.push('forgot-password')}
+          >
+            Olvidaste contraseña
+          </div>
+          {/* ------------------- or ------------------- part */}
+          <div className="mt-11 flex justify-between items-center">
+            <div className={styles.line} />
+            <div className={styles.orText}>or</div>
+            <div className={styles.line} />
+          </div>
+          {/* facebook button */}
+          <div className="mt-11">
+            <CommonButton handleClick={handleClickFacebook} label={'LOGIN CON FACEBOOK'} type={'facebook'} />
+          </div>
+          {/* google button */}
+          <div className="mt-6">
+            <CommonButton handleClick={handleClickGoogle} label={'LOGIN CON GOOGLE'} type={'google'} />
           </div>
         </div>
       </div>
