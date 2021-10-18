@@ -50,11 +50,13 @@ const Purchase = () => {
   const [countryBilling, setCountryBilling] = useState('')
   const [postalBilling, setPostalBilling] = useState('')
 
+  const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('')
   const [cardData, setCardData] = useState({ number: '', name: '', expiry: '', cvc: '' })
 
   useEffect(() => {
     setCartData(shoppingCartData)
+    setRedsys(false)
   }, [])
 
   const handleRemoveCart = index => {
@@ -456,6 +458,7 @@ const Purchase = () => {
                           handleChangePaymentType={handleChangePaymentType}
                           value={paymentType}
                           handleChangeCardData={handleChangeCardData}
+                          redsys={redsys}
                         />
                       </div>
                       <div className="pt-5">
