@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styles from './navbar.module.scss'
 import Image from 'next/image'
+import resizeIcon from 'public/images/resize.svg'
 import homeIcon from 'public/images/home.svg'
 import dashboardIcon from 'public/images/dashboard.svg'
 import shoppingIcon from 'public/images/shopping.svg'
@@ -13,7 +14,15 @@ import calendarIcon from 'public/images/calendar.svg'
 import nutritionIcon from 'public/images/nutrition.svg'
 import plansIcon from 'public/images/plans.svg'
 import logoutIcon from 'public/images/off.svg'
-import resizeIcon from 'public/images/resize.svg'
+import homeBlackIcon from 'public/images/home_black.svg'
+import dashboardBlackIcon from 'public/images/dashboard_black.svg'
+import shoppingBlackIcon from 'public/images/shopping_black.svg'
+import messageBlackIcon from 'public/images/message_black.svg'
+import profileBlackIcon from 'public/images/profile_black.svg'
+import billingBlackIcon from 'public/images/billing_black.svg'
+import calendarBlackIcon from 'public/images/calendar_black.svg'
+import nutritionBlackIcon from 'public/images/nutrition_black.svg'
+import plansBlackIcon from 'public/images/plans_black.svg'
 
 const Navbar = () => {
   const router = useRouter()
@@ -27,46 +36,55 @@ const Navbar = () => {
     {
       href: '/home',
       icon: homeIcon,
+      iconBlack: homeBlackIcon,
       title: 'Home',
     },
     {
       href: '/dashboard',
       icon: dashboardIcon,
+      iconBlack: dashboardBlackIcon,
       title: 'Dashboard',
     },
     {
       href: '/shopping',
       icon: shoppingIcon,
+      iconBlack: shoppingBlackIcon,
       title: 'Compras',
     },
     {
       href: '/message',
       icon: messageIcon,
+      iconBlack: messageBlackIcon,
       title: 'Mensajes',
     },
     {
       href: '/profile',
       icon: profileIcon,
+      iconBlack: profileBlackIcon,
       title: 'Perfil',
     },
     {
       href: '/billing',
       icon: billingIcon,
+      iconBlack: billingBlackIcon,
       title: 'Facturación',
     },
     {
       href: '/calendar',
       icon: calendarIcon,
+      iconBlack: calendarBlackIcon,
       title: 'Calendario',
     },
     {
       href: '/nutrition',
       icon: nutritionIcon,
+      iconBlack: nutritionBlackIcon,
       title: 'Nutrición',
     },
     {
       href: '/plans',
       icon: plansIcon,
+      iconBlack: plansBlackIcon,
       title: 'Planes online',
     },
   ]
@@ -96,9 +114,15 @@ const Navbar = () => {
             <nav className="mt-10 flex-1 px-2">
               {items.map((item, index) => (
                 <Link href={item.href} key={index}>
-                  <a className="flex items-center px-8 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100">
-                    <Image src={item.icon} alt="" width={20} height={20} />
-                  </a>
+                  {router.pathname === item.href ? (
+                    <a className="flex items-center px-8 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100">
+                      <Image src={item.iconBlack} alt="" width={20} height={20} />
+                    </a>
+                  ) : (
+                    <a className="flex items-center px-8 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100">
+                      <Image src={item.icon} alt="" width={20} height={20} />
+                    </a>
+                  )}
                 </Link>
               ))}
             </nav>
@@ -111,7 +135,6 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
-        {/* </div> */}
       </div>
       {!isOn && (
         <div className="hidden md:flex md:flex-shrink-0">
@@ -131,15 +154,17 @@ const Navbar = () => {
               <nav className="mt-10 flex-1 px-2 bg-white">
                 {items.map((item, index) => (
                   <Link href={item.href} key={index}>
-                    <a
-                      className={
-                        'flex items-center px-10 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100' +
-                        `${router.pathname === item.href ? ' bg-gray-100' : ' '}`
-                      }
-                    >
-                      <Image src={item.icon} alt="" width={20} height={20} />
-                      <p className={'pl-3 ' + styles.itemLabel}>{item.title}</p>
-                    </a>
+                    {router.pathname === item.href ? (
+                      <a className="flex items-center px-10 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100">
+                        <Image src={item.iconBlack} alt="" width={20} height={20} />
+                        <p className={'pl-3 ' + styles.activeLabel}>{item.title}</p>
+                      </a>
+                    ) : (
+                      <a className="flex items-center px-10 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100">
+                        <Image src={item.icon} alt="" width={20} height={20} />
+                        <p className={'pl-3 ' + styles.itemLabel}>{item.title}</p>
+                      </a>
+                    )}
                   </Link>
                 ))}
               </nav>
