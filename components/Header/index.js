@@ -369,7 +369,10 @@ const Header = props => {
             </button>
           </li>
           <li className={'flex justify-center items-center ' + styles.iconMenuItem}>
-            <button className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center">
+            <button
+              className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
+              onClick={() => router.push('login')}
+            >
               <Image src={AccountIcon} alt="" width={22} height={20} />
             </button>
           </li>
