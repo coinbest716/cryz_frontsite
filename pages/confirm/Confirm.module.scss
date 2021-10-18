@@ -1,0 +1,62 @@
+@import 'styles/variable.module.scss';
+
+.whiteArea {
+  background-color: $white-color;
+}
+
+.whiteAreaContent {
+  max-height: 538px;
+}
+
+.grayArea {
+  background-color: $blue-gray-400-color;
+}
+
+.grayAreaContent {
+  max-width: 460px;
+  width: 100%;
+}
+
+.title {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: -0.42px;
+  line-height: 32px;
+  margin-top: 38px;
+}
+
+.text {
+  color: #8c8c8c;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: -0.22px;
+  line-height: 20px;
+  margin-top: 12px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 61px;
+  right: 55px;
+}
+
+.confirmTitle {
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: -0.42px;
+  line-height: 32px;
+  margin-top: 20px;
+}
+
+.confirmText {
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 15px;
+  text-align: center;
+}
