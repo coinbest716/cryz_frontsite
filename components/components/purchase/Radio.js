@@ -17,7 +17,11 @@ const Radio = props => {
         />
       </div>
       <div>
-        <p className={'pl-3 ' + styles.creditTitle}>{label}</p>
+        {type === 'billAddress' ? (
+          <p className={'pl-3 ' + styles.billAddress}>{label}</p>
+        ) : (
+          <p className={'pl-3 ' + styles.creditTitle}>{label}</p>
+        )}
       </div>
     </div>
   )
