@@ -471,6 +471,7 @@ const Purchase = () => {
                 data={cartData}
                 handleRemoveCart={handleRemoveCart}
                 handleAcceptDiscount={handleAcceptDiscount}
+                tabIndex={tabIndex}
               />
             </div>
           </div>
