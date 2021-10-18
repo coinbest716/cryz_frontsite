@@ -1,0 +1,36 @@
+<svg id="Calendar" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        stroke: #999;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        stroke-dasharray: 0 0;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect id="_31_Background_Mask_" data-name="31 (Background/Mask)" class="cls-1" width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="_31" data-name="31">
+    <rect id="_31_Background_Mask_2" data-name="31 (Background/Mask)" class="cls-1" width="24" height="24"/>
+    <g id="_31-2" data-name="31" class="cls-2">
+      <path id="Vector" class="cls-3" d="M2,14.99a2.006,2.006,0,0,1-2-2V2A2.006,2.006,0,0,1,2,0H17.71a2.006,2.006,0,0,1,2,2V12.99a2,2,0,0,1-2,2Z" transform="translate(1.6 5.31)"/>
+      <path id="Vector-2" data-name="Vector" class="cls-3" d="M0,0H19.71" transform="translate(1.6 9.1)"/>
+      <g id="Group" transform="translate(6.74 3.6)">
+        <path id="Vector-3" data-name="Vector" class="cls-3" d="M0,3.29V0"/>
+        <path id="Vector-4" data-name="Vector" class="cls-3" d="M0,3.29V0" transform="translate(9.43)"/>
+      </g>
+    </g>
+  </g>
+</svg>

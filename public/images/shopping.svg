@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 17.2">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #999;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <g id="book-open" transform="translate(0.5 0.5)">
+    <path id="Path" class="cls-1" d="M0,0H5.4A3.6,3.6,0,0,1,9,3.6V16.2a2.7,2.7,0,0,0-2.7-2.7H0Z"/>
+    <path id="Path-2" data-name="Path" class="cls-1" d="M9,0H3.6A3.6,3.6,0,0,0,0,3.6V16.2a2.7,2.7,0,0,1,2.7-2.7H9Z" transform="translate(9)"/>
+  </g>
+</svg>
