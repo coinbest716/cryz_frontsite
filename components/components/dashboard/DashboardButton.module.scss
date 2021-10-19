@@ -1,0 +1,103 @@
+@import 'styles/variable.module.scss';
+
+.outlineButton {
+  border: 1.12px solid #e30018;
+  border-radius: 10px;
+  &:hover {
+    background-color: #e300171f;
+  }
+}
+.outlineLabel {
+  color: #e30018;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.welcomeSection {
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px 0 rgba(108, 117, 125, 0.02);
+}
+.viewButton {
+  width: 114px;
+  border: 1px solid #818e8e;
+  border-radius: 18px;
+  &:hover {
+    background-color: #818e8e21;
+  }
+}
+.viewLabel {
+  color: #818e8e;
+  font-family: Nunito;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 19px;
+}
+.viewRedButton {
+  width: 114px;
+  border: 1px solid #e30018;
+  border-radius: 18px;
+  &:hover {
+    background-color: #e3001725;
+  }
+}
+.viewRedLabel {
+  color: #e30018;
+  font-family: Nunito;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 19px;
+}
+.hourButton {
+  width: 80px;
+  height: 80px;
+  background-color: #818e8e;
+  box-shadow: 2px 14px 34px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  &:hover {
+    background-color: #818e8edc;
+  }
+}
+.numberLabel {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 29px;
+}
+.hourLabel {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 13px;
+}
+.editButton {
+  padding: 16px 25px;
+  border-radius: 10px;
+  background-color: #818e8e;
+  &:hover {
+    background-color: #687373;
+  }
+}
+.editLabel {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+.iconButton {
+  height: 50px;
+  width: 50px;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #818e8e;
+}

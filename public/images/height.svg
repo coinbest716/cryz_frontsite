@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #818e8e;
+        font-size: 12px;
+        font-family: SegoeUI, Segoe UI;
+      }
+    </style>
+  </defs>
+  <g id="Group_57" data-name="Group 57" transform="translate(0 0)">
+    <circle id="Ellipse_8" data-name="Ellipse 8" class="cls-1" cx="12.5" cy="12.5" r="12.5"/>
+    <text id="H" class="cls-2" transform="translate(7.5 2.5)"><tspan x="0" y="13">H</tspan></text>
+  </g>
+</svg>

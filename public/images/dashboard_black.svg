@@ -1,44 +1,27 @@
-<svg id="Frame_1731" data-name="Frame 1731" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
-  <defs>
-    <style>
-      .cls-1, .cls-3 {
-        fill: none;
-      }
-
-      .cls-2 {
-        clip-path: url(#clip-path);
-      }
-
-      .cls-3 {
-        stroke: #2A2C36;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-dasharray: 0 0;
-      }
-
-      .cls-4 {
-        stroke: none;
-      }
-    </style>
-    <clipPath id="clip-path">
-      <rect id="Frame_1731_Background_Mask_" data-name="Frame 1731 (Background/Mask)" class="cls-1" width="24" height="24"/>
-    </clipPath>
-  </defs>
-  <rect id="Frame_1731_Background_Mask_2" data-name="Frame 1731 (Background/Mask)" class="cls-1" width="24" height="24"/>
-  <g id="Frame_1731-2" data-name="Frame 1731" class="cls-2">
-    <g id="Group_2105" data-name="Group 2105" transform="translate(2 2)">
-      <g id="Rectangle_841" data-name="Rectangle 841" class="cls-3">
-        <rect class="cls-4" width="9" height="9" rx="1"/>
-        <rect class="cls-1" x="0.5" y="0.5" width="8" height="8" rx="0.5"/>
-      </g>
-      <g id="Rectangle_844" data-name="Rectangle 844" class="cls-3" transform="translate(0 11)">
-        <rect class="cls-4" width="9" height="9" rx="1"/>
-        <rect class="cls-1" x="0.5" y="0.5" width="8" height="8" rx="0.5"/>
-      </g>
-      <g id="Rectangle_843" data-name="Rectangle 843" class="cls-3" transform="translate(11)">
-        <rect class="cls-4" width="9" height="20" rx="1"/>
-        <rect class="cls-1" x="0.5" y="0.5" width="8" height="19" rx="0.5"/>
-      </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Frame 1731</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="9" height="9"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="9" height="9" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="0" y="11" width="9" height="9"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="9" height="9" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="11" y="0" width="9" height="20"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="9" height="20" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="0,0" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Frame-1731" stroke="#2A2C37" stroke-width="4">
+            <g id="Group-2105">
+                <use id="Rectangle-841" mask="url(#mask-2)" xlink:href="#path-1"></use>
+                <use id="Rectangle-844" mask="url(#mask-4)" xlink:href="#path-3"></use>
+                <use id="Rectangle-843" mask="url(#mask-6)" xlink:href="#path-5"></use>
+            </g>
+        </g>
     </g>
-  </g>
 </svg>
