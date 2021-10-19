@@ -6,7 +6,7 @@ export default function Layout({ children }) {
     <>
       <Header
         changeColorOnScroll={{
-          height: 100,
+          height: 1,
         }}
       />
       <main>{children}</main>
