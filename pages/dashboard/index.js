@@ -1,10 +1,81 @@
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './dashboard.module.scss'
+import DashboardButton from 'components/components/dashboard/DashboardButton'
+import welcomeIcon from 'public/images/welcome-header.svg'
+import Image from 'next/image'
 
 const Dashboard = () => {
+  const handleClickStartClass = () => {
+    console.log('handleClickStartClass redirect live video section wc-64')
+  }
+  const handleClickView = () => {
+    console.log('handleClickView redirect purchase section wc-67')
+  }
+  const handleClickHours = () => {
+    console.log('handleClickHours')
+  }
+  const handleChangeProfile = () => {
+    console.log('handleChangeProfile')
+  }
+  const handleClickWeight = () => {
+    console.log('handleClickWeight')
+  }
+  const handleClickMember = () => {
+    console.log('handleClickMember')
+  }
+
+  // <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
+  // <DashboardButton handleClick={handleChangeProfile} label={'Editar Perfil'} type={'editProfile'} />
+  // <DashboardButton handleClick={handleClickWeight} label={''} type={'iconWeight'} />
+  // <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
+
   return (
-    <div className={'flex flex-wrap ' + styles.container}>
-      <div className="h-full text-3xl">Dashboard</div>
+    <div className={'px-24 py-10 w-full ' + styles.container}>
+      <div className="grid grid-cols-12 gap-4">
+        <div className="col-span-12 md:col-span-8 sm:col-span-12">
+          <div className="flex justify-between items-center">
+            <div>
+              <div className={styles.dashboardTitle}>Dashboard</div>
+              <div className={'pt-2 ' + styles.today}>Domingo, 12 de Diciembre 2021</div>
+            </div>
+            <div>
+              <DashboardButton handleClick={handleClickStartClass} label={'Comenzar clase'} type={'startClass'} />
+            </div>
+          </div>
+          <div className={'flex items-center mt-7 px-9 ' + styles.welcomeSection}>
+            <div className="py-4 pr-4">
+              <div className={styles.welcomeLabel}>Bienvenido</div>
+              <div className={styles.welcomeLabel}>Mariano Perez</div>
+              <div className={'pt-2 ' + styles.welcomeDescription}>
+                Muy pronto vas a finalizar tu Bono 10 sesiones de Entrenamiento Intensivo… Puedes consultar tus sesiones
+                y renovar tu bono pinchando a continuación en el botón
+              </div>
+              <div className="pt-4">
+                <DashboardButton handleClick={handleClickView} label={'Ver'} type={'view'} />
+              </div>
+            </div>
+            <div style={{ minWidth: '220px' }}>
+              <Image src={welcomeIcon} alt="" width={220} height={254} />
+            </div>
+          </div>
+          <div className={'flex justify-between mt-7 px-9 py-7 ' + styles.welcomeSection}>
+            <div className={styles.dashboardTitle}>Actividad semanal</div>
+            <div>
+              <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
+              <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
+            </div>
+          </div>
+          <div className={'mt-7 px-9 py-7 ' + styles.welcomeSection}>
+            Recuerda!!
+            <DashboardButton handleClick={handleClickMember} label={'Hacerlo'} type={'viewRed'} />
+          </div>
+          <div className={'mt-7 px-9 py-7 ' + styles.welcomeSection}>calendar section</div>
+        </div>
+        <div className="col-span-12 md:col-span-4 sm:col-span-12">
+          <div className={styles.welcomeSection}>Profile Section</div>
+          <div className={styles.welcomeSection}>Message Section</div>
+        </div>
+      </div>
     </div>
   )
 }
