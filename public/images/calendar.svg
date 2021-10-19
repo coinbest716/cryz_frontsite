@@ -1,36 +1,16 @@
-<svg id="Calendar" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
-  <defs>
-    <style>
-      .cls-1, .cls-3 {
-        fill: none;
-      }
-
-      .cls-2 {
-        clip-path: url(#clip-path);
-      }
-
-      .cls-3 {
-        stroke: #999;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-miterlimit: 10;
-        stroke-width: 1.2px;
-        stroke-dasharray: 0 0;
-      }
-    </style>
-    <clipPath id="clip-path">
-      <rect id="_31_Background_Mask_" data-name="31 (Background/Mask)" class="cls-1" width="24" height="24"/>
-    </clipPath>
-  </defs>
-  <g id="_31" data-name="31">
-    <rect id="_31_Background_Mask_2" data-name="31 (Background/Mask)" class="cls-1" width="24" height="24"/>
-    <g id="_31-2" data-name="31" class="cls-2">
-      <path id="Vector" class="cls-3" d="M2,14.99a2.006,2.006,0,0,1-2-2V2A2.006,2.006,0,0,1,2,0H17.71a2.006,2.006,0,0,1,2,2V12.99a2,2,0,0,1-2,2Z" transform="translate(1.6 5.31)"/>
-      <path id="Vector-2" data-name="Vector" class="cls-3" d="M0,0H19.71" transform="translate(1.6 9.1)"/>
-      <g id="Group" transform="translate(6.74 3.6)">
-        <path id="Vector-3" data-name="Vector" class="cls-3" d="M0,3.29V0"/>
-        <path id="Vector-4" data-name="Vector" class="cls-3" d="M0,3.29V0" transform="translate(9.43)"/>
-      </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="18px" viewBox="0 0 21 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Calendar</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="0,0" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Calendar" stroke="#999999" stroke-width="1.20000005">
+            <g id="31">
+                <path d="M2.59997559,17.2999973 C1.49997544,17.2999973 0.599975586,16.3999974 0.599975586,15.2999973 L0.599975586,4.30999756 C0.599975586,3.20999753 1.49997544,2.30999756 2.59997559,2.30999756 L18.3099747,2.30999756 C19.4099747,2.30999756 20.3099747,3.20999753 20.3099747,4.30999756 L20.3099747,15.2999973 C20.3099747,16.3999974 19.4199747,17.2999973 18.3099747,17.2999973 L2.59997559,17.2999973 Z" id="Vector" fill-rule="nonzero"></path>
+                <line x1="0.599975586" y1="6.1000061" x2="20.3099747" y2="6.1000061" id="Vector"></line>
+                <g id="Group" transform="translate(5.740234, 0.599976)">
+                    <line x1="0" y1="3.28999996" x2="0" y2="0" id="Vector"></line>
+                    <line x1="9.42999268" y1="3.28999996" x2="9.42999268" y2="0" id="Vector"></line>
+                </g>
+            </g>
+        </g>
     </g>
-  </g>
 </svg>

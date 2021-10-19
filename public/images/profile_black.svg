@@ -1,32 +1,12 @@
-<svg id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
-  <defs>
-    <style>
-      .cls-1, .cls-3 {
-        fill: none;
-      }
-
-      .cls-2 {
-        clip-path: url(#clip-path);
-      }
-
-      .cls-3 {
-        stroke: #2A2C36;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-miterlimit: 10;
-        stroke-width: 1.2px;
-        stroke-dasharray: 0 0;
-      }
-    </style>
-    <clipPath id="clip-path">
-      <rect id="icon_Background_Mask_" data-name="icon (Background/Mask)" class="cls-1" width="24" height="24"/>
-    </clipPath>
-  </defs>
-  <rect id="icon_Background_Mask_2" data-name="icon (Background/Mask)" class="cls-1" width="24" height="24"/>
-  <g id="icon-2" data-name="icon" class="cls-2">
-    <g id="Group_1686" data-name="Group 1686" transform="translate(3.605 3.6)">
-      <path id="Vector" class="cls-3" d="M3.931,7.862A3.931,3.931,0,1,1,7.862,3.931,3.931,3.931,0,0,1,3.931,7.862Z" transform="translate(4.418)"/>
-      <path id="Vector-2" data-name="Vector" class="cls-3" d="M16.648,6.048a8.718,8.718,0,0,0-16.6,0A1.12,1.12,0,0,0,1.125,7.482H15.573A1.112,1.112,0,0,0,16.648,6.048Z" transform="translate(0 10.214)"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="21px" viewBox="0 0 20 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="0,0" stroke-linecap="round" stroke-linejoin="round">
+        <g id="icon" transform="translate(1.000000, 1.000000)" stroke="#2A2C36" stroke-width="2">
+            <g id="Group-1686" transform="translate(0.605469, 0.599976)">
+                <path d="M8.34885651,7.86239998 C6.17771469,7.86239998 4.41765625,6.10234207 4.41765625,3.93120026 C4.41765625,1.76005844 6.17771469,0 8.34885651,0 C10.5199983,0 12.2800557,1.76005844 12.2800557,3.93120026 C12.2800557,6.10234207 10.5199983,7.86239998 8.34885651,7.86239998 Z" id="Vector"></path>
+                <path d="M16.6483276,16.2623941 C15.5171276,12.756794 12.2355278,10.2143945 8.34912781,10.2143945 C4.46272778,10.2143945 1.18112747,12.756794 0.0499274778,16.2623941 C-0.174072526,16.9679941 0.385927458,17.6959938 1.12512749,17.6959938 L15.5731276,17.6959938 C16.3123276,17.6959938 16.8835276,16.9791941 16.6483276,16.2623941 Z" id="Vector" fill-rule="nonzero"></path>
+            </g>
+        </g>
     </g>
-  </g>
 </svg>
