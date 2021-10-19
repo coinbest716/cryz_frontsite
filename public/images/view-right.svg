@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5.85 9.698">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #818e8e;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="chevron-down_4_" data-name="chevron-down (4)" transform="translate(1 8.698) rotate(-90)">
+    <path id="Path" class="cls-1" d="M0,0,3.849,3.849,7.7,0"/>
+  </g>
+</svg>
