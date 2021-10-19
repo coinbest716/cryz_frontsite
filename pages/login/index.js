@@ -106,7 +106,9 @@ const Login = () => {
               </label>
             </div>
             <div>
-              <button className={styles.enterButton}>Entrar</button>
+              <button className={styles.enterButton} onClick={() => router.push('dashboard')}>
+                Entrar
+              </button>
             </div>
           </div>
           {/* forgot password part */}

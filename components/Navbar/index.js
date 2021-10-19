@@ -34,7 +34,7 @@ const Navbar = () => {
 
   const items = [
     {
-      href: '/home',
+      href: '/',
       icon: homeIcon,
       iconBlack: homeBlackIcon,
       title: 'Home',
@@ -104,7 +104,7 @@ const Navbar = () => {
           )}
           <div className="flex-1 h-0 pt-10 pb-4 overflow-y-auto">
             <div className="flex justify-center items-center flex-shrink-0 px-4">
-              <Link href={'/home'} passHref>
+              <Link href={'/'} passHref>
                 <div>
                   <p className={styles.logo}>CRYS</p>
                   <p className={'pt-1 ' + styles.logoSmall}>DYAZ & CO</p>
@@ -144,7 +144,7 @@ const Navbar = () => {
             </div>
             <div className="h-0 flex-1 flex flex-col pt-10 pb-4 overflow-y-auto">
               <div className="flex items-center flex-shrink-0 px-12">
-                <Link href={'/home'} passHref>
+                <Link href={'/'} passHref>
                   <div>
                     <p className={styles.logo}>CRYS</p>
                     <p className={'pt-1 ' + styles.logoSmall}>DYAZ & CO</p>
