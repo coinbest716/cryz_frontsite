@@ -1,10 +1,55 @@
+import React, { useState } from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './dashboard.module.scss'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import welcomeIcon from 'public/images/welcome-header.svg'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+import { route } from 'next/dist/server/router'
+import router from 'next/router'
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const Dashboard = () => {
+  const chartOptions = {
+    series: [
+      {
+        name: 'Actividad semanal',
+        data: [4, 20, 10, 30, 36, 80, 30, 91],
+      },
+    ],
+    options: {
+      chart: {
+        background: 'transparent',
+        foreColor: '#939AAC',
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      theme: {
+        monochrome: {
+          enabled: true,
+          color: '#818E8E',
+          shadeTo: 'light',
+        },
+      },
+      xaxis: {
+        categories: ['Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab', 'Dom'],
+      },
+      yaxis: {
+        show: false,
+      },
+      legend: {
+        position: 'bottom',
+      },
+      grid: {
+        show: false,
+      },
+    },
+  }
+
   const handleClickStartClass = () => {
     console.log('handleClickStartClass redirect live video section wc-64')
   }
@@ -13,6 +58,7 @@ const Dashboard = () => {
   }
   const handleClickHours = () => {
     console.log('handleClickHours')
+    router.push('/dashboard/profile')
   }
   const handleChangeProfile = () => {
     console.log('handleChangeProfile')
@@ -58,9 +104,14 @@ const Dashboard = () => {
               <Image src={welcomeIcon} alt="" width={220} height={254} />
             </div>
           </div>
-          <div className={'flex justify-between mt-7 px-9 py-7 ' + styles.welcomeSection}>
-            <div className={styles.dashboardTitle}>Actividad semanal</div>
-            <div>
+          <div className={'flex justify-between items-center mt-7 px-9 pt-7 pb-1 ' + styles.welcomeSection}>
+            <div className="w-full">
+              <div className={styles.dashboardTitle}>Actividad semanal</div>
+              <div>
+                <Chart options={chartOptions.options} series={chartOptions.series} type="area" height="200px" />
+              </div>
+            </div>
+            <div className="px-2 ">
               <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
               <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
             </div>
