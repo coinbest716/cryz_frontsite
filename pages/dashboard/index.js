@@ -89,12 +89,12 @@ const Dashboard = () => {
   // <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
 
   return (
-    <div className={'px-24 py-10 w-full ' + styles.container}>
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-12 md:col-span-8 sm:col-span-12">
+    <div className={'w-full ' + styles.container}>
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 md:col-span-8 sm:col-span-12 py-16 px-9">
           <div className="flex justify-between items-center">
             <div>
-              <div className={styles.dashboardTitle}>Dashboard</div>
+              <div className={styles.highBoldLabel}>Dashboard</div>
               <div className={'pt-2 ' + styles.today}>Domingo, 12 de Diciembre 2021</div>
             </div>
             <div>
@@ -119,7 +119,7 @@ const Dashboard = () => {
           </div>
           <div className={'flex justify-between items-center mt-7 px-9 pt-7 pb-1 ' + styles.welcomeSection}>
             <div className="w-full">
-              <div className={styles.dashboardTitle}>Actividad semanal</div>
+              <div className={styles.highBoldLabel}>Actividad semanal</div>
               <div>
                 <Chart options={chartOptions.options} series={chartOptions.series} type="area" height="200px" />
               </div>
@@ -137,8 +137,8 @@ const Dashboard = () => {
             <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
           </div>
           <div className={'grid grid-cols-12 gap-7 '}>
-            <div className="col-span-12 md:col-span-6 sm:col-span-12" style={{ height: '309px' }}>
-              <div className={'mt-7 px-9 py-7 w-full h-full ' + styles.welcomeSection}>
+            <div className="col-span-12 md:col-span-6 sm:col-span-12">
+              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
                 <Calendar
                   className={styles.calendar}
                   onChange={onChange}
@@ -154,20 +154,20 @@ const Dashboard = () => {
                 ></Calendar>
               </div>
             </div>
-            <div className="col-span-12 md:col-span-6 sm:col-span-12" style={{ height: '309px' }}>
-              <div className={'mt-7 px-9 py-7 w-full h-full ' + styles.welcomeSection}>
-                <div className={'text-center ' + styles.bonos}>Mis Bonos</div>
+            <div className="col-span-12 md:col-span-6 sm:col-span-12">
+              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
+                <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
                 <div className={'text-center pt-5'}>
                   <Image src={bonosIcon} alt="" width={50} height={50} />
                 </div>
                 <div>
-                  <div className="py-2">
+                  <div className="py-3">
                     <ProgressBar percentage={70} label={'Mujer'} type={'women'} />
                   </div>
-                  <div className="py-2">
+                  <div className="py-3">
                     <ProgressBar percentage={50} label={'Nutrición'} type={'nutrition'} />
                   </div>
-                  <div className="py-2">
+                  <div className="py-3">
                     <ProgressBar percentage={30} label={'Entrenamiento'} type={'training'} />
                   </div>
                 </div>
@@ -176,8 +176,39 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
-          <div className={styles.welcomeSection}>Profile Section</div>
-          <div className={styles.welcomeSection}>Message Section</div>
+          <div className="bg-white h-full px-9 py-10">
+            <div className={styles.highBoldLabel}>Perfil</div>
+            <div className={'pt-2 ' + styles.mediumLabel}>80% Perfil Completado</div>
+            <div className="p-8 text-center">
+              <div className="pt-7 flex justify-center">
+                <img
+                  src="/images/default-avatar.svg"
+                  style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
+                />
+              </div>
+              <div className={'pt-4 ' + styles.highBoldLabel}>Mariano Pérez</div>
+              <div className={'pt-2 ' + styles.mediumLabel}>Madrid</div>
+              <div className="pt-6 flex justify-center">
+                <DashboardButton handleClick={handleChangeProfile} label={'Editar Perfil'} type={'editProfile'} />
+              </div>
+              <div className="pt-14 flex justify-between">
+                <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+                  <div className="absolute -top-4">
+                    <DashboardButton handleClick={handleClickWeight} label={''} type={'iconWeight'} />
+                    <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
+                    <div className={'pt-3 ' + styles.mediumBoldLabel}>56,6 kg</div>
+                  </div>
+                </div>
+                <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+                  <div className="absolute -top-4">
+                    <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
+                    <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
+                    <div className={'pt-3 ' + styles.mediumBoldLabel}>170 cm</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
