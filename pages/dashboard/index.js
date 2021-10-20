@@ -4,12 +4,14 @@ import styles from './dashboard.module.scss'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import welcomeIcon from 'public/images/welcome-header.svg'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
-import { route } from 'next/dist/server/router'
 import router from 'next/router'
+import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const Dashboard = () => {
+  const [startDate, setStartDate] = useState(new Date())
   const chartOptions = {
     series: [
       {
@@ -123,7 +125,12 @@ const Dashboard = () => {
             </div>
             <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
           </div>
-          <div className={'mt-7 px-9 py-7 ' + styles.welcomeSection}>calendar section</div>
+          <div className="flex justify-between gap-7">
+            <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
+              {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
+            </div>
+            <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>qweqweqwe</div>
+          </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
           <div className={styles.welcomeSection}>Profile Section</div>
