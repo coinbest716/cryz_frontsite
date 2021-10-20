@@ -7,11 +7,20 @@ import Image from 'next/image'
 import router from 'next/router'
 import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
+// import Datepicker from 'react-datepicker'
+// import 'react-datepicker/dist/react-datepicker.css'
+// import DatePicker from 'react-date-picker'
+const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
+import 'react-calendar/dist/Calendar.css'
+// import Calendar from 'react-calendar'
+import moment from 'moment'
+import ProgressBar from 'components/components/dashboard/ProgressBar'
+import bonosIcon from 'public/images/bonos.svg'
 
 const Dashboard = () => {
   const [startDate, setStartDate] = useState(new Date())
+  const [value, onChange] = useState(new Date())
+
   const chartOptions = {
     series: [
       {
@@ -51,6 +60,8 @@ const Dashboard = () => {
       },
     },
   }
+
+  const mark = ['21-10-2021', '22-10-2021', '23-10-2021']
 
   const handleClickStartClass = () => {
     console.log('handleClickStartClass redirect live video section wc-64')
@@ -125,11 +136,43 @@ const Dashboard = () => {
             </div>
             <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
           </div>
-          <div className="flex justify-between gap-7">
-            <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
-              {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
+          <div className={'grid grid-cols-12 gap-7 '}>
+            <div className="col-span-12 md:col-span-6 sm:col-span-12" style={{ height: '309px' }}>
+              <div className={'mt-7 px-9 py-7 w-full h-full ' + styles.welcomeSection}>
+                <Calendar
+                  className={styles.calendar}
+                  onChange={onChange}
+                  value={value}
+                  tileClassName={({ date, view }) => {
+                    if (mark.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                      return 'highlight'
+                    }
+                  }}
+                  tileDisabled={({ date }) => date.getDay() === 0}
+                  /*maxDate={new Date(2020, 1, 0)}</div>*/
+                  minDate={new Date()}
+                ></Calendar>
+              </div>
             </div>
-            <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>qweqweqwe</div>
+            <div className="col-span-12 md:col-span-6 sm:col-span-12" style={{ height: '309px' }}>
+              <div className={'mt-7 px-9 py-7 w-full h-full ' + styles.welcomeSection}>
+                <div className={'text-center ' + styles.bonos}>Mis Bonos</div>
+                <div className={'text-center pt-5'}>
+                  <Image src={bonosIcon} alt="" width={50} height={50} />
+                </div>
+                <div>
+                  <div className="py-2">
+                    <ProgressBar percentage={70} label={'Mujer'} type={'women'} />
+                  </div>
+                  <div className="py-2">
+                    <ProgressBar percentage={50} label={'Nutrición'} type={'nutrition'} />
+                  </div>
+                  <div className="py-2">
+                    <ProgressBar percentage={30} label={'Entrenamiento'} type={'training'} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
