@@ -91,18 +91,12 @@ const Navbar = () => {
 
   return (
     <>
-      <div className={isOn ? '' : 'md:hidden'}>
+      <div className={isOn ? 'sticky top-0' : 'md:hidden sticky top-0'}>
+        <div className={'absolute top-24 -right-4 cursor-pointer ' + styles.resize} onClick={handlClickResize}>
+          <Image src={resizeIcon} alt="" width={33} height={26} />
+        </div>
         <div className={'flex flex-col h-screen ' + styles.hideSection}>
-          {isOn && (
-            <div
-              className={'absolute top-24 cursor-pointer ' + styles.resize}
-              style={{ left: '83px' }}
-              onClick={handlClickResize}
-            >
-              <Image src={resizeIcon} alt="" width={33} height={26} />
-            </div>
-          )}
-          <div className="flex-1 h-0 pt-10 pb-4 overflow-y-auto">
+          <div className="h-0 flex-1 flex flex-col pt-10 pb-4">
             <div className="flex justify-center items-center flex-shrink-0 px-4">
               <Link href={'/'} passHref>
                 <div>
@@ -111,16 +105,18 @@ const Navbar = () => {
                 </div>
               </Link>
             </div>
-            <nav className="mt-10 flex-1 px-2">
+            <nav className="mt-10 flex-1 px-2 bg-white">
               {items.map((item, index) => (
                 <Link href={item.href} key={index}>
                   {router.pathname === item.href ? (
-                    <a className="flex items-center px-8 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100">
-                      <Image src={item.iconBlack} alt="" width={20} height={20} />
+                    <a className="flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100">
+                      <Image src={item.iconBlack} alt="" width={21} height={21} />
+                      {/* <p className={'pl-3 ' + styles.activeLabel}>{item.title}</p> */}
                     </a>
                   ) : (
-                    <a className="flex items-center px-8 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100">
-                      <Image src={item.icon} alt="" width={20} height={20} />
+                    <a className="flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100">
+                      <Image src={item.icon} alt="" width={21} height={21} />
+                      {/* <p className={'pl-3 ' + styles.itemLabel}>{item.title}</p> */}
                     </a>
                   )}
                 </Link>
@@ -137,13 +133,13 @@ const Navbar = () => {
         </div>
       </div>
       {!isOn && (
-        <div className="hidden md:flex md:flex-shrink-0">
+        <div className="hidden md:flex md:flex-shrink-0 sticky top-0">
+          <div className={'absolute top-24 -right-4 cursor-pointer ' + styles.resize} onClick={handlClickResize}>
+            <Image src={resizeIcon} alt="" width={33} height={26} />
+          </div>
           <div className="flex flex-col w-56 bg-white h-screen">
-            <div className={'absolute top-24 left-52 cursor-pointer ' + styles.resize} onClick={handlClickResize}>
-              <Image src={resizeIcon} alt="" width={33} height={26} />
-            </div>
-            <div className="h-0 flex-1 flex flex-col pt-10 pb-4 overflow-y-auto">
-              <div className="flex items-center flex-shrink-0 px-12">
+            <div className="h-0 flex-1 flex flex-col pt-10 pb-4">
+              <div className="flex items-center flex-shrink-0 px-10">
                 <Link href={'/'} passHref>
                   <div>
                     <p className={styles.logo}>CRYS</p>
@@ -155,12 +151,12 @@ const Navbar = () => {
                 {items.map((item, index) => (
                   <Link href={item.href} key={index}>
                     {router.pathname === item.href ? (
-                      <a className="flex items-center px-10 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100">
+                      <a className="flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100">
                         <Image src={item.iconBlack} alt="" width={20} height={20} />
                         <p className={'pl-3 ' + styles.activeLabel}>{item.title}</p>
                       </a>
                     ) : (
-                      <a className="flex items-center px-10 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100">
+                      <a className="flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100">
                         <Image src={item.icon} alt="" width={20} height={20} />
                         <p className={'pl-3 ' + styles.itemLabel}>{item.title}</p>
                       </a>
