@@ -7,18 +7,15 @@ import Image from 'next/image'
 import router from 'next/router'
 import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
-// import Datepicker from 'react-datepicker'
-// import 'react-datepicker/dist/react-datepicker.css'
-// import DatePicker from 'react-date-picker'
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 import 'react-calendar/dist/Calendar.css'
-// import Calendar from 'react-calendar'
 import moment from 'moment'
 import ProgressBar from 'components/components/dashboard/ProgressBar'
 import bonosIcon from 'public/images/bonos.svg'
+import messageBoxIcon from 'public/images/message-box.svg'
+import meesageRightIcon from 'public/images/message-right.svg'
 
 const Dashboard = () => {
-  const [startDate, setStartDate] = useState(new Date())
   const [value, onChange] = useState(new Date())
 
   const chartOptions = {
@@ -61,6 +58,33 @@ const Dashboard = () => {
     },
   }
 
+  const message = [
+    {
+      name: 'Oluchi Mazi',
+      content: 'I’m getting a late today',
+    },
+    {
+      name: 'Shinohara Ryoma',
+      content: 'What are the homework…',
+    },
+    {
+      name: 'Paromita Haque',
+      content: 'I’m getting a late today',
+    },
+    {
+      name: 'Oluchi Mazi',
+      content: 'I’m getting a late today',
+    },
+    {
+      name: 'Shinohara Ryoma',
+      content: 'What are the homework…',
+    },
+    {
+      name: 'Paromita Haque',
+      content: 'I’m getting a late today',
+    },
+  ]
+
   const mark = ['21-10-2021', '22-10-2021', '23-10-2021']
 
   const handleClickStartClass = () => {
@@ -82,11 +106,10 @@ const Dashboard = () => {
   const handleClickRmember = () => {
     console.log('handleClickRmember')
   }
-
-  // <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
-  // <DashboardButton handleClick={handleChangeProfile} label={'Editar Perfil'} type={'editProfile'} />
-  // <DashboardButton handleClick={handleClickWeight} label={''} type={'iconWeight'} />
-  // <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
+  const handleClickMessage = () => {
+    console.log('handleClickMessage redirect  message section in side menu')
+    router.push('/dashboard/message')
+  }
 
   return (
     <div className={'w-full ' + styles.container}>
@@ -177,34 +200,59 @@ const Dashboard = () => {
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
           <div className="bg-white h-full px-9 py-10">
-            <div className={styles.highBoldLabel}>Perfil</div>
-            <div className={'pt-2 ' + styles.mediumLabel}>80% Perfil Completado</div>
-            <div className="p-8 text-center">
-              <div className="pt-7 flex justify-center">
-                <img
-                  src="/images/default-avatar.svg"
-                  style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
-                />
-              </div>
-              <div className={'pt-4 ' + styles.highBoldLabel}>Mariano Pérez</div>
-              <div className={'pt-2 ' + styles.mediumLabel}>Madrid</div>
-              <div className="pt-6 flex justify-center">
-                <DashboardButton handleClick={handleChangeProfile} label={'Editar Perfil'} type={'editProfile'} />
-              </div>
-              <div className="pt-14 flex justify-between">
-                <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
-                  <div className="absolute -top-4">
-                    <DashboardButton handleClick={handleClickWeight} label={''} type={'iconWeight'} />
-                    <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
-                    <div className={'pt-3 ' + styles.mediumBoldLabel}>56,6 kg</div>
+            <div>
+              <div className={styles.highBoldLabel}>Perfil</div>
+              <div className={'pt-2 ' + styles.mediumLabel}>80% Perfil Completado</div>
+              <div className="p-8 text-center">
+                <div className="pt-7 flex justify-center">
+                  <img
+                    src="/images/default-avatar.svg"
+                    style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
+                  />
+                </div>
+                <div className={'pt-4 ' + styles.highBoldLabel}>Mariano Pérez</div>
+                <div className={'pt-2 ' + styles.mediumLabel}>Madrid</div>
+                <div className="pt-6 flex justify-center">
+                  <DashboardButton handleClick={handleChangeProfile} label={'Editar Perfil'} type={'editProfile'} />
+                </div>
+                <div className="pt-14 flex justify-between">
+                  <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+                    <div className="absolute -top-4">
+                      <DashboardButton handleClick={handleClickWeight} label={''} type={'iconWeight'} />
+                      <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
+                      <div className={'pt-3 ' + styles.mediumBoldLabel}>56,6 kg</div>
+                    </div>
+                  </div>
+                  <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+                    <div className="absolute -top-4">
+                      <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
+                      <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
+                      <div className={'pt-3 ' + styles.mediumBoldLabel}>170 cm</div>
+                    </div>
                   </div>
                 </div>
-                <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
-                  <div className="absolute -top-4">
-                    <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
-                    <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
-                    <div className={'pt-3 ' + styles.mediumBoldLabel}>170 cm</div>
-                  </div>
+              </div>
+              <div className="pt-20">
+                <div className={styles.highBoldLabel}>Mensajes</div>
+                <div className={'pt-2 ' + styles.mediumLabel}>Tienes 3 mensajes nuevos</div>
+                <div className="pt-6">
+                  {message.map((item, index) => (
+                    <div
+                      className={
+                        'flex justify-between p-4 px-7 rounded-xl my-2.5 hover:bg-gray-200 cursor-pointer ' +
+                        styles.bodyInfo
+                      }
+                      key={index}
+                      onClick={handleClickMessage}
+                    >
+                      <Image src={messageBoxIcon} width={24} height={24} alt="" />
+                      <div className="flex flex-col justify-between">
+                        <div className={styles.mediumBoldLabel}>{item.name}</div>
+                        <div className={styles.mediumLabel}>{item.content}</div>
+                      </div>
+                      <Image src={meesageRightIcon} width={8} height={10} alt="" />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
