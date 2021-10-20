@@ -5,6 +5,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import SearchOrder from 'components/components/dashboard/SearchOrder'
+import Chip from 'components/components/Chip'
 
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
@@ -67,29 +68,59 @@ const Shopping = () => {
         <thead className={styles.tableHead}>
           <tr>
             <th>
-              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>Title</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>PEDIDO</div>
             </th>
             <th>
-              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>Author</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>DETALLE</div>
             </th>
             <th>
-              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>Views</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>FECHA</div>
+            </th>
+            <th>
+              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>PRECIO</div>
+            </th>
+            <th>
+              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>PDF</div>
             </th>
           </tr>
         </thead>
-        <tbody className={'mt-4'}>
+        <tbody className={'mt-4 ' + styles.tbody}>
           <tr>
-            <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>Intro to CSS</div>
+            <td className="h-full relative">
+              <div
+                className={
+                  'absolute top-0 bottom-0 flex flex-col justify-around ' +
+                  styles.tableContentArea +
+                  ' ' +
+                  styles.tableCellText
+                }
+              >
+                <div className="flex items-start">Order #239</div>
+                <div className="flex items-end mb-2">
+                  <Chip label={'PAGADO'} bgColor={'#54BD97'} />
+                </div>
+              </div>
             </td>
             <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>Adam</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                Adam
+                <br />
+                Adam
+                <br />
+                Adam
+              </div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>858</div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>858</div>
             </td>
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>858</div>
             </td>
           </tr>
-          <tr className="bg-gray-200">
+          <tr className="bg-white">
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                 A Long and Winding Tour of the History of UI Frameworks and Tools and the Impact on Design
@@ -101,6 +132,12 @@ const Shopping = () => {
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>112</div>
             </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>112</div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>112</div>
+            </td>
           </tr>
           <tr>
             <td>
@@ -108,6 +145,12 @@ const Shopping = () => {
             </td>
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>Chris</div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>1,280</div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>1,280</div>
             </td>
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>1,280</div>

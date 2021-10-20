@@ -41,6 +41,12 @@
   display: flex;
   justify-content: flex-start;
 }
+.tbody {
+  td div {
+    /* div will now take up full 200px of parent's height */
+    height: 100%;
+  }
+}
 .tableHeadTitle {
   color: #222222;
   font-family: Montserrat;
@@ -54,4 +60,7 @@
   font-size: 14px;
   letter-spacing: 1.4px;
   line-height: 33px;
+}
+
+.chip {
 }
