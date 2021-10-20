@@ -9,7 +9,6 @@
   opacity: 0.52;
 }
 .logoSmall {
-  // margin-left: 73px;
   font-family: 'Cartoon Marker';
   font-size: 9px;
   color: #2a2c36;
@@ -19,9 +18,15 @@
 .itemLabel {
   color: #2a2c37;
   font-family: Montserrat;
-  font-size: 14px;
+  font-size: 13.5px;
   letter-spacing: 0;
-  line-height: 21px;
+}
+.activeLabel {
+  color: #2a2c37;
+  font-family: Montserrat;
+  font-size: 13.5px;
+  letter-spacing: 0;
+  font-weight: bold;
 }
 .logoutLabel {
   color: #ed5252;
@@ -38,12 +43,5 @@
 .resize:hover {
   filter: brightness(1) invert(0.07);
   transition: 0.4s;
-}
-.activeLabel {
-  color: #2a2c37;
-  font-family: Montserrat;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 21px;
-  font-weight: bold;
+  cursor: pointer;
 }

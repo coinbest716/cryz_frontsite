@@ -1,10 +1,92 @@
+import React, { useState } from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './dashboard.module.scss'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import welcomeIcon from 'public/images/welcome-header.svg'
 import Image from 'next/image'
+import router from 'next/router'
+import dynamic from 'next/dynamic'
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
+const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
+import 'react-calendar/dist/Calendar.css'
+import moment from 'moment'
+import ProgressBar from 'components/components/dashboard/ProgressBar'
+import bonosIcon from 'public/images/bonos.svg'
+import messageBoxIcon from 'public/images/message-box.svg'
+import meesageRightIcon from 'public/images/message-right.svg'
 
 const Dashboard = () => {
+  const [value, onChange] = useState(new Date())
+
+  const chartOptions = {
+    series: [
+      {
+        name: 'Actividad semanal',
+        data: [4, 20, 10, 30, 36, 80, 30, 91],
+      },
+    ],
+    options: {
+      chart: {
+        background: 'transparent',
+        foreColor: '#939AAC',
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      theme: {
+        monochrome: {
+          enabled: true,
+          color: '#818E8E',
+          shadeTo: 'light',
+        },
+      },
+      xaxis: {
+        categories: ['Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab', 'Dom'],
+      },
+      yaxis: {
+        show: false,
+      },
+      legend: {
+        position: 'bottom',
+      },
+      grid: {
+        show: false,
+      },
+    },
+  }
+
+  const message = [
+    {
+      name: 'Oluchi Mazi',
+      content: 'I’m getting a late today',
+    },
+    {
+      name: 'Shinohara Ryoma',
+      content: 'What are the homework…',
+    },
+    {
+      name: 'Paromita Haque',
+      content: 'I’m getting a late today',
+    },
+    {
+      name: 'Oluchi Mazi',
+      content: 'I’m getting a late today',
+    },
+    {
+      name: 'Shinohara Ryoma',
+      content: 'What are the homework…',
+    },
+    {
+      name: 'Paromita Haque',
+      content: 'I’m getting a late today',
+    },
+  ]
+
+  const mark = ['21-10-2021', '22-10-2021', '23-10-2021']
+
   const handleClickStartClass = () => {
     console.log('handleClickStartClass redirect live video section wc-64')
   }
@@ -13,6 +95,7 @@ const Dashboard = () => {
   }
   const handleClickHours = () => {
     console.log('handleClickHours')
+    router.push('/dashboard/profile')
   }
   const handleChangeProfile = () => {
     console.log('handleChangeProfile')
@@ -20,22 +103,21 @@ const Dashboard = () => {
   const handleClickWeight = () => {
     console.log('handleClickWeight')
   }
-  const handleClickMember = () => {
-    console.log('handleClickMember')
+  const handleClickRmember = () => {
+    console.log('handleClickRmember')
+  }
+  const handleClickMessage = () => {
+    console.log('handleClickMessage redirect  message section in side menu')
+    router.push('/dashboard/message')
   }
 
-  // <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
-  // <DashboardButton handleClick={handleChangeProfile} label={'Editar Perfil'} type={'editProfile'} />
-  // <DashboardButton handleClick={handleClickWeight} label={''} type={'iconWeight'} />
-  // <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
-
   return (
-    <div className={'px-24 py-10 w-full ' + styles.container}>
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-12 md:col-span-8 sm:col-span-12">
+    <div className={'w-full ' + styles.container}>
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 md:col-span-8 sm:col-span-12 py-16 px-9">
           <div className="flex justify-between items-center">
             <div>
-              <div className={styles.dashboardTitle}>Dashboard</div>
+              <div className={styles.highBoldLabel}>Dashboard</div>
               <div className={'pt-2 ' + styles.today}>Domingo, 12 de Diciembre 2021</div>
             </div>
             <div>
@@ -58,22 +140,123 @@ const Dashboard = () => {
               <Image src={welcomeIcon} alt="" width={220} height={254} />
             </div>
           </div>
-          <div className={'flex justify-between mt-7 px-9 py-7 ' + styles.welcomeSection}>
-            <div className={styles.dashboardTitle}>Actividad semanal</div>
-            <div>
+          <div className={'flex justify-between items-center mt-7 px-9 pt-7 pb-1 ' + styles.welcomeSection}>
+            <div className="w-full">
+              <div className={styles.highBoldLabel}>Actividad semanal</div>
+              <div>
+                <Chart options={chartOptions.options} series={chartOptions.series} type="area" height="200px" />
+              </div>
+            </div>
+            <div className="px-2 ">
               <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
               <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
             </div>
           </div>
-          <div className={'mt-7 px-9 py-7 ' + styles.welcomeSection}>
-            Recuerda!!
-            <DashboardButton handleClick={handleClickMember} label={'Hacerlo'} type={'viewRed'} />
+          <div className={'mt-7 px-9 py-7 flex justify-between ' + styles.welcomeSection}>
+            <div>
+              <div className={styles.remember}>Recuerda!!</div>
+              <div className={'pt-2 ' + styles.rememberDescription}>Tienes un cuestionario pendiente de completar…</div>
+            </div>
+            <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
           </div>
-          <div className={'mt-7 px-9 py-7 ' + styles.welcomeSection}>calendar section</div>
+          <div className={'grid grid-cols-12 gap-7 '}>
+            <div className="col-span-12 md:col-span-6 sm:col-span-12">
+              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
+                <Calendar
+                  className={styles.calendar}
+                  onChange={onChange}
+                  value={value}
+                  tileClassName={({ date, view }) => {
+                    if (mark.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                      return 'highlight'
+                    }
+                  }}
+                  tileDisabled={({ date }) => date.getDay() === 0}
+                  /*maxDate={new Date(2020, 1, 0)}</div>*/
+                  minDate={new Date()}
+                ></Calendar>
+              </div>
+            </div>
+            <div className="col-span-12 md:col-span-6 sm:col-span-12">
+              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
+                <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
+                <div className={'text-center pt-5'}>
+                  <Image src={bonosIcon} alt="" width={50} height={50} />
+                </div>
+                <div>
+                  <div className="py-3">
+                    <ProgressBar percentage={70} label={'Mujer'} type={'women'} />
+                  </div>
+                  <div className="py-3">
+                    <ProgressBar percentage={50} label={'Nutrición'} type={'nutrition'} />
+                  </div>
+                  <div className="py-3">
+                    <ProgressBar percentage={30} label={'Entrenamiento'} type={'training'} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
-          <div className={styles.welcomeSection}>Profile Section</div>
-          <div className={styles.welcomeSection}>Message Section</div>
+          <div className="bg-white h-full px-9 py-10">
+            <div>
+              <div className={styles.highBoldLabel}>Perfil</div>
+              <div className={'pt-2 ' + styles.mediumLabel}>80% Perfil Completado</div>
+              <div className="p-8 text-center">
+                <div className="pt-7 flex justify-center">
+                  <img
+                    src="/images/default-avatar.svg"
+                    style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
+                  />
+                </div>
+                <div className={'pt-4 ' + styles.highBoldLabel}>Mariano Pérez</div>
+                <div className={'pt-2 ' + styles.mediumLabel}>Madrid</div>
+                <div className="pt-6 flex justify-center">
+                  <DashboardButton handleClick={handleChangeProfile} label={'Editar Perfil'} type={'editProfile'} />
+                </div>
+                <div className="pt-14 flex justify-between">
+                  <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+                    <div className="absolute -top-4">
+                      <DashboardButton handleClick={handleClickWeight} label={''} type={'iconWeight'} />
+                      <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
+                      <div className={'pt-3 ' + styles.mediumBoldLabel}>56,6 kg</div>
+                    </div>
+                  </div>
+                  <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+                    <div className="absolute -top-4">
+                      <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
+                      <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
+                      <div className={'pt-3 ' + styles.mediumBoldLabel}>170 cm</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-20">
+                <div className={styles.highBoldLabel}>Mensajes</div>
+                <div className={'pt-2 ' + styles.mediumLabel}>Tienes 3 mensajes nuevos</div>
+                <div className="pt-6">
+                  {message.map((item, index) => (
+                    <div
+                      className={
+                        'flex justify-between p-4 px-7 rounded-xl my-2.5 hover:bg-gray-200 cursor-pointer ' +
+                        styles.bodyInfo
+                      }
+                      key={index}
+                      onClick={handleClickMessage}
+                    >
+                      <Image src={messageBoxIcon} width={24} height={24} alt="" />
+                      <div className="flex flex-col justify-between">
+                        <div className={styles.mediumBoldLabel}>{item.name}</div>
+                        <div className={styles.mediumLabel}>{item.content}</div>
+                      </div>
+                      <Image src={meesageRightIcon} width={8} height={10} alt="" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

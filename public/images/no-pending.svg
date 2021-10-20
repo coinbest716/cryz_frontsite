@@ -1,0 +1,92 @@
+<svg id="Group_9" data-name="Group 9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 268 294">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f5f6fa;
+      }
+
+      .cls-2 {
+        fill: #818e8e;
+        font-size: 16px;
+        font-family: SegoeUI, Segoe UI;
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-6 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-7 {
+        fill: url(#linear-gradient-5);
+      }
+
+      .cls-8 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+
+      .cls-9 {
+        filter: url(#Oval_4);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#818e8e"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <filter id="Oval_4" x="52" y="46" width="160.232" height="160.232" filterUnits="userSpaceOnUse">
+      <feOffset dy="16" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#0a1646" flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#939e9e"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#859191"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#919c9c"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-5" x1="0.5" x2="0.17" y2="1.426" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#889494"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+  </defs>
+  <rect id="Rectangle" class="cls-1" width="268" height="294" rx="10"/>
+  <text id="_No_tienes_mensajes" data-name="¡No tienes mensajes" class="cls-2" transform="translate(42 198)"><tspan x="55.926" y="17">¡No tienes</tspan></text>
+  <g id="icon_message_24x24" transform="translate(48 37)">
+    <g id="logo">
+      <g class="cls-9" transform="matrix(1, 0, 0, 1, -48, -37)">
+        <circle id="Oval_4-2" data-name="Oval 4" class="cls-3" cx="56.116" cy="56.116" r="56.116" transform="translate(76 54)"/>
+      </g>
+      <circle id="Oval_4-3" data-name="Oval 4" class="cls-4" cx="35.5" cy="35.5" r="35.5" transform="translate(101.329 28.243) rotate(81)"/>
+      <circle id="Oval_4-4" data-name="Oval 4" class="cls-5" cx="7.5" cy="7.5" r="7.5" transform="translate(14.834 0.656) rotate(81)"/>
+      <circle id="Oval_4-5" data-name="Oval 4" class="cls-6" cx="3.5" cy="3.5" r="3.5" transform="translate(47.933 129.908) rotate(81)"/>
+      <circle id="Oval_4-6" data-name="Oval 4" class="cls-7" cx="4.5" cy="4.5" r="4.5" transform="translate(165.908 18.595) rotate(81)"/>
+    </g>
+    <g id="mail_1_" data-name="mail (1)" transform="translate(62 59)">
+      <path id="Path" class="cls-8" d="M4.3,0H38.7A4.288,4.288,0,0,1,43,4.25v25.5A4.288,4.288,0,0,1,38.7,34H4.3A4.288,4.288,0,0,1,0,29.75V4.25A4.288,4.288,0,0,1,4.3,0Z"/>
+      <path id="Path-2" data-name="Path" class="cls-8" d="M43,0,21.5,15,0,0" transform="translate(0 4)"/>
+    </g>
+  </g>
+</svg>
