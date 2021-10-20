@@ -7,3 +7,51 @@
   background-color: #f5f6fa;
   height: 100vh;
 }
+
+.monthArea {
+  margin-top: 57px;
+  margin-bottom: 21px;
+}
+
+.monthSelect {
+  width: 120px;
+  height: 40px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  // font style
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+
+// table part
+.tableHead {
+  border: 2px solid #ededed;
+  background-color: #ffffff;
+  height: 58px;
+}
+.tableContentArea {
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+.tableHeadTitle {
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 24px;
+}
+.tableCellText {
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  line-height: 33px;
+}
