@@ -1,0 +1,18 @@
+@import 'styles/variable.module.scss';
+
+.chip {
+  height: 22px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  line-height: 100%;
+  text-align: center;
+  cursor: pointer;
+}
