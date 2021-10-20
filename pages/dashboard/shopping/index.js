@@ -1,6 +1,9 @@
 import React from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 
+// next components
+import Image from 'next/image'
+
 // custom components
 import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
@@ -10,6 +13,11 @@ import Chip from 'components/components/Chip'
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
 import styles from './shopping.module.scss'
+
+// images
+import FileViewIcon from 'assets/images/file-view.svg'
+import DownloadIcon from 'assets/images/download.svg'
+import DownloadDisableIcon from 'assets/images/download-disable.svg'
 
 const Shopping = () => {
   const monthList = [
@@ -68,23 +76,24 @@ const Shopping = () => {
         <thead className={styles.tableHead}>
           <tr>
             <th>
-              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>PEDIDO</div>
+              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PEDIDO</div>
             </th>
             <th>
-              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>DETALLE</div>
+              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>DETALLE</div>
             </th>
             <th>
-              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>FECHA</div>
+              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>FECHA</div>
             </th>
             <th>
-              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>PRECIO</div>
+              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PRECIO</div>
             </th>
             <th>
-              <div className={styles.tableContentArea + ' ' + styles.tableHeadTitle}>PDF</div>
+              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PDF</div>
             </th>
           </tr>
         </thead>
         <tbody className={'mt-4 ' + styles.tbody}>
+          {/* first tr */}
           <tr>
             <td className="h-full relative">
               <div
@@ -103,57 +112,185 @@ const Shopping = () => {
             </td>
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                Adam
-                <br />
-                Adam
-                <br />
-                Adam
+                <div className={'inline-grid'}>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>10 sesiones entrenamiento</div>
+                  </div>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>Bono nutrición</div>
+                  </div>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>1 clase de pilates</div>
+                  </div>
+                </div>
               </div>
             </td>
             <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>858</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>24/5</div>
             </td>
-            <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>858</div>
-            </td>
-            <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>858</div>
-            </td>
-          </tr>
-          <tr className="bg-white">
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                A Long and Winding Tour of the History of UI Frameworks and Tools and the Impact on Design
+                <div className={'inline-grid'}>
+                  <span className={styles.price}>$875</span>
+                  <span className={styles.payment}>Paypal</span>
+                </div>
               </div>
             </td>
             <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>Adam</div>
-            </td>
-            <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>112</div>
-            </td>
-            <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>112</div>
-            </td>
-            <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>112</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <Image src={DownloadIcon} alt={''} width={18} height={22} />
+              </div>
             </td>
           </tr>
+          {/* second tr */}
+          <tr className="bg-white">
+            <td className="h-full relative">
+              <div
+                className={
+                  'absolute top-0 bottom-0 flex flex-col justify-around ' +
+                  styles.tableContentArea +
+                  ' ' +
+                  styles.tableCellText
+                }
+              >
+                <div className="flex items-start">Order #238</div>
+                <div className="flex items-end mb-2">
+                  <Chip label={'IMPAGADO'} bgColor={'#BD5B54'} />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <div className={'inline-grid'}>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>10 sesiones entrenamiento</div>
+                  </div>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>Bono nutrición</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>24/5</div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <div className={'inline-grid'}>
+                  <span className={styles.price}>$875</span>
+                  <span className={styles.payment}>Paypal</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <Image src={DownloadDisableIcon} alt={''} width={18} height={22} />
+              </div>
+            </td>
+          </tr>
+          {/* third tr */}
           <tr>
-            <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>Intro to JavaScript</div>
+            <td className="h-full relative">
+              <div
+                className={
+                  'absolute top-0 bottom-0 flex flex-col justify-around ' +
+                  styles.tableContentArea +
+                  ' ' +
+                  styles.tableCellText
+                }
+              >
+                <div className="flex items-start">Order #237</div>
+                <div className="flex items-end mb-2">
+                  <Chip label={'CANCELADO'} bgColor={'#A8BAB3'} />
+                </div>
+              </div>
             </td>
             <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>Chris</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <div className={'inline-grid'}>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>10 sesiones entrenamiento</div>
+                  </div>
+                </div>
+              </div>
             </td>
             <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>1,280</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>24/5</div>
             </td>
             <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>1,280</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <div className={'inline-grid'}>
+                  <span className={styles.price}>$875</span>
+                  <span className={styles.payment}>Paypal</span>
+                </div>
+              </div>
             </td>
             <td>
-              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>1,280</div>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <Image src={DownloadDisableIcon} alt={''} width={18} height={22} />
+              </div>
+            </td>
+          </tr>
+          {/* forth tr */}
+          <tr className="bg-white">
+            <td className="h-full relative">
+              <div
+                className={
+                  'absolute top-0 bottom-0 flex flex-col justify-around ' +
+                  styles.tableContentArea +
+                  ' ' +
+                  styles.tableCellText
+                }
+              >
+                <div className="flex items-start">Order #236</div>
+                <div className="flex items-end mb-2">
+                  <Chip label={'CANCELADO'} bgColor={'#A8BAB3'} />
+                </div>
+              </div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <div className={'inline-grid'}>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>10 sesiones entrenamiento</div>
+                  </div>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>Bono nutrición</div>
+                  </div>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>1 clase de pilates</div>
+                  </div>
+                  <div className={'flex cursor-pointer'}>
+                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <div className={'ml-5'}>1 clase de pilates</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>24/5</div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <div className={'inline-grid'}>
+                  <span className={styles.price}>$875</span>
+                  <span className={styles.payment}>Paypal</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                <Image src={DownloadDisableIcon} alt={''} width={18} height={22} />
+              </div>
             </td>
           </tr>
         </tbody>
