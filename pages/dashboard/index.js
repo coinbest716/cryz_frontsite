@@ -66,8 +66,8 @@ const Dashboard = () => {
   const handleClickWeight = () => {
     console.log('handleClickWeight')
   }
-  const handleClickMember = () => {
-    console.log('handleClickMember')
+  const handleClickRmember = () => {
+    console.log('handleClickRmember')
   }
 
   // <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
@@ -116,9 +116,12 @@ const Dashboard = () => {
               <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
             </div>
           </div>
-          <div className={'mt-7 px-9 py-7 ' + styles.welcomeSection}>
-            Recuerda!!
-            <DashboardButton handleClick={handleClickMember} label={'Hacerlo'} type={'viewRed'} />
+          <div className={'mt-7 px-9 py-7 flex justify-between ' + styles.welcomeSection}>
+            <div>
+              <div className={styles.remember}>Recuerda!!</div>
+              <div className={'pt-2 ' + styles.rememberDescription}>Tienes un cuestionario pendiente de completar…</div>
+            </div>
+            <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
           </div>
           <div className={'mt-7 px-9 py-7 ' + styles.welcomeSection}>calendar section</div>
         </div>
