@@ -88,6 +88,7 @@ const Dashboard = () => {
 
   const handleClickStartClass = () => {
     console.log('handleClickStartClass redirect live video section wc-64')
+    router.push('/dashboard/live-streaming')
   }
   const handleClickView = () => {
     console.log('handleClickView redirect purchase section wc-67')
