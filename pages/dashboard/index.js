@@ -12,8 +12,7 @@ import 'react-calendar/dist/Calendar.css'
 import moment from 'moment'
 import ProgressBar from 'components/components/dashboard/ProgressBar'
 import bonosIcon from 'public/images/bonos.svg'
-import messageBoxIcon from 'public/images/message-box.svg'
-import meesageRightIcon from 'public/images/message-right.svg'
+import NewMessageBox from 'components/components/dashboard/NewMessageBox'
 
 const Dashboard = () => {
   const [value, onChange] = useState(new Date())
@@ -237,20 +236,8 @@ const Dashboard = () => {
                 <div className={'pt-2 ' + styles.mediumLabel}>Tienes 3 mensajes nuevos</div>
                 <div className="pt-6">
                   {message.map((item, index) => (
-                    <div
-                      className={
-                        'flex justify-between p-4 px-7 rounded-xl my-2.5 hover:bg-gray-200 cursor-pointer ' +
-                        styles.bodyInfo
-                      }
-                      key={index}
-                      onClick={handleClickMessage}
-                    >
-                      <Image src={messageBoxIcon} width={24} height={24} alt="" />
-                      <div className="flex flex-col justify-between">
-                        <div className={styles.mediumBoldLabel}>{item.name}</div>
-                        <div className={styles.mediumLabel}>{item.content}</div>
-                      </div>
-                      <Image src={meesageRightIcon} width={8} height={10} alt="" />
+                    <div className="py-2 flex justify-center" key={index}>
+                      <NewMessageBox handleClickMessage={handleClickMessage} name={item.name} content={item.content} />
                     </div>
                   ))}
                 </div>
