@@ -11,29 +11,29 @@ import { useRouter } from 'next/router'
 const Services = () => {
   const router = useRouter()
 
-  const trainingImage = '/images/card2.png'
-  const physiotherapyImage = '/images/card3.png'
-  const nutritionImage = '/images/card1.png'
-  const placeholder1 = '/images/placeholder1.svg'
-  const placeholder2 = '/images/placeholder2.svg'
-  const placeholder3 = '/images/placeholder3.svg'
+  // const trainingImage = '/images/pcard1.jpg'
+  // const physiotherapyImage = '/images/pcard2.jpg'
+  // const nutritionImage = '/images/pcard3.jpg'
+  const trainingImage = '/images/card1.png'
+  const physiotherapyImage = '/images/card2.png'
+  const nutritionImage = '/images/card3.png'
+  const placeholder1 = '/images/placeholder1.png'
+  const placeholder2 = '/images/placeholder2.png'
+  const placeholder3 = '/images/placeholder3.png'
 
-  const [serverType, setServerType] = useState({ type1: false, type2: false, type3: false })
+  const [contactType, setContactType] = useState({ type1: true, type2: false, type3: false })
   const handleMouseOver = type => {
     switch (type) {
       case 'type1':
-        setServerType({ type1: true, type2: false, type3: false })
+        setContactType({ type1: true, type2: false, type3: false })
         break
       case 'type2':
-        setServerType({ type1: false, type2: true, type3: false })
+        setContactType({ type1: false, type2: true, type3: false })
         break
       case 'type3':
-        setServerType({ type1: false, type2: false, type3: true })
+        setContactType({ type1: false, type2: false, type3: true })
         break
     }
-  }
-  const handleMouseOut = () => {
-    setServerType({ type1: false, type2: false, type3: false })
   }
   const handleClick = type => {
     switch (type) {
@@ -55,7 +55,7 @@ const Services = () => {
         <div className={styles.container}>
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
-              <div className={styles.topTitle}>Servicios</div>
+              <div className={styles.topTitle}>Fem Health</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription}>
                 En Crys & CO ofrecemos un servicio personalizado y de calidad, especializado en planes 360 y a medida.
@@ -71,62 +71,72 @@ const Services = () => {
               </div>
             </div>
           </div>
-          <div className={'w-full flex justify-center mt-5'}>
-            <div className={styles.scontainer}>
-              <div
-                className={styles.box}
-                onMouseOver={() => handleMouseOver('type1')}
-                onMouseOut={handleMouseOut}
-                onClick={() => handleClick('type1')}
-              >
-                <img src={serverType.type1 ? trainingImage : placeholder1} />
-                <div className={styles.serverText}>Entrenamiento</div>
-                {serverType.type1 ? (
-                  <div className={styles.serverArrow}>
-                    <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
-                  </div>
-                ) : (
-                  <div className={styles.serverArrow}>
-                    <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
-                  </div>
-                )}
-              </div>
-              <div
-                className={styles.box}
-                onMouseOver={() => handleMouseOver('type2')}
-                onMouseOut={handleMouseOut}
-                onClick={() => handleClick('type2')}
-              >
-                <img src={serverType.type2 ? physiotherapyImage : placeholder2} />
-                <div className={styles.serverText}>Fisioterapia</div>
-                {serverType.type2 ? (
-                  <div className={styles.serverArrow}>
-                    <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
-                  </div>
-                ) : (
-                  <div className={styles.serverArrow}>
-                    <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
-                  </div>
-                )}
-              </div>
-              <div
-                className={styles.box}
-                onMouseOver={() => handleMouseOver('type3')}
-                onMouseOut={handleMouseOut}
-                onClick={() => handleClick('type3')}
-              >
-                <img src={serverType.type3 ? nutritionImage : placeholder3} />
-                <div className={styles.serverText}>Nutrición</div>
-                {serverType.type3 ? (
-                  <div className={styles.serverArrow}>
-                    <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
-                  </div>
-                ) : (
-                  <div className={styles.serverArrow}>
-                    <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
-                  </div>
-                )}
-              </div>
+          <div className={'flex w-full mt-5 overflow-hidden'}>
+            <div
+              className={'relative ' + (contactType.type1 ? styles.boxToRightActive : styles.boxDeactive)}
+              onMouseOver={() => handleMouseOver('type1')}
+              onClick={() => handleClick('type1')}
+            >
+              <img
+                src={contactType.type1 ? trainingImage : placeholder1}
+                style={{ width: '100%', height: '288px', opacity: 0.3 }}
+                className={styles.box1}
+              />
+
+              <div className={styles.serverText}>Entrenamiento</div>
+              {contactType.type1 ? (
+                <div className={styles.serverArrow}>
+                  <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
+                </div>
+              ) : (
+                <div className={styles.serverArrow}>
+                  <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
+                </div>
+              )}
+            </div>
+
+            <div
+              className={'relative ' + (contactType.type2 ? styles.boxToLeftActive : styles.boxDeactive)}
+              onMouseOver={() => handleMouseOver('type2')}
+              onClick={() => handleClick('type2')}
+            >
+              <img
+                src={contactType.type2 ? physiotherapyImage : placeholder2}
+                style={{ width: '100%', height: '288px', opacity: 0.3 }}
+                className={styles.box1}
+              />
+              <div className={styles.serverText}>Fisioterapia</div>
+              {contactType.type2 ? (
+                <div className={styles.serverArrow}>
+                  <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
+                </div>
+              ) : (
+                <div className={styles.serverArrow}>
+                  <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
+                </div>
+              )}
+            </div>
+
+            <div
+              className={'relative ' + (contactType.type3 ? styles.boxToLeftActive : styles.boxDeactive)}
+              onMouseOver={() => handleMouseOver('type3')}
+              onClick={() => handleClick('type3')}
+            >
+              <img
+                src={contactType.type3 ? nutritionImage : placeholder3}
+                style={{ width: '100%', height: '288px', opacity: 0.3 }}
+                className={styles.box1}
+              />
+              <div className={styles.serverText}>Nutrición</div>
+              {contactType.type3 ? (
+                <div className={styles.serverArrow}>
+                  <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
+                </div>
+              ) : (
+                <div className={styles.serverArrow}>
+                  <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
+                </div>
+              )}
             </div>
           </div>
         </div>
