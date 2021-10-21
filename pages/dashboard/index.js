@@ -12,8 +12,8 @@ import 'react-calendar/dist/Calendar.css'
 import moment from 'moment'
 import ProgressBar from 'components/components/dashboard/ProgressBar'
 import bonosIcon from 'public/images/bonos.svg'
-import messageBoxIcon from 'public/images/message-box.svg'
-import meesageRightIcon from 'public/images/message-right.svg'
+import NewMessageBox from 'components/components/dashboard/NewMessageBox'
+import noPendingIcon from 'public/images/no-pending.svg'
 
 const Dashboard = () => {
   const [value, onChange] = useState(new Date())
@@ -59,39 +59,41 @@ const Dashboard = () => {
   }
 
   const message = [
-    {
-      name: 'Oluchi Mazi',
-      content: 'I’m getting a late today',
-    },
-    {
-      name: 'Shinohara Ryoma',
-      content: 'What are the homework…',
-    },
-    {
-      name: 'Paromita Haque',
-      content: 'I’m getting a late today',
-    },
-    {
-      name: 'Oluchi Mazi',
-      content: 'I’m getting a late today',
-    },
-    {
-      name: 'Shinohara Ryoma',
-      content: 'What are the homework…',
-    },
-    {
-      name: 'Paromita Haque',
-      content: 'I’m getting a late today',
-    },
+    // {
+    //   name: 'Oluchi Mazi',
+    //   content: 'I’m getting a late today',
+    // },
+    // {
+    //   name: 'Shinohara Ryoma',
+    //   content: 'What are the homework…',
+    // },
+    // {
+    //   name: 'Paromita Haque',
+    //   content: 'I’m getting a late today',
+    // },
+    // {
+    //   name: 'Oluchi Mazi',
+    //   content: 'I’m getting a late today',
+    // },
+    // {
+    //   name: 'Shinohara Ryoma',
+    //   content: 'What are the homework…',
+    // },
+    // {
+    //   name: 'Paromita Haque',
+    //   content: 'I’m getting a late today',
+    // },
   ]
 
   const mark = ['21-10-2021', '22-10-2021', '23-10-2021']
 
   const handleClickStartClass = () => {
     console.log('handleClickStartClass redirect live video section wc-64')
+    router.push('/dashboard/live-streaming')
   }
   const handleClickView = () => {
     console.log('handleClickView redirect purchase section wc-67')
+    router.push('/dashboard/shopping')
   }
   const handleClickHours = () => {
     console.log('handleClickHours')
@@ -99,6 +101,7 @@ const Dashboard = () => {
   }
   const handleChangeProfile = () => {
     console.log('handleChangeProfile')
+    router.push('/dashboard/profile')
   }
   const handleClickWeight = () => {
     console.log('handleClickWeight')
@@ -110,6 +113,12 @@ const Dashboard = () => {
     console.log('handleClickMessage redirect  message section in side menu')
     router.push('/dashboard/message')
   }
+  const handleClickCalendar = () => {
+    router.push('/dashboard/calendar')
+  }
+  const handleClickBonos = () => {
+    console.log('handleClickBonos')
+  }
 
   return (
     <div className={'w-full ' + styles.container}>
@@ -118,10 +127,14 @@ const Dashboard = () => {
           <div className="flex justify-between items-center">
             <div>
               <div className={styles.highBoldLabel}>Dashboard</div>
-              <div className={'pt-2 ' + styles.today}>Domingo, 12 de Diciembre 2021</div>
+              {message.length ? <div className={'pt-2 ' + styles.today}>Domingo, 12 de Diciembre 2021</div> : <></>}
             </div>
             <div>
-              <DashboardButton handleClick={handleClickStartClass} label={'Comenzar clase'} type={'startClass'} />
+              {message.length ? (
+                <DashboardButton handleClick={handleClickStartClass} label={'Comenzar clase'} type={'startClass'} />
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <div className={'flex items-center mt-7 px-9 ' + styles.welcomeSection}>
@@ -152,16 +165,22 @@ const Dashboard = () => {
               <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
             </div>
           </div>
-          <div className={'mt-7 px-9 py-7 flex justify-between ' + styles.welcomeSection}>
-            <div>
-              <div className={styles.remember}>Recuerda!!</div>
-              <div className={'pt-2 ' + styles.rememberDescription}>Tienes un cuestionario pendiente de completar…</div>
+          {message.length ? (
+            <div className={'mt-7 px-9 py-7 flex justify-between ' + styles.welcomeSection}>
+              <div>
+                <div className={styles.remember}>Recuerda!!</div>
+                <div className={'pt-2 ' + styles.rememberDescription}>
+                  Tienes un cuestionario pendiente de completar…
+                </div>
+              </div>
+              <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
             </div>
-            <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
-          </div>
+          ) : (
+            <></>
+          )}
           <div className={'grid grid-cols-12 gap-7 '}>
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
-              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
+              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection} onClick={handleClickCalendar}>
                 <Calendar
                   className={styles.calendar}
                   onChange={onChange}
@@ -178,7 +197,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
-              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
+              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection} onClick={handleClickBonos}>
                 <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
                 <div className={'text-center pt-5'}>
                   <Image src={bonosIcon} alt="" width={50} height={50} />
@@ -234,26 +253,26 @@ const Dashboard = () => {
               </div>
               <div className="pt-20">
                 <div className={styles.highBoldLabel}>Mensajes</div>
-                <div className={'pt-2 ' + styles.mediumLabel}>Tienes 3 mensajes nuevos</div>
-                <div className="pt-6">
-                  {message.map((item, index) => (
-                    <div
-                      className={
-                        'flex justify-between p-4 px-7 rounded-xl my-2.5 hover:bg-gray-200 cursor-pointer ' +
-                        styles.bodyInfo
-                      }
-                      key={index}
-                      onClick={handleClickMessage}
-                    >
-                      <Image src={messageBoxIcon} width={24} height={24} alt="" />
-                      <div className="flex flex-col justify-between">
-                        <div className={styles.mediumBoldLabel}>{item.name}</div>
-                        <div className={styles.mediumLabel}>{item.content}</div>
-                      </div>
-                      <Image src={meesageRightIcon} width={8} height={10} alt="" />
+                {message.length ? (
+                  <div>
+                    <div className={'pt-2 ' + styles.mediumLabel}>Tienes 3 mensajes nuevos</div>
+                    <div className="pt-6">
+                      {message.map((item, index) => (
+                        <div className="py-2 flex justify-center" key={index}>
+                          <NewMessageBox
+                            handleClickMessage={handleClickMessage}
+                            name={item.name}
+                            content={item.content}
+                          />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ) : (
+                  <div className="pt-7 text-center">
+                    <Image src={noPendingIcon} alt="" width={268} height={294} />
+                  </div>
+                )}
               </div>
             </div>
           </div>
