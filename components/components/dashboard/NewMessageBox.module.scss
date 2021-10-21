@@ -1,0 +1,23 @@
+@import 'styles/variable.module.scss';
+
+.mediumLabel {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.mediumBoldLabel {
+  color: #2a2c36;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.bodyInfo {
+  background-color: #f5f6fa;
+  max-width: 290px;
+  min-width: 280px;
+}
