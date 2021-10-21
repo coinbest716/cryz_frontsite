@@ -2,8 +2,39 @@
 
 .container {
   width: 100%;
-  display: flex;
-  justify-content: center;
   background-color: #f5f6fa;
-  height: 100vh;
+}
+.title {
+  color: #2a2c36;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.reactPlayer {
+  video {
+    border-radius: 10px;
+  }
+}
+.material {
+  color: #333333;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.label {
+  color: #333333;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+.count {
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 15px;
 }
