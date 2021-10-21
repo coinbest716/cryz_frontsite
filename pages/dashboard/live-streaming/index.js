@@ -8,17 +8,17 @@ const LiveStreaming = () => {
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
   const materials = [
     {
-      url: '/images/card1.png',
+      url: '/images/card1.jpg',
       label: 'Pesas de 2kg',
       count: '2 unidades',
     },
     {
-      url: '/images/card1.png',
+      url: '/images/card1.jpg',
       label: 'Esterilla fina',
       count: '1 unidades',
     },
     {
-      url: '/images/card1.png',
+      url: '/images/card1.jpg',
       label: 'Gomas elásticas',
       count: '3 unidades',
     },

@@ -7,7 +7,7 @@
 .topTitle {
   background: linear-gradient(87.89deg, #e2d2e2 0%, #b7a1b7 100%);
   font-size: 54px;
-  width: 246.71px;
+  width: 300px;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transform: scale(1, 0.8);
@@ -49,34 +49,36 @@
   top: 217px;
   left: 45px;
 }
-.scontainer {
-  display: flex;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  box-sizing: border-box;
-  height: 288px;
-}
-.box {
-  flex: 1;
-  // overflow: hidden;
-  transition: 0.8s;
-  position: relative;
-  cursor: pointer;
-}
-.box > img {
-  width: 200%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: 0.5s;
-  opacity: 0.6;
-}
-
-.box:hover {
+.boxToRightActive {
   flex: 1 1 25%;
+  animation-name: moveToRight;
+  animation-duration: 0.57s;
+  animation-timing-function: cubic-bezier(0.185, 0.535, 0.8, 0.86);
 }
-.box:hover > img {
-  width: 100%;
-  height: 100%;
+.boxToLeftActive {
+  flex: 1 1 25%;
+  animation-name: moveToLeft;
+  animation-duration: 0.57s;
+  animation-timing-function: cubic-bezier(0.185, 0.535, 0.8, 0.86);
+}
+.boxDeactive {
+  overflow: hidden;
+  flex: 1;
+  z-index: 1;
+}
+@keyframes moveToRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes moveToLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
