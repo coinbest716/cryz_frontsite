@@ -93,6 +93,7 @@ const Dashboard = () => {
   }
   const handleClickView = () => {
     console.log('handleClickView redirect purchase section wc-67')
+    router.push('/dashboard/shopping')
   }
   const handleClickHours = () => {
     console.log('handleClickHours')
@@ -100,6 +101,7 @@ const Dashboard = () => {
   }
   const handleChangeProfile = () => {
     console.log('handleChangeProfile')
+    router.push('/dashboard/profile')
   }
   const handleClickWeight = () => {
     console.log('handleClickWeight')
@@ -110,6 +112,12 @@ const Dashboard = () => {
   const handleClickMessage = () => {
     console.log('handleClickMessage redirect  message section in side menu')
     router.push('/dashboard/message')
+  }
+  const handleClickCalendar = () => {
+    router.push('/dashboard/calendar')
+  }
+  const handleClickBonos = () => {
+    console.log('handleClickBonos')
   }
 
   return (
@@ -172,7 +180,7 @@ const Dashboard = () => {
           )}
           <div className={'grid grid-cols-12 gap-7 '}>
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
-              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
+              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection} onClick={handleClickCalendar}>
                 <Calendar
                   className={styles.calendar}
                   onChange={onChange}
@@ -189,7 +197,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
-              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}>
+              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection} onClick={handleClickBonos}>
                 <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
                 <div className={'text-center pt-5'}>
                   <Image src={bonosIcon} alt="" width={50} height={50} />
