@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "image": "/images/card1.png",
+    "image": "/images/card1.jpg",
     "name": "Mark Andersen",
     "role": "CEO",
     "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
@@ -12,7 +12,7 @@
   },
   {
     "id": 2,
-    "image": "/images/card2.png",
+    "image": "/images/card2.jpg",
     "name": "Chloe Parker",
     "role": "Art Director",
     "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
@@ -23,7 +23,7 @@
   },
   {
     "id": 3,
-    "image": "/images/card3.png",
+    "image": "/images/card3.jpg",
     "name": "Alex Bolson",
     "role": "Web Designer",
     "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
@@ -34,7 +34,7 @@
   },
   {
     "id": 4,
-    "image": "/images/card4.png",
+    "image": "/images/card4.jpg",
     "name": "Mark Andersen",
     "role": "CEO",
     "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
@@ -45,7 +45,7 @@
   },
   {
     "id": 5,
-    "image": "/images/card2.png",
+    "image": "/images/card2.jpg",
     "name": "Chloe Parker",
     "role": "Art Director",
     "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
@@ -56,7 +56,7 @@
   },
   {
     "id": 6,
-    "image": "/images/card3.png",
+    "image": "/images/card3.jpg",
     "name": "Alex Bolson",
     "role": "Web Designer",
     "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
@@ -67,7 +67,7 @@
   },
   {
     "id": 7,
-    "image": "/images/card1.png",
+    "image": "/images/card1.jpg",
     "name": "Mark Andersen",
     "role": "CEO",
     "description": "Doctor en Ciencias de la Actividad Física y del Deporte",

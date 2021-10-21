@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "image": "/images/card1.png",
+    "image": "/images/card1.jpg",
     "paymentType": "12€/ mes",
     "title": "Curso avanzado de preparacion al parto y ejercicios hipopresivos",
     "description": "Lorem ipsum blablablablabalababa",
@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "image": "/images/card2.png",
+    "image": "/images/card2.jpg",
     "paymentType": "12€/ mes",
     "title": "Curso avanzado de preparacion al parto y ejercicios hipopresivos",
     "description": "Lorem ipsum blablablablabalababa",
@@ -17,7 +17,7 @@
   },
   {
     "id": 3,
-    "image": "/images/card3.png",
+    "image": "/images/card3.jpg",
     "paymentType": "12€/ mes",
     "title": "Curso avanzado de preparacion al parto y ejercicios hipopresivos",
     "description": "Lorem ipsum blablablablabalababa",
@@ -25,7 +25,7 @@
   },
   {
     "id": 4,
-    "image": "/images/card3.png",
+    "image": "/images/card3.jpg",
     "paymentType": "12€/ mes",
     "title": "Curso avanzado de preparacion al parto y ejercicios hipopresivos",
     "description": "Lorem ipsum blablablablabalababa",
@@ -33,7 +33,7 @@
   },
   {
     "id": 5,
-    "image": "/images/card2.png",
+    "image": "/images/card2.jpg",
     "paymentType": "12€/ mes",
     "title": "Curso avanzado de preparacion al parto y ejercicios hipopresivos",
     "description": "Lorem ipsum blablablablabalababa",
@@ -41,7 +41,7 @@
   },
   {
     "id": 6,
-    "image": "/images/card1.png",
+    "image": "/images/card1.jpg",
     "paymentType": "12€/ mes",
     "title": "Curso avanzado de preparacion al parto y ejercicios hipopresivos",
     "description": "Lorem ipsum blablablablabalababa",
