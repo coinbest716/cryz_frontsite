@@ -108,15 +108,13 @@ const Navbar = () => {
             <nav className="mt-10 flex-1 px-2 bg-white">
               {items.map((item, index) => (
                 <Link href={item.href} key={index}>
-                  {router.pathname === item.href ? (
+                  {router.pathname.split('/')[2] === item.href.split('/')[2] && item.href !== '/' ? (
                     <a className="flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100">
                       <Image src={item.iconBlack} alt="" width={21} height={21} />
-                      {/* <p className={'pl-3 ' + styles.activeLabel}>{item.title}</p> */}
                     </a>
                   ) : (
                     <a className="flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100">
                       <Image src={item.icon} alt="" width={21} height={21} />
-                      {/* <p className={'pl-3 ' + styles.itemLabel}>{item.title}</p> */}
                     </a>
                   )}
                 </Link>
@@ -150,7 +148,7 @@ const Navbar = () => {
               <nav className="mt-10 flex-1 px-2 bg-white">
                 {items.map((item, index) => (
                   <Link href={item.href} key={index}>
-                    {router.pathname === item.href ? (
+                    {router.pathname.split('/')[2] === item.href.split('/')[2] && item.href !== '/' ? (
                       <a className="flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100">
                         <Image src={item.iconBlack} alt="" width={20} height={20} />
                         <p className={'pl-3 ' + styles.activeLabel}>{item.title}</p>
