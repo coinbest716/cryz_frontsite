@@ -3,6 +3,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 
 // next components
 import Image from 'next/image'
+import router from 'next/router'
 
 // custom components
 import Profile from 'components/components/dashboard/Profile'
@@ -38,6 +39,10 @@ const Shopping = () => {
 
   const handleChange = event => {
     setSelectedMonth(event.target.value)
+  }
+
+  const handleGotoOrderDetail = () => {
+    router.push('/dashboard/shopping/order-detail')
   }
   return (
     <div className={globalStyles.dashContainer}>
@@ -113,15 +118,15 @@ const Shopping = () => {
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                 <div className={'inline-grid'}>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>10 sesiones entrenamiento</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>Bono nutrición</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>1 clase de pilates</div>
                   </div>
@@ -165,11 +170,11 @@ const Shopping = () => {
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                 <div className={'inline-grid'}>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>10 sesiones entrenamiento</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>Bono nutrición</div>
                   </div>
@@ -213,7 +218,7 @@ const Shopping = () => {
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                 <div className={'inline-grid'}>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>10 sesiones entrenamiento</div>
                   </div>
@@ -257,19 +262,19 @@ const Shopping = () => {
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                 <div className={'inline-grid'}>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>10 sesiones entrenamiento</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>Bono nutrición</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>1 clase de pilates</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>1 clase de pilates</div>
                   </div>
