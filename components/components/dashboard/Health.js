@@ -10,7 +10,7 @@ import User from 'assets/images/team-member-01.png'
 import styles from './Health.module.scss'
 
 const Health = () => {
-  return <div className={'px-24 py-12 ' + styles.container}>Health</div>
+  return <div className={'px-24 py-8 ' + styles.container}>Health</div>
 }
 
 export default Health
