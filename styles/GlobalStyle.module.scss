@@ -1,4 +1,4 @@
-// @import 'styles/variable.module.scss';
+@import 'styles/variable.module.scss';
 
 .container {
   width: 100%;
@@ -38,4 +38,13 @@
   font-weight: bold;
   letter-spacing: 0;
   line-height: 19px;
+}
+
+.dashDate {
+  color: $blue-gray-400-color;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 15px;
 }
