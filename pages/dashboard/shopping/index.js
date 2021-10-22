@@ -20,6 +20,9 @@ import FileViewIcon from 'assets/images/file-view.svg'
 import DownloadIcon from 'assets/images/download.svg'
 import DownloadDisableIcon from 'assets/images/download-disable.svg'
 
+// json data
+import OrderStateData from 'assets/data/OrderStateData.json'
+
 const Shopping = () => {
   const monthList = [
     { id: 1, month: 'January' },
@@ -111,7 +114,7 @@ const Shopping = () => {
               >
                 <div className="flex items-start">Order #239</div>
                 <div className="flex items-end mb-2">
-                  <Chip label={'PAGADO'} bgColor={'#54BD97'} />
+                  <Chip data={OrderStateData[0]} onClick={() => {}} />
                 </div>
               </div>
             </td>
@@ -163,7 +166,7 @@ const Shopping = () => {
               >
                 <div className="flex items-start">Order #238</div>
                 <div className="flex items-end mb-2">
-                  <Chip label={'IMPAGADO'} bgColor={'#BD5B54'} />
+                  <Chip data={OrderStateData[1]} onClick={() => {}} />
                 </div>
               </div>
             </td>
@@ -211,7 +214,7 @@ const Shopping = () => {
               >
                 <div className="flex items-start">Order #237</div>
                 <div className="flex items-end mb-2">
-                  <Chip label={'CANCELADO'} bgColor={'#A8BAB3'} />
+                  <Chip data={OrderStateData[2]} onClick={() => {}} />
                 </div>
               </div>
             </td>
@@ -255,7 +258,7 @@ const Shopping = () => {
               >
                 <div className="flex items-start">Order #236</div>
                 <div className="flex items-end mb-2">
-                  <Chip label={'CANCELADO'} bgColor={'#A8BAB3'} />
+                  <Chip data={OrderStateData[2]} onClick={() => {}} />
                 </div>
               </div>
             </td>
