@@ -2,8 +2,51 @@
 
 .container {
   width: 100%;
-  display: flex;
-  justify-content: center;
   background-color: #f5f6fa;
-  height: 100vh;
+}
+.highBoldLabel {
+  color: #2a2c36;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.mediumLabel {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.divider {
+  height: 1px;
+  width: 100%;
+  border: 1px solid #c4c4c4;
+}
+.activeTab {
+  cursor: pointer;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 19px;
+  font-weight: bold;
+  display: inline-block;
+  border-bottom: 2px solid #222222;
+  padding-bottom: 6px;
+}
+.deactiveTab {
+  cursor: pointer;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 19px;
+  // display: inline-block;
+  // border-bottom: 2px solid #222222;
+  // padding-bottom: 6px;
+}
+.activePersonal {
 }
