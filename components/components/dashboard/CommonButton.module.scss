@@ -1,0 +1,11 @@
+@import 'styles/variable.module.scss';
+
+.button {
+  height: 40px;
+  border-radius: 6px;
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}

@@ -3,6 +3,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 
 // next components
 import Image from 'next/image'
+import router from 'next/router'
 
 // custom components
 import Profile from 'components/components/dashboard/Profile'
@@ -18,6 +19,9 @@ import styles from './shopping.module.scss'
 import FileViewIcon from 'assets/images/file-view.svg'
 import DownloadIcon from 'assets/images/download.svg'
 import DownloadDisableIcon from 'assets/images/download-disable.svg'
+
+// json data
+import OrderStateData from 'assets/data/OrderStateData.json'
 
 const Shopping = () => {
   const monthList = [
@@ -38,6 +42,10 @@ const Shopping = () => {
 
   const handleChange = event => {
     setSelectedMonth(event.target.value)
+  }
+
+  const handleGotoOrderDetail = () => {
+    router.push('/dashboard/shopping/order-detail')
   }
   return (
     <div className={globalStyles.dashContainer}>
@@ -106,22 +114,22 @@ const Shopping = () => {
               >
                 <div className="flex items-start">Order #239</div>
                 <div className="flex items-end mb-2">
-                  <Chip label={'PAGADO'} bgColor={'#54BD97'} />
+                  <Chip data={OrderStateData[0]} onClick={() => {}} />
                 </div>
               </div>
             </td>
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                 <div className={'inline-grid'}>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>10 sesiones entrenamiento</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>Bono nutrición</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>1 clase de pilates</div>
                   </div>
@@ -158,18 +166,18 @@ const Shopping = () => {
               >
                 <div className="flex items-start">Order #238</div>
                 <div className="flex items-end mb-2">
-                  <Chip label={'IMPAGADO'} bgColor={'#BD5B54'} />
+                  <Chip data={OrderStateData[1]} onClick={() => {}} />
                 </div>
               </div>
             </td>
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                 <div className={'inline-grid'}>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>10 sesiones entrenamiento</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>Bono nutrición</div>
                   </div>
@@ -206,14 +214,14 @@ const Shopping = () => {
               >
                 <div className="flex items-start">Order #237</div>
                 <div className="flex items-end mb-2">
-                  <Chip label={'CANCELADO'} bgColor={'#A8BAB3'} />
+                  <Chip data={OrderStateData[2]} onClick={() => {}} />
                 </div>
               </div>
             </td>
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                 <div className={'inline-grid'}>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>10 sesiones entrenamiento</div>
                   </div>
@@ -250,26 +258,26 @@ const Shopping = () => {
               >
                 <div className="flex items-start">Order #236</div>
                 <div className="flex items-end mb-2">
-                  <Chip label={'CANCELADO'} bgColor={'#A8BAB3'} />
+                  <Chip data={OrderStateData[2]} onClick={() => {}} />
                 </div>
               </div>
             </td>
             <td>
               <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                 <div className={'inline-grid'}>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>10 sesiones entrenamiento</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>Bono nutrición</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>1 clase de pilates</div>
                   </div>
-                  <div className={'flex cursor-pointer'}>
+                  <div className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
                     <Image src={FileViewIcon} alt={''} width={29} height={29} />
                     <div className={'ml-5'}>1 clase de pilates</div>
                   </div>
