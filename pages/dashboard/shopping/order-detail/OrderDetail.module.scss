@@ -1,1 +1,36 @@
 @import 'styles/variable.module.scss';
+
+// table part
+.tableHead {
+  border: 2px solid #ededed;
+  background-color: #ffffff;
+  height: 58px;
+  min-height: 58px;
+}
+.tableHeadArea {
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+.tableContentArea {
+  width: 100%;
+  padding: 8px 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+.tableHeadTitle {
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 24px;
+}
+.tableCellText {
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  line-height: 36px;
+}
