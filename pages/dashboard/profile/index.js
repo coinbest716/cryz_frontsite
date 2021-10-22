@@ -6,9 +6,10 @@ import NotificationButton from 'components/components/dashboard/NotificationButt
 import ProfileInfo from 'components/components/dashboard/Profile'
 import Personal from 'components/components/dashboard/Personal'
 import Health from 'components/components/dashboard/Health'
+import Graphic from 'components/components/dashboard/Graphic'
 
 const Profile = () => {
-  const [activeTab, setActiveTab] = useState({ personal: true, health: false })
+  const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
     surname: '',
@@ -42,6 +43,10 @@ const Profile = () => {
   const handleDiscardMeasure = () => {
     console.log('handleDiscardMeasure')
   }
+  const handleClickMeasureGraphic = tabType => {
+    console.log('handleClickMeasureGraphic')
+    setActiveTab({ [tabType]: true })
+  }
 
   return (
     <div className={'pt-10 pb-24 px-24 ' + styles.container}>
@@ -66,7 +71,7 @@ const Profile = () => {
           Personales
         </div>
         <div
-          className={activeTab.health ? styles.activeTab : styles.deactiveTab}
+          className={activeTab.health || activeTab.graphic ? styles.activeTab : styles.deactiveTab}
           onClick={() => handleClickTab('health')}
         >
           Antropométricos
@@ -81,7 +86,10 @@ const Profile = () => {
             handleDeleteAccount={handleDeleteAccount}
           />
         )}
-        {activeTab.health && <Health handleSave={handleSaveMeasure} handleDiscard={handleDiscardMeasure} />}
+        {activeTab.health && (
+          <Health handleSave={handleSaveMeasure} handleDiscard={handleDiscardMeasure} handleClickTab={handleClickTab} />
+        )}
+        {activeTab.graphic && <Graphic handleClickTab={handleClickTab} />}
       </div>
     </div>
   )
