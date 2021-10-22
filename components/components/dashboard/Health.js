@@ -7,12 +7,15 @@ import styles from './Health.module.scss'
 import measureGraphic from 'public/images/measure-graphic.svg'
 
 const Health = props => {
-  const { handleSave, handleDiscard, handleChangeHealth } = props
+  const { handleSave, handleDiscard, handleChangeHealth, handleClickTab } = props
 
   return (
     <div className={'px-16 py-8 ' + styles.container}>
       <div className="flex justify-between items-center">
-        <div className={'flex justify-between items-center ' + styles.measureGraphic}>
+        <div
+          className={'flex justify-between items-center ' + styles.measureGraphic}
+          onClick={() => handleClickTab('graphic')}
+        >
           <Image src={measureGraphic} width={38} height={34} />
         </div>
         <div className="flex justify-between items-center gap-6">
