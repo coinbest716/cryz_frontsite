@@ -9,9 +9,32 @@ import Health from 'components/components/dashboard/Health'
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState({ personal: true, health: false })
+  const [personalInfo, setPersonalInfo] = useState({
+    name: '',
+    surname: '',
+    email: '',
+    country: '',
+    address: '',
+    town: '',
+    data: '',
+    password: '',
+    meet: '',
+    telephone: '',
+    emergencyPhone: '',
+    code: '',
+    gender: '',
+  })
 
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
+  }
+  const handleSave = () => {}
+  const handleDiscard = () => {}
+  const handleChangePersonal = (event, key) => {
+    setPersonalInfo({ ...personalInfo, [key]: event.target.value })
+  }
+  const handleDeleteAccount = () => {
+    console.log('handleDeleteAccount')
   }
 
   return (
@@ -44,7 +67,14 @@ const Profile = () => {
         </div>
       </div>
       <div className="pt-4">
-        {activeTab.personal && <Personal />}
+        {activeTab.personal && (
+          <Personal
+            handleSave={handleSave}
+            handleDiscard={handleDiscard}
+            handleChangePersonal={handleChangePersonal}
+            handleDeleteAccount={handleDeleteAccount}
+          />
+        )}
         {activeTab.health && <Health />}
       </div>
     </div>
