@@ -1,0 +1,19 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px 0 rgba(108, 117, 125, 0.02);
+}
+.measureGraphic {
+  background-color: #818e8e;
+  border-radius: 6px;
+  padding: 18px 20px;
+  &:hover {
+    background-color: #818e8eb7;
+  }
+}
+.divider {
+  height: 1px;
+  border: 1px solid #ebefff;
+}
