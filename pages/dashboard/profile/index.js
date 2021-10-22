@@ -28,13 +28,19 @@ const Profile = () => {
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
   }
-  const handleSave = () => {}
-  const handleDiscard = () => {}
+  const handleSavePersonal = () => {}
+  const handleDiscardPersonal = () => {}
   const handleChangePersonal = (event, key) => {
     setPersonalInfo({ ...personalInfo, [key]: event.target.value })
   }
   const handleDeleteAccount = () => {
     console.log('handleDeleteAccount')
+  }
+  const handleSaveMeasure = () => {
+    console.log('handleSaveMeasure')
+  }
+  const handleDiscardMeasure = () => {
+    console.log('handleDiscardMeasure')
   }
 
   return (
@@ -66,16 +72,16 @@ const Profile = () => {
           Antropométricos
         </div>
       </div>
-      <div className="pt-4">
+      <div className="pt-7">
         {activeTab.personal && (
           <Personal
-            handleSave={handleSave}
-            handleDiscard={handleDiscard}
+            handleSavePersonal={handleSavePersonal}
+            handleDiscardPersonal={handleDiscardPersonal}
             handleChangePersonal={handleChangePersonal}
             handleDeleteAccount={handleDeleteAccount}
           />
         )}
-        {activeTab.health && <Health />}
+        {activeTab.health && <Health handleSave={handleSaveMeasure} handleDiscard={handleDiscardMeasure} />}
       </div>
     </div>
   )

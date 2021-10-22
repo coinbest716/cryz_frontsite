@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.5 36.451">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        stroke-width: 1.5px;
+      }
+    </style>
+  </defs>
+  <g id="Group_29" data-name="Group 29" transform="translate(0.75 0.75)">
+    <path id="Stroke_1" data-name="Stroke 1" class="cls-1" d="M0,1.942,2.136,0,4.272,1.942" transform="translate(0 0)"/>
+    <path id="Stroke_3" data-name="Stroke 3" class="cls-1" d="M0,0V32.621H37.282" transform="translate(1.942 0.388)"/>
+    <path id="Stroke_5" data-name="Stroke 5" class="cls-1" d="M0,0,1.942,2.136,0,4.272" transform="translate(38.058 30.68)"/>
+    <path id="Stroke_7" data-name="Stroke 7" class="cls-1" d="M5.049,2.524A2.524,2.524,0,1,1,2.524,0,2.524,2.524,0,0,1,5.049,2.524Z" transform="translate(4.66 17.476)"/>
+    <path id="Stroke_9" data-name="Stroke 9" class="cls-1" d="M5.049,2.524A2.524,2.524,0,1,1,2.524,0,2.524,2.524,0,0,1,5.049,2.524Z" transform="translate(12.816 9.709)"/>
+    <path id="Stroke_11" data-name="Stroke 11" class="cls-1" d="M5.049,2.524A2.524,2.524,0,1,1,2.524,0,2.524,2.524,0,0,1,5.049,2.524Z" transform="translate(22.524 17.476)"/>
+    <path id="Stroke_13" data-name="Stroke 13" class="cls-1" d="M5.049,2.524A2.524,2.524,0,1,1,2.524,0,2.524,2.524,0,0,1,5.049,2.524Z" transform="translate(33.01 4.66)"/>
+    <path id="Stroke_15" data-name="Stroke 15" class="cls-1" d="M0,3.5,4.272,0" transform="translate(9.32 14.369)"/>
+    <path id="Stroke_17" data-name="Stroke 17" class="cls-1" d="M0,0,5.437,4.272" transform="translate(17.476 13.981)"/>
+    <path id="Stroke_19" data-name="Stroke 19" class="cls-1" d="M0,8.544,6.99,0" transform="translate(26.796 9.32)"/>
+    <path id="Stroke_21" data-name="Stroke 21" class="cls-1" d="M.194,4.66V0" transform="translate(6.99 25.631)"/>
+    <path id="Stroke_23" data-name="Stroke 23" class="cls-1" d="M.194,12.427V0" transform="translate(15.146 17.864)"/>
+    <path id="Stroke_25" data-name="Stroke 25" class="cls-1" d="M.1,4.66V0" transform="translate(25.243 25.631)"/>
+    <path id="Stroke_27" data-name="Stroke 27" class="cls-1" d="M.194,17.476V0" transform="translate(35.34 12.816)"/>
+  </g>
+</svg>
