@@ -1,0 +1,40 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  position: relative;
+  max-width: 600px;
+  width: auto;
+  padding: 16px;
+  border-radius: 10px;
+  background-color: #c4c4c4;
+  display: inline-block;
+}
+
+.triangle {
+  position: absolute;
+  top: 0;
+  right: -9px;
+  width: 0;
+  height: 0;
+  border: 9px solid transparent;
+  border-bottom: 0;
+  border-top: 18px solid #c4c4c4;
+}
+
+.content {
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 17px;
+}
+
+.time {
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 15px;
+}
