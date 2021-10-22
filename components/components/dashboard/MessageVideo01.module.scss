@@ -1,0 +1,14 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 167px;
+  height: 101px;
+  opacity: 0.77;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+}
+
+.container video {
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+}
