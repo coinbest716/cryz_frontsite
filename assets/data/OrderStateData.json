@@ -1,0 +1,5 @@
+[
+  { "id": 0, "status": "Paid", "label": "PAGADO", "bgColor": "#54BD97" },
+  { "id": 1, "status": "Unpaid", "label": "IMPAGADO", "bgColor": "#BD5B54" },
+  { "id": 2, "status": "Cancelled", "label": "CANCELADO", "bgColor": "#A8BAB3" }
+]
