@@ -59,30 +59,30 @@ const Dashboard = () => {
   }
 
   const message = [
-    // {
-    //   name: 'Oluchi Mazi',
-    //   content: 'I’m getting a late today',
-    // },
-    // {
-    //   name: 'Shinohara Ryoma',
-    //   content: 'What are the homework…',
-    // },
-    // {
-    //   name: 'Paromita Haque',
-    //   content: 'I’m getting a late today',
-    // },
-    // {
-    //   name: 'Oluchi Mazi',
-    //   content: 'I’m getting a late today',
-    // },
-    // {
-    //   name: 'Shinohara Ryoma',
-    //   content: 'What are the homework…',
-    // },
-    // {
-    //   name: 'Paromita Haque',
-    //   content: 'I’m getting a late today',
-    // },
+    {
+      name: 'Oluchi Mazi',
+      content: 'I’m getting a late today',
+    },
+    {
+      name: 'Shinohara Ryoma',
+      content: 'What are the homework…',
+    },
+    {
+      name: 'Paromita Haque',
+      content: 'I’m getting a late today',
+    },
+    {
+      name: 'Oluchi Mazi',
+      content: 'I’m getting a late today',
+    },
+    {
+      name: 'Shinohara Ryoma',
+      content: 'What are the homework…',
+    },
+    {
+      name: 'Paromita Haque',
+      content: 'I’m getting a late today',
+    },
   ]
 
   const mark = ['21-10-2021', '22-10-2021', '23-10-2021']

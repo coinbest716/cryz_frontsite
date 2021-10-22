@@ -34,8 +34,10 @@ const LiveStreaming = () => {
           </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
-          <div className="flex justify-between items-center">
-            <NotificationButton />
+          <div className="flex justify-end items-center">
+            <div className="pr-4">
+              <NotificationButton />
+            </div>
             <Profile />
           </div>
           <div className="rounded-xl bg-white py-4 px-16 pb-10 mt-10">
