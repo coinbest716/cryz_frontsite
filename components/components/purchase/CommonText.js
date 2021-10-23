@@ -4,7 +4,7 @@ import styles from './CommonText.module.scss'
 const CommonText = props => {
   const { handleChange, value, label, placeholder, type, list } = props
   return (
-    <div className="max-w-lg">
+    <div className="max-w-sm">
       <div className={styles.label + ' pb-2'}>
         <p>{label}</p>
       </div>
