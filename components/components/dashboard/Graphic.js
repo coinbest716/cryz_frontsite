@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import CommonButton from 'components/components/purchase/CommonButton'
 import CommonText from 'components/components/purchase/CommonText'
@@ -11,6 +11,8 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const Graphic = props => {
   const { handleClickTab } = props
+  const [monthIndex, setMonthIndex] = useState(0)
+  const month = ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic']
 
   const fatChartOptions = {
     series: [
@@ -128,7 +130,7 @@ const Graphic = props => {
     },
   }
 
-  const perimeterChartOptions = {
+  const [perimeterChartOptions, setPerimeterChartOptions] = useState({
     series: [
       {
         name: 'perimeters',
@@ -158,7 +160,56 @@ const Graphic = props => {
       yaxis: {
         show: true,
       },
+      theme: {
+        monochrome: {
+          enabled: true,
+          color: '#818E8E',
+          shadeTo: 'light',
+        },
+      },
     },
+  })
+
+  let monthData = [
+    [10, 14, 16, 20],
+    [16, 20, 10, 14],
+    [14, 11, 18, 30],
+    [10, 14, 16, 20],
+    [16, 20, 10, 14],
+    [14, 11, 18, 30],
+    [10, 14, 16, 20],
+    [16, 20, 10, 14],
+    [14, 11, 18, 30],
+    [10, 14, 16, 20],
+    [16, 20, 10, 14],
+    [14, 11, 18, 30],
+  ]
+
+  const handleClickMonth = type => {
+    let newObj = JSON.parse(JSON.stringify(perimeterChartOptions))
+
+    const _monthIndex = monthIndex
+    if (type === 'previous') {
+      if (_monthIndex <= 0) {
+        setMonthIndex(11)
+        newObj.series[0].data = monthData[11]
+        setPerimeterChartOptions(newObj)
+      } else {
+        setMonthIndex(_monthIndex - 1)
+        newObj.series[0].data = monthData[_monthIndex - 1]
+        setPerimeterChartOptions(newObj)
+      }
+    } else if (type === 'next') {
+      if (_monthIndex >= 11) {
+        setMonthIndex(0)
+        newObj.series[0].data = monthData[0]
+        setPerimeterChartOptions(newObj)
+      } else {
+        setMonthIndex(_monthIndex + 1)
+        newObj.series[0].data = monthData[_monthIndex - 1]
+        setPerimeterChartOptions(newObj)
+      }
+    }
   }
 
   return (
@@ -184,7 +235,21 @@ const Graphic = props => {
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12 flex justify-center items-center">
           <div>
-            <div className={'pb-8 ' + styles.title}>Perímetros</div>
+            <div className="flex justify-between items-center">
+              <div className={'pb-8 ' + styles.title}>Perímetros</div>
+              <div className="flex justify-between items-center">
+                <div
+                  className="p-1 rounded-2xl bg-gray-200 cursor-pointer"
+                  onClick={() => handleClickMonth('previous')}
+                >
+                  <img src="/images/message-left.svg" style={{ width: '10px', height: '10px' }}></img>
+                </div>
+                <div className={'px-2 w-8 text-center ' + styles.month}>{month[monthIndex]}</div>
+                <div className="p-1 rounded-2xl bg-gray-200 cursor-pointer" onClick={() => handleClickMonth('next')}>
+                  <img src="/images/message-right.svg" style={{ width: '10px', height: '10px' }}></img>
+                </div>
+              </div>
+            </div>
             <Chart
               options={perimeterChartOptions.options}
               series={perimeterChartOptions.series}
