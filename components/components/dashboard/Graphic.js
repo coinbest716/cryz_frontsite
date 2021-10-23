@@ -11,7 +11,7 @@ const Graphic = props => {
   const { handleClickTab } = props
 
   return (
-    <div className={'px-16 py-8 ' + styles.container}>
+    <div className={'px-20 py-8 ' + styles.container}>
       <div className="flex justify-start items-center">
         <div
           className={'flex justify-between items-center ' + styles.measureGraphic}

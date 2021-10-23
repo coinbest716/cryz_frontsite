@@ -25,6 +25,23 @@ const Profile = () => {
     code: '',
     gender: '',
   })
+  const [healthInfo, setHealthInfo] = useState({
+    fatPercentage: '',
+    visceralFat: '',
+    boneMass: '',
+    bodyMass: '',
+    waterPercentage: '',
+    muscleMass: '',
+    metabolicExpense: '',
+    metabolicAge: '',
+    weight: '',
+    height: '',
+    waist: '',
+    arm: '',
+    hips: '',
+    thigh: '',
+    twin: '',
+  })
 
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
@@ -46,6 +63,9 @@ const Profile = () => {
   const handleClickMeasureGraphic = tabType => {
     console.log('handleClickMeasureGraphic')
     setActiveTab({ [tabType]: true })
+  }
+  const handleChangeHealth = (event, key) => {
+    setHealthInfo({ ...healthInfo, [key]: event.target.value })
   }
 
   return (
@@ -87,7 +107,12 @@ const Profile = () => {
           />
         )}
         {activeTab.health && (
-          <Health handleSave={handleSaveMeasure} handleDiscard={handleDiscardMeasure} handleClickTab={handleClickTab} />
+          <Health
+            handleSave={handleSaveMeasure}
+            handleDiscard={handleDiscardMeasure}
+            handleClickTab={handleClickTab}
+            handleChangeHealth={handleChangeHealth}
+          />
         )}
         {activeTab.graphic && <Graphic handleClickTab={handleClickTab} />}
       </div>
