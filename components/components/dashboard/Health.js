@@ -19,8 +19,8 @@ const Health = props => {
           <Image src={measureGraphic} width={38} height={34} />
         </div>
         <div className="flex justify-between items-center gap-6">
-          <CommonButton label={'Descartar'} handleClick={handleSave} type={'outline'} />
-          <CommonButton label={'Aprobar cambios'} handleClick={handleDiscard} type={'fill'} />
+          <CommonButton label={'Descartar'} handleClick={handleDiscard} type={'outline'} />
+          <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
         </div>
       </div>
       <div className={'w-full my-6 ' + styles.divider} />

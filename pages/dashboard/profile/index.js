@@ -46,8 +46,12 @@ const Profile = () => {
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
   }
-  const handleSavePersonal = () => {}
-  const handleDiscardPersonal = () => {}
+  const handleSavePersonal = () => {
+    console.log('handleSavePersonal')
+  }
+  const handleDiscardPersonal = () => {
+    console.log('handleDiscardPersonal')
+  }
   const handleChangePersonal = (event, key) => {
     setPersonalInfo({ ...personalInfo, [key]: event.target.value })
   }
@@ -100,8 +104,8 @@ const Profile = () => {
       <div className="pt-7">
         {activeTab.personal && (
           <Personal
-            handleSavePersonal={handleSavePersonal}
-            handleDiscardPersonal={handleDiscardPersonal}
+            handleSave={handleSavePersonal}
+            handleDiscard={handleDiscardPersonal}
             handleChangePersonal={handleChangePersonal}
             handleDeleteAccount={handleDeleteAccount}
           />

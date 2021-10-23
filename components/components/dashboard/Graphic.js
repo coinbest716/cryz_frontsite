@@ -21,6 +21,10 @@ const Graphic = props => {
         </div>
       </div>
       <div className={'w-full my-6 ' + styles.divider} />
+      <div className="grid grid-cols-12 gap-4 px-10">
+        <div className="col-span-12 md:col-span-6 sm:col-span-12"></div>
+        <div className="col-span-12 md:col-span-6 sm:col-span-12"></div>
+      </div>
     </div>
   )
 }

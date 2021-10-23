@@ -20,8 +20,8 @@ const Personal = props => {
             </div>
           </div>
           <div className="flex justify-between items-center gap-6">
-            <CommonButton label={'Descartar'} handleClick={handleSave} type={'outline'} />
-            <CommonButton label={'Aprobar cambios'} handleClick={handleDiscard} type={'fill'} />
+            <CommonButton label={'Descartar'} handleClick={handleDiscard} type={'outline'} />
+            <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
           </div>
         </div>
         <div className="grid grid-cols-12 gap-12 pt-16">
