@@ -7,13 +7,13 @@
   overflow: hidden;
 }
 .topTitle {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 35px;
+  letter-spacing: 0px;
   background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
-  font-size: 54px;
-  width: 382.97px;
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  transform: scale(1, 0.8);
-  font-weight: bold;
+  display: inline-grid;
 }
 .topDash {
   width: 42px;
