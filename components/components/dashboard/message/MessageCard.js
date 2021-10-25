@@ -4,12 +4,12 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from './ProfessionalBox.module.scss'
+import styles from './MessageCard.module.scss'
 
 // images
 import CheckIcon from 'assets/images/check.svg'
 
-const ProfessionalBox = () => {
+const MessageCard = () => {
   return (
     <div className={styles.container}>
       <div className={'flex justify-start'}>
@@ -29,4 +29,4 @@ const ProfessionalBox = () => {
   )
 }
 
-export default ProfessionalBox
+export default MessageCard
