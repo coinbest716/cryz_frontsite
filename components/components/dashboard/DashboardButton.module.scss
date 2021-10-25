@@ -108,6 +108,9 @@
   border: 0.8px solid #7d8f8e;
   border-radius: 4px;
   cursor: pointer;
+  &:hover {
+    background-color: #818e8e11;
+  }
 }
 .plusSection {
   background-color: #818e8e;

@@ -35,9 +35,6 @@ const Billing = () => {
     console.log('handleMinusCollapse')
   }
 
-  // <DashboardButton handleClick={handlePlusCollapse} label={''} type={'plusCollapse'} />
-  // <DashboardButton handleClick={handleMinusCollapse} label={''} type={'minusCollapse'} />
-
   return (
     <div className={'pt-10 pb-24 px-24 ' + styles.container}>
       <div className="flex justify-between">
