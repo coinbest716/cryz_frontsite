@@ -142,12 +142,14 @@
 .plusRoundLetter {
   color: #c4c4c4;
   font-size: 20px;
-  top: -50%;
-  left: 15%;
+  width: 50%;
+  height: 50%;
+  transform: translate(28%, -202%);
 }
 .minusRoundLetter {
   color: #c4c4c4;
   font-size: 20px;
-  top: -50%;
-  left: 30%;
+  width: 50%;
+  height: 50%;
+  transform: translate(49%, -202%);
 }
