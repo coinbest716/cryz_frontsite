@@ -1,0 +1,32 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  height: 56px;
+  border-radius: 10px;
+  background-color: $white-color;
+  display: flex;
+  justify-content: space-between;
+}
+.inputArea {
+  width: calc(100% - 40px);
+  margin-left: 16px;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+}
+.input {
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.iconArea {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+}
