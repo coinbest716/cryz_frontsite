@@ -228,7 +228,6 @@ const Header = props => {
   }
 
   const handleBack = () => {
-    console.log('=-=================')
     setOpenCart(false)
   }
 

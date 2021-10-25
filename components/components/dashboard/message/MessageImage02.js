@@ -4,12 +4,12 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from 'components/components/dashboard/MessageImage01.module.scss'
+import styles from 'components/components/dashboard/message/MessageImage02.module.scss'
 
 // images and icons
 import DownloadIcon from 'assets/images/download.svg'
 
-const MessageImage01 = props => {
+const MessageImage02 = props => {
   const { message } = props
   return (
     <div className={'relative inline-grid'}>
@@ -23,4 +23,4 @@ const MessageImage01 = props => {
   )
 }
 
-export default MessageImage01
+export default MessageImage02

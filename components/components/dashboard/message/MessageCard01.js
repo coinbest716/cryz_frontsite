@@ -1,14 +1,17 @@
 import React from 'react'
 
-// styles
-import styles from 'components/components/dashboard/MessageCard02.module.scss'
+// next components
+import Image from 'next/image'
 
-const MessageCard02 = props => {
+// styles
+import styles from 'components/components/dashboard/message/MessageCard01.module.scss'
+
+const MessageCard01 = props => {
   const { message } = props
   return (
     <div className={styles.container}>
       <div className={styles.content}>{message.content}</div>
-      <div className={'mt-4 flex justify-start items-center'}>
+      <div className={'mt-4 flex justify-end items-center'}>
         <div className={styles.time}>{message.time}</div>
       </div>
       <div className={styles.triangle}></div>
@@ -16,4 +19,4 @@ const MessageCard02 = props => {
   )
 }
 
-export default MessageCard02
+export default MessageCard01
