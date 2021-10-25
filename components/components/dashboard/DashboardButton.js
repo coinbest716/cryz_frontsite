@@ -70,12 +70,12 @@ const DashboardButton = props => {
         </button>
       )}
       {type === 'plusCollapse' && (
-        <button className={'relative ' + styles.plusRoundSection}>
+        <button className={'relative ' + styles.plusRoundSection} onClick={handleClick}>
           <div className={'absolute ' + styles.plusRoundLetter}>+</div>
         </button>
       )}
       {type === 'minusCollapse' && (
-        <button className={'relative ' + styles.plusRoundSection}>
+        <button className={'relative ' + styles.plusRoundSection} onClick={handleClick}>
           <div className={'absolute  ' + styles.minusRoundLetter}>-</div>
         </button>
       )}
