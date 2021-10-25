@@ -52,7 +52,7 @@ const Services = () => {
         <div className={styles.container}>
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
-              <div className={styles.topTitle}>Fem Health</div>
+              <div className={styles.topTitle}>Servicios</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription}>
                 En Crys & CO ofrecemos un servicio personalizado y de calidad, especializado en planes 360 y a medida.

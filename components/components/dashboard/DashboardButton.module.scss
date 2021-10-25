@@ -101,3 +101,55 @@
   border-radius: 10px;
   background-color: #818e8e;
 }
+
+.addBilling {
+  height: 40.8px;
+  width: 163.8px;
+  border: 0.8px solid #7d8f8e;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: #818e8e11;
+  }
+}
+.plusSection {
+  background-color: #818e8e;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+}
+.plusLetter {
+  color: white;
+  font-size: 20px;
+  top: -34%;
+  left: 20%;
+}
+.plusLabel {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.plusRoundSection {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  border: 2px solid #c4c4c4;
+  cursor: pointer;
+}
+.plusRoundLetter {
+  color: #c4c4c4;
+  font-size: 20px;
+  width: 50%;
+  height: 50%;
+  transform: translate(28%, -202%);
+}
+.minusRoundLetter {
+  color: #c4c4c4;
+  font-size: 20px;
+  width: 50%;
+  height: 50%;
+  transform: translate(49%, -202%);
+}

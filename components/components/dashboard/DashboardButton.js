@@ -61,6 +61,24 @@ const DashboardButton = props => {
           <img src="/images/height.svg" alt="" style={{ width: '25px', height: '25px' }} />
         </button>
       )}
+      {type === 'addBilling' && (
+        <button className={'flex justify-around items-center ' + styles.addBilling} onClick={handleClick}>
+          <div className={'relative ' + styles.plusSection}>
+            <div className={'absolute ' + styles.plusLetter}>+</div>
+          </div>
+          <p className={'pr-3 ' + styles.plusLabel}>{label}</p>
+        </button>
+      )}
+      {type === 'plusCollapse' && (
+        <button className={'relative ' + styles.plusRoundSection} onClick={handleClick}>
+          <div className={'absolute ' + styles.plusRoundLetter}>+</div>
+        </button>
+      )}
+      {type === 'minusCollapse' && (
+        <button className={'relative ' + styles.plusRoundSection} onClick={handleClick}>
+          <div className={'absolute  ' + styles.minusRoundLetter}>-</div>
+        </button>
+      )}
     </>
   )
 }

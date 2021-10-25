@@ -2,8 +2,31 @@
 
 .container {
   width: 100%;
-  display: flex;
-  justify-content: center;
   background-color: #f5f6fa;
-  height: 100vh;
+}
+.highBoldLabel {
+  color: #2a2c36;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.mediumLabel {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.divider {
+  height: 1px;
+  width: 100%;
+  border: 1px solid #ebefff;
+}
+.AddressSection {
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px 0 rgba(108, 117, 125, 0.02);
 }
