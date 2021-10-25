@@ -18,7 +18,6 @@ const MessageInput = props => {
   }, [message])
 
   const handleSetContent = event => {
-    console.log('event', event)
     setContent(event.target.value)
   }
 
