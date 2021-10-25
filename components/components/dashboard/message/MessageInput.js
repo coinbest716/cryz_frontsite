@@ -4,7 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from 'components/components/dashboard/MessageInput.module.scss'
+import styles from 'components/components/dashboard/message/MessageInput.module.scss'
 
 // images
 import SendIcon from 'assets/images/send.svg'
@@ -18,14 +18,17 @@ const MessageInput = props => {
   }, [message])
 
   const handleSetContent = event => {
+    console.log('event', event)
     setContent(event.target.value)
   }
+
   return (
     <div className={styles.container}>
       <div className={styles.inputArea}>
         <input
           type={'text'}
           value={content}
+          placeholder={'Escribe tu mensaje'}
           onChange={event => handleSetContent(event)}
           className={
             'appearance-none bg-white border-none w-full leading-tight focus:outline-none focus ' + styles.input
