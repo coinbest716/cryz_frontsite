@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './billing.module.scss'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
@@ -20,6 +20,7 @@ const Billing = () => {
     postalCode: '',
     collapse: true,
   })
+  const [addressDataList, setAddressDataList] = useState([])
 
   const addressMockupData = [
     {
@@ -48,20 +49,33 @@ const Billing = () => {
     },
   ]
 
+  useEffect(() => {
+    setAddressDataList(addressMockupData)
+  }, [])
+
   const handleAddAddress = () => {
     console.log('handleAddAddress')
+    let _addressDataList = [...addressDataList]
+    _addressDataList.push(addressInfo)
+    setAddressDataList(_addressDataList)
   }
-  const handleChangeAddress = (event, key) => {
-    setAddressInfo({ ...addressInfo, [key]: event.target.value })
+  const handleChangeAddress = (event, key, index) => {
+    let newArr = [...addressDataList]
+    newArr[index][key] = event.target.value
+    setAddressDataList(newArr)
   }
-  const handleSaveAddress = () => {}
-  const handleDeleteAddress = () => {}
+  const handleSaveAddress = index => {
+    console.log('handleSaveAddress', index)
+  }
+  const handleDeleteAddress = index => {
+    let newArr = [...addressDataList]
+    newArr.splice(index, 1)
+    setAddressDataList(newArr)
+  }
   const handlePlusCollapse = index => {
-    console.log('handlePlusCollapse = ', index)
-    let newArr = JSON.parse(JSON.stringify())
-    // let newArr = [...addressInfo]
+    let newArr = [...addressDataList]
     newArr[index].collapse = !newArr[index].collapse
-    setAddressInfo(newArr)
+    setAddressDataList(newArr)
   }
 
   return (
@@ -81,13 +95,13 @@ const Billing = () => {
       <div className="pt-12">
         <DashboardButton handleClick={handleAddAddress} label={'Añadir dirección'} type={'addBilling'} />
       </div>
-      {addressMockupData.map((item, index) => (
+      {addressDataList.map((item, index) => (
         <div className={'px-16 py-10 mt-6 ' + styles.AddressSection} key={index}>
           <div className="flex justify-between items-center">
             <div className="flex justify-start items-center">
               <div className="py-2 w-2/5">
                 <CommonText
-                  handleChange={e => handleChangeAddress(e, 'name')}
+                  handleChange={e => handleChangeAddress(e, 'name', index)}
                   label={'Nombre completo'}
                   placeholder={''}
                   type={'text'}
@@ -96,7 +110,7 @@ const Billing = () => {
               </div>
               <div className="py-2 px-6 w-2/5">
                 <CommonText
-                  handleChange={e => handleChangeAddress(e, 'title')}
+                  handleChange={e => handleChangeAddress(e, 'title', index)}
                   label={'Titulo'}
                   placeholder={''}
                   type={'text'}
@@ -105,7 +119,7 @@ const Billing = () => {
               </div>
               <div className="py-2 w-1/5">
                 <CommonText
-                  handleChange={e => handleChangeAddress(e, 'cif')}
+                  handleChange={e => handleChangeAddress(e, 'cif', index)}
                   label={'CIF'}
                   placeholder={''}
                   type={'text'}
@@ -121,7 +135,7 @@ const Billing = () => {
               )}
             </div>
           </div>
-          {item.collapse && (
+          {!item.collapse && (
             <div className="pt-10">
               <div className={styles.divider}></div>
               <div className="px-40 py-10">
@@ -129,7 +143,7 @@ const Billing = () => {
                   <div className="col-span-12 md:col-span-6 sm:col-span-12">
                     <div className="py-2">
                       <CommonText
-                        handleChange={e => handleChangeAddress(e, 'email')}
+                        handleChange={e => handleChangeAddress(e, 'email', index)}
                         label={'Email'}
                         placeholder={''}
                         type={'email'}
@@ -138,7 +152,7 @@ const Billing = () => {
                     </div>
                     <div className="py-2">
                       <CommonText
-                        handleChange={e => handleChangeAddress(e, 'address')}
+                        handleChange={e => handleChangeAddress(e, 'address', index)}
                         label={'Dirección facturación'}
                         placeholder={''}
                         type={'address'}
@@ -147,7 +161,7 @@ const Billing = () => {
                     </div>
                     <div className="py-2">
                       <CommonText
-                        handleChange={e => handleChangeAddress(e, 'country')}
+                        handleChange={e => handleChangeAddress(e, 'country', index)}
                         label={'Pais'}
                         placeholder={''}
                         type={'country'}
@@ -158,7 +172,7 @@ const Billing = () => {
                   <div className="col-span-12 md:col-span-6 sm:col-span-12">
                     <div className="py-2">
                       <CommonText
-                        handleChange={e => handleChangeAddress(e, 'nif')}
+                        handleChange={e => handleChangeAddress(e, 'nif', index)}
                         label={'NIF/NIE'}
                         placeholder={''}
                         type={'nif'}
@@ -167,7 +181,7 @@ const Billing = () => {
                     </div>
                     <div className="py-2">
                       <CommonText
-                        handleChange={e => handleChangeAddress(e, 'phone')}
+                        handleChange={e => handleChangeAddress(e, 'phone', index)}
                         label={'Teléfono'}
                         placeholder={''}
                         type={'phone'}
@@ -176,7 +190,7 @@ const Billing = () => {
                     </div>
                     <div className="py-2">
                       <CommonText
-                        handleChange={e => handleChangeAddress(e, 'postalCode')}
+                        handleChange={e => handleChangeAddress(e, 'postalCode', index)}
                         label={'CP'}
                         placeholder={''}
                         type={'postalCode'}
@@ -187,8 +201,8 @@ const Billing = () => {
                 </div>
               </div>
               <div className="flex justify-end gap-5">
-                <CommonButton label={'Borrar Cuenta'} handleClick={handleDeleteAddress} type={'icon'} />
-                <CommonButton label={'Aprobar cambios'} handleClick={handleSaveAddress} type={'fill'} />
+                <CommonButton label={'Borrar Cuenta'} handleClick={() => handleDeleteAddress(index)} type={'icon'} />
+                <CommonButton label={'Aprobar cambios'} handleClick={() => handleSaveAddress(index)} type={'fill'} />
               </div>
             </div>
           )}
