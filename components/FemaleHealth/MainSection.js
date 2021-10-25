@@ -3,6 +3,9 @@ import Image from 'next/image'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 
+// next components
+import { useRouter } from 'next/router'
+
 // custom component
 import CircularMark from 'components/components/CircularMark'
 
@@ -17,11 +20,23 @@ import globalStyles from 'styles/GlobalStyle.module.scss'
 import styles from 'components/FemaleHealth/MainSection.module.scss'
 
 const MainSection = () => {
+  const router = useRouter()
   const [sliderData, setSliderData] = React.useState([])
 
   React.useEffect(() => {
     setSliderData(FemaleHealthCarouselData)
   }, [])
+
+  const handleGotoDiscipline = () => {
+    const sectionPosition = document.getElementById('discipline').offsetTop
+    window.scrollTo({
+      top: sectionPosition,
+      behavior: 'smooth',
+    })
+    setTimeout(() => {
+      router.push('/female-health#discipline')
+    }, 500)
+  }
   return (
     <div className={'w-full p-0'}>
       <div className={'relative w-full p-0 m-0 h-screen flex flex-wrap justify-center ' + styles.container}>
@@ -94,7 +109,10 @@ const MainSection = () => {
         </div>
         {/* continue browsing part */}
         <div className={globalStyles.container + ' absolute bottom-0'}>
-          <div className={'absolute bottom-0 block jusity-center cursor-pointer right-10 '}>
+          <div
+            className={'absolute bottom-0 block jusity-center cursor-pointer right-10 '}
+            onClick={() => handleGotoDiscipline()}
+          >
             <div className={styles.continueBrowsing}>Seguir navegando</div>
             <Image src={StarGroup} alt="" width={29} height={64} />
           </div>

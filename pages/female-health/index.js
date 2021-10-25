@@ -10,7 +10,9 @@ const FemaleHealth = () => {
   return (
     <div className={styles.container}>
       <MainSection />
-      <DisciplineSection />
+      <div id="discipline" className="w-full block">
+        <DisciplineSection />
+      </div>
     </div>
   )
 }
