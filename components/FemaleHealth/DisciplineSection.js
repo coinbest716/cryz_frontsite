@@ -51,10 +51,10 @@ const DisciplineSection = () => {
     {
       id: 0,
       elem: [
-        { id: 1, width: 3, pos: 1 },
-        { id: 2, width: 1, pos: 2 },
-        { id: 3, width: 1, pos: 3 },
-        { id: 4, width: 1, pos: 4 },
+        { id: 1, width: 2, pos: 1 },
+        { id: 2, width: 2, pos: 2 },
+        { id: 3, width: 2, pos: 3 },
+        { id: 4, width: 2, pos: 4 },
         { id: 5, width: 3, pos: 5 },
         { id: 6, width: 2, pos: 6 },
         { id: 7, width: 2, pos: 7 },
