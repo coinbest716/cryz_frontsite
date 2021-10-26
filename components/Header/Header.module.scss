@@ -29,22 +29,11 @@
   color: $black-950-color;
   cursor: pointer;
 }
-.hamburgerMenu {
-  width: 80px;
-  height: 80px;
-  background-color: $blue-gray-400-color;
-  &:hover {
-    font-weight: 700;
-    border-bottom: 3px solid $pink-100-color;
-  }
-  border-bottom: 1px solid $gray-500-color;
-}
 
 .menuItem {
   height: 80px;
   &:hover {
     font-weight: 700;
-    border-bottom: 3px solid $pink-100-color;
   }
 }
 
@@ -93,8 +82,7 @@
 }
 
 .dropdown:hover .dropbtn {
-  font-weight: 700;
-  border-bottom: 1px solid $pink-100-color;
+  border-bottom: 3px solid $pink-100-color;
 }
 
 .dropdownContent {
@@ -153,7 +141,7 @@
   display: flex;
   flex-wrap: wrap;
   white-space: nowrap;
-  justify-content: center;
+  text-align: left;
   &:hover {
     font-weight: 700;
     border-bottom: 1px solid $pink-100-color;
