@@ -6,13 +6,15 @@
 }
 
 .title {
+  display: inline-grid;
   font-family: DrukWideCyWeb-Bold;
-  font-size: 28px;
-  line-height: 32px;
+  font-size: 32px;
+  line-height: 100%;
   letter-spacing: 0px;
   background: -webkit-linear-gradient(19.89deg, #d2aea1 0%, #5f5e5e 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
 }
 
 .divider {
@@ -46,6 +48,10 @@
   line-height: 36px;
   color: $blue-gray-400-color;
   margin-top: 26px;
+}
+
+.continueBrowsingArea {
+  bottom: -42px;
 }
 
 .continueBrowsing {
