@@ -3,6 +3,9 @@ import Image from 'next/image'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 
+// next components
+import { useRouter } from 'next/router'
+
 // custom component
 import CircularMark from 'components/components/CircularMark'
 
@@ -17,18 +20,30 @@ import globalStyles from 'styles/GlobalStyle.module.scss'
 import styles from 'components/FemaleHealth/MainSection.module.scss'
 
 const MainSection = () => {
+  const router = useRouter()
   const [sliderData, setSliderData] = React.useState([])
 
   React.useEffect(() => {
     setSliderData(FemaleHealthCarouselData)
   }, [])
+
+  const handleGotoDiscipline = () => {
+    const sectionPosition = document.getElementById('discipline').offsetTop
+    window.scrollTo({
+      top: sectionPosition,
+      behavior: 'smooth',
+    })
+    setTimeout(() => {
+      router.push('/female-health#discipline')
+    }, 500)
+  }
   return (
     <div className={'w-full p-0'}>
       <div className={'relative w-full p-0 m-0 h-screen flex flex-wrap justify-center ' + styles.container}>
         {/* carousel part */}
         <div className={'relative h-full grid grid-cols-12 gap-4'}>
           <div className={'col-span-5 flex'}></div>
-          <div className={'col-span-7 flex'}>
+          <div className={'col-span-7 flex ml-0 md:ml-11'}>
             <div className={'col-span-7 flex justify-center items-center'}>
               <div>
                 {sliderData.length !== 0 ? (
@@ -45,7 +60,7 @@ const MainSection = () => {
                     interval={3000}
                   >
                     {sliderData.map((item, index) => (
-                      <div key={index} className="mx-1">
+                      <div key={index} className="mx-1.5">
                         <Image src={item.image} alt="" width={283} height={544} />
                       </div>
                     ))}
@@ -62,14 +77,11 @@ const MainSection = () => {
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-5 flex'}>
               <div className={'w-full'}>
-                <div className={'flex'}>
-                  <p className={styles.title}>
-                    Salud
-                    <br />
-                    FEM.
-                  </p>
+                <div className={'inline-grid'}>
+                  <p className={styles.title}>Salud</p>
+                  <p className={styles.title}>FEM.</p>
                 </div>
-                <div className={'w-full mt-4 flex items-end '}>
+                <div className={'w-full flex items-end '}>
                   <div className={styles.divider} />
                   <div className={'ml-4 mr-2 ' + styles.byText}>by</div>
                   <div className={styles.subTitle}>CRYS DYAZ</div>
@@ -93,8 +105,11 @@ const MainSection = () => {
           </div>
         </div>
         {/* continue browsing part */}
-        <div className={globalStyles.container + ' absolute bottom-0'}>
-          <div className={'absolute bottom-0 block jusity-center cursor-pointer right-10 '}>
+        <div className={globalStyles.container + ' absolute bottom-0 ' + styles.continueBrowsingArea}>
+          <div
+            className={'absolute bottom-0 block jusity-center cursor-pointer right-10 '}
+            onClick={() => handleGotoDiscipline()}
+          >
             <div className={styles.continueBrowsing}>Seguir navegando</div>
             <Image src={StarGroup} alt="" width={29} height={64} />
           </div>
