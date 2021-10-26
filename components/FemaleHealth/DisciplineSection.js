@@ -51,39 +51,39 @@ const DisciplineSection = () => {
     {
       id: 0,
       elem: [
-        { id: 1, width: 1, pos: 1 },
+        { id: 1, width: 3, pos: 1 },
         { id: 2, width: 1, pos: 2 },
         { id: 3, width: 1, pos: 3 },
         { id: 4, width: 1, pos: 4 },
-        { id: 5, width: 2, pos: 5 },
-        { id: 6, width: 1, pos: 6 },
-        { id: 7, width: 1, pos: 7 },
+        { id: 5, width: 3, pos: 5 },
+        { id: 6, width: 2, pos: 6 },
+        { id: 7, width: 2, pos: 7 },
       ],
     },
     // box01 selected
     {
       id: 1,
       elem: [
-        { id: 1, width: 2, pos: 1 },
-        { id: 3, width: 1, pos: 2 },
-        { id: 4, width: 1, pos: 3 },
-        { id: 5, width: 1, pos: 4 },
-        { id: 2, width: 1, pos: 5 },
-        { id: 6, width: 1, pos: 6 },
-        { id: 7, width: 1, pos: 7 },
+        { id: 1, width: 3, pos: 1 },
+        { id: 2, width: 1, pos: 2 },
+        { id: 3, width: 1, pos: 3 },
+        { id: 4, width: 1, pos: 4 },
+        { id: 5, width: 3, pos: 5 },
+        { id: 6, width: 2, pos: 6 },
+        { id: 7, width: 2, pos: 7 },
       ],
     },
     // box02 selected
     {
       id: 2,
       elem: [
-        { id: 2, width: 2, pos: 1 },
-        { id: 3, width: 1, pos: 2 },
-        { id: 4, width: 1, pos: 3 },
-        { id: 5, width: 1, pos: 4 },
-        { id: 1, width: 1, pos: 5 },
-        { id: 6, width: 1, pos: 6 },
-        { id: 7, width: 1, pos: 7 },
+        { id: 1, width: 1, pos: 1 },
+        { id: 2, width: 3, pos: 2 },
+        { id: 3, width: 1, pos: 3 },
+        { id: 4, width: 1, pos: 4 },
+        { id: 5, width: 3, pos: 5 },
+        { id: 6, width: 2, pos: 6 },
+        { id: 7, width: 2, pos: 7 },
       ],
     },
     // box03 selected
@@ -91,12 +91,12 @@ const DisciplineSection = () => {
       id: 3,
       elem: [
         { id: 1, width: 1, pos: 1 },
-        { id: 3, width: 2, pos: 2 },
-        { id: 4, width: 1, pos: 3 },
-        { id: 5, width: 1, pos: 4 },
-        { id: 2, width: 1, pos: 5 },
-        { id: 6, width: 1, pos: 6 },
-        { id: 7, width: 1, pos: 7 },
+        { id: 2, width: 1, pos: 2 },
+        { id: 3, width: 3, pos: 3 },
+        { id: 4, width: 1, pos: 4 },
+        { id: 5, width: 3, pos: 5 },
+        { id: 6, width: 2, pos: 6 },
+        { id: 7, width: 2, pos: 7 },
       ],
     },
     // box04 selected
@@ -105,50 +105,50 @@ const DisciplineSection = () => {
       elem: [
         { id: 1, width: 1, pos: 1 },
         { id: 2, width: 1, pos: 2 },
-        { id: 4, width: 2, pos: 3 },
-        { id: 5, width: 1, pos: 4 },
-        { id: 3, width: 1, pos: 5 },
-        { id: 6, width: 1, pos: 6 },
-        { id: 7, width: 1, pos: 7 },
+        { id: 3, width: 1, pos: 3 },
+        { id: 4, width: 3, pos: 4 },
+        { id: 5, width: 3, pos: 5 },
+        { id: 6, width: 2, pos: 6 },
+        { id: 7, width: 2, pos: 7 },
       ],
     },
     // box05 selected
     {
       id: 5,
       elem: [
-        { id: 1, width: 1, pos: 1 },
-        { id: 2, width: 1, pos: 2 },
-        { id: 3, width: 1, pos: 3 },
-        { id: 4, width: 1, pos: 4 },
-        { id: 5, width: 2, pos: 5 },
-        { id: 6, width: 1, pos: 6 },
-        { id: 7, width: 1, pos: 7 },
+        { id: 1, width: 2, pos: 1 },
+        { id: 2, width: 2, pos: 2 },
+        { id: 3, width: 2, pos: 3 },
+        { id: 4, width: 2, pos: 4 },
+        { id: 5, width: 3, pos: 5 },
+        { id: 6, width: 2, pos: 6 },
+        { id: 7, width: 2, pos: 7 },
       ],
     },
     // box06 selected
     {
       id: 6,
       elem: [
-        { id: 1, width: 1, pos: 1 },
-        { id: 2, width: 1, pos: 2 },
-        { id: 3, width: 1, pos: 3 },
-        { id: 4, width: 1, pos: 4 },
-        { id: 5, width: 1, pos: 5 },
-        { id: 6, width: 2, pos: 6 },
-        { id: 7, width: 1, pos: 7 },
+        { id: 1, width: 2, pos: 1 },
+        { id: 2, width: 2, pos: 2 },
+        { id: 3, width: 2, pos: 3 },
+        { id: 4, width: 2, pos: 4 },
+        { id: 5, width: 2, pos: 5 },
+        { id: 6, width: 3, pos: 6 },
+        { id: 7, width: 2, pos: 7 },
       ],
     },
     // box07 selected
     {
       id: 7,
       elem: [
-        { id: 1, width: 1, pos: 1 },
-        { id: 2, width: 1, pos: 2 },
-        { id: 3, width: 1, pos: 3 },
-        { id: 4, width: 1, pos: 4 },
-        { id: 5, width: 1, pos: 5 },
-        { id: 6, width: 1, pos: 6 },
-        { id: 7, width: 2, pos: 7 },
+        { id: 1, width: 2, pos: 1 },
+        { id: 2, width: 2, pos: 2 },
+        { id: 3, width: 2, pos: 3 },
+        { id: 4, width: 2, pos: 4 },
+        { id: 5, width: 2, pos: 5 },
+        { id: 6, width: 2, pos: 6 },
+        { id: 7, width: 3, pos: 7 },
       ],
     },
   ]
@@ -187,7 +187,10 @@ const DisciplineSection = () => {
             type.elem.map((item, index) => (
               <div
                 key={index}
-                className={'relative cursor-pointer ' + (item.width === 1 ? styles.box01 : styles.box02)}
+                className={
+                  'relative cursor-pointer ' +
+                  (item.width === 1 ? styles.box01 : item.width === 2 ? styles.box02 : styles.box03)
+                }
                 style={{ backgroundColor: BoxInfo[item.id - 1].bgColor }}
                 onMouseOver={() => (isLoading === false ? handleSetType(item.id, index) : '')}
                 onClick={() => router.push(BoxInfo[item.id - 1].link)}
