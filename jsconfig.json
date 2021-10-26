@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@fullcalendar/*": ["components/components/fullcalendar/*"]
+    }
   }
 }
