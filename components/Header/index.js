@@ -304,7 +304,7 @@ const Header = props => {
                                         <Link href={item.link} passHref>
                                           <a
                                             className={
-                                              styles.menuText +
+                                              styles.subMenuText +
                                               ' ' +
                                               (router.pathname === item.link || router.asPath === item.link
                                                 ? styles.active
