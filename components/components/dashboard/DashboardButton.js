@@ -18,7 +18,10 @@ const DashboardButton = props => {
       )}
       {type === 'view' && (
         <div>
-          <button className={'flex justify-around items-center px-3 py-2 ' + styles.viewButton} onClick={handleClick}>
+          <button
+            className={'flex justify-between items-center pl-8 pr-6 py-2 ' + styles.viewButton}
+            onClick={handleClick}
+          >
             <p className={styles.viewLabel}>{label}</p>
             <img src="/images/view-right.svg" alt="" style={{ width: '8px', height: '8px' }} />
           </button>
@@ -27,7 +30,7 @@ const DashboardButton = props => {
       {type === 'viewRed' && (
         <div>
           <button
-            className={'flex justify-around items-center px-3 py-2 ' + styles.viewRedButton}
+            className={'flex justify-between items-center pl-6 pr-5 py-2 ' + styles.viewRedButton}
             onClick={handleClick}
           >
             <p className={styles.viewRedLabel}>{label}</p>
