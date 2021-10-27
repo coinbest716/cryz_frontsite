@@ -19,13 +19,13 @@ const Nutrition = () => {
   }, [])
 
   const handleClickBuyStreaming = () => {
-    router.push('/services')
+    router.push('/buy-one-to-one')
   }
   const handleClickBuyPersion = () => {
-    router.push('/services')
+    router.push('/buy-person')
   }
   const handleClickBuyPlan = () => {
-    router.push('/services')
+    router.push('/buy-plans-online')
   }
 
   const description = `Somos especialistas en educación de hábitos y promoción de la salud. Nuestros planes van dirigidos a personas que quieren cuidar su alimentación y mejorar su salud y/o su físico, ayudándoles a crear e introducir nuevas rutinas saludables en su día a día.
@@ -68,13 +68,13 @@ const Nutrition = () => {
       </div>
       <div className="flex justify-center">
         <div className="w-1/3">
-          <ArrowButton label={'Compra  1 to 1 en streaming'} onClick={handleClickBuyStreaming} />
+          <ArrowButton label={'Compra  1 to 1 en streaming'} onClick={handleClickBuyStreaming} type={'nutrition'} />
         </div>
         <div className="w-1/3">
-          <ArrowButton label={'Compra presenciales'} onClick={handleClickBuyPersion} />
+          <ArrowButton label={'Compra presenciales'} onClick={handleClickBuyPersion} type={'nutrition'} />
         </div>
         <div className="w-1/3">
-          <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} />
+          <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} type={'nutrition'} />
         </div>
       </div>
     </div>

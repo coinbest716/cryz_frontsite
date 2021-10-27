@@ -19,7 +19,7 @@ const Physiotherapy = () => {
   }, [])
 
   const handleClickBuy = () => {
-    router.push('/services')
+    router.push('/buy-person')
   }
 
   const description = `Nuestro equipo de fisioterapia y osteopatía integra el tratamiento de diferentes patologías, así como,
@@ -70,7 +70,7 @@ const Physiotherapy = () => {
         </div>
       </div>
       <div className="w-1/3 mr-1">
-        <ArrowButton label={'Compra  presenciales'} onClick={handleClickBuy} />
+        <ArrowButton label={'Compra  presenciales'} onClick={handleClickBuy} type={'physiotherapy'} />
       </div>
     </div>
   )

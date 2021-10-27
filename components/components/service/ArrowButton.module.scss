@@ -1,7 +1,8 @@
 @import 'styles/variable.module.scss';
 
 .workWithUsButton {
-  padding: 20px 50px 20px 90px;
+  // padding: 20px 50px 20px 90px;
+  height: 98px;
   font-family: Montserrat;
   font-size: 14px;
   letter-spacing: 0.7px;
@@ -10,11 +11,8 @@
   border: 1px solid #818e8e;
   border-bottom: none;
   color: #818e8e;
-  display: flex;
-  justify-content: space-around;
   &:hover {
-    background-color: #818e8e;
-    color: #f3f3e9;
+    background-color: #818e8e3d;
   }
 }
 .label {
