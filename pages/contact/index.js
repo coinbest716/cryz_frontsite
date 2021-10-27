@@ -15,15 +15,15 @@ const Contact = () => {
     {
       name: 'Location 1',
       location: {
-        lat: 41.3954,
-        lng: 2.162,
+        lat: 40.5187017,
+        lng: -3.652913,
       },
     },
     {
       name: 'Location 2',
       location: {
-        lat: 41.3917,
-        lng: 2.1649,
+        lat: 40.5296017,
+        lng: -3.678743,
       },
     },
   ]
@@ -53,7 +53,7 @@ const Contact = () => {
         </div>
       </div>
       <div className={styles.container + ' relative'}>
-        <div className="absolute -top-9 right-9">
+        <div className="absolute -top-9 right-9 cursor-pointer">
           <Image src={whatsapp} alt="" width={69} height={69} onClick={handleClickWhatsapp} />
         </div>
         <div className={globlaStyle.container}>
