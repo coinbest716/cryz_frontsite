@@ -8,8 +8,8 @@ import router from 'next/router'
 import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
-import 'react-calendar/dist/Calendar.css'
 import moment from 'moment'
+import 'react-calendar/dist/Calendar.css'
 import ProgressBar from 'components/components/dashboard/ProgressBar'
 import bonosIcon from 'public/images/bonos.svg'
 import NewMessageBox from 'components/components/dashboard/NewMessageBox'
@@ -114,7 +114,8 @@ const Dashboard = () => {
     router.push('/dashboard/message')
   }
   const handleClickCalendar = () => {
-    router.push('/dashboard/calendar')
+    console.log('handleClickCalendar redirect dashboard calendar section')
+    // router.push('/dashboard/calendar')
   }
   const handleClickBonos = () => {
     console.log('handleClickBonos')
@@ -180,7 +181,10 @@ const Dashboard = () => {
           )}
           <div className={'grid grid-cols-12 gap-7 '}>
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
-              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection} onClick={handleClickCalendar}>
+              <div
+                className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
+                onClick={handleClickCalendar}
+              >
                 <Calendar
                   className={styles.calendar}
                   onChange={onChange}
@@ -192,7 +196,7 @@ const Dashboard = () => {
                   }}
                   tileDisabled={({ date }) => date.getDay() === 0}
                   /*maxDate={new Date(2020, 1, 0)}</div>*/
-                  minDate={new Date()}
+                  // minDate={new Date()}
                 ></Calendar>
               </div>
             </div>

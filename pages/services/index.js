@@ -70,7 +70,9 @@ const Services = () => {
           </div>
           <div className={'flex w-full mt-5 overflow-hidden'}>
             <div
-              className={'relative ' + (contactType.type1 ? styles.boxToRightActive : styles.boxDeactive)}
+              className={
+                'relative cursor-pointer ' + (contactType.type1 ? styles.boxToRightActive : styles.boxDeactive)
+              }
               onMouseOver={() => handleMouseOver('type1')}
               onClick={() => handleClick('type1')}
             >
@@ -93,7 +95,7 @@ const Services = () => {
             </div>
 
             <div
-              className={'relative ' + (contactType.type2 ? styles.boxToLeftActive : styles.boxDeactive)}
+              className={'relative cursor-pointer ' + (contactType.type2 ? styles.boxToLeftActive : styles.boxDeactive)}
               onMouseOver={() => handleMouseOver('type2')}
               onClick={() => handleClick('type2')}
             >
@@ -115,7 +117,7 @@ const Services = () => {
             </div>
 
             <div
-              className={'relative ' + (contactType.type3 ? styles.boxToLeftActive : styles.boxDeactive)}
+              className={'relative cursor-pointer ' + (contactType.type3 ? styles.boxToLeftActive : styles.boxDeactive)}
               onMouseOver={() => handleMouseOver('type3')}
               onClick={() => handleClick('type3')}
             >

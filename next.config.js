@@ -1,6 +1,6 @@
 const path = require('path')
 
-module.exports = {
+const appConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
@@ -17,3 +17,5 @@ module.exports = {
     return config
   },
 }
+
+module.exports = appConfig
