@@ -69,7 +69,7 @@ const Training = () => {
           </div>
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-4 sm:col-span-12 ">
-              <div className={'pt-10 ' + styles.topTitle}>Entrenamiento</div>
+              <div className={'pt-10 pb-2 ' + styles.topTitle}>Entrenamiento</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription + ' mt-10 pb-20'}>
                 Entrenamiento 1 to 1 en streaming: Entrenamientos personalizados de una hora con tu entrenador, desde

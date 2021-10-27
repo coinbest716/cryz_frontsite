@@ -41,7 +41,7 @@ const Nutrition = () => {
           </div>
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-5 sm:col-span-12 ">
-              <div className={'pt-10 ' + styles.topTitle}>Nutrición</div>
+              <div className={'pt-10 pb-2 ' + styles.topTitle}>Nutrición</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription + ' mt-10 pb-20'}>
                 <ReactReadMoreReadLess
