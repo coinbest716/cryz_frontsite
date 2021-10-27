@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from './academy.module.scss'
-// import ArrowButton from 'components/components/ArrowButton'
 import AcademyCard from 'components/components/academy/AcademyCard'
 import CircularMark from 'components/components/CircularMark'
 import AcademyData from 'assets/data/AcademyData'
@@ -10,27 +9,11 @@ import { useRouter } from 'next/router'
 
 const Academy = () => {
   const router = useRouter()
-
   const [cardData, setCardData] = useState([])
-  const [filter, setFilter] = useState([
-    { id: 0, label: 'filtro 1', active: false },
-    { id: 1, label: 'filtro 2', active: false },
-  ])
 
   useEffect(() => {
     setCardData(AcademyData)
   }, [])
-
-  // const handleClickFilter = id => {
-  //   const newArr = JSON.parse(JSON.stringify(filter))
-  //   for (let i = 0; i < newArr.length; i++) {
-  //     if (newArr[i].id === id) {
-  //       newArr[i].active = !newArr[i].active
-  //       break
-  //     }
-  //   }
-  //   setFilter(newArr)
-  // }
 
   const handleClickPayment = data => {
     router.push(`/academy/${data.id}`)
@@ -44,13 +27,6 @@ const Academy = () => {
             <div>
               <div className={styles.topTitle}>Academy</div>
               <div className={styles.topDash} />
-              {/* <div className="flex justify-start mt-6">
-                {filter.map((item, index) => (
-                  <div className="mr-2" key={index}>
-                    <ArrowButton filter={item} onClick={handleClickFilter} key={index} />
-                  </div>
-                ))}
-              </div> */}
             </div>
             <div>
               <div className={'z-10'}>
