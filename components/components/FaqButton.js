@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
+import nextButtonPinkIcon from 'public/images/faq-arrow-right.svg'
 import styles from 'components/components/FaqButton.module.scss'
 
 const FaqButton = props => {
