@@ -20,7 +20,7 @@ const Classland = () => {
   const [cardData, setCardData] = useState([])
   const [faqData, setFaqData] = useState([])
   const [filter, setFilter] = useState([
-    { index: 0, label: 'Actívate', active: false },
+    { index: 0, label: 'Actívate', active: true },
     { index: 1, label: 'Bienestar', active: false },
     { index: 2, label: 'Embarazo', active: false },
     { index: 3, label: 'Post parto', active: false },
@@ -83,8 +83,8 @@ const Classland = () => {
         </div>
         <div className={styles.buttonGroup}>
           {filter.map((item, index) => (
-            <div className="mr-2" key={index}>
-              <ArrowButton filter={item} onClick={handleClickFilter} key={index} />
+            <div className="mr-3" key={index}>
+              <ArrowButton filter={item} onClick={() => handleClickFilter(index)} key={index} />
             </div>
           ))}
         </div>

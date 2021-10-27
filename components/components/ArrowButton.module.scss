@@ -8,11 +8,11 @@
   line-height: 26px;
   box-sizing: border-box;
   height: 41px;
-  border: 1px solid $blue-gray-450-color;
+  border: 1px solid $blue-gray-400-color;
   color: #f3f3e9;
-  background-color: $blue-gray-450-color;
+  background-color: $blue-gray-400-color;
   &:hover {
-    background-color: $blue-gray-400-color;
+    background-color: $blue-gray-450-color;
     color: #f3f3e9;
     transition: 0.3s;
   }
@@ -25,12 +25,12 @@
   line-height: 26px;
   box-sizing: border-box;
   height: 41px;
-  border: 1px solid $blue-gray-450-color;
-  color: $blue-gray-450-color;
-  background-color: #e0e6e8;
+  border: 1px solid $blue-gray-400-color;
+  color: $blue-gray-400-color;
+  // background-color: #e0e6e8;
   &:hover {
-    background-color: $gray-100-color;
-    color: $blue-gray-450-color;
+    background-color: #e0e6e8e3;
+    color: $blue-gray-400-color;
     transition: 0.3s;
   }
 }
