@@ -69,7 +69,7 @@ const Calendar = () => {
       <div className="grid grid-cols-12 gap-12 pt-8">
         <div className="col-span-12 md:col-span-8 sm:col-span-12 w-full">
           <div>
-            {/* <FullCalendar
+            <FullCalendar
               className={styles.fullCalendarSection}
               plugins={[dayGridPlugin, timeGridPlugin]} //[dayGridPlugin, timeGridPlugin, interactionPlugin]
               headerToolbar={{
@@ -84,7 +84,7 @@ const Calendar = () => {
               dayMaxEvents={true}
               weekends={true}
               events={events}
-            /> */}
+            />
           </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
