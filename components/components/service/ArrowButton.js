@@ -2,27 +2,19 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from './ArrowButton.module.scss'
 import ArrowRightUpGray from 'assets/images/arrow-right-up.svg'
-import ArrowRightUpWhite from 'assets/images/arrow-left.svg'
+import BrownRightUpIcon from 'public/images/brown-arrow-right-up.svg'
 
 const ArrowButton = props => {
-  const { label, onClick } = props
-  const [defaultIcon, setDefautIcon] = useState(ArrowRightUpGray)
-  const handleSetGrayIcon = () => {
-    setDefautIcon(ArrowRightUpGray)
-  }
-  const handleSetWhiteIcon = () => {
-    setDefautIcon(ArrowRightUpWhite)
-  }
+  const { label, onClick, type } = props
 
   return (
     <button
-      className={styles.workWithUsButton + ' flex justify-between w-full'}
-      onMouseOver={handleSetWhiteIcon}
-      onMouseOut={handleSetGrayIcon}
+      className={styles.workWithUsButton + ' pl-28 pr-16 flex justify-around items-center w-full'}
       onClick={onClick}
     >
       <p className={'mr-4 ' + styles.label}>{label}</p>
-      <Image src={defaultIcon} alt="" width={23} height={22} />
+      {type === 'nutrition' && <Image src={BrownRightUpIcon} alt="" width={36} height={30} />}
+      {type === 'physiotherapy' && <Image src={ArrowRightUpGray} alt="" width={36} height={30} />}
     </button>
   )
 }

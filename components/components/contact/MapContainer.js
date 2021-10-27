@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api'
+import googleMapStyles from 'assets/data/GoogleMapStylesData.json'
 
 const MapContainer = props => {
   const { locations } = props
@@ -10,8 +11,8 @@ const MapContainer = props => {
   }
 
   const defaultCenter = {
-    lat: 41.3851,
-    lng: 2.1734,
+    lat: 40.5187017,
+    lng: -3.652913,
   }
 
   const [selected, setSelected] = useState({})
@@ -22,7 +23,19 @@ const MapContainer = props => {
 
   return (
     <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP}>
-      <GoogleMap mapContainerStyle={mapStyles} zoom={13} center={defaultCenter}>
+      <GoogleMap
+        mapContainerStyle={mapStyles}
+        zoom={13}
+        center={defaultCenter}
+        options={{
+          // fullscreenControl: false,
+          // zoomControl: false,
+          scrollwheel: true,
+          // streetViewControl: false,
+          // mapTypeControl: false,
+          styles: googleMapStyles,
+        }}
+      >
         {locations.map(item => {
           return (
             <Marker

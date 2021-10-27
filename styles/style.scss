@@ -20,24 +20,31 @@
   .react-calendar {
     border: none;
     width: 100%;
-    color: #999999;
+    color: #99999999;
+    background: transparent;
+    font-size: 12px;
+    font-family: '.SF NS Display';
   }
   .react-calendar__month-view__days__day--weekend {
-    color: #999999;
+    color: #99999999;
   }
   .react-calendar__month-view__days__day--neighboringMonth {
-    color: #999999;
+    color: #99999999;
   }
   .react-calendar__navigation {
     height: 40px;
   }
   .react-calendar__navigation button {
     min-width: 40px;
+    color: #2a2c36;
+    font-family: Montserrat;
+    font-size: 13px;
   }
   .react-calendar__navigation button:enabled:hover,
   .react-calendar__navigation button:enabled:focus {
-    // background-color: #e6e6e6;
+    background-color: #818e8e;
     border-radius: 20px;
+    color: white;
   }
   .react-calendar__tile--now {
     background: #e6e6e6;

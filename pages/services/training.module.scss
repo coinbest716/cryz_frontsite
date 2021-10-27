@@ -45,11 +45,11 @@
 }
 .verticalText:hover .number {
   color: white;
-  transition: 0.4s;
+  transition: 0.6s;
 }
 .verticalText:hover .typograph {
   color: white;
-  transition: 0.4s;
+  transition: 0.6s;
 }
 .verticalText:hover .arrowIcon {
   filter: brightness(0) invert(1);
@@ -57,22 +57,26 @@
 }
 .number {
   color: #818e8e;
+  font-family: Montserrat;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.8px;
-  padding-bottom: 5px;
+  line-height: 58px;
 }
 .typograph {
   color: #818e8e;
-  font-size: 29px;
-  font-weight: 900;
-  letter-spacing: 0.4px;
+  font-family: Montserrat;
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  line-height: 58px;
 }
 .arrowIcon {
   transform: rotate(90deg);
 }
 .circleImageCover {
   position: relative;
+  transition: 0.3s;
 }
 .circleImage {
   position: absolute;
@@ -82,4 +86,5 @@
   object-fit: cover;
   object-position: center;
   opacity: 0.6;
+  transition: 3.9s;
 }

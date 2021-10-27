@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.645 33.329">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #c4ab89;
+      }
+    </style>
+  </defs>
+  <path id="Combined_shape_623_Copy" data-name="Combined shape 623 Copy" class="cls-1" d="M15.8,20.65l7.228-7.228H.789V10.264H23.03L15.8,3.034,18.034.8l8.808,8.808.124-.124L29.2,11.718l-.124.124.124.124L26.966,14.2l-.124-.124-8.807,8.808Zm8.672-8.672.135-.135-.135-.135Z" transform="translate(-1.084 13.906) rotate(-30)"/>
+</svg>

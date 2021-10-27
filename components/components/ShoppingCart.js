@@ -21,7 +21,7 @@ const ShoppingCart = props => {
     <div className={styles.shoppingCart}>
       <div className="flex justify-between">
         <div className={styles.summary}>Resumen compra</div>
-        <div className={'relative ' + styles.badge}>
+        <div className={'relative cursor-pointer ' + styles.badge}>
           <div className={'absoulte top-3 right-3 ' + styles.summaryNumber}>2</div>
         </div>
       </div>
@@ -54,7 +54,7 @@ const ShoppingCart = props => {
         <div className="flex justify-between">
           <div className={styles.discount}>Cupón descuento?</div>
           <div
-            className="duration-200 hover:bg-gray-300 w-5 h-5 flex justify-center items-center p-1 rounded-full"
+            className="duration-200 cursor-pointer hover:bg-gray-300 w-5 h-5 flex justify-center items-center p-1 rounded-full"
             onClick={handleClickExpand}
           >
             {expend ? (

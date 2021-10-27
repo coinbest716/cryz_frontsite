@@ -19,7 +19,7 @@ const Physiotherapy = () => {
   }, [])
 
   const handleClickBuy = () => {
-    router.push('/services')
+    router.push('/buy-person')
   }
 
   const description = `Nuestro equipo de fisioterapia y osteopatía integra el tratamiento de diferentes patologías, así como,
@@ -44,7 +44,7 @@ const Physiotherapy = () => {
           </div>
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-5 sm:col-span-12 ">
-              <div className={'pt-10 ' + styles.topTitle}>Fisioterapia</div>
+              <div className={'pt-10 pb-2 ' + styles.topTitle}>Fisioterapia</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription + ' mt-10 pb-20'}>
                 <ReactReadMoreReadLess
@@ -70,7 +70,7 @@ const Physiotherapy = () => {
         </div>
       </div>
       <div className="w-1/3 mr-1">
-        <ArrowButton label={'Compra  presenciales'} onClick={handleClickBuy} />
+        <ArrowButton label={'Compra  presenciales'} onClick={handleClickBuy} type={'physiotherapy'} />
       </div>
     </div>
   )

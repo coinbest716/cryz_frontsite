@@ -52,7 +52,7 @@ const Services = () => {
         <div className={styles.container}>
           <div className="grid grid-cols-12 gap-4">
             <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
-              <div className={styles.topTitle}>Servicios</div>
+              <div className={styles.topTitle + ' pb-2'}>Servicios</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription}>
                 En Crys & CO ofrecemos un servicio personalizado y de calidad, especializado en planes 360 y a medida.
@@ -78,7 +78,7 @@ const Services = () => {
             >
               <img
                 src={contactType.type1 ? trainingImage : placeholder1}
-                style={{ width: '100%', height: '288px', opacity: 0.3 }}
+                style={{ width: '100%', height: '288px', opacity: 0.4 }}
                 className={styles.box1}
               />
 
@@ -101,7 +101,7 @@ const Services = () => {
             >
               <img
                 src={contactType.type2 ? physiotherapyImage : placeholder2}
-                style={{ width: '100%', height: '288px', opacity: 0.3 }}
+                style={{ width: '100%', height: '288px', opacity: 0.4 }}
                 className={styles.box1}
               />
               <div className={styles.serverText}>Fisioterapia</div>
@@ -123,7 +123,7 @@ const Services = () => {
             >
               <img
                 src={contactType.type3 ? nutritionImage : placeholder3}
-                style={{ width: '100%', height: '288px', opacity: 0.3 }}
+                style={{ width: '100%', height: '288px', opacity: 0.4 }}
                 className={styles.box1}
               />
               <div className={styles.serverText}>Nutrición</div>

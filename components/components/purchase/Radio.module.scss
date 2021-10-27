@@ -21,13 +21,11 @@
   &::before {
     content: '';
     display: block;
-    width: 50%;
-    height: 50%;
-    margin: 26% 23%;
+    width: 52%;
+    height: 52%;
+    transform: translate(3.5px, 3.5px);
     border-radius: 50%;
     position: absolute;
-    // top: 4px;
-    // left: 4px;
   }
   &:checked:before {
     background: #72918e;
