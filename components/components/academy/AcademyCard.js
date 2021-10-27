@@ -11,9 +11,6 @@ const AcademyCard = props => {
       <div className={styles.singleCard}>
         <div className={styles.cardImageLayer}>
           <Image src={data?.image} alt="" width={365} height={253} className={styles.cardImage} />
-          <div className={styles.cardPayment}>
-            <span className={styles.cardPaymentType}>{data?.filter}</span>
-          </div>
         </div>
         <div className={styles.cardTitle}>{data?.title}</div>
         <div className={styles.cardDescripton}>{data?.description}</div>
