@@ -93,12 +93,12 @@ const Calendar = () => {
               className={styles.calendar}
               onChange={onChange}
               value={value}
-              tileClassName={({ date, view }) => {
-                if (mark.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                  return 'highlight'
-                }
-              }}
-              tileDisabled={({ date }) => date.getDay() === 0}
+              // tileClassName={({ date, view }) => {
+              //   if (mark.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+              //     return 'highlight'
+              //   }
+              // }}
+              // tileDisabled={({ date }) => date.getDay() === 0}
               /*maxDate={new Date(2020, 1, 0)}</div>*/
               // minDate={new Date()}
             />
