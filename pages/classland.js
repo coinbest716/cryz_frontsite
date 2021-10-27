@@ -3,7 +3,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globlaStyle from 'styles/GlobalStyle.module.scss'
 import styles from 'pages/classland.module.scss'
 import Image from 'next/image'
-import topImage from 'assets/images/classland-top-image.png'
+import topImage from 'public/images/classland-top-image.svg'
 import FaqButton from 'components/components/FaqButton'
 import CarouselTeam from 'components/components/CarouselTeam'
 import ArrowButton from 'components/components/ArrowButton'
@@ -45,7 +45,7 @@ const Classland = () => {
   return (
     <div className="flex flex-wrap justify-center">
       <div className={styles.container}>
-        <div className={globlaStyle.container}>
+        <div className={globlaStyle.container + ' mt-20'}>
           <div className={styles.topSection}>
             <div className="grid grid-cols-12 gap-4">
               <div className="col-span-12 md:col-span-4 sm:col-span-12 ">
