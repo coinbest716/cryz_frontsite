@@ -19,7 +19,7 @@ const MainSection = () => {
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
-        <Image src={MainImage} alt="" layout="fill" objectFit="cover" />
+        <Image src={MainImage} alt="" layout="fill" objectFit="cover" objectPosition="top" />
       </div>
       <div id="topToBottom" className={styles.topToBottom}>
         TUS METAS
@@ -27,9 +27,9 @@ const MainSection = () => {
       <div id="bottomToTop" className={styles.bottomToTop}>
         Alcanza
       </div>
-      <div className={'absolute flex justify-end w-1/3 top-0 right-0 p-0 m-0 h-screen'}>
+      <div className={'absolute flex justify-end w-1/3 top-0 right-0 p-0 m-0 h-screen ' + styles.mainRightArea}>
         <div className={'absolute top-0 left-0 h-screen -z-10 w-full ' + styles.mainCarouselOpacityArea} />
-        <div className={'w-full ' + styles.mainCarouselArea}>
+        <div className={styles.mainCarouselArea}>
           <Carousel
             showArrows={false}
             showThumbs={false}
@@ -60,15 +60,18 @@ const MainSection = () => {
                   <></>
                 )}
                 {item.id === 1 || item.id === 3 ? <div className={styles.blankDiv}></div> : <></>}
-                <div className={styles.pinkBox}>
-                  <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }}></div>
-                  <div className={styles.pinkText}>{item.content01}</div>
-                  <div className={styles.pinkButtonArea}>
-                    <button className={styles.pinkButton} onClick={() => router.push(item.link)}>
-                      <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
-                    </button>
+                <div className={styles.pinkBoxArea}>
+                  <div className={styles.pinkBoxOpacity} />
+                  <div className={styles.pinkBox}>
+                    <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
+                    <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.content01 }} />
+                    <div className={styles.pinkButtonArea}>
+                      <button className={styles.pinkButton} onClick={() => router.push(item.link)}>
+                        <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
+                      </button>
+                    </div>
+                    <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.content02 }} />
                   </div>
-                  <div className={styles.pinkText}>{item.content02}</div>
                 </div>
                 {item.id === 2 ? <div className={styles.blankDiv}></div> : <></>}
                 {item.id === 2 ? (

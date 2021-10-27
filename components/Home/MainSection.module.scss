@@ -46,14 +46,20 @@
     top: calc(50% - 80px);
   }
 }
+
+.mainRightArea {
+  width: 450px;
+}
 .mainCarouselOpacityArea {
   background-color: #637a76;
   opacity: 0.4;
 }
 
 .mainCarouselArea {
-  background-color: transparent;
-  padding: 200px 80px 80px 20px;
+  position: absolute;
+  bottom: 0px;
+  left: 25px;
+  right: 80px;
 }
 
 .videoArea {
@@ -78,10 +84,25 @@
   background-color: transparent;
 }
 
-.pinkBox {
-  background-color: $pink-150-color;
+.pinkBoxArea {
+  position: relative;
   width: 100%;
-  height: 400px;
+  height: 464px;
+}
+.pinkBoxOpacity {
+  position: absolute;
+  background-color: $pink-150-color;
+  opacity: 0.62;
+  width: 100%;
+  height: 100%;
+}
+
+.pinkBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   padding: 50px 36px 36px 36px;
   display: flex;
   justify-content: flex-end;
