@@ -2,8 +2,57 @@
 
 .container {
   width: 100%;
-  display: flex;
-  justify-content: center;
   background-color: #f5f6fa;
-  height: 100vh;
+}
+.highBoldLabel {
+  color: #2a2c36;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.mediumLabel {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.divider {
+  height: 1px;
+  width: 100%;
+  border: 1px solid #c4c4c4;
+}
+.calendar {
+  font-size: 13px;
+}
+.roomContainer {
+  border-radius: 6px;
+  background-color: #ffffff;
+}
+.roomTitle {
+  color: #333333;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.fullCalendarSection {
+  .fc {
+    .fc-col-header-cell-cushion {
+      color: #00b294 !important;
+    }
+  }
+  /* override day number color and size */
+  .fc-day-number {
+    font-size: 1.5em;
+    color: #5c005c;
+  }
+  /* override day title color and size */
+  .fc-day-header {
+    font-size: 1.5em;
+    color: #00b294;
+  }
 }
