@@ -17,7 +17,7 @@ const CarouselTeam = props => {
       stopOnHover={true}
       showStatus={false}
       showIndicators={false}
-      infiniteLoop={true}
+      // infiniteLoop={true}
       centerMode={true}
       centerSlidePercentage={100}
       interval={7500}
