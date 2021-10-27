@@ -88,19 +88,21 @@ const Calendar = () => {
           </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
-          <MonthCalendar
-            className={styles.calendar}
-            onChange={onChange}
-            value={value}
-            tileClassName={({ date, view }) => {
-              if (mark.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                return 'highlight'
-              }
-            }}
-            tileDisabled={({ date }) => date.getDay() === 0}
-            /*maxDate={new Date(2020, 1, 0)}</div>*/
-            // minDate={new Date()}
-          />
+          <div className="calendarWrapper">
+            <MonthCalendar
+              className={styles.calendar}
+              onChange={onChange}
+              value={value}
+              // tileClassName={({ date, view }) => {
+              //   if (mark.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+              //     return 'highlight'
+              //   }
+              // }}
+              // tileDisabled={({ date }) => date.getDay() === 0}
+              /*maxDate={new Date(2020, 1, 0)}</div>*/
+              // minDate={new Date()}
+            />
+          </div>
           <div className={'mt-8 px-5 py-4 ' + styles.roomContainer}>
             <div className={'pb-3 ' + styles.roomTitle}>Crys&Co Room</div>
             {events.map((item, index) => (

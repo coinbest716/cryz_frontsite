@@ -22,6 +22,7 @@
 }
 .viewButton {
   width: 114px;
+  height: 36px;
   border: 1px solid #818e8e;
   border-radius: 18px;
   &:hover {
@@ -37,7 +38,8 @@
   line-height: 19px;
 }
 .viewRedButton {
-  width: 114px;
+  width: 116px;
+  height: 36px;
   border: 1px solid #e30018;
   border-radius: 18px;
   &:hover {
