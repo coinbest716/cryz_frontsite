@@ -19,7 +19,7 @@ const MainSection = () => {
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
-        <Image src={MainImage} alt="" layout="fill" objectFit="cover" />
+        <Image src={MainImage} alt="" layout="fill" objectFit="cover" objectPosition="top" />
       </div>
       <div id="topToBottom" className={styles.topToBottom}>
         TUS METAS
