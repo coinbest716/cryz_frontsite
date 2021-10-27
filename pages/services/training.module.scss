@@ -57,16 +57,19 @@
 }
 .number {
   color: #818e8e;
+  font-family: Montserrat;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.8px;
-  padding-bottom: 5px;
+  line-height: 58px;
 }
 .typograph {
   color: #818e8e;
-  font-size: 29px;
-  font-weight: 900;
-  letter-spacing: 0.4px;
+  font-family: Montserrat;
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  line-height: 58px;
 }
 .arrowIcon {
   transform: rotate(90deg);

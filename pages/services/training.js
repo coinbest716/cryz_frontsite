@@ -44,13 +44,13 @@ const Training = () => {
   const handleClick = type => {
     switch (type) {
       case 'type1':
-        router.push('/services')
+        router.push('/buy-one-to-one')
         break
       case 'type2':
-        router.push('/services')
+        router.push('/buy-person')
         break
       case 'type3':
-        router.push('/services')
+        router.push('/buy-one-to-one')
         break
     }
   }
@@ -92,7 +92,12 @@ const Training = () => {
                   >
                     <span className={styles.number}>01&nbsp;&nbsp;</span>
                     <span className={styles.typograph}>Presencial&nbsp;</span>
-                    <img src={forwardGrayIcon} alt="" className={styles.arrowIcon} />
+                    <img
+                      src={forwardGrayIcon}
+                      alt=""
+                      className={styles.arrowIcon}
+                      style={{ width: '38px', height: '30px' }}
+                    />
                   </div>
                   <div
                     className={'w-1/3 ' + styles.verticalText}
@@ -101,7 +106,12 @@ const Training = () => {
                   >
                     <span className={styles.number}>02&nbsp;&nbsp;</span>
                     <span className={styles.typograph}>Planes online&nbsp;</span>
-                    <img src={forwardGrayIcon} alt="" className={styles.arrowIcon} />
+                    <img
+                      src={forwardGrayIcon}
+                      alt=""
+                      className={styles.arrowIcon}
+                      style={{ width: '38px', height: '30px' }}
+                    />
                   </div>
                   <div
                     className={'w-1/3 ' + styles.verticalText}
@@ -110,7 +120,12 @@ const Training = () => {
                   >
                     <span className={styles.number}>03&nbsp;&nbsp;</span>
                     <span className={styles.typograph}>1 to 1 en streaming&nbsp;</span>
-                    <img src={forwardGrayIcon} alt="" className={styles.arrowIcon} />
+                    <img
+                      src={forwardGrayIcon}
+                      alt=""
+                      className={styles.arrowIcon}
+                      style={{ width: '38px', height: '30px' }}
+                    />
                   </div>
                 </div>
               </div>
