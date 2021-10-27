@@ -12,7 +12,7 @@ import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
 import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
 import TeamMember01 from 'assets/images/team-member-01.png'
-import SignImg from 'assets/images/sign.svg'
+import SignImg from 'assets/images/sign.png'
 
 // json data
 import TeamSectionData from 'assets/data/TeamSectionData'
@@ -95,7 +95,7 @@ const TeamSection = () => {
             personales.
           </div>
           <div className="w-full flex justify-between my-4">
-            <Image src={SignImg} alt="" width={181} height={88} />
+            <Image src={SignImg} alt="" width={467} height={234} />
             <div className={'w-full flex justify-end items-center'}>
               <SocialButtonGroup color="gray" socialURL={SocialURLData[0]} />
             </div>

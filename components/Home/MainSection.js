@@ -60,7 +60,7 @@ const MainSection = () => {
                   <></>
                 )}
                 {item.id === 1 || item.id === 3 ? <div className={styles.blankDiv}></div> : <></>}
-                <div className={styles.pinkBoxArea}>
+                <div className={item.id === 2 ? styles.pinkBoxArea01 : styles.pinkBoxArea}>
                   <div className={styles.pinkBoxOpacity} />
                   <div className={styles.pinkBox}>
                     <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
@@ -75,7 +75,7 @@ const MainSection = () => {
                 </div>
                 {item.id === 2 ? <div className={styles.blankDiv}></div> : <></>}
                 {item.id === 2 ? (
-                  <div className={styles.videoArea}>
+                  <div className={styles.videoArea + ' mb-5'}>
                     <div className={styles.playerWrapper}>
                       <ReactPlayer
                         url={item.url}
