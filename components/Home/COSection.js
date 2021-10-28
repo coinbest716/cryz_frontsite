@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
+
+// next components
 import Image from 'next/image'
+
+// third party components
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
-import ReactCardFlip from 'react-card-flip'
 
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
@@ -23,14 +26,7 @@ import globalStyles from 'styles/GlobalStyle.module.scss'
 
 const COSection = () => {
   const [sliderData, setSliderData] = useState([])
-  const [loadFlipCard, setLoadFlipCard] = useState(false)
   const [isFlipped, setIsFlipped] = useState({ id: 1, bool: false })
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setLoadFlipCard(true)
-    }
-  }, [])
 
   useEffect(() => {
     var size = 6
@@ -49,90 +45,87 @@ const COSection = () => {
     <div className={globalStyles.container}>
       <div className={styles.title}>&CO</div>
       <div className={styles.divider}></div>
-      {sliderData.length !== 0 ? (
-        <Carousel
-          showArrows={true}
-          showThumbs={false}
-          autoPlay={false}
-          stopOnHover={true}
-          showStatus={false}
-          showIndicators={false}
-          infiniteLoop={true}
-          renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
-            hasPrev ? (
-              <button onClick={clickHandler} className={styles.previousButton}>
-                <Image src={previousButtonPinkIcon} alt="" width={20} height={15} />
-              </button>
-            ) : (
-              <button onClick={clickHandler} className={styles.previousButton}>
-                <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
-              </button>
-            )
-          }
-          renderArrowNext={(clickHandler, hasNext, labelNext) =>
-            hasNext ? (
-              <button onClick={clickHandler} className={styles.nextButton}>
-                <Image onClick={clickHandler} src={nextButtonPinkIcon} alt="" width={20} height={15} />
-              </button>
-            ) : (
-              <button onClick={clickHandler} className={styles.nextButton}>
-                <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
-              </button>
-            )
-          }
-        >
-          {sliderData.map((item, index) => (
-            <div key={index} className="grid grid-cols-3 gap-4">
-              {item.map((elem, idx) => (
-                <div key={idx}>
-                  {loadFlipCard && (
+      <div className={styles.carouselArea}>
+        {sliderData.length !== 0 ? (
+          <Carousel
+            showArrows={true}
+            showThumbs={false}
+            autoPlay={false}
+            stopOnHover={true}
+            showStatus={false}
+            showIndicators={false}
+            infiniteLoop={true}
+            renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
+              hasPrev ? (
+                <button onClick={clickHandler} className={styles.previousButton}>
+                  <Image src={previousButtonPinkIcon} alt="" width={20} height={15} />
+                </button>
+              ) : (
+                <button onClick={clickHandler} className={styles.previousButton}>
+                  <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
+                </button>
+              )
+            }
+            renderArrowNext={(clickHandler, hasNext, labelNext) =>
+              hasNext ? (
+                <button onClick={clickHandler} className={styles.nextButton}>
+                  <Image onClick={clickHandler} src={nextButtonPinkIcon} alt="" width={20} height={15} />
+                </button>
+              ) : (
+                <button onClick={clickHandler} className={styles.nextButton}>
+                  <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
+                </button>
+              )
+            }
+          >
+            {sliderData.map((item, index) => (
+              <div key={index} className="grid grid-cols-3 gap-4">
+                {item.map((elem, idx) => (
+                  <div key={idx}>
                     <div
                       onMouseOver={() => handleSetIsFlipped(true, elem.id)}
-                      onMouseOut={() => handleSetIsFlipped(false, elem.id)}
+                      onMouseLeave={() => handleSetIsFlipped(false, elem.id)}
                     >
-                      {elem.id === isFlipped.id ? (
-                        <ReactCardFlip isFlipped={isFlipped.bool} flipDirection="horizontal">
-                          <div>
-                            <Image src={elem.image} alt="" width={364} height={364} />
-                          </div>
-                          <div className={styles.card}>
-                            <Image src={elem.image} alt="" width={364} height={364} />
-                            <div className={styles.cardContent}>
+                      {elem.id === isFlipped.id && isFlipped.bool === true ? (
+                        <div className={styles.card}>
+                          <Image src={elem.image} alt="" width={364} height={364} layout="responsive" />
+                          <div className={styles.cardContent}>
+                            <div>
                               <div className={'w-full inline-block text-center ' + styles.cardText}>
                                 Entrenador personal
                               </div>
                               <div className={'w-full inline-block ' + styles.cardName}>{elem.name}</div>
                               <div className={'w-full inline-block ' + styles.cardDescription}>{elem.description}</div>
-                              <div className={'w-full flex justify-center'}>
-                                <SocialButtonGroup color="gray" socialURL={SocialURLData[0]} />
-                              </div>
+                            </div>
+                            <div className={'w-full flex justify-center'}>
+                              <SocialButtonGroup color="gray" socialURL={SocialURLData[0]} />
                             </div>
                           </div>
-                        </ReactCardFlip>
+                        </div>
                       ) : (
-                        <div>
-                          <Image src={elem.image} alt="" width={364} height={364} />
+                        <div className={styles.card}>
+                          <Image src={elem.image} alt="" width={364} height={364} layout="responsive" />
                         </div>
                       )}
                     </div>
-                  )}
-                  <div className="flex justify-start items-start">
-                    <div className={styles.divider} />
-                    <div className={styles.name}>
-                      {elem.name.split(' ')[0]}
-                      <br />
-                      {elem.name.split(' ')[1]}
-                      <div className={styles.role}>{elem.role}</div>
+                    <div className="flex justify-start items-start">
+                      <div className={styles.divider} />
+                      <div className={styles.name}>
+                        {elem.name.split(' ')[0]}
+                        <br />
+                        {elem.name.split(' ')[1]}
+                        <div className={styles.role}>{elem.role}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ))}
-        </Carousel>
-      ) : (
-        <></>
-      )}
+                ))}
+              </div>
+            ))}
+          </Carousel>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   )
 }

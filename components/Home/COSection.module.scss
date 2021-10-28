@@ -12,7 +12,6 @@
   width: 42px;
   height: 8px;
   margin-top: 24px;
-  margin-bottom: 38px;
   background-color: $pink-100-color;
 }
 
@@ -24,14 +23,20 @@
   color: $blue-gray-400-color;
 }
 
+.carouselArea {
+  margin-top: -44px;
+}
+
 .previousButton {
   margin-left: calc(100% - 100px);
+  margin-bottom: 66px;
 }
 
 .nextButton {
   position: absolute;
   top: 0px;
   margin-left: calc(100% - 20px);
+  margin-bottom: 66px;
 }
 
 .card {
@@ -39,6 +44,13 @@
   height: 100%;
   position: relative;
   display: inline-block;
+}
+.emptyImageArea {
+  width: 100%;
+  height: 100%;
+  max-width: 364px;
+  max-height: 364px;
+  background-color: #eeeeee;
 }
 .cardContent {
   position: absolute;
@@ -49,17 +61,14 @@
   left: 0;
   right: 0;
   text-align: center;
-  background: rgba(200, 200, 200, 0.6);
-  font-family: Arial, sans-serif;
-  color: $blue-gray-400-color;
+  background: rgba(200, 200, 200, 0.9);
   width: 100%; /* Set the width of the positioned div */
   height: 100%;
-  padding: 40px;
+  padding: 99px 40px 40px 40px;
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
   align-items: center;
-  opacity: 0.6;
 }
 
 .cardText {
@@ -72,7 +81,7 @@
 }
 
 .cardName {
-  color: $gray-850-color;
+  color: #303030;
   font-family: 'Montserrat';
   font-size: 20px;
   font-weight: 700;
@@ -81,7 +90,7 @@
 }
 
 .cardDescription {
-  color: $black-color;
+  color: $gray-800-color;
   font-family: 'Montserrat';
   font-size: 14px;
   font-weight: 200;
