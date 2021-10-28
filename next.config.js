@@ -1,4 +1,13 @@
 const path = require('path')
+const withTM = require('next-transpile-modules')([
+  '@fullcalendar/common',
+  '@fullcalendar/interaction',
+  '@fullcalendar/react',
+  '@fullcalendar/resource-timeline',
+  '@fullcalendar/timeline',
+  '@fullcalendar/daygrid',
+  '@fullcalendar/timegrid'
+])
 
 const appConfig = {
   sassOptions: {
@@ -18,4 +27,4 @@ const appConfig = {
   },
 }
 
-module.exports = appConfig
+module.exports = withTM(appConfig)
