@@ -239,7 +239,10 @@ const Header = props => {
   }
 
   return (
-    <div className={changeHeaderColor === true ? styles.whiteContainer : styles.transparentContainer}>
+    <div
+      className={changeHeaderColor === true ? styles.whiteContainer : styles.transparentContainer}
+      style={router.pathname === '/' ? { borderBottom: 'none' } : {}}
+    >
       <Link href={'/'} passHref>
         <p className={styles.logo}>CRYS DYAZ & CO</p>
       </Link>
