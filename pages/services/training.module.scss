@@ -42,6 +42,8 @@
   justify-content: flex-start;
   display: flex;
   white-space: pre;
+  bottom: 0%;
+  left: 25%;
 }
 .verticalText:hover .number {
   color: white;
@@ -76,15 +78,63 @@
 }
 .circleImageCover {
   position: relative;
-  transition: 0.3s;
+  transition: 0.6s;
 }
 .circleImage {
   position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 500px;
+  width: 400px;
+  height: 400px;
+  border-radius: 400px;
   object-fit: cover;
   object-position: center;
-  opacity: 0.6;
-  transition: 3.9s;
+  opacity: 0;
+  animation-iteration-count: 1;
+  animation: circleImage 0.7s ease-in;
+}
+@keyframes circleImage {
+  0% {
+    transform: scale(1, 1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+}
+.animationImage {
+  animation: animationImage 0.7s ease-out;
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 400px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.9;
+}
+
+@keyframes animationImage {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.activeSection {
+  cursor: pointer;
+}
+.activeSection:hover {
+  .number {
+    color: white;
+    transition: 0.6s;
+  }
+  .typograph {
+    color: white;
+    transition: 0.6s;
+  }
+  .arrowIcon {
+    filter: brightness(0) invert(1);
+    transition: 0.4s;
+  }
 }
