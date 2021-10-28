@@ -91,9 +91,7 @@ const COSection = () => {
                           <Image src={elem.image} alt="" width={364} height={364} layout="responsive" />
                           <div className={styles.cardContent}>
                             <div>
-                              <div className={'w-full inline-block text-center ' + styles.cardText}>
-                                Entrenador personal
-                              </div>
+                              <div className={'w-full inline-block text-center ' + styles.cardText}>{elem.role}</div>
                               <div className={'w-full inline-block ' + styles.cardName}>{elem.name}</div>
                               <div className={'w-full inline-block ' + styles.cardDescription}>{elem.description}</div>
                             </div>
