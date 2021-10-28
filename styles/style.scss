@@ -64,4 +64,27 @@
   .react-calendar__tile--active:enabled:focus {
     background: #818e8e;
   }
+  .react-calendar__navigation button[disabled] {
+    border-radius: 40px;
+  }
+}
+
+.fullCalendarWrapper {
+  .fc {
+    font-size: 13px;
+    color: #99999999;
+  }
+  .fc .fc-button-primary {
+    background-color: var(--fc-button-bg-color, #99999999);
+    border-color: var(--fc-button-border-color, #99999999);
+  }
+  .fc .fc-button-primary:not(:disabled):active,
+  .fc .fc-button-primary:not(:disabled).fc-button-active {
+    background-color: var(--fc-button-active-bg-color, #818e8e);
+    border-color: var(--fc-button-active-border-color, #818e8e);
+  }
+  .fc .fc-button-primary:hover {
+    background-color: var(--fc-button-hover-bg-color, #818e8e);
+    border-color: var(--fc-button-hover-border-color, #818e8e);
+  }
 }

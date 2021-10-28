@@ -21,8 +21,8 @@ const Calendar = () => {
     {
       id: 1,
       title: 'Redesign Landing Page Website',
-      start: '2021-10-27T10:30:00',
-      end: '2021-10-27T12:30:00',
+      start: '2021-10-31T10:30:00',
+      end: '2021-10-31T12:30:00',
       backgroundColor: '#585AB9',
       textColor: '#ffffff',
       label: 'Gimnasio 1',
@@ -30,8 +30,8 @@ const Calendar = () => {
     {
       id: 2,
       title: 'Redesign Landing Page Website',
-      start: '2021-10-28T08:30:00',
-      end: '2021-10-28T11:00:00',
+      start: '2021-11-03T08:30:00',
+      end: '2021-11-03T11:00:00',
       backgroundColor: '#FF9F24',
       textColor: '#ffffff',
       label: 'Sala 5',
@@ -39,8 +39,8 @@ const Calendar = () => {
     {
       id: 3,
       title: 'Redesign Landing Page Website',
-      start: '2021-10-29T13:30:00',
-      end: '2021-10-29T17:00:00',
+      start: '2021-11-05T13:30:00',
+      end: '2021-11-05T17:00:00',
       backgroundColor: '#3FB100',
       textColor: '#ffffff',
       label: 'Directo',
@@ -68,9 +68,8 @@ const Calendar = () => {
       </div>
       <div className="grid grid-cols-12 gap-12 pt-8">
         <div className="col-span-12 md:col-span-8 sm:col-span-12 w-full">
-          <div>
-            { <FullCalendar
-              className={styles.fullCalendarSection}
+          <div className="fullCalendarWrapper">
+            <FullCalendar
               plugins={[dayGridPlugin, timeGridPlugin]} //[dayGridPlugin, timeGridPlugin, interactionPlugin]
               headerToolbar={{
                 left: 'prev,next today',
@@ -84,24 +83,12 @@ const Calendar = () => {
               dayMaxEvents={true}
               weekends={true}
               events={events}
-            /> }
+            />
           </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
           <div className="calendarWrapper">
-            <MonthCalendar
-              className={styles.calendar}
-              onChange={onChange}
-              value={value}
-              tileClassName={({ date, view }) => {
-                 if (mark.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                   return 'highlight'
-                 }
-               }}
-               tileDisabled={({ date }) => date.getDay() === 0}
-              /*maxDate={new Date(2020, 1, 0)}</div>*/
-               minDate={new Date()}
-            />
+            <MonthCalendar className={styles.calendar} onChange={onChange} value={value} />
           </div>
           <div className={'mt-8 px-5 py-4 ' + styles.roomContainer}>
             <div className={'pb-3 ' + styles.roomTitle}>Crys&Co Room</div>
