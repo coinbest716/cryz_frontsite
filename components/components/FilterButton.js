@@ -5,11 +5,11 @@ import ArrowRightUpGray from 'assets/images/arrow-right-up.svg'
 import ArrowRightUpWhite from 'assets/images/arrow-left.svg'
 
 const FilterButton = props => {
-  const { filter, onClick } = props
+  const { filter, onClick, active } = props
 
   return (
     <>
-      {filter?.active ? (
+      {active ? (
         <button className={styles.activeButton + ' flex justify-between'} onClick={() => onClick(filter.id)}>
           <p className={'mr-4 ' + styles.label}>{filter?.label}</p>
           <Image src={ArrowRightUpWhite} alt="" width={23} height={22} />
