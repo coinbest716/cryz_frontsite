@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './profile.module.scss'
 import Image from 'next/image'
@@ -7,8 +7,10 @@ import ProfileInfo from 'components/components/dashboard/Profile'
 import Personal from 'components/components/dashboard/Personal'
 import Health from 'components/components/dashboard/Health'
 import Graphic from 'components/components/dashboard/Graphic'
+import { useRouter } from 'next/router'
 
 const Profile = () => {
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
@@ -43,8 +45,18 @@ const Profile = () => {
     twin: '',
   })
 
+  useEffect(() => {
+    const currentState = router.asPath.split('#')
+    if (currentState[1] === 'health') {
+      setActiveTab({ personal: false, health: true, graphic: false })
+    } else {
+      router.push('/dashboard/profile#personal', undefined, { shallow: true })
+    }
+  }, [])
+
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
+    router.push(`/dashboard/profile#${tabType}`, undefined, { shallow: true })
   }
   const handleSavePersonal = () => {
     console.log('handleSavePersonal')

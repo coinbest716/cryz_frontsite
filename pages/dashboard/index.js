@@ -105,6 +105,7 @@ const Dashboard = () => {
   }
   const handleClickWeight = () => {
     console.log('handleClickWeight')
+    router.push('/dashboard/profile#health')
   }
   const handleClickRmember = () => {
     console.log('handleClickRmember')
