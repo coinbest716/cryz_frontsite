@@ -64,4 +64,7 @@
   .react-calendar__tile--active:enabled:focus {
     background: #818e8e;
   }
+  .react-calendar__navigation button[disabled] {
+    border-radius: 40px;
+  }
 }

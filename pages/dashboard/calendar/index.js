@@ -69,7 +69,7 @@ const Calendar = () => {
       <div className="grid grid-cols-12 gap-12 pt-8">
         <div className="col-span-12 md:col-span-8 sm:col-span-12 w-full">
           <div>
-            { <FullCalendar
+            <FullCalendar
               className={styles.fullCalendarSection}
               plugins={[dayGridPlugin, timeGridPlugin]} //[dayGridPlugin, timeGridPlugin, interactionPlugin]
               headerToolbar={{
@@ -84,24 +84,12 @@ const Calendar = () => {
               dayMaxEvents={true}
               weekends={true}
               events={events}
-            /> }
+            />
           </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
           <div className="calendarWrapper">
-            <MonthCalendar
-              className={styles.calendar}
-              onChange={onChange}
-              value={value}
-              tileClassName={({ date, view }) => {
-                 if (mark.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                   return 'highlight'
-                 }
-               }}
-               tileDisabled={({ date }) => date.getDay() === 0}
-              /*maxDate={new Date(2020, 1, 0)}</div>*/
-               minDate={new Date()}
-            />
+            <MonthCalendar className={styles.calendar} onChange={onChange} value={value} />
           </div>
           <div className={'mt-8 px-5 py-4 ' + styles.roomContainer}>
             <div className={'pb-3 ' + styles.roomTitle}>Crys&Co Room</div>
