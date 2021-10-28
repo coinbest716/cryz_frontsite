@@ -6,7 +6,7 @@ import Image from 'next/image'
 import topImage from 'public/images/classland-top-image.svg'
 import FaqButton from 'components/components/FaqButton'
 import CarouselTeam from 'components/components/CarouselTeam'
-import ArrowButton from 'components/components/ArrowButton'
+import FilterButton from 'components/components/FilterButton'
 import ClassCard from 'components/components/ClassCard'
 import Accordian from 'components/components/Accordian'
 import CircularMark from 'components/components/CircularMark'
@@ -84,7 +84,7 @@ const Classland = () => {
         <div className={styles.buttonGroup}>
           {filter.map((item, index) => (
             <div className="mr-3" key={index}>
-              <ArrowButton filter={item} onClick={() => handleClickFilter(index)} key={index} />
+              <FilterButton filter={item} onClick={() => handleClickFilter(index)} key={index} />
             </div>
           ))}
         </div>
