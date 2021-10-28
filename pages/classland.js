@@ -19,23 +19,23 @@ const Classland = () => {
   const [sliderData, setSliderData] = useState([])
   const [cardData, setCardData] = useState([])
   const [faqData, setFaqData] = useState([])
-  const [filter, setFilter] = useState([
-    { index: 0, label: 'Actívate', active: true },
-    { index: 1, label: 'Bienestar', active: false },
-    { index: 2, label: 'Embarazo', active: false },
-    { index: 3, label: 'Post parto', active: false },
-  ])
+  const [filterKey, setFilterKey] = useState(0)
+  const [filter, setFilter] = useState([])
 
   useEffect(() => {
     setSliderData(TeamSectionData)
     setCardData(ClassCardData)
     setFaqData(AccordianFaqData)
+    setFilter([
+      { index: 0, label: 'Actívate' },
+      { index: 1, label: 'Bienestar' },
+      { index: 2, label: 'Embarazo' },
+      { index: 3, label: 'Post parto' },
+    ])
   }, [])
 
   const handleClickFilter = index => {
-    const newArr = JSON.parse(JSON.stringify(filter))
-    newArr[index].active = !newArr[index].active
-    setFilter(newArr)
+    setFilterKey(index)
   }
 
   const executeScroll = () => {
@@ -84,7 +84,12 @@ const Classland = () => {
         <div className={styles.buttonGroup}>
           {filter.map((item, index) => (
             <div className="mr-3" key={index}>
-              <FilterButton filter={item} onClick={() => handleClickFilter(index)} key={index} />
+              <FilterButton
+                active={index === filterKey}
+                filter={item}
+                onClick={() => handleClickFilter(index)}
+                key={index}
+              />
             </div>
           ))}
         </div>
