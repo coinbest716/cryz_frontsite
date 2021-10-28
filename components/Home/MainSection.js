@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+
+// next components
 import Image from 'next/image'
 import router from 'next/router'
+
+// components
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import ReactPlayer from 'react-player'
@@ -45,17 +49,25 @@ const MainSection = () => {
             {MainSectionData.map((item, index) => (
               <div key={index}>
                 {item.id === 1 || item.id === 3 ? (
-                  <div className={styles.videoArea}>
-                    <div className={styles.playerWrapper}>
-                      <ReactPlayer
-                        url={item.url}
-                        width="100%"
-                        height="100%"
-                        className={styles.reactPlayer}
-                        controls={true}
-                      />
-                    </div>
-                  </div>
+                  <>
+                    {item.type === 'image' ? (
+                      <div className={styles.imageArea}>
+                        <Image src={item.url} alt="" width={345} height={194} layout="responsive" />
+                      </div>
+                    ) : (
+                      <div className={styles.videoArea}>
+                        <div className={styles.playerWrapper}>
+                          <ReactPlayer
+                            url={item.url}
+                            width="100%"
+                            height="100%"
+                            className={styles.reactPlayer}
+                            controls={true}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <></>
                 )}
@@ -75,17 +87,25 @@ const MainSection = () => {
                 </div>
                 {item.id === 2 ? <div className={styles.blankDiv}></div> : <></>}
                 {item.id === 2 ? (
-                  <div className={styles.videoArea + ' mb-5'}>
-                    <div className={styles.playerWrapper}>
-                      <ReactPlayer
-                        url={item.url}
-                        width="100%"
-                        height="100%"
-                        className={styles.reactPlayer}
-                        controls={true}
-                      />
-                    </div>
-                  </div>
+                  <>
+                    {item.type === 'image' ? (
+                      <div className={styles.imageArea + ' mb-5'}>
+                        <Image src={item.url} alt="" width={345} height={194} layout="responsive" />
+                      </div>
+                    ) : (
+                      <div className={styles.videoArea + ' mb-5'}>
+                        <div className={styles.playerWrapper}>
+                          <ReactPlayer
+                            url={item.url}
+                            width="100%"
+                            height="100%"
+                            className={styles.reactPlayer}
+                            controls={true}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <></>
                 )}
