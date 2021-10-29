@@ -39,20 +39,3 @@
   font-weight: 500;
   letter-spacing: 0;
 }
-.fullCalendarSection {
-  .fc {
-    .fc-col-header-cell-cushion {
-      color: #00b294 !important;
-    }
-  }
-  /* override day number color and size */
-  .fc-day-number {
-    font-size: 1.5em;
-    color: #5c005c;
-  }
-  /* override day title color and size */
-  .fc-day-header {
-    font-size: 1.5em;
-    color: #00b294;
-  }
-}
