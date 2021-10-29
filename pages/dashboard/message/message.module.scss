@@ -7,3 +7,22 @@
   background-color: #f5f6fa;
   height: 100vh;
 }
+
+.contentBorder {
+  border: 1px solid #c4c4c4;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.commonBorder {
+  border: 1px solid #c4c4c4;
+}
+
+.professionalBorder {
+  border: 1px solid #c4c4c4;
+  border-top-left-radius: 10px;
+}
+
+.messageBorder {
+  border: 1px solid #c4c4c4;
+  border-bottom-left-radius: 10px;
+}
