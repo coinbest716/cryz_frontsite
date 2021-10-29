@@ -74,7 +74,7 @@ const TeamSection = () => {
         >
           {sliderData.map((item, index) => (
             <div key={index} className="mx-1">
-              <Image src={item.image} alt="" width={902} height={388} />
+              <Image src={item.image} alt="" width={902} height={388} layout={'responsive'} objectFit={'cover'} />
             </div>
           ))}
         </Carousel>
@@ -95,7 +95,7 @@ const TeamSection = () => {
             personales.
           </div>
           <div className="w-full flex justify-between my-4">
-            <Image src={SignImg} alt="" width={467} height={234} />
+            <Image src={SignImg} alt={''} width={467} height={234} />
             <div className={'w-full flex justify-end items-center'}>
               <SocialButtonGroup color="gray" socialURL={SocialURLData[0]} />
             </div>
