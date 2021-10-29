@@ -20,6 +20,7 @@ const Material = props => {
           borderRadius: '10px',
           objectFit: 'cover',
           objectPosition: 'center',
+          opacity: 0.6,
         }}
       />
       <div className="pl-4 flex flex-col justify-around">
