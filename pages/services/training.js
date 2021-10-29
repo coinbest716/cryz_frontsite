@@ -20,8 +20,8 @@ const Training = () => {
     let x = event.clientX - 200
     let y = event.clientY - 280
     let shark = document.getElementById('shark')
-    shark?.style.left = x + 'px'
-    shark?.style.top = y + 'px'
+    shark.style.left = x + 'px'
+    shark.style.top = y + 'px'
   }
 
   const [serverType, setServerType] = useState({ type1: false, type2: false, type3: false })
@@ -29,21 +29,21 @@ const Training = () => {
     setActiveHover(true)
     switch (type) {
       case 'type1':
-        setServerType({ type1: true, type2: false, type3: false })
+        // setServerType({ type1: true, type2: false, type3: false })
         setActiveImage(image01)
         break
       case 'type2':
-        setServerType({ type1: false, type2: true, type3: false })
+        // setServerType({ type1: false, type2: true, type3: false })
         setActiveImage(image02)
         break
       case 'type3':
-        setServerType({ type1: false, type2: false, type3: true })
+        // setServerType({ type1: false, type2: false, type3: true })
         setActiveImage(image03)
         break
     }
   }
   const handleMouseLeave = type => {
-    setServerType({ type1: false, type2: false, type3: false })
+    // setServerType({ type1: false, type2: false, type3: false })
     setActiveHover(false)
     // setActiveImage('')
   }
@@ -96,10 +96,7 @@ const Training = () => {
                     onMouseOver={() => handleMouseOver('type1')}
                     onMouseLeave={() => handleMouseLeave('type1')}
                   >
-                    <div
-                      className={'w-1/3 absolute ' + styles.verticalText}
-                      onClick={() => handleClick('type1')}
-                    >
+                    <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type1')}>
                       <span className={styles.number}>01&nbsp;&nbsp;</span>
                       <span className={styles.typograph}>Presencial&nbsp;</span>
                       <img
@@ -112,15 +109,12 @@ const Training = () => {
                   </div>
                 </div>
                 <div className="w-1/3 px-12">
-                <div
+                  <div
                     className={'h-full relative ' + styles.activeSection}
                     onMouseOver={() => handleMouseOver('type2')}
                     onMouseLeave={() => handleMouseLeave('type2')}
                   >
-                    <div
-                      className={'w-1/3 absolute ' + styles.verticalText}
-                      onClick={() => handleClick("type2")}
-                    >
+                    <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type2')}>
                       <span className={styles.number}>02&nbsp;&nbsp;</span>
                       <span className={styles.typograph}>Planes online&nbsp;</span>
                       <img
@@ -133,15 +127,12 @@ const Training = () => {
                   </div>
                 </div>
                 <div className="w-1/3 px-12">
-                <div
+                  <div
                     className={'h-full relative ' + styles.activeSection}
                     onMouseOver={() => handleMouseOver('type3')}
                     onMouseLeave={() => handleMouseLeave('type3')}
                   >
-                    <div
-                      className={'w-1/3 absolute ' + styles.verticalText}
-                      onClick={() => handleClick("type3")}
-                    >
+                    <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type3')}>
                       <span className={styles.number}>03&nbsp;&nbsp;</span>
                       <span className={styles.typograph}>1 to 1 en streaming&nbsp;</span>
                       <img
