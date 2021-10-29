@@ -28,6 +28,58 @@ const Plans = () => {
       description: '3 unidades',
     },
   ]
+
+  const grayMaterials = [
+    {
+      url: '/images/card1.jpg',
+      label: 'Abdominales hipopresivos',
+      description: 'Lorem ipsum dolor sit',
+    },
+    {
+      url: '/images/card1.jpg',
+      label: 'Abdominales hipopresivos',
+      description: 'Lorem ipsum dolor sit',
+    },
+    {
+      url: '/images/card1.jpg',
+      label: 'Abdominales hipopresivos',
+      description: 'Lorem ipsum dolor sit',
+    },
+  ]
+
+  const greenMaterials = [
+    {
+      url: '/images/card1.jpg',
+      label: 'Abdominales hipopresivos',
+      description: 'Lorem ipsum dolor sit',
+    },
+    {
+      url: '/images/card1.jpg',
+      label: 'Abdominales hipopresivos',
+      description: 'Lorem ipsum dolor sit',
+    },
+    {
+      url: '/images/card1.jpg',
+      label: 'Abdominales hipopresivos',
+      description: 'Lorem ipsum dolor sit',
+    },
+    {
+      url: '/images/card1.jpg',
+      label: 'Abdominales hipopresivos',
+      description: 'Lorem ipsum dolor sit',
+    },
+    {
+      url: '/images/card1.jpg',
+      label: 'Abdominales hipopresivos',
+      description: 'Lorem ipsum dolor sit',
+    },
+    {
+      url: '/images/card1.jpg',
+      label: 'Abdominales hipopresivos',
+      description: 'Lorem ipsum dolor sit',
+    },
+  ]
+
   const noteDescription =
     'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.'
   useEffect(() => {
@@ -99,12 +151,20 @@ const Plans = () => {
           </div>
         </div>
         <div className="col-span-12 md:col-span-3 sm:col-span-12">
-          <div className="rounded-xl bg-white py-4 px-16 pb-10 mt-10">
-            <div className={styles.material}>Material necesario</div>
+          <div className="rounded-xl bg-white py-4 px-6 pb-10 mt-10">
+            <div className={styles.videoMaterialTitle + ' pt-8'}>CALENTAMIENTO</div>
             <div className="pt-7">
-              {materials.map((item, index) => (
+              {grayMaterials.map((item, index) => (
                 <div className="py-2" key={index}>
-                  <Material item={item} />
+                  <Material item={item} type={'gray'} />
+                </div>
+              ))}
+            </div>
+            <div className={styles.videoMaterialTitle + ' pt-8'}>ABDOMINALES</div>
+            <div className="pt-7">
+              {greenMaterials.map((item, index) => (
+                <div className="py-2" key={index}>
+                  <Material item={item} type={'green'} />
                 </div>
               ))}
             </div>

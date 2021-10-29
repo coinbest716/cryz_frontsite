@@ -10,7 +10,7 @@ const CheckBoxImage = props => {
         style={{ width: '24px', height: '24px', backgroundColor: color, borderRadius: '6px', color: 'white' }}
         className="flex items-center justify-center"
       >
-        <img src="/images/check.svg" alt="" style={{ width: '12px', height: '12px' }} />
+        <img src="/images/check-white.svg" alt="" style={{ width: '12px', height: '12px' }} />
       </div>
       <div className={'pl-4 ' + styles.subTitle}>{label}</div>
     </div>

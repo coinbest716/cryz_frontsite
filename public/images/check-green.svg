@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.199 10.199">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #4dd848;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        stroke-width: 1.2px;
+        stroke-dasharray: 0 0;
+      }
+    </style>
+  </defs>
+  <path id="Vector" class="cls-1" d="M0,4.774,3.978,9,12,0" transform="translate(0.6 0.6)"/>
+</svg>
