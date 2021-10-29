@@ -7,10 +7,33 @@ import ReactPlayer from 'react-player'
 import Material from 'components/components/dashboard/Material'
 import Feature from 'components/components/academy/Feature'
 import DownloadPDF from 'components/components/academy/DownloadPDF'
+import Image from 'next/image'
+import downIcon from 'public/images/down.svg'
+import dynamic from 'next/dynamic'
+const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
+import moment from 'moment'
+import 'react-calendar/dist/Calendar.css'
 
 const Plans = () => {
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
   const [feature, setFeature] = useState([])
+  const [showCalendar, setShowCalendar] = useState(false)
+  const [date, setDate] = useState(new Date())
+
   const materials = [
     {
       url: '/images/card1.jpg',
@@ -93,6 +116,14 @@ const Plans = () => {
   const handleClickDownlodPDF = () => {
     console.log('handleClickDownlodPDF')
   }
+  const handleClickMonth = () => {
+    setShowCalendar(!showCalendar)
+  }
+  const handleChangeDate = value => {
+    setDate(value)
+    setShowCalendar(false)
+  }
+
   return (
     <div className={'pt-10 pb-24 px-24 ' + styles.container}>
       <div className="flex justify-between">
@@ -151,7 +182,27 @@ const Plans = () => {
           </div>
         </div>
         <div className="col-span-12 md:col-span-3 sm:col-span-12">
-          <div className="rounded-xl bg-white py-4 px-6 pb-10 mt-10">
+          <div className="rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative">
+            <div className="flex justify-between items-center">
+              <div className={styles.monthName}>{monthNames[date.getMonth()]}</div>
+              <div
+                className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}
+                onClick={handleClickMonth}
+              >
+                <div className={styles.monthSelect + ' pr-3'}>Mes</div>
+                <Image src={downIcon} alt="" width={7} height={7} />
+              </div>
+            </div>
+            <div className="calendarWrapper">
+              <Calendar
+                className={showCalendar ? '' : 'hidden'}
+                value={date}
+                onChange={handleChangeDate}
+                showDoubleView={false}
+                showNavigation={true}
+                // view={'year'}
+              />
+            </div>
             <div className={styles.videoMaterialTitle + ' pt-8'}>CALENTAMIENTO</div>
             <div className="pt-7">
               {grayMaterials.map((item, index) => (
