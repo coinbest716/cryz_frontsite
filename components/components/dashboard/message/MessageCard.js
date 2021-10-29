@@ -13,7 +13,10 @@ const MessageCard = () => {
   return (
     <div className={styles.container}>
       <div className={'flex justify-start'}>
-        <div className={'mr-4 ' + styles.avatar}>CS</div>
+        <div className={'relative mr-4 ' + styles.avatar}>
+          CS
+          <div className={styles.status} style={{ backgroundColor: '#5D51C6' }}></div>
+        </div>
         <div className={'inline-grid justify-start items-center'}>
           <div className={styles.title}>Entrenamiento de resistencia</div>
           <div className={'mt-2 ' + styles.text}>Siapp enjing saya ka bumi ente masih di didinya pan?</div>

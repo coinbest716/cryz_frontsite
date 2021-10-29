@@ -34,6 +34,18 @@
   line-height: 20px;
 }
 
+.status {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  z-index: 10;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #5a9bfe;
+  border: 1px solid $white-color;
+}
+
 .title {
   color: #333333;
   font-family: Montserrat;
