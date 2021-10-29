@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="share" transform="translate(1 16)">
+    <path id="Path" class="cls-1" d="M0,0V-6A1.5,1.5,0,0,1,1.5-7.5h9A1.5,1.5,0,0,1,12-6V0" transform="translate(0 -7.5)"/>
+    <path id="Path-2" data-name="Path" class="cls-1" d="M6-3,3,0,0-3" transform="translate(3)"/>
+    <path id="Path-3" data-name="Path" class="cls-1" d="M.375,0V-9.75" transform="translate(5.625)"/>
+  </g>
+</svg>

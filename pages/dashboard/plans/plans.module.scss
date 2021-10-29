@@ -4,6 +4,72 @@
   width: 100%;
   background-color: #f5f6fa;
 }
+.highBoldLabel {
+  color: #2a2c36;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.chapter {
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+.chapterTitle {
+  color: #333333;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+.dot {
+  height: 4px;
+  width: 4px;
+  background-color: #c4c4c4;
+  border-radius: 4px;
+}
+.blockSection {
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+.blackName {
+  color: #333333;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+.materialSection {
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+.materialTitle {
+  color: #333333;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.noteSection {
+  border: 1px solid #979797;
+  border-radius: 10px;
+}
+.notes {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 16px;
+}
+.noteDescription {
+  color: #c8c8c8;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
 .reactPlayer {
   video {
     border-radius: 10px;
