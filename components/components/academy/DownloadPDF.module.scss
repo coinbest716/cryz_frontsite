@@ -8,10 +8,24 @@
     background-color: $gray-100-color;
   }
 }
+.downloadPlan {
+  border-radius: 6px;
+  background-color: #818e8e;
+  &:hover {
+    background-color: #818e8ecb;
+  }
+}
 .label {
   color: #7d8f8e;
   font-family: Montserrat;
   font-size: 12px;
   letter-spacing: -0.29px;
   line-height: 22px;
+}
+.labelPlan {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
 }
