@@ -2,8 +2,10 @@
 
 .container {
   width: 100%;
-  display: flex;
-  justify-content: center;
   background-color: #f5f6fa;
-  height: 100vh;
+}
+.reactPlayer {
+  video {
+    border-radius: 10px;
+  }
 }
