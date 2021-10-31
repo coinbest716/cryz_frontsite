@@ -40,7 +40,7 @@ const ShoppingCart = props => {
             </div>
             <div>
               <button
-                className="duration-200 hover:bg-gray-300 w-5 h-5 flex justify-center items-center p-1.5 rounded-full"
+                className="duration-200 hover:bg-gray-300 w-6 h-6 flex justify-center items-center p-2 rounded-full"
                 onClick={() => handleRemoveCart(index)}
               >
                 <Image src={close} alt="" width={16} height={16} />
@@ -54,13 +54,13 @@ const ShoppingCart = props => {
         <div className="flex justify-between">
           <div className={styles.discount}>Cupón descuento?</div>
           <div
-            className="duration-200 cursor-pointer hover:bg-gray-300 w-5 h-5 flex justify-center items-center p-1 rounded-full"
+            className="duration-200 cursor-pointer hover:bg-gray-300 w-6 h-6 flex justify-center items-center p-1.5 rounded-full"
             onClick={handleClickExpand}
           >
             {expend ? (
-              <Image src={up} alt="" width={13} height={13} />
+              <Image src={up} alt="" width={15} height={15} />
             ) : (
-              <Image src={down} alt="" width={13} height={13} />
+              <Image src={down} alt="" width={15} height={15} />
             )}
           </div>
         </div>

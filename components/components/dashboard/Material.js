@@ -7,7 +7,7 @@ import greenCheckIcon from 'public/images/check-green.svg'
 const Material = props => {
   const { item, type } = props
   return (
-    <div className="flex justify-start items-center py-2">
+    <div className="flex justify-start items-center py-2 cursor-pointer">
       {type === 'gray' && <Image src={grayCheckIcon} alt="" width={15} height={12} />}
       {type === 'green' && <Image src={greenCheckIcon} alt="" width={15} height={12} />}
       <img
