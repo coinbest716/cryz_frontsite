@@ -115,11 +115,10 @@ const Dashboard = () => {
     router.push('/dashboard/message')
   }
   const handleClickCalendar = () => {
-    console.log('handleClickCalendar redirect dashboard calendar section')
-    // router.push('/dashboard/calendar')
+    router.push('/dashboard/calendar')
   }
   const handleClickBonos = () => {
-    console.log('handleClickBonos')
+    router.push('/dashboard/message')
   }
 
   return (
@@ -191,12 +190,14 @@ const Dashboard = () => {
             </div>
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
               <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection} onClick={handleClickBonos}>
-                <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
-                <div className={'text-center pt-5'}>
-                  <Image src={bonosIcon} alt="" width={50} height={50} />
+                <div className="flex justify-between items-center">
+                  <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
+                  <div className={'text-center'}>
+                    <Image src={bonosIcon} alt="" width={50} height={50} />
+                  </div>
                 </div>
                 <div>
-                  <div className="py-3">
+                  <div className="py-3 h-full pt-6">
                     <ProgressBar percentage={70} label={'Mujer'} type={'women'} />
                   </div>
                   <div className="py-3">
