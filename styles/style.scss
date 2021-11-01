@@ -27,16 +27,16 @@
   .react-calendar {
     border: none;
     width: 100%;
-    color: #99999999;
+    color: #999999;
     background: transparent;
     font-size: 12px;
     font-family: '.SF NS Display';
   }
   .react-calendar__month-view__days__day--weekend {
-    color: #99999999;
+    color: #999999;
   }
   .react-calendar__month-view__days__day--neighboringMonth {
-    color: #99999999;
+    color: #999999;
   }
   .react-calendar__navigation {
     height: 40px;
@@ -79,11 +79,11 @@
 .fullCalendarWrapper {
   .fc {
     font-size: 13px;
-    color: #99999999;
+    color: #999999;
   }
   .fc .fc-button-primary {
-    background-color: var(--fc-button-bg-color, #99999999);
-    border-color: var(--fc-button-border-color, #99999999);
+    background-color: var(--fc-button-bg-color, #999999);
+    border-color: var(--fc-button-border-color, #999999);
   }
   .fc .fc-button-primary:not(:disabled):active,
   .fc .fc-button-primary:not(:disabled).fc-button-active {
