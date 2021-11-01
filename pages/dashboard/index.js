@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './dashboard.module.scss'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
@@ -14,104 +14,37 @@ import ProgressBar from 'components/components/dashboard/ProgressBar'
 import bonosIcon from 'public/images/bonos.svg'
 import NewMessageBox from 'components/components/dashboard/NewMessageBox'
 import noPendingIcon from 'public/images/no-pending.svg'
+import { chartOptionsData, messageData } from 'assets/data/Dashboard'
 
 const Dashboard = () => {
   const [value, onChange] = useState(new Date())
-
-  const chartOptions = {
-    series: [
-      {
-        name: 'Actividad semanal',
-        data: [4, 20, 10, 30, 36, 80, 30, 91],
-      },
-    ],
-    options: {
-      chart: {
-        background: 'transparent',
-        foreColor: '#939AAC',
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      theme: {
-        monochrome: {
-          enabled: true,
-          color: '#818E8E',
-          shadeTo: 'light',
-        },
-      },
-      xaxis: {
-        categories: ['Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab', 'Dom'],
-      },
-      yaxis: {
-        show: false,
-      },
-      legend: {
-        position: 'bottom',
-      },
-      grid: {
-        show: false,
-      },
-    },
-  }
-
-  const message = [
-    {
-      name: 'Oluchi Mazi',
-      content: 'I’m getting a late today',
-    },
-    {
-      name: 'Shinohara Ryoma',
-      content: 'What are the homework…',
-    },
-    {
-      name: 'Paromita Haque',
-      content: 'I’m getting a late today',
-    },
-    {
-      name: 'Oluchi Mazi',
-      content: 'I’m getting a late today',
-    },
-    {
-      name: 'Shinohara Ryoma',
-      content: 'What are the homework…',
-    },
-    {
-      name: 'Paromita Haque',
-      content: 'I’m getting a late today',
-    },
-  ]
-
-  const mark = ['21-10-2021', '22-10-2021', '23-10-2021']
+  const [chartOptions, setChartOptions] = useState({})
+  const [message, setMessage] = useState([])
+  console.log(chartOptionsData)
+  useEffect(() => {
+    setChartOptions(chartOptionsData)
+    setMessage(messageData)
+  }, [])
 
   const handleClickStartClass = () => {
-    console.log('handleClickStartClass redirect live video section wc-64')
     router.push('/dashboard/live-streaming')
   }
   const handleClickView = () => {
-    console.log('handleClickView redirect purchase section wc-67')
     router.push('/dashboard/shopping')
   }
   const handleClickHours = () => {
-    console.log('handleClickHours')
     router.push('/dashboard/profile')
   }
   const handleChangeProfile = () => {
-    console.log('handleChangeProfile')
     router.push('/dashboard/profile')
   }
   const handleClickWeight = () => {
-    console.log('handleClickWeight')
     router.push('/dashboard/profile#health')
   }
   const handleClickRmember = () => {
     console.log('handleClickRmember')
   }
   const handleClickMessage = () => {
-    console.log('handleClickMessage redirect  message section in side menu')
     router.push('/dashboard/message')
   }
   const handleClickCalendar = () => {
