@@ -14,6 +14,7 @@ import MessageInput from 'components/components/dashboard/message/MessageInput'
 
 import ProfessionalCard from 'components/components/dashboard/message/ProfessionalCard'
 import MessageCard from 'components/components/dashboard/message/MessageCard'
+import MessageSelectCard from 'components/components/dashboard/message/MessageSelectCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
@@ -63,19 +64,7 @@ const Message = () => {
         </div>
       </div>
       {/* body part */}
-      <div>
-        <MessageCard01 message={messageContent} />
-        <MessageCard02 message={messageContent} />
-        <MessageImage01 message={messageImage} />
-        <MessageImage02 message={messageImage} />
-        <MessageVideo01 message={messageVideo} />
-        <MessageVideo02 message={messageVideo} />
-        <MessageInput message={messageInput} sendMessage={(content, type) => handleSendMessage(content, type)} />
-
-        <ProfessionalCard />
-        <MessageCard />
-      </div>
-      <div className={'w-full flex flex-wrap ' + styles.contentBorder}>
+      <div className={'w-full flex flex-wrap mt-6 ' + styles.contentBorder}>
         <div className={'w-full md:w-1/2 '}>
           {/* professional area */}
           <div className={styles.professionalBorder}>
@@ -97,12 +86,38 @@ const Message = () => {
             <MessageCard />
             <MessageCard />
             <MessageCard />
-            <MessageCard />
-            <MessageCard />
-            <MessageCard />
           </div>
         </div>
-        <div className={'w-full md:w-1/2 ' + styles.commonBorder}>bbb</div>
+        <div className={'w-full md:w-1/2 '}>
+          {/* message select card area */}
+          <div className={styles.commonBorder}>
+            <MessageSelectCard />
+          </div>
+          {/* chat area */}
+          <div className={styles.commonBorder}>
+            <div className={'my-5 mx-7 flex justify-end'}>
+              <MessageCard01 message={messageContent} />
+            </div>
+            <div className={'my-5 mx-7 flex justify-start'}>
+              <MessageCard02 message={messageContent} />
+            </div>
+            <div className={'my-5 mx-7 flex justify-end'}>
+              <MessageCard01 message={messageContent} />
+            </div>
+            <div className={'my-5 mx-7 flex justify-end'}>
+              <MessageImage01 message={messageImage} />
+            </div>
+            <div className={'my-5 mx-7 flex justify-end'}>
+              <MessageVideo01 message={messageVideo} />
+            </div>
+          </div>
+          {/* message input area */}
+          <div className={styles.commonBorder}>
+            <div className={'my-5 mx-7 flex justify-end'}>
+              <MessageInput message={messageInput} sendMessage={(content, type) => handleSendMessage(content, type)} />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
