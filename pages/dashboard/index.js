@@ -8,50 +8,93 @@ import router from 'next/router'
 import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
-import moment from 'moment'
 import 'react-calendar/dist/Calendar.css'
 import ProgressBar from 'components/components/dashboard/ProgressBar'
 import bonosIcon from 'public/images/bonos.svg'
 import NewMessageBox from 'components/components/dashboard/NewMessageBox'
 import noPendingIcon from 'public/images/no-pending.svg'
-import { chartOptionsData, messageData } from 'assets/data/Dashboard'
+import DashboardData from 'assets/data/DashboardData.json'
 
 const Dashboard = () => {
   const [value, onChange] = useState(new Date())
-  const [chartOptions, setChartOptions] = useState({})
   const [message, setMessage] = useState([])
-  console.log(chartOptionsData)
+
   useEffect(() => {
-    setChartOptions(chartOptionsData)
-    setMessage(messageData)
+    setMessage(DashboardData)
   }, [])
 
-  const handleClickStartClass = () => {
-    router.push('/dashboard/live-streaming')
+  const chartOptions = {
+    series: [
+      {
+        name: 'Actividad semanal',
+        data: [4, 20, 10, 30, 36, 80, 30, 91],
+      },
+    ],
+    options: {
+      chart: {
+        background: 'transparent',
+        foreColor: '#939AAC',
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: 'smooth',
+        width: 2,
+      },
+      theme: {
+        monochrome: {
+          enabled: true,
+          color: '#818E8E',
+          shadeTo: 'light',
+        },
+      },
+      xaxis: {
+        categories: ['Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab', 'Dom'],
+      },
+      yaxis: {
+        show: false,
+      },
+      legend: {
+        position: 'bottom',
+      },
+      grid: {
+        show: false,
+      },
+    },
   }
-  const handleClickView = () => {
-    router.push('/dashboard/shopping')
-  }
-  const handleClickHours = () => {
-    router.push('/dashboard/profile')
-  }
-  const handleChangeProfile = () => {
-    router.push('/dashboard/profile')
-  }
-  const handleClickWeight = () => {
-    router.push('/dashboard/profile#health')
-  }
+
   const handleClickRmember = () => {
     console.log('handleClickRmember')
   }
-  const handleClickMessage = () => {
-    router.push('/dashboard/message')
-  }
-  const handleClickCalendar = () => {
-    router.push('/dashboard/calendar')
-  }
-  const handleClickBonos = () => {
-    router.push('/dashboard/message')
+
+  const handleClickRedirect = type => {
+    switch (type) {
+      case 'startClass':
+        router.push('/dashboard/live-streaming')
+        break
+      case 'view':
+        router.push('/dashboard/shopping')
+        break
+      case 'hour':
+        router.push('/dashboard/profile')
+        break
+      case 'editProfile':
+        router.push('/dashboard/profile')
+        break
+      case 'iconWeight':
+        router.push('/dashboard/profile#health')
+        break
+      case 'messageBox':
+        router.push('/dashboard/message')
+        break
+      case 'calendar':
+        router.push('/dashboard/calendar')
+        break
+      case 'bonos':
+        router.push('/dashboard/message')
+        break
+    }
   }
 
   return (
@@ -65,7 +108,11 @@ const Dashboard = () => {
             </div>
             <div>
               {message.length ? (
-                <DashboardButton handleClick={handleClickStartClass} label={'Comenzar clase'} type={'startClass'} />
+                <DashboardButton
+                  handleClick={() => handleClickRedirect('startClass')}
+                  label={'Comenzar clase'}
+                  type={'startClass'}
+                />
               ) : (
                 <></>
               )}
@@ -80,7 +127,7 @@ const Dashboard = () => {
                 sesiones y renovar tu bono pinchando a continuación en el botón
               </div>
               <div className="pt-4">
-                <DashboardButton handleClick={handleClickView} label={'Ver'} type={'view'} />
+                <DashboardButton handleClick={() => handleClickRedirect('view')} label={'Ver'} type={'view'} />
               </div>
             </div>
             <div style={{ minWidth: '220px' }}>
@@ -91,12 +138,12 @@ const Dashboard = () => {
             <div className="w-full">
               <div className={styles.highBoldLabel}>Actividad semanal</div>
               <div>
-                <Chart options={chartOptions.options} series={chartOptions.series} type="area" height="200px" />
+                <Chart options={chartOptions?.options} series={chartOptions?.series} type="area" height="200px" />
               </div>
             </div>
             <div className="px-2 ">
               <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
-              <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
+              <DashboardButton handleClick={() => handleClickRedirect('hour')} label={'75,2'} type={'hour'} />
             </div>
           </div>
           {message.length ? (
@@ -116,13 +163,16 @@ const Dashboard = () => {
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
               <div
                 className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
-                onClick={handleClickCalendar}
+                onClick={() => handleClickRedirect('calendar')}
               >
                 <Calendar className={styles.calendar} onChange={onChange} value={value}></Calendar>
               </div>
             </div>
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
-              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection} onClick={handleClickBonos}>
+              <div
+                className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}
+                onClick={() => handleClickRedirect('bonos')}
+              >
                 <div className="flex justify-between items-center">
                   <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
                   <div className={'text-center'}>
@@ -159,19 +209,31 @@ const Dashboard = () => {
                 <div className={'pt-4 ' + styles.highBoldLabel}>Mariano Pérez</div>
                 <div className={'pt-2 ' + styles.mediumLabel}>Madrid</div>
                 <div className="pt-6 flex justify-center">
-                  <DashboardButton handleClick={handleChangeProfile} label={'Editar Perfil'} type={'editProfile'} />
+                  <DashboardButton
+                    handleClick={() => handleClickRedirect('editProfile')}
+                    label={'Editar Perfil'}
+                    type={'editProfile'}
+                  />
                 </div>
                 <div className="pt-14 flex justify-between">
                   <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
                     <div className="absolute -top-4">
-                      <DashboardButton handleClick={handleClickWeight} label={''} type={'iconWeight'} />
+                      <DashboardButton
+                        handleClick={() => handleClickRedirect('iconWeight')}
+                        label={''}
+                        type={'iconWeight'}
+                      />
                       <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
                       <div className={'pt-3 ' + styles.mediumBoldLabel}>56,6 kg</div>
                     </div>
                   </div>
                   <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
                     <div className="absolute -top-4">
-                      <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
+                      <DashboardButton
+                        handleClick={() => handleClickRedirect('iconWeight')}
+                        label={''}
+                        type={'iconHeight'}
+                      />
                       <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
                       <div className={'pt-3 ' + styles.mediumBoldLabel}>170 cm</div>
                     </div>
@@ -187,7 +249,7 @@ const Dashboard = () => {
                       {message.map((item, index) => (
                         <div className="py-2 flex justify-center" key={index}>
                           <NewMessageBox
-                            handleClickMessage={handleClickMessage}
+                            handleClickMessage={() => handleClickRedirect('messageBox')}
                             name={item.name}
                             content={item.content}
                           />
