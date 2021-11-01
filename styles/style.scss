@@ -16,6 +16,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('../assets/fonts/AvenirNextLTPro-BoldCn.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
 .calendarWrapper {
   .react-calendar {
     border: none;
