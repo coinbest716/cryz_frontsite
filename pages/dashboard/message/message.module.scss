@@ -1,9 +1,44 @@
 @import 'styles/variable.module.scss';
 
-.container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: #f5f6fa;
-  height: 100vh;
+.contentBorder {
+  border: 1px solid #c4c4c4;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.commonBorder {
+  border: 1px solid #c4c4c4;
+}
+
+.professionalBorder {
+  border: 1px solid #c4c4c4;
+  border-top-left-radius: 10px;
+}
+
+.messageBorder {
+  border: 1px solid #c4c4c4;
+  border-bottom-left-radius: 10px;
+}
+
+.messageText {
+  color: #72918e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.26px;
+  line-height: 25px;
+}
+
+.professionalArea {
+  height: 218px;
+  overflow-y: auto;
+}
+
+.messageArea {
+  height: calc(100vh - 48px - 50px - 24px - 220px - 70px);
+  overflow-y: auto;
+}
+
+.chatArea {
+  height: calc(100vh - 48px - 50px - 24px - 100px - 159px - 70px);
+  overflow-y: auto;
 }
