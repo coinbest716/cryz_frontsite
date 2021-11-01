@@ -1,6 +1,13 @@
 import React from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 
+// third party components
+import 'react-perfect-scrollbar/dist/css/styles.css'
+import PerfectScrollbar from 'react-perfect-scrollbar'
+
+// next components
+import Image from 'next/image'
+
 // custom components
 import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
@@ -15,6 +22,10 @@ import MessageInput from 'components/components/dashboard/message/MessageInput'
 import ProfessionalCard from 'components/components/dashboard/message/ProfessionalCard'
 import MessageCard from 'components/components/dashboard/message/MessageCard'
 import MessageSelectCard from 'components/components/dashboard/message/MessageSelectCard'
+
+// images
+import PlusIcon from 'assets/images/plus.svg'
+import TrashIcon from 'assets/images/trash.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyle.module.scss'
@@ -67,25 +78,43 @@ const Message = () => {
       <div className={'w-full flex flex-wrap mt-6 ' + styles.contentBorder}>
         <div className={'w-full md:w-1/2 '}>
           {/* professional area */}
-          <div className={styles.professionalBorder}>
-            <div>Profesionales</div>
-            <ProfessionalCard />
-            <ProfessionalCard />
-            <ProfessionalCard />
-            <ProfessionalCard />
-            <ProfessionalCard />
+          <div className={styles.professionalBorder + ' ' + styles.professionalArea}>
+            <PerfectScrollbar>
+              <div className={'mx-6 my-2 ' + styles.messageText}>Profesionales</div>
+              <ProfessionalCard />
+              <ProfessionalCard />
+              <ProfessionalCard />
+              <ProfessionalCard />
+              <ProfessionalCard />
+            </PerfectScrollbar>
           </div>
           {/* message area */}
-          <div className={styles.messageBorder}>
-            <div className={'flex justify-between'}>
-              <div>Mensajes</div>
-              <div>Mensajes</div>
-            </div>
-            <MessageCard />
-            <MessageCard />
-            <MessageCard />
-            <MessageCard />
-            <MessageCard />
+          <div className={styles.messageBorder + ' ' + styles.messageArea}>
+            <PerfectScrollbar>
+              <div className={'flex justify-between mx-6 my-6'}>
+                <div className={styles.messageText}>Mensajes</div>
+                <div className={'flex ' + styles.messageText}>
+                  <button className={'flex justify-center items-center mr-4'}>
+                    <div className={'flex items-center mr-4'} style={{ fontSize: '24px' }}>
+                      +
+                    </div>
+                    Nuevo mensaje
+                  </button>
+                  <button className={'grid justify-center items-center'}>
+                    <Image src={TrashIcon} alt={''} width={31} height={31} />
+                  </button>
+                </div>
+              </div>
+              <MessageCard />
+              <MessageCard />
+              <MessageCard />
+              <MessageCard />
+              <MessageCard />
+              <MessageCard />
+              <MessageCard />
+              <MessageCard />
+              <MessageCard />
+            </PerfectScrollbar>
           </div>
         </div>
         <div className={'w-full md:w-1/2 '}>
@@ -94,22 +123,24 @@ const Message = () => {
             <MessageSelectCard />
           </div>
           {/* chat area */}
-          <div className={styles.commonBorder}>
-            <div className={'my-5 mx-7 flex justify-end'}>
-              <MessageCard01 message={messageContent} />
-            </div>
-            <div className={'my-5 mx-7 flex justify-start'}>
-              <MessageCard02 message={messageContent} />
-            </div>
-            <div className={'my-5 mx-7 flex justify-end'}>
-              <MessageCard01 message={messageContent} />
-            </div>
-            <div className={'my-5 mx-7 flex justify-end'}>
-              <MessageImage01 message={messageImage} />
-            </div>
-            <div className={'my-5 mx-7 flex justify-end'}>
-              <MessageVideo01 message={messageVideo} />
-            </div>
+          <div className={styles.commonBorder + ' ' + styles.chatArea}>
+            <PerfectScrollbar>
+              <div className={'my-5 mx-7 flex justify-end'}>
+                <MessageCard01 message={messageContent} />
+              </div>
+              <div className={'my-5 mx-7 flex justify-start'}>
+                <MessageCard02 message={messageContent} />
+              </div>
+              <div className={'my-5 mx-7 flex justify-end'}>
+                <MessageCard01 message={messageContent} />
+              </div>
+              <div className={'my-5 mx-7 flex justify-end'}>
+                <MessageImage01 message={messageImage} />
+              </div>
+              <div className={'my-5 mx-7 flex justify-end'}>
+                <MessageVideo01 message={messageVideo} />
+              </div>
+            </PerfectScrollbar>
           </div>
           {/* message input area */}
           <div className={styles.commonBorder}>
