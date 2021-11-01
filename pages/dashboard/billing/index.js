@@ -6,9 +6,10 @@ import ProfileInfo from 'components/components/dashboard/Profile'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import CommonText from 'components/components/purchase/CommonText'
 import CommonButton from 'components/components/purchase/CommonButton'
+import BillingData from 'assets/data/BillingData'
 
 const Billing = () => {
-  const [addressInfo, setAddressInfo] = useState({
+  const addressInfo = {
     name: '',
     title: '',
     cif: '',
@@ -19,38 +20,11 @@ const Billing = () => {
     country: '',
     postalCode: '',
     collapse: true,
-  })
+  }
   const [addressDataList, setAddressDataList] = useState([])
 
-  const addressMockupData = [
-    {
-      name: 'qwe',
-      title: 'qwe',
-      cif: 'qwe',
-      email: 'qwe',
-      nif: 'qwe',
-      address: 'qwe',
-      phone: 'qwe',
-      country: 'qwe',
-      postalCode: 'qwe',
-      collapse: true,
-    },
-    {
-      name: 'asd',
-      title: 'asd',
-      cif: 'asd',
-      email: 'asd',
-      nif: 'asd',
-      address: 'asd',
-      phone: 'asd',
-      country: 'asd',
-      postalCode: 'asd',
-      collapse: true,
-    },
-  ]
-
   useEffect(() => {
-    setAddressDataList(addressMockupData)
+    setAddressDataList(BillingData)
   }, [])
 
   const handleAddAddress = () => {
