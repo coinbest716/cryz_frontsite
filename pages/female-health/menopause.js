@@ -9,7 +9,7 @@ import CarouselFemaleHealth from 'components/FemaleHealth/CarouselFemaleHealth'
 import OutlineButton from 'components/components/OutlineButton'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/female-health/PreparationForChildbirth.module.scss'
 
 // json data

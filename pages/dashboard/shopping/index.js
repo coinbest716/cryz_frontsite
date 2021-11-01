@@ -12,7 +12,7 @@ import SearchOrder from 'components/components/dashboard/SearchOrder'
 import Chip from 'components/components/Chip'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './shopping.module.scss'
 
 // images

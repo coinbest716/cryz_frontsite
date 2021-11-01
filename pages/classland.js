@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyle.module.scss'
+import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/classland.module.scss'
 import Image from 'next/image'
 import topImage from 'public/images/classland-top-image.svg'

@@ -1,5 +1,5 @@
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyle.module.scss'
+import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './credit-success.module.scss'
 import Image from 'next/image'
 import successLogo from 'public/images/credit-success.svg'

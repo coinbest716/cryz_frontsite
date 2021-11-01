@@ -20,7 +20,7 @@ import SocialURLData from 'assets/data/SocialURLData'
 
 // styles
 import styles from 'components/Home/TeamSection.module.scss'
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 
 const TeamSection = () => {
   const [sliderData, setSliderData] = useState([])

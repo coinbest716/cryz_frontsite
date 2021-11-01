@@ -12,7 +12,7 @@ import AcademyImage from 'assets/images/team-member-01.png'
 import SocialURLData from 'assets/data/SocialURLData'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/Menu/Menu.module.scss'
 
 const BurgerIcon = ({ visibilty, setVisibility, router }) => {

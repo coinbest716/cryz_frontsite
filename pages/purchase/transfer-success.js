@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyle.module.scss'
+import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './transfer-success.module.scss'
 import Image from 'next/image'
 import news from 'public/images/news.svg'
