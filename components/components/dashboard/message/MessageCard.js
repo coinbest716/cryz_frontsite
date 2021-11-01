@@ -7,7 +7,7 @@ import Image from 'next/image'
 import styles from './MessageCard.module.scss'
 
 // images
-import CheckIcon from 'assets/images/check-white.svg'
+import CheckIcon from 'assets/images/check.svg'
 
 const MessageCard = () => {
   return (
