@@ -95,3 +95,35 @@
     border-color: var(--fc-button-hover-border-color, #818e8e);
   }
 }
+
+.mainCarouselArea {
+  position: absolute;
+  bottom: 0px;
+  left: 25px;
+  right: 0px;
+}
+
+.mainCarouselArea .carousel-root .carousel-slider {
+  padding-right: 80px;
+}
+
+.mainCarouselArea .carousel-root .control-dots {
+  width: 10px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  right: 40px;
+  top: 0;
+  z-index: 9000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mainCarouselArea .carousel-root .control-dots .dot {
+  margin: 8px !important;
+  z-index: 9000;
+}
+.mainCarouselArea .carousel-root .control-dots .dot.selected {
+  margin: 8px !important;
+  z-index: 9000;
+}

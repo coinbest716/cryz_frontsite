@@ -33,7 +33,7 @@ const MainSection = () => {
       </div>
       <div className={'absolute flex justify-end w-1/3 top-0 right-0 p-0 m-0 h-screen ' + styles.mainRightArea}>
         <div className={'absolute top-0 left-0 h-screen -z-10 w-full ' + styles.mainCarouselOpacityArea} />
-        <div className={styles.mainCarouselArea}>
+        <div className={'mainCarouselArea'}>
           <Carousel
             showArrows={false}
             showThumbs={false}
