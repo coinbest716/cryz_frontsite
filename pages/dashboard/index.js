@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './dashboard.module.scss'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
@@ -8,15 +8,20 @@ import router from 'next/router'
 import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
-import moment from 'moment'
 import 'react-calendar/dist/Calendar.css'
 import ProgressBar from 'components/components/dashboard/ProgressBar'
 import bonosIcon from 'public/images/bonos.svg'
 import NewMessageBox from 'components/components/dashboard/NewMessageBox'
 import noPendingIcon from 'public/images/no-pending.svg'
+import DashboardData from 'assets/data/DashboardData.json'
 
 const Dashboard = () => {
   const [value, onChange] = useState(new Date())
+  const [message, setMessage] = useState([])
+
+  useEffect(() => {
+    setMessage(DashboardData)
+  }, [])
 
   const chartOptions = {
     series: [
@@ -35,6 +40,7 @@ const Dashboard = () => {
       },
       stroke: {
         curve: 'smooth',
+        width: 2,
       },
       theme: {
         monochrome: {
@@ -58,68 +64,37 @@ const Dashboard = () => {
     },
   }
 
-  const message = [
-    {
-      name: 'Oluchi Mazi',
-      content: 'I’m getting a late today',
-    },
-    {
-      name: 'Shinohara Ryoma',
-      content: 'What are the homework…',
-    },
-    {
-      name: 'Paromita Haque',
-      content: 'I’m getting a late today',
-    },
-    {
-      name: 'Oluchi Mazi',
-      content: 'I’m getting a late today',
-    },
-    {
-      name: 'Shinohara Ryoma',
-      content: 'What are the homework…',
-    },
-    {
-      name: 'Paromita Haque',
-      content: 'I’m getting a late today',
-    },
-  ]
-
-  const mark = ['21-10-2021', '22-10-2021', '23-10-2021']
-
-  const handleClickStartClass = () => {
-    console.log('handleClickStartClass redirect live video section wc-64')
-    router.push('/dashboard/live-streaming')
-  }
-  const handleClickView = () => {
-    console.log('handleClickView redirect purchase section wc-67')
-    router.push('/dashboard/shopping')
-  }
-  const handleClickHours = () => {
-    console.log('handleClickHours')
-    router.push('/dashboard/profile')
-  }
-  const handleChangeProfile = () => {
-    console.log('handleChangeProfile')
-    router.push('/dashboard/profile')
-  }
-  const handleClickWeight = () => {
-    console.log('handleClickWeight')
-    router.push('/dashboard/profile#health')
-  }
   const handleClickRmember = () => {
     console.log('handleClickRmember')
   }
-  const handleClickMessage = () => {
-    console.log('handleClickMessage redirect  message section in side menu')
-    router.push('/dashboard/message')
-  }
-  const handleClickCalendar = () => {
-    console.log('handleClickCalendar redirect dashboard calendar section')
-    // router.push('/dashboard/calendar')
-  }
-  const handleClickBonos = () => {
-    console.log('handleClickBonos')
+
+  const handleClickRedirect = type => {
+    switch (type) {
+      case 'startClass':
+        router.push('/dashboard/live-streaming')
+        break
+      case 'view':
+        router.push('/dashboard/shopping')
+        break
+      case 'hour':
+        router.push('/dashboard/profile')
+        break
+      case 'editProfile':
+        router.push('/dashboard/profile')
+        break
+      case 'iconWeight':
+        router.push('/dashboard/profile#health')
+        break
+      case 'messageBox':
+        router.push('/dashboard/message')
+        break
+      case 'calendar':
+        router.push('/dashboard/calendar')
+        break
+      case 'bonos':
+        router.push('/dashboard/message')
+        break
+    }
   }
 
   return (
@@ -133,7 +108,11 @@ const Dashboard = () => {
             </div>
             <div>
               {message.length ? (
-                <DashboardButton handleClick={handleClickStartClass} label={'Comenzar clase'} type={'startClass'} />
+                <DashboardButton
+                  handleClick={() => handleClickRedirect('startClass')}
+                  label={'Comenzar clase'}
+                  type={'startClass'}
+                />
               ) : (
                 <></>
               )}
@@ -148,7 +127,7 @@ const Dashboard = () => {
                 sesiones y renovar tu bono pinchando a continuación en el botón
               </div>
               <div className="pt-4">
-                <DashboardButton handleClick={handleClickView} label={'Ver'} type={'view'} />
+                <DashboardButton handleClick={() => handleClickRedirect('view')} label={'Ver'} type={'view'} />
               </div>
             </div>
             <div style={{ minWidth: '220px' }}>
@@ -159,12 +138,12 @@ const Dashboard = () => {
             <div className="w-full">
               <div className={styles.highBoldLabel}>Actividad semanal</div>
               <div>
-                <Chart options={chartOptions.options} series={chartOptions.series} type="area" height="200px" />
+                <Chart options={chartOptions?.options} series={chartOptions?.series} type="area" height="200px" />
               </div>
             </div>
             <div className="px-2 ">
               <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
-              <DashboardButton handleClick={handleClickHours} label={'75,2'} type={'hour'} />
+              <DashboardButton handleClick={() => handleClickRedirect('hour')} label={'75,2'} type={'hour'} />
             </div>
           </div>
           {message.length ? (
@@ -184,19 +163,24 @@ const Dashboard = () => {
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
               <div
                 className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
-                onClick={handleClickCalendar}
+                onClick={() => handleClickRedirect('calendar')}
               >
                 <Calendar className={styles.calendar} onChange={onChange} value={value}></Calendar>
               </div>
             </div>
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
-              <div className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection} onClick={handleClickBonos}>
-                <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
-                <div className={'text-center pt-5'}>
-                  <Image src={bonosIcon} alt="" width={50} height={50} />
+              <div
+                className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}
+                onClick={() => handleClickRedirect('bonos')}
+              >
+                <div className="flex justify-between items-center">
+                  <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
+                  <div className={'text-center'}>
+                    <Image src={bonosIcon} alt="" width={50} height={50} />
+                  </div>
                 </div>
                 <div>
-                  <div className="py-3">
+                  <div className="py-3 h-full pt-6">
                     <ProgressBar percentage={70} label={'Mujer'} type={'women'} />
                   </div>
                   <div className="py-3">
@@ -225,19 +209,31 @@ const Dashboard = () => {
                 <div className={'pt-4 ' + styles.highBoldLabel}>Mariano Pérez</div>
                 <div className={'pt-2 ' + styles.mediumLabel}>Madrid</div>
                 <div className="pt-6 flex justify-center">
-                  <DashboardButton handleClick={handleChangeProfile} label={'Editar Perfil'} type={'editProfile'} />
+                  <DashboardButton
+                    handleClick={() => handleClickRedirect('editProfile')}
+                    label={'Editar Perfil'}
+                    type={'editProfile'}
+                  />
                 </div>
                 <div className="pt-14 flex justify-between">
                   <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
                     <div className="absolute -top-4">
-                      <DashboardButton handleClick={handleClickWeight} label={''} type={'iconWeight'} />
+                      <DashboardButton
+                        handleClick={() => handleClickRedirect('iconWeight')}
+                        label={''}
+                        type={'iconWeight'}
+                      />
                       <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
                       <div className={'pt-3 ' + styles.mediumBoldLabel}>56,6 kg</div>
                     </div>
                   </div>
                   <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
                     <div className="absolute -top-4">
-                      <DashboardButton handleClick={handleClickWeight} label={''} type={'iconHeight'} />
+                      <DashboardButton
+                        handleClick={() => handleClickRedirect('iconWeight')}
+                        label={''}
+                        type={'iconHeight'}
+                      />
                       <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
                       <div className={'pt-3 ' + styles.mediumBoldLabel}>170 cm</div>
                     </div>
@@ -253,7 +249,7 @@ const Dashboard = () => {
                       {message.map((item, index) => (
                         <div className="py-2 flex justify-center" key={index}>
                           <NewMessageBox
-                            handleClickMessage={handleClickMessage}
+                            handleClickMessage={() => handleClickRedirect('messageBox')}
                             name={item.name}
                             content={item.content}
                           />

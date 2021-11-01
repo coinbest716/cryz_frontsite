@@ -1,0 +1,26 @@
+[
+    {
+      "name": "qwe",
+      "title": "qwe",
+      "cif": "qwe",
+      "email": "qwe",
+      "nif": "qwe",
+      "address": "qwe",
+      "phone": "qwe",
+      "country": "qwe",
+      "postalCode": "qwe",
+      "collapse": true
+    },
+    {
+      "name": "asd",
+      "title": "asd",
+      "cif": "asd",
+      "email": "asd",
+      "nif": "asd",
+      "address": "asd",
+      "phone": "asd",
+      "country": "asd",
+      "postalCode": "asd",
+      "collapse": true
+    }
+  ]

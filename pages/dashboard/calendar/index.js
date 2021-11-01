@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './calendar.module.scss'
 import FullCalendar, { formatDate } from '@fullcalendar/react'
@@ -10,45 +10,18 @@ import ProfileInfo from 'components/components/dashboard/Profile'
 import dynamic from 'next/dynamic'
 const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 import 'react-calendar/dist/Calendar.css'
-import moment from 'moment'
 import CheckBoxImage from 'components/components/dashboard/CheckBoxImage'
+import CalendarData from 'assets/data/CalendarData'
 
 const Calendar = () => {
   const [value, onChange] = useState(new Date())
   const mark = ['28-10-2021', '29-10-2021', '30-10-2021']
-
-  const events = [
-    {
-      id: 1,
-      title: 'Redesign Landing Page Website',
-      start: '2021-10-31T10:30:00',
-      end: '2021-10-31T12:30:00',
-      backgroundColor: '#585AB9',
-      textColor: '#ffffff',
-      label: 'Gimnasio 1',
-    },
-    {
-      id: 2,
-      title: 'Redesign Landing Page Website',
-      start: '2021-11-03T08:30:00',
-      end: '2021-11-03T11:00:00',
-      backgroundColor: '#FF9F24',
-      textColor: '#ffffff',
-      label: 'Sala 5',
-    },
-    {
-      id: 3,
-      title: 'Redesign Landing Page Website',
-      start: '2021-11-05T13:30:00',
-      end: '2021-11-05T17:00:00',
-      backgroundColor: '#3FB100',
-      textColor: '#ffffff',
-      label: 'Directo',
-    },
-  ]
+  const [events, setEvents] = useState([])
+  useEffect(() => {
+    setEvents(CalendarData)
+  }, [])
 
   const handleClickStartClass = () => {
-    console.log('handleClickStartClass redirect live video section wc-64')
     router.push('/dashboard/live-streaming')
   }
 
