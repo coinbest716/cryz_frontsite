@@ -22,7 +22,7 @@ import SocialURLData from 'assets/data/SocialURLData'
 
 // styles
 import styles from 'components/Home/COSection.module.scss'
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 
 const COSection = () => {
   const [sliderData, setSliderData] = useState([])

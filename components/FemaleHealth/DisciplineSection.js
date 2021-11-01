@@ -7,7 +7,7 @@ import ArrowRightGrayIcon from 'assets/images/arrow-right-black.svg'
 import ArrowRightUpGrayIcon from 'assets/images/arrow-right-up-black.svg'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/FemaleHealth/DisciplineSection.module.scss'
 
 const DisciplineSection = () => {

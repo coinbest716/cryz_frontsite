@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyle.module.scss'
+import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './course.module.scss'
 import ArrowButton from 'components/components/academy/ArrowButton'
 import Feature from 'components/components/academy/Feature'

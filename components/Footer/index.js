@@ -11,7 +11,7 @@ import ArrowLeftIcon from 'assets/images/arrow-left.svg'
 import SocialURLData from 'assets/data/SocialURLData'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/Footer/Footer.module.scss'
 
 const Footer = () => {

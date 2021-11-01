@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyle.module.scss'
+import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/purchase-login.module.scss'
 import CommonButton from 'components/components/purchaseLogin/CommonButton'
 import Link from 'next/link'

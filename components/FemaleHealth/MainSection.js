@@ -16,7 +16,7 @@ import StarGroup from 'assets/images/star-group.svg'
 import FemaleHealthCarouselData from 'assets/data/FemaleHealthCarouselData'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/FemaleHealth/MainSection.module.scss'
 
 const MainSection = () => {

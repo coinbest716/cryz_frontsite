@@ -11,7 +11,7 @@ import BuyCard from 'components/components/BuyCard'
 import BuySessionData from 'assets/data/BuySessionData.json'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/buy.module.scss'
 
 const BuyPerson = () => {

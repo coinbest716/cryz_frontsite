@@ -1,7 +1,7 @@
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/PrivacyPolicy.module.scss'
 
 const PrivacyPolicy = () => {

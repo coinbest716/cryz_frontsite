@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyle.module.scss'
+import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './nutrition.module.scss'
 import { useRouter } from 'next/router'
 import ReactReadMoreReadLess from 'react-read-more-read-less'

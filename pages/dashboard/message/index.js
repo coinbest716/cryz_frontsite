@@ -28,7 +28,7 @@ import PlusIcon from 'assets/images/plus.svg'
 import TrashIcon from 'assets/images/trash.svg'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './message.module.scss'
 
 const Message = () => {

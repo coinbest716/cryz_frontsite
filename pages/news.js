@@ -1,5 +1,5 @@
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyle.module.scss'
+import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/news.module.scss'
 import Image from 'next/image'
 import news from 'public/images/news.svg'

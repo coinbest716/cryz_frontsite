@@ -11,7 +11,7 @@ import CommonButton from 'components/components/dashboard/CommonButton'
 import Chip from 'components/components/Chip'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/dashboard/shopping/order-detail/OrderDetail.module.scss'
 
 // json data

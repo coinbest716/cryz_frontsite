@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyle.module.scss'
+import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './academy.module.scss'
 import AcademyCard from 'components/components/academy/AcademyCard'
 import CircularMark from 'components/components/CircularMark'

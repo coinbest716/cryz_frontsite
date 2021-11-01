@@ -12,7 +12,7 @@ import ArrowLeftIcon from 'assets/images/arrow-right-up.svg'
 import SocialURLData from 'assets/data/SocialURLData'
 
 // styles
-import globalStyles from 'styles/GlobalStyle.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/ContactFooter/ContactFooter.module.scss'
 
 const ContactFooter = () => {
