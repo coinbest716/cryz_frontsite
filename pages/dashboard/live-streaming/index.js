@@ -1,28 +1,19 @@
+import React, { useState } from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './LiveStreaming.module.scss'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import Profile from 'components/components/dashboard/Profile'
 import ReactPlayer from 'react-player'
+import LiveStreamingData from 'assets/data/LiveStreamingData.json'
+import { useEffect } from 'react'
 
 const LiveStreaming = () => {
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
-  const materials = [
-    {
-      url: '/images/card1.jpg',
-      label: 'Pesas de 2kg',
-      count: '2 unidades',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Esterilla fina',
-      count: '1 unidades',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Gomas elásticas',
-      count: '3 unidades',
-    },
-  ]
+  const [material, setMaterial] = useState([])
+
+  useEffect(() => {
+    setMaterial(LiveStreamingData)
+  }, [])
 
   return (
     <div className={'h-fll pt-12 pl-14 pr-8 h-screen ' + styles.container}>
@@ -43,7 +34,7 @@ const LiveStreaming = () => {
           <div className="rounded-xl bg-white py-4 px-16 pb-10 mt-10">
             <div className={styles.material}>Material necesario</div>
             <div className="pt-7">
-              {materials.map((item, index) => (
+              {material.map((item, index) => (
                 <div className="flex justify-start py-2" key={index}>
                   <img
                     src={item.url}

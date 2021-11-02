@@ -25,19 +25,21 @@ import toast from 'react-hot-toast'
 const Purchase = () => {
   const [cartData, setCartData] = useState([])
   const [tabIndex, setTabIndex] = useState(0)
-  const [birthday, setBirthday] = useState(new Date())
-  const [name, setName] = useState('')
-  const [password, setPasssword] = useState('')
-  const [surname, setSurname] = useState('')
-  const [meet, setMeet] = useState('')
-  const [email, setEmail] = useState('')
-  const [telephone, setTelephone] = useState('')
-  const [country, setCountry] = useState('')
-  const [emergencyPhone, setEmergencyPhone] = useState('')
-  const [address, setAddress] = useState('')
-  const [code, setCode] = useState('')
-  const [town, setTown] = useState('')
-  const [gender, setGender] = useState('')
+  const [personalInfo, setPersonalInfo] = useState({
+    name: '',
+    password: '',
+    surname: '',
+    meet: '',
+    email: '',
+    telephone: '',
+    country: '',
+    emergencyPhone: '',
+    address: '',
+    code: '',
+    town: '',
+    gender: '',
+    birthday: new Date(),
+  })
   const list = ['male', 'female']
 
   const [frameType, setFrameType] = useState('frame1')
@@ -71,45 +73,8 @@ const Purchase = () => {
     setTabIndex(1)
   }
 
-  const handleChangeBirthday = event => {
-    setBirthday(event.target.value)
-  }
-  const handleChangeGender = event => {
-    setGender(event.target.value)
-  }
-
-  const handleChangeName = event => {
-    setName(event.target.value)
-  }
-  const handleChangePassword = event => {
-    setPasssword(event.target.value)
-  }
-  const handleChangeSurname = event => {
-    setSurname(event.target.value)
-  }
-  const handleChangeMeet = event => {
-    setMeet(event.target.value)
-  }
-  const handleChangeEmail = event => {
-    setEmail(event.target.value)
-  }
-  const handleChangeTelephone = event => {
-    setTelephone(event.target.value)
-  }
-  const handleChangeCountry = event => {
-    setCountry(event.target.value)
-  }
-  const handleChangeEmergencyPhone = event => {
-    setEmergencyPhone(event.target.value)
-  }
-  const handleChangeAddress = event => {
-    setAddress(event.target.value)
-  }
-  const handleChangeCode = event => {
-    setCode(event.target.value)
-  }
-  const handleChangeTown = event => {
-    setTown(event.target.value)
+  const handleChangeInfo = (event, key) => {
+    setPersonalInfo({ ...personalInfo, [key]: event.target.value })
   }
 
   const handleChangeFrame = event => {
@@ -176,8 +141,8 @@ const Purchase = () => {
       <div className={styles.container}>
         <div className={globlaStyle.container + ' pt-20'}>
           <div className="grid grid-cols-12 gap-4 ">
-            <div className="col-span-12 md:col-span-8 sm:col-span-12 pt-5 pb-20 px-5">
-              <div>
+            <div className="col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-20 px-5">
+              <div className="pt-3.5">
                 <Tabs
                   selectedIndex={tabIndex}
                   onSelect={index => setTabIndex(index)}
@@ -195,10 +160,12 @@ const Purchase = () => {
                         <div className="w-full">
                           <div className={styles.tabTitle}>Información general</div>
                           <div className="w-full flex justify-between items-center pt-10">
-                            <PurchaseAvatar avatar={''} />
-                            <div className="pl-5">
-                              <div className={styles.profileName}>Mariano Pérez Fanjul</div>
-                              <div className={styles.profileCounry}>Madrid, Spain</div>
+                            <div className="flex justify-start items-center">
+                              <PurchaseAvatar avatar={''} />
+                              <div className="pl-5">
+                                <div className={styles.profileName}>Mariano Pérez Fanjul</div>
+                                <div className={styles.profileCounry}>Madrid, Spain</div>
+                              </div>
                             </div>
                             <CommonButton label={'Descartar'} handleClick={handleSave} type={'outline'} />
                             <CommonButton label={'Aprobar cambios'} handleClick={handleDiscard} type={'fill'} />
@@ -208,131 +175,131 @@ const Purchase = () => {
                       <div className="flex justify-between gap-8 pt-16">
                         <div className="w-3/5">
                           <CommonText
-                            handleChange={handleChangeName}
+                            handleChange={e => handleChangeInfo(e, 'name')}
                             label={'Nombre'}
                             placeholder={''}
                             type={'text'}
-                            value={name}
+                            value={personalInfo.name}
                           />
                         </div>
                         <div className="w-2/5">
                           <CommonText
-                            handleChange={handleChangePassword}
+                            handleChange={e => handleChangeInfo(e, 'password')}
                             label={'Contraseña'}
                             placeholder={''}
                             type={'password'}
-                            value={password}
+                            value={personalInfo.password}
                           />
                         </div>
                       </div>
                       <div className="flex justify-between gap-8 pt-4">
                         <div className="w-3/5">
                           <CommonText
-                            handleChange={handleChangeSurname}
+                            handleChange={e => handleChangeInfo(e, 'surname')}
                             label={'Surnames'}
                             placeholder={''}
                             type={'text'}
-                            value={surname}
+                            value={personalInfo.surname}
                           />
                         </div>
                         <div className="w-2/5">
                           <CommonText
-                            handleChange={handleChangeMeet}
+                            handleChange={e => handleChangeInfo(e, 'meet')}
                             label={'Como nos conoció…'}
                             placeholder={''}
                             type={'password'}
-                            value={meet}
+                            value={personalInfo.meet}
                           />
                         </div>
                       </div>
                       <div className="flex justify-between gap-8 pt-4">
                         <div className="w-3/5">
                           <CommonText
-                            handleChange={handleChangeEmail}
+                            handleChange={e => handleChangeInfo(e, 'email')}
                             label={'Email'}
                             placeholder={''}
                             type={'email'}
-                            value={email}
+                            value={personalInfo.email}
                           />
                         </div>
                         <div className="w-2/5">
                           <CommonText
-                            handleChange={handleChangeTelephone}
+                            handleChange={e => handleChangeInfo(e, 'telephone')}
                             label={'Teléfono'}
                             placeholder={''}
                             type={'tel'}
-                            value={telephone}
+                            value={personalInfo.telephone}
                           />
                         </div>
                       </div>
                       <div className="flex justify-between gap-8 pt-4">
                         <div className="w-3/5">
                           <CommonText
-                            handleChange={handleChangeCountry}
+                            handleChange={e => handleChangeInfo(e, 'country')}
                             label={'Pais'}
                             placeholder={''}
                             type={'text'}
-                            value={country}
+                            value={personalInfo.country}
                           />
                         </div>
                         <div className="w-2/5">
                           <CommonText
-                            handleChange={handleChangeEmergencyPhone}
+                            handleChange={e => handleChangeInfo(e, 'emergencyPhone')}
                             label={'Teléfono emergencia'}
                             placeholder={''}
                             type={'tel'}
-                            value={emergencyPhone}
+                            value={personalInfo.emergencyPhone}
                           />
                         </div>
                       </div>
                       <div className="flex justify-between gap-8 pt-4">
                         <div className="w-3/5">
                           <CommonText
-                            handleChange={handleChangeAddress}
+                            handleChange={e => handleChangeInfo(e, 'address')}
                             label={'Dirección'}
                             placeholder={''}
                             type={'text'}
-                            value={address}
+                            value={personalInfo.address}
                           />
                         </div>
                         <div className="w-2/5">
                           <CommonText
-                            handleChange={handleChangeCode}
+                            handleChange={e => handleChangeInfo(e, 'code')}
                             label={'DNI'}
                             placeholder={''}
                             type={'text'}
-                            value={code}
+                            value={personalInfo.code}
                           />
                         </div>
                       </div>
                       <div className="flex justify-between gap-8 pt-4">
                         <div className="w-3/5">
                           <CommonText
-                            handleChange={handleChangeTown}
+                            handleChange={e => handleChangeInfo(e, 'town')}
                             label={'Ciudad'}
                             placeholder={''}
                             type={'text'}
-                            value={town}
+                            value={personalInfo.town}
                           />
                         </div>
                         <div className="w-2/5">
                           <CommonText
+                            handleChange={e => handleChangeInfo(e, 'gender')}
                             label={'Sexo'}
                             list={list}
-                            handleChange={handleChangeGender}
-                            value={gender}
                             type={'select'}
+                            value={personalInfo.gender}
                           />
                         </div>
                       </div>
                       <div className="flex justify-between gap-8 pt-4">
                         <div className="w-3/5">
                           <CommonText
-                            handleChange={handleChangeBirthday}
+                            handleChange={e => handleChangeInfo(e, 'birthday')}
                             label={'Fecha de nacimiento'}
                             placeholder={''}
                             type={'date'}
-                            value={birthday}
+                            value={personalInfo.birthday}
                           />
                         </div>
                         <div className="w-2/5"></div>
@@ -478,7 +445,7 @@ const Purchase = () => {
                 </Tabs>
               </div>
             </div>
-            <div className="col-span-12 md:col-span-4 sm:col-span-12">
+            <div className="col-span-12 md:col-span-3 sm:col-span-12">
               <ShoppingCart
                 data={cartData}
                 handleRemoveCart={handleRemoveCart}

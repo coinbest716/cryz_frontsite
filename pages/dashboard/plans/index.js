@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic'
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 import moment from 'moment'
 import 'react-calendar/dist/Calendar.css'
+import PlanData from 'assets/data/PlanData.json'
 
 const Plans = () => {
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
@@ -33,75 +34,15 @@ const Plans = () => {
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
+  const [materials, setMaterials] = useState([])
+  const [grayMaterials, setGrayMaterials] = useState([])
+  const [greenMaterials, setGreenMaterials] = useState([])
 
-  const materials = [
-    {
-      url: '/images/card1.jpg',
-      label: 'Pesas de 2kg',
-      description: '2 unidades',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Esterilla fina',
-      description: '1 unidades',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Gomas elásticas',
-      description: '3 unidades',
-    },
-  ]
-
-  const grayMaterials = [
-    {
-      url: '/images/card1.jpg',
-      label: 'Abdominales hipopresivos',
-      description: 'Lorem ipsum dolor sit',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Abdominales hipopresivos',
-      description: 'Lorem ipsum dolor sit',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Abdominales hipopresivos',
-      description: 'Lorem ipsum dolor sit',
-    },
-  ]
-
-  const greenMaterials = [
-    {
-      url: '/images/card1.jpg',
-      label: 'Abdominales hipopresivos',
-      description: 'Lorem ipsum dolor sit',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Abdominales hipopresivos',
-      description: 'Lorem ipsum dolor sit',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Abdominales hipopresivos',
-      description: 'Lorem ipsum dolor sit',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Abdominales hipopresivos',
-      description: 'Lorem ipsum dolor sit',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Abdominales hipopresivos',
-      description: 'Lorem ipsum dolor sit',
-    },
-    {
-      url: '/images/card1.jpg',
-      label: 'Abdominales hipopresivos',
-      description: 'Lorem ipsum dolor sit',
-    },
-  ]
+  useEffect(() => {
+    setMaterials(PlanData.materialData)
+    setGrayMaterials(PlanData.grayMaterialData)
+    setGreenMaterials(PlanData.greenMaterialData)
+  }, [])
 
   const noteDescription =
     'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.'

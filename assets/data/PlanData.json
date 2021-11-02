@@ -1,0 +1,68 @@
+  {
+    "materialData" : [
+      {
+        "url": "/images/card1.jpg",
+        "label": "Pesas de 2kg",
+        "description": "2 unidades"
+      },
+      {
+        "url": "/images/card1.jpg",
+        "label": "Esterilla fina",
+        "description": "1 unidades"
+      },
+      {
+        "url": "/images/card1.jpg",
+        "label": "Gomas elásticas",
+        "description": "3 unidades"
+      }
+    ],
+    "grayMaterialData" : [
+      {
+        "url": "/images/card1.jpg",
+        "label": "Abdominales hipopresivos",
+        "description": "Lorem ipsum dolor sit"
+      },
+      {
+        "url": "/images/card1.jpg",
+        "label": "Abdominales hipopresivos",
+        "description": "Lorem ipsum dolor sit"
+      },
+      {
+        "url": "/images/card1.jpg",
+        "label": "Abdominales hipopresivos",
+        "description": "Lorem ipsum dolor sit"
+      }
+    ],
+    "greenMaterialData" : [
+      {
+        "url": "/images/card1.jpg",
+        "label": "Abdominales hipopresivos",
+        "description": "Lorem ipsum dolor sit"
+      },
+      {
+        "url": "/images/card1.jpg",
+        "label": "Abdominales hipopresivos",
+        "description": "Lorem ipsum dolor sit"
+      },
+      {
+        "url": "/images/card1.jpg",
+        "label": "Abdominales hipopresivos",
+        "description": "Lorem ipsum dolor sit"
+      },
+      {
+        "url": "/images/card1.jpg",
+        "label": "Abdominales hipopresivos",
+        "description": "Lorem ipsum dolor sit"
+      },
+      {
+        "url": "/images/card1.jpg",
+        "label": "Abdominales hipopresivos",
+        "description": "Lorem ipsum dolor sit"
+      },
+      {
+        "url": "/images/card1.jpg",
+        "label": "Abdominales hipopresivos",
+        "description": "Lorem ipsum dolor sit"
+      }
+    ]
+  }
