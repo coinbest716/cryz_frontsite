@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <MainSection />
-      <div id="team" />
+      <div id="team" className={'w-full h-10'} />
       <TeamSection />
       <COSection />
     </div>
