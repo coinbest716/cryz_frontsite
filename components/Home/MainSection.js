@@ -42,7 +42,7 @@ const MainSection = () => {
             showStatus={false}
             showIndicators={true}
             infiniteLoop={true}
-            interval={3000}
+            interval={5000}
             axis="vertical"
             dynamicHeight={true}
           >
