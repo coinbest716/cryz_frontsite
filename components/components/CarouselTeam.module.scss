@@ -8,3 +8,7 @@
   top: 0px;
   margin-left: calc(100% - 20px);
 }
+.slideImage {
+  object-fit: cover;
+  object-position: center;
+}

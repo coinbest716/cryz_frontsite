@@ -46,7 +46,7 @@ const CarouselTeam = props => {
     >
       {sliderData?.map((item, index) => (
         <div key={index}>
-          <Image src={item.image} alt="" width={1165} height={415} />
+          <Image src={item.image} alt="" width={1165} height={415} className={styles.slideImage} />
         </div>
       ))}
     </Carousel>

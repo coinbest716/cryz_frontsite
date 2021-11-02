@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "image": "/images/team/01.jpg",
+    "image": "/images/team/01.jpg", 
     "name": "Mark Andersen",
     "role": "CEO",
     "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
@@ -12,7 +12,7 @@
   },
   {
     "id": 2,
-    "image": "/images/team/02.jpg",
+    "image": "/images/team/02.jpg", 
     "name": "Chloe Parker",
     "role": "Art Director",
     "description": "Doctor en Ciencias de la Actividad Física y del Deporte",
