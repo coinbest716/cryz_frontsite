@@ -25,19 +25,21 @@ import toast from 'react-hot-toast'
 const Purchase = () => {
   const [cartData, setCartData] = useState([])
   const [tabIndex, setTabIndex] = useState(0)
-  const [birthday, setBirthday] = useState(new Date())
-  const [name, setName] = useState('')
-  const [password, setPasssword] = useState('')
-  const [surname, setSurname] = useState('')
-  const [meet, setMeet] = useState('')
-  const [email, setEmail] = useState('')
-  const [telephone, setTelephone] = useState('')
-  const [country, setCountry] = useState('')
-  const [emergencyPhone, setEmergencyPhone] = useState('')
-  const [address, setAddress] = useState('')
-  const [code, setCode] = useState('')
-  const [town, setTown] = useState('')
-  const [gender, setGender] = useState('')
+  const [personalInfo, setPersonalInfo] = useState({
+    name: '',
+    password: '',
+    surname: '',
+    meet: '',
+    email: '',
+    telephone: '',
+    country: '',
+    emergencyPhone: '',
+    address: '',
+    code: '',
+    town: '',
+    gender: '',
+    birthday: new Date(),
+  })
   const list = ['male', 'female']
 
   const [frameType, setFrameType] = useState('frame1')
@@ -70,22 +72,6 @@ const Purchase = () => {
   const handleContinue = () => {
     setTabIndex(1)
   }
-
-  const [personalInfo, setPersonalInfo] = useState({
-    name: '',
-    password: '',
-    surname: '',
-    meet: '',
-    email: '',
-    telephone: '',
-    country: '',
-    emergencyPhone: '',
-    address: '',
-    code: '',
-    town: '',
-    gender: '',
-    birthday: '',
-  })
 
   const handleChangeInfo = (event, key) => {
     setPersonalInfo({ ...personalInfo, [key]: event.target.value })
@@ -174,10 +160,12 @@ const Purchase = () => {
                         <div className="w-full">
                           <div className={styles.tabTitle}>Información general</div>
                           <div className="w-full flex justify-between items-center pt-10">
-                            <PurchaseAvatar avatar={''} />
-                            <div className="pl-5">
-                              <div className={styles.profileName}>Mariano Pérez Fanjul</div>
-                              <div className={styles.profileCounry}>Madrid, Spain</div>
+                            <div className="flex justify-start items-center">
+                              <PurchaseAvatar avatar={''} />
+                              <div className="pl-5">
+                                <div className={styles.profileName}>Mariano Pérez Fanjul</div>
+                                <div className={styles.profileCounry}>Madrid, Spain</div>
+                              </div>
                             </div>
                             <CommonButton label={'Descartar'} handleClick={handleSave} type={'outline'} />
                             <CommonButton label={'Aprobar cambios'} handleClick={handleDiscard} type={'fill'} />
