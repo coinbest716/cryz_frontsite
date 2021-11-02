@@ -31,7 +31,7 @@ const Accordian = props => {
           <Image src={defaultIcon} alt="" width={35} height={35} />
         </button>
       </div>
-      {flag && <div className={styles.description}>{description}</div>}
+      {flag ? <div className={styles.description}>{description}</div> : <div className={styles.collapse} />}
     </div>
   )
 }

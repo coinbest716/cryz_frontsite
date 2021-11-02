@@ -34,4 +34,19 @@
   line-height: 28px;
   text-align: justify;
   border-top: none;
+  overflow: hidden;
+  max-height: 1000px;
+  transition: all 0.5s ease-in-out;
+}
+.collapse {
+  box-sizing: border-box;
+  color: #b6b6b6;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.62px;
+  line-height: 28px;
+  text-align: justify;
+  border-top: none;
+  transition: all 0.5s ease-in-out;
+  max-height: 0;
 }
