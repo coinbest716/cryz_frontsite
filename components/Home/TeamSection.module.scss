@@ -26,7 +26,9 @@
 }
 
 .previousButton {
+  position: absolute;
   margin-left: calc(100% - 100px);
+  top: 0px;
 }
 
 .nextButton {
