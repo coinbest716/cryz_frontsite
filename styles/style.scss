@@ -143,3 +143,7 @@
 .femaleCarousel .carousel-root .control-dots .dot.selected {
   background: $blue-gray-400-color;
 }
+
+.femaleCarousel .carousel .slider-wrapper.axis-horizontal .slider .slide {
+  align-self: center;
+}

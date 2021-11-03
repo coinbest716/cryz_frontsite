@@ -35,7 +35,7 @@ const Postpartum = () => {
         <div className={styles.backButtonArea}>
           <BackButton />
         </div>
-        <div className={'grid grid-cols-12 gap-4 mb-20'} style={{ minHeight: '634px' }}>
+        <div className={'grid grid-cols-12 gap-4'} style={{ minHeight: '634px' }}>
           <div className={'col-span-5 block'}>
             <div className={styles.strokeTitle}>EL</div>
             <div className={styles.pinkTitle}>POSTPARTO</div>
@@ -64,14 +64,14 @@ const Postpartum = () => {
             <div className={'absolute top-10 z-10'}>
               <CircularMark />
             </div>
-            <div className={'w-full mt-20'}>
+            <div className={'w-full h-full mt-20 pb-20'}>
               <CarouselFemaleHealth sliderData={sliderData} />
             </div>
           </div>
         </div>
       </div>
       {/* Button group part */}
-      <div className={'w-full'}>
+      <div className={'w-full pt-32'}>
         <div className={'grid grid-cols-12 gap-0'}>
           <div className={'col-span-4 w-full flex'}>
             <OutlineButton
