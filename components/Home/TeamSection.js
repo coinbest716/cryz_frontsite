@@ -37,50 +37,52 @@ const TeamSection = () => {
         El equipo de Crys Dyaz & CO está compuesto por profesionales de diferentes ámbitos del deporte y fisioterapeutas
         dedicados a mejorar la salud de nuestros pacientes y ayudarles a mejorar sus hábitos.
       </div>
-      {sliderData.length !== 0 ? (
-        <Carousel
-          showArrows={true}
-          showThumbs={false}
-          autoPlay={true}
-          stopOnHover={true}
-          showStatus={false}
-          showIndicators={false}
-          infiniteLoop={true}
-          centerMode={true}
-          centerSlidePercentage={80}
-          interval={1500}
-          renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
-            hasPrev ? (
-              <button onClick={clickHandler} className={styles.previousButton}>
-                <Image src={previousButtonPinkIcon} alt="" width={20} height={15} />
-              </button>
-            ) : (
-              <button onClick={clickHandler} className={styles.previousButton}>
-                <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
-              </button>
-            )
-          }
-          renderArrowNext={(clickHandler, hasNext, labelNext) =>
-            hasNext ? (
-              <button onClick={clickHandler} className={styles.nextButton}>
-                <Image onClick={clickHandler} src={nextButtonPinkIcon} alt="" width={20} height={15} />
-              </button>
-            ) : (
-              <button onClick={clickHandler} className={styles.nextButton}>
-                <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
-              </button>
-            )
-          }
-        >
-          {sliderData.map((item, index) => (
-            <div key={index} className="mx-1">
-              <Image src={item.image} alt="" width={902} height={388} layout={'responsive'} objectFit={'cover'} />
-            </div>
-          ))}
-        </Carousel>
-      ) : (
-        <></>
-      )}
+      <div className={'teamCarousel'}>
+        {sliderData.length !== 0 ? (
+          <Carousel
+            showArrows={true}
+            showThumbs={false}
+            autoPlay={true}
+            stopOnHover={true}
+            showStatus={false}
+            showIndicators={false}
+            infiniteLoop={true}
+            centerMode={true}
+            centerSlidePercentage={80}
+            interval={5000}
+            renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
+              hasPrev ? (
+                <button onClick={clickHandler} className={styles.previousButton}>
+                  <Image src={previousButtonPinkIcon} alt="" width={20} height={15} />
+                </button>
+              ) : (
+                <button onClick={clickHandler} className={styles.previousButton}>
+                  <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
+                </button>
+              )
+            }
+            renderArrowNext={(clickHandler, hasNext, labelNext) =>
+              hasNext ? (
+                <button onClick={clickHandler} className={styles.nextButton}>
+                  <Image onClick={clickHandler} src={nextButtonPinkIcon} alt="" width={20} height={15} />
+                </button>
+              ) : (
+                <button onClick={clickHandler} className={styles.nextButton}>
+                  <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
+                </button>
+              )
+            }
+          >
+            {sliderData.map((item, index) => (
+              <div key={index} className="mx-1">
+                <Image src={item.image} alt="" width={902} height={388} layout={'responsive'} objectFit={'cover'} />
+              </div>
+            ))}
+          </Carousel>
+        ) : (
+          <></>
+        )}
+      </div>
       <div className="w-full flex mt-20 mb-11">
         <div className="w-full md:w-1/2 flex justify-center items-center">
           <Image src={TeamMember01} alt="" width={355} height={368} />

@@ -1,7 +1,7 @@
 @import 'styles/variable.module.scss';
 
 /* burger-icon */
-.burgerIcon01 {
+.burgerIcon {
   position: fixed;
   top: 0;
   right: 0;
@@ -14,30 +14,6 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-}
-
-.topLine,
-.bottomLine,
-.middleLine {
-  line-height: 0;
-  width: 30px;
-  border-bottom: 3px solid $white-color;
-  margin: 2.75px auto;
-  transition: all 0.25s ease-in-out;
-}
-
-.burgerIcon01.show .topLine {
-  -webkit-transform: rotate(-45deg) translate(-5px, 4px);
-  transform: rotate(-45deg) translate(-5px, 4px);
-}
-
-.burgerIcon01.show .middleLine {
-  opacity: 0;
-}
-
-.burgerIcon01.show .bottomLine {
-  -webkit-transform: rotate(45deg) translate(-7px, -6px);
-  transform: rotate(45deg) translate(-7px, -6px);
 }
 
 @keyframes menuOpen {

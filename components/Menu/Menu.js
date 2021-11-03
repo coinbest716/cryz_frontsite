@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+
+// next components
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -6,6 +8,8 @@ import { useRouter } from 'next/router'
 import SocialButtonGroup from 'components/SocialButtonGroup'
 
 // images
+import CandyboxIcon from 'assets/images/candybox.svg'
+import CloseIcon from 'assets/images/close.svg'
 import AcademyImage from 'assets/images/team-member-01.png'
 
 // json data
@@ -17,10 +21,12 @@ import styles from 'components/Menu/Menu.module.scss'
 
 const BurgerIcon = ({ visibilty, setVisibility, router }) => {
   return (
-    <div className={`${styles.burgerIcon01} ${visibilty && styles.show}`} onClick={() => setVisibility(prev => !prev)}>
-      <span className={`${styles.topLine}`} />
-      <span className={`${styles.middleLine}`} />
-      <span className={`${styles.bottomLine}`} />
+    <div className={`${styles.burgerIcon}`} onClick={() => setVisibility(prev => !prev)}>
+      {visibilty === false ? (
+        <Image src={CandyboxIcon} alt={''} width={34} height={31} />
+      ) : (
+        <Image src={CloseIcon} alt={''} width={34} height={31} />
+      )}
     </div>
   )
 }

@@ -96,6 +96,7 @@
   }
 }
 
+// main carousel style
 .mainCarouselArea {
   position: absolute;
   bottom: 0px;
@@ -123,4 +124,12 @@
 }
 .mainCarouselArea .carousel-root .control-dots .dot.selected {
   margin: 8px !important;
+}
+
+// team carousel style
+.teamCarousel {
+  margin-top: -80px;
+}
+.teamCarousel .carousel-root .carousel-slider {
+  padding-top: 100px;
 }
