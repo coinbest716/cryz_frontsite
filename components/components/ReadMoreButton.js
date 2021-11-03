@@ -19,6 +19,7 @@ const ReadMoreButton = props => {
     >
       {/* currentState: more && less */}
       {currentState === 'less' ? '[leer mas…]' : '[Leer menos...]'}
+      <span className={styles.bgArea} />
     </p>
   )
 }
