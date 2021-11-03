@@ -2,6 +2,8 @@
 @import '~tailwindcss/components';
 @import '~tailwindcss/utilities';
 
+@import 'styles/variable.module.scss';
+
 @font-face {
   font-family: 'Cartoon Marker';
   src: url('../assets/fonts/Cartoon-Marker.ttf');
@@ -132,4 +134,12 @@
 }
 .teamCarousel .carousel-root .carousel-slider {
   padding-top: 100px;
+}
+
+// female health carousel style
+.femaleCarousel .carousel-root .control-dots .dot {
+  border: 1px solid $blue-gray-400-color;
+}
+.femaleCarousel .carousel-root .control-dots .dot.selected {
+  background: $blue-gray-400-color;
 }

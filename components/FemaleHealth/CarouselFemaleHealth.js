@@ -24,7 +24,7 @@ const CarouselFemaleHealth = props => {
   return (
     <div className="relative w-full h-full">
       <div className="absolute top-0 left-0 h-full w-1/12 z-10 bg-white"></div>
-      <div className="absolute top-0 left-0">
+      <div className="absolute top-0 left-0 femaleCarousel">
         <Carousel
           showArrows={true}
           showThumbs={false}
@@ -39,7 +39,7 @@ const CarouselFemaleHealth = props => {
           renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
             hasPrev ? (
               <button onClick={clickHandler} className={styles.previousButton}>
-                <Image src={previousButtonPinkIcon} alt="" width={20} height={15} />
+                <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
               </button>
             ) : (
               <button onClick={clickHandler} className={styles.previousButton}>
@@ -50,7 +50,7 @@ const CarouselFemaleHealth = props => {
           renderArrowNext={(clickHandler, hasNext, labelNext) =>
             hasNext ? (
               <button onClick={clickHandler} className={styles.nextButton}>
-                <Image onClick={clickHandler} src={nextButtonPinkIcon} alt="" width={20} height={15} />
+                <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
               </button>
             ) : (
               <button onClick={clickHandler} className={styles.nextButton}>
