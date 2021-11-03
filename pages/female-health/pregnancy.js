@@ -3,7 +3,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // custom component
 import BackButton from 'components/components/BackButton'
-import ReadMoreButton from 'components/components/ReadMoreButton'
+// import ReadMoreButton from 'components/components/ReadMoreButton'
 import CircularMark from 'components/components/CircularMark'
 import CarouselFemaleHealth from 'components/FemaleHealth/CarouselFemaleHealth'
 import OutlineButton from 'components/components/OutlineButton'
@@ -19,15 +19,15 @@ import router from 'next/router'
 const Pregnancy = () => {
   const [sliderData, setSliderData] = React.useState([])
 
-  const [readMoreCurrentState, setReadMoreCurrentState] = React.useState('less')
+  // const [readMoreCurrentState, setReadMoreCurrentState] = React.useState('less')
 
   React.useEffect(() => {
     setSliderData(ServerPhysiotherapy)
   }, [])
 
-  const handleReadMore = state => {
-    setReadMoreCurrentState(state)
-  }
+  // const handleReadMore = state => {
+  //   setReadMoreCurrentState(state)
+  // }
 
   return (
     <div className={'w-full flex flex-wrap justify-center'}>
@@ -40,10 +40,8 @@ const Pregnancy = () => {
             <div className={styles.strokeTitle}>EL</div>
             <div className={styles.pinkTitle}>EMBARAZO</div>
             <div className={styles.divider} />
-            <div
-              id="text"
-              className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}
-            >
+            <div id="text" className={'relative ' + styles.text + ' ' + styles.expand}>
+              {/* className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)} */}
               En esta fase, el cuerpo de la mujer se adapta de una forma sorprendente a la nueva vida que está por
               llegar.
               <br />
@@ -52,7 +50,7 @@ const Pregnancy = () => {
               ayuda a evitar dolores, pesadez y debilidad. Además, nuestro equipo de expertos ayuda a las pacientes a
               prevenir y tratar otro tipo de patologías como son: la pubalgia, diastasis, pérdidas de orina, dolor
               lumbar o falsas ciáticas.
-              <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+              {/* <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} /> */}
             </div>
           </div>
           <div className={'col-span-7 relative flex justify-end'}>

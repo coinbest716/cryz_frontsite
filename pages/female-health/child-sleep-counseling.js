@@ -3,7 +3,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // custom component
 import BackButton from 'components/components/BackButton'
-import ReadMoreButton from 'components/components/ReadMoreButton'
+// import ReadMoreButton from 'components/components/ReadMoreButton'
 import CircularMark from 'components/components/CircularMark'
 import CarouselFemaleHealth from 'components/FemaleHealth/CarouselFemaleHealth'
 import OutlineButton from 'components/components/OutlineButton'
@@ -19,15 +19,15 @@ import router from 'next/router'
 const ChildSleepCounseling = () => {
   const [sliderData, setSliderData] = React.useState([])
 
-  const [readMoreCurrentState, setReadMoreCurrentState] = React.useState('less')
+  // const [readMoreCurrentState, setReadMoreCurrentState] = React.useState('less')
 
   React.useEffect(() => {
     setSliderData(ServerPhysiotherapy)
   }, [])
 
-  const handleReadMore = state => {
-    setReadMoreCurrentState(state)
-  }
+  // const handleReadMore = state => {
+  //   setReadMoreCurrentState(state)
+  // }
 
   return (
     <div className={'w-full flex flex-wrap justify-center'}>
@@ -40,16 +40,14 @@ const ChildSleepCounseling = () => {
             <div className={styles.strokeTitle}>Asesoría</div>
             <div className={styles.pinkTitle}>SUEÑO INFANTIL</div>
             <div className={styles.divider} />
-            <div
-              id="text"
-              className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}
-            >
+            <div id="text" className={'relative ' + styles.text + ' ' + styles.expand}>
+              {/* className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)} */}
               Se trata de un método propio y respetuoso con los bebés y que se adapta a las diferentes maneras de criar.
               <br />
               <br />
               Impartido por Olga Sesé, coach del sueño infantil, gracias a ella más de 1.300 familias han vuelto a
               dormir después de haber pasado por su consulta.
-              <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+              {/* <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} /> */}
             </div>
           </div>
           <div className={'col-span-7 relative flex justify-end'}>
