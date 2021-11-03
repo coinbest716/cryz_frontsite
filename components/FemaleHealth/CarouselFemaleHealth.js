@@ -23,12 +23,12 @@ const CarouselFemaleHealth = props => {
 
   return (
     <div className="relative w-full h-full">
-      <div className="absolute top-0 left-0 h-full w-1/12 z-10 bg-white"></div>
-      <div className="absolute top-0 left-0 femaleCarousel">
+      <div className="absolute top-0 left-0 w-full femaleCarousel">
+        <div className="absolute top-0 left-0 bottom-0 h-full w-1/12 z-10 bg-white"></div>
         <Carousel
           showArrows={true}
           showThumbs={false}
-          autoPlay={true}
+          autoPlay={false}
           stopOnHover={true}
           showStatus={false}
           showIndicators={true}
@@ -60,12 +60,13 @@ const CarouselFemaleHealth = props => {
           }
         >
           {sliderData?.map((item, index) => (
-            <div key={index} className={'pb-12'}>
+            <div key={index} className={'pb-12 px-5'}>
               <Image
                 src={item.image}
                 alt=""
-                width={500}
-                height={500}
+                width={379}
+                height={index % 2 === 0 ? 379 : 474}
+                layout="responsive"
                 objectFit="cover"
                 className={index % 2 === 0 ? styles.circleImage : ''}
               />
