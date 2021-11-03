@@ -6,16 +6,14 @@ const Radio = props => {
 
   return (
     <div className="flex">
-      <div className="relative">
-        <input
-          type="radio"
-          value={value}
-          name={type}
-          checked={value === type}
-          onChange={handleChangeType}
-          className={styles.inputRadio}
-        />
-      </div>
+      <input
+        type="radio"
+        value={value}
+        name={type}
+        checked={value === type}
+        onChange={handleChangeType}
+        className={styles.inputRadio}
+      />
       <div>
         {type === 'billAddress' ? (
           <p className={'pl-3 ' + styles.billAddress}>{label}</p>
