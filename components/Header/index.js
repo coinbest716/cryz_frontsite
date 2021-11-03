@@ -93,24 +93,24 @@ const Header = props => {
             },
           ],
         },
-        {
-          title: 'Asesoria de Lactancia',
-          link: '/female-health/lactation-counseling',
-          subMenus: [
-            {
-              title: '1 to 1',
-              link: '/buy-one-to-one',
-            },
-            {
-              title: 'Presencial',
-              link: '/buy-person',
-            },
-            {
-              title: 'Planes Online',
-              link: '/buy-plans-online',
-            },
-          ],
-        },
+        // {
+        //   title: 'Asesoria de Lactancia',
+        //   link: '/female-health/lactation-counseling',
+        //   subMenus: [
+        //     {
+        //       title: '1 to 1',
+        //       link: '/buy-one-to-one',
+        //     },
+        //     {
+        //       title: 'Presencial',
+        //       link: '/buy-person',
+        //     },
+        //     {
+        //       title: 'Planes Online',
+        //       link: '/buy-plans-online',
+        //     },
+        //   ],
+        // },
         {
           title: 'Menopausia',
           link: '/female-health/menopause',
