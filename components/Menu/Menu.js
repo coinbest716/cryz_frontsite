@@ -22,7 +22,7 @@ import styles from 'components/Menu/Menu.module.scss'
 const BurgerIcon = ({ visibilty, setVisibility, router }) => {
   return (
     <div className={`${styles.burgerIcon}`} onClick={() => setVisibility(prev => !prev)}>
-      {visibilty === false ? (
+      {visibilty === false || visibilty === undefined ? (
         <Image src={CandyboxIcon} alt={''} width={34} height={31} />
       ) : (
         <Image src={CloseIcon} alt={''} width={34} height={31} />
@@ -35,15 +35,41 @@ const Menu = () => {
   const [visibility, setVisibility] = useState()
   const router = useRouter()
 
-  const [selectedMenu, setSelectedMenu] = useState({ id: '' })
+  const image01 = '/images/card1.jpg'
+  const image02 = '/images/card2.jpg'
 
-  const handleSetItem = id => {
-    setSelectedMenu(selectedMenu => ({ ...selectedMenu, id: id }))
-  }
+  const [activeImage, setActiveImage] = useState('')
+  const [activeHover, setActiveHover] = useState(false)
 
   const handleGotoLink = link => {
     setVisibility(false)
     router.push(link)
+  }
+
+  const handleMouseMover = event => {
+    if (activeImage === '') return
+    let x = event.clientX - 200
+    let y = event.clientY - 200
+    let sharp = document.getElementById('sharp')
+    sharp.style.left = x + 'px'
+    sharp.style.top = y + 'px'
+  }
+
+  const handleMouseOver = id => {
+    setActiveHover(true)
+    switch (id) {
+      case 'academy':
+        setActiveImage(image01)
+        break
+      case 'news':
+        setActiveImage(image02)
+        break
+    }
+  }
+
+  const handleMouseLeave = () => {
+    setActiveHover(false)
+    setActiveImage('')
   }
 
   return (
@@ -51,17 +77,25 @@ const Menu = () => {
       <BurgerIcon visibilty={visibility} setVisibility={setVisibility} router={router} />
 
       <div className={visibility === true ? styles.menuOpen : visibility === false ? styles.menuClose : styles.menu}>
-        <div className={globalStyles.container + ' mx-auto h-screen flex flex-wrap content-between'}>
+        <div className={styles.circleImageCover} id="sharp">
+          {activeImage !== '' ? (
+            <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
+          ) : (
+            <></>
+          )}
+        </div>
+        <div
+          className={globalStyles.container + ' mx-auto h-screen flex flex-wrap content-between'}
+          onMouseMove={handleMouseMover}
+        >
           <div className={styles.menuItems + ' w-full mt-32 sm:mt-48'}>
-            <div className="grid grid-cols-2 flex items-center h-full">
+            <div className="grid grid-cols-2 gap-x-9 flex items-center h-full">
               <div
-                className="relative cursor-pointer"
-                onMouseOver={() => handleSetItem('academy')}
+                className="relative cursor-pointer h-full"
                 onClick={() => handleGotoLink('/academy')}
+                onMouseOver={() => handleMouseOver('academy')}
+                onMouseLeave={() => handleMouseLeave()}
               >
-                <div className={'opacity-75 -z-10 w-full flex justify-center ' + styles.imageArea}>
-                  {selectedMenu.id === 'academy' ? <Image src={AcademyImage} alt="" width={482} height={482} /> : <></>}
-                </div>
                 <div className="absolute inset-y-1/4 w-full flex justify-center">
                   <a id="academy">
                     <div className={`${styles.number} invisible sm:visible mx-1`}>01</div>
@@ -70,13 +104,11 @@ const Menu = () => {
                 </div>
               </div>
               <div
-                className="relative cursor-pointer"
-                onMouseOver={() => handleSetItem('news')}
+                className="relative cursor-pointer h-full"
                 onClick={() => handleGotoLink('/news')}
+                onMouseOver={() => handleMouseOver('news')}
+                onMouseLeave={() => handleMouseLeave()}
               >
-                <div className={'opacity-75 -z-10 w-full flex justify-center ' + styles.imageArea}>
-                  {selectedMenu.id === 'news' ? <Image src={AcademyImage} alt="" width={482} height={482} /> : <></>}
-                </div>
                 <div className="absolute inset-y-1/4 w-full flex justify-center">
                   <a id="news">
                     News
