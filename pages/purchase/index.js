@@ -355,7 +355,7 @@ const Purchase = () => {
                         <div className="w-5/12">
                           <CommonText
                             handleChange={e => handleChangeBillingAddress(e, 'code')}
-                            label={'NIF/NIE'}
+                            label={'NIF/DNI'}
                             placeholder={''}
                             type={'password'}
                             value={billingAddress.code}
