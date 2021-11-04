@@ -50,8 +50,7 @@ const PurchaseLogin = () => {
   }
 
   const handleClickEnter = () => {
-    console.log('handleClickEnter')
-    router.push('/purchase')
+    router.push('/purchase#address')
   }
 
   return (

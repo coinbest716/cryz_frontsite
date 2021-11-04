@@ -59,6 +59,13 @@ const Purchase = () => {
   useEffect(() => {
     setCartData(shoppingCartData)
     setRedsys(false)
+    const currentState = router.asPath.split('#')
+    if (currentState[1] === 'address') {
+      setTabIndex(1)
+      router.push('/purchase#address', undefined, { shallow: true })
+    } else {
+      router.push('/purchase#information', undefined, { shallow: true })
+    }
   }, [])
 
   const handleRemoveCart = index => {
@@ -69,8 +76,20 @@ const Purchase = () => {
 
   const handleDiscard = () => {}
   const handleSave = () => {}
-  const handleContinue = () => {
-    setTabIndex(1)
+  const handleContinue = tabIndex => {
+    setTabIndex(tabIndex)
+    switch (tabIndex) {
+      case 0:
+        router.push('/purchase#information', undefined, { shallow: true })
+        break
+
+      case 1:
+        router.push('/purchase#address', undefined, { shallow: true })
+        break
+      case 2:
+        router.push('/purchase#payment', undefined, { shallow: true })
+        break
+    }
   }
 
   const handleChangeInfo = (event, key) => {
@@ -136,6 +155,10 @@ const Purchase = () => {
 
   const handleAcceptDiscount = () => {}
 
+  const onClickTab = tabType => {
+    router.push(`/purchase#${tabType}`, undefined, { shallow: true })
+  }
+
   return (
     <div className="flex flex-wrap justify-center">
       <div className={styles.container}>
@@ -150,9 +173,9 @@ const Purchase = () => {
                   selectedTabClassName={styles.selectedTab}
                 >
                   <TabList className={styles.tabsList}>
-                    <Tab>01 INFORMACIÓN</Tab>
-                    <Tab>02 DIRECCIONES FACTURACIÓN</Tab>
-                    <Tab>03 MÉTODO DE PAGO</Tab>
+                    <Tab onClick={() => onClickTab('information')}>01 INFORMACIÓN</Tab>
+                    <Tab onClick={() => onClickTab('address')}>02 DIRECCIONES FACTURACIÓN</Tab>
+                    <Tab onClick={() => onClickTab('payment')}>03 MÉTODO DE PAGO</Tab>
                   </TabList>
                   <TabPanel>
                     <div className="p-4 pt-16">
@@ -306,7 +329,7 @@ const Purchase = () => {
                       </div>
                       <div className={'w-full mt-20 ' + styles.divider} />
                       <div className="pt-24 flex justify-end">
-                        <CommonButton label={'CONTINUAR'} handleClick={handleContinue} type={'continue'} />
+                        <CommonButton label={'CONTINUAR'} handleClick={() => handleContinue(1)} type={'continue'} />
                       </div>
                     </div>
                   </TabPanel>
@@ -411,9 +434,12 @@ const Purchase = () => {
                       <div className={'w-full mt-20 ' + styles.divider} />
                       <div className="pt-24 flex justify-between items-center">
                         <div>
-                          <PreviousButton handleChangePrevious={handleChangePrevious} label={'Volver a Información'} />
+                          <PreviousButton
+                            handleChangePrevious={() => handleContinue(0)}
+                            label={'Volver a Información'}
+                          />
                         </div>
-                        <CommonButton label={'CONTINUAR'} handleClick={handleContinueBilling} type={'continue'} />
+                        <CommonButton label={'CONTINUAR'} handleClick={() => handleContinue(2)} type={'continue'} />
                       </div>
                     </div>
                   </TabPanel>
@@ -435,7 +461,7 @@ const Purchase = () => {
                     <div className="pt-24 flex justify-between items-center">
                       <div>
                         <PreviousButton
-                          handleChangePrevious={handleChangeBillingPage}
+                          handleChangePrevious={() => handleContinue(1)}
                           label={'Volver a Direcciones facturación'}
                         />
                       </div>
