@@ -18,9 +18,6 @@ const Nutrition = () => {
     setSliderData(ServerPhysiotherapy)
   }, [])
 
-  const handleClickBuyStreaming = () => {
-    router.push('/buy-one-to-one')
-  }
   const handleClickBuyPersion = () => {
     router.push('/buy-person')
   }
@@ -66,10 +63,7 @@ const Nutrition = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center">
-        <div className="w-1/3">
-          <ArrowButton label={'Compra  1 to 1 en streaming'} onClick={handleClickBuyStreaming} type={'nutrition'} />
-        </div>
+      <div className="flex justify-start">
         <div className="w-1/3">
           <ArrowButton label={'Compra presenciales'} onClick={handleClickBuyPersion} type={'nutrition'} />
         </div>
