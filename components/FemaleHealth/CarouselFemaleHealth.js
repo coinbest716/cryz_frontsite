@@ -28,7 +28,7 @@ const CarouselFemaleHealth = props => {
         <Carousel
           showArrows={true}
           showThumbs={false}
-          autoPlay={false}
+          autoPlay={true}
           stopOnHover={true}
           showStatus={false}
           showIndicators={true}
