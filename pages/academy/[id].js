@@ -9,6 +9,7 @@ import CarouselAcademy from 'components/components/academy/CarouselAcademy'
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import BackButton from 'components/components/BackButton'
 import toast from 'react-hot-toast'
+import router from 'next/router'
 
 const Course = () => {
   const [feature, setFeature] = useState([])
@@ -27,8 +28,8 @@ const Course = () => {
   }, [])
 
   const handleClickPayment = () => {
-    console.log('handleClickPayment')
-    toast.success('This content added in Shopping Cart!')
+    toast.error('You did not connected payment!')
+    router.push('/purchase-login')
   }
   const handleClickDownlodPDF = () => {
     console.log('handleClickDownlodPDF')
