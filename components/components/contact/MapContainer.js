@@ -11,8 +11,8 @@ const MapContainer = props => {
   }
 
   const defaultCenter = {
-    lat: 40.5187017,
-    lng: -3.652913,
+    lat: 40.5186797,
+    lng: -3.6508627,
   }
 
   const [selected, setSelected] = useState({})
@@ -25,7 +25,7 @@ const MapContainer = props => {
     <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP}>
       <GoogleMap
         mapContainerStyle={mapStyles}
-        zoom={13}
+        zoom={17}
         center={defaultCenter}
         options={{
           // fullscreenControl: false,
