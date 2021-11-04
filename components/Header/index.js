@@ -360,7 +360,10 @@ const Header = props => {
                         </Link>
                       </button>
                       <div className={'flex justify-center items-center ' + styles.iconMenuItem}>
-                        <button className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center block xl:hidden">
+                        <button
+                          className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center block xl:hidden"
+                          onClick={() => router.push('/contact')}
+                        >
                           <Image src={MessageIcon} alt="" width={22} height={19} />
                         </button>
                       </div>
