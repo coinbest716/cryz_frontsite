@@ -10,7 +10,6 @@ import SocialButtonGroup from 'components/SocialButtonGroup'
 // images
 import CandyboxIcon from 'assets/images/candybox.svg'
 import CloseIcon from 'assets/images/close.svg'
-import AcademyImage from 'assets/images/team-member-01.png'
 
 // json data
 import SocialURLData from 'assets/data/SocialURLData'
@@ -37,6 +36,7 @@ const Menu = () => {
 
   const academy = '/images/menu/academy.jpg'
   const news = '/images/menu/news.jpg'
+  const team = '/images/menu/team.png'
 
   const [activeImage, setActiveImage] = useState('')
   const [activeHover, setActiveHover] = useState(false)
@@ -58,11 +58,14 @@ const Menu = () => {
   const handleMouseOver = id => {
     setActiveHover(true)
     switch (id) {
-      case 'academy':
+      case 'academyMenu':
         setActiveImage(academy)
         break
-      case 'news':
+      case 'newsMenu':
         setActiveImage(news)
+        break
+      case 'teamMenu':
+        setActiveImage(team)
         break
     }
   }
@@ -88,16 +91,16 @@ const Menu = () => {
           className={globalStyles.container + ' mx-auto h-screen flex flex-wrap content-between'}
           onMouseMove={handleMouseMover}
         >
-          <div className={styles.menuItems + ' w-full mt-32 sm:mt-48'}>
+          <div className={'h-48 xl:h-96 w-full mt-32 sm:mt-48 ' + styles.menuItems}>
             <div className="grid grid-cols-2 gap-x-9 flex items-center h-full">
               <div
                 className="relative cursor-pointer h-full"
                 onClick={() => handleGotoLink('/academy')}
-                onMouseOver={() => handleMouseOver('academy')}
+                onMouseOver={() => handleMouseOver('academyMenu')}
                 onMouseLeave={() => handleMouseLeave()}
               >
                 <div className="absolute inset-y-1/4 w-full flex justify-center">
-                  <a id="academy">
+                  <a id="academyMenu">
                     <div className={`${styles.number} invisible sm:visible mx-1`}>01</div>
                     Academy
                   </a>
@@ -106,13 +109,28 @@ const Menu = () => {
               <div
                 className="relative cursor-pointer h-full"
                 onClick={() => handleGotoLink('/news')}
-                onMouseOver={() => handleMouseOver('news')}
+                onMouseOver={() => handleMouseOver('newsMenu')}
                 onMouseLeave={() => handleMouseLeave()}
               >
                 <div className="absolute inset-y-1/4 w-full flex justify-center">
-                  <a id="news">
+                  <a id="newsMenu">
                     News
                     <div className={`${styles.number} invisible sm:visible mx-1`}>02</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="block xl:hidden grid grid-cols-1 gap-x-9 flex justify-center h-full">
+              <div
+                className="relative cursor-pointer h-full"
+                onClick={() => handleGotoLink('/#team')}
+                onMouseOver={() => handleMouseOver('teamMenu')}
+                onMouseLeave={() => handleMouseLeave()}
+              >
+                <div className="absolute inset-y-1/4 w-full flex justify-center">
+                  <a id="teamMenu">
+                    Equipo
+                    <div className={`${styles.number} invisible sm:visible mx-1`}>03</div>
                   </a>
                 </div>
               </div>
