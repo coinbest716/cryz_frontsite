@@ -40,17 +40,20 @@ const Purchase = () => {
     gender: '',
     birthday: new Date(),
   })
-  const list = ['male', 'female']
+  const [billingAddress, setBillingAddress] = useState({
+    name: '',
+    title: '',
+    email: '',
+    code: '',
+    address: '',
+    phone: '',
+    country: '',
+    postal: '',
+  })
+  const list = ['Hombre', 'Mujer']
+  const meetList = ['Instagram', 'Facebook', 'Prensa', 'Por un amigo', 'Otros']
 
   const [frameType, setFrameType] = useState('frame1')
-  const [nameBilling, setNameBilling] = useState('')
-  const [titleBilling, setTitleBilling] = useState('')
-  const [emailBilling, setEmailBilling] = useState('')
-  const [codeBilling, setCodeBilling] = useState('')
-  const [addressBilling, setAddressBilling] = useState('')
-  const [phoneBilling, setPhoneBilling] = useState('')
-  const [countryBilling, setCountryBilling] = useState('')
-  const [postalBilling, setPostalBilling] = useState('')
 
   const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('')
@@ -96,41 +99,16 @@ const Purchase = () => {
     setPersonalInfo({ ...personalInfo, [key]: event.target.value })
   }
 
+  const handleChangeBillingAddress = (event, key) => {
+    setBillingAddress({ ...billingAddress, [key]: event.target.value })
+  }
+
   const handleChangeFrame = event => {
     setFrameType(event.target.name)
   }
-  const handleChangeNameBilling = event => {
-    setNameBilling(event.target.value)
-  }
-  const handleChangeTitleBilling = event => {
-    setTitleBilling(event.target.value)
-  }
-  const handleChangeEmailBilling = event => {
-    setEmailBilling(event.target.value)
-  }
-  const handleChangeCodeBilling = event => {
-    setCodeBilling(event.target.value)
-  }
-  const handleChangeAddressBilling = event => {
-    setAddressBilling(event.target.value)
-  }
-  const handleChangePhoneBilling = event => {
-    setPhoneBilling(event.target.value)
-  }
-  const handleChangeCountryBilling = event => {
-    setCountryBilling(event.target.value)
-  }
-  const handleChangePostalBilling = event => {
-    setPostalBilling(event.target.value)
-  }
+
   const handleDeleteBilling = () => {}
   const handleSaveBilling = () => {}
-  const handleChangePrevious = () => {
-    setTabIndex(0)
-  }
-  const handleContinueBilling = () => {
-    setTabIndex(2)
-  }
 
   const handleChangePaymentType = event => {
     setPaymentType(event.target.name)
@@ -138,9 +116,6 @@ const Purchase = () => {
   const handleChangeCardData = (name, value) => {
     console.log(name, value)
     setCardData({ ...cardData, [name]: value })
-  }
-  const handleChangeBillingPage = () => {
-    setTabIndex(1)
   }
   const handleFinishBilling = () => {
     if (paymentType === '') {
@@ -219,7 +194,7 @@ const Purchase = () => {
                         <div className="w-3/5">
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'surname')}
-                            label={'Surnames'}
+                            label={'Apellidos'}
                             placeholder={''}
                             type={'text'}
                             value={personalInfo.surname}
@@ -229,8 +204,8 @@ const Purchase = () => {
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'meet')}
                             label={'Como nos conoció…'}
-                            placeholder={''}
-                            type={'password'}
+                            list={meetList}
+                            type={'select'}
                             value={personalInfo.meet}
                           />
                         </div>
@@ -348,21 +323,21 @@ const Purchase = () => {
                       <div className="flex justify-between gap-8 pt-6">
                         <div className="w-7/12">
                           <CommonText
-                            handleChange={handleChangeNameBilling}
+                            handleChange={e => handleChangeBillingAddress(e, 'name')}
                             label={'Nombre completo'}
                             placeholder={''}
                             type={'text'}
-                            value={nameBilling}
+                            value={billingAddress.name}
                           />
                         </div>
                         <div className="w-5/12 flex justify-end">
                           <div className="w-2/3">
                             <CommonText
-                              handleChange={handleChangeTitleBilling}
+                              handleChange={e => handleChangeBillingAddress(e, 'title')}
                               label={'Titulo'}
                               placeholder={''}
                               type={'text'}
-                              value={titleBilling}
+                              value={billingAddress.title}
                             />
                           </div>
                         </div>
@@ -370,60 +345,60 @@ const Purchase = () => {
                       <div className="flex justify-between gap-8 pt-6">
                         <div className="w-7/12">
                           <CommonText
-                            handleChange={handleChangeEmailBilling}
+                            handleChange={e => handleChangeBillingAddress(e, 'email')}
                             label={'Email'}
                             placeholder={''}
                             type={'email'}
-                            value={emailBilling}
+                            value={billingAddress.email}
                           />
                         </div>
                         <div className="w-5/12">
                           <CommonText
-                            handleChange={handleChangeCodeBilling}
+                            handleChange={e => handleChangeBillingAddress(e, 'code')}
                             label={'NIF/NIE'}
                             placeholder={''}
                             type={'password'}
-                            value={codeBilling}
+                            value={billingAddress.code}
                           />
                         </div>
                       </div>
                       <div className="flex justify-between gap-8 pt-6">
                         <div className="w-7/12">
                           <CommonText
-                            handleChange={handleChangeAddressBilling}
+                            handleChange={e => handleChangeBillingAddress(e, 'address')}
                             label={'Dirección facturación'}
                             placeholder={''}
                             type={'text'}
-                            value={addressBilling}
+                            value={billingAddress.address}
                           />
                         </div>
                         <div className="w-5/12">
                           <CommonText
-                            handleChange={handleChangePhoneBilling}
+                            handleChange={e => handleChangeBillingAddress(e, 'phone')}
                             label={'Teléfono'}
                             placeholder={''}
                             type={'text'}
-                            value={phoneBilling}
+                            value={billingAddress.phone}
                           />
                         </div>
                       </div>
                       <div className="flex justify-between gap-8 pt-6">
                         <div className="w-7/12">
                           <CommonText
-                            handleChange={handleChangeCountryBilling}
+                            handleChange={e => handleChangeBillingAddress(e, 'country')}
                             label={'Pais'}
                             placeholder={''}
                             type={'text'}
-                            value={countryBilling}
+                            value={billingAddress.country}
                           />
                         </div>
                         <div className="w-5/12">
                           <CommonText
-                            handleChange={handleChangePostalBilling}
+                            handleChange={e => handleChangeBillingAddress(e, 'postal')}
                             label={'CP'}
                             placeholder={''}
-                            type={'number'}
-                            value={postalBilling}
+                            type={'text'}
+                            value={billingAddress.postal}
                           />
                         </div>
                       </div>
