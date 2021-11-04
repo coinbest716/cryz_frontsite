@@ -32,6 +32,9 @@ const Dashboard = () => {
     ],
     options: {
       chart: {
+        toolbar: {
+          show: false,
+        },
         background: 'transparent',
         foreColor: '#939AAC',
       },
@@ -77,7 +80,7 @@ const Dashboard = () => {
         router.push('/dashboard/shopping')
         break
       case 'hour':
-        router.push('/dashboard/profile')
+        router.push('/dashboard/profile#health')
         break
       case 'editProfile':
         router.push('/dashboard/profile')
@@ -92,7 +95,7 @@ const Dashboard = () => {
         router.push('/dashboard/calendar')
         break
       case 'bonos':
-        router.push('/dashboard/message')
+        router.push('/dashboard/shopping/order-detail')
         break
     }
   }
@@ -136,9 +139,15 @@ const Dashboard = () => {
           </div>
           <div className={'flex justify-between items-center mt-7 px-9 pt-7 pb-1 ' + styles.welcomeSection}>
             <div className="w-full">
-              <div className={styles.highBoldLabel}>Actividad semanal</div>
+              <div className={styles.highBoldLabel}>Actividad mensual</div>
               <div>
-                <Chart options={chartOptions?.options} series={chartOptions?.series} type="area" height="200px" />
+                <Chart
+                  chart={chartOptions.chart}
+                  options={chartOptions?.options}
+                  series={chartOptions?.series}
+                  type="area"
+                  height="200px"
+                />
               </div>
             </div>
             <div className="px-2 ">
@@ -163,19 +172,19 @@ const Dashboard = () => {
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
               <div
                 className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
-                onClick={() => handleClickRedirect('calendar')}
+                // onClick={() => handleClickRedirect('calendar')}
               >
                 <Calendar className={styles.calendar} onChange={onChange} value={value}></Calendar>
               </div>
             </div>
             <div className="col-span-12 md:col-span-6 sm:col-span-12">
               <div
-                className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection}
+                className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
                 onClick={() => handleClickRedirect('bonos')}
               >
                 <div className="flex justify-between items-center">
                   <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
-                  <div className={'text-center'}>
+                  <div className={'text-center '}>
                     <Image src={bonosIcon} alt="" width={50} height={50} />
                   </div>
                 </div>
