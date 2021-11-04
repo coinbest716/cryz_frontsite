@@ -35,8 +35,8 @@ const Menu = () => {
   const [visibility, setVisibility] = useState()
   const router = useRouter()
 
-  const image01 = '/images/card1.jpg'
-  const image02 = '/images/card2.jpg'
+  const academy = '/images/menu/academy.jpg'
+  const news = '/images/menu/news.jpg'
 
   const [activeImage, setActiveImage] = useState('')
   const [activeHover, setActiveHover] = useState(false)
@@ -59,10 +59,10 @@ const Menu = () => {
     setActiveHover(true)
     switch (id) {
       case 'academy':
-        setActiveImage(image01)
+        setActiveImage(academy)
         break
       case 'news':
-        setActiveImage(image02)
+        setActiveImage(news)
         break
     }
   }

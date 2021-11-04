@@ -16,8 +16,19 @@
   padding: 30px 0 0 0;
   width: 100%;
   background-image: linear-gradient(to bottom, transparent, $white-color);
+  z-index: 1;
 }
 
 .expand {
   background-image: none;
+}
+
+.bgArea {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background-color: white;
+  z-index: -1;
 }
