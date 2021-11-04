@@ -9,6 +9,7 @@ import Menu from 'components/Menu/Menu'
 // images
 import CartIcon from 'assets/images/cart.svg'
 import AccountIcon from 'assets/images/account.svg'
+import MessageIcon from 'assets/images/message-box.svg'
 
 // styles
 import styles from 'components/Header/Header.module.scss'
@@ -171,10 +172,10 @@ const Header = props => {
       title: 'Contacto',
       link: '/contact',
     },
-    {
-      title: 'Tienda',
-      link: '/shop',
-    },
+    // {
+    //   title: 'Tienda',
+    //   link: '/shop',
+    // },
   ]
 
   useEffect(() => {
@@ -252,9 +253,9 @@ const Header = props => {
           {menus &&
             menus.map((menu, key) => {
               return (
-                <li className={'flex justify-center ' + styles.menuItem} key={key}>
+                <li className={'flex justify-center items-center ' + styles.menuItem} key={key}>
                   {menu.link === '/#team' ? (
-                    <button onClick={() => gotoTeamSection()}>
+                    <button onClick={() => gotoTeamSection()} className={'hidden xl:block'}>
                       <a
                         className={
                           styles.menuText +
@@ -343,6 +344,27 @@ const Header = props => {
                         </div>
                       </div>
                     </div>
+                  ) : menu.link === '/contact' ? (
+                    <>
+                      <button className={'hidden xl:block'}>
+                        <Link href={menu.link} passHref>
+                          <a
+                            className={
+                              styles.menuText +
+                              ' ' +
+                              (router.pathname === menu.link || router.asPath === menu.link ? styles.active : '')
+                            }
+                          >
+                            {router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}
+                          </a>
+                        </Link>
+                      </button>
+                      <div className={'flex justify-center items-center ' + styles.iconMenuItem}>
+                        <button className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center block xl:hidden">
+                          <Image src={MessageIcon} alt="" width={22} height={19} />
+                        </button>
+                      </div>
+                    </>
                   ) : (
                     <button>
                       <Link href={menu.link} passHref>
@@ -362,7 +384,7 @@ const Header = props => {
               )
             })}
           {/* icon menu part */}
-          <li className={'flex justify-center items-center ml-16 ' + styles.iconMenuItem}>
+          <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
             <button
               className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
               onMouseOver={() => handleClickShoppingCard(true)}
