@@ -47,8 +47,7 @@ const Register = () => {
   }
 
   const handleClickEnter = () => {
-    console.log('handleClickEnter')
-    router.push('/purchase')
+    router.push('/purchase#information')
   }
 
   return (

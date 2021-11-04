@@ -11,7 +11,7 @@ import ArrowRightWhite from 'assets/images/arrow-right-white.svg'
 import styles from 'components/components/BuyCard.module.scss'
 
 const BuyCard = props => {
-  const { data, index } = props
+  const { data, index, handleClickBuy } = props
   return (
     <div className={'block'}>
       <div
@@ -31,7 +31,7 @@ const BuyCard = props => {
         </div>
         <div className={styles.cardDescription}>{data.cardDescription}</div>
       </div>
-      <button className={styles.button}>
+      <button className={styles.button} onClick={handleClickBuy}>
         <div className={'flex justify-start'}>
           <div className={styles.buttonText}>
             {data.buttonText} <b>{data.price}</b>

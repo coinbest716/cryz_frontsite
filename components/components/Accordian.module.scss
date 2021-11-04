@@ -35,8 +35,7 @@
   text-align: justify;
   border-top: none;
   overflow: hidden;
-  max-height: 1000px;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 .collapse {
   box-sizing: border-box;
@@ -47,6 +46,5 @@
   line-height: 28px;
   text-align: justify;
   border-top: none;
-  transition: all 0.5s ease-in-out;
-  max-height: 0;
+  transition: all 0.25s ease-in-out;
 }

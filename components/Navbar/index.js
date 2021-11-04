@@ -95,7 +95,7 @@ const Navbar = () => {
         <div className={'absolute top-24 -right-4 cursor-pointer ' + styles.resize} onClick={handlClickResize}>
           <Image src={resizeIcon} alt="" width={33} height={26} />
         </div>
-        <div className={'flex flex-col h-screen ' + styles.hideSection}>
+        <div className={'flex flex-col h-full ' + styles.hideSection}>
           <div className="h-0 flex-1 flex flex-col pt-10 pb-4">
             <div className="flex justify-center items-center flex-shrink-0 px-4">
               <Link href={'/'} passHref>
@@ -135,7 +135,7 @@ const Navbar = () => {
           <div className={'absolute top-24 -right-4 cursor-pointer ' + styles.resize} onClick={handlClickResize}>
             <Image src={resizeIcon} alt="" width={33} height={26} />
           </div>
-          <div className="flex flex-col w-56 bg-white h-screen">
+          <div className="flex flex-col w-56 bg-white h-full">
             <div className="h-0 flex-1 flex flex-col pt-10 pb-4">
               <div className="flex items-center flex-shrink-0 px-10">
                 <Link href={'/'} passHref>

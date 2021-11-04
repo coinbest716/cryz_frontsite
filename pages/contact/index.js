@@ -13,23 +13,20 @@ import whatsapp from 'public/images/whatsapp.svg'
 const Contact = () => {
   const locations = [
     {
-      name: 'Location 1',
+      name: 'Crys Dyaz & Co',
       location: {
-        lat: 40.5187017,
-        lng: -3.652913,
-      },
-    },
-    {
-      name: 'Location 2',
-      location: {
-        lat: 40.5296017,
-        lng: -3.678743,
+        lat: 40.5186797,
+        lng: -3.6508627,
       },
     },
   ]
 
   const handleClickWhatsapp = () => {
     console.log('handleClickWhatsapp')
+  }
+
+  const handleClickEmail = address => {
+    window.open(`mailto:${address}`, '_self')
   }
 
   return (
@@ -62,18 +59,20 @@ const Contact = () => {
               <Image src={phoneIcon} alt="" width={35} height={35} />
               <div className={'pt-5 ' + styles.lowTitle}>Phone</div>
               <div className={'pt-6 pb-14 ' + styles.lowDescription}>
-                91 046 70 34
-                <br />
-                650 148 244
+                <div className="cursor-pointer">650 046 703</div>
+                <div className="cursor-pointer">650 148 244</div>
               </div>
             </div>
             <div className="col-span-12 md:col-span-4 sm:col-span-12 pt-12">
-              <Image src={emailIcon} alt="" width={41} height={30} />
+              <Image src={emailIcon} alt="" width={41} height={35} />
               <div className={'pt-5 ' + styles.lowTitle}>E-mail Address</div>
               <div className={'pt-6 pb-14 ' + styles.lowDescription}>
-                info@crysdyazandco.com
-                <br />
-                colaboraciones@crysdyazandco.com
+                <div className="cursor-pointer" onClick={() => handleClickEmail('info@crysdyazandco.com')}>
+                  info@crysdyazandco.com
+                </div>
+                <div className="cursor-pointer" onClick={() => handleClickEmail('colaboraciones@crysdyazandco.com')}>
+                  colaboraciones@crysdyazandco.com
+                </div>
               </div>
             </div>
             <div className="col-span-12 md:col-span-4 sm:col-span-12 pt-12">

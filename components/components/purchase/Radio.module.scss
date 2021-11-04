@@ -10,22 +10,21 @@
 }
 .inputRadio {
   -webkit-appearance: none;
-  min-width: 19px;
-  min-height: 19px;
-  width: 19px;
-  height: 19px;
+  min-width: 20px;
+  min-height: 20px;
+  width: 20px;
+  height: 20px;
   border: 2px solid #72918e;
   border-radius: 50%;
   outline: none;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &::before {
     content: '';
-    display: block;
-    width: 52%;
-    height: 52%;
-    transform: translate(3.5px, 3.5px);
+    width: 50%;
+    height: 50%;
     border-radius: 50%;
-    position: absolute;
   }
   &:checked:before {
     background: #72918e;

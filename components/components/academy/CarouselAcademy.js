@@ -22,7 +22,7 @@ const CarouselAcademy = props => {
       stopOnHover={true}
       showStatus={false}
       showIndicators={true}
-      infiniteLoop={true}
+      // infiniteLoop={true}
       centerMode={true}
       centerSlidePercentage={100}
       interval={2500}
