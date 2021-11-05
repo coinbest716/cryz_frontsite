@@ -1,5 +1,5 @@
 import React from 'react'
-
+import router from 'next/router'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // custom component
@@ -15,6 +15,9 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/buy/index.module.scss'
 
 const BuyPlansOnline = () => {
+  const handleClickBuy = () => {
+    router.push('/purchase-login')
+  }
   return (
     <div className={styles.container}>
       <div className={globalStyles.container}>
@@ -37,7 +40,7 @@ const BuyPlansOnline = () => {
         <div className={'mt-5 mb-10 grid grid-cols-12 gap-6'}>
           {BuySessionData.map((item, index) => (
             <div className={'col-span-4'} key={index}>
-              <BuyCard data={item} index={index} />
+              <BuyCard data={item} index={index} handleClickBuy={handleClickBuy} />
             </div>
           ))}
         </div>

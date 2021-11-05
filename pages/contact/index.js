@@ -59,8 +59,8 @@ const Contact = () => {
               <Image src={phoneIcon} alt="" width={35} height={35} />
               <div className={'pt-5 ' + styles.lowTitle}>Phone</div>
               <div className={'pt-6 pb-14 ' + styles.lowDescription}>
-                <div className="cursor-pointer">650 046 703</div>
                 <div className="cursor-pointer">650 148 244</div>
+                <div className="cursor-pointer">91 046 70 34</div>
               </div>
             </div>
             <div className="col-span-12 md:col-span-4 sm:col-span-12 pt-12">

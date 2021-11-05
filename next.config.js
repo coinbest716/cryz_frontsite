@@ -6,8 +6,9 @@ const withTM = require('next-transpile-modules')([
   '@fullcalendar/resource-timeline',
   '@fullcalendar/timeline',
   '@fullcalendar/daygrid',
-  '@fullcalendar/timegrid'
+  '@fullcalendar/timegrid',
 ])
+const withGraphql = require('next-plugin-graphql')
 
 const appConfig = {
   sassOptions: {
@@ -27,4 +28,4 @@ const appConfig = {
   },
 }
 
-module.exports = withTM(appConfig)
+module.exports = withGraphql(withTM(appConfig))
