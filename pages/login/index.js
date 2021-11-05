@@ -57,6 +57,7 @@ const Login = () => {
 
   const handleClickLogin = () => {
     getUserInfo()
+    router.push('/dashboard')
   }
 
   return (

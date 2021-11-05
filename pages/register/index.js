@@ -39,8 +39,10 @@ const Register = () => {
       })
       .catch(error => {
         console.log('error signing up:', error)
-        toast.error(error.message)
+        // toast.error(error.message)
+        toast.error('Server Error')
       })
+    router.push('/dashboard')
   }
 
   return (
