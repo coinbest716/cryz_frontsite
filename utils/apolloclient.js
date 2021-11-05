@@ -4,7 +4,7 @@ import { onError } from '@apollo/client/link/error'
 import { createUploadLink } from 'apollo-upload-client'
 
 const uploadLink = createUploadLink({
-  uri: 'http://localhost:8000/graphql', // Apollo Server is served from port 8000
+  uri: process.env.NEXT_PUBLIC_GOOGLE_MAP, // Apollo Server is served from port 8000
   headers: {
     'keep-alive': 'true',
   },
