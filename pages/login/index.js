@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 // next components
 import Image from 'next/image'
@@ -16,9 +16,28 @@ import CloseIcon from 'assets/images/close.svg'
 import EyeCrossIcon from 'assets/images/eye-cross.svg'
 import EyeIcon from 'assets/images/eye.svg'
 
+import toast from 'react-hot-toast'
+import { useMutation, useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Login = () => {
   const [showPass, setShowPass] = React.useState(false)
   const [rememberMe, setRememberMe] = React.useState(false)
+  const [getUserInfo, { data: userData, loading: userLoading, error: userError }] = useLazyQuery(
+    graphql.queries.getUser
+  )
+
+  useEffect(() => {
+    if (!userError && userData && userData.getUser) {
+      console.log('getUser = ', userData)
+      if (userData.getUser) {
+        toast.success('You login successfuly!')
+        router.push('/dashboard')
+      } else {
+        toast.error('You failed to login!')
+      }
+    }
+  }, [userLoading, userData, userError]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSetShowPass = bool => {
     setShowPass(bool)
@@ -34,6 +53,10 @@ const Login = () => {
 
   const handleClickGoogle = () => {
     console.log('handleClickGoogle')
+  }
+
+  const handleClickLogin = () => {
+    getUserInfo()
   }
 
   return (
@@ -106,7 +129,7 @@ const Login = () => {
               </label>
             </div>
             <div>
-              <button className={styles.enterButton} onClick={() => router.push('dashboard')}>
+              <button className={styles.enterButton} onClick={handleClickLogin}>
                 Entrar
               </button>
             </div>

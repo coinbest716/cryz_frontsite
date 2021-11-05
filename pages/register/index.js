@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 // next components
 import Image from 'next/image'
@@ -13,9 +13,14 @@ import CloseIcon from 'assets/images/close.svg'
 import EyeCrossIcon from 'assets/images/eye-cross.svg'
 import EyeIcon from 'assets/images/eye.svg'
 
+import toast from 'react-hot-toast'
+import { useMutation, useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Register = () => {
   const [showPass, setShowPass] = React.useState(false)
   const [showRepeatPass, setShowRepeatPass] = React.useState(false)
+  const [createUser] = useMutation(graphql.mutations.createUser)
 
   const handleSetShowPass = bool => {
     setShowPass(bool)
@@ -23,6 +28,19 @@ const Register = () => {
 
   const handleSetShowRepeatPass = bool => {
     setShowRepeatPass(bool)
+  }
+
+  const handleClickRegister = async () => {
+    await createUser()
+      .then(response => {
+        console.log('register = ', response)
+        toast.success('You registered successfuly!')
+        router.push('/dashboard')
+      })
+      .catch(error => {
+        console.log('error signing up:', error)
+        toast.error(error.message)
+      })
   }
 
   return (
@@ -97,7 +115,9 @@ const Register = () => {
           {/* login button part */}
           <div className="mt-5 flex justify-end items-center">
             <div>
-              <button className={styles.enterButton}>Entrar</button>
+              <button className={styles.enterButton} onClick={handleClickRegister}>
+                Entrar
+              </button>
             </div>
           </div>
         </div>
