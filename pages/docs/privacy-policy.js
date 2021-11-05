@@ -2,7 +2,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from 'pages/privacy-policy/index.module.scss'
+import styles from 'pages/docs/index.module.scss'
 
 const PrivacyPolicy = () => {
   return (

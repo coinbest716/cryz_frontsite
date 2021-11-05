@@ -38,23 +38,23 @@ const ContactFooter = () => {
         <div className={globalStyles.container + ' pt-7'}>
           <div className={'w-full flex justify-between items-center'}>
             <div className={styles.text}>
-              <Link href={'/terms'} passHref>
+              <Link href={'/docs/terms'} passHref>
                 <p>Terminos y Condiciones</p>
               </Link>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/privacy-policy'} passHref>
+              <Link href={'/docs/privacy-policy'} passHref>
                 <p>Politica Privacidad</p>
               </Link>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/legal'} passHref>
+              <Link href={'/docs/legal'} passHref>
                 <p>Legal</p>
               </Link>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/cookies'} passHref>
+              <Link href={'/docs/cookies'} passHref>
                 <p>Cookies</p>
               </Link>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/sale'} passHref>
+              <Link href={'/docs/sale'} passHref>
                 <p>Venta</p>
               </Link>
             </div>

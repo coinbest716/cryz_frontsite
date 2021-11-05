@@ -2,7 +2,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from 'pages/terms/index.module.scss'
+import styles from 'pages/docs/index.module.scss'
 
 const TermsAndConditions = () => {
   return (
