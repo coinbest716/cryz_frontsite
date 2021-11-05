@@ -19,7 +19,7 @@ const Physiotherapy = () => {
   }, [])
 
   const handleClickBuy = () => {
-    router.push('/buy-person')
+    router.push('/buy/buy-person')
   }
 
   const description = `Nuestro equipo de fisioterapia y osteopatía integra el tratamiento de diferentes patologías, así como,

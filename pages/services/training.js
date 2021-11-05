@@ -51,13 +51,13 @@ const Training = () => {
   const handleClick = type => {
     switch (type) {
       case 'type1':
-        router.push('/buy-one-to-one')
+        router.push('/buy/buy-one-to-one')
         break
       case 'type2':
-        router.push('/buy-person')
+        router.push('/buy/buy-person')
         break
       case 'type3':
-        router.push('/buy-one-to-one')
+        router.push('/buy/buy-one-to-one')
         break
     }
   }

@@ -36,11 +36,11 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/buy-one-to-one',
+              link: '/buy/buy-one-to-one',
             },
             {
               title: 'Presencial',
-              link: '/buy-person',
+              link: '/buy/buy-person',
             },
           ],
         },
@@ -50,11 +50,11 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/buy-one-to-one',
+              link: '/buy/buy-one-to-one',
             },
             {
               title: 'Presencial',
-              link: '/buy-person',
+              link: '/buy/buy-person',
             },
           ],
         },
@@ -64,15 +64,15 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/buy-one-to-one',
+              link: '/buy/buy-one-to-one',
             },
             {
               title: 'Presencial',
-              link: '/buy-person',
+              link: '/buy/buy-person',
             },
             {
               title: 'Planes Online',
-              link: '/buy-plans-online',
+              link: '/buy/buy-plans-online',
             },
           ],
         },
@@ -82,15 +82,15 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/buy-one-to-one',
+              link: '/buy/buy-one-to-one',
             },
             {
               title: 'Presencial',
-              link: '/buy-person',
+              link: '/buy/buy-person',
             },
             {
               title: 'Planes Online',
-              link: '/buy-plans-online',
+              link: '/buy/buy-plans-online',
             },
           ],
         },
@@ -100,15 +100,15 @@ const Header = props => {
         //   subMenus: [
         //     {
         //       title: '1 to 1',
-        //       link: '/buy-one-to-one',
+        //       link: '/buy/buy-one-to-one',
         //     },
         //     {
         //       title: 'Presencial',
-        //       link: '/buy-person',
+        //       link: '/buy/buy-person',
         //     },
         //     {
         //       title: 'Planes Online',
-        //       link: '/buy-plans-online',
+        //       link: '/buy/buy-plans-online',
         //     },
         //   ],
         // },
@@ -118,15 +118,15 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/buy-one-to-one',
+              link: '/buy/buy-one-to-one',
             },
             {
               title: 'Presencial',
-              link: '/buy-person',
+              link: '/buy/buy-person',
             },
             {
               title: 'Planes Online',
-              link: '/buy-plans-online',
+              link: '/buy/buy-plans-online',
             },
           ],
         },
@@ -136,7 +136,7 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/buy-one-to-one',
+              link: '/buy/buy-one-to-one',
             },
           ],
         },
@@ -146,11 +146,11 @@ const Header = props => {
           subMenus: [
             {
               title: '1 to 1',
-              link: '/buy-one-to-one',
+              link: '/buy/buy-one-to-one',
             },
             {
               title: 'Presencial',
-              link: '/buy-person',
+              link: '/buy/buy-person',
             },
           ],
         },

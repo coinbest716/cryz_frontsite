@@ -19,10 +19,10 @@ const Nutrition = () => {
   }, [])
 
   const handleClickBuyPersion = () => {
-    router.push('/buy-person')
+    router.push('/buy/buy-person')
   }
   const handleClickBuyPlan = () => {
-    router.push('/buy-plans-online')
+    router.push('/buy/buy-plans-online')
   }
 
   const description = `Somos especialistas en educación de hábitos y promoción de la salud. Nuestros planes van dirigidos a personas que quieren cuidar su alimentación y mejorar su salud y/o su físico, ayudándoles a crear e introducir nuevas rutinas saludables en su día a día.

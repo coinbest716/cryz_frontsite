@@ -66,7 +66,7 @@ const ChildSleepCounseling = () => {
           <div className={'col-span-4 w-full flex'}>
             <OutlineButton
               title="Compra 1 to 1 en streaming"
-              link="/buy-one-to-one"
+              link="/buy/buy-one-to-one"
               onClick={link => router.push(link)}
             />
           </div>

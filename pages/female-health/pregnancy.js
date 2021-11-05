@@ -69,15 +69,19 @@ const Pregnancy = () => {
           <div className={'col-span-4 w-full flex'}>
             <OutlineButton
               title="Compra 1 to 1 en streaming"
-              link="/buy-one-to-one"
+              link="/buy/buy-one-to-one"
               onClick={link => router.push(link)}
             />
           </div>
           <div className={'col-span-4 w-full flex'}>
-            <OutlineButton title="Compra presenciales" link="/buy-person" onClick={link => router.push(link)} />
+            <OutlineButton title="Compra presenciales" link="/buy/buy-person" onClick={link => router.push(link)} />
           </div>
           <div className={'col-span-4 w-full flex'}>
-            <OutlineButton title="Compra planes online" link="/buy-plans-online" onClick={link => router.push(link)} />
+            <OutlineButton
+              title="Compra planes online"
+              link="/buy/buy-plans-online"
+              onClick={link => router.push(link)}
+            />
           </div>
         </div>
       </div>
