@@ -1,0 +1,13 @@
+query GetUser {
+  getUser {
+    id
+    email
+    name
+  }
+}
+
+mutation CreateUser {
+  createUser {
+    id
+  }
+}

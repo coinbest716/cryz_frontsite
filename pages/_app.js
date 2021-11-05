@@ -6,10 +6,8 @@ import store from 'store.js'
 import 'styles/style.scss'
 
 import { Toaster } from 'react-hot-toast'
-
-// import '@fullcalendar/daygrid/main.css'
-// import '@fullcalendar/common/main.css'
-// import '@fullcalendar/timegrid/main.css'
+import { ApolloProvider } from '@apollo/client'
+import client from 'utils/apolloclient'
 
 import '@fullcalendar/common/main.css' // @fullcalendar/react imports @fullcalendar/common
 import '@fullcalendar/timeline/main.css' // @fullcalendar/resource-timeline imports @fullcalendar/timeline
@@ -20,8 +18,10 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>
-      <Toaster position="top-right" reverseOrder={false} />
+      <ApolloProvider client={client}>
+        <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>
+        <Toaster position="top-right" reverseOrder={false} />
+      </ApolloProvider>
     </>
   )
 }
