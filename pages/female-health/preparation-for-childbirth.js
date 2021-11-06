@@ -70,13 +70,6 @@ const PreparationForChildbirth = () => {
       <div className={'w-full pt-32'}>
         <div className={'grid grid-cols-12 gap-0'}>
           <div className={'col-span-4 w-full flex'}>
-            <OutlineButton
-              title="Compra 1 to 1 en streaming"
-              link="/buy/buy-one-to-one"
-              onClick={link => router.push(link)}
-            />
-          </div>
-          <div className={'col-span-4 w-full flex'}>
             <OutlineButton title="Compra presenciales" link="/buy/buy-person" onClick={link => router.push(link)} />
           </div>
         </div>
