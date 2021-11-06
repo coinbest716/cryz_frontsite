@@ -13,7 +13,9 @@ const Cookies = () => {
         {/* paragraph */}
         <div className={styles.text}>Crody Salud S.L. informa acerca del uso de las cookies en su página web:</div>
         {/* paragraph */}
-        <div className={styles.text}>https://crysdyazandco.com/</div>
+        <div className={styles.text}>
+          <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>
+        </div>
         <br />
         {/* paragraph */}
         <div className={styles.text}>
@@ -327,6 +329,732 @@ const Cookies = () => {
           </li>
         </div>
         <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>_utmb</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 30 minutos
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Almacena información sobre la actividad de la visita a nuestro sitio web y principalmente la
+            duración de ésta.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>_utmc</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: Sesión
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Almacena información sobre la actividad de la visita a nuestro sitio web y principalmente la
+            duración de ésta.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>_utmz</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 6 meses a partir de su instalación o actualización.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Esta cookie normalmente se almacena en el navegador en la primera visita a nuestro sitio web.
+            Esta cookie almacena cómo ha llegado el visitante a nuestro sitio web, ya sea directamente introduciendo la
+            dirección del dominio, un enlace, una búsqueda web o un anuncio. La cookie se actualiza cada vez que visita
+            nuestra web.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>_ga</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 2 años
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Sirve para distinguir a los usuarios. Generada por Google Analytics. Google almacena la
+            informacion recogida por las cookies en servidores ubicados en Estados Unidos, cumpliendo con la legislación
+            Europea en cuanto a protección de datos personales y se compromete a no compartirla con terceros, excepto
+            cuando la ley le obligue a ello o sea necesario para el funcionamiento del sistema. Google no asocia su
+            direccion IP con ninguna otra informacion que tenga. Si desea obtener mas informacion acerca de las cookies
+            usadas por Google Analytics, por favor acceda a esta direccion:
+            <br />
+            <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es&csw=1">
+              https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es&csw=1
+            </a>
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>_gat</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 1 minuto
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Utilizada para mostrar nuestra publicidad en otras páginas de la red de Google. Generada por
+            Google Analytics. Google almacena la informacion recogida por las cookies en servidores ubicados en Estados
+            Unidos, cumpliendo con la legislación Europea en cuanto a protección de datos personales y se compromete a
+            no compartirla con terceros, excepto cuando la ley le obligue a ello o sea necesario para el funcionamiento
+            del sistema. Google no asocia su direccion IP con ninguna otra informacion que tenga. Si desea obtener mas
+            informacion acerca de las cookies usadas por Google Analytics, por favor acceda a esta direccion:
+            <a
+              href={'https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es&csw=1'}
+            >
+              https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es&csw=1
+            </a>
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Publicidad comportamental
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>_gid</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 24 horas
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            o Descripción: Generada por Google Analytics. Google almacena la informacion recogida por las cookies en
+            servidores ubicados en Estados Unidos, cumpliendo con la legislación Europea en cuanto a protección de datos
+            personales y se compromete a no compartirla con terceros, excepto cuando la ley le obligue a ello o sea
+            necesario para el funcionamiento del sistema. Google no asocia su direccion IP con ninguna otra informacion
+            que tenga. Si desea obtener mas informacion acerca de las cookies usadas por Google Analytics, por favor
+            acceda a esta direccion:
+            <a href={'https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es&csw'}>
+              https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es&csw
+            </a>
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Publicidad comportamental
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>APISID</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 2 años
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Al crear o iniciar sesión en una cuenta de Google se almacenan esta cookie en su ordenador con
+            el fin de permanecer conectado a su cuenta de Google al visitar sus servicios de nuevo. Mientras permanezca
+            con esta sesión activa y use complementos en otros sitios Web como el nuestro, Google hará uso de estas
+            cookies para mejorar su experiencia de uso.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>HSID</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 2 años
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Al crear o iniciar sesión en una cuenta de Google se almacenan esta cookie en su ordenador con
+            el fin de permanecer conectado a su cuenta de Google al visitar sus servicios de nuevo. Mientras permanezca
+            con esta sesión activa y use complementos en otros sitios Web como el nuestro, Google hará uso de estas
+            cookies para mejorar su experiencia de uso.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>LOGIN_INFO</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 2 años
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: En algunas páginas de nuestro Sitio Web tenemos vídeos incrustados de Youtube, es un servicio
+            de Google. Su uso implica la remisión de esta cookie además de las cookies que Google requiere si mantiene
+            la sesión activa con su cuenta, con el propósito de visualizar los vídeos incrustados, estimar el ancho de
+            banda y mostrar cuantas veces se ha reproducido.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>PREF</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 2 años
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Al crear o iniciar sesión en una cuenta de Google se almacenan esta cookie en su ordenador con
+            el fin de permanecer conectado a su cuenta de Google al visitar sus servicios de nuevo. Mientras permanezca
+            con esta sesión activa y use complementos en otros sitios Web como el nuestro, Google hará uso de estas
+            cookies para mejorar su experiencia de uso.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>SAPISID</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 2 años
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: En algunas páginas de nuestro Sitio Web tenemos vídeos incrustados de Youtube, es un servicio
+            de Google. Su uso implica la remisión de esta cookie además de las cookies que Google requiere si mantiene
+            la sesión activa con su cuenta, con el propósito de visualizar los vídeos incrustados, estimar el ancho de
+            banda y mostrar cuantas veces se ha reproducido.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>SID</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 2 años
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Al crear o iniciar sesión en una cuenta de Google se almacenan esta cookie en su ordenador con
+            el fin de permanecer conectado a su cuenta de Google al visitar sus servicios de nuevo. Mientras permanezca
+            con esta sesión activa y use complementos en otros sitios Web como el nuestro, Google hará uso de estas
+            cookies para mejorar su experiencia de uso.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>SSID</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 2 años
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Al crear o iniciar sesión en una cuenta de Google se almacenan esta cookie en su ordenador con
+            el fin de permanecer conectado a su cuenta de Google al visitar sus servicios de nuevo. Mientras permanezca
+            con esta sesión activa y use complementos en otros sitios Web como el nuestro, Google hará uso de estas
+            cookies para mejorar su experiencia de uso.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>VISITOR_INFO1_LIVE</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 8 meses
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: En algunas páginas de nuestro Sitio Web tenemos vídeos incrustados de Youtube, es un servicio
+            de Google. Su uso implica la remisión de esta cookie además de las cookies que Google requiere si mantiene
+            la sesión activa con su cuenta, con el propósito de visualizar los vídeos incrustados, estimar el ancho de
+            banda y mostrar cuantas veces se ha reproducido.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>YSC</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: Al cerrar sesión
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: En algunas páginas de nuestro Sitio Web tenemos vídeos incrustados de Youtube, es un servicio
+            de Google. Su uso implica la remisión de esta cookie además de las cookies que Google requiere si mantiene
+            la sesión activa con su cuenta, con el propósito de visualizar los vídeos incrustados, estimar el ancho de
+            banda y mostrar cuantas veces se ha reproducido.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>nTpXe.resume</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 1 mes
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: En algunas páginas de nuestro Sitio Web tenemos vídeos incrustados de Youtube, es un servicio
+            de Google. Su uso implica la remisión de esta cookie además de las cookies que Google requiere si mantiene
+            la sesión activa con su cuenta, con el propósito de visualizar los vídeos incrustados, estimar el ancho de
+            banda y mostrar cuantas veces se ha reproducido.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Analítica
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>NID</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 6 meses
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: La finalidad de esta cookie es almacenar información sobre tus preferencias.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Personalización
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>AMP_TOKEN</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 30 segundos a 1 año
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Incluye un token que se puede utilizar para recuperar un ID de cliente del servicio de ID de
+            cliente de AMP. Otros posibles valores indican inhabilitaciones, solicitudes en curso o errores obtenidos al
+            recuperar un ID del servicio de ID de cliente de AMP.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Personalización
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>_gac_</li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Duración: 90 días
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Descripción: Incluye información de la campaña relativa al usuario. Si has vinculado tus cuentas de Google
+            Analytics y AdWords, las etiquetas de conversión de sitios web leerán esta cookie, a menos que la
+            inhabilites
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Tipo: Tercero
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-8'} style={{ listStyleType: 'circle' }}>
+            Finalidad: Personalización
+          </li>
+        </div>
+        <br />
+
+        {/* paragraph */}
+        <div className={styles.text}>
+          <p>
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>&nbsp;muestra información sobre su
+            Política de cookies en la parte inferior o superior de cualquier página del portal con cada inicio de
+            sesión.
+          </p>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>Ante esta información es posible llevar a cabo las siguientes acciones:</div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>
+            Aceptar cookies: No se volverá a visualizar este aviso al acceder a cualquier página del portal durante la
+            presente sesión.
+          </li>
+        </div>
+        <br />
+        {/* paragraph */}
+        <div className={styles.text}>
+          <li className={'ml-4'}>
+            Modificar/personalizar su configuración: Podrá obtener más información sobre qué son las cookies, conocer la
+            Política de cookies de:&nbsp;<a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>&nbsp;y
+            modificar la configuración de su navegador.
+          </li>
+        </div>
+        <br />
+
+        {/* paragraph */}
+        <div className={styles.text}>REV: 20.3009</div>
 
         <div className={'mb-10'} />
       </div>
