@@ -31,9 +31,12 @@ const Sale = () => {
         <div className={styles.text}>OBJETO</div>
         <br />
         <div className={styles.text}>
-          Mediante el presente texto ponemos a disposición de todos los usuarios y clientes las condiciones de uso y
-          registro que son de aplicación a https://crysdyazandco.com/ y a los servicios que prestamos, quedando
-          reflejados en éste todos los derechos y obligaciones que asisten a las partes.
+          <p>
+            Mediante el presente texto ponemos a disposición de todos los usuarios y clientes las condiciones de uso y
+            registro que son de aplicación a&nbsp;<a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>{' '}
+            y a los servicios que prestamos, quedando reflejados en éste todos los derechos y obligaciones que asisten a
+            las partes.
+          </p>
         </div>
         <br />
         <div className={styles.text}>
@@ -74,9 +77,12 @@ const Sale = () => {
         </div>
         <br />
         <div className={styles.text}>
-          Las condiciones de contratación indicadas a continuación son de aplicación directa a la contratación de todos
-          los servicios puestos a disposición a través del portal web https://crysdyazandco.com/, salvo que expresamente
-          se disponga lo contrario.
+          <p>
+            Las condiciones de contratación indicadas a continuación son de aplicación directa a la contratación de
+            todos los servicios puestos a disposición a través del portal web&nbsp;
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>, salvo que expresamente se disponga lo
+            contrario.
+          </p>
         </div>
         <br />
         <div className={styles.text}>PROCEDIMIENTO DE CONTRATACIÓN</div>
@@ -113,10 +119,13 @@ const Sale = () => {
         </div>
         <br />
         <div className={styles.text}>
-          Una vez marcada la casilla de aceptación de las condiciones de contratación, en caso de haber seleccionado
-          como forma de pago alguno de los medios electrónicos, el usuario será directamente redireccionado a la
-          plataforma de pago externa correspondiente para realizar el pago, sin que https://crysdyazandco.com/ tenga
-          posibilidad de acceder en ningún momento a los datos de tarjetas de crédito y/o sistemas de pago del usuario.
+          <p>
+            Una vez marcada la casilla de aceptación de las condiciones de contratación, en caso de haber seleccionado
+            como forma de pago alguno de los medios electrónicos, el usuario será directamente redireccionado a la
+            plataforma de pago externa correspondiente para realizar el pago, sin que&nbsp;
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>&nbsp;tenga posibilidad de acceder en
+            ningún momento a los datos de tarjetas de crédito y/o sistemas de pago del usuario.
+          </p>
         </div>
         <br />
         <div className={styles.text}>
@@ -264,8 +273,11 @@ const Sale = () => {
         </div>
         <br />
         <div className={styles.text}>
-          Para gestionar cualquier tipo de devolución o cambio de productos comprados en https://crysdyazandco.com/ el
-          cliente debe ponerse en contacto con nuestro servicio de Atención al Cliente.
+          <p>
+            Para gestionar cualquier tipo de devolución o cambio de productos comprados en&nbsp;
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>&nbsp;el cliente debe ponerse en
+            contacto con nuestro servicio de Atención al Cliente.
+          </p>
         </div>
         <br />
         <div className={styles.text}>
@@ -363,10 +375,13 @@ const Sale = () => {
         </div>
         <br />
         <div className={styles.text}>
-          No realizar actos de ingeniería inversa, toma de requisitos y demás actividades encaminadas a desarrollar una
-          plataforma online idéntica o semejante a la puesta a disposición por parte de https://crysdyazandco.com/,
-          pudiendo ser considerada esta actividad como un acto de competencia desleal y vulneración de los derechos de
-          propiedad intelectual e industrial que el prestador ostenta sobre la plataforma.
+          <p>
+            No realizar actos de ingeniería inversa, toma de requisitos y demás actividades encaminadas a desarrollar
+            una plataforma online idéntica o semejante a la puesta a disposición por parte de&nbsp;
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>, pudiendo ser considerada esta
+            actividad como un acto de competencia desleal y vulneración de los derechos de propiedad intelectual e
+            industrial que el prestador ostenta sobre la plataforma.
+          </p>
         </div>
         <br />
         <div className={styles.text}>
@@ -382,7 +397,10 @@ const Sale = () => {
         </div>
         <br />
         <div className={styles.text}>
-          Aceptar que https://crysdyazandco.com/ pueda introducir en el sitio web publicidad contextualizada o no.
+          <p>
+            Aceptar que&nbsp; <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>&nbsp;pueda
+            introducir en el sitio web publicidad contextualizada o no.
+          </p>
         </div>
         <br />
         <div className={styles.text}>
@@ -442,8 +460,11 @@ const Sale = () => {
         <div className={styles.text}>DERECHOS DE PROPIEDAD INTELECTUAL E INDUSTRIAL</div>
         <br />
         <div className={styles.text}>
-          Desde https://crysdyazandco.com/ estamos profundamente comprometidos con la protección de los derechos de
-          propiedad intelectual. Es por ello que hemos establecido las siguientes condiciones y políticas:
+          <p>
+            Desde&nbsp;<a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>&nbsp;estamos profundamente
+            comprometidos con la protección de los derechos de propiedad intelectual. Es por ello que hemos establecido
+            las siguientes condiciones y políticas:
+          </p>
         </div>
         <br />
         <div className={styles.text}>1. RELATIVOS A LA PLATAFORMA ONLINE</div>
@@ -508,9 +529,12 @@ const Sale = () => {
         <div className={styles.text}>2. RELATIVOS A LOS CONTENIDOS E INFORMACIÓN DE LOS USUARIOS</div>
         <br />
         <div className={styles.text}>
-          Todos los contenidos e informaciones publicadas o gestionados por parte de los usuarios en la plataforma son
-          propiedad exclusiva de éste, siendo https://crysdyazandco.com/ un mero prestador de servicios de la sociedad
-          de la información encargado del almacenamiento de datos.
+          <p>
+            Todos los contenidos e informaciones publicadas o gestionados por parte de los usuarios en la plataforma son
+            propiedad exclusiva de éste, siendo&nbsp;
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>&nbsp;un mero prestador de servicios de
+            la sociedad de la información encargado del almacenamiento de datos.
+          </p>
         </div>
         <br />
         <div className={styles.text}>
@@ -609,9 +633,14 @@ const Sale = () => {
         <div className={styles.text}>RESOLUCION EXTRAJUDICIAL DE CONFLICTOS</div>
         <br />
         <div className={styles.text}>
-          Asimismo, en los términos que se recogen en el artículo 14 del Reglamento UE 524/2013, sobre resolución de
-          litigios en materia de consumo, se proporciona un enlace directo a la plataforma de resolución de litigios en
-          línea: https://ec.europa.eu/consumers/odr/main/index.cfm
+          <p>
+            Asimismo, en los términos que se recogen en el artículo 14 del Reglamento UE 524/2013, sobre resolución de
+            litigios en materia de consumo, se proporciona un enlace directo a la plataforma de resolución de litigios
+            en línea:&nbsp;
+            <a href={'https://ec.europa.eu/consumers/odr/main/index.cfm'}>
+              https://ec.europa.eu/consumers/odr/main/index.cfm
+            </a>
+          </p>
         </div>
         <br />
         <div className={styles.text}>LEY APLICABLE Y JURISDICCIÓN</div>

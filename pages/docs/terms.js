@@ -11,9 +11,12 @@ const TermsAndConditions = () => {
         <div className={styles.title}>Términos y condiciones</div>
         <div className={styles.divider} />
         <div className={styles.text}>
-          https://crysdyazandco.com/ (en adelante, la Web) es un sitio web propiedad de Crody Salud S.L., en adelante EL
-          PROPIETARIO, con CIF/NIF nº: B01907781 y domicilio social en: C/ Azalea, 1, Locales A y 2, Edificio F,
-          Polígono Empresarial Minipark, C.P. 28109 – Alcobendas (Madrid).
+          <p>
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>&nbsp; (en adelante, la Web) es un
+            sitio web propiedad de Crody Salud S.L., en adelante EL PROPIETARIO, con CIF/NIF nº: B01907781 y domicilio
+            social en: C/ Azalea, 1, Locales A y 2, Edificio F, Polígono Empresarial Minipark, C.P. 28109 – Alcobendas
+            (Madrid).
+          </p>
         </div>
         <br />
         <div className={styles.text}>
@@ -216,7 +219,10 @@ const TermsAndConditions = () => {
         <div className={styles.text}>
           Asimismo, en los términos que se recogen en el artículo 14 del Reglamento UE 524/2013, sobre resolución de
           litigios en materia de consumo, se proporciona un enlace directo a la plataforma de resolución de litigios en
-          línea: https://ec.europa.eu/consumers/odr/main/index.cfm
+          línea:&nbsp;
+          <a href={'https://ec.europa.eu/consumers/odr/main/index.cfm'}>
+            https://ec.europa.eu/consumers/odr/main/index.cfm
+          </a>
         </div>
         <br />
         <div className={styles.text}>LEY APLICABLE Y JURISDICCIÓN</div>

@@ -13,10 +13,12 @@ const PrivacyPolicy = () => {
         <div className={styles.text}>Protección de datos de carácter personal según el RGPD</div>
         <br />
         <div className={styles.text}>
-          Crody Salud S.L., en aplicación de la normativa vigente en materia de protección de datos de carácter
-          personal, informa que los datos personales que se recogen a través de los formularios del Sitio web:
-          https://crysdyazandco.com/, se incluyen en los ficheros automatizados específicos de usuarios de los servicios
-          de Crody Salud S.L.
+          <p>
+            Crody Salud S.L., en aplicación de la normativa vigente en materia de protección de datos de carácter
+            personal, informa que los datos personales que se recogen a través de los formularios del Sitio web:&nbsp;
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>, se incluyen en los ficheros
+            automatizados específicos de usuarios de los servicios de Crody Salud S.L.
+          </p>
         </div>
         <br />
         <div className={styles.text}>
@@ -55,8 +57,10 @@ const PrivacyPolicy = () => {
         <div className={styles.text}>¿Con qué finalidad trataremos tus datos personales?</div>
         <br />
         <div className={styles.text}>
-          En Crody Salud S.L., trataremos tus datos personales recabados a través del Sitio Web:
-          https://crysdyazandco.com/, con las siguientes finalidades:
+          <p>
+            En Crody Salud S.L., trataremos tus datos personales recabados a través del Sitio Web:&nbsp;
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>, con las siguientes finalidades:
+          </p>
         </div>
         <br />
         <div className={styles.text}>
@@ -156,18 +160,27 @@ const PrivacyPolicy = () => {
           RGPD.
         </div>
         <br />
-        <div className={styles.text}>Derechos propiedad intelectual https://crysdyazandco.com/</div>
-        <br />
         <div className={styles.text}>
-          Crody Salud S.L. es titular de todos los derechos de autor, propiedad intelectual, industrial, “know how” y
-          cuantos otros derechos guardan relación con los contenidos del sitio web https://crysdyazandco.com/ y los
-          servicios ofertados en el mismo, así como de los programas necesarios para su implementación y la información
-          relacionada.
+          <p>
+            Derechos propiedad intelectual <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a>
+          </p>
         </div>
         <br />
         <div className={styles.text}>
-          No se permite la reproducción, publicación y/o uso no estrictamente privado de los contenidos, totales o
-          parciales, del sitio web https://crysdyazandco.com/ sin el consentimiento previo y por escrito.
+          <p>
+            Crody Salud S.L. es titular de todos los derechos de autor, propiedad intelectual, industrial, “know how” y
+            cuantos otros derechos guardan relación con los contenidos del sitio web&nbsp;
+            <a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a> y los servicios ofertados en el mismo,
+            así como de los programas necesarios para su implementación y la información relacionada.
+          </p>
+        </div>
+        <br />
+        <div className={styles.text}>
+          <p>
+            No se permite la reproducción, publicación y/o uso no estrictamente privado de los contenidos, totales o
+            parciales, del sitio web&nbsp;<a href={'https://crysdyazandco.com/'}>https://crysdyazandco.com/</a> sin el
+            consentimiento previo y por escrito.
+          </p>
         </div>
         <br />
         <div className={styles.text}>Propiedad intelectual del software</div>
