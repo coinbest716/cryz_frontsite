@@ -23,12 +23,6 @@ import styles from 'components/Home/TeamSection.module.scss'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 
 const TeamSection = () => {
-  const [sliderData, setSliderData] = useState([])
-
-  useEffect(() => {
-    setSliderData(TeamSectionData)
-  }, [])
-
   return (
     <div className={globalStyles.container}>
       <div className={styles.title}>Equipo</div>
@@ -38,7 +32,7 @@ const TeamSection = () => {
         dedicados a mejorar la salud de nuestros pacientes y ayudarles a mejorar sus hábitos.
       </div>
       <div className={'teamCarousel'}>
-        {sliderData.length !== 0 ? (
+        {TeamSectionData.length !== 0 ? (
           <Carousel
             showArrows={true}
             showThumbs={false}
@@ -73,7 +67,7 @@ const TeamSection = () => {
               )
             }
           >
-            {sliderData.map((item, index) => (
+            {TeamSectionData.map((item, index) => (
               <div key={index} className="mx-1">
                 <Image src={item.image} alt="" width={902} height={388} layout={'responsive'} objectFit={'cover'} />
               </div>
