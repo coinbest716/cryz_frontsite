@@ -18,18 +18,18 @@ import PlanData from 'assets/data/PlanData.json'
 const Plans = () => {
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
   const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    'Enero',
+    'Febrero',
+    'Marcha',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
   ]
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
@@ -64,6 +64,10 @@ const Plans = () => {
     setDate(value)
     setShowCalendar(false)
   }
+  const getOnlyMonth = label => {
+    const str = label.split(' ')
+    return str[0]
+  }
 
   return (
     <div className={'pt-10 pb-24 px-24 ' + styles.container}>
@@ -89,8 +93,8 @@ const Plans = () => {
             <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} />
           </div>
 
-          <div className="flex justify-between items-center pt-6">
-            <div className={styles.blockSection + ' flex items-center px-5 py-5'}>
+          <div className="flex flex-wrap justify-between pt-12 gap-4">
+            <div className={styles.blockSection + ' flex flex-wrap items-center px-5 py-5'}>
               <div className={styles.blackName}>Información del bloque</div>
               {feature.map((item, index) => (
                 <div key={index} className="px-2">
@@ -142,6 +146,11 @@ const Plans = () => {
                 showDoubleView={false}
                 showNavigation={true}
                 // view={'year'}
+                locale="es-MX"
+                navigationLabel={({ date, label, locale, view }) =>
+                  // `Current view: ${view}, date: ${date.toLocaleDateString(locale)}`
+                  `${getOnlyMonth(label)}`
+                }
               />
             </div>
             <div className={styles.videoMaterialTitle + ' pt-8'}>CALENTAMIENTO</div>
