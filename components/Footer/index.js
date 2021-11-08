@@ -1,5 +1,9 @@
+import React from 'react'
+
+// next components
 import Image from 'next/image'
 import Link from 'next/link'
+import router from 'next/router'
 
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
@@ -20,7 +24,10 @@ const Footer = () => {
       <div className={'w-full flex flex-wrap justify-center items-center'}>
         <div className={globalStyles.container + ' pb-7'}>
           <div className={'w-full flex justify-between items-center'}>
-            <button className={styles.workWithUsButton + ' flex justify-between'}>
+            <button
+              className={styles.workWithUsButton + ' flex justify-between'}
+              onClick={() => router.push('work-with-us')}
+            >
               <p className={'mr-4'}>Trabaja con nosotros</p>
               <Image src={ArrowLeftIcon} alt="" width={23} height={22} />
             </button>
