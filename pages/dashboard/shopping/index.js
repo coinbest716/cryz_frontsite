@@ -25,18 +25,18 @@ import OrderStateData from 'assets/data/OrderStateData.json'
 
 const Shopping = () => {
   const monthList = [
-    { id: 1, month: 'January' },
-    { id: 2, month: 'February' },
-    { id: 3, month: 'March' },
-    { id: 4, month: 'April' },
-    { id: 5, month: 'May' },
-    { id: 6, month: 'Jun' },
-    { id: 7, month: 'July' },
-    { id: 8, month: 'August' },
-    { id: 9, month: 'September' },
-    { id: 10, month: 'October' },
-    { id: 11, month: 'November' },
-    { id: 12, month: 'December' },
+    { id: 1, month: 'Enero' },
+    { id: 2, month: 'Febrero' },
+    { id: 3, month: 'Marzo' },
+    { id: 4, month: 'Abril' },
+    { id: 5, month: 'Mayo' },
+    { id: 6, month: 'Junio' },
+    { id: 7, month: 'Julio' },
+    { id: 8, month: 'Agosto' },
+    { id: 9, month: 'Septiembre' },
+    { id: 10, month: 'Octubre' },
+    { id: 11, month: 'Noviembre' },
+    { id: 12, month: 'Diciembre' },
   ]
   const [selectedMonth, setSelectedMonth] = React.useState('January')
 
