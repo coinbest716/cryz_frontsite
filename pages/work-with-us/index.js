@@ -7,6 +7,13 @@ import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './index.module.scss'
 
 const WorkWithUs = () => {
+  const fileRef = React.createRef()
+  const handleAttachFile = event => {
+    console.log(event.target.files[0])
+  }
+  const onClickAttachFile = () => {
+    fileRef.current.click()
+  }
   return (
     <div className="flex flex-wrap justify-center">
       <div className={globlaStyle.container}>
@@ -75,6 +82,7 @@ const WorkWithUs = () => {
                 />
                 <div className={'relative'}>
                   <div className={'hidden md:flex ' + styles.label}>&nbsp;</div>
+                  <input className={'hidden'} type="file" id="img_frontr" onChange={handleAttachFile} ref={fileRef} />
                   <input
                     className={
                       'appearance-none bg-transparent border rounded w-full h-10 text-gray-700 py-1 pl-5 pr-36 mb-4 leading-tight focus:outline-none ' +
@@ -84,7 +92,10 @@ const WorkWithUs = () => {
                     placeholder="Attach File"
                     aria-label="Attach File"
                   />
-                  <button className={'absolute bottom-0 right-0 h-10 mb-4 px-4 rounded ' + styles.button}>
+                  <button
+                    className={'absolute bottom-0 right-0 h-10 mb-4 px-4 rounded ' + styles.button}
+                    onClick={onClickAttachFile}
+                  >
                     Adjuntar pdf
                   </button>
                 </div>
