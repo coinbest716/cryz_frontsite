@@ -17,23 +17,10 @@ import PlanData from 'assets/data/PlanData.json'
 
 const Plans = () => {
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
-  const monthNames = [
-    'Enero',
-    'Febrero',
-    'Marcha',
-    'Abril',
-    'Mayo',
-    'Junio',
-    'Julio',
-    'Agosto',
-    'Septiembre',
-    'Octubre',
-    'Noviembre',
-    'Diciembre',
-  ]
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
+  const [currentMonth, setCurrentMonth] = useState('')
   const [materials, setMaterials] = useState([])
   const [grayMaterials, setGrayMaterials] = useState([])
   const [greenMaterials, setGreenMaterials] = useState([])
@@ -66,6 +53,7 @@ const Plans = () => {
   }
   const getOnlyMonth = label => {
     const str = label.split(' ')
+    setCurrentMonth(str[0].charAt(0).toUpperCase() + str[0].slice(1))
     return str[0]
   }
 
@@ -129,7 +117,7 @@ const Plans = () => {
         <div className="col-span-12 md:col-span-3 sm:col-span-12">
           <div className="rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative">
             <div className="flex justify-between items-center">
-              <div className={styles.monthName}>{monthNames[date.getMonth()]}</div>
+              <div className={styles.monthName}>{currentMonth}</div>
               <div
                 className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}
                 onClick={handleClickMonth}
