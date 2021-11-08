@@ -48,7 +48,7 @@ const Login = () => {
         setIsAuthenticated(false)
       })
     if (isAuthenticated) {
-      router.push('/login')
+      router.push('/dashboard')
     }
   }, [isAuthenticated, router])
 
