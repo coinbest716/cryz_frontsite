@@ -39,7 +39,7 @@ const BuyOneToOne = () => {
         </div>
         <div className={'mt-5 mb-10 grid grid-cols-12 gap-6'}>
           {BuySessionData.map((item, index) => (
-            <div className={'col-span-4'} key={index}>
+            <div className={'md:col-span-6 lg:col-span-4'} key={index}>
               <BuyCard data={item} index={index} handleClickBuy={handleClickBuy} />
             </div>
           ))}
