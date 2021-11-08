@@ -23,7 +23,6 @@ import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
 import ReactLoading from 'react-loading'
-import { glob } from 'goober'
 
 const Login = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -246,7 +245,7 @@ const Login = () => {
               <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
                 <input
                   type={showPass === true ? 'text' : 'password'}
-                  placeholder="Contraseña"
+                  placeholder="Actualiza contraseña"
                   className="w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10"
                   value={password}
                   onChange={handleChangePassword}
