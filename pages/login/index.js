@@ -242,6 +242,7 @@ const Login = () => {
         ) : (
           <div className={'w-full col-span-6 flex flex-wrap flex justify-center items-center ' + styles.grayArea}>
             <div>
+              <div className={styles.updatePassword}>Actualiza contraseña</div>
               <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
                 <input
                   type={showPass === true ? 'text' : 'password'}
