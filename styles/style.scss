@@ -76,6 +76,10 @@
   .react-calendar__navigation button[disabled] {
     border-radius: 40px;
   }
+  .highlight {
+    color: red;
+    background-color: #818e8e;
+  }
 }
 
 .fullCalendarWrapper {

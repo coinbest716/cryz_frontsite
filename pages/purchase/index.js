@@ -41,15 +41,71 @@ const Purchase = () => {
     birthday: new Date(),
   })
   const [billingAddress, setBillingAddress] = useState({
-    name: '',
-    title: '',
+    addressAlias: '',
+    surname: '',
     email: '',
+    town: '',
+    postal: '',
+    name: '',
     code: '',
     address: '',
-    phone: '',
+    province: '',
     country: '',
-    postal: '',
   })
+  const billingAddressLeftInfo = [
+    {
+      value: 'addressAlias',
+      type: 'text',
+      label: 'Alias de la dirección ( ej. casa, trabajo…)',
+    },
+    {
+      value: 'surname',
+      type: 'text',
+      label: 'Apellidos',
+    },
+    {
+      value: 'email',
+      type: 'enauk',
+      label: 'Email',
+    },
+    {
+      value: 'town',
+      type: 'text',
+      label: 'Población',
+    },
+    {
+      value: 'postal',
+      type: 'text',
+      label: 'CP',
+    },
+  ]
+  const billingAddressRightInfo = [
+    {
+      value: 'name',
+      type: 'text',
+      label: 'Nombre',
+    },
+    {
+      value: 'code',
+      type: 'text',
+      label: 'DNI/NIF',
+    },
+    {
+      value: 'address',
+      type: 'text',
+      label: 'Dirección facturación',
+    },
+    {
+      value: 'province',
+      type: 'text',
+      label: 'Provincia',
+    },
+    {
+      value: 'country',
+      type: 'text',
+      label: 'Pais',
+    },
+  ]
   const list = ['Hombre', 'Mujer']
   const meetList = ['Instagram', 'Facebook', 'Prensa', 'Por un amigo', 'Otros']
 
@@ -311,95 +367,41 @@ const Purchase = () => {
                   <TabPanel>
                     <div className="p-4 pt-16">
                       <div className={styles.tabTitle}>Direcciones facturación</div>
-                      <div className="flex justify-between gap-8 pt-10">
-                        <div className="w-1/2">
+                      <div className="grid grid-cols-12 gap-4 pt-8">
+                        <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
                           <BillingDoc handleChangeFrame={handleChangeFrame} frameType={'frame1'} value={frameType} />
                         </div>
-                        <div className="w-1/2">
+                        <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
                           <BillingDoc handleChangeFrame={handleChangeFrame} frameType={'frame2'} value={frameType} />
                         </div>
                       </div>
                       <div className={'pt-6 ' + styles.newAddress}>Nueva dirección</div>
-                      <div className="flex justify-between gap-8 pt-6">
-                        <div className="w-7/12">
-                          <CommonText
-                            handleChange={e => handleChangeBillingAddress(e, 'name')}
-                            label={'Nombre completo'}
-                            placeholder={''}
-                            type={'text'}
-                            value={billingAddress.name}
-                          />
+                      <div className="grid grid-cols-12 gap-4 pt-8">
+                        <div className="col-span-12 md:col-span-7 sm:col-span-12">
+                          {billingAddressLeftInfo.map((item, index) => (
+                            <div className="py-2" key={index}>
+                              <CommonText
+                                handleChange={e => handleChangeBillingAddress(e, item.value)}
+                                label={item.label}
+                                placeholder={''}
+                                type={item.type}
+                                value={billingAddress[item.value]}
+                              />
+                            </div>
+                          ))}
                         </div>
-                        <div className="w-5/12 flex justify-end">
-                          <div className="w-2/3">
-                            <CommonText
-                              handleChange={e => handleChangeBillingAddress(e, 'title')}
-                              label={'Titulo'}
-                              placeholder={''}
-                              type={'text'}
-                              value={billingAddress.title}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex justify-between gap-8 pt-6">
-                        <div className="w-7/12">
-                          <CommonText
-                            handleChange={e => handleChangeBillingAddress(e, 'email')}
-                            label={'Email'}
-                            placeholder={''}
-                            type={'email'}
-                            value={billingAddress.email}
-                          />
-                        </div>
-                        <div className="w-5/12">
-                          <CommonText
-                            handleChange={e => handleChangeBillingAddress(e, 'code')}
-                            label={'NIF/DNI'}
-                            placeholder={''}
-                            type={'password'}
-                            value={billingAddress.code}
-                          />
-                        </div>
-                      </div>
-                      <div className="flex justify-between gap-8 pt-6">
-                        <div className="w-7/12">
-                          <CommonText
-                            handleChange={e => handleChangeBillingAddress(e, 'address')}
-                            label={'Dirección facturación'}
-                            placeholder={''}
-                            type={'text'}
-                            value={billingAddress.address}
-                          />
-                        </div>
-                        <div className="w-5/12">
-                          <CommonText
-                            handleChange={e => handleChangeBillingAddress(e, 'phone')}
-                            label={'Teléfono'}
-                            placeholder={''}
-                            type={'text'}
-                            value={billingAddress.phone}
-                          />
-                        </div>
-                      </div>
-                      <div className="flex justify-between gap-8 pt-6">
-                        <div className="w-7/12">
-                          <CommonText
-                            handleChange={e => handleChangeBillingAddress(e, 'country')}
-                            label={'Pais'}
-                            placeholder={''}
-                            type={'text'}
-                            value={billingAddress.country}
-                          />
-                        </div>
-                        <div className="w-5/12">
-                          <CommonText
-                            handleChange={e => handleChangeBillingAddress(e, 'postal')}
-                            label={'CP'}
-                            placeholder={''}
-                            type={'text'}
-                            value={billingAddress.postal}
-                          />
+                        <div className="col-span-12 md:col-span-5 sm:col-span-12 ">
+                          {billingAddressRightInfo.map((item, index) => (
+                            <div className="py-2" key={index}>
+                              <CommonText
+                                handleChange={e => handleChangeBillingAddress(e, item.value)}
+                                label={item.label}
+                                placeholder={''}
+                                type={item.type}
+                                value={billingAddress[item.value]}
+                              />
+                            </div>
+                          ))}
                         </div>
                       </div>
                       <div className="flex justify-end gap-8 pt-6">

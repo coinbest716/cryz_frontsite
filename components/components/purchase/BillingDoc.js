@@ -19,9 +19,8 @@ const BillingDoc = props => {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-between items-center">
-        <div className={'w-2/5 p-3 text-center ' + styles.edit}>Editar</div>
-        <div className={'w-3/5 p-3 text-center ' + styles.new}>Añadir nueva</div>
+      <div className={'w-full flex justify-end items-center ' + styles.edit}>
+        <div className={'p-3 text-center '}>Editar</div>
       </div>
     </div>
   )

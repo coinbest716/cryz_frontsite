@@ -17,23 +17,10 @@ import PlanData from 'assets/data/PlanData.json'
 
 const Plans = () => {
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
+  const [currentMonth, setCurrentMonth] = useState('')
   const [materials, setMaterials] = useState([])
   const [grayMaterials, setGrayMaterials] = useState([])
   const [greenMaterials, setGreenMaterials] = useState([])
@@ -64,6 +51,11 @@ const Plans = () => {
     setDate(value)
     setShowCalendar(false)
   }
+  const getOnlyMonth = label => {
+    const str = label.split(' ')
+    setCurrentMonth(str[0].charAt(0).toUpperCase() + str[0].slice(1))
+    return str[0]
+  }
 
   return (
     <div className={'pt-10 pb-24 px-24 ' + styles.container}>
@@ -89,8 +81,8 @@ const Plans = () => {
             <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} />
           </div>
 
-          <div className="flex justify-between items-center pt-6">
-            <div className={styles.blockSection + ' flex items-center px-5 py-5'}>
+          <div className="flex flex-wrap justify-between pt-12 gap-4">
+            <div className={styles.blockSection + ' flex flex-wrap items-center px-5 py-5'}>
               <div className={styles.blackName}>Información del bloque</div>
               {feature.map((item, index) => (
                 <div key={index} className="px-2">
@@ -125,7 +117,7 @@ const Plans = () => {
         <div className="col-span-12 md:col-span-3 sm:col-span-12">
           <div className="rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative">
             <div className="flex justify-between items-center">
-              <div className={styles.monthName}>{monthNames[date.getMonth()]}</div>
+              <div className={styles.monthName}>{currentMonth}</div>
               <div
                 className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}
                 onClick={handleClickMonth}
@@ -142,6 +134,11 @@ const Plans = () => {
                 showDoubleView={false}
                 showNavigation={true}
                 // view={'year'}
+                locale="es-MX"
+                navigationLabel={({ date, label, locale, view }) =>
+                  // `Current view: ${view}, date: ${date.toLocaleDateString(locale)}`
+                  `${getOnlyMonth(label)}`
+                }
               />
             </div>
             <div className={styles.videoMaterialTitle + ' pt-8'}>CALENTAMIENTO</div>

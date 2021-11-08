@@ -4,6 +4,7 @@ import styles from './calendar.module.scss'
 import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
+import esLocale from '@fullcalendar/core/locales/es'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import ProfileInfo from 'components/components/dashboard/Profile'
@@ -12,19 +13,35 @@ const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 import 'react-calendar/dist/Calendar.css'
 import CheckBoxImage from 'components/components/dashboard/CheckBoxImage'
 import CalendarData from 'assets/data/CalendarData'
+import moment from 'moment'
 
 const Calendar = () => {
-  const [value, onChange] = useState(new Date())
-  const mark = ['28-10-2021', '29-10-2021', '30-10-2021']
+  const calendarComponentRef = React.createRef()
+  const [calendarValue, setCalendarValue] = useState(new Date())
+  const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
   useEffect(() => {
     setEvents(CalendarData)
+    const _markDate = []
+    CalendarData.map(item => {
+      _markDate.push(moment(item.start).format('DD-MM-YYYY'))
+    })
+    setMarkDate(_markDate)
   }, [])
 
   const handleClickStartClass = () => {
     router.push('/dashboard/live-streaming')
   }
-
+  const handleChangeDate = value => {
+    setCalendarValue(value)
+    const styleDate = moment(value).format('YYYY-MM-DD')
+    markDate.map(item => {
+      if (item === moment(value).format('DD-MM-YYYY')) {
+        let calendarApi = calendarComponentRef.current.getApi()
+        calendarApi.gotoDate(styleDate) // call a method on the Calendar object
+      }
+    })
+  }
   return (
     <div className={'px-10 py-10 ' + styles.container}>
       <div className="grid grid-cols-12 gap-12">
@@ -56,12 +73,24 @@ const Calendar = () => {
               dayMaxEvents={true}
               weekends={true}
               events={events}
+              locale={esLocale}
+              ref={calendarComponentRef}
             />
           </div>
         </div>
         <div className="col-span-12 md:col-span-4 sm:col-span-12">
           <div className="calendarWrapper">
-            <MonthCalendar className={styles.calendar} onChange={onChange} value={value} />
+            <MonthCalendar
+              className={styles.calendar}
+              onChange={handleChangeDate}
+              value={calendarValue}
+              locale="es-MX"
+              tileClassName={({ date, view }) => {
+                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                  return 'highlight'
+                }
+              }}
+            />
           </div>
           <div className={'mt-8 px-5 py-4 ' + styles.roomContainer}>
             <div className={'pb-3 ' + styles.roomTitle}>Crys&Co Room</div>
