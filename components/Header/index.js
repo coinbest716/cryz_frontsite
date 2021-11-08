@@ -274,7 +274,9 @@ const Header = props => {
                             className={
                               styles.menuText +
                               ' ' +
-                              (router.pathname === menu.link || router.asPath === menu.link ? styles.active : '')
+                              ('/' + router.pathname.split('/')[1] === menu.link || router.asPath === menu.link
+                                ? styles.active
+                                : '')
                             }
                           >
                             {router.pathname === menu.link ? <b>{menu.title}</b> : menu.title}
