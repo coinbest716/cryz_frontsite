@@ -84,10 +84,10 @@ const Navbar = () => {
       title: 'Nutrición',
     },
     {
-      href: '/dashboard/plans',
+      href: '/dashboard/planes',
       icon: plansIcon,
       iconBlack: plansBlackIcon,
-      title: 'Plans online',
+      title: 'Planes online',
     },
   ]
 
