@@ -88,7 +88,6 @@ const Login = () => {
   }
 
   const handleClickLogin = async () => {
-    console.log('+++++++++++++++++', email, password)
     setProgressStatus(true)
     await Auth.signIn(email, password)
       .then(response => {
@@ -134,6 +133,17 @@ const Login = () => {
       })
   }
 
+  const googleLogin = () => {
+    setProgressStatus(true)
+    Auth.federatedSignIn({ provider: 'Google' })
+    setProgressStatus(false)
+  }
+  const facebookLogin = () => {
+    setProgressStatus(true)
+    Auth.federatedSignIn({ provider: 'Facebook' })
+    setProgressStatus(false)
+  }
+
   return (
     <div className="relative">
       <div className="w-full h-screen flex grid grid-cols-12">
@@ -148,7 +158,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-        {authChallenge === '' ? (
+        {authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
           <div className={'w-full col-span-6 flex flex-wrap justify-center items-center relative ' + styles.grayArea}>
             <div className={styles.closeButton}>
               <button
@@ -210,7 +220,7 @@ const Login = () => {
                   </label>
                 </div>
                 <div>
-                  <button className={styles.enterButton} onClick={handleClickLogin}>
+                  <button className={styles.enterButton} onClick={handleClickLogin} disabled={progressStatus}>
                     Entrar
                   </button>
                 </div>
@@ -230,11 +240,11 @@ const Login = () => {
               </div>
               {/* facebook button */}
               <div className="mt-11">
-                <CommonButton handleClick={handleClickFacebook} label={'LOGIN CON FACEBOOK'} type={'facebook'} />
+                <CommonButton handleClick={facebookLogin} label={'LOGIN CON FACEBOOK'} type={'facebook'} />
               </div>
               {/* google button */}
               <div className="mt-6">
-                <CommonButton handleClick={handleClickGoogle} label={'LOGIN CON GOOGLE'} type={'google'} />
+                <CommonButton handleClick={googleLogin} label={'LOGIN CON GOOGLE'} type={'google'} />
               </div>
             </div>
           </div>
