@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
-import styles from './plans.module.scss'
+import styles from './planes.module.scss'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import ProfileInfo from 'components/components/dashboard/Profile'
 import ReactPlayer from 'react-player'
