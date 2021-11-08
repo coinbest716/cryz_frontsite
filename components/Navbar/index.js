@@ -23,6 +23,8 @@ import billingBlackIcon from 'public/images/billing_black.svg'
 import calendarBlackIcon from 'public/images/calendar_black.svg'
 import nutritionBlackIcon from 'public/images/nutrition_black.svg'
 import plansBlackIcon from 'public/images/plans_black.svg'
+import client from 'utils/apolloclient'
+import { Auth } from 'aws-amplify'
 
 const Navbar = () => {
   const router = useRouter()
@@ -88,6 +90,13 @@ const Navbar = () => {
       title: 'Plans online',
     },
   ]
+
+  const handleClickLogout = async () => {
+    await client.resetStore()
+    await client.clearStore()
+    await Auth.signOut()
+    router.push('/login')
+  }
 
   return (
     <>
@@ -164,12 +173,13 @@ const Navbar = () => {
               </nav>
             </div>
             <div className="flex-shrink-0 flex p-4">
-              <Link href={'/'}>
-                <a className="flex items-center px-10 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100">
-                  <Image src={logoutIcon} alt="" width={30} height={30} />
-                  <p className={'pl-3 ' + styles.logoutLabel}>Log Out</p>
-                </a>
-              </Link>
+              <div
+                onClick={handleClickLogout}
+                className="cursor-pointer flex items-center px-10 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100"
+              >
+                <Image src={logoutIcon} alt="" width={30} height={30} />
+                <p className={'pl-3 ' + styles.logoutLabel}>Log Out</p>
+              </div>
             </div>
           </div>
         </div>

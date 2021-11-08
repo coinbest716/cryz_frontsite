@@ -19,8 +19,10 @@
     "@fullcalendar/timegrid": "^5.10.0",
     "@fullcalendar/timeline": "^5.10.0",
     "@react-google-maps/api": "^2.4.1",
+    "add": "^2.0.6",
     "apexcharts": "^3.29.0",
     "apollo-upload-client": "^16.0.0",
+    "aws-amplify": "^4.3.4",
     "graphql": "^16.0.1",
     "moment": "^2.29.1",
     "next": "^11.1.3-canary.7",
@@ -32,6 +34,7 @@
     "react-card-flip": "^1.1.3",
     "react-dom": "^17.0.2",
     "react-hot-toast": "^2.1.1",
+    "react-loading": "^2.0.3",
     "react-payment": "^0.1.8",
     "react-perfect-scrollbar": "^1.5.8",
     "react-player": "^2.9.0",
@@ -39,7 +42,8 @@
     "react-redux": "^7.2.5",
     "react-responsive-carousel": "^3.2.21",
     "react-tabs": "^3.2.2",
-    "sass": "^1.42.1"
+    "sass": "^1.42.1",
+    "yarn": "^1.22.17"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
