@@ -15,7 +15,7 @@ import moment from 'moment'
 import 'react-calendar/dist/Calendar.css'
 import PlanData from 'assets/data/PlanData.json'
 
-const Plans = () => {
+const Planes = () => {
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
@@ -163,8 +163,8 @@ const Plans = () => {
     </div>
   )
 }
-export default Plans
+export default Planes
 
-Plans.getLayout = function getLayout(page) {
+Planes.getLayout = function getLayout(page) {
   return <SecondaryLayout>{page}</SecondaryLayout>
 }
