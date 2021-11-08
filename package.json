@@ -11,6 +11,7 @@
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@fullcalendar/common": "^5.10.0",
+    "@fullcalendar/core": "^5.10.1",
     "@fullcalendar/daygrid": "^5.10.0",
     "@fullcalendar/interaction": "^5.10.0",
     "@fullcalendar/react": "^5.10.0",
