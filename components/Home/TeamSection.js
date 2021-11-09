@@ -16,7 +16,7 @@ import SignImg from 'assets/images/sign.png'
 
 // json data
 import TeamSectionData from 'assets/data/TeamSectionData'
-import SocialURLData from 'assets/data/SocialURLData'
+import SocialURLData from 'assets/data/TeamSocialURLData'
 
 // styles
 import styles from 'components/Home/TeamSection.module.scss'

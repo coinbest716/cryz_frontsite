@@ -85,7 +85,7 @@ const Navbar = () => {
       href: '/dashboard/plans',
       icon: plansIcon,
       iconBlack: plansBlackIcon,
-      title: 'Plans online',
+      title: 'Planes online',
     },
   ]
 
