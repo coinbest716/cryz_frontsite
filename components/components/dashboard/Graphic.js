@@ -242,7 +242,7 @@ const Graphic = props => {
                   className={'p-1 rounded-2xl bg-gray-200 cursor-pointer'}
                   onClick={() => handleClickMonth('previous')}
                 >
-                  <img src={'/images/message-left.svg'} style={{ width: '10px', height: '10px' }}></img>
+                  <img src="/images/message-left.svg" style={{ width: '10px', height: '10px' }}></img>
                 </div>
                 <div className={'px-2 w-8 text-center ' + styles.month}>{month[monthIndex]}</div>
                 <div className={'p-1 rounded-2xl bg-gray-200 cursor-pointer'} onClick={() => handleClickMonth('next')}>

@@ -13,7 +13,7 @@ const PurchaseAvatar = props => {
       />
       <div className={'absolute top-16 right-0 cursor-pointer'}>
         <div className={styles.edit} onClick={handleChangeAvatar}>
-          <img src={'/images/edit.svg'} style={{ width: '14px', height: '14px' }} />
+          <img src="/images/edit.svg" style={{ width: '14px', height: '14px' }} />
         </div>
       </div>
     </div>
