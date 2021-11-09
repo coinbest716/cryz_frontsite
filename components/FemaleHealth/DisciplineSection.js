@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // images
 import ArrowRightGrayIcon from 'assets/images/arrow-right-black.svg'
@@ -11,7 +11,8 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/FemaleHealth/DisciplineSection.module.scss'
 
 const DisciplineSection = () => {
-  const [isLoading, setIsLoading] = React.useState(false)
+  const router = useRouter()
+
   const BoxInfo = [
     {
       id: 1,
@@ -153,16 +154,21 @@ const DisciplineSection = () => {
     },
   ]
 
-  const [type, setType] = React.useState({})
-  const [selectedItem, setSelectedItem] = React.useState(5)
+  const [type, setType] = React.useState({
+    id: 0,
+    elem: [
+      { id: 1, width: 2, pos: 1 },
+      { id: 2, width: 2, pos: 2 },
+      { id: 3, width: 2, pos: 3 },
+      { id: 4, width: 2, pos: 4 },
+      { id: 5, width: 3, pos: 5 },
+      { id: 6, width: 2, pos: 6 },
+      { id: 7, width: 2, pos: 7 },
+    ],
+  })
 
-  React.useEffect(() => {
-    setType(BoxList[0])
-  }, [])
-
-  const handleSetType = (id, index) => {
-    setIsLoading(true)
-    setSelectedItem(id)
+  const handleMouseOver = (id, index) => {
+    console.log('=======', id, index)
     if (index === 4 && id !== 5) {
       setType(BoxList[5])
     } else {
@@ -170,11 +176,10 @@ const DisciplineSection = () => {
     }
   }
 
-  React.useEffect(() => {
-    if (JSON.stringify(type) !== JSON.stringify({})) {
-      setIsLoading(false)
-    }
-  }, [type])
+  const handleClick = link => {
+    console.log('link', link)
+    router.push(link)
+  }
 
   return (
     <div className={globalStyles.container}>
@@ -192,20 +197,20 @@ const DisciplineSection = () => {
                   (item.width === 1 ? styles.box01 : item.width === 2 ? styles.box02 : styles.box03)
                 }
                 style={{ backgroundColor: BoxInfo[item.id - 1].bgColor }}
-                onMouseOver={() => (isLoading === false ? handleSetType(item.id, index) : '')}
-                onClick={() => router.push(BoxInfo[item.id - 1].link)}
+                onMouseOver={() => handleMouseOver(item.id, index)}
+                onClick={() => handleClick(BoxInfo[item.id - 1].link)}
               >
-                <div className="w-full h-full relative">
+                <div className={'w-full h-full relative'}>
                   <div className={'absolute ' + styles.cardTitle}>{BoxInfo[item.id - 1].title}</div>
                   <div className={'absolute ' + styles.cardArrow}>
                     <Image
-                      src={item.id === selectedItem ? ArrowRightGrayIcon : ArrowRightUpGrayIcon}
+                      src={item.id === type.id ? ArrowRightGrayIcon : ArrowRightUpGrayIcon}
                       alt=""
-                      width={item.id === selectedItem ? 30 : 40}
-                      height={item.id === selectedItem ? 24 : 32}
+                      width={item.id === type.id ? 30 : 40}
+                      height={item.id === type.id ? 24 : 32}
                     />
                   </div>
-                  {item.id === selectedItem ? (
+                  {item.id === type.id ? (
                     <Image
                       src={BoxInfo[item.id - 1].image}
                       alt=""
@@ -213,7 +218,7 @@ const DisciplineSection = () => {
                       height={288}
                       layout="fill"
                       objectFit="cover"
-                      className="opacity-40"
+                      className={'opacity-40'}
                     />
                   ) : (
                     <></>

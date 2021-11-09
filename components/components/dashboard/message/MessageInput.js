@@ -42,7 +42,7 @@ const MessageInput = props => {
         </div>
         <div className={styles.iconArea}>
           <button
-            className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
+            className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
             onClick={() => sendMessage(content, 'text')}
           >
             <Image src={SendIcon} alt={''} width={18} height={18} />
@@ -51,10 +51,10 @@ const MessageInput = props => {
       </div>
       {/* icon part */}
       <div className={'w-full flex justify-end items-center mt-4'}>
-        <button className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center">
+        <button className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}>
           <Image src={SmileIcon} alt={''} width={21} height={21} />
         </button>
-        <button className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center">
+        <button className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}>
           <Image src={AttachIcon} alt={''} width={21} height={21} />
         </button>
         <div className={'ml-4'}>

@@ -4,7 +4,7 @@ import styles from './nutrition.module.scss'
 const Nutrition = () => {
   return (
     <div className={'flex flex-wrap ' + styles.container}>
-      <div className="h-full text-3xl">Nutrition</div>
+      <div className={'h-full text-3xl'}>Nutrition</div>
     </div>
   )
 }

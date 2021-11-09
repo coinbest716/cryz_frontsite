@@ -6,17 +6,17 @@ import news from 'public/images/news.svg'
 
 const News = () => {
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globlaStyle.container + ' pt-20'}>
-          <div className="h-full">
-            <div className="h-1/3 flex items-center">
+          <div className={'h-full'}>
+            <div className={'h-1/3 flex items-center'}>
               <div>
                 <div className={styles.topTitle}>PROXIMAMENTE…</div>
                 <div className={styles.topDash + ' mt-4'} />
               </div>
             </div>
-            <div className="h-1/3 flex items-center justify-center">
+            <div className={'h-1/3 flex items-center justify-center'}>
               <div>
                 <Image src={news} alt="" />
                 <div className={styles.description}>
@@ -25,7 +25,7 @@ const News = () => {
                 </div>
               </div>
             </div>
-            <div className="h-1/3"></div>
+            <div className={'h-1/3'}></div>
           </div>
         </div>
       </div>

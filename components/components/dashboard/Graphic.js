@@ -214,7 +214,7 @@ const Graphic = props => {
 
   return (
     <div className={'px-20 py-8 ' + styles.container}>
-      <div className="flex justify-start items-center">
+      <div className={'flex justify-start items-center'}>
         <div
           className={'flex justify-between items-center ' + styles.measureGraphic}
           onClick={() => handleClickTab('health')}
@@ -223,29 +223,29 @@ const Graphic = props => {
         </div>
       </div>
       <div className={'w-full my-6 ' + styles.divider} />
-      <div className="grid grid-cols-12 gap-8">
-        <div className="col-span-12 md:col-span-8 sm:col-span-12">
-          <div className="pb-8">
+      <div className={'grid grid-cols-12 gap-8'}>
+        <div className={'col-span-12 md:col-span-8 sm:col-span-12'}>
+          <div className={'pb-8'}>
             <div className={styles.title}>Datos Antropométricos</div>
             <Chart options={fatChartOptions.options} series={fatChartOptions.series} type="area" height="300px" />
           </div>
-          <div className="pt-8">
+          <div className={'pt-8'}>
             <Chart options={bodyChartOptions.options} series={bodyChartOptions.series} type="line" height="300px" />
           </div>
         </div>
-        <div className="col-span-12 md:col-span-4 sm:col-span-12 flex justify-center items-center">
+        <div className={'col-span-12 md:col-span-4 sm:col-span-12 flex justify-center items-center'}>
           <div>
-            <div className="flex justify-between items-center">
+            <div className={'flex justify-between items-center'}>
               <div className={'pb-8 ' + styles.title}>Perímetros</div>
-              <div className="flex justify-between items-center">
+              <div className={'flex justify-between items-center'}>
                 <div
-                  className="p-1 rounded-2xl bg-gray-200 cursor-pointer"
+                  className={'p-1 rounded-2xl bg-gray-200 cursor-pointer'}
                   onClick={() => handleClickMonth('previous')}
                 >
                   <img src="/images/message-left.svg" style={{ width: '10px', height: '10px' }}></img>
                 </div>
                 <div className={'px-2 w-8 text-center ' + styles.month}>{month[monthIndex]}</div>
-                <div className="p-1 rounded-2xl bg-gray-200 cursor-pointer" onClick={() => handleClickMonth('next')}>
+                <div className={'p-1 rounded-2xl bg-gray-200 cursor-pointer'} onClick={() => handleClickMonth('next')}>
                   <img src="/images/message-right.svg" style={{ width: '10px', height: '10px' }}></img>
                 </div>
               </div>

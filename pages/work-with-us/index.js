@@ -15,7 +15,7 @@ const WorkWithUs = () => {
     fileRef.current.click()
   }
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className={'flex flex-wrap justify-center'}>
       <div className={globlaStyle.container}>
         <div className={styles.container}>
           <div className={styles.title}>Trabaja con nosotros</div>

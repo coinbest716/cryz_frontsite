@@ -191,12 +191,12 @@ const Purchase = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globlaStyle.container + ' pt-20'}>
-          <div className="grid grid-cols-12 gap-4 ">
-            <div className="col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-20 px-5">
-              <div className="pt-3.5">
+          <div className={'grid grid-cols-12 gap-4 '}>
+            <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-20 px-5'}>
+              <div className={'pt-3.5'}>
                 <Tabs
                   selectedIndex={tabIndex}
                   onSelect={index => setTabIndex(index)}
@@ -209,14 +209,14 @@ const Purchase = () => {
                     <Tab onClick={() => onClickTab('payment')}>03 MÉTODO DE PAGO</Tab>
                   </TabList>
                   <TabPanel>
-                    <div className="p-4 pt-16">
-                      <div className="flex justify-between gap-8">
-                        <div className="w-full">
+                    <div className={'p-4 pt-16'}>
+                      <div className={'flex justify-between gap-8'}>
+                        <div className={'w-full'}>
                           <div className={styles.tabTitle}>Información general</div>
-                          <div className="w-full flex justify-between items-center pt-10">
-                            <div className="flex justify-start items-center">
+                          <div className={'w-full flex justify-between items-center pt-10'}>
+                            <div className={'flex justify-start items-center'}>
                               <PurchaseAvatar avatar={''} />
-                              <div className="pl-5">
+                              <div className={'pl-5'}>
                                 <div className={styles.profileName}>Mariano Pérez Fanjul</div>
                                 <div className={styles.profileCounry}>Madrid, Spain</div>
                               </div>
@@ -226,8 +226,8 @@ const Purchase = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="flex justify-between gap-8 pt-16">
-                        <div className="w-3/5">
+                      <div className={'flex justify-between gap-8 pt-16'}>
+                        <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'name')}
                             label={'Nombre'}
@@ -236,7 +236,7 @@ const Purchase = () => {
                             value={personalInfo.name}
                           />
                         </div>
-                        <div className="w-2/5">
+                        <div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'password')}
                             label={'Contraseña'}
@@ -246,8 +246,8 @@ const Purchase = () => {
                           />
                         </div>
                       </div>
-                      <div className="flex justify-between gap-8 pt-4">
-                        <div className="w-3/5">
+                      <div className={'flex justify-between gap-8 pt-4'}>
+                        <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'surname')}
                             label={'Apellidos'}
@@ -256,7 +256,7 @@ const Purchase = () => {
                             value={personalInfo.surname}
                           />
                         </div>
-                        <div className="w-2/5">
+                        <div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'meet')}
                             label={'Como nos conoció…'}
@@ -266,8 +266,8 @@ const Purchase = () => {
                           />
                         </div>
                       </div>
-                      <div className="flex justify-between gap-8 pt-4">
-                        <div className="w-3/5">
+                      <div className={'flex justify-between gap-8 pt-4'}>
+                        <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'email')}
                             label={'Email'}
@@ -276,7 +276,7 @@ const Purchase = () => {
                             value={personalInfo.email}
                           />
                         </div>
-                        <div className="w-2/5">
+                        <div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'telephone')}
                             label={'Teléfono'}
@@ -286,8 +286,8 @@ const Purchase = () => {
                           />
                         </div>
                       </div>
-                      <div className="flex justify-between gap-8 pt-4">
-                        <div className="w-3/5">
+                      <div className={'flex justify-between gap-8 pt-4'}>
+                        <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'country')}
                             label={'Pais'}
@@ -296,7 +296,7 @@ const Purchase = () => {
                             value={personalInfo.country}
                           />
                         </div>
-                        <div className="w-2/5">
+                        <div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'emergencyPhone')}
                             label={'Teléfono emergencia'}
@@ -306,8 +306,8 @@ const Purchase = () => {
                           />
                         </div>
                       </div>
-                      <div className="flex justify-between gap-8 pt-4">
-                        <div className="w-3/5">
+                      <div className={'flex justify-between gap-8 pt-4'}>
+                        <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'address')}
                             label={'Dirección'}
@@ -316,7 +316,7 @@ const Purchase = () => {
                             value={personalInfo.address}
                           />
                         </div>
-                        <div className="w-2/5">
+                        <div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'code')}
                             label={'DNI'}
@@ -326,8 +326,8 @@ const Purchase = () => {
                           />
                         </div>
                       </div>
-                      <div className="flex justify-between gap-8 pt-4">
-                        <div className="w-3/5">
+                      <div className={'flex justify-between gap-8 pt-4'}>
+                        <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'town')}
                             label={'Ciudad'}
@@ -336,7 +336,7 @@ const Purchase = () => {
                             value={personalInfo.town}
                           />
                         </div>
-                        <div className="w-2/5">
+                        <div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'gender')}
                             label={'Sexo'}
@@ -346,8 +346,8 @@ const Purchase = () => {
                           />
                         </div>
                       </div>
-                      <div className="flex justify-between gap-8 pt-4">
-                        <div className="w-3/5">
+                      <div className={'flex justify-between gap-8 pt-4'}>
+                        <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'birthday')}
                             label={'Fecha de nacimiento'}
@@ -356,16 +356,16 @@ const Purchase = () => {
                             value={personalInfo.birthday}
                           />
                         </div>
-                        <div className="w-2/5"></div>
+                        <div className={'w-2/5'}></div>
                       </div>
                       <div className={'w-full mt-20 ' + styles.divider} />
-                      <div className="pt-24 flex justify-end">
+                      <div className={'pt-24 flex justify-end'}>
                         <CommonButton label={'CONTINUAR'} handleClick={() => handleContinue(1)} type={'continue'} />
                       </div>
                     </div>
                   </TabPanel>
                   <TabPanel>
-                    <div className="p-4 pt-16">
+                    <div className={'p-4 pt-16'}>
                       <div className={styles.tabTitle}>Direcciones facturación</div>
                       <div className="grid grid-cols-12 gap-4 pt-8">
                         <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
@@ -404,12 +404,12 @@ const Purchase = () => {
                           ))}
                         </div>
                       </div>
-                      <div className="flex justify-end gap-8 pt-6">
+                      <div className={'flex justify-end gap-8 pt-6'}>
                         <CommonButton label={'Borrar dirección'} handleClick={handleDeleteBilling} type={'icon'} />
                         <CommonButton label={'Aceptar cambios'} handleClick={handleSaveBilling} type={'fill'} />
                       </div>
                       <div className={'w-full mt-20 ' + styles.divider} />
-                      <div className="pt-24 flex justify-between items-center">
+                      <div className={'pt-24 flex justify-between items-center'}>
                         <div>
                           <PreviousButton
                             handleChangePrevious={() => handleContinue(0)}
@@ -421,9 +421,9 @@ const Purchase = () => {
                     </div>
                   </TabPanel>
                   <TabPanel>
-                    <div className="p-4 pt-16">
+                    <div className={'p-4 pt-16'}>
                       <div className={styles.tabTitle}>Método de pago</div>
-                      <div className="pt-9">
+                      <div className={'pt-9'}>
                         <Credit
                           handleChangePaymentType={handleChangePaymentType}
                           value={paymentType}
@@ -431,11 +431,11 @@ const Purchase = () => {
                           redsys={redsys}
                         />
                       </div>
-                      <div className="pt-5">
+                      <div className={'pt-5'}>
                         <Transfer handleChangePaymentType={handleChangePaymentType} value={paymentType} />
                       </div>
                     </div>
-                    <div className="pt-24 flex justify-between items-center">
+                    <div className={'pt-24 flex justify-between items-center'}>
                       <div>
                         <PreviousButton
                           handleChangePrevious={() => handleContinue(1)}
@@ -448,7 +448,7 @@ const Purchase = () => {
                 </Tabs>
               </div>
             </div>
-            <div className="col-span-12 md:col-span-3 sm:col-span-12">
+            <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
               <ShoppingCart
                 data={cartData}
                 handleRemoveCart={handleRemoveCart}

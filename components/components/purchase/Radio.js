@@ -5,7 +5,7 @@ const Radio = props => {
   const { handleChangeType, type, value, label } = props
 
   return (
-    <div className="flex">
+    <div className={'flex'}>
       <input
         type="radio"
         value={value}

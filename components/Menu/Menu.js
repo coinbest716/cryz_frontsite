@@ -92,14 +92,14 @@ const Menu = () => {
           onMouseMove={handleMouseMover}
         >
           <div className={'h-48 xl:h-96 w-full mt-32 sm:mt-48 ' + styles.menuItems}>
-            <div className="grid grid-cols-2 gap-x-9 flex items-center h-full">
+            <div className={'grid grid-cols-2 gap-x-9 flex items-center h-full'}>
               <div
-                className="relative cursor-pointer h-full"
+                className={'relative cursor-pointer h-full'}
                 onClick={() => handleGotoLink('/academy')}
                 onMouseOver={() => handleMouseOver('academyMenu')}
                 onMouseLeave={() => handleMouseLeave()}
               >
-                <div className="absolute inset-y-1/4 w-full flex justify-center">
+                <div className={'absolute inset-y-1/4 w-full flex justify-center'}>
                   <a id="academyMenu">
                     <div className={`${styles.number} invisible sm:visible mx-1`}>01</div>
                     Academy
@@ -107,12 +107,12 @@ const Menu = () => {
                 </div>
               </div>
               <div
-                className="relative cursor-pointer h-full"
+                className={'relative cursor-pointer h-full'}
                 onClick={() => handleGotoLink('/news')}
                 onMouseOver={() => handleMouseOver('newsMenu')}
                 onMouseLeave={() => handleMouseLeave()}
               >
-                <div className="absolute inset-y-1/4 w-full flex justify-center">
+                <div className={'absolute inset-y-1/4 w-full flex justify-center'}>
                   <a id="newsMenu">
                     News
                     <div className={`${styles.number} invisible sm:visible mx-1`}>02</div>
@@ -120,14 +120,14 @@ const Menu = () => {
                 </div>
               </div>
             </div>
-            <div className="block xl:hidden grid grid-cols-1 gap-x-9 flex justify-center h-full">
+            <div className={'block xl:hidden grid grid-cols-1 gap-x-9 flex justify-center h-full'}>
               <div
-                className="relative cursor-pointer h-full"
+                className={'relative cursor-pointer h-full'}
                 onClick={() => handleGotoLink('/#team')}
                 onMouseOver={() => handleMouseOver('teamMenu')}
                 onMouseLeave={() => handleMouseLeave()}
               >
-                <div className="absolute inset-y-1/4 w-full flex justify-center">
+                <div className={'absolute inset-y-1/4 w-full flex justify-center'}>
                   <a id="teamMenu">
                     Equipo
                     <div className={`${styles.number} invisible sm:visible mx-1`}>03</div>
@@ -138,7 +138,7 @@ const Menu = () => {
           </div>
 
           <div className={`${styles.socials} w-full flex flex-wrap mr-4`}>
-            <div className="w-full flex justify-end">
+            <div className={'w-full flex justify-end'}>
               <SocialButtonGroup color="white" socialURL={SocialURLData[0]} />
             </div>
             <div className={styles.whiteLine}></div>

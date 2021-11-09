@@ -60,7 +60,7 @@ const MainSection = () => {
                     interval={3000}
                   >
                     {sliderData.map((item, index) => (
-                      <div key={index} className="mx-1.5">
+                      <div key={index} className={'mx-1.5'}>
                         <Image src={item.image} alt="" width={283} height={544} />
                       </div>
                     ))}

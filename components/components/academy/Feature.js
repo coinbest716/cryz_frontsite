@@ -10,7 +10,7 @@ const Feature = props => {
     <div className={'flex justify-start w-full items-center'}>
       <div
         style={{ backgroundColor: data.bgColor, width: '28px', height: '28px', minWidth: '28px' }}
-        className="flex justify-center items-center mr-2"
+        className={'flex justify-center items-center mr-2'}
       >
         <img src={data.path} alt="" width={15} height={15} />
       </div>

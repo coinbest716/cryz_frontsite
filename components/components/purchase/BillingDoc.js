@@ -7,8 +7,8 @@ const BillingDoc = props => {
 
   return (
     <div className={styles.billingSection}>
-      <div className="flex justify-start p-2">
-        <div className="w-full">
+      <div className={'flex justify-start p-2'}>
+        <div className={'w-full'}>
           <Radio handleChangeType={handleChangeFrame} type={frameType} value={value} label={''} />
           <div className={'px-6 ' + styles.content}>
             <div>Jamy Larson</div>

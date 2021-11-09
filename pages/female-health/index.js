@@ -10,7 +10,7 @@ const FemaleHealth = () => {
   return (
     <div className={styles.container}>
       <MainSection />
-      <div id="discipline" className="w-full flex justify-center">
+      <div id="discipline" className={'w-full flex justify-center'}>
         <DisciplineSection />
       </div>
     </div>

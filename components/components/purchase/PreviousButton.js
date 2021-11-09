@@ -7,7 +7,7 @@ const PreviousButton = props => {
   const { handleChangePrevious, label } = props
 
   return (
-    <button className="flex justify-between items-center hover:bg-gray-300 px-2 py-1" onClick={handleChangePrevious}>
+    <button className={'flex justify-between items-center hover:bg-gray-300 px-2 py-1'} onClick={handleChangePrevious}>
       <Image src={backGrayIcon} alt="" width={15} height={15} />
       <p className={styles.back}>{label}</p>
     </button>

@@ -79,7 +79,7 @@ const COSection = () => {
             }
           >
             {sliderData.map((item, index) => (
-              <div key={index} className="grid grid-cols-3 gap-4">
+              <div key={index} className={'grid grid-cols-3 gap-4'}>
                 {item.map((elem, idx) => (
                   <div key={idx}>
                     <div
@@ -106,7 +106,7 @@ const COSection = () => {
                         </div>
                       )}
                     </div>
-                    <div className="flex justify-start items-start">
+                    <div className={'flex justify-start items-start'}>
                       <div className={styles.divider} />
                       <div className={styles.name}>
                         {elem.name.split(' ')[0]}

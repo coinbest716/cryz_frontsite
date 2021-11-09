@@ -43,12 +43,12 @@ const Classland = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globlaStyle.container + ' mt-20'}>
           <div className={styles.topSection}>
-            <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 md:col-span-4 sm:col-span-12 ">
+            <div className={'grid grid-cols-12 gap-4'}>
+              <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
                 <div className={styles.topTitle}>Classland</div>
                 <div className={styles.topDash} />
                 <div className={styles.topDescription}>
@@ -57,7 +57,7 @@ const Classland = () => {
                   pilates, pérdida de peso, embarazo, post parto, entre otras.
                 </div>
               </div>
-              <div className="col-span-12 md:col-span-8 sm:col-span-12 ">
+              <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
                 <div className={styles.topRightSection}>
                   <div className={styles.topRightLetImage}>
                     <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
@@ -66,7 +66,7 @@ const Classland = () => {
                     <div className={'z-10'}>
                       <CircularMark />
                     </div>
-                    <div className="mt-6">
+                    <div className={'mt-6'}>
                       <FaqButton onClick={executeScroll} />
                     </div>
                   </div>
@@ -83,7 +83,7 @@ const Classland = () => {
         </div>
         <div className={styles.buttonGroup}>
           {filter.map((item, index) => (
-            <div className="mr-3" key={index}>
+            <div className={'mr-3'} key={index}>
               <FilterButton
                 active={index === filterKey}
                 filter={item}
@@ -94,7 +94,7 @@ const Classland = () => {
           ))}
         </div>
         <div className={styles.cardSection}>
-          <div className="grid grid-cols-12 gap-12">
+          <div className={'grid grid-cols-12 gap-12'}>
             {cardData?.map((card, index) => (
               <div className={'col-span-12 flex  md:col-span-4 sm:col-span-12 ' + styles.cardAlign} key={index}>
                 <ClassCard data={card} key={index} />
