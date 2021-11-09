@@ -80,7 +80,7 @@ const Shopping = () => {
         </select>
       </div>
       {/* table part */}
-      <table className="w-full table-auto">
+      <table className={'w-full table-auto'}>
         <thead className={styles.tableHead}>
           <tr>
             <th>
@@ -103,7 +103,7 @@ const Shopping = () => {
         <tbody className={'mt-4 ' + styles.tbody}>
           {/* first tr */}
           <tr>
-            <td className="h-full relative">
+            <td className={'h-full relative'}>
               <div
                 className={
                   'absolute top-0 bottom-0 flex flex-col justify-around ' +
@@ -112,8 +112,8 @@ const Shopping = () => {
                   styles.tableCellText
                 }
               >
-                <div className="flex items-start">Order #239</div>
-                <div className="flex items-end mb-2">
+                <div className={'flex items-start'}>Order #239</div>
+                <div className={'flex items-end mb-2'}>
                   <Chip data={OrderStateData[0]} onClick={() => {}} />
                 </div>
               </div>
@@ -154,8 +154,8 @@ const Shopping = () => {
             </td>
           </tr>
           {/* second tr */}
-          <tr className="bg-white">
-            <td className="h-full relative">
+          <tr className={'bg-white'}>
+            <td className={'h-full relative'}>
               <div
                 className={
                   'absolute top-0 bottom-0 flex flex-col justify-around ' +
@@ -164,8 +164,8 @@ const Shopping = () => {
                   styles.tableCellText
                 }
               >
-                <div className="flex items-start">Order #238</div>
-                <div className="flex items-end mb-2">
+                <div className={'flex items-start'}>Order #238</div>
+                <div className={'flex items-end mb-2'}>
                   <Chip data={OrderStateData[1]} onClick={() => {}} />
                 </div>
               </div>
@@ -203,7 +203,7 @@ const Shopping = () => {
           </tr>
           {/* third tr */}
           <tr>
-            <td className="h-full relative">
+            <td className={'h-full relative'}>
               <div
                 className={
                   'absolute top-0 bottom-0 flex flex-col justify-around ' +
@@ -212,8 +212,8 @@ const Shopping = () => {
                   styles.tableCellText
                 }
               >
-                <div className="flex items-start">Order #237</div>
-                <div className="flex items-end mb-2">
+                <div className={'flex items-start'}>Order #237</div>
+                <div className={'flex items-end mb-2'}>
                   <Chip data={OrderStateData[2]} onClick={() => {}} />
                 </div>
               </div>
@@ -246,8 +246,8 @@ const Shopping = () => {
             </td>
           </tr>
           {/* forth tr */}
-          <tr className="bg-white">
-            <td className="h-full relative">
+          <tr className={'bg-white'}>
+            <td className={'h-full relative'}>
               <div
                 className={
                   'absolute top-0 bottom-0 flex flex-col justify-around ' +
@@ -256,8 +256,8 @@ const Shopping = () => {
                   styles.tableCellText
                 }
               >
-                <div className="flex items-start">Order #236</div>
-                <div className="flex items-end mb-2">
+                <div className={'flex items-start'}>Order #236</div>
+                <div className={'flex items-end mb-2'}>
                   <Chip data={OrderStateData[2]} onClick={() => {}} />
                 </div>
               </div>

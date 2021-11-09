@@ -17,7 +17,9 @@ const SearchOrder = () => {
       </div>
       <div className={styles.text}>
         <input
-          className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 leading-tight focus:outline-none"
+          className={
+            'appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 leading-tight focus:outline-none'
+          }
           type="text"
           placeholder="Buscar pedido"
           aria-label="Search Order"

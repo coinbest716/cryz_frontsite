@@ -22,28 +22,28 @@ const ShoppingCart = props => {
   const handleChangeFrame = () => {}
   return (
     <div className={styles.shoppingCart}>
-      <div className="flex justify-between">
+      <div className={'flex justify-between'}>
         <div className={styles.summary}>Resumen compra</div>
         <div className={'relative cursor-pointer ' + styles.badge}>
           <div className={'absoulte top-3 right-3 ' + styles.summaryNumber}>2</div>
         </div>
       </div>
       <div className={styles.divider + ' mt-4 mb-4'} />
-      <div className="max-h-54 overflow-y-auto -mr-8 pr-1">
+      <div className={'max-h-54 overflow-y-auto -mr-8 pr-1'}>
         {data?.map((item, index) => (
-          <div className="flex justify-between items-center my-3" key={index}>
-            <div className="flex justify-between">
-              <div className="mr-4" style={{ minWidth: '88px' }}>
+          <div className={'flex justify-between items-center my-3'} key={index}>
+            <div className={'flex justify-between'}>
+              <div className={'mr-4'} style={{ minWidth: '88px' }}>
                 <img src={item.image} style={{ width: '88px', height: '88px' }} />
               </div>
-              <div className="flex flex-col justify-between">
+              <div className={'flex flex-col justify-between'}>
                 <div className={styles.listDescription}>{item.description}</div>
                 <div className={styles.listPrice}>€&nbsp;&nbsp;{item.price}</div>
               </div>
             </div>
             <div>
               <button
-                className="duration-200 hover:bg-gray-300 w-6 h-6 flex justify-center items-center p-2 rounded-full"
+                className={'duration-200 hover:bg-gray-300 w-6 h-6 flex justify-center items-center p-2 rounded-full'}
                 onClick={() => handleRemoveCart(index)}
               >
                 <Image src={close} alt="" width={16} height={16} />
@@ -53,11 +53,11 @@ const ShoppingCart = props => {
         ))}
       </div>
       {data?.length !== 0 && <div className={styles.divider + ' mt-4'} />}
-      <div className="mt-4">
-        <div className="flex justify-between">
+      <div className={'mt-4'}>
+        <div className={'flex justify-between'}>
           <div className={styles.discount}>Cupón descuento?</div>
           <div
-            className="duration-200 hover:bg-gray-300 w-6 h-6 flex justify-center items-center p-1.5 rounded-full"
+            className={'duration-200 hover:bg-gray-300 w-6 h-6 flex justify-center items-center p-1.5 rounded-full'}
             onClick={handleClickExpand}
           >
             {expend ? (
@@ -69,22 +69,22 @@ const ShoppingCart = props => {
         </div>
         {expend && (
           <div>
-            <div className="flex justify-end mt-3">
+            <div className={'flex justify-end mt-3'}>
               <input type="text" id="discount" name="number" className={styles.inputDiscount} />
             </div>
-            <div className="flex justify-end mt-1">
+            <div className={'flex justify-end mt-1'}>
               <AcceptCommonButtom label={'Aplicar'} handleClick={handleAcceptDiscount} type={'fill'} />
             </div>
           </div>
         )}
       </div>
       <div className={styles.divider + ' mt-4 mb-4'} />
-      <div className="flex justify-between">
+      <div className={'flex justify-between'}>
         <div className={styles.listDescription}>Total +IVA</div>
         <div className={styles.listPrice}>€&nbsp;{total.toFixed(2)}</div>
       </div>
       {tabIndex === 2 && (
-        <div className="pt-36">
+        <div className={'pt-36'}>
           <Radio
             handleChangeType={handleChangeFrame}
             type={'billAddress'}

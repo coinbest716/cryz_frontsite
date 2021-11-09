@@ -200,7 +200,7 @@ const DisciplineSection = () => {
                 onMouseOver={() => handleMouseOver(item.id, index)}
                 onClick={() => handleClick(BoxInfo[item.id - 1].link)}
               >
-                <div className="w-full h-full relative">
+                <div className={'w-full h-full relative'}>
                   <div className={'absolute ' + styles.cardTitle}>{BoxInfo[item.id - 1].title}</div>
                   <div className={'absolute ' + styles.cardArrow}>
                     <Image
@@ -218,7 +218,7 @@ const DisciplineSection = () => {
                       height={288}
                       layout="fill"
                       objectFit="cover"
-                      className="opacity-40"
+                      className={'opacity-40'}
                     />
                   ) : (
                     <></>

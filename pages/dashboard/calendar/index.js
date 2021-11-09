@@ -27,21 +27,21 @@ const Calendar = () => {
 
   return (
     <div className={'px-10 py-10 ' + styles.container}>
-      <div className="grid grid-cols-12 gap-12">
-        <div className="col-span-12 md:col-span-8 sm:col-span-12 flex justify-between">
+      <div className={'grid grid-cols-12 gap-12'}>
+        <div className={'col-span-12 md:col-span-8 sm:col-span-12 flex justify-between'}>
           <div className={styles.highBoldLabel}>Calendario</div>
           <DashboardButton handleClick={handleClickStartClass} label={'Comenzar clase'} type={'startClass'} />
         </div>
-        <div className="col-span-12 md:col-span-4 sm:col-span-12 flex justify-between items-center">
-          <div className="pr-4">
+        <div className={'col-span-12 md:col-span-4 sm:col-span-12 flex justify-between items-center'}>
+          <div className={'pr-4'}>
             <NotificationButton />
           </div>
           <ProfileInfo />
         </div>
       </div>
-      <div className="grid grid-cols-12 gap-12 pt-8">
-        <div className="col-span-12 md:col-span-8 sm:col-span-12 w-full">
-          <div className="fullCalendarWrapper">
+      <div className={'grid grid-cols-12 gap-12 pt-8'}>
+        <div className={'col-span-12 md:col-span-8 sm:col-span-12 w-full'}>
+          <div className={'fullCalendarWrapper'}>
             <FullCalendar
               plugins={[dayGridPlugin, timeGridPlugin]} //[dayGridPlugin, timeGridPlugin, interactionPlugin]
               headerToolbar={{
@@ -59,14 +59,14 @@ const Calendar = () => {
             />
           </div>
         </div>
-        <div className="col-span-12 md:col-span-4 sm:col-span-12">
-          <div className="calendarWrapper">
+        <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
+          <div className={'calendarWrapper'}>
             <MonthCalendar className={styles.calendar} onChange={onChange} value={value} />
           </div>
           <div className={'mt-8 px-5 py-4 ' + styles.roomContainer}>
             <div className={'pb-3 ' + styles.roomTitle}>Crys&Co Room</div>
             {events.map((item, index) => (
-              <div className="py-3" key={index}>
+              <div className={'py-3'} key={index}>
                 <CheckBoxImage label={item.label} color={item.backgroundColor} />
               </div>
             ))}

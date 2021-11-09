@@ -54,26 +54,26 @@ const Billing = () => {
 
   return (
     <div className={'pt-10 pb-24 px-24 ' + styles.container}>
-      <div className="flex justify-between">
+      <div className={'flex justify-between'}>
         <div>
           <div className={styles.highBoldLabel}>Direcciones de facturación</div>
           <div className={'pt-2 ' + styles.mediumLabel}>Domingo, 12 de Diciembre 2021</div>
         </div>
-        <div className="flex justify-end items-center">
-          <div className="pr-4">
+        <div className={'flex justify-end items-center'}>
+          <div className={'pr-4'}>
             <NotificationButton />
           </div>
           <ProfileInfo />
         </div>
       </div>
-      <div className="pt-12">
+      <div className={'pt-12'}>
         <DashboardButton handleClick={handleAddAddress} label={'Añadir dirección'} type={'addBilling'} />
       </div>
       {addressDataList.map((item, index) => (
         <div className={'px-16 py-10 mt-6 ' + styles.AddressSection} key={index}>
-          <div className="flex justify-between items-center">
-            <div className="flex justify-start items-center">
-              <div className="py-2 w-2/5">
+          <div className={'flex justify-between items-center'}>
+            <div className={'flex justify-start items-center'}>
+              <div className={'py-2 w-2/5'}>
                 <CommonText
                   handleChange={e => handleChangeAddress(e, 'name', index)}
                   label={'Nombre completo'}
@@ -82,7 +82,7 @@ const Billing = () => {
                   value={item.name}
                 />
               </div>
-              <div className="py-2 px-6 w-2/5">
+              <div className={'py-2 px-6 w-2/5'}>
                 <CommonText
                   handleChange={e => handleChangeAddress(e, 'title', index)}
                   label={'Titulo'}
@@ -91,7 +91,7 @@ const Billing = () => {
                   value={item.title}
                 />
               </div>
-              <div className="py-2 w-1/5">
+              <div className={'py-2 w-1/5'}>
                 <CommonText
                   handleChange={e => handleChangeAddress(e, 'cif', index)}
                   label={'CIF'}
@@ -110,12 +110,12 @@ const Billing = () => {
             </div>
           </div>
           {!item.collapse && (
-            <div className="pt-10">
+            <div className={'pt-10'}>
               <div className={styles.divider}></div>
-              <div className="px-40 py-10">
-                <div className="grid grid-cols-12 gap-12">
-                  <div className="col-span-12 md:col-span-6 sm:col-span-12">
-                    <div className="py-2">
+              <div className={'px-40 py-10'}>
+                <div className={'grid grid-cols-12 gap-12'}>
+                  <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+                    <div className={'py-2'}>
                       <CommonText
                         handleChange={e => handleChangeAddress(e, 'email', index)}
                         label={'Email'}
@@ -124,7 +124,7 @@ const Billing = () => {
                         value={item.email}
                       />
                     </div>
-                    <div className="py-2">
+                    <div className={'py-2'}>
                       <CommonText
                         handleChange={e => handleChangeAddress(e, 'address', index)}
                         label={'Dirección facturación'}
@@ -133,7 +133,7 @@ const Billing = () => {
                         value={item.address}
                       />
                     </div>
-                    <div className="py-2">
+                    <div className={'py-2'}>
                       <CommonText
                         handleChange={e => handleChangeAddress(e, 'country', index)}
                         label={'Pais'}
@@ -143,8 +143,8 @@ const Billing = () => {
                       />
                     </div>
                   </div>
-                  <div className="col-span-12 md:col-span-6 sm:col-span-12">
-                    <div className="py-2">
+                  <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+                    <div className={'py-2'}>
                       <CommonText
                         handleChange={e => handleChangeAddress(e, 'nif', index)}
                         label={'NIF/NIE'}
@@ -153,7 +153,7 @@ const Billing = () => {
                         value={item.nif}
                       />
                     </div>
-                    <div className="py-2">
+                    <div className={'py-2'}>
                       <CommonText
                         handleChange={e => handleChangeAddress(e, 'phone', index)}
                         label={'Teléfono'}
@@ -162,7 +162,7 @@ const Billing = () => {
                         value={item.phone}
                       />
                     </div>
-                    <div className="py-2">
+                    <div className={'py-2'}>
                       <CommonText
                         handleChange={e => handleChangeAddress(e, 'postalCode', index)}
                         label={'CP'}
@@ -174,7 +174,7 @@ const Billing = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-end gap-5">
+              <div className={'flex justify-end gap-5'}>
                 <CommonButton label={'Borrar Cuenta'} handleClick={() => handleDeleteAddress(index)} type={'icon'} />
                 <CommonButton label={'Aprobar cambios'} handleClick={() => handleSaveAddress(index)} type={'fill'} />
               </div>

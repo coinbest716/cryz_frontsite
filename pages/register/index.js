@@ -46,7 +46,7 @@ const Register = () => {
   }
 
   return (
-    <div className="w-full h-screen flex grid grid-cols-12">
+    <div className={'w-full h-screen flex grid grid-cols-12'}>
       <div className={'w-full col-span-6 flex flex-wrap justify-center items-center ' + styles.whiteArea}>
         <div className={styles.whiteAreaContent}>
           <div styles={'w-full flex justify-center'}>
@@ -61,14 +61,14 @@ const Register = () => {
       <div className={'w-full col-span-6 flex flex-wrap justify-center items-center relative ' + styles.grayArea}>
         <div className={styles.closeButton}>
           <button
-            className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
+            className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
             onClick={() => router.push('/')}
           >
             <Image src={CloseIcon} alt="" width={19} height={20} />
           </button>
         </div>
         <div className={styles.grayAreaContent}>
-          <div className="w-full flex justify-start">
+          <div className={'w-full flex justify-start'}>
             <button className={styles.loginButton} onClick={() => router.push('/login')}>
               LOGIN
             </button>
@@ -81,7 +81,7 @@ const Register = () => {
             <input
               type="text"
               placeholder="Email"
-              className="w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white"
+              className={'w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white'}
             />
           </div>
           {/* password input */}
@@ -89,9 +89,9 @@ const Register = () => {
             <input
               type={showPass === true ? 'text' : 'password'}
               placeholder="Contraseña"
-              className="w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10"
+              className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
             />
-            <div className="absolute right-3 cursor-pointer">
+            <div className={'absolute right-3 cursor-pointer'}>
               {showPass === true ? (
                 <Image src={EyeIcon} alt="" width={17} height={17} onClick={() => handleSetShowPass(false)} />
               ) : (
@@ -104,9 +104,9 @@ const Register = () => {
             <input
               type={showRepeatPass === true ? 'text' : 'password'}
               placeholder="Repetir contraseña"
-              className="w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10"
+              className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
             />
-            <div className="absolute right-3 cursor-pointer">
+            <div className={'absolute right-3 cursor-pointer'}>
               {showRepeatPass === true ? (
                 <Image src={EyeIcon} alt="" width={17} height={17} onClick={() => handleSetShowRepeatPass(false)} />
               ) : (
@@ -115,7 +115,7 @@ const Register = () => {
             </div>
           </div>
           {/* login button part */}
-          <div className="mt-5 flex justify-end items-center">
+          <div className={'mt-5 flex justify-end items-center'}>
             <div>
               <button className={styles.enterButton} onClick={handleClickRegister}>
                 Entrar

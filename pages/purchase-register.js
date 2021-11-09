@@ -51,21 +51,21 @@ const Register = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globlaStyle.container + ' pt-20'}>
-          <div className="grid grid-cols-12 gap-4 ">
-            <div className="col-span-12 md:col-span-8 sm:col-span-12 pt-32 pb-44">
-              <div className="px-10">
+          <div className={'grid grid-cols-12 gap-4 '}>
+            <div className={'col-span-12 md:col-span-8 sm:col-span-12 pt-32 pb-44'}>
+              <div className={'px-10'}>
                 <div className={styles.title}>Regístrate para continuar con la compra</div>
               </div>
-              <div className="flex justify-center">
-                <div className="pt-12" style={{ maxWidth: '300px', width: '100%' }}>
-                  <div className="flex justify-start gap-4">
+              <div className={'flex justify-center'}>
+                <div className={'pt-12'} style={{ maxWidth: '300px', width: '100%' }}>
+                  <div className={'flex justify-start gap-4'}>
                     <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'outline'} />
                     <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'fill'} />
                   </div>
-                  <div className="pt-9">
+                  <div className={'pt-9'}>
                     <input
                       type="email"
                       placeholder="Email"
@@ -74,7 +74,7 @@ const Register = () => {
                       onChange={handleChangeEmail}
                     />
                   </div>
-                  <div className="pt-5">
+                  <div className={'pt-5'}>
                     <input
                       type="password"
                       placeholder="Contraseña"
@@ -83,7 +83,7 @@ const Register = () => {
                       onChange={handleChangePassword}
                     />
                   </div>
-                  <div className="pt-5">
+                  <div className={'pt-5'}>
                     <input
                       type="password"
                       placeholder="Repetir contraseña"
@@ -92,13 +92,13 @@ const Register = () => {
                       onChange={handleChangeConfirmPassword}
                     />
                   </div>
-                  <div className="flex justify-end pt-6">
+                  <div className={'flex justify-end pt-6'}>
                     <CommonButton handleClick={handleClickEnter} label={'Entrar'} type={'fill'} />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-span-12 md:col-span-4 sm:col-span-12">
+            <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
               <ShoppingCart data={cartData} handleRemoveCart={handleRemoveCart} />
             </div>
           </div>

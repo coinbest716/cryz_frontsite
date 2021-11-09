@@ -247,8 +247,8 @@ const Header = props => {
       <Link href={'/'} passHref>
         <p className={styles.logo}>CRYS DYAZ & CO</p>
       </Link>
-      <div className="flex">
-        <ul className="flex flex-col sm:flex-row list-none items-center justify-end mr-24">
+      <div className={'flex'}>
+        <ul className={'flex flex-col sm:flex-row list-none items-center justify-end mr-24'}>
           {/* text menu part */}
           {menus &&
             menus.map((menu, key) => {
@@ -284,7 +284,7 @@ const Header = props => {
                         </Link>
                       </button>
                       <div className={styles.dropdownContent}>
-                        <div className="flex flex-wrap relative">
+                        <div className={'flex flex-wrap relative'}>
                           {menu.subMenus.map((subMenu, idx) =>
                             subMenu.subMenus !== undefined && subMenu.subMenus.length !== 0 ? (
                               <div key={idx}>
@@ -363,7 +363,9 @@ const Header = props => {
                       </button>
                       <div className={'flex justify-center items-center ' + styles.iconMenuItem}>
                         <button
-                          className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center block xl:hidden"
+                          className={
+                            'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center block xl:hidden'
+                          }
                           onClick={() => router.push('/contact')}
                         >
                           <Image src={MessageIcon} alt="" width={22} height={19} />
@@ -391,7 +393,7 @@ const Header = props => {
           {/* icon menu part */}
           <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
             <button
-              className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
+              className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
               onMouseOver={() => handleClickShoppingCard(true)}
             >
               <Image src={CartIcon} alt="" width={22} height={19} />
@@ -399,7 +401,7 @@ const Header = props => {
           </li>
           <li className={'flex justify-center items-center ' + styles.iconMenuItem}>
             <button
-              className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
+              className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
               onClick={() => router.push('login')}
             >
               <Image src={AccountIcon} alt="" width={22} height={20} />
@@ -409,7 +411,7 @@ const Header = props => {
         <Menu />
       </div>
       {openCart && (
-        <div className="absolute top-20 right-20" onMouseLeave={handleBack}>
+        <div className={'absolute top-20 right-20'} onMouseLeave={handleBack}>
           <ShoppingCart
             data={cartData}
             handleRemoveCart={handleRemoveCart}

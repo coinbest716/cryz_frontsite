@@ -22,13 +22,13 @@ const Credit = props => {
 
   return (
     <div className={'px-10 py-8 ' + styles.creditSection}>
-      <div className="flex justify-between items-center">
+      <div className={'flex justify-between items-center'}>
         <div>
           <Radio handleChangeType={handleChangePaymentType} type={'card'} value={value} label={'Tarjeta bancaria'} />
         </div>
         <Image src={cards} alt="" width={110} height={22} />
       </div>
-      <div className="flex justify-between items-center">
+      <div className={'flex justify-between items-center'}>
         <div className={'pl-8 pt-2 ' + styles.creditDescription}>
           Paga con tarjeta de forma segura con :: Visa, Maestro, Discover, <br /> American Express.
         </div>
@@ -49,8 +49,8 @@ const Credit = props => {
               disabled={value === 'card' ? false : true}
             />
           </div>
-          <div className="flex justify-between gap-4">
-            <div className="w-1/2">
+          <div className={'flex justify-between gap-4'}>
+            <div className={'w-1/2'}>
               <div className={'pt-7 pb-1.5 ' + styles.label}>Nombre completo</div>
               <input
                 type="text"
@@ -62,7 +62,7 @@ const Credit = props => {
                 disabled={value === 'card' ? false : true}
               />
             </div>
-            <div className="w-1/4">
+            <div className={'w-1/4'}>
               <div className={'pt-7 pb-1.5 ' + styles.label}>fecha expiración</div>
               <input
                 type="tel"
@@ -75,7 +75,7 @@ const Credit = props => {
                 disabled={value === 'card' ? false : true}
               />
             </div>
-            <div className="w-1/4">
+            <div className={'w-1/4'}>
               <div className={'pt-7 pb-1.5 ' + styles.label}>CVV CODE</div>
               <input
                 type="tel"

@@ -11,7 +11,7 @@ const NewMessageBox = ({ handleClickMessage, name, content }) => {
       onClick={handleClickMessage}
     >
       <Image src={messageBoxIcon} width={24} height={24} alt="" />
-      <div className="flex flex-col justify-between">
+      <div className={'flex flex-col justify-between'}>
         <div className={styles.mediumBoldLabel}>{name}</div>
         <div className={styles.mediumLabel}>{content}</div>
       </div>

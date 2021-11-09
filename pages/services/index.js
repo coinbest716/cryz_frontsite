@@ -47,11 +47,11 @@ const Services = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className={'flex flex-wrap justify-center'}>
       <div className={globlaStyle.container}>
         <div className={styles.container}>
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
+          <div className={'grid grid-cols-12 gap-4'}>
+            <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
               <div className={styles.topTitle + ' pb-2'}>Servicios</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription}>
@@ -62,7 +62,7 @@ const Services = () => {
                 programas creados y supervisados por los mejores profesionales del sector.
               </div>
             </div>
-            <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
+            <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
               <div className={'z-10 ' + styles.circularMark}>
                 <CircularMark />
               </div>

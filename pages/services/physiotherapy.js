@@ -37,13 +37,13 @@ const Physiotherapy = () => {
 
   return (
     <div className={styles.container}>
-      <div className="flex flex-wrap justify-center pb-20">
+      <div className={'flex flex-wrap justify-center pb-20'}>
         <div className={globlaStyle.container}>
-          <div className="mt-9">
+          <div className={'mt-9'}>
             <BackButton />
           </div>
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 md:col-span-5 sm:col-span-12 ">
+          <div className={'grid grid-cols-12 gap-4'}>
+            <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
               <div className={'pt-10 pb-2 ' + styles.topTitle}>Fisioterapia</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription + ' mt-10 pb-20'}>
@@ -51,14 +51,14 @@ const Physiotherapy = () => {
                   charLimit={500}
                   readMoreText={' [leer mas…] '}
                   readLessText={' [Leer menos…]'}
-                  readMoreClassName="read-more-less--more"
-                  readLessClassName="read-more-less--less"
+                  readMoreClassName={'read-more-less--more'}
+                  readLessClassName={'read-more-less--less'}
                 >
                   {description}
                 </ReactReadMoreReadLess>
               </div>
             </div>
-            <div className="col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end">
+            <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end'}>
               <div className={'absolute top-10 z-10'}>
                 <CircularMark />
               </div>
@@ -69,7 +69,7 @@ const Physiotherapy = () => {
           </div>
         </div>
       </div>
-      <div className="w-1/3 mr-1">
+      <div className={'w-1/3 mr-1'}>
         <ArrowButton label={'Compra  presenciales'} onClick={handleClickBuy} type={'physiotherapy'} />
       </div>
     </div>

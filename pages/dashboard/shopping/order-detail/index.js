@@ -46,7 +46,7 @@ const OrderDetail = () => {
         </div>
       </div>
       {/* table part */}
-      <table className="w-full table-auto">
+      <table className={'w-full table-auto'}>
         <thead className={styles.tableHead}>
           <tr>
             <th>
@@ -77,7 +77,7 @@ const OrderDetail = () => {
               </td>
               <td>
                 <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                  <div className="flex items-end mb-2">
+                  <div className={'flex items-end mb-2'}>
                     <Chip data={OrderDetailStateData[item.orderState]} onClick={() => {}} />
                   </div>
                 </div>

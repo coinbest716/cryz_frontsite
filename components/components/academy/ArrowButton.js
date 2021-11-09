@@ -8,7 +8,7 @@ const ArrowButton = props => {
 
   return (
     <button className={styles.workWithUsButton + ' flex justify-between w-full'} onClick={onClick}>
-      <div className="flex">
+      <div className={'flex'}>
         <p>{'Consiguelo por'}&nbsp;&nbsp;</p>
         <p className={'mr-4 font-bold ' + styles.label}>{label}</p>
       </div>

@@ -41,7 +41,7 @@ const DashboardButton = props => {
       {type === 'hour' && (
         <div>
           <button className={'flex justify-around items-center ' + styles.hourButton} onClick={handleClick}>
-            <div className="absolute ">
+            <div className={'absolute '}>
               <p className={styles.numberLabel}>{label}</p>
               <div className={styles.hourLabel}>Horas</div>
             </div>

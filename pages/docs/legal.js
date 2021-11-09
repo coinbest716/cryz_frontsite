@@ -6,7 +6,7 @@ import styles from 'pages/docs/index.module.scss'
 
 const Legal = () => {
   return (
-    <div className="flex justify-center">
+    <div className={'flex justify-center'}>
       <div className={globalStyles.container}>
         <div className={styles.title}>Aviso legal</div>
         <div className={styles.divider} />

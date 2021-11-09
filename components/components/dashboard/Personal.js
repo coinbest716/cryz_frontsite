@@ -9,24 +9,24 @@ const Personal = props => {
   const list = ['male', 'female']
 
   return (
-    <div className="w-full h-full ">
+    <div className={'w-full h-full'}>
       <div className={'px-24 py-8 ' + styles.container}>
-        <div className="flex justify-between items-center">
-          <div className="flex justify-between items-center">
+        <div className={'flex justify-between items-center'}>
+          <div className={'flex justify-between items-center'}>
             <PurchaseAvatar avatar={''} />
-            <div className="pl-5">
+            <div className={'pl-5'}>
               <div className={styles.profileName}>Mariano Pérez Fanjul</div>
               <div className={styles.profileCounry}>Madrid, Spain</div>
             </div>
           </div>
-          <div className="flex justify-between items-center gap-6">
+          <div className={'flex justify-between items-center gap-6'}>
             <CommonButton label={'Descartar'} handleClick={handleDiscard} type={'outline'} />
             <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
           </div>
         </div>
-        <div className="grid grid-cols-12 gap-12 pt-16">
-          <div className="col-span-12 md:col-span-8 sm:col-span-12">
-            <div className="py-2">
+        <div className={'grid grid-cols-12 gap-12 pt-16'}>
+          <div className={'col-span-12 md:col-span-8 sm:col-span-12'}>
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'name')}
                 label={'Nombre'}
@@ -34,7 +34,7 @@ const Personal = props => {
                 type={'text'}
               />
             </div>
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'surname')}
                 label={'Apellidos'}
@@ -42,7 +42,7 @@ const Personal = props => {
                 type={'text'}
               />
             </div>
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'email')}
                 label={'Email'}
@@ -50,7 +50,7 @@ const Personal = props => {
                 type={'email'}
               />
             </div>
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'country')}
                 label={'Pais'}
@@ -59,7 +59,7 @@ const Personal = props => {
               />
             </div>
 
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'address')}
                 label={'Dirección'}
@@ -68,7 +68,7 @@ const Personal = props => {
               />
             </div>
 
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'town')}
                 label={'Ciudad'}
@@ -77,7 +77,7 @@ const Personal = props => {
               />
             </div>
 
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'date')}
                 label={'Fecha de nacimiento'}
@@ -86,8 +86,8 @@ const Personal = props => {
               />
             </div>
           </div>
-          <div className="col-span-12 md:col-span-4 sm:col-span-12">
-            <div className="py-2">
+          <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'password')}
                 label={'Contraseña'}
@@ -96,7 +96,7 @@ const Personal = props => {
               />
             </div>
 
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'meet')}
                 label={'Como nos conoció…'}
@@ -105,7 +105,7 @@ const Personal = props => {
               />
             </div>
 
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'telephone')}
                 label={'Teléfono'}
@@ -114,7 +114,7 @@ const Personal = props => {
               />
             </div>
 
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'emergencyPhone')}
                 label={'Teléfono emergencia'}
@@ -123,7 +123,7 @@ const Personal = props => {
               />
             </div>
 
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'code')}
                 label={'DNI'}
@@ -132,7 +132,7 @@ const Personal = props => {
               />
             </div>
 
-            <div className="py-2">
+            <div className={'py-2'}>
               <CommonText
                 label={'Sexo'}
                 list={list}
@@ -143,7 +143,7 @@ const Personal = props => {
           </div>
         </div>
       </div>
-      <div className="flex justify-end pt-4">
+      <div className={'flex justify-end pt-4'}>
         <CommonButton label={'Borrar Cuenta'} handleClick={handleDeleteAccount} type={'icon'} />
       </div>
     </div>

@@ -11,7 +11,7 @@ const SocialButtonGroup = props => {
   const { color, socialURL } = props
   return (
     <div className={'flex justify-between'}>
-      <div className="mx-1">
+      <div className={'mx-1'}>
         <a target="_blank" href={socialURL.instagram} rel="noopener noreferrer">
           <button>
             <Image
@@ -23,7 +23,7 @@ const SocialButtonGroup = props => {
           </button>
         </a>
       </div>
-      <div className="mx-1">
+      <div className={'mx-1'}>
         <a target="_blank" href={socialURL.facebook} rel="noopener noreferrer">
           <button>
             <Image

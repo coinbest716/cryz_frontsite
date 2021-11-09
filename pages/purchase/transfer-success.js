@@ -21,26 +21,26 @@ const TransferSuccess = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globlaStyle.container + ' pt-20'}>
-          <div className="grid grid-cols-12 gap-4 ">
-            <div className="col-span-12 md:col-span-8 sm:col-span-12 p-5 pt-32 pb-44">
+          <div className={'grid grid-cols-12 gap-4 '}>
+            <div className={'col-span-12 md:col-span-8 sm:col-span-12 p-5 pt-32 pb-44'}>
               <div className={styles.title}>GRACIAS, tu pedido ha sido recibido.</div>
-              <div className="pt-12">
-                <div className="flex">
+              <div className={'pt-12'}>
+                <div className={'flex'}>
                   <p className={'font-bold ' + styles.detail}>NÚMERO DE PEDIDO:</p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;#45486</p>
                 </div>
-                <div className="flex pt-3">
+                <div className={'flex pt-3'}>
                   <p className={'font-bold ' + styles.detail}>FECHA: </p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;12 / 11 /2022</p>
                 </div>
-                <div className="flex pt-3">
+                <div className={'flex pt-3'}>
                   <p className={'font-bold ' + styles.detail}>TOTAL:</p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;200€</p>
                 </div>
-                <div className="flex pt-3">
+                <div className={'flex pt-3'}>
                   <p className={'font-bold ' + styles.detail}>MÉTODO PAGO:</p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;TRANSFERENCIA BANCARIA</p>
                 </div>
@@ -53,21 +53,21 @@ const TransferSuccess = () => {
               </div>
               <div className={'pt-10 font-bold ' + styles.detail}>Detalles bancarios</div>
               <div className={'mt-4 px-6 py-4 ' + styles.detailBank}>
-                <div className="flex">
+                <div className={'flex'}>
                   <p className={'font-bold ' + styles.detail}>BANCO:</p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;LA CAIXA</p>
                 </div>
-                <div className="flex pt-3">
+                <div className={'flex pt-3'}>
                   <p className={'font-bold ' + styles.detail}>NºCUENTA: </p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;2100 9201 4202 0013 0103</p>
                 </div>
-                <div className="flex pt-3">
+                <div className={'flex pt-3'}>
                   <p className={'font-bold ' + styles.detail}>IBAN: </p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;ES27</p>
                 </div>
               </div>
             </div>
-            <div className="col-span-12 md:col-span-4 sm:col-span-12">
+            <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
               <ShoppingCart data={cartData} handleRemoveCart={handleRemoveCart} />
             </div>
           </div>

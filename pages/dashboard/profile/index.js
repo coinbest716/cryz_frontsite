@@ -86,20 +86,20 @@ const Profile = () => {
 
   return (
     <div className={'pt-10 pb-24 px-24 ' + styles.container}>
-      <div className="flex justify-between">
+      <div className={'flex justify-between'}>
         <div>
           <div className={styles.highBoldLabel}>Perfil</div>
           <div className={'pt-2 ' + styles.mediumLabel}>80% Perfil Completado</div>
         </div>
-        <div className="flex justify-end items-center">
-          <div className="pr-4">
+        <div className={'flex justify-end items-center'}>
+          <div className={'pr-4'}>
             <NotificationButton />
           </div>
           <ProfileInfo />
         </div>
       </div>
       <div className={'my-8 ' + styles.divider} />
-      <div className="flex">
+      <div className={'flex'}>
         <div
           className={'mr-10 ' + (activeTab.personal ? styles.activeTab : styles.deactiveTab)}
           onClick={() => handleClickTab('personal')}
@@ -113,7 +113,7 @@ const Profile = () => {
           Antropométricos
         </div>
       </div>
-      <div className="pt-7">
+      <div className={'pt-7'}>
         {activeTab.personal && (
           <Personal
             handleSave={handleSavePersonal}

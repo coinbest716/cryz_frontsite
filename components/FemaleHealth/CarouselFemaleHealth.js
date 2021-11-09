@@ -30,9 +30,9 @@ const CarouselFemaleHealth = props => {
   }, [sliderData])
 
   return (
-    <div className="relative w-full h-full">
-      <div className="absolute top-0 left-0 w-full femaleCarousel">
-        <div className="absolute top-0 left-0 bottom-0 h-full w-1/12 z-10 bg-white"></div>
+    <div className={'relative w-full h-full'}>
+      <div className={'absolute top-0 left-0 w-full femaleCarousel'}>
+        <div className={'absolute top-0 left-0 bottom-0 h-full w-1/12 z-10 bg-white'}></div>
         {data.length !== 0 ? (
           <Carousel
             showArrows={true}

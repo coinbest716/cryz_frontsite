@@ -6,13 +6,13 @@ import successLogo from 'public/images/credit-success.svg'
 
 const CreditSuccess = () => {
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globlaStyle.container}>
-          <div className="flex justify-center items-center h-full">
+          <div className={'flex justify-center items-center h-full'}>
             <div className={styles.creditSection}>
               <div className={styles.title}>¡GRACIAS POR TU COMPRA!</div>
-              <div className="pt-16 text-center">
+              <div className={'pt-16 text-center'}>
                 <Image src={successLogo} alt="" width={270} height={222} />
               </div>
               <div className={'pt-16 ' + styles.orderNumber}>TU NÚMERO DE PEDIDO ES #45486</div>

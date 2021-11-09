@@ -67,13 +67,13 @@ const Training = () => {
       <div className={'z-0 ' + styles.circleImageCover} id="shark">
         <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
       </div>
-      <div className="flex flex-wrap justify-center pb-20">
+      <div className={'flex flex-wrap justify-center pb-20'}>
         <div className={globlaStyle.container}>
-          <div className="mt-9">
+          <div className={'mt-9'}>
             <BackButton />
           </div>
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 md:col-span-4 sm:col-span-12 ">
+          <div className={'grid grid-cols-12 gap-4'}>
+            <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
               <div className={'pt-10 pb-2 ' + styles.topTitle}>Entrenamiento</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription + ' mt-10 pb-20'}>
@@ -87,9 +87,9 @@ const Training = () => {
                 <br />
               </div>
             </div>
-            <div className="col-span-12 md:col-span-1 sm:col-span-12 " />
-            <div className="col-span-12 md:col-span-7 sm:col-span-12 relative">
-              <div className="flex h-full">
+            <div className={'col-span-12 md:col-span-1 sm:col-span-12'} />
+            <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative'}>
+              <div className={'flex h-full'}>
                 <div className={'w-1/3 px-12 '}>
                   <div
                     className={'h-full relative ' + styles.activeSection}
@@ -108,7 +108,7 @@ const Training = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-1/3 px-12">
+                <div className={'w-1/3 px-12'}>
                   <div
                     className={'h-full relative ' + styles.activeSection}
                     onMouseOver={() => handleMouseOver('type2')}
@@ -126,7 +126,7 @@ const Training = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-1/3 px-12">
+                <div className={'w-1/3 px-12'}>
                   <div
                     className={'h-full relative ' + styles.activeSection}
                     onMouseOver={() => handleMouseOver('type3')}
