@@ -192,10 +192,12 @@ const Navbar = () => {
                 ))}
               </nav>
             </div>
-            <div className="flex-shrink-0 flex p-4">
+            <div className={'flex-shrink-0 flex p-4'}>
               <div
                 onClick={handleClickLogout}
-                className="cursor-pointer flex items-center px-10 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100"
+                className={
+                  'cursor-pointer flex items-center px-10 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100'
+                }
               >
                 <Image src={logoutIcon} alt="" width={30} height={30} />
                 <p className={'pl-3 ' + styles.logoutLabel}>Log Out</p>

@@ -367,19 +367,19 @@ const Purchase = () => {
                   <TabPanel>
                     <div className={'p-4 pt-16'}>
                       <div className={styles.tabTitle}>Direcciones facturación</div>
-                      <div className="grid grid-cols-12 gap-4 pt-8">
-                        <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
+                      <div className={'grid grid-cols-12 gap-4 pt-8'}>
+                        <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
                           <BillingDoc handleChangeFrame={handleChangeFrame} frameType={'frame1'} value={frameType} />
                         </div>
-                        <div className="col-span-12 md:col-span-6 sm:col-span-12 ">
+                        <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
                           <BillingDoc handleChangeFrame={handleChangeFrame} frameType={'frame2'} value={frameType} />
                         </div>
                       </div>
                       <div className={'pt-6 ' + styles.newAddress}>Nueva dirección</div>
-                      <div className="grid grid-cols-12 gap-4 pt-8">
-                        <div className="col-span-12 md:col-span-7 sm:col-span-12">
+                      <div className={'grid grid-cols-12 gap-4 pt-8'}>
+                        <div className={'col-span-12 md:col-span-7 sm:col-span-12'}>
                           {billingAddressLeftInfo.map((item, index) => (
-                            <div className="py-2" key={index}>
+                            <div className={'py-2'} key={index}>
                               <CommonText
                                 handleChange={e => handleChangeBillingAddress(e, item.value)}
                                 label={item.label}
@@ -390,9 +390,9 @@ const Purchase = () => {
                             </div>
                           ))}
                         </div>
-                        <div className="col-span-12 md:col-span-5 sm:col-span-12 ">
+                        <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
                           {billingAddressRightInfo.map((item, index) => (
-                            <div className="py-2" key={index}>
+                            <div className={'py-2'} key={index}>
                               <CommonText
                                 handleChange={e => handleChangeBillingAddress(e, item.value)}
                                 label={item.label}

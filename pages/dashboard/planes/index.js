@@ -81,7 +81,7 @@ const Planes = () => {
             <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} />
           </div>
 
-          <div className="flex flex-wrap justify-between pt-12 gap-4">
+          <div className={'flex flex-wrap justify-between pt-12 gap-4'}>
             <div className={styles.blockSection + ' flex flex-wrap items-center px-5 py-5'}>
               <div className={styles.blackName}>Información del bloque</div>
               {feature.map((item, index) => (
@@ -114,9 +114,9 @@ const Planes = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-12 md:col-span-3 sm:col-span-12">
-          <div className="rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative">
-            <div className="flex justify-between items-center">
+        <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
+          <div className={'rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative'}>
+            <div className={'flex justify-between items-center'}>
               <div className={styles.monthName}>{currentMonth}</div>
               <div
                 className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}

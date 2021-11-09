@@ -46,8 +46,8 @@ const ForgotPassword = () => {
     setUserEmail(event.target.value)
   }
   return (
-    <div className="relative">
-      <div className="w-full h-screen flex grid grid-cols-12">
+    <div className={'relative'}>
+      <div className={'w-full h-screen flex grid grid-cols-12'}>
         <div className={'w-full col-span-6 flex flex-wrap justify-center items-center ' + styles.whiteArea}>
           <div className={styles.whiteAreaContent}>
             <div styles={'w-full'}>
@@ -62,14 +62,14 @@ const ForgotPassword = () => {
         <div className={'w-full col-span-6 flex flex-wrap justify-center items-center relative ' + styles.grayArea}>
           <div className={styles.closeButton}>
             <button
-              className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
+              className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
               onClick={() => router.push('/')}
             >
               <Image src={CloseIcon} alt="" width={19} height={20} />
             </button>
           </div>
           <div className={styles.grayAreaContent}>
-            <div className="w-full flex justify-center">
+            <div className={'w-full flex justify-center'}>
               <Image src={KeyImage} alt="" width={167} height={136} />
             </div>
             <div className={'w-full text-center ' + styles.changePassTitle}>Cambia la contraseña</div>
@@ -81,7 +81,7 @@ const ForgotPassword = () => {
               <input
                 type="text"
                 placeholder="Email"
-                className="w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white"
+                className={'w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white'}
                 value={userEmail}
                 onChange={handleChangeEmail}
                 onKeyDown={handleKeyPress}
@@ -89,7 +89,7 @@ const ForgotPassword = () => {
             </div>
 
             {/* login button part */}
-            <div className="mt-5 flex justify-end items-center">
+            <div className={'mt-5 flex justify-end items-center'}>
               <button className={styles.enterButton} onClick={handleForgotPassword}>
                 Entrar
               </button>

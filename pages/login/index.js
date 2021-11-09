@@ -145,8 +145,8 @@ const Login = () => {
   }
 
   return (
-    <div className="relative">
-      <div className="w-full h-screen flex grid grid-cols-12">
+    <div className={'relative'}>
+      <div className={'w-full h-screen flex grid grid-cols-12'}>
         <div className={'w-full col-span-6 flex flex-wrap justify-center items-center ' + styles.whiteArea}>
           <div className={styles.whiteAreaContent}>
             <div styles={'w-full'}>
@@ -162,14 +162,14 @@ const Login = () => {
           <div className={'w-full col-span-6 flex flex-wrap justify-center items-center relative ' + styles.grayArea}>
             <div className={styles.closeButton}>
               <button
-                className="duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center"
+                className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
                 onClick={() => router.push('/')}
               >
                 <Image src={CloseIcon} alt="" width={19} height={20} />
               </button>
             </div>
             <div className={styles.grayAreaContent}>
-              <div className="w-full flex justify-start">
+              <div className={'w-full flex justify-start'}>
                 <button className={styles.loginButton} onClick={() => router.push('/login')}>
                   LOGIN
                 </button>
@@ -182,7 +182,7 @@ const Login = () => {
                 <input
                   type="text"
                   placeholder="Email"
-                  className="w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white"
+                  className={'w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white'}
                   value={email}
                   onChange={handleChangeEmail}
                 />
@@ -192,11 +192,11 @@ const Login = () => {
                 <input
                   type={showPass === true ? 'text' : 'password'}
                   placeholder="Contraseña"
-                  className="w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10"
+                  className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
                   value={password}
                   onChange={handleChangePassword}
                 />
-                <div className="absolute right-3 cursor-pointer">
+                <div className={'absolute right-3 cursor-pointer'}>
                   {showPass === true ? (
                     <Image src={EyeIcon} alt="" width={17} height={17} onClick={() => handleSetShowPass(false)} />
                   ) : (
@@ -205,16 +205,16 @@ const Login = () => {
                 </div>
               </div>
               {/* login button part */}
-              <div className="mt-5 flex justify-between items-center">
+              <div className={'mt-5 flex justify-between items-center'}>
                 <div>
-                  <label className="inline-flex items-center cursor-pointer">
+                  <label className={'inline-flex items-center cursor-pointer'}>
                     <input
                       type="checkbox"
                       className={'form-checkbox cursor-pointer ' + styles.checkbox}
                       onChange={() => handleSetRememberMe()}
                       checked={rememberMe}
                     />
-                    <span className="ml-2" onChange={() => handleSetRememberMe()}>
+                    <span className={'ml-2'} onChange={() => handleSetRememberMe()}>
                       Recuérdame
                     </span>
                   </label>
@@ -233,17 +233,17 @@ const Login = () => {
                 Olvidaste contraseña
               </div>
               {/* ------------------- or ------------------- part */}
-              <div className="mt-11 flex justify-between items-center">
+              <div className={'mt-11 flex justify-between items-center'}>
                 <div className={styles.line} />
                 <div className={styles.orText}>or</div>
                 <div className={styles.line} />
               </div>
               {/* facebook button */}
-              <div className="mt-11">
+              <div className={'mt-11'}>
                 <CommonButton handleClick={facebookLogin} label={'LOGIN CON FACEBOOK'} type={'facebook'} />
               </div>
               {/* google button */}
-              <div className="mt-6">
+              <div className={'mt-6'}>
                 <CommonButton handleClick={googleLogin} label={'LOGIN CON GOOGLE'} type={'google'} />
               </div>
             </div>
@@ -256,11 +256,11 @@ const Login = () => {
                 <input
                   type={showPass === true ? 'text' : 'password'}
                   placeholder="Actualiza contraseña"
-                  className="w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10"
+                  className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
                   value={password}
                   onChange={handleChangePassword}
                 />
-                <div className="absolute right-3 cursor-pointer">
+                <div className={'absolute right-3 cursor-pointer'}>
                   {showPass === true ? (
                     <Image src={EyeIcon} alt="" width={17} height={17} onClick={() => handleSetShowPass(false)} />
                   ) : (
