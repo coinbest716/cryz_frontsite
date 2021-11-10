@@ -6,7 +6,8 @@ import DisciplineSection from 'components/FemaleHealth/DisciplineSection'
 
 import styles from 'pages/female-health/FemaleHealth.module.scss'
 
-const FemaleHealth = () => {
+const FemaleHealth = props => {
+  console.log('viewport', props.viewport)
   return (
     <div className={styles.container}>
       <MainSection />
