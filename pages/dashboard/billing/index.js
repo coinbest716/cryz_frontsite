@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react'
+
+// redux
+import { useSelector } from 'react-redux'
+
+// custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
-import styles from './billing.module.scss'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import ProfileInfo from 'components/components/dashboard/Profile'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import CommonText from 'components/components/purchase/CommonText'
 import CommonButton from 'components/components/purchase/CommonButton'
+
+// styles
+import styles from './billing.module.scss'
+
+// json data
 import BillingData from 'assets/data/BillingData'
 
 const Billing = () => {
+  // variables
+  const today = useSelector(state => state.today)
   const addressInfo = {
     name: '',
     title: '',
@@ -23,6 +34,7 @@ const Billing = () => {
   }
   const [addressDataList, setAddressDataList] = useState([])
 
+  // handlers
   useEffect(() => {
     setAddressDataList(BillingData)
   }, [])
@@ -57,7 +69,7 @@ const Billing = () => {
       <div className={'flex justify-between'}>
         <div>
           <div className={styles.highBoldLabel}>Direcciones de facturación</div>
-          <div className={'pt-2 ' + styles.mediumLabel}>Domingo, 12 de Diciembre 2021</div>
+          <div className={'pt-2 ' + styles.mediumLabel}>{today}</div>
         </div>
         <div className={'flex justify-end items-center'}>
           <div className={'pr-4'}>

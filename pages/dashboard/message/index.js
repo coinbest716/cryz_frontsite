@@ -1,5 +1,7 @@
 import React from 'react'
-import SecondaryLayout from 'components/Layout/SecondaryLayout'
+
+// redux
+import { useSelector } from 'react-redux'
 
 // third party components
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -9,6 +11,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import Image from 'next/image'
 
 // custom components
+import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import MessageCard01 from 'components/components/dashboard/message/MessageCard01'
@@ -18,7 +21,6 @@ import MessageImage02 from 'components/components/dashboard/message/MessageImage
 import MessageVideo01 from 'components/components/dashboard/message/MessageVideo01'
 import MessageVideo02 from 'components/components/dashboard/message/MessageVideo02'
 import MessageInput from 'components/components/dashboard/message/MessageInput'
-
 import ProfessionalCard from 'components/components/dashboard/message/ProfessionalCard'
 import MessageCard from 'components/components/dashboard/message/MessageCard'
 import MessageSelectCard from 'components/components/dashboard/message/MessageSelectCard'
@@ -30,10 +32,6 @@ import TrashIcon from 'assets/images/trash.svg'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './message.module.scss'
-
-// json data
-import DayOfWeekList from 'assets/data/DayOfWeekListData.json'
-import MonthList from 'assets/data/MonthListData.json'
 
 const Message = () => {
   const messageContent = {
@@ -62,20 +60,8 @@ const Message = () => {
     console.log(type)
   }
 
-  const [today, setToday] = React.useState('')
+  const today = useSelector(state => state.today)
 
-  React.useEffect(() => {
-    let date = new Date()
-    date =
-      DayOfWeekList[date.getDay()].day +
-      ', ' +
-      String(date.getDate()).padStart(2, '0') +
-      ' de ' +
-      MonthList[date.getMonth()].month +
-      ' ' +
-      date.getFullYear()
-    setToday(date)
-  }, [])
   return (
     <div className={globalStyles.dashContainer}>
       {/* header part */}
