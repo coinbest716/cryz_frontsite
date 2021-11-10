@@ -7,12 +7,12 @@ import DisciplineSection from 'components/FemaleHealth/DisciplineSection'
 import styles from 'pages/female-health/FemaleHealth.module.scss'
 
 const FemaleHealth = props => {
-  console.log('viewport', props.viewport)
+  const { viewport } = props
   return (
     <div className={styles.container}>
       <MainSection />
       <div id="discipline" className={'w-full flex justify-center'}>
-        <DisciplineSection />
+        <DisciplineSection viewport={viewport} />
       </div>
     </div>
   )

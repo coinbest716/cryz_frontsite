@@ -10,7 +10,8 @@ import ArrowRightUpGrayIcon from 'assets/images/arrow-right-up-black.svg'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/FemaleHealth/DisciplineSection.module.scss'
 
-const DisciplineSection = () => {
+const DisciplineSection = props => {
+  const { viewport } = props
   const router = useRouter()
 
   const BoxInfo = [
@@ -155,7 +156,7 @@ const DisciplineSection = () => {
   ]
 
   const [type, setType] = React.useState({
-    id: 0,
+    id: 5,
     elem: [
       { id: 1, width: 2, pos: 1 },
       { id: 2, width: 2, pos: 2 },
@@ -206,6 +207,11 @@ const DisciplineSection = () => {
                     width={item.id === type.id ? 30 : 40}
                     height={item.id === type.id ? 24 : 32}
                   />
+                  {viewport === 'ipad' && item.id === type.id ? (
+                    <div className={'ml-4 cursor-pointer'}>VER MÁS</div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 {item.id === type.id ? (
                   <Image

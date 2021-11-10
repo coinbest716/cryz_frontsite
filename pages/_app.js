@@ -30,6 +30,15 @@ const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || (page => page)
 
   const [viewport, setViewport] = React.useState('desktop') // mobile, ipad, desktop
+  React.useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
 
   React.useEffect(() => {
     const resizeFunction = () => {
