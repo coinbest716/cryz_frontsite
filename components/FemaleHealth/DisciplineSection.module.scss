@@ -29,19 +29,36 @@
 .box01 {
   width: 16.6666667%;
   height: 288px;
-  transition: 0.8s;
 }
 
 .box02 {
   width: 25%;
   height: 288px;
-  transition: 0.8s;
 }
 
 .box03 {
   width: 50%;
   height: 288px;
-  transition: 0.8s;
+  animation-name: moveToLeft;
+  animation-duration: 0.57s;
+  animation-timing-function: cubic-bezier(0.185, 0.535, 0.8, 0.86);
+}
+
+@keyframes moveToRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes moveToLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .cardTitle {
@@ -52,9 +69,31 @@
   letter-spacing: 1px;
   color: $black-color;
   z-index: 100;
+  @media (max-width: 639px) {
+    font-size: 14px;
+  }
+  @media (min-width: 640px) {
+    font-size: 16px;
+  }
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
+  @media (min-width: 1025px) {
+    font-size: 18px;
+  }
+  @media (min-width: 1280px) {
+    font-size: 20px;
+  }
 }
 
 .cardArrow {
   bottom: 40px;
   left: 40px;
+  display: flex;
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  color: $black-color;
+  z-index: 100;
 }

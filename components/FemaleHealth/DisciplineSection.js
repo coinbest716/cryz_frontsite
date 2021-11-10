@@ -10,7 +10,8 @@ import ArrowRightUpGrayIcon from 'assets/images/arrow-right-up-black.svg'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/FemaleHealth/DisciplineSection.module.scss'
 
-const DisciplineSection = () => {
+const DisciplineSection = props => {
+  const { viewport } = props
   const router = useRouter()
 
   const BoxInfo = [
@@ -155,7 +156,7 @@ const DisciplineSection = () => {
   ]
 
   const [type, setType] = React.useState({
-    id: 0,
+    id: 5,
     elem: [
       { id: 1, width: 2, pos: 1 },
       { id: 2, width: 2, pos: 2 },
@@ -168,7 +169,6 @@ const DisciplineSection = () => {
   })
 
   const handleMouseOver = (id, index) => {
-    console.log('=======', id, index)
     if (index === 4 && id !== 5) {
       setType(BoxList[5])
     } else {
@@ -177,7 +177,6 @@ const DisciplineSection = () => {
   }
 
   const handleClick = link => {
-    console.log('link', link)
     router.push(link)
   }
 
@@ -188,47 +187,48 @@ const DisciplineSection = () => {
         <div className={styles.divider} />
         {/* disciplines part */}
         <div className={'w-full flex flex-wrap justify-between ' + styles.disciplineCard}>
-          {JSON.stringify(type) !== JSON.stringify({}) ? (
-            type.elem.map((item, index) => (
-              <div
-                key={index}
-                className={
-                  'relative cursor-pointer ' +
-                  (item.width === 1 ? styles.box01 : item.width === 2 ? styles.box02 : styles.box03)
-                }
-                style={{ backgroundColor: BoxInfo[item.id - 1].bgColor }}
-                onMouseOver={() => handleMouseOver(item.id, index)}
-                onClick={() => handleClick(BoxInfo[item.id - 1].link)}
-              >
-                <div className={'w-full h-full relative'}>
-                  <div className={'absolute ' + styles.cardTitle}>{BoxInfo[item.id - 1].title}</div>
-                  <div className={'absolute ' + styles.cardArrow}>
-                    <Image
-                      src={item.id === type.id ? ArrowRightGrayIcon : ArrowRightUpGrayIcon}
-                      alt=""
-                      width={item.id === type.id ? 30 : 40}
-                      height={item.id === type.id ? 24 : 32}
-                    />
-                  </div>
-                  {item.id === type.id ? (
-                    <Image
-                      src={BoxInfo[item.id - 1].image}
-                      alt=""
-                      width={576}
-                      height={288}
-                      layout="fill"
-                      objectFit="cover"
-                      className={'opacity-40'}
-                    />
+          {type.elem.map((item, index) => (
+            <div
+              key={index}
+              className={
+                'relative cursor-pointer ' +
+                (item.width === 1 ? styles.box01 : item.width === 2 ? styles.box02 : styles.box03)
+              }
+              style={{ backgroundColor: BoxInfo[item.id - 1].bgColor }}
+              onMouseOver={() => handleMouseOver(item.id, index)}
+              onClick={() => handleClick(BoxInfo[item.id - 1].link)}
+            >
+              <div className={'w-full h-full relative'}>
+                <div className={'absolute ' + styles.cardTitle}>{BoxInfo[item.id - 1].title}</div>
+                <div className={'absolute ' + styles.cardArrow}>
+                  <Image
+                    src={item.id === type.id ? ArrowRightGrayIcon : ArrowRightUpGrayIcon}
+                    alt=""
+                    width={item.id === type.id ? 30 : 40}
+                    height={item.id === type.id ? 24 : 32}
+                  />
+                  {viewport === 'ipad' && item.id === type.id ? (
+                    <div className={'ml-4 cursor-pointer'}>VER MÁS</div>
                   ) : (
                     <></>
                   )}
                 </div>
+                {item.id === type.id ? (
+                  <Image
+                    src={BoxInfo[item.id - 1].image}
+                    alt=""
+                    width={576}
+                    height={288}
+                    layout="fill"
+                    objectFit="cover"
+                    className={'opacity-40'}
+                  />
+                ) : (
+                  <></>
+                )}
               </div>
-            ))
-          ) : (
-            <></>
-          )}
+            </div>
+          ))}
         </div>
       </div>
     </div>
