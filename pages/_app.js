@@ -28,10 +28,26 @@ Auth.configure(awsconfig)
 
 const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || (page => page)
+
+  const [viewport, setViewport] = React.useState('desktop') // mobile, ipad, desktop
+
+  React.useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
   return (
     <>
       <ApolloProvider client={client}>
-        <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>
+        <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
         <Toaster position="top-right" reverseOrder={false} />
       </ApolloProvider>
     </>

@@ -7,7 +7,7 @@ import TeamSection from 'components/Home/TeamSection'
 import COSection from 'components/Home/COSection'
 import styles from 'styles/Home.module.scss'
 
-const Home = () => {
+const Home = props => {
   return (
     <div className={styles.container}>
       <MainSection />
