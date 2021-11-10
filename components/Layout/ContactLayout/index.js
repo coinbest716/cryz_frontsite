@@ -1,7 +1,10 @@
+import React from 'react'
+
+// custom components
 import Header from 'components/Header'
 import ContactFooter from 'components/ContactFooter'
 
-export default function Layout({ children }) {
+const ContactLayout = ({ children }) => {
   return (
     <>
       <Header
@@ -14,3 +17,5 @@ export default function Layout({ children }) {
     </>
   )
 }
+
+export default ContactLayout

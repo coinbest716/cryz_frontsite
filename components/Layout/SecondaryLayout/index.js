@@ -1,7 +1,9 @@
 import React from 'react'
+
+// custom components
 import Navbar from 'components/Navbar'
 
-export default function Layout({ children }) {
+const SecondaryLayout = ({ children }) => {
   return (
     <>
       <div className={'flex'}>
@@ -15,3 +17,5 @@ export default function Layout({ children }) {
     </>
   )
 }
+
+export default SecondaryLayout

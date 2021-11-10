@@ -1,12 +1,13 @@
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
+import React from 'react'
 
 // components
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import MainSection from 'components/Home/MainSection'
 import TeamSection from 'components/Home/TeamSection'
 import COSection from 'components/Home/COSection'
 import styles from 'styles/Home.module.scss'
 
-const Home = () => {
+const Home = props => {
   return (
     <div className={styles.container}>
       <MainSection />

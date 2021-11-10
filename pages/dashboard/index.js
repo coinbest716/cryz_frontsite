@@ -1,27 +1,41 @@
 import React, { useEffect, useState } from 'react'
-import SecondaryLayout from 'components/Layout/SecondaryLayout'
-import styles from './dashboard.module.scss'
-import DashboardButton from 'components/components/dashboard/DashboardButton'
-import welcomeIcon from 'public/images/welcome-header.svg'
+
+// redux
+import { useSelector } from 'react-redux'
+
+// next components
 import Image from 'next/image'
 import router from 'next/router'
 import dynamic from 'next/dynamic'
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
-const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
-import 'react-calendar/dist/Calendar.css'
+
+// custom components
+import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import DashboardButton from 'components/components/dashboard/DashboardButton'
 import ProgressBar from 'components/components/dashboard/ProgressBar'
-import bonosIcon from 'public/images/bonos.svg'
 import NewMessageBox from 'components/components/dashboard/NewMessageBox'
+
+// third party components
+import 'react-calendar/dist/Calendar.css'
+
+// styles
+import styles from './dashboard.module.scss'
+
+// images and icons
+import welcomeIcon from 'public/images/welcome-header.svg'
+import bonosIcon from 'public/images/bonos.svg'
 import noPendingIcon from 'public/images/no-pending.svg'
+
+// json data
 import DashboardData from 'assets/data/DashboardData.json'
 
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
+const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
+
 const Dashboard = () => {
+  // variables
+  const today = useSelector(state => state.today)
   const [value, onChange] = useState(new Date())
   const [message, setMessage] = useState([])
-
-  useEffect(() => {
-    setMessage(DashboardData)
-  }, [])
 
   const chartOptions = {
     series: [
@@ -67,6 +81,11 @@ const Dashboard = () => {
     },
   }
 
+  // handlers
+  useEffect(() => {
+    setMessage(DashboardData)
+  }, [])
+
   const handleClickRmember = () => {
     console.log('handleClickRmember')
   }
@@ -107,7 +126,7 @@ const Dashboard = () => {
           <div className={'flex justify-between items-center'}>
             <div>
               <div className={styles.highBoldLabel}>Dashboard</div>
-              {message.length ? <div className={'pt-2 ' + styles.today}>Domingo, 12 de Diciembre 2021</div> : <></>}
+              {message.length ? <div className={'pt-2 ' + styles.today}>{today}</div> : <></>}
             </div>
             <div>
               {message.length ? (

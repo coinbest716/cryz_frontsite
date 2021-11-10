@@ -1,5 +1,7 @@
 import React from 'react'
-import SecondaryLayout from 'components/Layout/SecondaryLayout'
+
+// redux
+import { useSelector } from 'react-redux'
 
 // third party components
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -9,6 +11,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import Image from 'next/image'
 
 // custom components
+import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import MessageCard01 from 'components/components/dashboard/message/MessageCard01'
@@ -18,7 +21,6 @@ import MessageImage02 from 'components/components/dashboard/message/MessageImage
 import MessageVideo01 from 'components/components/dashboard/message/MessageVideo01'
 import MessageVideo02 from 'components/components/dashboard/message/MessageVideo02'
 import MessageInput from 'components/components/dashboard/message/MessageInput'
-
 import ProfessionalCard from 'components/components/dashboard/message/ProfessionalCard'
 import MessageCard from 'components/components/dashboard/message/MessageCard'
 import MessageSelectCard from 'components/components/dashboard/message/MessageSelectCard'
@@ -57,13 +59,16 @@ const Message = () => {
     console.log(content)
     console.log(type)
   }
+
+  const today = useSelector(state => state.today)
+
   return (
     <div className={globalStyles.dashContainer}>
       {/* header part */}
       <div className={'w-full flex flex-wrap justify-between items-center'}>
         <div className={'block'}>
           <div className={globalStyles.dashTitle}>Mensajes</div>
-          <div className={'mt-2 ' + globalStyles.dashDate}>Domingo, 12 de Diciembre 2021</div>
+          <div className={'mt-2 ' + globalStyles.dashDate}>{today}</div>
         </div>
         <div className={'flex justify-end'}>
           <div className={'mr-8'}>
