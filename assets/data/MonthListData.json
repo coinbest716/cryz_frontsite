@@ -1,14 +1,14 @@
 [
-  { "id": 1, "month": "Enero" },
-  { "id": 2, "month": "Febrero" },
-  { "id": 3, "month": "Marzo" },
-  { "id": 4, "month": "Abril" },
-  { "id": 5, "month": "Mayo" },
-  { "id": 6, "month": "Junio" },
-  { "id": 7, "month": "Julio" },
-  { "id": 8, "month": "Agosto" },
-  { "id": 9, "month": "Septiembre" },
-  { "id": 10, "month": "Octubre" },
-  { "id": 11, "month": "Noviembre" },
-  { "id": 12, "month": "Diciembre" }
+  { "id": 0, "month": "Enero" },
+  { "id": 1, "month": "Febrero" },
+  { "id": 2, "month": "Marzo" },
+  { "id": 3, "month": "Abril" },
+  { "id": 4, "month": "Mayo" },
+  { "id": 5, "month": "Junio" },
+  { "id": 6, "month": "Julio" },
+  { "id": 7, "month": "Agosto" },
+  { "id": 8, "month": "Septiembre" },
+  { "id": 9, "month": "Octubre" },
+  { "id": 10, "month": "Noviembre" },
+  { "id": 11, "month": "Diciembre" }
 ]

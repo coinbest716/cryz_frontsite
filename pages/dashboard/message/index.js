@@ -31,6 +31,10 @@ import TrashIcon from 'assets/images/trash.svg'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './message.module.scss'
 
+// json data
+import DayOfWeekList from 'assets/data/DayOfWeekListData.json'
+import MonthList from 'assets/data/MonthListData.json'
+
 const Message = () => {
   const messageContent = {
     content: 'Sayang, besok kamu ada acara keluar ga?',
@@ -57,13 +61,28 @@ const Message = () => {
     console.log(content)
     console.log(type)
   }
+
+  const [today, setToday] = React.useState('')
+
+  React.useEffect(() => {
+    let date = new Date()
+    date =
+      DayOfWeekList[date.getDay()].day +
+      ', ' +
+      String(date.getDate()).padStart(2, '0') +
+      ' de ' +
+      MonthList[date.getMonth()].month +
+      ' ' +
+      date.getFullYear()
+    setToday(date)
+  }, [])
   return (
     <div className={globalStyles.dashContainer}>
       {/* header part */}
       <div className={'w-full flex flex-wrap justify-between items-center'}>
         <div className={'block'}>
           <div className={globalStyles.dashTitle}>Mensajes</div>
-          <div className={'mt-2 ' + globalStyles.dashDate}>Domingo, 12 de Diciembre 2021</div>
+          <div className={'mt-2 ' + globalStyles.dashDate}>{today}</div>
         </div>
         <div className={'flex justify-end'}>
           <div className={'mr-8'}>
