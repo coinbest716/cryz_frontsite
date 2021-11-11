@@ -22,7 +22,7 @@ import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './physiotherapy.module.scss'
 
 const Physiotherapy = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -35,7 +35,8 @@ const Physiotherapy = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const router = useRouter()

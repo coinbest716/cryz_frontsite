@@ -34,7 +34,7 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './message.module.scss'
 
 const Message = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -47,7 +47,8 @@ const Message = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   const messageContent = {
     content: 'Sayang, besok kamu ada acara keluar ga?',

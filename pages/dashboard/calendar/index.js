@@ -29,7 +29,7 @@ import styles from './calendar.module.scss'
 import CalendarData from 'assets/data/CalendarData'
 
 const Calendar = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -42,7 +42,8 @@ const Calendar = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   const calendarComponentRef = React.createRef()
   const [calendarValue, setCalendarValue] = useState(new Date())

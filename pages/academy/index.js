@@ -15,7 +15,7 @@ import styles from './academy.module.scss'
 import AcademyData from 'assets/data/AcademyData'
 
 const Academy = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -28,7 +28,8 @@ const Academy = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   const router = useRouter()
   const [cardData, setCardData] = useState([])

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 const LactationCounseling = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -20,7 +20,8 @@ const LactationCounseling = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   return <div>LactationCounseling</div>
 }

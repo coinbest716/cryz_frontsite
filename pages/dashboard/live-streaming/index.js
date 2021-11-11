@@ -18,7 +18,7 @@ import styles from './LiveStreaming.module.scss'
 import LiveStreamingData from 'assets/data/LiveStreamingData.json'
 
 const LiveStreaming = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -31,7 +31,8 @@ const LiveStreaming = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
   const [material, setMaterial] = useState([])

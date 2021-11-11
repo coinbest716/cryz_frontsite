@@ -20,7 +20,7 @@ import nextButtonPinkIcon from 'public/images/arrow-right-pink.svg'
 import ArrowRightUpGrayIcon from 'public/images/arrow-right-up.svg'
 
 const Services = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -33,7 +33,8 @@ const Services = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const router = useRouter()

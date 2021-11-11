@@ -26,7 +26,7 @@ import ClassCardData from 'assets/data/ClassCardData'
 import AccordianFaqData from 'assets/data/AccordianFaqData'
 
 const Classland = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -39,7 +39,8 @@ const Classland = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   const faqRef = useRef(null)
   const [sliderData, setSliderData] = useState([])

@@ -20,7 +20,7 @@ import addressIcon from 'public/images/address.svg'
 import whatsapp from 'public/images/whatsapp.svg'
 
 const Contact = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -33,7 +33,8 @@ const Contact = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const locations = [

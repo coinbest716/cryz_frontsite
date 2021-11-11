@@ -17,7 +17,7 @@ import styles from 'pages/404.module.scss'
 import ErrorImage from 'assets/images/error.png'
 
 const Custom404 = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -30,7 +30,8 @@ const Custom404 = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   return (
     <div className={'w-full flex justify-center'}>

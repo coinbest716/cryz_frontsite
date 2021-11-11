@@ -17,7 +17,7 @@ import styles from 'pages/news/news.module.scss'
 import news from 'public/images/news.svg'
 
 const News = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -30,7 +30,8 @@ const News = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   return (
     <div className={'flex flex-wrap justify-center'}>

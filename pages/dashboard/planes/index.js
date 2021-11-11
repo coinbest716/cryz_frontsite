@@ -31,7 +31,7 @@ import PlanData from 'assets/data/PlanData.json'
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
 const Planes = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -44,7 +44,8 @@ const Planes = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
