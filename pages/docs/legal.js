@@ -1,3 +1,9 @@
+import React from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
@@ -5,6 +11,21 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/docs/index.module.scss'
 
 const Legal = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   return (
     <div className={'flex justify-center'}>
       <div className={globalStyles.container}>

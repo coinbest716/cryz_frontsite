@@ -1,13 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// third party components1
+import ReactPlayer from 'react-player'
+
+// custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
-import styles from './LiveStreaming.module.scss'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import Profile from 'components/components/dashboard/Profile'
-import ReactPlayer from 'react-player'
+
+// styles
+import styles from './LiveStreaming.module.scss'
+
+// json data
 import LiveStreamingData from 'assets/data/LiveStreamingData.json'
-import { useEffect } from 'react'
 
 const LiveStreaming = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
   const [material, setMaterial] = useState([])
 

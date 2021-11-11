@@ -1,4 +1,6 @@
 import React from 'react'
+
+// redux
 import { useDispatch } from 'react-redux'
 
 // components
@@ -9,7 +11,7 @@ import DisciplineSection from 'components/FemaleHealth/DisciplineSection'
 import styles from 'pages/female-health/FemaleHealth.module.scss'
 
 const FemaleHealth = props => {
-  const { viewport } = props
+  // loading part
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -23,6 +25,10 @@ const FemaleHealth = props => {
       dispatch({ type: 'set', isLoading: false })
     }
   }, [isMounted])
+
+  // variables
+  const { viewport } = props
+
   return (
     <div className={styles.container}>
       <MainSection />

@@ -1,7 +1,10 @@
 import React from 'react'
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
+
+// redux
+import { useDispatch } from 'react-redux'
 
 // custom component
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
 import CircularMark from 'components/components/CircularMark'
@@ -17,10 +20,26 @@ import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import router from 'next/router'
 
 const PreparationForChildbirth = () => {
-  const [sliderData, setSliderData] = React.useState([])
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
 
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
+  const [sliderData, setSliderData] = React.useState([])
   const [readMoreCurrentState, setReadMoreCurrentState] = React.useState('less')
 
+  // handlers
   React.useEffect(() => {
     setSliderData(ServerPhysiotherapy)
   }, [])

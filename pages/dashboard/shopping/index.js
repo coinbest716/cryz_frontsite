@@ -1,11 +1,14 @@
 import React from 'react'
-import SecondaryLayout from 'components/Layout/SecondaryLayout'
+
+// redux
+import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
 import router from 'next/router'
 
 // custom components
+import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import SearchOrder from 'components/components/dashboard/SearchOrder'
@@ -25,8 +28,25 @@ import OrderStateData from 'assets/data/OrderStateData.json'
 import MonthList from 'assets/data/MonthListData.json'
 
 const Shopping = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const [selectedMonth, setSelectedMonth] = React.useState('January')
 
+  // handlers
   const handleChange = event => {
     setSelectedMonth(event.target.value)
   }
@@ -34,6 +54,7 @@ const Shopping = () => {
   const handleGotoOrderDetail = () => {
     router.push('/dashboard/shopping/order-detail')
   }
+
   return (
     <div className={globalStyles.dashContainer}>
       {/* header part */}

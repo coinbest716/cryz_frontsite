@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 // redux
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // next components
 import Image from 'next/image'
@@ -32,11 +32,25 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
 const Dashboard = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   // variables
   const today = useSelector(state => state.today)
   const [value, onChange] = useState(new Date())
   const [message, setMessage] = useState([])
-
   const chartOptions = {
     series: [
       {

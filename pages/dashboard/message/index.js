@@ -1,7 +1,7 @@
 import React from 'react'
 
 // redux
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // third party components
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -34,6 +34,21 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './message.module.scss'
 
 const Message = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   const messageContent = {
     content: 'Sayang, besok kamu ada acara keluar ga?',
     time: '10:56 AM',

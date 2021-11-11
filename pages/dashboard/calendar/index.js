@@ -13,6 +13,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import esLocale from '@fullcalendar/core/locales/es'
 import 'react-calendar/dist/Calendar.css'
 import moment from 'moment'
+const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -26,8 +27,6 @@ import styles from './calendar.module.scss'
 
 // json data
 import CalendarData from 'assets/data/CalendarData'
-
-const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 
 const Calendar = () => {
   // loading part

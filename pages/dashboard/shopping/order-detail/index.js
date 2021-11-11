@@ -1,10 +1,10 @@
 import React from 'react'
-import SecondaryLayout from 'components/Layout/SecondaryLayout'
 
-// next components
-import Image from 'next/image'
+// redux
+import { useDispatch } from 'react-redux'
 
 // custom components
+import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import CommonButton from 'components/components/dashboard/CommonButton'
@@ -19,6 +19,21 @@ import OrderDetailData from 'assets/data/OrderDetailData.json'
 import OrderDetailStateData from 'assets/data/OrderDetailStateData.json'
 
 const OrderDetail = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   const handleClickButton = () => {
     console.log('clicked button')
   }

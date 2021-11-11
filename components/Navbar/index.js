@@ -1,8 +1,18 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// next components
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import styles from './navbar.module.scss'
 import Image from 'next/image'
+
+// third party components
+import client from 'utils/apolloclient'
+import { Auth } from 'aws-amplify'
+
+// images and icons
 import resizeIcon from 'public/images/resize.svg'
 import homeIcon from 'public/images/home.svg'
 import dashboardIcon from 'public/images/dashboard.svg'
@@ -23,11 +33,13 @@ import billingBlackIcon from 'public/images/billing_black.svg'
 import calendarBlackIcon from 'public/images/calendar_black.svg'
 import nutritionBlackIcon from 'public/images/nutrition_black.svg'
 import plansBlackIcon from 'public/images/plans_black.svg'
-import client from 'utils/apolloclient'
-import { Auth } from 'aws-amplify'
+
+// styles
+import styles from './navbar.module.scss'
 
 const Navbar = () => {
   const router = useRouter()
+  const dispatch = useDispatch()
   const [isOn, setIsOn] = useState(false)
 
   const handlClickResize = () => {
@@ -92,6 +104,8 @@ const Navbar = () => {
   ]
 
   const handleClickLogout = async () => {
+    dispatch({ type: 'set', isLoading: true })
+
     await client.resetStore()
     await client.clearStore()
     await Auth.signOut()
@@ -106,7 +120,12 @@ const Navbar = () => {
         </div>
         <div className={'flex flex-col h-full ' + styles.hideSection}>
           <div className={'h-0 flex-1 flex flex-col pt-10 pb-4'}>
-            <div className={'flex justify-center items-center flex-shrink-0 px-4'}>
+            <div
+              className={'flex justify-center items-center flex-shrink-0 px-4'}
+              onClick={() => {
+                dispatch({ type: 'set', isLoading: true })
+              }}
+            >
               <Link href={'/'} passHref>
                 <div>
                   <p className={styles.logo}>CRYS</p>
@@ -116,29 +135,41 @@ const Navbar = () => {
             </div>
             <nav className={'mt-10 flex-1 px-2 bg-white'}>
               {items.map((item, index) => (
-                <Link href={item.href} key={index}>
-                  {router.pathname.split('/')[2] === item.href.split('/')[2] && item.href !== '/' ? (
-                    <a
-                      className={
-                        'flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100'
-                      }
-                    >
-                      <Image src={item.iconBlack} alt="" width={21} height={21} />
-                    </a>
-                  ) : (
-                    <a
-                      className={
-                        'flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100'
-                      }
-                    >
-                      <Image src={item.icon} alt="" width={21} height={21} />
-                    </a>
-                  )}
-                </Link>
+                <div
+                  key={index}
+                  onClick={() => {
+                    dispatch({ type: 'set', isLoading: true })
+                  }}
+                >
+                  <Link href={item.href}>
+                    {router.pathname.split('/')[2] === item.href.split('/')[2] && item.href !== '/' ? (
+                      <a
+                        className={
+                          'flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100'
+                        }
+                      >
+                        <Image src={item.iconBlack} alt="" width={21} height={21} />
+                      </a>
+                    ) : (
+                      <a
+                        className={
+                          'flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100'
+                        }
+                      >
+                        <Image src={item.icon} alt="" width={21} height={21} />
+                      </a>
+                    )}
+                  </Link>
+                </div>
               ))}
             </nav>
           </div>
-          <div className={'flex-shrink-0 flex p-4'}>
+          <div
+            className={'flex-shrink-0 flex p-4'}
+            onClick={() => {
+              dispatch({ type: 'set', isLoading: true })
+            }}
+          >
             <Link href={'/'}>
               <a
                 className={
@@ -158,7 +189,12 @@ const Navbar = () => {
           </div>
           <div className={'flex flex-col w-56 bg-white h-full'}>
             <div className={'h-0 flex-1 flex flex-col pt-10 pb-4'}>
-              <div className={'flex items-center flex-shrink-0 px-10'}>
+              <div
+                className={'flex items-center flex-shrink-0 px-10'}
+                onClick={() => {
+                  dispatch({ type: 'set', isLoading: true })
+                }}
+              >
                 <Link href={'/'} passHref>
                   <div>
                     <p className={styles.logo}>CRYS</p>
@@ -168,27 +204,34 @@ const Navbar = () => {
               </div>
               <nav className={'mt-10 flex-1 px-2 bg-white'}>
                 {items.map((item, index) => (
-                  <Link href={item.href} key={index}>
-                    {router.pathname.split('/')[2] === item.href.split('/')[2] && item.href !== '/' ? (
-                      <a
-                        className={
-                          'flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100'
-                        }
-                      >
-                        <Image src={item.iconBlack} alt="" width={20} height={20} />
-                        <p className={'pl-3 ' + styles.activeLabel}>{item.title}</p>
-                      </a>
-                    ) : (
-                      <a
-                        className={
-                          'flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100'
-                        }
-                      >
-                        <Image src={item.icon} alt="" width={20} height={20} />
-                        <p className={'pl-3 ' + styles.itemLabel}>{item.title}</p>
-                      </a>
-                    )}
-                  </Link>
+                  <div
+                    key={index}
+                    onClick={() => {
+                      dispatch({ type: 'set', isLoading: true })
+                    }}
+                  >
+                    <Link href={item.href}>
+                      {router.pathname.split('/')[2] === item.href.split('/')[2] && item.href !== '/' ? (
+                        <a
+                          className={
+                            'flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100 bg-gray-100'
+                          }
+                        >
+                          <Image src={item.iconBlack} alt="" width={20} height={20} />
+                          <p className={'pl-3 ' + styles.activeLabel}>{item.title}</p>
+                        </a>
+                      ) : (
+                        <a
+                          className={
+                            'flex items-center px-8 py-3 my-2 rounded-md hover:font-bold hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100'
+                          }
+                        >
+                          <Image src={item.icon} alt="" width={20} height={20} />
+                          <p className={'pl-3 ' + styles.itemLabel}>{item.title}</p>
+                        </a>
+                      )}
+                    </Link>
+                  </div>
                 ))}
               </nav>
             </div>
