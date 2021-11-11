@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 // redux
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -18,6 +18,21 @@ import styles from './billing.module.scss'
 import BillingData from 'assets/data/BillingData'
 
 const Billing = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   // variables
   const today = useSelector(state => state.today)
   const addressInfo = {

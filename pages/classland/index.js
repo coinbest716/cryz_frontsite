@@ -1,20 +1,46 @@
 import React, { useState, useEffect, useRef } from 'react'
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyles.module.scss'
-import styles from 'pages/classland/classland.module.scss'
+import { useDispatch } from 'react-redux'
+
+// next components
 import Image from 'next/image'
-import topImage from 'public/images/classland-top-image.svg'
+
+// custom components
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import FaqButton from 'components/components/FaqButton'
 import CarouselTeam from 'components/components/CarouselTeam'
 import FilterButton from 'components/components/FilterButton'
 import ClassCard from 'components/components/ClassCard'
 import Accordian from 'components/components/Accordian'
 import CircularMark from 'components/components/CircularMark'
+
+// styles
+import globlaStyle from 'styles/GlobalStyles.module.scss'
+import styles from 'pages/classland/classland.module.scss'
+
+// images
+import topImage from 'public/images/classland-top-image.svg'
+
+// json data
 import TeamSectionData from 'assets/data/TeamSectionData'
 import ClassCardData from 'assets/data/ClassCardData'
 import AccordianFaqData from 'assets/data/AccordianFaqData'
 
 const Classland = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   const faqRef = useRef(null)
   const [sliderData, setSliderData] = useState([])
   const [cardData, setCardData] = useState([])

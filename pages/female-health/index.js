@@ -1,6 +1,8 @@
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 
 // components
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import MainSection from 'components/FemaleHealth/MainSection'
 import DisciplineSection from 'components/FemaleHealth/DisciplineSection'
 
@@ -8,6 +10,19 @@ import styles from 'pages/female-health/FemaleHealth.module.scss'
 
 const FemaleHealth = props => {
   const { viewport } = props
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
   return (
     <div className={styles.container}>
       <MainSection />

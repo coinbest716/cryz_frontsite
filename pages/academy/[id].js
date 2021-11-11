@@ -1,20 +1,48 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
+// next components
+import router from 'next/router'
+
+// third party components
+import toast from 'react-hot-toast'
+
+// custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyles.module.scss'
-import styles from './course.module.scss'
 import ArrowButton from 'components/components/academy/ArrowButton'
 import Feature from 'components/components/academy/Feature'
 import DownloadPDF from 'components/components/academy/DownloadPDF'
 import CarouselAcademy from 'components/components/academy/CarouselAcademy'
-import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import BackButton from 'components/components/BackButton'
-import toast from 'react-hot-toast'
-import router from 'next/router'
+
+// styles
+import globlaStyle from 'styles/GlobalStyles.module.scss'
+import styles from './course.module.scss'
+
+// json data
+import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 
 const Course = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const [feature, setFeature] = useState([])
   const [sliderData, setSliderData] = useState([])
 
+  // handlers
   useEffect(() => {
     setSliderData(ServerPhysiotherapy)
   }, [])
