@@ -49,8 +49,17 @@
   line-height: 15px;
 }
 
+.loadingArea {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0px;
+  left: 0px;
+}
+
 .loading {
-  position: absolute;
+  position: relative;
   left: calc(50% - 32px);
-  top: calc(50% - 32px);
+  top: calc(50vh - 32px);
 }

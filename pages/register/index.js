@@ -228,8 +228,10 @@ const Register = () => {
         </div>
       </div>
       {progressStatus && (
-        <div className={globalStyles.loading}>
-          <ReactLoading type={'spinningBubbles'} color="#006600" />
+        <div className={globalStyles.loadingArea}>
+          <div className={globalStyles.loading}>
+            <ReactLoading type={'spinningBubbles'} color="#006600" />
+          </div>
         </div>
       )}
     </div>

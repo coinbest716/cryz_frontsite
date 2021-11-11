@@ -23,8 +23,10 @@ const ContactLayout = ({ children }) => {
       <main>{children}</main>
       <ContactFooter />
       {isLoading && (
-        <div className={globalStyles.loading}>
-          <ReactLoading type={'spinningBubbles'} color="#006600" />
+        <div className={globalStyles.loadingArea}>
+          <div className={globalStyles.loading}>
+            <ReactLoading type={'spinningBubbles'} color="#006600" />
+          </div>
         </div>
       )}
     </>

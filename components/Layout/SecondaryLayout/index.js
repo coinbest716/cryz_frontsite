@@ -23,8 +23,10 @@ const SecondaryLayout = ({ children }) => {
         </div>
       </div>
       {isLoading && (
-        <div className={globalStyles.loading}>
-          <ReactLoading type={'spinningBubbles'} color="#006600" />
+        <div className={globalStyles.loadingArea}>
+          <div className={globalStyles.loading}>
+            <ReactLoading type={'spinningBubbles'} color="#006600" />
+          </div>
         </div>
       )}
     </>
