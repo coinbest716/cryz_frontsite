@@ -252,6 +252,7 @@ const Header = props => {
       dispatch({ type: 'set', isLoading: true })
     }
   }
+
   return (
     <div
       className={changeHeaderColor === true ? styles.whiteContainer : styles.transparentContainer}
