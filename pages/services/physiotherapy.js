@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
+// redux
+import { useDispatch } from 'react-redux'
+
 // next components
 import { useRouter } from 'next/router'
 
