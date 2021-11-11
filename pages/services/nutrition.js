@@ -24,7 +24,7 @@ import styles from './nutrition.module.scss'
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 
 const Nutrition = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -37,7 +37,8 @@ const Nutrition = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const router = useRouter()

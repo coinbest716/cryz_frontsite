@@ -13,7 +13,7 @@ import COSection from 'components/Home/COSection'
 import styles from 'styles/Home.module.scss'
 
 const Home = props => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -26,7 +26,8 @@ const Home = props => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   return (
     <div className={styles.container}>

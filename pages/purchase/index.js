@@ -36,7 +36,7 @@ const Tabs = dynamic(
 ) // disable ssr
 
 const Purchase = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -49,7 +49,8 @@ const Purchase = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const [cartData, setCartData] = useState([])

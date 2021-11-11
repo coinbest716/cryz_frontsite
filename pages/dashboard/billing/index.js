@@ -18,7 +18,7 @@ import styles from './billing.module.scss'
 import BillingData from 'assets/data/BillingData'
 
 const Billing = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -31,7 +31,8 @@ const Billing = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const today = useSelector(state => state.today)

@@ -20,7 +20,7 @@ import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import router from 'next/router'
 
 const TrainYourDiastasis = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -33,7 +33,8 @@ const TrainYourDiastasis = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const [sliderData, setSliderData] = React.useState([])

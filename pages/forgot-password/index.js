@@ -19,7 +19,7 @@ import toast from 'react-hot-toast'
 import ReactLoading from 'react-loading'
 
 const ForgotPassword = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -32,7 +32,8 @@ const ForgotPassword = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const [progressStatus, setProgressStatus] = useState(false)

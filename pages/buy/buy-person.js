@@ -18,7 +18,7 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/buy/index.module.scss'
 
 const BuyPerson = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -31,7 +31,8 @@ const BuyPerson = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   const handleClickBuy = () => {
     router.push('/purchase-login')

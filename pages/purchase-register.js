@@ -19,7 +19,7 @@ import styles from 'pages/purchase-register.module.scss'
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
 const Register = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -32,7 +32,8 @@ const Register = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const [cartData, setCartData] = useState([])

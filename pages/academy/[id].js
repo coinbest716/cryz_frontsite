@@ -23,7 +23,7 @@ import styles from './course.module.scss'
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 
 const Course = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -36,7 +36,8 @@ const Course = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const [feature, setFeature] = useState([])

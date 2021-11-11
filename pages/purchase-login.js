@@ -20,7 +20,7 @@ import styles from 'pages/purchase-login.module.scss'
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
 const PurchaseLogin = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -33,7 +33,8 @@ const PurchaseLogin = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const [cartData, setCartData] = useState([])

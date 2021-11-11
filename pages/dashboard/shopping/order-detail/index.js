@@ -19,7 +19,7 @@ import OrderDetailData from 'assets/data/OrderDetailData.json'
 import OrderDetailStateData from 'assets/data/OrderDetailStateData.json'
 
 const OrderDetail = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -32,7 +32,8 @@ const OrderDetail = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   const handleClickButton = () => {
     console.log('clicked button')

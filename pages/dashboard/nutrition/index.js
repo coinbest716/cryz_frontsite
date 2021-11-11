@@ -7,7 +7,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import styles from './nutrition.module.scss'
 
 const Nutrition = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -20,7 +20,8 @@ const Nutrition = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   return (
     <div className={'flex flex-wrap ' + styles.container}>

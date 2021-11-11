@@ -28,7 +28,7 @@ import OrderStateData from 'assets/data/OrderStateData.json'
 import MonthList from 'assets/data/MonthListData.json'
 
 const Shopping = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -41,7 +41,8 @@ const Shopping = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const [selectedMonth, setSelectedMonth] = React.useState('January')

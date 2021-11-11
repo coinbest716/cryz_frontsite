@@ -15,7 +15,7 @@ import styles from './transfer-success.module.scss'
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
 const TransferSuccess = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -28,7 +28,8 @@ const TransferSuccess = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const [cartData, setCartData] = useState([])

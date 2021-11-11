@@ -112,6 +112,14 @@ const Navbar = () => {
     router.push('/login')
   }
 
+  const handleGotoRouter = link => {
+    if (link === '/#team') {
+      dispatch({ type: 'set', isLoading: false })
+    } else if (router.pathname !== link) {
+      dispatch({ type: 'set', isLoading: true })
+    }
+  }
+
   return (
     <>
       <div className={isOn ? 'sticky top-0' : 'md:hidden sticky top-0'}>
@@ -122,9 +130,7 @@ const Navbar = () => {
           <div className={'h-0 flex-1 flex flex-col pt-10 pb-4'}>
             <div
               className={'flex justify-center items-center flex-shrink-0 px-4'}
-              onClick={() => {
-                dispatch({ type: 'set', isLoading: true })
-              }}
+              onClick={() => handleGotoRouter('/')}
             >
               <Link href={'/'} passHref>
                 <div>
@@ -135,12 +141,7 @@ const Navbar = () => {
             </div>
             <nav className={'mt-10 flex-1 px-2 bg-white'}>
               {items.map((item, index) => (
-                <div
-                  key={index}
-                  onClick={() => {
-                    dispatch({ type: 'set', isLoading: true })
-                  }}
-                >
+                <div key={index} onClick={() => handleGotoRouter(item.href)}>
                   <Link href={item.href}>
                     {router.pathname.split('/')[2] === item.href.split('/')[2] && item.href !== '/' ? (
                       <a
@@ -164,12 +165,7 @@ const Navbar = () => {
               ))}
             </nav>
           </div>
-          <div
-            className={'flex-shrink-0 flex p-4'}
-            onClick={() => {
-              dispatch({ type: 'set', isLoading: true })
-            }}
-          >
+          <div className={'flex-shrink-0 flex p-4'} onClick={() => handleGotoRouter('/')}>
             <Link href={'/'}>
               <a
                 className={
@@ -189,12 +185,7 @@ const Navbar = () => {
           </div>
           <div className={'flex flex-col w-56 bg-white h-full'}>
             <div className={'h-0 flex-1 flex flex-col pt-10 pb-4'}>
-              <div
-                className={'flex items-center flex-shrink-0 px-10'}
-                onClick={() => {
-                  dispatch({ type: 'set', isLoading: true })
-                }}
-              >
+              <div className={'flex items-center flex-shrink-0 px-10'} onClick={() => handleGotoRouter('/')}>
                 <Link href={'/'} passHref>
                   <div>
                     <p className={styles.logo}>CRYS</p>
@@ -204,12 +195,7 @@ const Navbar = () => {
               </div>
               <nav className={'mt-10 flex-1 px-2 bg-white'}>
                 {items.map((item, index) => (
-                  <div
-                    key={index}
-                    onClick={() => {
-                      dispatch({ type: 'set', isLoading: true })
-                    }}
-                  >
+                  <div key={index} onClick={() => handleGotoRouter(item.href)}>
                     <Link href={item.href}>
                       {router.pathname.split('/')[2] === item.href.split('/')[2] && item.href !== '/' ? (
                         <a

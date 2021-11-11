@@ -11,7 +11,7 @@ import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './index.module.scss'
 
 const WorkWithUs = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -24,7 +24,8 @@ const WorkWithUs = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   // variables
   const fileRef = React.createRef()

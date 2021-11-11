@@ -14,7 +14,7 @@ import CloseIcon from 'assets/images/close.svg'
 import ConfirmImage from 'assets/images/confirm.png'
 
 const Confirm = () => {
-  // loading part
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -27,7 +27,8 @@ const Confirm = () => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
-  }, [isMounted])
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   return (
     <div className={'w-full h-screen flex grid grid-cols-12'}>
