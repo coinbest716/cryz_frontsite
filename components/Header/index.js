@@ -245,16 +245,19 @@ const Header = props => {
     }
   }
 
+  const handleGotoRouter = link => {
+    if (link === '/#team') {
+      dispatch({ type: 'set', isLoading: false })
+    } else if (router.pathname !== link) {
+      dispatch({ type: 'set', isLoading: true })
+    }
+  }
   return (
     <div
       className={changeHeaderColor === true ? styles.whiteContainer : styles.transparentContainer}
       style={router.pathname === '/' ? { borderBottom: 'none' } : {}}
     >
-      <div
-        onClick={() => {
-          dispatch({ type: 'set', isLoading: true })
-        }}
-      >
+      <div onClick={() => handleGotoRouter('/')}>
         <Link href={'/'} passHref>
           <p className={styles.logo}>CRYS DYAZ & CO</p>
         </Link>
@@ -268,9 +271,7 @@ const Header = props => {
                 <li
                   className={'flex justify-center items-center ' + styles.menuItem}
                   key={key}
-                  onClick={() => {
-                    dispatch({ type: 'set', isLoading: true })
-                  }}
+                  onClick={() => handleGotoRouter(menu.link)}
                 >
                   {menu.link === '/#team' ? (
                     <button onClick={() => gotoTeamSection()} className={'hidden xl:block'}>
@@ -409,12 +410,7 @@ const Header = props => {
               )
             })}
           {/* icon menu part */}
-          <li
-            className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}
-            onClick={() => {
-              dispatch({ type: 'set', isLoading: true })
-            }}
-          >
+          <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
             <button
               className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
               onMouseOver={() => handleClickShoppingCard(true)}
@@ -424,9 +420,7 @@ const Header = props => {
           </li>
           <li
             className={'flex justify-center items-center ' + styles.iconMenuItem}
-            onClick={() => {
-              dispatch({ type: 'set', isLoading: true })
-            }}
+            onClick={() => handleGotoRouter('login')}
           >
             <button
               className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
