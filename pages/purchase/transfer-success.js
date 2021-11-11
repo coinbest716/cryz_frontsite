@@ -1,15 +1,39 @@
 import React, { useEffect, useState } from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
+import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
+
+// styles
 import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './transfer-success.module.scss'
-import Image from 'next/image'
-import news from 'public/images/news.svg'
-import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
+
+// json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
 const TransferSuccess = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const [cartData, setCartData] = useState([])
 
+  // handlers
   useEffect(() => {
     setCartData(shoppingCartData)
   }, [])

@@ -1,21 +1,49 @@
 import React, { useEffect, useState } from 'react'
-import SecondaryLayout from 'components/Layout/SecondaryLayout'
-import styles from './calendar.module.scss'
+
+// redux
+import { useDispatch, useSelector } from 'react-redux'
+
+// next components
+import dynamic from 'next/dynamic'
+
+// third party components
 import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import esLocale from '@fullcalendar/core/locales/es'
+import 'react-calendar/dist/Calendar.css'
+import moment from 'moment'
+const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
+
+// custom components
+import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import ProfileInfo from 'components/components/dashboard/Profile'
-import dynamic from 'next/dynamic'
-const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
-import 'react-calendar/dist/Calendar.css'
 import CheckBoxImage from 'components/components/dashboard/CheckBoxImage'
+
+// styles
+import styles from './calendar.module.scss'
+
+// json data
 import CalendarData from 'assets/data/CalendarData'
-import moment from 'moment'
 
 const Calendar = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   const calendarComponentRef = React.createRef()
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [markDate, setMarkDate] = useState([])

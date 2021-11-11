@@ -1,10 +1,37 @@
+import React from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// next components
+import Image from 'next/image'
+
+// custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
+
+// styles
 import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './credit-success.module.scss'
-import Image from 'next/image'
+
+// images and icons
 import successLogo from 'public/images/credit-success.svg'
 
 const CreditSuccess = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   return (
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>

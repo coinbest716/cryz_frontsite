@@ -1,27 +1,42 @@
 import React, { useState, useEffect } from 'react'
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyles.module.scss'
-import styles from './physiotherapy.module.scss'
+
+// next components
 import { useRouter } from 'next/router'
+
+// third party components
 import ReactReadMoreReadLess from 'react-read-more-read-less'
-import CircularMark from 'components/components/CircularMark'
 import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
+
+// custom components
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
+import CircularMark from 'components/components/CircularMark'
 import CarouselService from 'components/components/service/CarouselService'
 import ArrowButton from 'components/components/service/ArrowButton'
 import BackButton from 'components/components/BackButton'
 
-const Physiotherapy = () => {
-  const router = useRouter()
-  const [sliderData, setSliderData] = useState([])
+// styles
+import globlaStyle from 'styles/GlobalStyles.module.scss'
+import styles from './physiotherapy.module.scss'
 
-  useEffect(() => {
-    setSliderData(ServerPhysiotherapy)
+const Physiotherapy = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
   }, [])
 
-  const handleClickBuy = () => {
-    router.push('/buy/buy-person')
-  }
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
 
+  // variables
+  const router = useRouter()
+  const [sliderData, setSliderData] = useState([])
   const description = `Nuestro equipo de fisioterapia y osteopatía integra el tratamiento de diferentes patologías, así como,
   dolores y molestias de nuestro día a día para distintos tipos de perfiles: embarazadas, ancianos, bebés,
   deportistas… En constante formación de las últimas tendencias y metodologías, realizamos una valoración
@@ -34,6 +49,15 @@ const Physiotherapy = () => {
   eléctricas para el tratamiento de lesiones musculo esqueléticas. También tratamos los hipopresivos con
   esta técnica. – OTROS SERVICIOS: Vendajes funcionales y neuromusculares, punción seca, crioterapia,
   termoterapia, electroterapia (TENS).`
+
+  // handlers
+  useEffect(() => {
+    setSliderData(ServerPhysiotherapy)
+  }, [])
+
+  const handleClickBuy = () => {
+    router.push('/buy/buy-person')
+  }
 
   return (
     <div className={styles.container}>

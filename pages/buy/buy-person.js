@@ -1,8 +1,11 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+
+//next components
 import router from 'next/router'
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // custom component
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 import CircularMark from 'components/components/CircularMark'
 import BuyCard from 'components/components/BuyCard'
@@ -15,6 +18,21 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/buy/index.module.scss'
 
 const BuyPerson = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   const handleClickBuy = () => {
     router.push('/purchase-login')
   }

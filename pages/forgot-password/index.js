@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 
+// redux
+import { useDispatch } from 'react-redux'
+
 // next components
 import Image from 'next/image'
 import router from 'next/router'
@@ -16,9 +19,26 @@ import toast from 'react-hot-toast'
 import ReactLoading from 'react-loading'
 
 const ForgotPassword = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const [progressStatus, setProgressStatus] = useState(false)
   const [userEmail, setUserEmail] = useState('')
 
+  // handlers
   const handleForgotPassword = async () => {
     setProgressStatus(true)
     await Auth.forgotPassword(userEmail)
@@ -45,6 +65,7 @@ const ForgotPassword = () => {
   const handleChangeEmail = event => {
     setUserEmail(event.target.value)
   }
+
   return (
     <div className={'relative'}>
       <div className={'w-full h-screen flex grid grid-cols-12'}>

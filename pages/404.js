@@ -1,18 +1,37 @@
 import React from 'react'
 
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
+// redux
+import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
 
-// images
-import ErrorImage from 'assets/images/error.png'
+// custom components
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/404.module.scss'
 
+// images
+import ErrorImage from 'assets/images/error.png'
+
 const Custom404 = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   return (
     <div className={'w-full flex justify-center'}>
       <div className={globalStyles.container}>

@@ -1,21 +1,52 @@
 import React, { useState, useEffect } from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// next components
+import Image from 'next/image'
+import dynamic from 'next/dynamic'
+
+// third party components
+import ReactPlayer from 'react-player'
+import 'react-calendar/dist/Calendar.css'
+
+// custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
-import styles from './planes.module.scss'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import ProfileInfo from 'components/components/dashboard/Profile'
-import ReactPlayer from 'react-player'
 import Material from 'components/components/dashboard/Material'
 import Feature from 'components/components/academy/Feature'
 import DownloadPDF from 'components/components/academy/DownloadPDF'
-import Image from 'next/image'
+
+// styles
+import styles from './planes.module.scss'
+
+// images and icons
 import downIcon from 'public/images/down.svg'
-import dynamic from 'next/dynamic'
-const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
-import moment from 'moment'
-import 'react-calendar/dist/Calendar.css'
+
+// json data
 import PlanData from 'assets/data/PlanData.json'
 
+const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
+
 const Planes = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
@@ -24,15 +55,16 @@ const Planes = () => {
   const [materials, setMaterials] = useState([])
   const [grayMaterials, setGrayMaterials] = useState([])
   const [greenMaterials, setGreenMaterials] = useState([])
+  const noteDescription =
+    'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.'
 
+  // handlers
   useEffect(() => {
     setMaterials(PlanData.materialData)
     setGrayMaterials(PlanData.grayMaterialData)
     setGreenMaterials(PlanData.greenMaterialData)
   }, [])
 
-  const noteDescription =
-    'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.'
   useEffect(() => {
     setFeature([
       { id: 0, path: '/images/category.svg', bgColor: '#D2DADA', topLabel: 'Nivel', lowLabel: '1' },
@@ -41,16 +73,20 @@ const Planes = () => {
       { id: 3, path: '/images/star.svg', bgColor: '#F5DEC2', topLabel: 'Peso', lowLabel: '05 kg' },
     ])
   }, [])
+
   const handleClickDownlodPDF = () => {
     console.log('handleClickDownlodPDF')
   }
+
   const handleClickMonth = () => {
     setShowCalendar(!showCalendar)
   }
+
   const handleChangeDate = value => {
     setDate(value)
     setShowCalendar(false)
   }
+
   const getOnlyMonth = label => {
     const str = label.split(' ')
     setCurrentMonth(str[0].charAt(0).toUpperCase() + str[0].slice(1))

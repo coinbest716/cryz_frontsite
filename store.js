@@ -17,6 +17,7 @@ date =
 const initialState = {
   menu: 'HOME',
   today: date,
+  isLoading: false,
 }
 
 const changeState = (state = initialState, { type, ...rest }) => {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
@@ -13,6 +14,21 @@ import CloseIcon from 'assets/images/close.svg'
 import ConfirmImage from 'assets/images/confirm.png'
 
 const Confirm = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   return (
     <div className={'w-full h-screen flex grid grid-cols-12'}>
       <div className={'w-full col-span-6 flex flex-wrap justify-center items-center ' + styles.whiteArea}>

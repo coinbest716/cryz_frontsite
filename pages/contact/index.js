@@ -1,16 +1,41 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+
+// next components
+import Image from 'next/image'
+
+// custom components
 import ContactLayout from 'components/Layout/ContactLayout'
 import CircularMark from 'components/components/CircularMark'
 import MapContainer from 'components/components/contact/MapContainer'
+
+// styles
 import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/contact/contact.module.scss'
-import Image from 'next/image'
+
+// images
 import phoneIcon from 'public/images/phone.svg'
 import emailIcon from 'public/images/email.svg'
 import addressIcon from 'public/images/address.svg'
 import whatsapp from 'public/images/whatsapp.svg'
 
 const Contact = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const locations = [
     {
       name: 'Crys Dyaz & Co',
@@ -21,6 +46,7 @@ const Contact = () => {
     },
   ]
 
+  // handlers
   const handleClickWhatsapp = () => {
     console.log('handleClickWhatsapp')
   }

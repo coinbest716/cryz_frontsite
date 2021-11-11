@@ -1,14 +1,41 @@
-import React, { useState, useEffect } from 'react'
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyles.module.scss'
-import CircularMark from 'components/components/CircularMark'
-import styles from './services.module.scss'
+import React, { useState } from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// next components
 import Image from 'next/image'
-import nextButtonPinkIcon from 'public/images/arrow-right-pink.svg'
-import ArrowRightUpGrayIcon from 'public/images/arrow-right-up.svg'
 import { useRouter } from 'next/router'
 
+// custom components
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
+import CircularMark from 'components/components/CircularMark'
+
+// styles
+import globlaStyle from 'styles/GlobalStyles.module.scss'
+import styles from './services.module.scss'
+
+// images and icons
+import nextButtonPinkIcon from 'public/images/arrow-right-pink.svg'
+import ArrowRightUpGrayIcon from 'public/images/arrow-right-up.svg'
+
 const Services = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const router = useRouter()
 
   const trainingImage = '/images/contact1.png'
@@ -19,6 +46,8 @@ const Services = () => {
   const placeholder3 = '/images/placeholder3.png'
 
   const [contactType, setContactType] = useState({ type1: true, type2: false, type3: false })
+
+  // handlers
   const handleMouseOver = type => {
     switch (type) {
       case 'type1':
@@ -32,6 +61,7 @@ const Services = () => {
         break
     }
   }
+
   const handleClick = type => {
     switch (type) {
       case 'type1':

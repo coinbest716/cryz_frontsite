@@ -1,13 +1,35 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+// next components
+import { useRouter } from 'next/router'
+// custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyles.module.scss'
-import styles from './academy.module.scss'
 import AcademyCard from 'components/components/academy/AcademyCard'
 import CircularMark from 'components/components/CircularMark'
+
+// styles
+import globlaStyle from 'styles/GlobalStyles.module.scss'
+import styles from './academy.module.scss'
+// json data
 import AcademyData from 'assets/data/AcademyData'
-import { useRouter } from 'next/router'
 
 const Academy = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
   const router = useRouter()
   const [cardData, setCardData] = useState([])
 
@@ -16,6 +38,7 @@ const Academy = () => {
   }, [])
 
   const handleClickPayment = data => {
+    dispatch({ type: 'set', isLoading: true })
     router.push(`/academy/${data.id}`)
   }
 

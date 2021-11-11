@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// next components
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-// components
+// custom components
 import Menu from 'components/Menu/Menu'
 
 // images
@@ -18,6 +23,7 @@ import shoppingCartData from 'assets/data/ShoppingCartData'
 
 const Header = props => {
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const [changeHeaderColor, setChangeHeaderColor] = React.useState(false)
 
@@ -244,16 +250,28 @@ const Header = props => {
       className={changeHeaderColor === true ? styles.whiteContainer : styles.transparentContainer}
       style={router.pathname === '/' ? { borderBottom: 'none' } : {}}
     >
-      <Link href={'/'} passHref>
-        <p className={styles.logo}>CRYS DYAZ & CO</p>
-      </Link>
+      <div
+        onClick={() => {
+          dispatch({ type: 'set', isLoading: true })
+        }}
+      >
+        <Link href={'/'} passHref>
+          <p className={styles.logo}>CRYS DYAZ & CO</p>
+        </Link>
+      </div>
       <div className={'flex'}>
         <ul className={'flex flex-col sm:flex-row list-none items-center justify-end mr-24'}>
           {/* text menu part */}
           {menus &&
             menus.map((menu, key) => {
               return (
-                <li className={'flex justify-center items-center ' + styles.menuItem} key={key}>
+                <li
+                  className={'flex justify-center items-center ' + styles.menuItem}
+                  key={key}
+                  onClick={() => {
+                    dispatch({ type: 'set', isLoading: true })
+                  }}
+                >
                   {menu.link === '/#team' ? (
                     <button onClick={() => gotoTeamSection()} className={'hidden xl:block'}>
                       <a
@@ -391,7 +409,12 @@ const Header = props => {
               )
             })}
           {/* icon menu part */}
-          <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
+          <li
+            className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}
+            onClick={() => {
+              dispatch({ type: 'set', isLoading: true })
+            }}
+          >
             <button
               className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
               onMouseOver={() => handleClickShoppingCard(true)}
@@ -399,7 +422,12 @@ const Header = props => {
               <Image src={CartIcon} alt="" width={22} height={19} />
             </button>
           </li>
-          <li className={'flex justify-center items-center ' + styles.iconMenuItem}>
+          <li
+            className={'flex justify-center items-center ' + styles.iconMenuItem}
+            onClick={() => {
+              dispatch({ type: 'set', isLoading: true })
+            }}
+          >
             <button
               className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
               onClick={() => router.push('login')}

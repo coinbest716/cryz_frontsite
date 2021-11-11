@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyles.module.scss'
-import styles from './purchase.module.scss'
-import Link from 'next/link'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// next components
 import router from 'next/router'
-import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
-import shoppingCartData from 'assets/data/ShoppingCartData'
-import 'react-tabs/style/react-tabs.css'
 import dynamic from 'next/dynamic'
-const Tabs = dynamic(
-  import('react-tabs').then(mod => mod.Tabs),
-  { ssr: false }
-) // disable ssr
+
+// third party components
 import { Tab, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
+import toast from 'react-hot-toast'
+
+// custom components
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CommonButton from 'components/components/purchase/CommonButton'
 import CommonText from 'components/components/purchase/CommonText'
 import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
@@ -20,9 +21,37 @@ import BillingDoc from 'components/components/purchase/BillingDoc'
 import PreviousButton from 'components/components/purchase/PreviousButton'
 import Credit from 'components/components/purchase/Credit'
 import Transfer from 'components/components/purchase/Transfer'
-import toast from 'react-hot-toast'
+import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
+
+// json data
+import shoppingCartData from 'assets/data/ShoppingCartData'
+
+// styles
+import globlaStyle from 'styles/GlobalStyles.module.scss'
+import styles from './purchase.module.scss'
+
+const Tabs = dynamic(
+  import('react-tabs').then(mod => mod.Tabs),
+  { ssr: false }
+) // disable ssr
 
 const Purchase = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const [cartData, setCartData] = useState([])
   const [tabIndex, setTabIndex] = useState(0)
   const [personalInfo, setPersonalInfo] = useState({
@@ -115,6 +144,7 @@ const Purchase = () => {
   const [paymentType, setPaymentType] = useState('')
   const [cardData, setCardData] = useState({ number: '', name: '', expiry: '', cvc: '' })
 
+  // handlers
   useEffect(() => {
     setCartData(shoppingCartData)
     setRedsys(false)
