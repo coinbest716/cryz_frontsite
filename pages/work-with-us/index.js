@@ -1,5 +1,9 @@
 import React from 'react'
 
+// redux
+import { useDispatch } from 'react-redux'
+
+// custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
@@ -7,13 +11,33 @@ import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './index.module.scss'
 
 const WorkWithUs = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const fileRef = React.createRef()
+
+  // handlers
   const handleAttachFile = event => {
     console.log(event.target.files[0])
   }
+
   const onClickAttachFile = () => {
     fileRef.current.click()
   }
+
   return (
     <div className={'flex flex-wrap justify-center'}>
       <div className={globlaStyle.container}>

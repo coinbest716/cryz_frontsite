@@ -1,4 +1,6 @@
 import React from 'react'
+
+// redux
 import { useDispatch } from 'react-redux'
 
 // components
@@ -11,6 +13,7 @@ import COSection from 'components/Home/COSection'
 import styles from 'styles/Home.module.scss'
 
 const Home = props => {
+  // loading part
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -24,6 +27,7 @@ const Home = props => {
       dispatch({ type: 'set', isLoading: false })
     }
   }, [isMounted])
+
   return (
     <div className={styles.container}>
       <MainSection />

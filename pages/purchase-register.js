@@ -1,19 +1,46 @@
 import React, { useEffect, useState } from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// next components
+import router from 'next/router'
+
+// custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
+import CommonButton from 'components/components/purchaseLogin/CommonButton'
+import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
+
+// styles
 import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/purchase-register.module.scss'
-import CommonButton from 'components/components/purchaseLogin/CommonButton'
-import Link from 'next/link'
-import router from 'next/router'
-import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
+
+// json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
 const Register = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const [cartData, setCartData] = useState([])
   const [email, setEmail] = useState('')
   const [password, setPasssword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
+  // handlers
   useEffect(() => {
     setCartData(shoppingCartData)
   }, [])

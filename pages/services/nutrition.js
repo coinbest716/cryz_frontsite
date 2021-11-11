@@ -1,19 +1,52 @@
 import React, { useState, useEffect } from 'react'
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyles.module.scss'
-import styles from './nutrition.module.scss'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// next components
 import { useRouter } from 'next/router'
+
+// third party components
 import ReactReadMoreReadLess from 'react-read-more-read-less'
+
+// custom components
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
-import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import CarouselService from 'components/components/service/CarouselService'
 import ArrowButton from 'components/components/service/ArrowButton'
 import BackButton from 'components/components/BackButton'
 
+// styles
+import globlaStyle from 'styles/GlobalStyles.module.scss'
+import styles from './nutrition.module.scss'
+
+// json data
+import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
+
 const Nutrition = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const router = useRouter()
   const [sliderData, setSliderData] = useState([])
+  const description = `Somos especialistas en educación de hábitos y promoción de la salud. Nuestros planes van dirigidos a personas que quieren cuidar su alimentación y mejorar su salud y/o su físico, ayudándoles a crear e introducir nuevas rutinas saludables en su día a día.
+  Previa valoración inicial del paciente y realización de un estudio personalizado para poder escoger su plan más adecuado, nos adaptamos a patologías como obesidad, cáncer, diabetes, alergias e intolerancias, entre otras y realizamos programas específicos de alimentación sana antes y durante el embarazo, así como, en casos especiales. 
+  Hacemos seguimiento y tenemos en cuenta los gustos de cada paciente, sus horarios, disponibilidad, etc. Les apoyamos en cada paso del camino, creando nuevos hábitos saludables y mejorando otros. “Cambia tus hábitos y tu vida cambiará”`
 
+  // handlers
   useEffect(() => {
     setSliderData(ServerPhysiotherapy)
   }, [])
@@ -24,10 +57,6 @@ const Nutrition = () => {
   const handleClickBuyPlan = () => {
     router.push('/buy/buy-plans-online')
   }
-
-  const description = `Somos especialistas en educación de hábitos y promoción de la salud. Nuestros planes van dirigidos a personas que quieren cuidar su alimentación y mejorar su salud y/o su físico, ayudándoles a crear e introducir nuevas rutinas saludables en su día a día.
-  Previa valoración inicial del paciente y realización de un estudio personalizado para poder escoger su plan más adecuado, nos adaptamos a patologías como obesidad, cáncer, diabetes, alergias e intolerancias, entre otras y realizamos programas específicos de alimentación sana antes y durante el embarazo, así como, en casos especiales. 
-  Hacemos seguimiento y tenemos en cuenta los gustos de cada paciente, sus horarios, disponibilidad, etc. Les apoyamos en cada paso del camino, creando nuevos hábitos saludables y mejorando otros. “Cambia tus hábitos y tu vida cambiará”`
 
   return (
     <div className={styles.container}>

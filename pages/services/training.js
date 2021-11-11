@@ -1,11 +1,33 @@
-import React, { useState, useEffect } from 'react'
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import globlaStyle from 'styles/GlobalStyles.module.scss'
-import styles from './training.module.scss'
+import React, { useState } from 'react'
+
+// next components
 import { useRouter } from 'next/router'
+
+// custom components
+import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 
+// styles
+import globlaStyle from 'styles/GlobalStyles.module.scss'
+import styles from './training.module.scss'
+
 const Training = () => {
+  // loading part
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted])
+
+  // variables
   const router = useRouter()
   const forwardGrayIcon = '/images/arrow-right-gray.svg'
 
@@ -14,7 +36,9 @@ const Training = () => {
   const image03 = '/images/card4.jpg'
   const [activeImage, setActiveImage] = useState('')
   const [activeHover, setActiveHover] = useState(false)
+  const [serverType, setServerType] = useState({ type1: false, type2: false, type3: false })
 
+  // handlers
   const handleMouseMover = event => {
     if (activeImage === '') return
     let x = event.clientX - 200
@@ -24,7 +48,6 @@ const Training = () => {
     shark.style.top = y + 'px'
   }
 
-  const [serverType, setServerType] = useState({ type1: false, type2: false, type3: false })
   const handleMouseOver = type => {
     setActiveHover(true)
     switch (type) {
@@ -42,6 +65,7 @@ const Training = () => {
         break
     }
   }
+
   const handleMouseLeave = type => {
     // setServerType({ type1: false, type2: false, type3: false })
     setActiveHover(false)
