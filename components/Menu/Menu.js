@@ -82,7 +82,17 @@ const Menu = () => {
       <div className={visibility === true ? styles.menuOpen : visibility === false ? styles.menuClose : styles.menu}>
         <div className={styles.circleImageCover} id="sharp">
           {activeImage !== '' ? (
-            <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
+            <div className={activeHover ? styles.animationImage : styles.circleImage}>
+              <Image
+                src={activeImage}
+                alt={''}
+                width={400}
+                height={400}
+                objectFit="cover"
+                objectPosition="center"
+                layout="fill"
+              />
+            </div>
           ) : (
             <></>
           )}
