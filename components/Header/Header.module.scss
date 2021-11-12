@@ -41,13 +41,35 @@
 
 .menuText {
   font-family: 'Montserrat';
-  font-size: 14px;
   font-weight: 400;
   line-height: 14px;
   letter-spacing: 0.7px;
   color: $gray-800-color;
-  padding-left: 16px;
-  padding-right: 16px;
+  @media (max-width: 639px) {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 9px;
+  }
+  @media (min-width: 640px) {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 10px;
+  }
+  @media (min-width: 768px) {
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 12px;
+  }
+  @media (min-width: 1025px) {
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 13px;
+  }
+  @media (min-width: 1280px) {
+    padding-left: 32px;
+    padding-right: 32px;
+    font-size: 14px;
+  }
   padding-top: 29px;
   padding-bottom: 27px;
 }
