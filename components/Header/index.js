@@ -368,7 +368,7 @@ const Header = props => {
                     </div>
                   ) : menu.link === '/contact' ? (
                     <>
-                      <button className={'hidden xl:block'}>
+                      <button className={'hidden lg:block'}>
                         <Link href={menu.link} passHref>
                           <a
                             className={
@@ -381,7 +381,7 @@ const Header = props => {
                           </a>
                         </Link>
                       </button>
-                      <div className={'flex justify-center items-center ' + styles.iconMenuItem}>
+                      <div className={'flex lg:hidden justify-center items-center ' + styles.iconMenuItem}>
                         <button
                           className={
                             'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center block xl:hidden'
