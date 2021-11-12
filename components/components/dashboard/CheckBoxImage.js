@@ -1,4 +1,9 @@
 import React from 'react'
+
+// next components
+import Image from 'next/image'
+
+// styles
 import styles from './CheckBoxImage.module.scss'
 
 const CheckBoxImage = props => {
@@ -10,7 +15,7 @@ const CheckBoxImage = props => {
         style={{ width: '24px', height: '24px', backgroundColor: color, borderRadius: '6px', color: 'white' }}
         className={'flex items-center justify-center'}
       >
-        <img src="/images/check-white.svg" alt="" style={{ width: '12px', height: '12px' }} />
+        <Image src={'/images/check-white.svg'} alt={''} width={12} height={12} />
       </div>
       <div className={'pl-4 ' + styles.subTitle}>{label}</div>
     </div>
