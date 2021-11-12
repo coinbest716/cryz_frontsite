@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // next components
 import dynamic from 'next/dynamic'
+import router from 'next/router'
 
 // third party components
 import FullCalendar, { formatDate } from '@fullcalendar/react'
@@ -49,6 +50,7 @@ const Calendar = () => {
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
+
   useEffect(() => {
     setEvents(CalendarData)
     const _markDate = []
@@ -56,6 +58,12 @@ const Calendar = () => {
       _markDate.push(moment(item.start).format('DD-MM-YYYY'))
     })
     setMarkDate(_markDate)
+
+    const eventDate = router.query.eventDate
+    if (eventDate) {
+      let calendarApi = calendarComponentRef.current.getApi()
+      calendarApi.gotoDate(eventDate) // call a method on the Calendar object
+    }
   }, [])
 
   const handleClickStartClass = () => {

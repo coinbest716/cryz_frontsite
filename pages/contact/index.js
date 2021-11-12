@@ -84,7 +84,7 @@ const Contact = () => {
           <div className={'grid grid-cols-12 gap-4 text-center'}>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12 pt-12'}>
               <Image src={phoneIcon} alt="" width={35} height={35} />
-              <div className={'pt-5 ' + styles.lowTitle}>Phone</div>
+              <div className={'pt-5 ' + styles.lowTitle}>Teléfonos</div>
               <div className={'pt-6 pb-14 ' + styles.lowDescription}>
                 <div className={'cursor-pointer'}>
                   <a href="tel:+690148244">690 148 244</a>
@@ -96,7 +96,7 @@ const Contact = () => {
             </div>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12 pt-12'}>
               <Image src={emailIcon} alt="" width={41} height={35} />
-              <div className={'pt-5 ' + styles.lowTitle}>E-mail Address</div>
+              <div className={'pt-5 ' + styles.lowTitle}>Direcciones de E-mail</div>
               <div className={'pt-6 pb-14 ' + styles.lowDescription}>
                 <div className={'cursor-pointer'} onClick={() => handleClickEmail('info@crysdyazandco.com')}>
                   info@crysdyazandco.com
@@ -108,7 +108,7 @@ const Contact = () => {
             </div>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12 pt-12'}>
               <Image src={addressIcon} alt="" width={30} height={35} />
-              <div className={'pt-5 ' + styles.lowTitle}>Office Address</div>
+              <div className={'pt-5 ' + styles.lowTitle}>Dirección centro</div>
               <div className={'pt-6 pb-14 ' + styles.lowDescription}>
                 C\ Azalea 1 Miniparc I
                 <br />
