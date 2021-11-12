@@ -1,4 +1,9 @@
 import React from 'react'
+
+// next components
+import Image from 'next/image'
+
+// styles
 import styles from './CommonButton.module.scss'
 
 const CommonButton = props => {
@@ -23,7 +28,7 @@ const CommonButton = props => {
       {type === 'icon' && (
         <button className={'flex justify-between items-center ' + styles.outlineButton} onClick={handleClick}>
           <p className={'pr-3 ' + styles.outlineLabel}>{label}</p>
-          <img src="/images/trash.svg" alt="" style={{ width: '12px', height: '12px' }} />
+          <Image src={'/images/trash.svg'} alt={''} width={12} height={12} />
         </button>
       )}
     </>

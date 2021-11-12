@@ -1,6 +1,12 @@
 import React from 'react'
-import styles from './Material.module.scss'
+
+// next components
 import Image from 'next/image'
+
+// styles
+import styles from './Material.module.scss'
+
+// images and icons
 import grayCheckIcon from 'public/images/check-gray.svg'
 import greenCheckIcon from 'public/images/check-green.svg'
 

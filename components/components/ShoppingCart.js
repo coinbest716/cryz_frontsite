@@ -31,7 +31,7 @@ const ShoppingCart = props => {
           <div className={'flex justify-between items-center my-3'} key={index}>
             <div className={'flex justify-between'}>
               <div className={'mr-4'} style={{ minWidth: '88px' }}>
-                <img src={item.image} style={{ width: '88px', height: '88px' }} />
+                <Image src={item.image} alt={''} width={88} height={88} />
               </div>
               <div className={'flex flex-col justify-between'}>
                 <div className={styles.listDescription}>{item.description}</div>

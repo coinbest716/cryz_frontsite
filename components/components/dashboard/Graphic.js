@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+
+// next components
 import Image from 'next/image'
 import CommonButton from 'components/components/purchase/CommonButton'
 import CommonText from 'components/components/purchase/CommonText'
@@ -27,6 +29,9 @@ const Graphic = props => {
     ],
     options: {
       chart: {
+        toolbar: {
+          show: false,
+        },
         background: 'transparent',
         foreColor: '#939AAC',
       },
@@ -97,6 +102,9 @@ const Graphic = props => {
     ],
     options: {
       chart: {
+        toolbar: {
+          show: false,
+        },
         background: 'transparent',
         foreColor: '#939AAC',
       },
@@ -139,6 +147,9 @@ const Graphic = props => {
     ],
     options: {
       chart: {
+        toolbar: {
+          show: false,
+        },
         height: 350,
         type: 'bar',
       },
@@ -239,14 +250,17 @@ const Graphic = props => {
               <div className={'pb-8 ' + styles.title}>Perímetros</div>
               <div className={'flex justify-between items-center'}>
                 <div
-                  className={'p-1 rounded-2xl bg-gray-200 cursor-pointer'}
+                  className={'p-1 rounded-2xl bg-gray-200 cursor-pointer h-5 w-5 flex justify-center items-center'}
                   onClick={() => handleClickMonth('previous')}
                 >
-                  <img src="/images/message-left.svg" style={{ width: '10px', height: '10px' }}></img>
+                  <Image src={'/images/message-left.svg'} alt={''} width={10} height={10} />
                 </div>
                 <div className={'px-2 w-8 text-center ' + styles.month}>{month[monthIndex]}</div>
-                <div className={'p-1 rounded-2xl bg-gray-200 cursor-pointer'} onClick={() => handleClickMonth('next')}>
-                  <img src="/images/message-right.svg" style={{ width: '10px', height: '10px' }}></img>
+                <div
+                  className={'p-1 rounded-2xl bg-gray-200 cursor-pointer h-5 w-5 flex justify-center items-center'}
+                  onClick={() => handleClickMonth('next')}
+                >
+                  <Image src={'/images/message-right.svg'} alt={''} width={10} height={10} />
                 </div>
               </div>
             </div>

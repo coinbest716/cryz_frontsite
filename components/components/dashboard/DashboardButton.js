@@ -1,4 +1,9 @@
 import React from 'react'
+
+// next components
+import Image from 'next/image'
+
+// styles
 import styles from './DashboardButton.module.scss'
 
 const DashboardButton = props => {
@@ -12,7 +17,7 @@ const DashboardButton = props => {
             onClick={handleClick}
           >
             <p className={'pr-3 ' + styles.outlineLabel}>{label}</p>
-            <img src="/images/start-class.svg" alt="" style={{ width: '30px', height: '30px' }} />
+            <Image src={'/images/start-class.svg'} alt={''} width={30} height={30} />
           </button>
         </div>
       )}
@@ -23,7 +28,7 @@ const DashboardButton = props => {
             onClick={handleClick}
           >
             <p className={styles.viewLabel}>{label}</p>
-            <img src="/images/view-right.svg" alt="" style={{ width: '8px', height: '8px' }} />
+            <Image src={'/images/view-right.svg'} alt={''} width={8} height={8} />
           </button>
         </div>
       )}
@@ -34,7 +39,7 @@ const DashboardButton = props => {
             onClick={handleClick}
           >
             <p className={styles.viewRedLabel}>{label}</p>
-            <img src="/images/view-right-red.svg" alt="" style={{ width: '8px', height: '8px' }} />
+            <Image src={'/images/view-right-red.svg'} alt={''} width={8} height={8} />
           </button>
         </div>
       )}
@@ -50,18 +55,18 @@ const DashboardButton = props => {
       )}
       {type === 'editProfile' && (
         <button className={'flex justify-between items-center ' + styles.editButton} onClick={handleClick}>
-          <img src="/images/edit.svg" alt="" style={{ width: '15px', height: '15px' }} />
+          <Image src={'/images/edit.svg'} alt={''} width={15} height={15} />
           <p className={'pl-3 ' + styles.editLabel}>{label}</p>
         </button>
       )}
       {type === 'iconWeight' && (
         <button className={'flex justify-between items-center ' + styles.iconButton} onClick={handleClick}>
-          <img src="/images/weight.svg" alt="" style={{ width: '25px', height: '25px' }} />
+          <Image src={'/images/weight.svg'} alt={''} width={25} height={25} />
         </button>
       )}
       {type === 'iconHeight' && (
         <button className={'flex justify-between items-center ' + styles.iconButton} onClick={handleClick}>
-          <img src="/images/height.svg" alt="" style={{ width: '25px', height: '25px' }} />
+          <Image src={'/images/height.svg'} alt={''} width={25} height={25} />
         </button>
       )}
       {type === 'addBilling' && (
