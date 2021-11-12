@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // next components
 import Image from 'next/image'
@@ -8,6 +8,7 @@ import styles from './PurchaseAvatar.module.scss'
 
 const PurchaseAvatar = props => {
   const { avatar, handleChangeAvatar } = props
+
   return (
     <div className={'relative ' + styles.avatarSection}>
       <Image
@@ -18,8 +19,17 @@ const PurchaseAvatar = props => {
         className={styles.defaultAvatar}
       />
       <div className={'absolute top-16 right-0 cursor-pointer'}>
-        <div className={styles.edit} onClick={handleChangeAvatar}>
-          <Image src={'/images/edit.svg'} alt="" width={14} height={14} />
+        <div className={styles.edit}>
+          <input
+            id="contained-button-file"
+            accept="image/*"
+            style={{ display: 'none', cursor: 'pointer' }}
+            type="file"
+            onChange={handleChangeAvatar}
+          />
+          <label htmlFor="contained-button-file" className="cursor-pointer">
+            <Image src={'/images/edit.svg'} alt="" width={14} height={14} />
+          </label>
         </div>
       </div>
     </div>

@@ -12,7 +12,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   &:hover {
+    cursor: pointer;
     background-color: $blue-gray-300-color;
   }
 }

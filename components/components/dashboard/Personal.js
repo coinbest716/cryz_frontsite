@@ -5,7 +5,8 @@ import CommonText from 'components/components/purchase/CommonText'
 import styles from './Personal.module.scss'
 
 const Personal = props => {
-  const { handleSave, handleDiscard, handleChangePersonal, handleDeleteAccount } = props
+  const { handleSave, handleDiscard, handleChangePersonal, handleDeleteAccount, personalInfo, handleChangeAvatar } =
+    props
   const list = ['male', 'female']
 
   return (
@@ -13,7 +14,7 @@ const Personal = props => {
       <div className={'px-24 py-8 ' + styles.container}>
         <div className={'flex justify-between items-center'}>
           <div className={'flex justify-between items-center'}>
-            <PurchaseAvatar avatar={''} />
+            <PurchaseAvatar avatar={personalInfo.avatar} handleChangeAvatar={handleChangeAvatar} />
             <div className={'pl-5'}>
               <div className={styles.profileName}>Mariano Pérez Fanjul</div>
               <div className={styles.profileCounry}>Madrid, Spain</div>
@@ -32,6 +33,7 @@ const Personal = props => {
                 label={'Nombre'}
                 placeholder={''}
                 type={'text'}
+                value={personalInfo.name}
               />
             </div>
             <div className={'py-2'}>
@@ -40,6 +42,7 @@ const Personal = props => {
                 label={'Apellidos'}
                 placeholder={''}
                 type={'text'}
+                value={personalInfo.surname}
               />
             </div>
             <div className={'py-2'}>
@@ -48,6 +51,7 @@ const Personal = props => {
                 label={'Email'}
                 placeholder={''}
                 type={'email'}
+                value={personalInfo.email}
               />
             </div>
             <div className={'py-2'}>
@@ -56,6 +60,7 @@ const Personal = props => {
                 label={'Pais'}
                 placeholder={''}
                 type={'text'}
+                value={personalInfo.country}
               />
             </div>
 
@@ -65,6 +70,7 @@ const Personal = props => {
                 label={'Dirección'}
                 placeholder={''}
                 type={'text'}
+                value={personalInfo.address}
               />
             </div>
 
@@ -74,6 +80,7 @@ const Personal = props => {
                 label={'Ciudad'}
                 placeholder={''}
                 type={'text'}
+                value={personalInfo.town}
               />
             </div>
 
@@ -83,6 +90,7 @@ const Personal = props => {
                 label={'Fecha de nacimiento'}
                 placeholder={''}
                 type={'date'}
+                value={personalInfo.date}
               />
             </div>
           </div>
@@ -93,6 +101,7 @@ const Personal = props => {
                 label={'Contraseña'}
                 placeholder={''}
                 type={'password'}
+                value={personalInfo.password}
               />
             </div>
 
@@ -102,6 +111,7 @@ const Personal = props => {
                 label={'Como nos conoció…'}
                 placeholder={''}
                 type={'password'}
+                value={personalInfo.meet}
               />
             </div>
 
@@ -111,6 +121,7 @@ const Personal = props => {
                 label={'Teléfono'}
                 placeholder={''}
                 type={'tel'}
+                value={personalInfo.telephone}
               />
             </div>
 
@@ -120,6 +131,7 @@ const Personal = props => {
                 label={'Teléfono emergencia'}
                 placeholder={''}
                 type={'tel'}
+                value={personalInfo.emergencyPhone}
               />
             </div>
 
@@ -129,6 +141,7 @@ const Personal = props => {
                 label={'DNI'}
                 placeholder={''}
                 type={'text'}
+                value={personalInfo.code}
               />
             </div>
 
@@ -138,6 +151,7 @@ const Personal = props => {
                 list={list}
                 handleChange={e => handleChangePersonal(e, 'gender')}
                 type={'select'}
+                value={personalInfo.gender}
               />
             </div>
           </div>

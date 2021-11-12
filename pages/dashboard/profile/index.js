@@ -37,7 +37,9 @@ const Profile = () => {
   // variables
   const router = useRouter()
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
+  const [uploadFile, setUploadFile] = useState({})
   const [personalInfo, setPersonalInfo] = useState({
+    avatar: '',
     name: '',
     surname: '',
     email: '',
@@ -78,15 +80,23 @@ const Profile = () => {
     } else {
       router.push('/dashboard/profile#personal', undefined, { shallow: true })
     }
-  }, [router])
+  }, [router.pathname])
 
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
     router.push(`/dashboard/profile#${tabType}`, undefined, { shallow: true })
   }
 
+  const handleChangeAvatar = event => {
+    const newImage = event.target.files[0]
+    setUploadFile(newImage)
+    if (newImage) {
+      setPersonalInfo({ ...personalInfo, avatar: URL.createObjectURL(newImage) })
+    }
+  }
+
   const handleSavePersonal = () => {
-    console.log('handleSavePersonal')
+    console.log('handleSavePersonal', uploadFile)
   }
 
   const handleDiscardPersonal = () => {
@@ -150,6 +160,8 @@ const Profile = () => {
       <div className={'pt-7'}>
         {activeTab.personal && (
           <Personal
+            personalInfo={personalInfo}
+            handleChangeAvatar={handleChangeAvatar}
             handleSave={handleSavePersonal}
             handleDiscard={handleDiscardPersonal}
             handleChangePersonal={handleChangePersonal}
