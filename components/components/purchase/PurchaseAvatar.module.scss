@@ -5,9 +5,13 @@
   background-color: $gray-100-color;
 }
 .edit {
+  width: 24px;
+  height: 24px;
   background-color: $blue-gray-400-color;
-  border-radius: 20px;
-  padding: 3px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     background-color: $blue-gray-300-color;
   }

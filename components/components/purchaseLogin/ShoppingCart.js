@@ -1,12 +1,20 @@
 import React, { useState } from 'react'
+
+// next components
 import Image from 'next/image'
+
+// custom components
+import AcceptCommonButtom from 'components/components/purchase/CommonButton'
+// import CommonButton from './CommonButton'
+
+import Radio from 'components/components/purchase/Radio'
+// styles
 import styles from './ShoppingCart.module.scss'
+
+// images
 import close from 'public/images/close.svg'
 import down from 'public/images/down.svg'
 import up from 'public/images/up.svg'
-import CommonButton from './CommonButton'
-import AcceptCommonButtom from 'components/components/purchase/CommonButton'
-import Radio from 'components/components/purchase/Radio'
 
 const ShoppingCart = props => {
   const { data, handleRemoveCart, handleAcceptDiscount, tabIndex } = props
@@ -34,7 +42,7 @@ const ShoppingCart = props => {
           <div className={'flex justify-between items-center my-3'} key={index}>
             <div className={'flex justify-between'}>
               <div className={'mr-4'} style={{ minWidth: '88px' }}>
-                <img src={item.image} style={{ width: '88px', height: '88px' }} />
+                <Image src={item.image} alt="" width={88} height={88} />
               </div>
               <div className={'flex flex-col justify-between'}>
                 <div className={styles.listDescription}>{item.description}</div>

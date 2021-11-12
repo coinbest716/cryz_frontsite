@@ -50,7 +50,7 @@ const Login = () => {
     if (isAuthenticated) {
       router.push('/dashboard')
     }
-  }, [isAuthenticated, router])
+  }, [isAuthenticated])
 
   useEffect(() => {
     if (!userError && userData && userData.getUser) {

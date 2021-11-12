@@ -244,10 +244,19 @@ const Dashboard = () => {
               <div className={'pt-2 ' + styles.mediumLabel}>80% Perfil Completado</div>
               <div className={'p-8 text-center'}>
                 <div className={'pt-7 flex justify-center'}>
-                  <img
-                    src="/images/default-avatar.svg"
+                  <div
+                    className={'flex justify-center items-center overflow-hidden p-1'}
                     style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
-                  />
+                  >
+                    <Image
+                      src={'/images/default-avatar.svg'}
+                      alt=""
+                      width={140}
+                      height={140}
+                      objectFit="cover"
+                      objectPosition="center"
+                    />
+                  </div>
                 </div>
                 <div className={'pt-4 ' + styles.highBoldLabel}>Mariano Pérez</div>
                 <div className={'pt-2 ' + styles.mediumLabel}>Madrid</div>
