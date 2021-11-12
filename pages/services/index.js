@@ -109,6 +109,7 @@ const Services = () => {
             >
               <img
                 src={contactType.type1 ? trainingImage : placeholder1}
+                alt=""
                 style={{ width: '100%', height: '288px', opacity: 0.4 }}
                 className={styles.box1}
               />
@@ -132,6 +133,7 @@ const Services = () => {
             >
               <img
                 src={contactType.type2 ? physiotherapyImage : placeholder2}
+                alt=""
                 style={{ width: '100%', height: '288px', opacity: 0.4 }}
                 className={styles.box1}
               />
@@ -154,6 +156,7 @@ const Services = () => {
             >
               <img
                 src={contactType.type3 ? nutritionImage : placeholder3}
+                alt=""
                 style={{ width: '100%', height: '288px', opacity: 0.4 }}
                 className={styles.box1}
               />

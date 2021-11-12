@@ -16,7 +16,7 @@ const Health = props => {
           className={'flex justify-between items-center ' + styles.measureGraphic}
           onClick={() => handleClickTab('graphic')}
         >
-          <Image src={measureGraphic} width={38} height={34} />
+          <Image src={measureGraphic} alt="" width={38} height={34} />
         </div>
         <div className={'flex justify-between items-center gap-6'}>
           <CommonButton label={'Descartar'} handleClick={handleDiscard} type={'outline'} />

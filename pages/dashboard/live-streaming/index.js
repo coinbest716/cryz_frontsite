@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 // redux
 import { useDispatch } from 'react-redux'
 
+// next components
+import Image from 'next/image'
+
 // third party components1
 import ReactPlayer from 'react-player'
 
@@ -62,17 +65,9 @@ const LiveStreaming = () => {
             <div className={'pt-7'}>
               {material.map((item, index) => (
                 <div className={'flex justify-start py-2'} key={index}>
-                  <img
-                    src={item.url}
-                    alt=""
-                    style={{
-                      width: '56px',
-                      height: '56px',
-                      borderRadius: '10px',
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                    }}
-                  />
+                  <div className={styles.imageArea}>
+                    <Image src={item.url} alt="" width={56} height={56} objectFit="cover" objectPosition="center" />
+                  </div>
                   <div className={'pl-4 flex flex-col justify-around'}>
                     <div className={styles.label}>{item.label}</div>
                     <div className={styles.count}>{item.count}</div>

@@ -230,7 +230,7 @@ const Graphic = props => {
           className={'flex justify-between items-center ' + styles.measureGraphic}
           onClick={() => handleClickTab('health')}
         >
-          <Image src={measureEdit} width={38} height={34} />
+          <Image src={measureEdit} alt="" width={38} height={34} />
         </div>
       </div>
       <div className={'w-full my-6 ' + styles.divider} />
