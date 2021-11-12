@@ -16,6 +16,7 @@ import NewMessageBox from 'components/components/dashboard/NewMessageBox'
 
 // third party components
 import 'react-calendar/dist/Calendar.css'
+import moment from 'moment'
 
 // styles
 import styles from './dashboard.module.scss'
@@ -27,6 +28,7 @@ import noPendingIcon from 'public/images/no-pending.svg'
 
 // json data
 import DashboardData from 'assets/data/DashboardData.json'
+import CalendarData from 'assets/data/CalendarData'
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
@@ -37,6 +39,11 @@ const Dashboard = () => {
   const [isMounted, setIsMounted] = React.useState(false)
 
   React.useEffect(() => {
+    let _markDate = []
+    CalendarData.map(item => {
+      _markDate.push(moment(item.start).format('DD-MM-YYYY'))
+    })
+    setMarkDate(_markDate)
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
@@ -49,6 +56,8 @@ const Dashboard = () => {
   // loading part end #######################
 
   // variables
+  const [markDate, setMarkDate] = useState([])
+  const [calendarValue, setCalendarValue] = useState(new Date())
   const today = useSelector(state => state.today)
   const [value, onChange] = useState(new Date())
   const [message, setMessage] = useState([])
@@ -134,6 +143,21 @@ const Dashboard = () => {
     }
   }
 
+  const handleChangeDate = value => {
+    setCalendarValue(value)
+    const eventDate = moment(value).format('YYYY-MM-DD')
+    markDate.map(item => {
+      if (item === moment(value).format('DD-MM-YYYY')) {
+        router.push({
+          pathname: '/dashboard/calendar',
+          query: {
+            eventDate: eventDate,
+          },
+        })
+      }
+    })
+  }
+
   return (
     <div className={'w-full ' + styles.container}>
       <div className={'grid grid-cols-12'}>
@@ -208,7 +232,17 @@ const Dashboard = () => {
                 className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
                 // onClick={() => handleClickRedirect('calendar')}
               >
-                <Calendar className={styles.calendar} onChange={onChange} value={value}></Calendar>
+                <Calendar
+                  className={styles.calendar}
+                  onChange={handleChangeDate}
+                  value={calendarValue}
+                  locale="es-MX"
+                  tileClassName={({ date, view }) => {
+                    if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                      return 'highlight'
+                    }
+                  }}
+                ></Calendar>
               </div>
             </div>
             <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
