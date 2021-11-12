@@ -1,24 +1,26 @@
 [
     {
       "name": "qwe",
-      "title": "qwe",
+      "surname": "qwe",
+      "province": "qwe",
+      "addressAlias": "qwe",
+      "population" : "qwe",
       "cif": "qwe",
       "email": "qwe",
-      "nif": "qwe",
       "address": "qwe",
-      "phone": "qwe",
       "country": "qwe",
       "postalCode": "qwe",
       "collapse": true
     },
     {
       "name": "asd",
-      "title": "asd",
+      "surname": "qwe",
+      "province": "asd",
+      "addressAlias": "qwe",
+      "population" : "qwe",
       "cif": "asd",
       "email": "asd",
-      "nif": "asd",
       "address": "asd",
-      "phone": "asd",
       "country": "asd",
       "postalCode": "asd",
       "collapse": true
