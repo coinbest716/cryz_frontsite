@@ -27,6 +27,7 @@ import downIcon from 'public/images/down.svg'
 
 // json data
 import PlanData from 'assets/data/PlanData.json'
+import MonthListData from 'assets/data/MonthListData.json'
 
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
@@ -64,6 +65,7 @@ const Planes = () => {
     setMaterials(PlanData.materialData)
     setGrayMaterials(PlanData.grayMaterialData)
     setGreenMaterials(PlanData.greenMaterialData)
+    setCurrentMonth(MonthListData[new Date().getMonth()].month)
   }, [])
 
   useEffect(() => {
@@ -90,8 +92,7 @@ const Planes = () => {
 
   const getOnlyMonth = label => {
     const str = label.split(' ')
-    setCurrentMonth(str[0].charAt(0).toUpperCase() + str[0].slice(1))
-    return str[0]
+    return str[0].charAt(0).toUpperCase() + str[0].slice(1)
   }
 
   return (
@@ -127,9 +128,14 @@ const Planes = () => {
                 </div>
               ))}
             </div>
-            <div>
+            <div className={'hidden lg:flex'}>
               <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
             </div>
+          </div>
+
+          <div className={styles.noteSection + ' mt-5 px-8 py-4 flex lg:hidden'}>
+            <div className={styles.notes}>Notas :</div>
+            <div className={styles.noteDescription}>{noteDescription}</div>
           </div>
 
           <div className={'grid grid-cols-12 gap-8 pt-7'}>
@@ -144,9 +150,12 @@ const Planes = () => {
               </div>
             </div>
             <div className={'col-span-12 md:col-span-8 sm:col-span-12'}>
-              <div className={styles.noteSection + ' px-8 py-4'}>
+              <div className={styles.noteSection + ' px-8 py-4 hidden lg:flex'}>
                 <div className={styles.notes}>Notas :</div>
                 <div className={styles.noteDescription}>{noteDescription}</div>
+              </div>
+              <div className={'flex justify-end lg:hidden'}>
+                <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
               </div>
             </div>
           </div>
@@ -170,12 +179,9 @@ const Planes = () => {
                 onChange={handleChangeDate}
                 showDoubleView={false}
                 showNavigation={true}
-                // view={'year'}
-                locale="es-MX"
-                navigationLabel={({ date, label, locale, view }) =>
-                  // `Current view: ${view}, date: ${date.toLocaleDateString(locale)}`
-                  `${getOnlyMonth(label)}`
-                }
+                view={'month'}
+                locale="es"
+                navigationLabel={({ label }) => getOnlyMonth(label)}
               />
             </div>
             <div className={styles.videoMaterialTitle + ' pt-8'}>CALENTAMIENTO</div>
