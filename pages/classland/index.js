@@ -121,9 +121,9 @@ const Classland = () => {
           ))}
         </div>
         <div className={styles.cardSection}>
-          <div className={'grid grid-cols-12 gap-12'}>
+          <div className={'grid grid-cols-12 gap-8'}>
             {cardData?.map((card, index) => (
-              <div className={'col-span-12 flex  md:col-span-4 sm:col-span-12 ' + styles.cardAlign} key={index}>
+              <div className={'col-span-12 flex md:col-span-6 lg:col-span-4 ' + styles.cardAlign} key={index}>
                 <ClassCard data={card} key={index} />
               </div>
             ))}
