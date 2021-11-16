@@ -15,12 +15,16 @@ const DownloadPDF = props => {
           onClick={onClick}
         >
           <div className={styles.labelPlan}>{'Documentación'}&nbsp;&nbsp;</div>
-          <Image src={DownloadWhiteIcon} alt="" width={15} height={15} />
+          <div className={'w-4 h-4 flex items-center'}>
+            <Image src={DownloadWhiteIcon} alt="" width={15} height={15} />
+          </div>
         </button>
       ) : (
         <button className={'flex justify-between w-full items-center ' + styles.download} onClick={onClick}>
           <div className={styles.label}>{'Dossier'}&nbsp;&nbsp;</div>
-          <Image src={DownloadPDFIcon} alt="" width={15} height={15} />
+          <div className={'w-4 h-4 flex items-center'}>
+            <Image src={DownloadPDFIcon} alt="" width={15} height={15} />
+          </div>
         </button>
       )}
     </div>

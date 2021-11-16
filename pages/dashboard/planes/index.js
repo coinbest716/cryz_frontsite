@@ -122,10 +122,10 @@ const Planes = () => {
 
           <div className={'flex flex-wrap justify-between pt-12 gap-4'}>
             <div className={styles.blockSection + ' flex flex-wrap justify-between items-center px-5 py-5'}>
-              <div className={styles.blackName + ' py-2'}>Información del bloque</div>
+              <div className={styles.blackName + ' py-2 pr-4'}>Información del bloque</div>
               <div className={'flex justify-end flex-1'}>
                 {feature.map((item, index) => (
-                  <div key={index} className={'px-2 lg:px-5'}>
+                  <div key={index} className={'pl-4 lg:px-5'}>
                     <Feature data={item} />
                   </div>
                 ))}
