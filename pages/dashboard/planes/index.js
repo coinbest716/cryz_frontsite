@@ -20,6 +20,7 @@ import Feature from 'components/components/academy/Feature'
 import DownloadPDF from 'components/components/academy/DownloadPDF'
 
 // styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './planes.module.scss'
 
 // images and icons
@@ -96,7 +97,7 @@ const Planes = () => {
   }
 
   return (
-    <div className={'pt-10 pb-24 px-24 ' + styles.container}>
+    <div className={globalStyles.dashContainer}>
       <div className={'flex justify-between'}>
         <div>
           <div className={styles.highBoldLabel}>Planes online</div>
@@ -133,30 +134,26 @@ const Planes = () => {
             </div>
           </div>
 
-          <div className={styles.noteSection + ' mt-5 px-8 py-4 flex lg:hidden'}>
+          <div className={styles.noteSection + ' mt-5 px-8 py-4 block lg:hidden'}>
             <div className={styles.notes}>Notas :</div>
             <div className={styles.noteDescription}>{noteDescription}</div>
           </div>
 
-          <div className={'grid grid-cols-12 gap-8 pt-7'}>
-            <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
-              <div className={'px-8 py-5 ' + styles.materialSection}>
-                <div className={styles.materialTitle + ' pb-2'}>Material necesario</div>
-                {materials.map((item, index) => (
-                  <div className={'py-2'} key={index}>
-                    <Material item={item} />
-                  </div>
-                ))}
-              </div>
+          <div className={'w-full flex pt-7'}>
+            <div className={'mr-8 px-8 py-5 ' + styles.materialSection}>
+              <div className={styles.materialTitle + ' pb-2'}>Material necesario</div>
+              {materials.map((item, index) => (
+                <div className={'py-2'} key={index}>
+                  <Material item={item} />
+                </div>
+              ))}
             </div>
-            <div className={'col-span-12 md:col-span-8 sm:col-span-12'}>
-              <div className={styles.noteSection + ' px-8 py-4 hidden lg:flex'}>
-                <div className={styles.notes}>Notas :</div>
-                <div className={styles.noteDescription}>{noteDescription}</div>
-              </div>
-              <div className={'flex justify-end lg:hidden'}>
-                <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
-              </div>
+            <div className={'hidden lg:block px-8 py-5 ' + styles.noteSection}>
+              <div className={styles.notes}>Notas :</div>
+              <div className={styles.noteDescription}>{noteDescription}</div>
+            </div>
+            <div className={'flex justify-end lg:hidden'}>
+              <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
             </div>
           </div>
         </div>
