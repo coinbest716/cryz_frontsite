@@ -121,20 +121,22 @@ const Planes = () => {
           </div>
 
           <div className={'flex flex-wrap justify-between pt-12 gap-4'}>
-            <div className={styles.blockSection + ' flex flex-wrap items-center px-5 py-5'}>
-              <div className={styles.blackName}>Información del bloque</div>
-              {feature.map((item, index) => (
-                <div key={index} className={'px-2'}>
-                  <Feature data={item} />
-                </div>
-              ))}
+            <div className={styles.blockSection + ' flex flex-wrap justify-between items-center px-5 py-5'}>
+              <div className={styles.blackName + ' py-2'}>Información del bloque</div>
+              <div className={'flex justify-end flex-1'}>
+                {feature.map((item, index) => (
+                  <div key={index} className={'px-2 lg:px-5'}>
+                    <Feature data={item} />
+                  </div>
+                ))}
+              </div>
             </div>
             <div className={'hidden lg:flex'}>
               <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
             </div>
           </div>
 
-          <div className={styles.noteSection + ' mt-5 px-8 py-4 block lg:hidden'}>
+          <div className={styles.noteSection + ' mt-5 px-4 py-8 block lg:hidden'}>
             <div className={styles.notes}>Notas :</div>
             <div className={styles.noteDescription}>{noteDescription}</div>
           </div>
@@ -148,7 +150,7 @@ const Planes = () => {
                 </div>
               ))}
             </div>
-            <div className={'hidden lg:block px-8 py-5 ' + styles.noteSection}>
+            <div className={'hidden lg:block px-4 py-8 ' + styles.noteSection}>
               <div className={styles.notes}>Notas :</div>
               <div className={styles.noteDescription}>{noteDescription}</div>
             </div>
