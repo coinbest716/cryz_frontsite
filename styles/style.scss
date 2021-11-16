@@ -49,6 +49,12 @@
     font-family: Montserrat;
     font-size: 13px;
   }
+  .react-calendar__navigation__prev2-button {
+    display: none !important;
+  }
+  .react-calendar__navigation__next2-button {
+    display: none !important;
+  }
   .react-calendar__navigation button:enabled:hover,
   .react-calendar__navigation button:enabled:focus {
     background-color: #818e8e;

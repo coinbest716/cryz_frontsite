@@ -20,6 +20,7 @@ import Feature from 'components/components/academy/Feature'
 import DownloadPDF from 'components/components/academy/DownloadPDF'
 
 // styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './planes.module.scss'
 
 // images and icons
@@ -27,6 +28,7 @@ import downIcon from 'public/images/down.svg'
 
 // json data
 import PlanData from 'assets/data/PlanData.json'
+import MonthListData from 'assets/data/MonthListData.json'
 
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
@@ -64,6 +66,7 @@ const Planes = () => {
     setMaterials(PlanData.materialData)
     setGrayMaterials(PlanData.grayMaterialData)
     setGreenMaterials(PlanData.greenMaterialData)
+    setCurrentMonth(MonthListData[new Date().getMonth()].month)
   }, [])
 
   useEffect(() => {
@@ -90,12 +93,11 @@ const Planes = () => {
 
   const getOnlyMonth = label => {
     const str = label.split(' ')
-    setCurrentMonth(str[0].charAt(0).toUpperCase() + str[0].slice(1))
-    return str[0]
+    return str[0].charAt(0).toUpperCase() + str[0].slice(1)
   }
 
   return (
-    <div className={'pt-10 pb-24 px-24 ' + styles.container}>
+    <div className={globalStyles.dashContainer}>
       <div className={'flex justify-between'}>
         <div>
           <div className={styles.highBoldLabel}>Planes online</div>
@@ -119,35 +121,41 @@ const Planes = () => {
           </div>
 
           <div className={'flex flex-wrap justify-between pt-12 gap-4'}>
-            <div className={styles.blockSection + ' flex flex-wrap items-center px-5 py-5'}>
-              <div className={styles.blackName}>Información del bloque</div>
-              {feature.map((item, index) => (
-                <div key={index} className={'px-2'}>
-                  <Feature data={item} />
-                </div>
-              ))}
-            </div>
-            <div>
-              <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
-            </div>
-          </div>
-
-          <div className={'grid grid-cols-12 gap-8 pt-7'}>
-            <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
-              <div className={'px-8 py-5 ' + styles.materialSection}>
-                <div className={styles.materialTitle + ' pb-2'}>Material necesario</div>
-                {materials.map((item, index) => (
-                  <div className={'py-2'} key={index}>
-                    <Material item={item} />
+            <div className={styles.blockSection + ' flex flex-wrap justify-between items-center px-5 py-5'}>
+              <div className={styles.blackName + ' py-2 pr-4'}>Información del bloque</div>
+              <div className={'flex justify-end flex-1'}>
+                {feature.map((item, index) => (
+                  <div key={index} className={'pl-4 lg:px-5'}>
+                    <Feature data={item} />
                   </div>
                 ))}
               </div>
             </div>
-            <div className={'col-span-12 md:col-span-8 sm:col-span-12'}>
-              <div className={styles.noteSection + ' px-8 py-4'}>
-                <div className={styles.notes}>Notas :</div>
-                <div className={styles.noteDescription}>{noteDescription}</div>
-              </div>
+            <div className={'hidden lg:flex'}>
+              <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
+            </div>
+          </div>
+
+          <div className={styles.noteSection + ' mt-5 px-4 py-8 block lg:hidden'}>
+            <div className={styles.notes}>Notas :</div>
+            <div className={styles.noteDescription}>{noteDescription}</div>
+          </div>
+
+          <div className={'w-full flex pt-7'}>
+            <div className={'mr-8 px-8 py-5 ' + styles.materialSection}>
+              <div className={styles.materialTitle + ' pb-2'}>Material necesario</div>
+              {materials.map((item, index) => (
+                <div className={'py-2'} key={index}>
+                  <Material item={item} />
+                </div>
+              ))}
+            </div>
+            <div className={'hidden lg:block px-4 py-8 ' + styles.noteSection}>
+              <div className={styles.notes}>Notas :</div>
+              <div className={styles.noteDescription}>{noteDescription}</div>
+            </div>
+            <div className={'flex justify-end lg:hidden'}>
+              <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
             </div>
           </div>
         </div>
@@ -170,12 +178,9 @@ const Planes = () => {
                 onChange={handleChangeDate}
                 showDoubleView={false}
                 showNavigation={true}
-                // view={'year'}
-                locale="es-MX"
-                navigationLabel={({ date, label, locale, view }) =>
-                  // `Current view: ${view}, date: ${date.toLocaleDateString(locale)}`
-                  `${getOnlyMonth(label)}`
-                }
+                view={'month'}
+                locale="es"
+                navigationLabel={({ label }) => getOnlyMonth(label)}
               />
             </div>
             <div className={styles.videoMaterialTitle + ' pt-8'}>CALENTAMIENTO</div>
