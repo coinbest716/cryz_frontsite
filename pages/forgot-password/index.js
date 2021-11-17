@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 // redux
 import { useDispatch } from 'react-redux'
 
+import { Auth } from 'aws-amplify'
+
 // next components
 import Image from 'next/image'
 import router from 'next/router'
@@ -48,7 +50,7 @@ const ForgotPassword = () => {
         setProgressStatus(false)
         toast.success('Successfully send email.')
         localStorage.setItem('email', userEmail)
-        router.push('/reset_password')
+        router.push('/reset-password')
       })
       .catch(error => {
         console.log(error)
