@@ -11,6 +11,9 @@ const withTM = require('next-transpile-modules')([
 const withGraphql = require('next-plugin-graphql')
 
 const appConfig = {
+  images: {
+    domains: ['crysdiaz-public.s3.eu-west-1.amazonaws.com'],
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
