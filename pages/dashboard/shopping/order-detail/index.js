@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
-import Profile from 'components/components/dashboard/Profile'
+// import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import CommonButton from 'components/components/dashboard/CommonButton'
 import Chip from 'components/components/Chip'
@@ -44,12 +44,8 @@ const OrderDetail = () => {
       <div className={'w-full flex flex-wrap justify-between items-center'}>
         <div className={globalStyles.dashTitle}>Bono 10 sesiones Preparación parto</div>
         <div className={'flex justify-end'}>
-          <div className={'mr-8'}>
-            <NotificationButton />
-          </div>
-          <div>
-            <Profile />
-          </div>
+          <NotificationButton />
+          {/* <Profile /> */}
         </div>
       </div>
       {/* button part */}

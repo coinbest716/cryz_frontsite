@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
-import ProfileInfo from 'components/components/dashboard/Profile'
+// import Profile from 'components/components/dashboard/Profile'
 import Personal from 'components/components/dashboard/Personal'
 import Health from 'components/components/dashboard/Health'
 import Graphic from 'components/components/dashboard/Graphic'
@@ -136,10 +136,8 @@ const Profile = () => {
           <div className={'pt-2 ' + styles.mediumLabel}>80% Perfil Completado</div>
         </div>
         <div className={'flex justify-end items-center'}>
-          <div className={'pr-4'}>
-            <NotificationButton />
-          </div>
-          <ProfileInfo />
+          <NotificationButton />
+          {/* <Profile /> */}
         </div>
       </div>
       <div className={'my-8 ' + styles.divider} />
