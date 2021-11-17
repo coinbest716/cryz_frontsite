@@ -22,8 +22,6 @@ import topImage from 'public/images/classland-top-image.svg'
 
 // json data
 import TeamSectionData from 'assets/data/TeamSectionData'
-import ClassCardData from 'assets/data/ClassCardData'
-import AccordianFaqData from 'assets/data/AccordianFaqData'
 
 // graphql
 import { useLazyQuery } from '@apollo/client'
@@ -68,21 +66,18 @@ const Classland = () => {
 
   useEffect(() => {
     if (!classlandsError && classlandsData && classlandsData.getClasslands) {
-      console.log(classlandsData.getClasslands)
       setCardData(classlandsData.getClasslands)
     }
   }, [classlandsLoading, classlandsData, classlandsError])
 
   useEffect(() => {
     if (!faqsError && faqsData && faqsData.getFaqs) {
-      console.log(faqsData)
       setFaqData(faqsData.getFaqs)
     }
   }, [faqsLoading, faqsData, faqsError])
 
   useEffect(() => {
     setSliderData(TeamSectionData)
-    // setCardData(ClassCardData)
     setFilter([
       { index: 0, label: 'Actívate' },
       { index: 1, label: 'Bienestar' },
