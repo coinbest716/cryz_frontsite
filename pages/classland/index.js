@@ -25,6 +25,10 @@ import TeamSectionData from 'assets/data/TeamSectionData'
 import ClassCardData from 'assets/data/ClassCardData'
 import AccordianFaqData from 'assets/data/AccordianFaqData'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Classland = () => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -42,6 +46,7 @@ const Classland = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  // variables
   const faqRef = useRef(null)
   const [sliderData, setSliderData] = useState([])
   const [cardData, setCardData] = useState([])
@@ -49,10 +54,35 @@ const Classland = () => {
   const [filterKey, setFilterKey] = useState(0)
   const [filter, setFilter] = useState([])
 
+  const [getClasslands, { data: classlandsData, loading: classlandsLoading, error: classlandsError }] = useLazyQuery(
+    graphql.queries.getClasslands
+  )
+  const [getFaqs, { data: faqsData, loading: faqsLoading, error: faqsError }] = useLazyQuery(graphql.queries.getFaqs)
+
+  // handlers
+
+  useEffect(() => {
+    getClasslands()
+    getFaqs()
+  }, [])
+
+  useEffect(() => {
+    if (!classlandsError && classlandsData && classlandsData.getClasslands) {
+      console.log(classlandsData.getClasslands)
+      setCardData(classlandsData.getClasslands)
+    }
+  }, [classlandsLoading, classlandsData, classlandsError])
+
+  useEffect(() => {
+    if (!faqsError && faqsData && faqsData.getFaqs) {
+      console.log(faqsData)
+      setFaqData(faqsData.getFaqs)
+    }
+  }, [faqsLoading, faqsData, faqsError])
+
   useEffect(() => {
     setSliderData(TeamSectionData)
-    setCardData(ClassCardData)
-    setFaqData(AccordianFaqData)
+    // setCardData(ClassCardData)
     setFilter([
       { index: 0, label: 'Actívate' },
       { index: 1, label: 'Bienestar' },
@@ -136,7 +166,7 @@ const Classland = () => {
           </div>
           {faqData?.map((data, index) => (
             <div style={{ padding: '7px 0px' }} key={index}>
-              <Accordian title={data.title} description={data.description} />
+              <Accordian title={data.name} description={data.description} />
             </div>
           ))}
         </div>

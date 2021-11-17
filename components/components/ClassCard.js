@@ -10,7 +10,7 @@ const ClassCard = props => {
       <div className={styles.cardImageLayer}>
         <Image src={data?.image} alt="" layout="responsive" width={365} height={253} className={styles.cardImage} />
         <div className={styles.cardPayment}>
-          <span className={styles.cardPaymentType}>{data?.paymentType}s</span>
+          <span className={styles.cardPaymentType}>{data?.price}€/mes</span>
         </div>
       </div>
       <div className={styles.cardTitle}>{data?.title}</div>
