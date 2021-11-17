@@ -13,7 +13,7 @@ const SocialButtonGroup = props => {
     <div className={'flex justify-between'}>
       <div className={'mx-1'}>
         <a target="_blank" href={socialURL.instagram} rel="noopener noreferrer">
-          <button>
+          <button className={'w-8 h-8 duration-200 hover:bg-gray-500 rounded-full flex justify-center items-center'}>
             <Image
               src={color === 'white' ? InstagramIcon : color === 'gray' ? InstagramGrayIcon : ''}
               alt=""
@@ -25,7 +25,7 @@ const SocialButtonGroup = props => {
       </div>
       <div className={'mx-1'}>
         <a target="_blank" href={socialURL.facebook} rel="noopener noreferrer">
-          <button>
+          <button className={'w-8 h-8 duration-200 hover:bg-gray-500 rounded-full flex justify-center items-center'}>
             <Image
               src={color === 'white' ? FacebookIcon : color === 'gray' ? FacebookGrayIcon : ''}
               alt=""
