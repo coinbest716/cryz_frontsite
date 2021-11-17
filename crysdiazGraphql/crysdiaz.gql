@@ -11,3 +11,14 @@ mutation CreateUser {
     id
   }
 }
+
+# contact page
+query GetContactInfo {
+  getContactInfo {
+    id
+    phone_one
+    phone_two
+    email_one
+    email_two
+  }
+}
