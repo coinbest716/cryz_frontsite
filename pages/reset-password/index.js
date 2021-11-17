@@ -11,6 +11,8 @@ import ReactLoading from 'react-loading'
 import EyeCrossIcon from 'assets/images/eye-cross.svg'
 import EyeIcon from 'assets/images/eye.svg'
 
+import { Auth } from 'aws-amplify'
+
 const ResetPassword = () => {
   const [progressStatus, setProgressStatus] = useState(false)
   const [showPass, setShowPass] = useState(false)
