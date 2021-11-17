@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 // next components
@@ -19,17 +19,21 @@ import emailIcon from 'public/images/email.svg'
 import addressIcon from 'public/images/address.svg'
 import whatsapp from 'public/images/whatsapp.svg'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Contact = () => {
   // loading part ###########################
   const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = React.useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
@@ -47,13 +51,32 @@ const Contact = () => {
     },
   ]
 
+  const [emailOne, setEmailOne] = useState('')
+  const [emailTwo, setEmailTwo] = useState('')
+  const [phoneOne, setPhoneOne] = useState('')
+  const [phoneTwo, setPhoneTwo] = useState('')
+
+  const [getContactInfo, { data: contactData, loading: contactLoading, error: contactError }] = useLazyQuery(
+    graphql.queries.getContactInfo
+  )
+
   // handlers
+  useEffect(() => {
+    getContactInfo()
+  }, [])
+
+  useEffect(() => {
+    if (!contactError && contactData && contactData.getContactInfo) {
+      setEmailOne(contactData.getContactInfo.email_one)
+      setEmailTwo(contactData.getContactInfo.email_two)
+      setPhoneOne(contactData.getContactInfo.phone_one)
+      setPhoneTwo(contactData.getContactInfo.phone_two)
+    }
+    // eslint-disable-line react-hooks/exhaustive-deps
+  }, [contactLoading, contactData, contactError])
+
   const handleClickWhatsapp = () => {
     console.log('handleClickWhatsapp')
-  }
-
-  const handleClickEmail = address => {
-    window.open(`mailto:${address}`, '_blank')
   }
 
   return (
@@ -87,10 +110,10 @@ const Contact = () => {
               <div className={'pt-5 ' + styles.lowTitle}>Teléfonos</div>
               <div className={'pt-6 pb-14 ' + styles.lowDescription}>
                 <div className={'cursor-pointer'}>
-                  <a href="tel:+690148244">690 148 244</a>
+                  <a href={'tel:+' + phoneOne}>{phoneOne}</a>
                 </div>
                 <div className={'cursor-pointer'}>
-                  <a href="tel:+910467034">91 046 70 34</a>
+                  <a href={'tel:+' + phoneTwo}>{phoneTwo}</a>
                 </div>
               </div>
             </div>
@@ -98,11 +121,11 @@ const Contact = () => {
               <Image src={emailIcon} alt="" width={41} height={35} />
               <div className={'pt-5 ' + styles.lowTitle}>Direcciones de E-mail</div>
               <div className={'pt-6 pb-14 ' + styles.lowDescription}>
-                <div className={'cursor-pointer'} onClick={() => handleClickEmail('info@crysdyazandco.com')}>
-                  info@crysdyazandco.com
+                <div className={'cursor-pointer'}>
+                  <a href={'mailto:' + emailOne}>{emailOne}</a>
                 </div>
-                <div className={'cursor-pointer'} onClick={() => handleClickEmail('colaboraciones@crysdyazandco.com')}>
-                  colaboraciones@crysdyazandco.com
+                <div className={'cursor-pointer'}>
+                  <a href={'mailto:' + emailTwo}>{emailTwo}</a>
                 </div>
               </div>
             </div>
