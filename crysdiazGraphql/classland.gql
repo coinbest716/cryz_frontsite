@@ -1,0 +1,22 @@
+query GetClasslands {
+  getClasslands(category: "ALL") {
+    id
+    image
+    name
+    description
+    url
+    price
+    difficulty
+    category
+    visible
+  }
+}
+
+query GetFaqs {
+  getFaqs {
+    id
+    name
+    description
+    visible
+  }
+}
