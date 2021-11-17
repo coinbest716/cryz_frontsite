@@ -12,7 +12,7 @@ import Image from 'next/image'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
-import Profile from 'components/components/dashboard/Profile'
+// import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import MessageCard01 from 'components/components/dashboard/message/MessageCard01'
 import MessageCard02 from 'components/components/dashboard/message/MessageCard02'
@@ -87,12 +87,8 @@ const Message = () => {
           <div className={'mt-2 ' + globalStyles.dashDate}>{today}</div>
         </div>
         <div className={'flex justify-end'}>
-          <div className={'mr-8'}>
-            <NotificationButton />
-          </div>
-          <div>
-            <Profile />
-          </div>
+          <NotificationButton />
+          {/* <Profile /> */}
         </div>
       </div>
       {/* body part */}

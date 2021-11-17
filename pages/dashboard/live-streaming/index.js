@@ -12,7 +12,7 @@ import ReactPlayer from 'react-player'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
-import Profile from 'components/components/dashboard/Profile'
+// import Profile from 'components/components/dashboard/Profile'
 
 // styles
 import styles from './LiveStreaming.module.scss'
@@ -55,10 +55,8 @@ const LiveStreaming = () => {
         </div>
         <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
           <div className={'flex justify-end items-center'}>
-            <div className={'pr-4'}>
-              <NotificationButton />
-            </div>
-            <Profile />
+            <NotificationButton />
+            {/* <Profile /> */}
           </div>
           <div className={'rounded-xl bg-white py-4 px-16 pb-10 mt-10'}>
             <div className={styles.material}>Material necesario</div>

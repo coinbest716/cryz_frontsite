@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
-import ProfileInfo from 'components/components/dashboard/Profile'
+// import Profile from 'components/components/dashboard/Profile'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import CommonText from 'components/components/purchase/CommonText'
 import CommonButton from 'components/components/purchase/CommonButton'
@@ -89,10 +89,8 @@ const Billing = () => {
           <div className={'pt-2 ' + styles.mediumLabel}>{today}</div>
         </div>
         <div className={'flex justify-end items-center'}>
-          <div className={'pr-4'}>
-            <NotificationButton />
-          </div>
-          <ProfileInfo />
+          <NotificationButton />
+          {/* <Profile /> */}
         </div>
       </div>
       <div className={'pt-12'}>

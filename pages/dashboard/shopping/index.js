@@ -9,9 +9,9 @@ import router from 'next/router'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
-import Profile from 'components/components/dashboard/Profile'
+// import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
-import SearchOrder from 'components/components/dashboard/SearchOrder'
+// import SearchOrder from 'components/components/dashboard/SearchOrder'
 import Chip from 'components/components/Chip'
 
 // styles
@@ -62,15 +62,8 @@ const Shopping = () => {
       <div className={'w-full flex flex-wrap justify-between items-center'}>
         <div className={globalStyles.dashTitle}>Compras</div>
         <div className={'flex justify-end'}>
-          <div className={'mr-36'}>
-            <SearchOrder />
-          </div>
-          <div className={'mr-8'}>
-            <NotificationButton />
-          </div>
-          <div>
-            <Profile />
-          </div>
+          <NotificationButton />
+          {/* <Profile /> */}
         </div>
       </div>
       {/* month select part */}

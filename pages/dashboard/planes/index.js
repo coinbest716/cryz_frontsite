@@ -14,7 +14,7 @@ import 'react-calendar/dist/Calendar.css'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
-import ProfileInfo from 'components/components/dashboard/Profile'
+// import Profile from 'components/components/dashboard/Profile'
 import Material from 'components/components/dashboard/Material'
 import Feature from 'components/components/academy/Feature'
 import DownloadPDF from 'components/components/academy/DownloadPDF'
@@ -103,10 +103,8 @@ const Planes = () => {
           <div className={styles.highBoldLabel}>Planes online</div>
         </div>
         <div className={'flex justify-end items-center'}>
-          <div className={'pr-4'}>
-            <NotificationButton />
-          </div>
-          <ProfileInfo />
+          <NotificationButton />
+          {/* <Profile /> */}
         </div>
       </div>
       <div className={'grid grid-cols-12 gap-8'}>

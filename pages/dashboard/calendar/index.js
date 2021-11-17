@@ -20,7 +20,7 @@ const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
-import ProfileInfo from 'components/components/dashboard/Profile'
+// import Profile from 'components/components/dashboard/Profile'
 import CheckBoxImage from 'components/components/dashboard/CheckBoxImage'
 
 // styles
@@ -87,10 +87,8 @@ const Calendar = () => {
           <DashboardButton handleClick={handleClickStartClass} label={'Comenzar clase'} type={'startClass'} />
         </div>
         <div className={'col-span-12 md:col-span-4 sm:col-span-12 flex justify-between items-center'}>
-          <div className={'pr-4'}>
-            <NotificationButton />
-          </div>
-          <ProfileInfo />
+          <NotificationButton />
+          {/* <Profile /> */}
         </div>
       </div>
       <div className={'grid grid-cols-12 gap-12 pt-8'}>
