@@ -1,5 +1,5 @@
-query GetClasslands {
-  getClasslands(category: "ALL") {
+query GetClasslands($category: String) {
+  getClasslands(category: $category) {
     id
     image
     name

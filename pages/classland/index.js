@@ -60,7 +60,7 @@ const Classland = () => {
   // handlers
 
   useEffect(() => {
-    getClasslands()
+    getClasslands({ variables: { category: 'Actívate' } })
     getFaqs()
   }, [])
 
@@ -88,6 +88,7 @@ const Classland = () => {
 
   const handleClickFilter = index => {
     setFilterKey(index)
+    getClasslands({ variables: { category: filter[index].label } })
   }
 
   const executeScroll = () => {
