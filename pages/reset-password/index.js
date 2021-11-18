@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import router from 'next/router'
 import styles from './ResetPassword.module.scss'
@@ -17,9 +17,15 @@ const ResetPassword = () => {
   const [progressStatus, setProgressStatus] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const [showRepeatPass, setShowRepeatPass] = useState(false)
+
+  const [email, setEmail] = useState('')
   const [verifyCode, setVerifyCode] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+
+  useEffect(() => {
+    setEmail(localStorage.getItem('email'))
+  }, [])
 
   const handleSetShowPass = bool => {
     setShowPass(bool)
@@ -44,7 +50,6 @@ const ResetPassword = () => {
       return
     }
     setProgressStatus(true)
-    const email = localStorage.getItem('email')
     Auth.forgotPasswordSubmit(email.trim(), verifyCode.trim(), confirmPassword.trim())
       .then(response => {
         console.log(response)
@@ -96,7 +101,7 @@ const ResetPassword = () => {
                 autoComplete="new-password"
                 placeholder="Código de verificación"
                 className={'w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white'}
-                value={localStorage.getItem('email')}
+                value={email}
                 disabled={true}
                 onChange={handleChangeVerifyCode}
               />
