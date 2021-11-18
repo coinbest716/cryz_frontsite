@@ -105,6 +105,7 @@ const ForgotPassword = () => {
               <input
                 type="text"
                 placeholder="Email"
+                // autoComplete="off"
                 className={'w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white'}
                 value={userEmail}
                 onChange={handleChangeEmail}

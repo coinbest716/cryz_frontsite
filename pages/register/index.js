@@ -143,6 +143,7 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Email"
+                  autoComplete="new-password"
                   className={'w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white'}
                   value={email}
                   onChange={handleChangeEmail}
@@ -152,6 +153,7 @@ const Register = () => {
               <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
                 <input
                   type={showPass === true ? 'text' : 'password'}
+                  autoComplete="new-password"
                   placeholder="Contraseña"
                   className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
                   value={password}
@@ -169,6 +171,7 @@ const Register = () => {
               <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
                 <input
                   type={showRepeatPass === true ? 'text' : 'password'}
+                  autoComplete="new-password"
                   placeholder="Repetir contraseña"
                   className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
                   value={confirmPassword}
@@ -204,6 +207,7 @@ const Register = () => {
                 <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
                   <input
                     type={showPass === true ? 'text' : 'password'}
+                    autoComplete="new-password"
                     placeholder="Verifica tu código"
                     className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
                     value={verifyCode}

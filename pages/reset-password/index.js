@@ -91,9 +91,21 @@ const ResetPassword = () => {
             </div>
             <div className={'w-full mt-9 ' + styles.inputArea}>
               <input
-                id="verify-code"
-                autoComplete="verify-code"
+                id="email"
                 type="text"
+                autoComplete="new-password"
+                placeholder="Código de verificación"
+                className={'w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white'}
+                value={localStorage.getItem('email')}
+                disabled={true}
+                onChange={handleChangeVerifyCode}
+              />
+            </div>
+            <div className={'w-full mt-9 ' + styles.inputArea}>
+              <input
+                id="verify-code"
+                type="text"
+                autoComplete="new-password"
                 placeholder="Código de verificación"
                 className={'w-full h-full border border-white rounded bg-transparent py-1 px-2 text-white'}
                 value={verifyCode}
@@ -104,8 +116,8 @@ const ResetPassword = () => {
             <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
               <input
                 id="new-password"
-                autoComplete="nnew-password"
                 type={showPass === true ? 'text' : 'password'}
+                autoComplete="new-password"
                 placeholder="Contraseña"
                 className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
                 value={password}
@@ -123,7 +135,7 @@ const ResetPassword = () => {
             <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
               <input
                 id="confirm-password"
-                autoComplete="off"
+                autoComplete="new-password"
                 type={showRepeatPass === true ? 'text' : 'password'}
                 placeholder="Repetir contraseña"
                 className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
