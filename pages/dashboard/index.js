@@ -158,6 +158,10 @@ const Dashboard = () => {
     })
   }
 
+  const updateCalendarLabel = label => {
+    return label.charAt(0).toUpperCase() + label.slice(1)
+  }
+
   return (
     <div className={'w-full ' + styles.container}>
       <div className={'grid grid-cols-12'}>
@@ -236,12 +240,13 @@ const Dashboard = () => {
                   className={styles.calendar}
                   onChange={handleChangeDate}
                   value={calendarValue}
-                  locale="es-MX"
+                  locale="es"
                   tileClassName={({ date, view }) => {
                     if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
                       return 'highlight'
                     }
                   }}
+                  navigationLabel={({ label }) => updateCalendarLabel(label)}
                 ></Calendar>
               </div>
             </div>
