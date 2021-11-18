@@ -79,10 +79,11 @@ const Classland = () => {
   useEffect(() => {
     setSliderData(TeamSectionData)
     setFilter([
-      { index: 0, label: 'Actívate' },
-      { index: 1, label: 'Bienestar' },
-      { index: 2, label: 'Embarazo' },
-      { index: 3, label: 'Post parto' },
+      { index: 0, label: 'ALL' },
+      { index: 1, label: 'Actívate' },
+      { index: 2, label: 'Bienestar' },
+      { index: 3, label: 'Embarazo' },
+      { index: 4, label: 'Post parto' },
     ])
   }, [])
 
