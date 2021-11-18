@@ -1,12 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './ClassCard.module.scss'
+import router from 'next/router'
 
 const ClassCard = props => {
   const { data } = props
 
   return (
-    <div className={styles.singleCard}>
+    <div className={'cursor-pointer ' + styles.singleCard} onClick={router.push(data?.url)}>
       <div className={styles.cardImageLayer}>
         <Image
           src={data?.image ? data?.image : 'https://via.placeholder.com/365x253?text=Placeholder'}
