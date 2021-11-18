@@ -60,7 +60,7 @@ const Classland = () => {
   // handlers
 
   useEffect(() => {
-    getClasslands({ variables: { category: 'Actívate' } })
+    getClasslands({ variables: { category: 'ALL' } })
     getFaqs()
   }, [])
 
@@ -79,17 +79,29 @@ const Classland = () => {
   useEffect(() => {
     setSliderData(TeamSectionData)
     setFilter([
-      { index: 0, label: 'ALL' },
-      { index: 1, label: 'Actívate' },
-      { index: 2, label: 'Bienestar' },
-      { index: 3, label: 'Embarazo' },
-      { index: 4, label: 'Post parto' },
+      { id: 'ALL', value: 'TODO' },
+      {
+        id: 'active',
+        value: 'Actívate',
+      },
+      {
+        id: 'wellness',
+        value: 'Bienestar',
+      },
+      {
+        id: 'pregnancy',
+        value: 'Embarazo',
+      },
+      {
+        id: 'postpartum',
+        value: 'Postparto',
+      },
     ])
   }, [])
 
   const handleClickFilter = index => {
     setFilterKey(index)
-    getClasslands({ variables: { category: filter[index].label } })
+    getClasslands({ variables: { category: filter[index].id } })
   }
 
   const executeScroll = () => {
