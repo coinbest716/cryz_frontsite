@@ -7,7 +7,7 @@ const ClassCard = props => {
   const { data } = props
 
   return (
-    <div className={'cursor-pointer ' + styles.singleCard} onClick={router.push(data?.url)}>
+    <div className={'cursor-pointer ' + styles.singleCard} onClick={() => router.push(data?.url)}>
       <div className={styles.cardImageLayer}>
         <Image
           src={data?.image ? data?.image : 'https://via.placeholder.com/365x253?text=Placeholder'}
