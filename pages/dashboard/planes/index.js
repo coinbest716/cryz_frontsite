@@ -91,9 +91,8 @@ const Planes = () => {
     setShowCalendar(false)
   }
 
-  const getOnlyMonth = label => {
-    const str = label.split(' ')
-    return str[0].charAt(0).toUpperCase() + str[0].slice(1)
+  const updateCalendarLabel = label => {
+    return label.charAt(0).toUpperCase() + label.slice(1)
   }
 
   return (
@@ -176,9 +175,8 @@ const Planes = () => {
                 onChange={handleChangeDate}
                 showDoubleView={false}
                 showNavigation={true}
-                view={'month'}
                 locale="es"
-                navigationLabel={({ label }) => getOnlyMonth(label)}
+                navigationLabel={({ label }) => updateCalendarLabel(label)}
               />
             </div>
             <div className={styles.videoMaterialTitle + ' pt-8'}>CALENTAMIENTO</div>
