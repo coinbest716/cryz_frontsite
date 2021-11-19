@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -12,26 +12,47 @@ import COSection from 'components/Home/COSection'
 // styles
 import styles from 'styles/Home.module.scss'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Home = props => {
   // loading part ###########################
   const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = React.useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  // variables
+  const [mainImage, setMainImage] = useState('')
+  const [getMainImage, { data: mainImageData, loading: mainImageLoading, error: mainImageError }] = useLazyQuery(
+    graphql.queries.getMainImage
+  )
+
+  // handlers
+  useEffect(() => {
+    getMainImage()
+  }, [])
+
+  useEffect(() => {
+    if (!mainImageError && mainImageData && mainImageData.getMainImage) {
+      setMainImage(mainImageData.getMainImage)
+    }
+  }, [mainImageLoading, mainImageData, mainImageError])
+
   return (
     <div className={styles.container}>
-      <MainSection />
+      <MainSection mainImage={mainImage} />
       <div id="team" className={'w-full h-10'} />
       <TeamSection />
       <COSection />

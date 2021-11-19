@@ -10,7 +10,6 @@ import { Carousel } from 'react-responsive-carousel'
 import ReactPlayer from 'react-player'
 
 // images
-import MainImage from 'assets/images/main.png'
 import ArrowLeftWhite from 'assets/images/arrow-left-white.svg'
 
 // json data
@@ -19,17 +18,22 @@ import MainSectionData from 'assets/data/MainSectionData'
 // styles
 import styles from 'components/Home/MainSection.module.scss'
 
-const MainSection = () => {
+const MainSection = props => {
+  const { mainImage } = props
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
-        <Image src={MainImage} alt="" layout="fill" objectFit="cover" objectPosition="top" />
+        {mainImage !== '' ? (
+          <Image src={mainImage?.path} alt="" layout="fill" objectFit="cover" objectPosition="top" />
+        ) : (
+          <></>
+        )}
       </div>
       <div id="topToBottom" className={styles.topToBottom}>
-        TUS METAS
+        {mainImage.text_two}
       </div>
       <div id="bottomToTop" className={styles.bottomToTop}>
-        Alcanza
+        {mainImage.text_one}
       </div>
       <div className={'absolute flex justify-end w-1/3 top-0 right-0 p-0 m-0 h-screen ' + styles.mainRightArea}>
         <div className={'absolute top-0 left-0 h-screen -z-10 w-full ' + styles.mainCarouselOpacityArea} />

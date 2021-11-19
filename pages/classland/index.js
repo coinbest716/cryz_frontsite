@@ -30,14 +30,14 @@ import graphql from 'crysdiazGraphql'
 const Classland = () => {
   // loading part ###########################
   const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = React.useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
