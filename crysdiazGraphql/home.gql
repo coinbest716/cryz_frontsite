@@ -1,0 +1,21 @@
+query GetMainImage {
+  getMainImage {
+    id
+    path
+    text_one
+    text_two
+  }
+}
+
+query GetFeaturedServices {
+  getFeaturedServices {
+    id
+    subject
+    image
+    title
+    detail
+    url
+    text
+    active
+  }
+}
