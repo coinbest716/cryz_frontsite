@@ -35,13 +35,19 @@ const Home = props => {
 
   // variables
   const [mainImage, setMainImage] = useState('')
+  const [featuredServices, setFeaturedServices] = useState('')
   const [getMainImage, { data: mainImageData, loading: mainImageLoading, error: mainImageError }] = useLazyQuery(
     graphql.queries.getMainImage
   )
+  const [
+    getFeaturedServices,
+    { data: featuredServicesData, loading: featuredServicesLoading, error: featuredServicesError },
+  ] = useLazyQuery(graphql.queries.getFeaturedServices)
 
   // handlers
   useEffect(() => {
     getMainImage()
+    getFeaturedServices()
   }, [])
 
   useEffect(() => {
@@ -50,9 +56,15 @@ const Home = props => {
     }
   }, [mainImageLoading, mainImageData, mainImageError])
 
+  useEffect(() => {
+    if (!featuredServicesError && featuredServicesData && featuredServicesData.getFeaturedServices) {
+      setFeaturedServices(featuredServicesData.getFeaturedServices)
+    }
+  }, [featuredServicesLoading, featuredServicesData, featuredServicesError])
+
   return (
     <div className={styles.container}>
-      <MainSection mainImage={mainImage} />
+      <MainSection mainImage={mainImage} featuredServices={featuredServices} />
       <div id="team" className={'w-full h-10'} />
       <TeamSection />
       <COSection />

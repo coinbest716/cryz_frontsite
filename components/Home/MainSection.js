@@ -20,7 +20,8 @@ import MainSectionData from 'assets/data/MainSectionData'
 import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
-  const { mainImage } = props
+  const { mainImage, featuredServices } = props
+  console.log('featured Services', featuredServices)
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
