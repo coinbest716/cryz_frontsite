@@ -10,6 +10,7 @@ import { Carousel } from 'react-responsive-carousel'
 import ReactPlayer from 'react-player'
 
 // images
+import MainImage from 'assets/images/main.png'
 import ArrowLeftWhite from 'assets/images/arrow-left-white.svg'
 
 // json data
@@ -24,7 +25,13 @@ const MainSection = props => {
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
         {mainImage !== '' ? (
-          <Image src={mainImage?.path} alt="" layout="fill" objectFit="cover" objectPosition="top" />
+          <Image
+            src={mainImage.path ? mainImage.path : MainImage}
+            alt=""
+            layout="fill"
+            objectFit="cover"
+            objectPosition="top"
+          />
         ) : (
           <></>
         )}
