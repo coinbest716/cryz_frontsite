@@ -45,7 +45,7 @@ const MainSection = props => {
           <Carousel
             showArrows={false}
             showThumbs={false}
-            autoPlay={false}
+            autoPlay={true}
             stopOnHover={true}
             showStatus={false}
             showIndicators={true}
