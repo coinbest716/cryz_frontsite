@@ -13,15 +13,11 @@ import ReactPlayer from 'react-player'
 import MainImage from 'assets/images/main.png'
 import ArrowLeftWhite from 'assets/images/arrow-left-white.svg'
 
-// json data
-import MainSectionData from 'assets/data/MainSectionData'
-
 // styles
 import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
   const { mainImage, featuredServices } = props
-  console.log('featured Services', featuredServices)
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
@@ -91,7 +87,7 @@ const MainSection = props => {
                     <></>
                   )}
                   {index % 2 === 0 ? <div className={styles.blankDiv}></div> : <></>}
-                  <div className={index % 2 === 0 ? styles.pinkBoxArea01 : styles.pinkBoxArea}>
+                  <div className={index % 2 === 1 ? styles.pinkBoxArea01 : styles.pinkBoxArea}>
                     <div className={styles.pinkBoxOpacity} />
                     <div className={styles.pinkBox}>
                       <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
