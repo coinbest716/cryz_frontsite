@@ -19,3 +19,18 @@ query GetFeaturedServices {
     active
   }
 }
+
+query GetEquipo {
+  getEquipo {
+    id
+    title
+    description
+    images
+    avatar
+    text_one
+    text_two
+    sign
+    facebook
+    instagram
+  }
+}
