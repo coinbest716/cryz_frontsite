@@ -63,7 +63,13 @@ const Home = props => {
 
   useEffect(() => {
     if (!featuredServicesError && featuredServicesData && featuredServicesData.getFeaturedServices) {
-      setFeaturedServices(featuredServicesData.getFeaturedServices)
+      let array = []
+      featuredServicesData.getFeaturedServices.map((item, index) => {
+        if (item.active === true) {
+          array.push(item)
+        }
+      })
+      setFeaturedServices(array)
     }
   }, [featuredServicesLoading, featuredServicesData, featuredServicesError])
 
