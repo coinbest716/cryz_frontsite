@@ -1,5 +1,6 @@
 import { GetEquipo, GetFeaturedServices, GetMainImage } from './home.gql'
 import { GetClasslands, GetFaqs } from './classland.gql'
+import { GetCmsService, GetCmsServiceDisciplineList } from './services.gql'
 import { GetContactInfo, GetUser, CreateUser } from './crysdiaz.gql'
 
 export default {
@@ -13,6 +14,9 @@ export default {
     getContactInfo: GetContactInfo,
     getFaqs: GetFaqs,
     getUser: GetUser,
+    // services part
+    getCmsService: GetCmsService,
+    getCmsServiceDisciplineList: GetCmsServiceDisciplineList,
   },
   mutations: {
     createUser: CreateUser,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -19,17 +19,21 @@ import styles from './services.module.scss'
 import nextButtonPinkIcon from 'public/images/arrow-right-pink.svg'
 import ArrowRightUpGrayIcon from 'public/images/arrow-right-up.svg'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Services = () => {
   // loading part ###########################
   const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = React.useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
@@ -48,7 +52,17 @@ const Services = () => {
 
   const [contactType, setContactType] = useState({ type1: true, type2: false, type3: false })
 
+  // variables
+  const [cmsService, setCmsService] = useState('')
+  const [getCmsService, { data: cmsServiceData, loading: mainImageLoading, error: mainImageError }] = useLazyQuery(
+    graphql.queries.getMainImage
+  )
+
   // handlers
+  useEffect(() => {
+    getCmsService()
+  }, [])
+
   const handleMouseOver = type => {
     switch (type) {
       case 'type1':
