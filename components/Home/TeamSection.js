@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+
+// next components
 import Image from 'next/image'
+
+// third party components
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 
@@ -7,16 +11,10 @@ import { Carousel } from 'react-responsive-carousel'
 import SocialButtonGroup from 'components/SocialButtonGroup'
 
 // images
-import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
 import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
-import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
 import TeamMember01 from 'assets/images/team-member-01.png'
 import SignImg from 'assets/images/sign.png'
-
-// json data
-import TeamSectionData from 'assets/data/TeamSectionData'
-import SocialURLData from 'assets/data/TeamSocialURLData'
 
 // styles
 import styles from 'components/Home/TeamSection.module.scss'
