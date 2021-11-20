@@ -10,6 +10,7 @@ import { Carousel } from 'react-responsive-carousel'
 import ReactPlayer from 'react-player'
 
 // images
+import MainImage from 'assets/images/main.png'
 import ArrowLeftWhite from 'assets/images/arrow-left-white.svg'
 
 // json data
@@ -19,12 +20,19 @@ import MainSectionData from 'assets/data/MainSectionData'
 import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
-  const { mainImage } = props
+  const { mainImage, featuredServices } = props
+  console.log('featured Services', featuredServices)
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
         {mainImage !== '' ? (
-          <Image src={mainImage?.path} alt="" layout="fill" objectFit="cover" objectPosition="top" />
+          <Image
+            src={mainImage.path ? mainImage.path : MainImage}
+            alt=""
+            layout="fill"
+            objectFit="cover"
+            objectPosition="top"
+          />
         ) : (
           <></>
         )}
@@ -41,7 +49,7 @@ const MainSection = props => {
           <Carousel
             showArrows={false}
             showThumbs={false}
-            autoPlay={true}
+            autoPlay={false}
             stopOnHover={true}
             showStatus={false}
             showIndicators={true}
@@ -50,19 +58,26 @@ const MainSection = props => {
             axis="vertical"
             dynamicHeight={true}
           >
-            {MainSectionData.map((item, index) => (
-              <div key={index}>
-                {item.id === 1 || item.id === 3 ? (
-                  <>
-                    {item.type === 'image' ? (
+            {featuredServices &&
+              featuredServices.map((item, index) => (
+                <div key={index}>
+                  {index % 2 === 0 ? (
+                    <>
+                      {/* {item.type === 'image' ? ( */}
                       <div className={styles.imageArea}>
-                        <Image src={item.url} alt="" width={345} height={194} layout="responsive" />
+                        <Image
+                          src={item.image !== null ? item.image : MainImage}
+                          alt=""
+                          width={345}
+                          height={194}
+                          layout="responsive"
+                        />
                       </div>
-                    ) : (
+                      {/* ) : (
                       <div className={styles.videoArea}>
                         <div className={styles.playerWrapper}>
                           <ReactPlayer
-                            url={item.url}
+                            url={item.video}
                             width="100%"
                             height="100%"
                             className={styles.reactPlayer}
@@ -70,51 +85,57 @@ const MainSection = props => {
                           />
                         </div>
                       </div>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-                {item.id === 1 || item.id === 3 ? <div className={styles.blankDiv}></div> : <></>}
-                <div className={item.id === 2 ? styles.pinkBoxArea01 : styles.pinkBoxArea}>
-                  <div className={styles.pinkBoxOpacity} />
-                  <div className={styles.pinkBox}>
-                    <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
-                    <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.content01 }} />
-                    <div className={styles.pinkButtonArea}>
-                      <button className={styles.pinkButton} onClick={() => router.push(item.link)}>
-                        <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
-                      </button>
+                    )} */}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {index % 2 === 0 ? <div className={styles.blankDiv}></div> : <></>}
+                  <div className={index % 2 === 0 ? styles.pinkBoxArea01 : styles.pinkBoxArea}>
+                    <div className={styles.pinkBoxOpacity} />
+                    <div className={styles.pinkBox}>
+                      <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
+                      <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
+                      <div className={styles.pinkButtonArea}>
+                        <button className={styles.pinkButton} onClick={() => router.push(item.url)}>
+                          <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
+                        </button>
+                      </div>
+                      <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.text }} />
                     </div>
-                    <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.content02 }} />
                   </div>
-                </div>
-                {item.id === 2 ? <div className={styles.blankDiv}></div> : <></>}
-                {item.id === 2 ? (
-                  <>
-                    {item.type === 'image' ? (
+                  {index % 2 === 1 ? <div className={styles.blankDiv}></div> : <></>}
+                  {index % 2 === 1 ? (
+                    <>
+                      {/* {item.type === 'image' ? ( */}
                       <div className={styles.imageArea + ' mb-5'}>
-                        <Image src={item.url} alt="" width={345} height={194} layout="responsive" />
+                        <Image
+                          src={item.image !== null ? item.image : MainImage}
+                          alt=""
+                          width={345}
+                          height={194}
+                          layout="responsive"
+                        />
                       </div>
-                    ) : (
-                      <div className={styles.videoArea + ' mb-5'}>
-                        <div className={styles.playerWrapper}>
-                          <ReactPlayer
-                            url={item.url}
-                            width="100%"
-                            height="100%"
-                            className={styles.reactPlayer}
-                            controls={true}
-                          />
+                      {/* ) : (
+                        <div className={styles.videoArea + ' mb-5'}>
+                          <div className={styles.playerWrapper}>
+                            <ReactPlayer
+                              url={item.url}
+                              width="100%"
+                              height="100%"
+                              className={styles.reactPlayer}
+                              controls={true}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-            ))}
+                      )} */}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              ))}
           </Carousel>
         </div>
       </div>

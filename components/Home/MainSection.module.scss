@@ -158,6 +158,7 @@
   letter-spacing: 0.8px;
   color: $white-color;
   text-align: right;
+  width: 100%;
 }
 
 .pinkText {
@@ -168,11 +169,15 @@
   letter-spacing: 0.53px;
   color: $white-color;
   text-align: right;
+  width: 100%;
 }
 
 .pinkButtonArea {
   margin-top: 18px;
   margin-bottom: 26px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
 }
 
 .pinkButton {
