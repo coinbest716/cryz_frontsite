@@ -2,6 +2,8 @@ import { ApolloClient, /* createHttpLink */ InMemoryCache, from } from '@apollo/
 // import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { createUploadLink } from 'apollo-upload-client'
+import * as Sentry from '@sentry/nextjs'
+import { SentryLink } from 'apollo-link-sentry'
 
 const uploadLink = createUploadLink({
   uri: process.env.NEXT_PUBLIC_BACKEND_ENDPOINT, // Apollo Server is served from port 8000
@@ -12,6 +14,7 @@ const uploadLink = createUploadLink({
 })
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
+  Sentry.captureException(graphQLErrors)
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) => {
       console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
@@ -23,6 +26,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
   if (networkError) {
     console.log(`[Network error]: ${networkError}`)
+    Sentry.captureException(networkError)
     if (networkError.statusCode === 401) {
       client.resetStore()
       client.clearStore()
@@ -31,7 +35,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 })
 
 const client = new ApolloClient({
-  link: from([errorLink, uploadLink]),
+  link: from([new SentryLink(), errorLink, uploadLink]),
   cache: new InMemoryCache(),
   queryDeduplication: false,
   defaultOptions: {

@@ -22,6 +22,7 @@
     "@sentry/nextjs": "^6.15.0",
     "add": "^2.0.6",
     "apexcharts": "^3.29.0",
+    "apollo-link-sentry": "^3.0.2",
     "apollo-upload-client": "^16.0.0",
     "aws-amplify": "^4.3.4",
     "graphql": "^16.0.1",
