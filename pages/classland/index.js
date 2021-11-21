@@ -52,29 +52,33 @@ const Classland = () => {
   const [filterKey, setFilterKey] = useState(0)
   const [filter, setFilter] = useState([])
 
-  const [getClasslands, { data: classlandsData, loading: classlandsLoading, error: classlandsError }] = useLazyQuery(
-    graphql.queries.getClasslands
-  )
-  const [getFaqs, { data: faqsData, loading: faqsLoading, error: faqsError }] = useLazyQuery(graphql.queries.getFaqs)
+  // GetClasslandMain, GetClasslandCategory, GetClasslandFaq
+
+  const [
+    GetClasslandCategory,
+    { data: classlandCategoryData, loading: classlandCategoryLoading, error: classlandCategoryError },
+  ] = useLazyQuery(graphql.queries.getClasslandCategory)
+  const [GetClasslandFaq, { data: classlandFaqData, loading: classlandFaqLoading, error: classlandFaqError }] =
+    useLazyQuery(graphql.queries.getClasslandFaq)
 
   // handlers
 
   useEffect(() => {
-    getClasslands({ variables: { category: 'ALL' } })
-    getFaqs()
+    GetClasslandCategory({ variables: { category: 'ALL' } })
+    GetClasslandFaq()
   }, [])
 
   useEffect(() => {
-    if (!classlandsError && classlandsData && classlandsData.getClasslands) {
-      setCardData(classlandsData.getClasslands)
+    if (!classlandCategoryError && classlandCategoryData && classlandCategoryData.getClasslandCategory) {
+      setCardData(classlandCategoryData.getClasslandCategory)
     }
-  }, [classlandsLoading, classlandsData, classlandsError])
+  }, [classlandCategoryLoading, classlandCategoryData, classlandCategoryError])
 
   useEffect(() => {
-    if (!faqsError && faqsData && faqsData.getFaqs) {
-      setFaqData(faqsData.getFaqs)
+    if (!classlandFaqError && classlandFaqData && classlandFaqData.getClasslandFaq) {
+      setFaqData(classlandFaqData.getClasslandFaq)
     }
-  }, [faqsLoading, faqsData, faqsError])
+  }, [classlandFaqLoading, classlandFaqData, classlandFaqError])
 
   useEffect(() => {
     setSliderData(TeamSectionData)
@@ -101,7 +105,7 @@ const Classland = () => {
 
   const handleClickFilter = index => {
     setFilterKey(index)
-    getClasslands({ variables: { category: filter[index].id } })
+    GetClasslandCategory({ variables: { category: filter[index].id } })
   }
 
   const executeScroll = () => {
