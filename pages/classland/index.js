@@ -46,6 +46,7 @@ const Classland = () => {
 
   // variables
   const faqRef = useRef(null)
+  const [main, setMain] = useState({})
   const [sliderData, setSliderData] = useState([])
   const [cardData, setCardData] = useState([])
   const [faqData, setFaqData] = useState([])
@@ -53,7 +54,8 @@ const Classland = () => {
   const [filter, setFilter] = useState([])
 
   // GetClasslandMain, GetClasslandCategory, GetClasslandFaq
-
+  const [GetClasslandMain, { data: classlandMainData, loading: classlandMainLoading, error: classlandMainError }] =
+    useLazyQuery(graphql.queries.getClasslandMain)
   const [
     GetClasslandCategory,
     { data: classlandCategoryData, loading: classlandCategoryLoading, error: classlandCategoryError },
@@ -64,9 +66,16 @@ const Classland = () => {
   // handlers
 
   useEffect(() => {
+    GetClasslandMain()
     GetClasslandCategory({ variables: { category: 'ALL' } })
     GetClasslandFaq()
   }, [])
+
+  useEffect(() => {
+    if (!classlandMainError && classlandMainData && classlandMainData.getClasslandMain) {
+      setMain(classlandMainData.getClasslandMain)
+    }
+  }, [classlandMainLoading, classlandMainData, classlandMainError])
 
   useEffect(() => {
     if (!classlandCategoryError && classlandCategoryData && classlandCategoryData.getClasslandCategory) {
@@ -119,18 +128,20 @@ const Classland = () => {
           <div className={styles.topSection}>
             <div className={'grid grid-cols-12 gap-4'}>
               <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-                <div className={styles.topTitle}>Classland</div>
+                <div className={styles.topTitle}>{main.title}</div>
                 <div className={styles.topDash} />
-                <div className={styles.topDescription}>
-                  Classland es la plataforma de entrenamientos en streaming en la que el equipo de Crys Dyaz cuenta con
-                  más de 5.000 suscriptores que disfrutan cada semana de 34 clases de diferentes tipologías: fuerza,
-                  pilates, pérdida de peso, embarazo, post parto, entre otras.
-                </div>
+                <div className={styles.topDescription}>{main.text}</div>
               </div>
               <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
                 <div className={styles.topRightSection}>
                   <div className={styles.topRightLetImage}>
-                    <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
+                    <Image
+                      src={main.image !== null ? main.image : topImage}
+                      alt=""
+                      width={435}
+                      height={471}
+                      className={styles.topImage}
+                    />
                   </div>
                   <div>
                     <div className={'z-10'}>
