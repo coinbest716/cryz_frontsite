@@ -46,35 +46,48 @@ const Classland = () => {
 
   // variables
   const faqRef = useRef(null)
+  const [main, setMain] = useState({})
   const [sliderData, setSliderData] = useState([])
   const [cardData, setCardData] = useState([])
   const [faqData, setFaqData] = useState([])
   const [filterKey, setFilterKey] = useState(0)
   const [filter, setFilter] = useState([])
 
-  const [getClasslands, { data: classlandsData, loading: classlandsLoading, error: classlandsError }] = useLazyQuery(
-    graphql.queries.getClasslands
-  )
-  const [getFaqs, { data: faqsData, loading: faqsLoading, error: faqsError }] = useLazyQuery(graphql.queries.getFaqs)
+  // GetClasslandMain, GetClasslandCategory, GetClasslandFaq
+  const [GetClasslandMain, { data: classlandMainData, loading: classlandMainLoading, error: classlandMainError }] =
+    useLazyQuery(graphql.queries.getClasslandMain)
+  const [
+    GetClasslandCategory,
+    { data: classlandCategoryData, loading: classlandCategoryLoading, error: classlandCategoryError },
+  ] = useLazyQuery(graphql.queries.getClasslandCategory)
+  const [GetClasslandFaq, { data: classlandFaqData, loading: classlandFaqLoading, error: classlandFaqError }] =
+    useLazyQuery(graphql.queries.getClasslandFaq)
 
   // handlers
 
   useEffect(() => {
-    getClasslands({ variables: { category: 'ALL' } })
-    getFaqs()
+    GetClasslandMain()
+    GetClasslandCategory({ variables: { category: 'ALL' } })
+    GetClasslandFaq()
   }, [])
 
   useEffect(() => {
-    if (!classlandsError && classlandsData && classlandsData.getClasslands) {
-      setCardData(classlandsData.getClasslands)
+    if (!classlandMainError && classlandMainData && classlandMainData.getClasslandMain) {
+      setMain(classlandMainData.getClasslandMain)
     }
-  }, [classlandsLoading, classlandsData, classlandsError])
+  }, [classlandMainLoading, classlandMainData, classlandMainError])
 
   useEffect(() => {
-    if (!faqsError && faqsData && faqsData.getFaqs) {
-      setFaqData(faqsData.getFaqs)
+    if (!classlandCategoryError && classlandCategoryData && classlandCategoryData.getClasslandCategory) {
+      setCardData(classlandCategoryData.getClasslandCategory)
     }
-  }, [faqsLoading, faqsData, faqsError])
+  }, [classlandCategoryLoading, classlandCategoryData, classlandCategoryError])
+
+  useEffect(() => {
+    if (!classlandFaqError && classlandFaqData && classlandFaqData.getClasslandFaq) {
+      setFaqData(classlandFaqData.getClasslandFaq)
+    }
+  }, [classlandFaqLoading, classlandFaqData, classlandFaqError])
 
   useEffect(() => {
     setSliderData(TeamSectionData)
@@ -101,7 +114,7 @@ const Classland = () => {
 
   const handleClickFilter = index => {
     setFilterKey(index)
-    getClasslands({ variables: { category: filter[index].id } })
+    GetClasslandCategory({ variables: { category: filter[index].id } })
   }
 
   const executeScroll = () => {
@@ -115,18 +128,20 @@ const Classland = () => {
           <div className={styles.topSection}>
             <div className={'grid grid-cols-12 gap-4'}>
               <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-                <div className={styles.topTitle}>Classland</div>
+                <div className={styles.topTitle}>{main.title}</div>
                 <div className={styles.topDash} />
-                <div className={styles.topDescription}>
-                  Classland es la plataforma de entrenamientos en streaming en la que el equipo de Crys Dyaz cuenta con
-                  más de 5.000 suscriptores que disfrutan cada semana de 34 clases de diferentes tipologías: fuerza,
-                  pilates, pérdida de peso, embarazo, post parto, entre otras.
-                </div>
+                <div className={styles.topDescription}>{main.text}</div>
               </div>
               <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
                 <div className={styles.topRightSection}>
                   <div className={styles.topRightLetImage}>
-                    <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
+                    <Image
+                      src={main.image !== null ? main.image : topImage}
+                      alt=""
+                      width={435}
+                      height={471}
+                      className={styles.topImage}
+                    />
                   </div>
                   <div>
                     <div className={'z-10'}>

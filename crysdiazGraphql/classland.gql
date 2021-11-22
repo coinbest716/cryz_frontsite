@@ -1,5 +1,14 @@
-query GetClasslands($category: String) {
-  getClasslands(category: $category) {
+query GetClasslandMain {
+  getClasslandMain {
+    id
+    title
+    text
+    images
+  }
+}
+
+query GetClasslandCategory($category: String) {
+  getClasslandCategory(category: $category) {
     id
     image
     name
@@ -9,14 +18,16 @@ query GetClasslands($category: String) {
     difficulty
     category
     visible
+    order
   }
 }
 
-query GetFaqs {
-  getFaqs {
+query GetClasslandFaqs {
+  getClasslandFaqs {
     id
     name
     description
     visible
+    order
   }
 }
