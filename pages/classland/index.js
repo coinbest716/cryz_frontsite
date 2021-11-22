@@ -7,7 +7,7 @@ import Image from 'next/image'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import FaqButton from 'components/components/FaqButton'
-import CarouselTeam from 'components/components/CarouselTeam'
+import ClasslandCarousel from 'components/components/ClasslandCarousel'
 import FilterButton from 'components/components/FilterButton'
 import ClassCard from 'components/components/ClassCard'
 import Accordian from 'components/components/Accordian'
@@ -19,9 +19,6 @@ import styles from 'pages/classland/classland.module.scss'
 
 // images
 import topImage from 'public/images/classland-top-image.svg'
-
-// json data
-import TeamSectionData from 'assets/data/TeamSectionData'
 
 // graphql
 import { useLazyQuery } from '@apollo/client'
@@ -51,29 +48,47 @@ const Classland = () => {
   const [cardData, setCardData] = useState([])
   const [faqData, setFaqData] = useState([])
   const [filterKey, setFilterKey] = useState(0)
-  const [filter, setFilter] = useState([])
+  const [filter, setFilter] = useState([
+    { id: 'ALL', value: 'TODO' },
+    {
+      id: 'active',
+      value: 'Actívate',
+    },
+    {
+      id: 'wellness',
+      value: 'Bienestar',
+    },
+    {
+      id: 'pregnancy',
+      value: 'Embarazo',
+    },
+    {
+      id: 'postpartum',
+      value: 'Postparto',
+    },
+  ])
 
-  // GetClasslandMain, GetClasslandCategory, GetClasslandFaq
-  const [GetClasslandMain, { data: classlandMainData, loading: classlandMainLoading, error: classlandMainError }] =
+  const [getClasslandMain, { data: classlandMainData, loading: classlandMainLoading, error: classlandMainError }] =
     useLazyQuery(graphql.queries.getClasslandMain)
   const [
-    GetClasslandCategory,
+    getClasslandCategory,
     { data: classlandCategoryData, loading: classlandCategoryLoading, error: classlandCategoryError },
   ] = useLazyQuery(graphql.queries.getClasslandCategory)
-  const [GetClasslandFaq, { data: classlandFaqData, loading: classlandFaqLoading, error: classlandFaqError }] =
-    useLazyQuery(graphql.queries.getClasslandFaq)
+  const [getClasslandFaqs, { data: classlandFaqData, loading: classlandFaqLoading, error: classlandFaqError }] =
+    useLazyQuery(graphql.queries.getClasslandFaqs)
 
   // handlers
 
   useEffect(() => {
-    GetClasslandMain()
-    GetClasslandCategory({ variables: { category: 'ALL' } })
-    GetClasslandFaq()
+    getClasslandMain()
+    getClasslandCategory({ variables: { category: 'ALL' } })
+    getClasslandFaqs()
   }, [])
 
   useEffect(() => {
     if (!classlandMainError && classlandMainData && classlandMainData.getClasslandMain) {
       setMain(classlandMainData.getClasslandMain)
+      setSliderData(classlandMainData.getClasslandMain.images)
     }
   }, [classlandMainLoading, classlandMainData, classlandMainError])
 
@@ -84,37 +99,14 @@ const Classland = () => {
   }, [classlandCategoryLoading, classlandCategoryData, classlandCategoryError])
 
   useEffect(() => {
-    if (!classlandFaqError && classlandFaqData && classlandFaqData.getClasslandFaq) {
-      setFaqData(classlandFaqData.getClasslandFaq)
+    if (!classlandFaqError && classlandFaqData && classlandFaqData.getClasslandFaqs) {
+      setFaqData(classlandFaqData.getClasslandFaqs)
     }
   }, [classlandFaqLoading, classlandFaqData, classlandFaqError])
 
-  useEffect(() => {
-    setSliderData(TeamSectionData)
-    setFilter([
-      { id: 'ALL', value: 'TODO' },
-      {
-        id: 'active',
-        value: 'Actívate',
-      },
-      {
-        id: 'wellness',
-        value: 'Bienestar',
-      },
-      {
-        id: 'pregnancy',
-        value: 'Embarazo',
-      },
-      {
-        id: 'postpartum',
-        value: 'Postparto',
-      },
-    ])
-  }, [])
-
   const handleClickFilter = index => {
     setFilterKey(index)
-    GetClasslandCategory({ variables: { category: filter[index].id } })
+    getClasslandCategory({ variables: { category: filter[index].id } })
   }
 
   const executeScroll = () => {
@@ -128,20 +120,14 @@ const Classland = () => {
           <div className={styles.topSection}>
             <div className={'grid grid-cols-12 gap-4'}>
               <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-                <div className={styles.topTitle}>{main.title}</div>
+                <div className={styles.topTitle}>{main?.title}</div>
                 <div className={styles.topDash} />
-                <div className={styles.topDescription}>{main.text}</div>
+                <div className={styles.topDescription} dangerouslySetInnerHTML={{ __html: main?.text }} />
               </div>
               <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
                 <div className={styles.topRightSection}>
                   <div className={styles.topRightLetImage}>
-                    <Image
-                      src={main.image !== null ? main.image : topImage}
-                      alt=""
-                      width={435}
-                      height={471}
-                      className={styles.topImage}
-                    />
+                    <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
                   </div>
                   <div>
                     <div className={'z-10'}>
@@ -160,7 +146,7 @@ const Classland = () => {
       <div className={'w-full ' + globlaStyle.container}>
         <div className={styles.middleSection}>
           <div className={styles.fullPass}>Full Pass</div>
-          <CarouselTeam sliderData={sliderData} />
+          {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} /> : <></>}
         </div>
         <div className={styles.buttonGroup}>
           {filter.map((item, index) => (
