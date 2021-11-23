@@ -42,7 +42,7 @@ const FemaleHealth = props => {
   // handlers
   useEffect(() => {
     getFemHealth()
-  }, [])
+  }, [getFemHealth])
 
   useEffect(() => {
     if (!femHealthError && femHealthData && femHealthData.getFemHealth) {

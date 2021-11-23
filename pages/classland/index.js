@@ -83,7 +83,7 @@ const Classland = () => {
     getClasslandMain()
     getClasslandCategory({ variables: { category: 'ALL' } })
     getClasslandFaqs()
-  }, [])
+  }, [getClasslandMain, getClasslandCategory, getClasslandFaqs])
 
   useEffect(() => {
     if (!classlandMainError && classlandMainData && classlandMainData.getClasslandMain) {

@@ -80,7 +80,7 @@ const Profile = () => {
     } else {
       router.push('/dashboard/profile#personal', undefined, { shallow: true })
     }
-  }, [router.pathname])
+  }, [router])
 
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })

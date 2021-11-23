@@ -63,7 +63,7 @@ const Contact = () => {
   // handlers
   useEffect(() => {
     getContactInfo()
-  }, [])
+  }, [getContactInfo])
 
   useEffect(() => {
     if (!contactError && contactData && contactData.getContactInfo) {

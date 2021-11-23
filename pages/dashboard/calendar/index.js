@@ -64,7 +64,7 @@ const Calendar = () => {
       let calendarApi = calendarComponentRef.current.getApi()
       calendarApi.gotoDate(eventDate) // call a method on the Calendar object
     }
-  }, [])
+  }, [calendarComponentRef])
 
   const handleClickStartClass = () => {
     router.push('/dashboard/live-streaming')

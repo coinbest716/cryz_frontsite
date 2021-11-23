@@ -61,7 +61,7 @@ const Services = () => {
   // handlers
   useEffect(() => {
     getCmsService()
-  }, [])
+  }, [getCmsService])
 
   const handleMouseOver = type => {
     switch (type) {
