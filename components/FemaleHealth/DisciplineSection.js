@@ -219,9 +219,7 @@ const DisciplineSection = props => {
                     alt=""
                     width={576}
                     height={288}
-                    layout="fill"
-                    objectFit="cover"
-                    className={'opacity-40'}
+                    className={styles.imageArea}
                   />
                 ) : (
                   <></>
