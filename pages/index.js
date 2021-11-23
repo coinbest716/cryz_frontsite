@@ -53,7 +53,7 @@ const Home = props => {
     getMainImage()
     getFeaturedServices()
     getEquipo()
-  }, [])
+  }, [getMainImage, getFeaturedServices, getEquipo])
 
   useEffect(() => {
     if (!mainImageError && mainImageData && mainImageData.getMainImage) {
