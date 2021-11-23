@@ -85,7 +85,13 @@ const TeamSection = props => {
         <div className={'w-full md:w-1/2 flex flex-wrap justify-start items-center'}>
           <div className={styles.text} dangerouslySetInnerHTML={{ __html: team.text_one }} />
           <div className={'w-full flex justify-between my-4'}>
-            <Image src={team.sign !== null ? team.sign : SignImg} alt={''} width={467} height={234} />
+            <Image
+              src={team.sign !== null ? team.sign : SignImg}
+              alt={''}
+              width={467}
+              height={234}
+              className={styles.imageArea}
+            />
             <div className={'w-full flex justify-end items-center'}>
               <SocialButtonGroup color="gray" socialURL={{ instagram: team.instagram, facebook: team.facebook }} />
             </div>
