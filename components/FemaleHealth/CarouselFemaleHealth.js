@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // next component
 import Image from 'next/image'
 
@@ -18,9 +18,9 @@ import styles from './CarouselFemaleHealth.module.scss'
 const CarouselFemaleHealth = props => {
   const { sliderData } = props
 
-  const [data, setData] = React.useState([])
+  const [data, setData] = useState([])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (sliderData.length > 5) {
       let array = sliderData.splice(5, sliderData.length - 1)
       setData(array)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -30,14 +30,14 @@ import MonthList from 'assets/data/MonthListData.json'
 const Shopping = () => {
   // loading part ###########################
   const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = React.useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
@@ -45,7 +45,7 @@ const Shopping = () => {
   // loading part end #######################
 
   // variables
-  const [selectedMonth, setSelectedMonth] = React.useState('January')
+  const [selectedMonth, setSelectedMonth] = useState('January')
 
   // handlers
   const handleChange = event => {

@@ -25,7 +25,7 @@ const Header = props => {
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const [changeHeaderColor, setChangeHeaderColor] = React.useState(false)
+  const [changeHeaderColor, setChangeHeaderColor] = useState(false)
 
   const [openCart, setOpenCart] = useState(false)
   const [cartData, setCartData] = useState([])
@@ -203,7 +203,7 @@ const Header = props => {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (props.changeColorOnScroll) {
       window.addEventListener('scroll', headerColorChange)
     }

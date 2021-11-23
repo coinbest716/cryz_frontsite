@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 
 // aws components
@@ -29,8 +29,8 @@ Auth.configure(awsconfig)
 const MyApp = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || (page => page)
 
-  const [viewport, setViewport] = React.useState('desktop') // mobile, ipad, desktop
-  React.useEffect(() => {
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+  useEffect(() => {
     if (window.innerWidth > 1024) {
       setViewport('desktop')
     } else if (window.innerWidth === 1024) {
@@ -40,7 +40,7 @@ const MyApp = ({ Component, pageProps }) => {
     }
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     const resizeFunction = () => {
       if (window.innerWidth > 1024) {
         setViewport('desktop')

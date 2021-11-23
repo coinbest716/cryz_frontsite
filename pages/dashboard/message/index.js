@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -36,14 +36,14 @@ import styles from './message.module.scss'
 const Message = () => {
   // loading part ###########################
   const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = React.useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
@@ -62,7 +62,7 @@ const Message = () => {
     thumbnail: '/images/01.png',
     url: 'https://www.w3schools.com/html/mov_bbb.mp4',
   }
-  const [messageInput, setMessageInput] = React.useState('')
+  const [messageInput, setMessageInput] = useState('')
 
   const handleSendMessage = (content, type) => {
     switch (type) {

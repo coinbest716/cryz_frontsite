@@ -50,6 +50,11 @@
   margin-top: 26px;
 }
 
+.slideImage {
+  object-fit: cover;
+  object-position: center;
+}
+
 .continueBrowsingArea {
   bottom: -42px;
 }

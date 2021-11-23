@@ -36,9 +36,9 @@ const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 const Dashboard = () => {
   // loading part ###########################
   const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = React.useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     let _markDate = []
     CalendarData.map(item => {
       _markDate.push(moment(item.start).format('DD-MM-YYYY'))
@@ -48,7 +48,7 @@ const Dashboard = () => {
     return () => setIsMounted(false)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }

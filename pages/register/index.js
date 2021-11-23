@@ -28,8 +28,8 @@ const Register = () => {
   const [userConfirmed, setUserConfirmed] = useState(null)
   const [verifyCode, setVerifyCode] = useState('')
 
-  const [showPass, setShowPass] = React.useState(false)
-  const [showRepeatPass, setShowRepeatPass] = React.useState(false)
+  const [showPass, setShowPass] = useState(false)
+  const [showRepeatPass, setShowRepeatPass] = useState(false)
   const [createUser] = useMutation(graphql.mutations.createUser)
 
   const handleSetShowPass = bool => {
