@@ -1,0 +1,32 @@
+query GetFemHealth {
+  getFemHealth {
+    id
+    title_one
+    title_two
+    sub_title
+    text
+    images
+    list
+  }
+}
+
+query GetDisciplineList {
+  getDisciplineList {
+    id
+    name
+    order
+  }
+}
+
+query GetFemHealthService {
+  getFemHealthService {
+    id
+    discipline_id
+    name
+    title_one
+    title_two
+    text
+    images
+    list
+  }
+}
