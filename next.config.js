@@ -32,6 +32,7 @@ const appConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   reactStrictMode: true,
+  productionBrowserSourceMaps: true,
   webpackDevMiddleware: config => {
     config.watchOptions = {
       poll: 1000,
@@ -45,4 +46,6 @@ const appConfig = {
   },
 }
 
+//module.exports = withGraphql(withTM(appConfig))
 module.exports = withSentryConfig(withGraphql(withTM(appConfig)), sentryWebpackPluginOptions)
+//module.exports = withTM(appConfig)

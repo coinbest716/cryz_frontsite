@@ -25,6 +25,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     })
 
   if (networkError) {
+    console.log(networkError)
     console.log(`[Network error]: ${networkError}`)
     Sentry.captureException(networkError)
     if (networkError.statusCode === 401) {
@@ -36,6 +37,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const client = new ApolloClient({
   link: from([new SentryLink(), errorLink, uploadLink]),
+  //link: from([errorLink, uploadLink]),
   cache: new InMemoryCache(),
   queryDeduplication: false,
   defaultOptions: {
