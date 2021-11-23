@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
@@ -12,20 +12,13 @@ import CircularMark from 'components/components/CircularMark'
 // images
 import StarGroup from 'assets/images/star-group.svg'
 
-// json data
-import FemaleHealthCarouselData from 'assets/data/FemaleHealthCarouselData'
-
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/FemaleHealth/MainSection.module.scss'
 
-const MainSection = () => {
+const MainSection = props => {
+  const { data } = props
   const router = useRouter()
-  const [sliderData, setSliderData] = React.useState([])
-
-  React.useEffect(() => {
-    setSliderData(FemaleHealthCarouselData)
-  }, [])
 
   const handleGotoDiscipline = () => {
     const sectionPosition = document.getElementById('discipline').offsetTop
@@ -46,7 +39,7 @@ const MainSection = () => {
           <div className={'col-span-7 flex ml-0 md:ml-11'}>
             <div className={'col-span-7 flex justify-center items-center'}>
               <div>
-                {sliderData.length !== 0 ? (
+                {data.images.length !== 0 ? (
                   <Carousel
                     showArrows={false}
                     showThumbs={false}
@@ -59,9 +52,9 @@ const MainSection = () => {
                     centerSlidePercentage={33}
                     interval={3000}
                   >
-                    {sliderData.map((item, index) => (
+                    {data.images.map((item, index) => (
                       <div key={index} className={'mx-1.5'}>
-                        <Image src={item.image} alt="" width={283} height={544} />
+                        <Image src={item.path} alt="" width={283} height={544} className={styles.slideImage} />
                       </div>
                     ))}
                   </Carousel>
@@ -78,25 +71,15 @@ const MainSection = () => {
             <div className={'col-span-5 flex'}>
               <div className={'w-full'}>
                 <div className={'inline-grid'}>
-                  <p className={styles.title}>Salud</p>
-                  <p className={styles.title}>FEM.</p>
+                  <p className={styles.title}>{data.title_one}</p>
+                  <p className={styles.title}>{data.title_two}</p>
                 </div>
                 <div className={'w-full flex items-end '}>
                   <div className={styles.divider} />
                   <div className={'ml-4 mr-2 ' + styles.byText}>by</div>
-                  <div className={styles.subTitle}>CRYS DYAZ</div>
+                  <div className={styles.subTitle}>{data.sub_title}</div>
                 </div>
-                <div className={styles.text}>
-                  La unidad de mujer de Crys Dyaz & Co está formada por fisioterapeutas y entrenadoras especializadas en
-                  el cuidado integral de la mujer en todas las etapas de su vida.
-                  <br />
-                  <br />
-                  Desde el dolor perineal en relaciones sexuales o debilidad de suelo pélvico en el entrenamiento, hasta
-                  el acompañamiento en el embarazo, preparación al parto, postparto y menopausia.
-                  <br />
-                  En Crys Dyaz & CO defendemos la importancia de cuidarse desde dentro para sentirse fuerte y segura por
-                  fuera.
-                </div>
+                <div className={styles.text} dangerouslySetInnerHTML={{ __html: data.text }} />
               </div>
             </div>
             <div className={'col-span-7 flex justify-end z-10'}>
