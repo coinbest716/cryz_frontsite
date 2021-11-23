@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -19,14 +19,14 @@ import ConfirmImage from 'assets/images/confirm.png'
 const Confirm = () => {
   // loading part ###########################
   const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = React.useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
@@ -34,7 +34,7 @@ const Confirm = () => {
   // loading part end #######################
 
   // variables
-  const fileRef = React.createRef()
+  const fileRef = createRef()
 
   // handlers
   const handleAttachFile = event => {

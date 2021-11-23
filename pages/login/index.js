@@ -33,8 +33,8 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [showPass, setShowPass] = React.useState(false)
-  const [rememberMe, setRememberMe] = React.useState(false)
+  const [showPass, setShowPass] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false)
   const [getUserInfo, { data: userData, loading: userLoading, error: userError }] = useLazyQuery(
     graphql.queries.getUser
   )

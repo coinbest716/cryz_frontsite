@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // next components
 import Image from 'next/image'
@@ -15,9 +15,9 @@ import SendWhiteIcon from 'assets/images/send-white.svg'
 
 const MessageInput = props => {
   const { message, sendMessage } = props
-  const [content, setContent] = React.useState('')
+  const [content, setContent] = useState('')
 
-  React.useEffect(() => {
+  useEffect(() => {
     setContent(message)
   }, [message])
 

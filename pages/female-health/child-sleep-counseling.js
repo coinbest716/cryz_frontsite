@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -22,25 +22,25 @@ import router from 'next/router'
 const ChildSleepCounseling = () => {
   // loading part ###########################
   const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = React.useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMounted === true) {
       dispatch({ type: 'set', isLoading: false })
     }
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  const [sliderData, setSliderData] = React.useState([])
+  const [sliderData, setSliderData] = useState([])
 
-  // const [readMoreCurrentState, setReadMoreCurrentState] = React.useState('less')
+  // const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSliderData(ServerPhysiotherapy)
   }, [])
 

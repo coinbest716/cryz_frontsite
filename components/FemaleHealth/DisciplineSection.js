@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -155,7 +155,7 @@ const DisciplineSection = props => {
     },
   ]
 
-  const [type, setType] = React.useState({
+  const [type, setType] = useState({
     id: 5,
     elem: [
       { id: 1, width: 2, pos: 1 },
