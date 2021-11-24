@@ -33,6 +33,10 @@ import TrashIcon from 'assets/images/trash.svg'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './message.module.scss'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Message = () => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -50,6 +54,11 @@ const Message = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  // variables
+  const [usersByPatient, setUsersByPatient] = useState('')
+  const [getUsersByPatient, { data: usersByPatientData, loading: usersByPatientLoading, error: usersByPatientError }] =
+    useLazyQuery(graphql.queries.getUsersByPatient)
+
   const messageContent = {
     content: 'Sayang, besok kamu ada acara keluar ga?',
     time: '10:56 AM',
@@ -63,6 +72,18 @@ const Message = () => {
     url: 'https://www.w3schools.com/html/mov_bbb.mp4',
   }
   const [messageInput, setMessageInput] = useState('')
+
+  // handlers
+  useEffect(() => {
+    getUsersByPatient()
+  }, [getUsersByPatient])
+
+  useEffect(() => {
+    if (!usersByPatientError && usersByPatientData && usersByPatientData.getUsersByPatient) {
+      console.log('===============', usersByPatientData.getUsersByPatient)
+      setUsersByPatient(usersByPatientData.getUsersByPatient)
+    }
+  }, [usersByPatientLoading, usersByPatientData, usersByPatientError])
 
   const handleSendMessage = (content, type) => {
     switch (type) {

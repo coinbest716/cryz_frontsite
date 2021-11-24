@@ -4,6 +4,9 @@ import { GetClasslandMain, GetClasslandCategory, GetClasslandFaqs } from './clas
 import { GetCmsService, GetCmsServiceDisciplineList } from './services.gql'
 import { GetContactInfo, GetUser, CreateUser } from './crysdiaz.gql'
 
+// dashboard part
+import { GetUsersByPatient } from './dashboard/message.gql'
+
 export default {
   queries: {
     // home part
@@ -27,6 +30,10 @@ export default {
 
     // other part
     getUser: GetUser,
+
+    // dashboard part
+    // message part
+    getUsersByPatient: GetUsersByPatient,
   },
   mutations: {
     createUser: CreateUser,
