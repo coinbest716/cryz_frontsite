@@ -32,7 +32,6 @@ const Profile = () => {
   const [deletePersonalInfo] = useMutation(graphql.mutations.deletePersonalInfo)
 
   useEffect(() => {
-    console.log('#######################')
     getPersonalInfo()
     setIsMounted(true)
     return () => setIsMounted(false)
@@ -127,7 +126,7 @@ const Profile = () => {
       .then(response => {
         if (response.data.savePersonalInfo) {
           getPersonalInfo()
-          toast.success('Successfully save personal information!')
+          toast.success('Successfully save personal account!')
           dispatch({ type: 'set', isLoading: false })
         }
       })
