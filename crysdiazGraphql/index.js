@@ -8,6 +8,9 @@ import { GetPersonalInfo, SavePersonalInfo, DeletePersonalInfo } from './persona
 // dashboard part
 import { GetUsersByPatient } from './dashboard/message.gql'
 
+// dashboard part
+import { GetUsersByPatient } from './dashboard/message.gql'
+
 export default {
   queries: {
     // home part
