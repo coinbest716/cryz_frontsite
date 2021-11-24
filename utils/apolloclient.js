@@ -1,9 +1,10 @@
-import { ApolloClient, /* createHttpLink */ InMemoryCache, from } from '@apollo/client'
-// import { setContext } from '@apollo/client/link/context'
+import { ApolloClient, InMemoryCache, from } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { createUploadLink } from 'apollo-upload-client'
 import * as Sentry from '@sentry/nextjs'
 import { SentryLink } from 'apollo-link-sentry'
+import { Auth } from 'aws-amplify'
 
 const uploadLink = createUploadLink({
   uri: process.env.NEXT_PUBLIC_BACKEND_ENDPOINT, // Apollo Server is served from port 8000
@@ -11,6 +12,16 @@ const uploadLink = createUploadLink({
     'keep-alive': 'true',
   },
   //   credentials: 'same-origin', // if your backend is a different domain. 'include'
+})
+
+const authLink = setContext(async (_, { headers }) => {
+  const token = await Auth.currentSession()
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `${token.idToken.jwtToken}` : '',
+    },
+  }
 })
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -36,8 +47,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 })
 
 const client = new ApolloClient({
-  link: from([new SentryLink(), errorLink, uploadLink]),
-  //link: from([errorLink, uploadLink]),
+  link: from([new SentryLink(), authLink, errorLink, uploadLink]),
   cache: new InMemoryCache(),
   queryDeduplication: false,
   defaultOptions: {

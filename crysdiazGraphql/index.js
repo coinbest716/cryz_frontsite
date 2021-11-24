@@ -3,6 +3,7 @@ import { GetFemHealth, GetDisciplineList, GetFemHealthService } from './female-h
 import { GetClasslandMain, GetClasslandCategory, GetClasslandFaqs } from './classland.gql'
 import { GetCmsService, GetCmsServiceDisciplineList } from './services.gql'
 import { GetContactInfo, GetUser, CreateUser } from './crysdiaz.gql'
+import { GetPersonalInfo, SavePersonalInfo, DeletePersonalInfo } from './personal.gql'
 
 export default {
   queries: {
@@ -27,8 +28,11 @@ export default {
 
     // other part
     getUser: GetUser,
+    getPersonalInfo: GetPersonalInfo,
   },
   mutations: {
     createUser: CreateUser,
+    savePersonalInfo: SavePersonalInfo,
+    deletePersonalInfo: DeletePersonalInfo,
   },
 }
