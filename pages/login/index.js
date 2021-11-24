@@ -43,10 +43,14 @@ const Login = () => {
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
+        router.push('/dashboard')
       })
       .catch(() => {
         setIsAuthenticated(false)
       })
+  }, [])
+
+  useEffect(() => {
     if (isAuthenticated) {
       router.push('/dashboard')
     }
