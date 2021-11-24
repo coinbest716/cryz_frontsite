@@ -5,6 +5,9 @@ import { GetCmsService, GetCmsServiceDisciplineList } from './services.gql'
 import { GetContactInfo, GetUser, CreateUser } from './crysdiaz.gql'
 import { GetPersonalInfo, SavePersonalInfo, DeletePersonalInfo } from './personal.gql'
 
+// dashboard part
+import { GetUsersByPatient } from './dashboard/message.gql'
+
 export default {
   queries: {
     // home part
@@ -29,6 +32,10 @@ export default {
     // other part
     getUser: GetUser,
     getPersonalInfo: GetPersonalInfo,
+
+    // dashboard part
+    // message part
+    getUsersByPatient: GetUsersByPatient,
   },
   mutations: {
     createUser: CreateUser,
