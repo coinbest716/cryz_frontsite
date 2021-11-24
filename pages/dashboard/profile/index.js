@@ -17,19 +17,23 @@ import Graphic from 'components/components/dashboard/Graphic'
 // styles
 import styles from './profile.module.scss'
 // graphql
-import { useLazyQuery } from '@apollo/client'
+import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import toast from 'react-hot-toast'
 
 const Profile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [getFemHealth, { data: femHealthData, loading: femHealthLoading, error: femHealthError }] = useLazyQuery(
-    graphql.queries.getFemHealth
+  const [getPersonalInfo, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
+    graphql.queries.getPersonalInfo
   )
+  const [savePersonalInfo] = useMutation(graphql.mutations.savePersonalInfo)
+  const [deletePersonalInfo] = useMutation(graphql.mutations.deletePersonalInfo)
 
   useEffect(() => {
-    getFemHealth()
+    console.log('#######################')
+    getPersonalInfo()
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
@@ -46,6 +50,7 @@ const Profile = () => {
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
   const [uploadFile, setUploadFile] = useState({})
   const [personalInfo, setPersonalInfo] = useState({
+    id: -1,
     avatar: '',
     name: '',
     surname: '',
@@ -53,7 +58,7 @@ const Profile = () => {
     country: '',
     address: '',
     town: '',
-    data: '',
+    date: '',
     password: '',
     meet: '',
     telephone: '',
@@ -89,6 +94,13 @@ const Profile = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (!personalError && personalData && personalData.getPersonalInfo) {
+      console.log('personal information ', personalData.getPersonalInfo)
+      setPersonalInfo(personalData.getPersonalInfo)
+    }
+  }, [personalLoading, personalData, personalError])
+
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
     router.push(`/dashboard/profile#${tabType}`, undefined, { shallow: true })
@@ -104,10 +116,44 @@ const Profile = () => {
 
   const handleSavePersonal = () => {
     console.log('handleSavePersonal', uploadFile)
+    dispatch({ type: 'set', isLoading: true })
+    let _personalInfo = { ...personalInfo }
+    _personalInfo = { ..._personalInfo, imageFile: uploadFile }
+    savePersonalInfo({
+      variables: {
+        _personalInfo,
+      },
+    })
+      .then(response => {
+        if (response.data.savePersonalInfo) {
+          getPersonalInfo()
+          toast.success('Successfully save personal information!')
+          dispatch({ type: 'set', isLoading: false })
+        }
+      })
+      .catch(error => {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(error.message)
+      })
   }
 
   const handleDiscardPersonal = () => {
-    console.log('handleDiscardPersonal')
+    setPersonalInfo({
+      avatar: '',
+      name: '',
+      surname: '',
+      email: '',
+      country: '',
+      address: '',
+      town: '',
+      date: '',
+      password: '',
+      meet: '',
+      telephone: '',
+      emergencyPhone: '',
+      code: '',
+      gender: '',
+    })
   }
 
   const handleChangePersonal = (event, key) => {
@@ -116,6 +162,19 @@ const Profile = () => {
 
   const handleDeleteAccount = () => {
     console.log('handleDeleteAccount')
+    dispatch({ type: 'set', isLoading: true })
+    deletePersonalInfo()
+      .then(response => {
+        if (response.data.deletePersonalInfo) {
+          getPersonalInfo()
+          toast.success('Successfully delete personal information!')
+          dispatch({ type: 'set', isLoading: false })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+        dispatch({ type: 'set', isLoading: false })
+      })
   }
 
   const handleSaveMeasure = () => {
@@ -124,11 +183,6 @@ const Profile = () => {
 
   const handleDiscardMeasure = () => {
     console.log('handleDiscardMeasure')
-  }
-
-  const handleClickMeasureGraphic = tabType => {
-    console.log('handleClickMeasureGraphic')
-    setActiveTab({ [tabType]: true })
   }
 
   const handleChangeHealth = (event, key) => {

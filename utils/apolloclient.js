@@ -1,5 +1,5 @@
-import { ApolloClient, /* createHttpLink */ InMemoryCache, from } from '@apollo/client'
-// import { setContext } from '@apollo/client/link/context'
+import { ApolloClient, InMemoryCache, from } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { createUploadLink } from 'apollo-upload-client'
 import * as Sentry from '@sentry/nextjs'
@@ -12,6 +12,16 @@ const uploadLink = createUploadLink({
   },
   //   credentials: 'same-origin', // if your backend is a different domain. 'include'
 })
+
+// const authLink = setContext(async (_, { headers }) => {
+//   const token = await Auth.currentSession()
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `${token.idToken.jwtToken}` : '',
+//     },
+//   }
+// })
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   Sentry.captureException(graphQLErrors)

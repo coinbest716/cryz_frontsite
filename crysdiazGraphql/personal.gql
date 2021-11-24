@@ -1,0 +1,65 @@
+query GetPersonalInfo {
+  getPersonalInfo {
+    id
+    avatar
+    name
+    surname
+    email
+    country
+    address
+    town
+    date
+    password
+    meet
+    telephone
+    emergencyPhone
+    code
+    gender
+  }
+}
+
+mutation SavePersonalInfo(
+  $id: Int
+  $avatar: String
+  $name: String
+  $surname: String
+  $email: String
+  $country: String
+  $address: String
+  $town: String
+  $date: Date
+  $password: String
+  $meet: String
+  $telephone: String
+  $emergencyPhone: String
+  $code: String
+  $gender: String
+  $imageFile: Upload
+) {
+  savePersonalInfo(
+    id: $id
+    avatar: $avatar
+    name: $name
+    surname: $surname
+    email: $email
+    country: $country
+    address: $address
+    town: $town
+    date: $date
+    password: $password
+    meet: $meet
+    telephone: $telephone
+    emergencyPhone: $emergencyPhone
+    code: $code
+    gender: $gender
+    imageFile: $imageFile
+  ) {
+    id
+  }
+}
+
+mutation DeletePersonalInfo {
+  deletePersonalInfo {
+    id
+  }
+}
