@@ -16,13 +16,20 @@ import Graphic from 'components/components/dashboard/Graphic'
 
 // styles
 import styles from './profile.module.scss'
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const Profile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [getFemHealth, { data: femHealthData, loading: femHealthLoading, error: femHealthError }] = useLazyQuery(
+    graphql.queries.getFemHealth
+  )
 
   useEffect(() => {
+    getFemHealth()
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
