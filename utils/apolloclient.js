@@ -48,8 +48,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 })
 
 const client = new ApolloClient({
-  // link: from([new SentryLink(), errorLink, uploadLink]),
-  link: from([new SentryLink(), authLink, errorLink, uploadLink]),
+  link: from([new SentryLink(), errorLink, uploadLink]),
+  // link: from([new SentryLink(), authLink, errorLink, uploadLink]),
   cache: new InMemoryCache(),
   queryDeduplication: false,
   defaultOptions: {
