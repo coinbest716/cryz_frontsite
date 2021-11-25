@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+
+// next components
+import router from 'next/router'
 
 // third party components
 import ReactLoading from 'react-loading'
@@ -10,9 +13,25 @@ import Navbar from 'components/Navbar'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 
+import { Auth } from 'aws-amplify'
+
 const SecondaryLayout = ({ children }) => {
   const isLoading = useSelector(state => state.isLoading)
-  return (
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        setIsAuthenticated(true)
+      })
+      .catch(() => {
+        router.push('/')
+        setIsAuthenticated(false)
+      })
+  }, [])
+
+  return isAuthenticated === true ? (
     <>
       <div className={'flex'}>
         <div>
@@ -30,6 +49,8 @@ const SecondaryLayout = ({ children }) => {
         </div>
       )}
     </>
+  ) : (
+    <></>
   )
 }
 

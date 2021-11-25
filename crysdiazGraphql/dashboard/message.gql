@@ -1,0 +1,11 @@
+query GetUsersByPatient {
+  UsersByPatient {
+    id
+    name
+    lastname
+    roles
+    specialties
+    active
+    high_date
+  }
+}
