@@ -9,7 +9,6 @@ import Image from 'next/image'
 
 const CarouselService = props => {
   const { sliderData } = props
-
   if (sliderData.length > 5) {
     sliderData.splice(5, sliderData.length - 1)
   }

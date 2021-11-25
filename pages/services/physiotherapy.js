@@ -45,6 +45,9 @@ const Physiotherapy = () => {
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [personalButton, setPersonalButton] = useState(false)
+  const [onlineButton, setOnlineButton] = useState(false)
+  const [streamButton, setStreamButton] = useState(false)
   const [sliderData, setSliderData] = useState([])
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
 
@@ -61,12 +64,21 @@ const Physiotherapy = () => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
       setTitle(cmsSubjectData.getCmsServiceSubject.title_two)
       setDescription(cmsSubjectData.getCmsServiceSubject.text)
-      setSliderData(cmsSubjectData.getCmsServiceSubject.images)
+      setSliderData(cmsSubjectData.getCmsServiceSubject.carousel_image || [])
+      setPersonalButton(cmsSubjectData.getCmsServiceSubject.personal_button || false)
+      setOnlineButton(cmsSubjectData.getCmsServiceSubject.online_button || false)
+      setStreamButton(cmsSubjectData.getCmsServiceSubject.stream_button || false)
     }
   }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
 
-  const handleClickBuy = () => {
+  const handleClickBuyPersion = () => {
     router.push('/buy/buy-person')
+  }
+  const handleClickBuyPlan = () => {
+    router.push('/buy/buy-plans-online')
+  }
+  const handleClickBuyStreaming = () => {
+    router.push('/buy/buy-one-to-one')
   }
 
   const handleReadMore = state => {
@@ -104,8 +116,26 @@ const Physiotherapy = () => {
           </div>
         </div>
       </div>
-      <div className={'w-1/3 mr-1'}>
-        <ArrowButton label={'Compra  presenciales'} onClick={handleClickBuy} type={'physiotherapy'} />
+      <div className={'flex justify-start'}>
+        {personalButton && (
+          <div className={'w-1/3'}>
+            <ArrowButton label={'Compra person'} onClick={handleClickBuyPersion} type={'physiotherapy'} />
+          </div>
+        )}
+        {onlineButton && (
+          <div className={'w-1/3'}>
+            <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} type={'physiotherapy'} />
+          </div>
+        )}
+        {streamButton && (
+          <div className={'w-1/3'}>
+            <ArrowButton
+              label={'Compra 1 to 1 en streaming'}
+              onClick={handleClickBuyStreaming}
+              type={'physiotherapy'}
+            />
+          </div>
+        )}
       </div>
     </div>
   )
