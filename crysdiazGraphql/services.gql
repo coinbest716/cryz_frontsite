@@ -2,10 +2,7 @@ query GetCmsService {
   getCmsService {
     id
     title_one
-    title_two
-    sub_title
     text
-    images
   }
 }
 

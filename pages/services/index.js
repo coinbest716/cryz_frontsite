@@ -42,19 +42,25 @@ const Services = () => {
 
   // variables
   const router = useRouter()
+  const [mainService, setMainService] = useState([])
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
 
   const [getCmsServiceDisciplineList, { data: cmsServiceData, loading: cmsServiceLoading, error: cmsServiceError }] =
     useLazyQuery(graphql.queries.getCmsServiceDisciplineList)
-  const [mainService, setMainService] = useState([])
+  const [getCmsService, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
+    graphql.queries.getCmsService
+  )
+  const [contactType, setContactType] = useState({ type1: true, type2: false, type3: false })
+
   const placeholder1 = '/images/placeholder1.png'
   const placeholder2 = '/images/placeholder2.png'
   const placeholder3 = '/images/placeholder3.png'
 
-  const [contactType, setContactType] = useState({ type1: true, type2: false, type3: false })
-
   // handlers
   useEffect(() => {
     getCmsServiceDisciplineList()
+    getCmsService()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -63,6 +69,14 @@ const Services = () => {
       setMainService(cmsServiceData.getCmsServiceDisciplineList)
     }
   }, [cmsServiceLoading, cmsServiceData, cmsServiceError])
+
+  useEffect(() => {
+    if (!mainError && mainData && mainData.getCmsService) {
+      console.log('main ', mainData.getCmsService)
+      setTitle(mainData.getCmsService?.title_one)
+      setDescription(mainData.getCmsService?.text)
+    }
+  }, [mainLoading, mainData, mainError])
 
   const handleMouseOver = type => {
     switch (type) {
@@ -80,13 +94,13 @@ const Services = () => {
 
   const handleClick = type => {
     switch (type) {
-      case 'type1':
+      case 1:
         router.push('/services/training')
         break
-      case 'type2':
+      case 2:
         router.push('/services/physiotherapy')
         break
-      case 'type3':
+      case 3:
         router.push('/services/nutrition')
         break
     }
@@ -98,15 +112,9 @@ const Services = () => {
         <div className={styles.container}>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
-              <div className={styles.topTitle + ' pb-2'}>Servicios</div>
+              <div className={styles.topTitle + ' pb-2'}>{title}</div>
               <div className={styles.topDash} />
-              <div className={styles.topDescription}>
-                En Crys & CO ofrecemos un servicio personalizado y de calidad, especializado en planes 360 y a medida.
-                <br />
-                <br />
-                Podrás beneficiarte de nuestros servicios de: entrenamiento, fisioterapia y nutrición, con infinidad de
-                programas creados y supervisados por los mejores profesionales del sector.
-              </div>
+              <div className={styles.topDescription} dangerouslySetInnerHTML={{ __html: description }}></div>
             </div>
             <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
               <div className={'z-10 ' + styles.circularMark}>
@@ -120,7 +128,7 @@ const Services = () => {
                 'relative cursor-pointer ' + (contactType.type1 ? styles.boxToRightActive : styles.boxDeactive)
               }
               onMouseOver={() => handleMouseOver('type1')}
-              onClick={() => handleClick('type1')}
+              onClick={() => handleClick(mainService[0].id)}
             >
               <img
                 src={contactType.type1 ? mainService[0]?.image : placeholder1}
@@ -144,7 +152,7 @@ const Services = () => {
             <div
               className={'relative cursor-pointer ' + (contactType.type2 ? styles.boxToLeftActive : styles.boxDeactive)}
               onMouseOver={() => handleMouseOver('type2')}
-              onClick={() => handleClick('type2')}
+              onClick={() => handleClick(mainService[1].id)}
             >
               <img
                 src={contactType.type2 ? mainService[1]?.image : placeholder2}
@@ -167,7 +175,7 @@ const Services = () => {
             <div
               className={'relative cursor-pointer ' + (contactType.type3 ? styles.boxToLeftActive : styles.boxDeactive)}
               onMouseOver={() => handleMouseOver('type3')}
-              onClick={() => handleClick('type3')}
+              onClick={() => handleClick(mainService[2].id)}
             >
               <img
                 src={contactType.type3 ? mainService[2]?.image : placeholder3}
