@@ -65,14 +65,12 @@ const Services = () => {
 
   useEffect(() => {
     if (!cmsServiceError && cmsServiceData && cmsServiceData.getCmsServiceDisciplineList) {
-      console.log('personal information ', cmsServiceData.getCmsServiceDisciplineList)
       setMainService(cmsServiceData.getCmsServiceDisciplineList)
     }
   }, [cmsServiceLoading, cmsServiceData, cmsServiceError])
 
   useEffect(() => {
     if (!mainError && mainData && mainData.getCmsService) {
-      console.log('main ', mainData.getCmsService)
       setTitle(mainData.getCmsService?.title_one)
       setDescription(mainData.getCmsService?.text)
     }

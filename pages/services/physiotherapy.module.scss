@@ -36,3 +36,17 @@
   width: 500px;
   padding-top: 100px;
 }
+.text {
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 0.71px;
+  color: $blue-gray-400-color;
+  text-align: justify;
+  overflow: hidden;
+  padding-bottom: 50px;
+  max-height: 440px;
+}
+.expand {
+  max-height: 100%;
+}

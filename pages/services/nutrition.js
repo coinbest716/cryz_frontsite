@@ -59,7 +59,6 @@ const Nutrition = () => {
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
-      console.log('personal information ', cmsSubjectData.getCmsServiceSubject)
       setTitle(cmsSubjectData.getCmsServiceSubject.title_two)
       setDescription(cmsSubjectData.getCmsServiceSubject.text)
       setSliderData(cmsSubjectData.getCmsServiceSubject.images)
