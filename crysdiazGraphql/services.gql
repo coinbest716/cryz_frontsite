@@ -30,7 +30,7 @@ query GetCmsServiceSubject($discipline_id: Int) {
   }
 }
 
-query GetCmsServiceSubjectByType($discipline_id: Int, $service_type: [JSON]) {
+query GetCmsServiceSubjectByType($discipline_id: Int, $service_type: String) {
   getCmsServiceSubjectByType(discipline_id: $discipline_id, service_type: $service_type) {
     bono_text
     services
