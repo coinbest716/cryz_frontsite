@@ -15,13 +15,21 @@ const uploadLink = createUploadLink({
 })
 
 const authLink = setContext(async (_, { headers }) => {
-  const token = await Auth.currentSession()
-  console.log('========== token', token)
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `${token.idToken.jwtToken}` : '',
-    },
+  try {
+    const token = await Auth.currentSession()
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `${token.idToken.jwtToken}` : '',
+      },
+    }
+  } catch (e) {
+    return {
+      headers: {
+        ...headers,
+        authorization: '',
+      },
+    }
   }
 })
 
@@ -48,7 +56,6 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 })
 
 const client = new ApolloClient({
-  // link: from([new SentryLink(), errorLink, uploadLink]),
   link: from([new SentryLink(), authLink, errorLink, uploadLink]),
   cache: new InMemoryCache(),
   queryDeduplication: false,
