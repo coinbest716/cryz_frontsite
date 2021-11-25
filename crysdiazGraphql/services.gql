@@ -14,5 +14,6 @@ query GetCmsServiceDisciplineList {
     id
     name
     order
+    image
   }
 }

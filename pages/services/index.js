@@ -43,25 +43,26 @@ const Services = () => {
   // variables
   const router = useRouter()
 
-  const trainingImage = '/images/contact1.png'
-  const physiotherapyImage = '/images/contact2.png'
-  const nutritionImage = '/images/contact3.png'
+  const [getCmsServiceDisciplineList, { data: cmsServiceData, loading: cmsServiceLoading, error: cmsServiceError }] =
+    useLazyQuery(graphql.queries.getCmsServiceDisciplineList)
+  const [mainService, setMainService] = useState([])
   const placeholder1 = '/images/placeholder1.png'
   const placeholder2 = '/images/placeholder2.png'
   const placeholder3 = '/images/placeholder3.png'
 
   const [contactType, setContactType] = useState({ type1: true, type2: false, type3: false })
 
-  // variables
-  const [cmsService, setCmsService] = useState('')
-  const [getCmsService, { data: cmsServiceData, loading: mainImageLoading, error: mainImageError }] = useLazyQuery(
-    graphql.queries.getMainImage
-  )
-
   // handlers
   useEffect(() => {
-    getCmsService()
-  }, [getCmsService])
+    getCmsServiceDisciplineList()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!cmsServiceError && cmsServiceData && cmsServiceData.getCmsServiceDisciplineList) {
+      console.log('personal information ', cmsServiceData.getCmsServiceDisciplineList)
+      setMainService(cmsServiceData.getCmsServiceDisciplineList)
+    }
+  }, [cmsServiceLoading, cmsServiceData, cmsServiceError])
 
   const handleMouseOver = type => {
     switch (type) {
@@ -122,13 +123,13 @@ const Services = () => {
               onClick={() => handleClick('type1')}
             >
               <img
-                src={contactType.type1 ? trainingImage : placeholder1}
+                src={contactType.type1 ? mainService[0]?.image : placeholder1}
                 alt=""
                 style={{ width: '100%', height: '288px', opacity: 0.4 }}
                 className={styles.box1}
               />
 
-              <div className={styles.serverText}>Entrenamiento</div>
+              <div className={styles.serverText}>{mainService[0]?.name}</div>
               {contactType.type1 ? (
                 <div className={styles.serverArrow}>
                   <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
@@ -146,12 +147,12 @@ const Services = () => {
               onClick={() => handleClick('type2')}
             >
               <img
-                src={contactType.type2 ? physiotherapyImage : placeholder2}
+                src={contactType.type2 ? mainService[1]?.image : placeholder2}
                 alt=""
                 style={{ width: '100%', height: '288px', opacity: 0.4 }}
                 className={styles.box1}
               />
-              <div className={styles.serverText}>Fisioterapia</div>
+              <div className={styles.serverText}>{mainService[1]?.name}</div>
               {contactType.type2 ? (
                 <div className={styles.serverArrow}>
                   <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
@@ -169,12 +170,12 @@ const Services = () => {
               onClick={() => handleClick('type3')}
             >
               <img
-                src={contactType.type3 ? nutritionImage : placeholder3}
+                src={contactType.type3 ? mainService[2]?.image : placeholder3}
                 alt=""
                 style={{ width: '100%', height: '288px', opacity: 0.4 }}
                 className={styles.box1}
               />
-              <div className={styles.serverText}>Nutrición</div>
+              <div className={styles.serverText}>{mainService[2]?.name}</div>
               {contactType.type3 ? (
                 <div className={styles.serverArrow}>
                   <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
