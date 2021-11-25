@@ -16,7 +16,6 @@ const uploadLink = createUploadLink({
 
 const authLink = setContext(async (_, { headers }) => {
   const token = await Auth.currentSession()
-  console.log('========== token', token)
   return {
     headers: {
       ...headers,

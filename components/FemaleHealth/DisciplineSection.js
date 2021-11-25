@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -10,39 +10,49 @@ import ArrowRightUpGrayIcon from 'assets/images/arrow-right-up-black.svg'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/FemaleHealth/DisciplineSection.module.scss'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const DisciplineSection = props => {
+  // variables
   const { viewport } = props
   const router = useRouter()
+  const ColorList = ['#f8f5f4', '#F3F3EB', '#F1F1F1', '#99A7A9', '#d9dfdf', '#e8ebeb', '#cecbce']
+
+  const [disciplineList, setDisciplineList] = useState([])
+  const [getDisciplineList, { data: disciplineListData, loading: disciplineListLoading, error: disciplineListError }] =
+    useLazyQuery(graphql.queries.getDisciplineList)
 
   const BoxInfo = [
     {
       id: 1,
       bgColor: '#f8f5f4',
-      title: 'Suelo pélvico',
+      name: 'Suelo pélvico',
       image: '/images/card1.jpg',
       link: '/female-health/pelvic-floor',
     },
     {
       id: 2,
       bgColor: '#F3F3EB',
-      title: 'Preparación al parto',
+      name: 'Preparación al parto',
       image: '/images/card2.jpg',
       link: '/female-health/preparation-for-childbirth',
     },
-    { id: 3, bgColor: '#F1F1F1', title: 'Menopausia', image: '/images/card3.jpg', link: '/female-health/menopause' },
-    { id: 4, bgColor: '#99A7A9', title: 'Postparto', image: '/images/card4.jpg', link: '/female-health/postpartum' },
-    { id: 5, bgColor: '#d9dfdf', title: 'Embarazo', image: '/images/card1.jpg', link: '/female-health/pregnancy' },
+    { id: 3, bgColor: '#F1F1F1', name: 'Menopausia', image: '/images/card3.jpg', link: '/female-health/menopause' },
+    { id: 4, bgColor: '#99A7A9', name: 'Postparto', image: '/images/card4.jpg', link: '/female-health/postpartum' },
+    { id: 5, bgColor: '#d9dfdf', name: 'Embarazo', image: '/images/card1.jpg', link: '/female-health/pregnancy' },
     {
       id: 6,
       bgColor: '#e8ebeb',
-      title: 'Asesoría del sueño infantil',
+      name: 'Asesoría del sueño infantil',
       image: '/images/card2.jpg',
       link: 'female-health/child-sleep-counseling',
     },
     {
       id: 7,
       bgColor: '#cecbce',
-      title: 'Entrena tu diástasis',
+      name: 'Entrena tu diástasis',
       image: '/images/card3.jpg',
       link: '/female-health/train-your-diastasis',
     },
@@ -168,6 +178,24 @@ const DisciplineSection = props => {
     ],
   })
 
+  // handlers
+  useEffect(() => {
+    getDisciplineList()
+  }, [getDisciplineList])
+
+  useEffect(() => {
+    if (!disciplineListError && disciplineListData && disciplineListData.getDisciplineList) {
+      let array = []
+      let temp = {}
+      disciplineListData.getDisciplineList.map((item, index) => {
+        temp = JSON.parse(JSON.stringify(item))
+        temp.bgColor = ColorList[index]
+        array.push(temp)
+      })
+      setDisciplineList(array)
+    }
+  }, [disciplineListLoading, disciplineListData, disciplineListError])
+
   const handleMouseOver = (id, index) => {
     if (index === 4 && id !== 5) {
       setType(BoxList[5])
@@ -176,8 +204,8 @@ const DisciplineSection = props => {
     }
   }
 
-  const handleClick = link => {
-    router.push(link)
+  const handleClick = id => {
+    router.push(id)
   }
 
   return (
@@ -196,10 +224,10 @@ const DisciplineSection = props => {
               }
               style={{ backgroundColor: BoxInfo[item.id - 1].bgColor }}
               onMouseOver={() => handleMouseOver(item.id, index)}
-              onClick={() => handleClick(BoxInfo[item.id - 1].link)}
+              onClick={() => handleClick(BoxInfo[item.id - 1].id)}
             >
               <div className={'w-full h-full relative'}>
-                <div className={'absolute ' + styles.cardTitle}>{BoxInfo[item.id - 1].title}</div>
+                <div className={'absolute ' + styles.cardTitle}>{BoxInfo[item.id - 1].name}</div>
                 <div className={'absolute ' + styles.cardArrow}>
                   <Image
                     src={item.id === type.id ? ArrowRightGrayIcon : ArrowRightUpGrayIcon}
