@@ -23,7 +23,6 @@ const BuyPlansOnline = () => {
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    console.log('+++++++++++++++++++', router.query.discipline_id, router.query.service_type)
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])

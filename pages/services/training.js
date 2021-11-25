@@ -98,13 +98,22 @@ const Training = () => {
   const handleClick = type => {
     switch (type) {
       case 'type1':
-        router.push('/buy/buy-one-to-one')
+        router.push({
+          pathname: '/buy/buy-person',
+          query: { discipline_id: 1, service_type: 'personal' },
+        })
         break
       case 'type2':
-        router.push('/buy/buy-person')
+        router.push({
+          pathname: '/buy/buy-plans-online',
+          query: { discipline_id: 1, service_type: 'online' },
+        })
         break
       case 'type3':
-        router.push('/buy/buy-one-to-one')
+        router.push({
+          pathname: '/buy/buy-one-to-one',
+          query: { discipline_id: 1, service_type: 'streaming' },
+        })
         break
     }
   }

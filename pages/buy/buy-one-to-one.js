@@ -10,12 +10,12 @@ import BackButton from 'components/components/BackButton'
 import CircularMark from 'components/components/CircularMark'
 import BuyCard from 'components/components/BuyCard'
 
-// json data
-import BuySessionData from 'assets/data/BuySessionData.json'
-
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/buy/index.module.scss'
+
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const BuyOneToOne = () => {
   // loading part ###########################
@@ -34,6 +34,24 @@ const BuyOneToOne = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  const [getCmsServiceSubjectByType, { data: cmsSubjectData, loading: cmsSubjectLoading, error: cmsSubjectError }] =
+    useLazyQuery(graphql.queries.getCmsServiceSubjectByType)
+  const [description, setDescription] = useState('')
+  const [sessionData, setSessionData] = useState([])
+
+  useEffect(() => {
+    getCmsServiceSubjectByType({
+      variables: { discipline_id: parseInt(router.query.discipline_id), service_type: router.query.service_type },
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubjectByType) {
+      setDescription(cmsSubjectData.getCmsServiceSubjectByType.bono_text || '')
+      setSessionData(cmsSubjectData.getCmsServiceSubjectByType.services || [])
+    }
+  }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
+
   const handleClickBuy = () => {
     router.push('/purchase-login')
   }
@@ -47,17 +65,14 @@ const BuyOneToOne = () => {
           <div className={'col-span-6'}>
             <div className={styles.title}>Bonos y Sesiones</div>
             <div className={styles.divider} />
-            <div className={styles.text}>
-              Nuestros bonos solo pueden ser utilizados por una persona al mismo tiempo, si quieres mas información
-              puedes contactarnos sin compromiso
-            </div>
+            <div className={styles.text} dangerouslySetInnerHTML={{ __html: description }} />
           </div>
           <div className={'col-span-6 flex justify-end z-10'}>
             <CircularMark />
           </div>
         </div>
         <div className={'mt-5 mb-10 grid grid-cols-12 gap-6'}>
-          {BuySessionData.map((item, index) => (
+          {sessionData.map((item, index) => (
             <div className={'md:col-span-6 lg:col-span-4'} key={index}>
               <BuyCard data={item} index={index} handleClickBuy={handleClickBuy} />
             </div>

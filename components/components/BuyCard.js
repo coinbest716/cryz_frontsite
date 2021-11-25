@@ -24,7 +24,7 @@ const BuyCard = props => {
       >
         {data.service_type === 'personal' ? 'Personal' : ''}
         {data.service_type === 'online' ? 'Planes Online' : ''}
-        {data.service_type === 'streamin' ? '1 to 1 en Streaming' : ''}
+        {data.service_type === 'streaming' ? '1 to 1 en Streaming' : ''}
       </div>
       <div className={styles.card}>
         <div className={'flex'}>
