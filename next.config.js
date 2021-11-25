@@ -1,5 +1,5 @@
 const path = require('path')
-const { withSentryConfig } = require('@sentry/nextjs');
+const { withSentryConfig } = require('@sentry/nextjs')
 
 const sentryWebpackPluginOptions = {
   // Additional config options for the Sentry Webpack plugin. Keep in mind that
@@ -11,7 +11,7 @@ const sentryWebpackPluginOptions = {
   silent: true, // Suppresses all logs
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options.
-};
+}
 
 const withTM = require('next-transpile-modules')([
   '@fullcalendar/common',
@@ -26,7 +26,7 @@ const withGraphql = require('next-plugin-graphql')
 
 const appConfig = {
   images: {
-    domains: ['crysdiaz-public.s3.eu-west-1.amazonaws.com'],
+    domains: ['crysdiaz-public.s3.eu-west-1.amazonaws.com', 'via.placeholder.com'],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
