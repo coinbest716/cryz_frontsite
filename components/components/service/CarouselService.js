@@ -51,7 +51,7 @@ const CarouselService = props => {
     >
       {sliderData?.map((item, index) => (
         <div key={index} style={{ height: '550px' }}>
-          <Image src={item.image} alt="" width={500} height={500} className={styles.slideImage} />
+          <Image src={item.path} alt="" width={500} height={500} className={styles.slideImage} />
         </div>
       ))}
     </Carousel>

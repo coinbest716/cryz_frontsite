@@ -6,22 +6,20 @@ import { useDispatch } from 'react-redux'
 // next components
 import { useRouter } from 'next/router'
 
-// third party components
-import ReactReadMoreReadLess from 'react-read-more-read-less'
-
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
 import CarouselService from 'components/components/service/CarouselService'
 import ArrowButton from 'components/components/service/ArrowButton'
 import BackButton from 'components/components/BackButton'
+import ReadMoreButton from 'components/components/ReadMoreButton'
 
 // styles
 import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './nutrition.module.scss'
 
-// json data
-import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const Nutrition = () => {
   // loading part ###########################
@@ -42,21 +40,41 @@ const Nutrition = () => {
 
   // variables
   const router = useRouter()
+  const [getCmsServiceSubject, { data: cmsSubjectData, loading: cmsSubjectLoading, error: cmsSubjectError }] =
+    useLazyQuery(graphql.queries.getCmsServiceSubject)
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+
   const [sliderData, setSliderData] = useState([])
-  const description = `Somos especialistas en educación de hábitos y promoción de la salud. Nuestros planes van dirigidos a personas que quieren cuidar su alimentación y mejorar su salud y/o su físico, ayudándoles a crear e introducir nuevas rutinas saludables en su día a día.
-  Previa valoración inicial del paciente y realización de un estudio personalizado para poder escoger su plan más adecuado, nos adaptamos a patologías como obesidad, cáncer, diabetes, alergias e intolerancias, entre otras y realizamos programas específicos de alimentación sana antes y durante el embarazo, así como, en casos especiales. 
-  Hacemos seguimiento y tenemos en cuenta los gustos de cada paciente, sus horarios, disponibilidad, etc. Les apoyamos en cada paso del camino, creando nuevos hábitos saludables y mejorando otros. “Cambia tus hábitos y tu vida cambiará”`
+  const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
 
   // handlers
   useEffect(() => {
-    setSliderData(ServerPhysiotherapy)
+    getCmsServiceSubject({
+      variables: {
+        discipline_id: 3,
+      },
+    })
   }, [])
+
+  useEffect(() => {
+    if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
+      console.log('personal information ', cmsSubjectData.getCmsServiceSubject)
+      setTitle(cmsSubjectData.getCmsServiceSubject.title_two)
+      setDescription(cmsSubjectData.getCmsServiceSubject.text)
+      setSliderData(cmsSubjectData.getCmsServiceSubject.images)
+    }
+  }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
 
   const handleClickBuyPersion = () => {
     router.push('/buy/buy-person')
   }
   const handleClickBuyPlan = () => {
     router.push('/buy/buy-plans-online')
+  }
+
+  const handleReadMore = state => {
+    setReadMoreCurrentState(state)
   }
 
   return (
@@ -68,18 +86,15 @@ const Nutrition = () => {
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={'pt-10 pb-2 ' + styles.topTitle}>Nutrición</div>
+              <div className={'pt-10 pb-2 ' + styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription + ' mt-10 pb-20'}>
-                <ReactReadMoreReadLess
-                  charLimit={500}
-                  readMoreText={' [leer mas…] '}
-                  readLessText={' [Leer menos…]'}
-                  readMoreClassName={'read-more-less--more'}
-                  readLessClassName={'read-more-less--less'}
+                <div
+                  className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}
                 >
-                  {description}
-                </ReactReadMoreReadLess>
+                  <div dangerouslySetInnerHTML={{ __html: description }}></div>
+                  <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+                </div>
               </div>
             </div>
             <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end'}>

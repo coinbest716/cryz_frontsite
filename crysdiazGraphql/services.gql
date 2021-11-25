@@ -14,3 +14,15 @@ query GetCmsServiceDisciplineList {
     image
   }
 }
+
+query GetCmsServiceSubject($discipline_id: Int) {
+  getCmsServiceSubject(discipline_id: $discipline_id) {
+    id
+    text
+    title_two
+    images
+    personal_image
+    online_image
+    stream_image
+  }
+}

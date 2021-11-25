@@ -1,7 +1,7 @@
 import { GetEquipo, GetFeaturedServices, GetMainImage } from './home.gql'
 import { GetFemHealth, GetDisciplineList, GetFemHealthService } from './female-health.gql'
 import { GetClasslandMain, GetClasslandCategory, GetClasslandFaqs } from './classland.gql'
-import { GetCmsService, GetCmsServiceDisciplineList } from './services.gql'
+import { GetCmsService, GetCmsServiceDisciplineList, GetCmsServiceSubject } from './services.gql'
 import { GetContactInfo, GetUser, CreateUser } from './crysdiaz.gql'
 import { GetPersonalInfo, SavePersonalInfo, DeletePersonalInfo } from './personal.gql'
 
@@ -25,6 +25,7 @@ export default {
     // services part
     getCmsService: GetCmsService,
     getCmsServiceDisciplineList: GetCmsServiceDisciplineList,
+    getCmsServiceSubject: GetCmsServiceSubject,
 
     // contact part
     getContactInfo: GetContactInfo,
