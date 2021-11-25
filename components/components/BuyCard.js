@@ -22,19 +22,21 @@ const BuyCard = props => {
           styles.title
         }
       >
-        {data.title}
+        {data.service_type === 'personal' ? 'Personal' : ''}
+        {data.service_type === 'online' ? 'Planes Online' : ''}
+        {data.service_type === 'streaming' ? '1 to 1 en Streaming' : ''}
       </div>
       <div className={styles.card}>
         <div className={'flex'}>
-          <div className={styles.cardTitle}>{data.cardTitle}</div>
+          <div className={styles.cardTitle}>{data.name}</div>
           <Image src={ArrowRightPink} alt="" width={26} height={20} />
         </div>
-        <div className={styles.cardDescription}>{data.cardDescription}</div>
+        <div className={styles.cardDescription}>{data.description}</div>
       </div>
       <button className={styles.button} onClick={handleClickBuy}>
         <div className={'flex justify-start'}>
           <div className={styles.buttonText}>
-            {data.buttonText} <b>{data.price}</b>
+            {'Comprar por'} <b>{data.price} €</b>
           </div>
         </div>
         <Image src={ArrowRightWhite} alt="" width={26} height={20} />

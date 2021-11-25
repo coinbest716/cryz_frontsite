@@ -2,10 +2,7 @@ query GetCmsService {
   getCmsService {
     id
     title_one
-    title_two
-    sub_title
     text
-    images
   }
 }
 
@@ -14,5 +11,28 @@ query GetCmsServiceDisciplineList {
     id
     name
     order
+    image
+  }
+}
+
+query GetCmsServiceSubject($discipline_id: Int) {
+  getCmsServiceSubject(discipline_id: $discipline_id) {
+    id
+    text
+    title_two
+    carousel_image
+    personal_image
+    online_image
+    stream_image
+    stream_button
+    personal_button
+    online_button
+  }
+}
+
+query GetCmsServiceSubjectByType($discipline_id: Int, $service_type: String) {
+  getCmsServiceSubjectByType(discipline_id: $discipline_id, service_type: $service_type) {
+    bono_text
+    services
   }
 }

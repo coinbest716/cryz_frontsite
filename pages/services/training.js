@@ -14,6 +14,9 @@ import BackButton from 'components/components/BackButton'
 import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './training.module.scss'
 
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Training = () => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -33,16 +36,37 @@ const Training = () => {
 
   // variables
   const router = useRouter()
-  const forwardGrayIcon = '/images/arrow-right-gray.svg'
+  const [getCmsServiceSubject, { data: cmsSubjectData, loading: cmsSubjectLoading, error: cmsSubjectError }] =
+    useLazyQuery(graphql.queries.getCmsServiceSubject)
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
 
-  const image01 = '/images/card1.jpg'
-  const image02 = '/images/card2.jpg'
-  const image03 = '/images/card4.jpg'
+  const forwardGrayIcon = '/images/arrow-right-gray.svg'
+  const [imageOne, setImageOne] = useState('')
+  const [imageTwo, setImageTwo] = useState('')
+  const [imageThree, setImageThree] = useState('')
   const [activeImage, setActiveImage] = useState('')
   const [activeHover, setActiveHover] = useState(false)
-  const [serverType, setServerType] = useState({ type1: false, type2: false, type3: false })
 
   // handlers
+  useEffect(() => {
+    getCmsServiceSubject({
+      variables: {
+        discipline_id: 1,
+      },
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
+      setTitle(cmsSubjectData.getCmsServiceSubject.title_two)
+      setDescription(cmsSubjectData.getCmsServiceSubject.text)
+      setImageOne(cmsSubjectData.getCmsServiceSubject.personal_image[0]?.path)
+      setImageTwo(cmsSubjectData.getCmsServiceSubject.online_image[0]?.path)
+      setImageThree(cmsSubjectData.getCmsServiceSubject.stream_image[0]?.path)
+    }
+  }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
+
   const handleMouseMover = event => {
     if (activeImage === '') return
     let x = event.clientX - 200
@@ -56,36 +80,40 @@ const Training = () => {
     setActiveHover(true)
     switch (type) {
       case 'type1':
-        // setServerType({ type1: true, type2: false, type3: false })
-        setActiveImage(image01)
+        setActiveImage(imageOne)
         break
       case 'type2':
-        // setServerType({ type1: false, type2: true, type3: false })
-        setActiveImage(image02)
+        setActiveImage(imageTwo)
         break
       case 'type3':
-        // setServerType({ type1: false, type2: false, type3: true })
-        setActiveImage(image03)
+        setActiveImage(imageThree)
         break
     }
   }
 
   const handleMouseLeave = type => {
-    // setServerType({ type1: false, type2: false, type3: false })
     setActiveHover(false)
-    // setActiveImage('')
   }
 
   const handleClick = type => {
     switch (type) {
       case 'type1':
-        router.push('/buy/buy-one-to-one')
+        router.push({
+          pathname: '/buy/buy-person',
+          query: { discipline_id: 1, service_type: 'personal' },
+        })
         break
       case 'type2':
-        router.push('/buy/buy-person')
+        router.push({
+          pathname: '/buy/buy-plans-online',
+          query: { discipline_id: 1, service_type: 'online' },
+        })
         break
       case 'type3':
-        router.push('/buy/buy-one-to-one')
+        router.push({
+          pathname: '/buy/buy-one-to-one',
+          query: { discipline_id: 1, service_type: 'streaming' },
+        })
         break
     }
   }
@@ -102,18 +130,12 @@ const Training = () => {
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-              <div className={'pt-10 pb-2 ' + styles.topTitle}>Entrenamiento</div>
+              <div className={'pt-10 pb-2 ' + styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
-              <div className={styles.topDescription + ' mt-10 pb-20'}>
-                Entrenamiento 1 to 1 en streaming: Entrenamientos personalizados de una hora con tu entrenador, desde
-                nuestra plataforma. <br />
-                <br />
-                Entrenamiento presencial de una hora en el centro de Crys Dyaz o en el domicilio del paciente. <br />
-                <br />
-                Planes online personalizados, basado en videos de ejercicios, al cual el paciente accederá por medio de
-                la plataforma online <br />
-                <br />
-              </div>
+              <div
+                className={styles.topDescription + ' mt-10 pb-20'}
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
             </div>
             <div className={'col-span-12 md:col-span-1 sm:col-span-12'} />
             <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative'}>
@@ -126,7 +148,7 @@ const Training = () => {
                   >
                     <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type1')}>
                       <span className={styles.number}>01&nbsp;&nbsp;</span>
-                      <span className={styles.typograph}>Presencial&nbsp;</span>
+                      <span className={styles.typograph}>Personal&nbsp;</span>
                       <img
                         src={forwardGrayIcon}
                         alt=""

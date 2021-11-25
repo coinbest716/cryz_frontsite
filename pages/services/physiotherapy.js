@@ -6,20 +6,20 @@ import { useDispatch } from 'react-redux'
 // next components
 import { useRouter } from 'next/router'
 
-// third party components
-import ReactReadMoreReadLess from 'react-read-more-read-less'
-import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
-
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
 import CarouselService from 'components/components/service/CarouselService'
 import ArrowButton from 'components/components/service/ArrowButton'
 import BackButton from 'components/components/BackButton'
+import ReadMoreButton from 'components/components/ReadMoreButton'
 
 // styles
 import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './physiotherapy.module.scss'
+
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const Physiotherapy = () => {
   // loading part ###########################
@@ -40,27 +40,58 @@ const Physiotherapy = () => {
 
   // variables
   const router = useRouter()
+  const [getCmsServiceSubject, { data: cmsSubjectData, loading: cmsSubjectLoading, error: cmsSubjectError }] =
+    useLazyQuery(graphql.queries.getCmsServiceSubject)
+
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [personalButton, setPersonalButton] = useState(false)
+  const [onlineButton, setOnlineButton] = useState(false)
+  const [streamButton, setStreamButton] = useState(false)
   const [sliderData, setSliderData] = useState([])
-  const description = `Nuestro equipo de fisioterapia y osteopatía integra el tratamiento de diferentes patologías, así como,
-  dolores y molestias de nuestro día a día para distintos tipos de perfiles: embarazadas, ancianos, bebés,
-  deportistas… En constante formación de las últimas tendencias y metodologías, realizamos una valoración
-  previa del paciente y utilizamos técnicas manuales, además de aparatología como INDIBA, ya sea lesiones
-  como postparto, kinesiotaping, punción seca...
-  Algunos de nuestros tratamientos son la terapia manual, terapia activa, osteopatía, INDIBA, crioterapia,
-  termoterapia, electroterapia (TENS)...
-  Todo ello para mejorar tu bienestar y llevar un estilo de vida con la mayor calidad posible– INDIBA:
-  Método que utiliza el sistema de transferencia eléctrica capacitiva resistiva al aplicar corrientes
-  eléctricas para el tratamiento de lesiones musculo esqueléticas. También tratamos los hipopresivos con
-  esta técnica. – OTROS SERVICIOS: Vendajes funcionales y neuromusculares, punción seca, crioterapia,
-  termoterapia, electroterapia (TENS).`
+  const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
 
   // handlers
   useEffect(() => {
-    setSliderData(ServerPhysiotherapy)
+    getCmsServiceSubject({
+      variables: {
+        discipline_id: 2,
+      },
+    })
   }, [])
 
-  const handleClickBuy = () => {
-    router.push('/buy/buy-person')
+  useEffect(() => {
+    if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
+      setTitle(cmsSubjectData.getCmsServiceSubject.title_two)
+      setDescription(cmsSubjectData.getCmsServiceSubject.text)
+      setSliderData(cmsSubjectData.getCmsServiceSubject.carousel_image || [])
+      setPersonalButton(cmsSubjectData.getCmsServiceSubject.personal_button || false)
+      setOnlineButton(cmsSubjectData.getCmsServiceSubject.online_button || false)
+      setStreamButton(cmsSubjectData.getCmsServiceSubject.stream_button || false)
+    }
+  }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
+
+  const handleClickBuyPersion = () => {
+    router.push({
+      pathname: '/buy/buy-person',
+      query: { discipline_id: 2, service_type: 'personal' },
+    })
+  }
+  const handleClickBuyPlan = () => {
+    router.push({
+      pathname: '/buy/buy-plans-online',
+      query: { discipline_id: 2, service_type: 'online' },
+    })
+  }
+  const handleClickBuyStreaming = () => {
+    router.push({
+      pathname: '/buy/buy-one-to-one',
+      query: { discipline_id: 2, service_type: 'streaming' },
+    })
+  }
+
+  const handleReadMore = state => {
+    setReadMoreCurrentState(state)
   }
 
   return (
@@ -72,18 +103,15 @@ const Physiotherapy = () => {
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={'pt-10 pb-2 ' + styles.topTitle}>Fisioterapia</div>
+              <div className={'pt-10 pb-2 ' + styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
               <div className={styles.topDescription + ' mt-10 pb-20'}>
-                <ReactReadMoreReadLess
-                  charLimit={500}
-                  readMoreText={' [leer mas…] '}
-                  readLessText={' [Leer menos…]'}
-                  readMoreClassName={'read-more-less--more'}
-                  readLessClassName={'read-more-less--less'}
+                <div
+                  className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}
                 >
-                  {description}
-                </ReactReadMoreReadLess>
+                  <div dangerouslySetInnerHTML={{ __html: description }}></div>
+                  <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+                </div>
               </div>
             </div>
             <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end'}>
@@ -97,8 +125,26 @@ const Physiotherapy = () => {
           </div>
         </div>
       </div>
-      <div className={'w-1/3 mr-1'}>
-        <ArrowButton label={'Compra  presenciales'} onClick={handleClickBuy} type={'physiotherapy'} />
+      <div className={'flex justify-start'}>
+        {personalButton && (
+          <div className={'w-1/3'}>
+            <ArrowButton label={'Compra person'} onClick={handleClickBuyPersion} type={'physiotherapy'} />
+          </div>
+        )}
+        {onlineButton && (
+          <div className={'w-1/3'}>
+            <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} type={'physiotherapy'} />
+          </div>
+        )}
+        {streamButton && (
+          <div className={'w-1/3'}>
+            <ArrowButton
+              label={'Compra 1 to 1 en streaming'}
+              onClick={handleClickBuyStreaming}
+              type={'physiotherapy'}
+            />
+          </div>
+        )}
       </div>
     </div>
   )

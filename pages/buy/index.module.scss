@@ -4,8 +4,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   padding-top: 80px;
+  min-height: calc(100vh - 177px);
 }
 
 .backButtonArea {
