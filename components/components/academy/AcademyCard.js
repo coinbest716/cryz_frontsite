@@ -5,6 +5,7 @@ import ArrowButton from 'components/components/academy/ArrowButton'
 
 const AcademyCard = props => {
   const { data, handleClickPayment } = props
+
   return (
     <div>
       <div className={styles.singleCard}>
