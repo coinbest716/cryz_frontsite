@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 // next components
-import router from 'next/router'
+// import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // third party components
 import toast from 'react-hot-toast'
@@ -27,6 +28,10 @@ import 'moment/locale/es'
 moment.locale('es')
 
 const Course = () => {
+  const router = useRouter()
+
+  // const { pid } = router.query
+  // console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', router.query, router.asPath)
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -47,7 +52,7 @@ const Course = () => {
   const [getAcademyById, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
     graphql.queries.getAcademyById
   )
-  const [mainData, setMainData] = useState({})
+  const [mainData, setMainData] = useState(null)
   const [feature, setFeature] = useState([])
 
   // handlers
@@ -61,23 +66,27 @@ const Course = () => {
           path: '/images/category.svg',
           bgColor: '#D2DADA',
           topLabel: 'Categoria',
-          lowLabel: temp.category,
+          lowLabel: temp.category || '',
         },
-        { id: 1, path: '/images/type.svg', bgColor: '#DFDBD5', topLabel: 'Tipo', lowLabel: temp.type },
+        { id: 1, path: '/images/type.svg', bgColor: '#DFDBD5', topLabel: 'Tipo', lowLabel: temp.type || '' },
         {
           id: 1,
           path: '/images/time.svg',
           bgColor: '#E3BBAA',
           topLabel: 'Tiempo',
-          lowLabel: temp.duration + 'h',
+          lowLabel: temp.duration || 0 + 'h',
         },
       ])
     }
   }, [courseLoading, courseData, courseError])
 
   useEffect(() => {
-    getAcademyById(router.query)
-  }, [])
+    const currentPath = router.asPath
+    const newArr = currentPath.split('/')
+    if (parseInt(newArr[2])) {
+      getAcademyById({ variables: { id: parseInt(newArr[2]) } })
+    }
+  }, [router.asPath])
 
   const handleClickPayment = () => {
     toast.error('You did not connected payment!')
@@ -103,7 +112,7 @@ const Course = () => {
                   {moment(mainData.end_date).format('MMMM YYYY')}
                 </div>
                 <div className={'mt-6'} style={{ width: '326px' }}>
-                  <ArrowButton label={mainData.price + ' €'} onClick={handleClickPayment} />
+                  <ArrowButton label={mainData.price || '' + ' €'} onClick={handleClickPayment} />
                 </div>
                 <div
                   className={styles.topDescription + ' mt-8'}

@@ -11,8 +11,6 @@ import CircularMark from 'components/components/CircularMark'
 // styles
 import globlaStyle from 'styles/GlobalStyles.module.scss'
 import styles from './academy.module.scss'
-// json data
-import AcademyData from 'assets/data/AcademyData'
 
 // graphql
 import { useLazyQuery } from '@apollo/client'
@@ -58,10 +56,7 @@ const Academy = () => {
 
   const handleClickPayment = data => {
     dispatch({ type: 'set', isLoading: true })
-    router.push({
-      pathname: `/academy/${data.id}`,
-      query: { id: data.id },
-    })
+    router.push(`/academy/${data.id}`)
   }
 
   return (
