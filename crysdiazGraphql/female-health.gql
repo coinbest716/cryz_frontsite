@@ -16,6 +16,9 @@ query GetDisciplineList {
     name
     order
     image
+    stream_button
+    online_button
+    personal_button
   }
 }
 
