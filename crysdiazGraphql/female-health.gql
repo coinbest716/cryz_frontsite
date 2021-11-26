@@ -19,15 +19,17 @@ query GetDisciplineList {
   }
 }
 
-query GetFemHealthService {
-  getFemHealthService {
+query GetFemHealthService($discipline_id: Int) {
+  getFemHealthService(discipline_id: $discipline_id) {
     id
-    discipline_id
     name
     title_one
     title_two
     text
-    images
-    list
+    discipline_id
+    carousel_image
+    stream_button
+    personal_button
+    online_button
   }
 }

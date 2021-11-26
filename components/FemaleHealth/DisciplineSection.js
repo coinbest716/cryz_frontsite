@@ -24,40 +24,6 @@ const DisciplineSection = props => {
   const [getDisciplineList, { data: disciplineListData, loading: disciplineListLoading, error: disciplineListError }] =
     useLazyQuery(graphql.queries.getDisciplineList)
 
-  const BoxInfo = [
-    {
-      id: 1,
-      bgColor: '#f8f5f4',
-      name: 'Suelo pélvico',
-      image: '/images/card1.jpg',
-      link: '/female-health/pelvic-floor',
-    },
-    {
-      id: 2,
-      bgColor: '#F3F3EB',
-      name: 'Preparación al parto',
-      image: '/images/card2.jpg',
-      link: '/female-health/preparation-for-childbirth',
-    },
-    { id: 3, bgColor: '#F1F1F1', name: 'Menopausia', image: '/images/card3.jpg', link: '/female-health/menopause' },
-    { id: 4, bgColor: '#99A7A9', name: 'Postparto', image: '/images/card4.jpg', link: '/female-health/postpartum' },
-    { id: 5, bgColor: '#d9dfdf', name: 'Embarazo', image: '/images/card1.jpg', link: '/female-health/pregnancy' },
-    {
-      id: 6,
-      bgColor: '#e8ebeb',
-      name: 'Asesoría del sueño infantil',
-      image: '/images/card2.jpg',
-      link: 'female-health/child-sleep-counseling',
-    },
-    {
-      id: 7,
-      bgColor: '#cecbce',
-      name: 'Entrena tu diástasis',
-      image: '/images/card3.jpg',
-      link: '/female-health/train-your-diastasis',
-    },
-  ]
-
   const BoxList = [
     // default
     {

@@ -71,7 +71,7 @@ const CarouselFemaleHealth = props => {
             {data.map((item, index) => (
               <div key={index} className={'pb-12 px-5'}>
                 <Image
-                  src={item.image}
+                  src={item.path}
                   alt=""
                   width={379}
                   height={index % 2 === 0 ? 379 : 474}

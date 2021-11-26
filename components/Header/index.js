@@ -21,168 +21,75 @@ import styles from 'components/Header/Header.module.scss'
 import ShoppingCart from 'components/components/ShoppingCart'
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Header = props => {
+  // variables
   const router = useRouter()
   const dispatch = useDispatch()
 
   const [changeHeaderColor, setChangeHeaderColor] = useState(false)
+  const [getDisciplineList, { data: disciplineListData, loading: disciplineListLoading, error: disciplineListError }] =
+    useLazyQuery(graphql.queries.getDisciplineList)
 
   const [openCart, setOpenCart] = useState(false)
   const [cartData, setCartData] = useState([])
-  const [loginStatus, setLoginStatus] = useState(false)
+  const [menus, setMenus] = useState([])
 
-  const menus = [
-    {
-      title: 'Salud Fem',
-      link: '/female-health',
-      subMenus: [
+  // handlers
+  useEffect(() => {
+    getDisciplineList()
+  }, [getDisciplineList])
+
+  useEffect(() => {
+    if (!disciplineListError && disciplineListData && disciplineListData.getDisciplineList) {
+      let subMenus = []
+      disciplineListData.getDisciplineList.map((item, index) => {
+        let object = {}
+        object.title = item.name
+        object.link = '/female-health/' + item.id
+        let subMenu = [
+          {
+            title: '1 to 1',
+            link: '/buy/buy-one-to-one',
+          },
+          {
+            title: 'Presencial',
+            link: '/buy/buy-person',
+          },
+          {
+            title: 'Planes Online',
+            link: '/buy/buy-plans-online',
+          },
+        ]
+        object.subMenus = subMenu
+        subMenus.push(object)
+      })
+      let menu = []
+      menu.push({ title: 'Salud Fem', link: '/female-health', subMenus: subMenus })
+      menu.push(
         {
-          title: 'Preparación al parto',
-          link: '/female-health/preparation-for-childbirth',
-          subMenus: [
-            {
-              title: '1 to 1',
-              link: '/buy/buy-one-to-one',
-            },
-            {
-              title: 'Presencial',
-              link: '/buy/buy-person',
-            },
-          ],
+          title: 'Servicios',
+          link: '/services',
         },
         {
-          title: 'Suelo pélvico',
-          link: '/female-health/pelvic-floor',
-          subMenus: [
-            {
-              title: '1 to 1',
-              link: '/buy/buy-one-to-one',
-            },
-            {
-              title: 'Presencial',
-              link: '/buy/buy-person',
-            },
-          ],
+          title: 'Classland',
+          link: '/classland',
         },
         {
-          title: 'Postparto',
-          link: '/female-health/postpartum',
-          subMenus: [
-            {
-              title: '1 to 1',
-              link: '/buy/buy-one-to-one',
-            },
-            {
-              title: 'Presencial',
-              link: '/buy/buy-person',
-            },
-            {
-              title: 'Planes Online',
-              link: '/buy/buy-plans-online',
-            },
-          ],
+          title: 'Equipo',
+          link: '/#team',
         },
         {
-          title: 'Embarazo',
-          link: '/female-health/pregnancy',
-          subMenus: [
-            {
-              title: '1 to 1',
-              link: '/buy/buy-one-to-one',
-            },
-            {
-              title: 'Presencial',
-              link: '/buy/buy-person',
-            },
-            {
-              title: 'Planes Online',
-              link: '/buy/buy-plans-online',
-            },
-          ],
-        },
-        // {
-        //   title: 'Asesoria de Lactancia',
-        //   link: '/female-health/lactation-counseling',
-        //   subMenus: [
-        //     {
-        //       title: '1 to 1',
-        //       link: '/buy/buy-one-to-one',
-        //     },
-        //     {
-        //       title: 'Presencial',
-        //       link: '/buy/buy-person',
-        //     },
-        //     {
-        //       title: 'Planes Online',
-        //       link: '/buy/buy-plans-online',
-        //     },
-        //   ],
-        // },
-        {
-          title: 'Menopausia',
-          link: '/female-health/menopause',
-          subMenus: [
-            {
-              title: '1 to 1',
-              link: '/buy/buy-one-to-one',
-            },
-            {
-              title: 'Presencial',
-              link: '/buy/buy-person',
-            },
-            {
-              title: 'Planes Online',
-              link: '/buy/buy-plans-online',
-            },
-          ],
-        },
-        {
-          title: 'Asesoria del sueño',
-          link: '/female-health/child-sleep-counseling',
-          subMenus: [
-            {
-              title: '1 to 1',
-              link: '/buy/buy-one-to-one',
-            },
-          ],
-        },
-        {
-          title: 'Entrena tu Diástasis',
-          link: '/female-health/train-your-diastasis',
-          subMenus: [
-            {
-              title: '1 to 1',
-              link: '/buy/buy-one-to-one',
-            },
-            {
-              title: 'Presencial',
-              link: '/buy/buy-person',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Servicios',
-      link: '/services',
-    },
-    {
-      title: 'Classland',
-      link: '/classland',
-    },
-    {
-      title: 'Equipo',
-      link: '/#team',
-    },
-    {
-      title: 'Contacto',
-      link: '/contact',
-    },
-    // {
-    //   title: 'Tienda',
-    //   link: '/shop',
-    // },
-  ]
+          title: 'Contacto',
+          link: '/contact',
+        }
+      )
+      setMenus(menu)
+    }
+  }, [disciplineListLoading, disciplineListData, disciplineListError])
 
   useEffect(() => {
     setCartData(shoppingCartData)
@@ -240,9 +147,7 @@ const Header = props => {
 
   const handleCheckout = () => {
     setOpenCart(false)
-    if (!loginStatus) {
-      router.push('/purchase-login')
-    }
+    router.push('/purchase-login')
   }
 
   const handleGotoRouter = link => {
