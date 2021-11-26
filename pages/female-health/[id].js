@@ -13,10 +13,9 @@ import OutlineButton from 'components/components/OutlineButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from 'pages/female-health/PreparationForChildbirth.module.scss'
+import styles from 'pages/female-health/id.module.scss'
 
 // json data
-import ServerPhysiotherapy from 'assets/data/ServerPhysiotherapy'
 import { useRouter } from 'next/router'
 
 // graphql
@@ -42,8 +41,6 @@ const Menopause = () => {
 
   // variables
   const router = useRouter()
-  const { pid } = router.query
-  const [sliderData, setSliderData] = useState([])
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
   const [disciplineID, setDisciplineID] = useState(1)
 
@@ -70,44 +67,43 @@ const Menopause = () => {
     }
   }, [femHealthServiceLoading, femHealthServiceData, femHealthServiceError])
 
-  useEffect(() => {
-    setSliderData(ServerPhysiotherapy)
-  }, [])
-
   const handleReadMore = state => {
     setReadMoreCurrentState(state)
   }
 
   return (
     <div className={'w-full flex flex-wrap justify-center'}>
-      {console.log(femHealthService)}
       <div className={globalStyles.container}>
         <div className={styles.backButtonArea}>
           <BackButton />
         </div>
-        <div className={'grid grid-cols-12 gap-4'} style={{ minHeight: '634px' }}>
-          <div className={'col-span-5 block'}>
-            <div className={styles.strokeTitle}>{femHealthService.title_one}</div>
-            <div className={styles.pinkTitle}>{femHealthService.title_two}</div>
-            <div className={styles.divider} />
-            <div className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}>
-              <div id="text" dangerouslySetInnerHTML={{ __html: femHealthService.text }}></div>
-              <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+        {JSON.stringify(femHealthService) !== JSON.stringify({}) ? (
+          <div className={'grid grid-cols-12 gap-4'} style={{ minHeight: '634px' }}>
+            <div className={'col-span-5 block'}>
+              <div className={styles.strokeTitle}>{femHealthService.title_one}</div>
+              <div className={styles.pinkTitle}>{femHealthService.title_two}</div>
+              <div className={styles.divider} />
+              <div className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}>
+                <div id="text" dangerouslySetInnerHTML={{ __html: femHealthService.text }}></div>
+                <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+              </div>
+            </div>
+            <div className={'col-span-7 relative flex justify-end'}>
+              <div className={'absolute top-10 z-10'}>
+                <CircularMark />
+              </div>
+              <div className={'w-full h-full mt-20 pb-20'}>
+                {femHealthService?.carousel_image !== undefined ? (
+                  <CarouselFemaleHealth sliderData={femHealthService?.carousel_image} />
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           </div>
-          <div className={'col-span-7 relative flex justify-end'}>
-            <div className={'absolute top-10 z-10'}>
-              <CircularMark />
-            </div>
-            <div className={'w-full h-full mt-20 pb-20'}>
-              {femHealthService?.carousel_image !== undefined ? (
-                <CarouselFemaleHealth sliderData={femHealthService?.carousel_image} />
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-        </div>
+        ) : (
+          <div className={'w-full justify-center items-center text-center p-32 text-7xl'}>No Data</div>
+        )}
       </div>
       {/* Button group part */}
       <div className={'w-full pt-32'}>
