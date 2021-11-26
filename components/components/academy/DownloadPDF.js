@@ -20,7 +20,7 @@ const DownloadPDF = props => {
           </div>
         </button>
       ) : (
-        <a href={url} target="_blank">
+        <a href={url} target="_blank" rel="noopener noreferrer">
           <button className={'flex justify-between w-full items-center ' + styles.download} onClick={onClick}>
             <div className={styles.label}>{'Dossier'}&nbsp;&nbsp;</div>
             <div className={'w-4 h-4 flex items-center'}>
