@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -14,11 +14,12 @@ import styles from 'components/FemaleHealth/DisciplineSection.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
+const ColorList = ['#f8f5f4', '#F3F3EB', '#F1F1F1', '#99A7A9', '#d9dfdf', '#e8ebeb', '#cecbce']
+
 const DisciplineSection = props => {
   // variables
   const { viewport } = props
   const router = useRouter()
-  const ColorList = ['#f8f5f4', '#F3F3EB', '#F1F1F1', '#99A7A9', '#d9dfdf', '#e8ebeb', '#cecbce']
 
   const [disciplineList, setDisciplineList] = useState([])
   const [getDisciplineList, { data: disciplineListData, loading: disciplineListLoading, error: disciplineListError }] =

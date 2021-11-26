@@ -75,12 +75,8 @@ const Course = () => {
   }, [courseLoading, courseData, courseError])
 
   useEffect(() => {
-    const currentPath = router.asPath
-    const newArr = currentPath.split('/')
-    if (parseInt(newArr[2])) {
-      getAcademyById({ variables: { id: parseInt(newArr[2]) } })
-    }
-  }, [router.asPath])
+    getAcademyById({ variables: { id: Number(router.asPath.split('/')[2]) } })
+  }, [getAcademyById])
 
   const handleClickPayment = () => {
     toast.error('You did not connected payment!')

@@ -35,7 +35,7 @@ const Profile = () => {
     getPersonalInfo()
     setIsMounted(true)
     return () => setIsMounted(false)
-  }, [])
+  }, [getPersonalInfo])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -91,7 +91,7 @@ const Profile = () => {
     } else {
       router.push('/dashboard/profile#personal', undefined, { shallow: true })
     }
-  }, [])
+  }, [router])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPersonalInfo) {
@@ -160,7 +160,6 @@ const Profile = () => {
   }
 
   const handleDeleteAccount = () => {
-    console.log('handleDeleteAccount')
     dispatch({ type: 'set', isLoading: true })
     deletePersonalInfo()
       .then(response => {

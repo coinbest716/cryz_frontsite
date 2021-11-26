@@ -55,7 +55,7 @@ const Training = () => {
         discipline_id: 1,
       },
     })
-  }, [])
+  }, [getCmsServiceSubject])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
