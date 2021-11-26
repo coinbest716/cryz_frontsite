@@ -10,7 +10,7 @@ import Image from 'next/image'
 const CarouselAcademy = props => {
   const { sliderData } = props
 
-  if (sliderData.length > 5) {
+  if (sliderData?.length > 5) {
     sliderData.splice(5, sliderData.length - 1)
   }
 
@@ -51,7 +51,7 @@ const CarouselAcademy = props => {
     >
       {sliderData?.map((item, index) => (
         <div key={index} style={{ height: '400px' }}>
-          <Image src={item.image} alt="" width={500} height={350} className={styles.slideImage} />
+          <Image src={item.path} alt="" width={500} height={350} className={styles.slideImage} />
         </div>
       ))}
     </Carousel>

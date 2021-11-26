@@ -5,7 +5,7 @@ import DownloadPDFIcon from 'public/images/downloadPDF.svg'
 import DownloadWhiteIcon from 'public/images/downloadWhite.svg'
 
 const DownloadPDF = props => {
-  const { onClick, type } = props
+  const { onClick, type, url } = props
 
   return (
     <div>
@@ -20,12 +20,14 @@ const DownloadPDF = props => {
           </div>
         </button>
       ) : (
-        <button className={'flex justify-between w-full items-center ' + styles.download} onClick={onClick}>
-          <div className={styles.label}>{'Dossier'}&nbsp;&nbsp;</div>
-          <div className={'w-4 h-4 flex items-center'}>
-            <Image src={DownloadPDFIcon} alt="" width={15} height={15} />
-          </div>
-        </button>
+        <a href={url} target="_blank">
+          <button className={'flex justify-between w-full items-center ' + styles.download} onClick={onClick}>
+            <div className={styles.label}>{'Dossier'}&nbsp;&nbsp;</div>
+            <div className={'w-4 h-4 flex items-center'}>
+              <Image src={DownloadPDFIcon} alt="" width={15} height={15} />
+            </div>
+          </button>
+        </a>
       )}
     </div>
   )

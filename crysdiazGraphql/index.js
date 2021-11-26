@@ -9,6 +9,7 @@ import {
 } from './services.gql'
 import { GetContactInfo, GetUser, CreateUser } from './crysdiaz.gql'
 import { GetPersonalInfo, SavePersonalInfo, DeletePersonalInfo } from './personal.gql'
+import { GetAcademy, GetAcademyById } from './academy.gql'
 
 // dashboard part
 import { GetUsersByPatient } from './dashboard/message.gql'
@@ -32,7 +33,9 @@ export default {
     getCmsServiceDisciplineList: GetCmsServiceDisciplineList,
     getCmsServiceSubject: GetCmsServiceSubject,
     getCmsServiceSubjectByType: GetCmsServiceSubjectByType,
-
+    // academy part
+    getAcademy: GetAcademy,
+    getAcademyById: GetAcademyById,
     // contact part
     getContactInfo: GetContactInfo,
 
