@@ -43,7 +43,7 @@ const BuyPlansOnline = () => {
     getCmsServiceSubjectByType({
       variables: { discipline_id: parseInt(router.query.discipline_id), service_type: router.query.service_type },
     })
-  }, [])
+  }, [getCmsServiceSubjectByType])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubjectByType) {

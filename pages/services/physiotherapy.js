@@ -58,7 +58,7 @@ const Physiotherapy = () => {
         discipline_id: 2,
       },
     })
-  }, [])
+  }, [getCmsServiceSubject])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {

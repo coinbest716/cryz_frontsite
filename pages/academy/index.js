@@ -46,7 +46,7 @@ const Academy = () => {
         type: 'ALL',
       },
     })
-  }, [])
+  }, [getAcademy])
 
   useEffect(() => {
     if (!mainError && mainData && mainData.getAcademy) {

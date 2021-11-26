@@ -58,7 +58,7 @@ const Nutrition = () => {
         discipline_id: 3,
       },
     })
-  }, [])
+  }, [getCmsServiceSubject])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {

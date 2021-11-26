@@ -55,13 +55,13 @@ const Menopause = () => {
     dispatch({ type: 'set', isLoading: false })
     setFemHealthService({})
     setDisciplineID(Number(router.asPath.split('/')[2]))
-  }, [router])
+  }, [dispatch, router])
 
   useEffect(() => {
     if (disciplineID !== null) {
       getFemHealthService({ variables: { discipline_id: disciplineID } })
     }
-  }, [disciplineID])
+  }, [disciplineID, getFemHealthService])
 
   useEffect(() => {
     if (!femHealthServiceError && femHealthServiceData && femHealthServiceData.getFemHealthService) {
