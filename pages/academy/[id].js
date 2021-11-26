@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 // next components
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // third party components
 import toast from 'react-hot-toast'
@@ -27,6 +27,7 @@ import 'moment/locale/es'
 moment.locale('es')
 
 const Course = () => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
 
