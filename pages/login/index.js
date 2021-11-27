@@ -83,14 +83,6 @@ const Login = () => {
     setRememberMe(!rememberMe)
   }
 
-  const handleClickFacebook = () => {
-    console.log('handleClickFacebook')
-  }
-
-  const handleClickGoogle = () => {
-    console.log('handleClickGoogle')
-  }
-
   const handleClickLogin = async () => {
     setProgressStatus(true)
     await Auth.signIn(email, password)
