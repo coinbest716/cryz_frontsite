@@ -75,9 +75,9 @@ const Academy = () => {
             </div>
           </div>
           <div className={styles.cardTitle + ' mb-5'}>Destacados</div>
-          <div className={'grid grid-cols-12 gap-12 mb-24'}>
+          <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
             {cardData?.map((card, index) => (
-              <div className={'col-span-12 flex  md:col-span-4 sm:col-span-12 ' + styles.cardAlign} key={index}>
+              <div className={'flex justify-center col-span-12 md:col-span-4'} key={index}>
                 <AcademyCard data={card} index={index} handleClickPayment={handleClickPayment} />
               </div>
             ))}
