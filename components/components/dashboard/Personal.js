@@ -5,8 +5,15 @@ import CommonText from 'components/components/purchase/CommonText'
 import styles from './Personal.module.scss'
 
 const Personal = props => {
-  const { handleSave, handleDiscard, handleChangePersonal, handleDeleteAccount, personalInfo, handleChangeAvatar } =
-    props
+  const {
+    handleSave,
+    handleDiscard,
+    handleChangePersonal,
+    handleChangeShipping,
+    handleDeleteAccount,
+    personalInfo,
+    handleChangeAvatar,
+  } = props
   const list = ['male', 'female']
 
   return (
@@ -25,8 +32,9 @@ const Personal = props => {
             <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
           </div>
         </div>
-        <div className={'grid grid-cols-12 gap-12 pt-16'}>
-          <div className={'col-span-12 md:col-span-8 sm:col-span-12'}>
+        <div className={styles.divider + ' my-9'}></div>
+        <div className={'grid grid-cols-12 gap-12'}>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
             <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'name')}
@@ -38,52 +46,40 @@ const Personal = props => {
             </div>
             <div className={'py-2'}>
               <CommonText
-                handleChange={e => handleChangePersonal(e, 'surname')}
-                label={'Apellidos'}
+                handleChange={e => handleChangePersonal(e, 'password')}
+                label={'Contraseña'}
                 placeholder={''}
-                type={'text'}
-                value={personalInfo.surname}
+                type={'password'}
+                value={personalInfo.password}
               />
             </div>
             <div className={'py-2'}>
               <CommonText
-                handleChange={e => handleChangePersonal(e, 'email')}
-                label={'Email'}
+                handleChange={e => handleChangePersonal(e, 'code')}
+                label={'DNI'}
                 placeholder={''}
-                type={'email'}
-                value={personalInfo.email}
+                type={'text'}
+                value={personalInfo.code}
               />
             </div>
             <div className={'py-2'}>
               <CommonText
-                handleChange={e => handleChangePersonal(e, 'country')}
-                label={'Pais'}
+                handleChange={e => handleChangePersonal(e, 'telephone')}
+                label={'Teléfono'}
                 placeholder={''}
-                type={'text'}
-                value={personalInfo.country}
+                type={'tel'}
+                value={personalInfo.telephone}
               />
             </div>
-
             <div className={'py-2'}>
               <CommonText
-                handleChange={e => handleChangePersonal(e, 'address')}
-                label={'Dirección'}
-                placeholder={''}
-                type={'text'}
-                value={personalInfo.address}
+                label={'Sexo'}
+                list={list}
+                handleChange={e => handleChangePersonal(e, 'gender')}
+                type={'select'}
+                value={personalInfo.gender}
               />
             </div>
-
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'town')}
-                label={'Ciudad'}
-                placeholder={''}
-                type={'text'}
-                value={personalInfo.town}
-              />
-            </div>
-
             <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'date')}
@@ -94,14 +90,14 @@ const Personal = props => {
               />
             </div>
           </div>
-          <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
             <div className={'py-2'}>
               <CommonText
-                handleChange={e => handleChangePersonal(e, 'password')}
-                label={'Contraseña'}
+                handleChange={e => handleChangePersonal(e, 'surname')}
+                label={'Apellidos'}
                 placeholder={''}
-                type={'password'}
-                value={personalInfo.password}
+                type={'text'}
+                value={personalInfo.surname}
               />
             </div>
 
@@ -114,14 +110,13 @@ const Personal = props => {
                 value={personalInfo.meet}
               />
             </div>
-
             <div className={'py-2'}>
               <CommonText
-                handleChange={e => handleChangePersonal(e, 'telephone')}
-                label={'Teléfono'}
+                handleChange={e => handleChangePersonal(e, 'email')}
+                label={'Email'}
                 placeholder={''}
-                type={'tel'}
-                value={personalInfo.telephone}
+                type={'email'}
+                value={personalInfo.email}
               />
             </div>
 
@@ -134,24 +129,86 @@ const Personal = props => {
                 value={personalInfo.emergencyPhone}
               />
             </div>
-
             <div className={'py-2'}>
               <CommonText
-                handleChange={e => handleChangePersonal(e, 'code')}
-                label={'DNI'}
+                handleChange={e => handleChangePersonal(e, 'birthday')}
+                label={'Fecha nacimiento'}
                 placeholder={''}
-                type={'text'}
-                value={personalInfo.code}
+                type={'birthday'}
+                value={personalInfo.birthday}
               />
             </div>
-
+          </div>
+        </div>
+        <div className="flex justify-between items-center my-9">
+          <div className={styles.shippingData}>DATOS DE ENVIO</div>
+          <div className={styles.divider + ' my-9'}></div>
+        </div>
+        <div className={'grid grid-cols-12 gap-12'}>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
             <div className={'py-2'}>
               <CommonText
-                label={'Sexo'}
-                list={list}
-                handleChange={e => handleChangePersonal(e, 'gender')}
-                type={'select'}
-                value={personalInfo.gender}
+                handleChange={e => handleChangeShipping(e, 'name')}
+                label={'Nombre'}
+                placeholder={''}
+                type={'text'}
+                value={personalInfo.name}
+              />
+            </div>
+            <div className={'py-2'}>
+              <CommonText
+                handleChange={e => handleChangeShipping(e, 'address')}
+                label={'Dirección'}
+                placeholder={''}
+                type={'text'}
+                value={personalInfo.address}
+              />
+            </div>
+            <div className={'py-2'}>
+              <CommonText
+                handleChange={e => handleChangeShipping(e, 'town')}
+                label={'Ciudad'}
+                placeholder={''}
+                type={'text'}
+                value={personalInfo.town}
+              />
+            </div>
+            <div className={'py-2'}>
+              <CommonText
+                handleChange={e => handleChangeShipping(e, 'country')}
+                label={'Pais'}
+                placeholder={''}
+                type={'text'}
+                value={personalInfo.country}
+              />
+            </div>
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <div className={'py-2'}>
+              <CommonText
+                handleChange={e => handleChangeShipping(e, 'aliasAddress')}
+                label={'Alias de la dirección ( ej. casa, trabajo…)'}
+                placeholder={''}
+                type={'text'}
+                value={personalInfo.aliasAddress}
+              />
+            </div>
+            <div className={'py-2'}>
+              <CommonText
+                handleChange={e => handleChangeShipping(e, 'cp')}
+                label={'CP'}
+                placeholder={''}
+                type={'text'}
+                value={personalInfo.cp}
+              />
+            </div>
+            <div className={'py-2'}>
+              <CommonText
+                handleChange={e => handleChangeShipping(e, 'province')}
+                label={'Provincia'}
+                placeholder={''}
+                type={'text'}
+                value={personalInfo.province}
               />
             </div>
           </div>

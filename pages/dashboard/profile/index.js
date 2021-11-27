@@ -54,14 +54,12 @@ const Profile = () => {
     name: '',
     surname: '',
     email: '',
-    country: '',
-    address: '',
-    town: '',
     date: '',
     password: '',
     meet: '',
     telephone: '',
     emergencyPhone: '',
+    birthday: '',
     code: '',
     gender: '',
   })
@@ -81,6 +79,15 @@ const Profile = () => {
     hips: '',
     thigh: '',
     twin: '',
+  })
+  const [shippingInfo, setShippingInfo] = useState({
+    name: '',
+    address: '',
+    town: '',
+    country: '',
+    aliasAddress: '',
+    cp: '',
+    province: '',
   })
 
   // handlers
@@ -159,6 +166,10 @@ const Profile = () => {
     setPersonalInfo({ ...personalInfo, [key]: event.target.value })
   }
 
+  const handleChangeShipping = (event, key) => {
+    setShippingInfo({ ...shippingInfo, [key]: event.target.value })
+  }
+
   const handleDeleteAccount = () => {
     dispatch({ type: 'set', isLoading: true })
     deletePersonalInfo()
@@ -222,6 +233,7 @@ const Profile = () => {
             handleSave={handleSavePersonal}
             handleDiscard={handleDiscardPersonal}
             handleChangePersonal={handleChangePersonal}
+            handleChangeShipping={handleChangeShipping}
             handleDeleteAccount={handleDeleteAccount}
           />
         )}
