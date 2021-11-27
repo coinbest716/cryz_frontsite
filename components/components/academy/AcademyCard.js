@@ -9,7 +9,7 @@ const AcademyCard = props => {
   return (
     <div>
       <div className={styles.singleCard}>
-        <div className={styles.cardImageLayer}>
+        <div className={'relative'}>
           {data.images.length > 0 && (
             <Image src={data?.images[0]?.path || ''} alt="" width={365} height={253} className={styles.cardImage} />
           )}
