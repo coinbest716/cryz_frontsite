@@ -3,6 +3,7 @@ import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
 import CommonButton from 'components/components/purchase/CommonButton'
 import CommonText from 'components/components/purchase/CommonText'
 import styles from './Personal.module.scss'
+import moment from 'moment'
 
 const Personal = props => {
   const {
@@ -21,7 +22,7 @@ const Personal = props => {
       <div className={'px-24 py-8 ' + styles.container}>
         <div className={'flex justify-between items-center'}>
           <div className={'flex justify-between items-center'}>
-            <PurchaseAvatar avatar={personalInfo.avatar} handleChangeAvatar={handleChangeAvatar} />
+            <PurchaseAvatar avatar={personalInfo.avatar || ''} handleChangeAvatar={handleChangeAvatar} />
             <div className={'pl-5'}>
               <div className={styles.profileName}>Mariano Pérez Fanjul</div>
               <div className={styles.profileCounry}>Madrid, Spain</div>
@@ -80,15 +81,6 @@ const Personal = props => {
                 value={personalInfo.gender}
               />
             </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'date')}
-                label={'Fecha de nacimiento'}
-                placeholder={''}
-                type={'date'}
-                value={personalInfo.date}
-              />
-            </div>
           </div>
           <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
             <div className={'py-2'}>
@@ -106,7 +98,7 @@ const Personal = props => {
                 handleChange={e => handleChangePersonal(e, 'meet')}
                 label={'Como nos conoció…'}
                 placeholder={''}
-                type={'password'}
+                type={'text'}
                 value={personalInfo.meet}
               />
             </div>
@@ -117,6 +109,7 @@ const Personal = props => {
                 placeholder={''}
                 type={'email'}
                 value={personalInfo.email}
+                disabled={true}
               />
             </div>
 
@@ -134,8 +127,8 @@ const Personal = props => {
                 handleChange={e => handleChangePersonal(e, 'birthday')}
                 label={'Fecha nacimiento'}
                 placeholder={''}
-                type={'birthday'}
-                value={personalInfo.birthday}
+                type={'date'}
+                value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
               />
             </div>
           </div>

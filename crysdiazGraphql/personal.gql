@@ -1,24 +1,8 @@
-query GetPersonalInfo {
-  getPersonalInfo {
-    id
-    avatar
-    name
-    surname
-    email
-    country
-    address
-    town
-    date
-    password
-    meet
-    telephone
-    emergencyPhone
-    code
-    gender
-  }
+query GetPatientByEmail($email: String) {
+  getPatientByEmail(email: $email)
 }
 
-mutation SavePersonalInfo(
+mutation UpdatePatientByDashboard(
   $id: Int
   $avatar: String
   $name: String
@@ -36,7 +20,7 @@ mutation SavePersonalInfo(
   $gender: String
   $imageFile: Upload
 ) {
-  savePersonalInfo(
+  updatePatientByDashboard(
     id: $id
     avatar: $avatar
     name: $name
@@ -58,8 +42,8 @@ mutation SavePersonalInfo(
   }
 }
 
-mutation DeletePersonalInfo {
-  deletePersonalInfo {
+mutation DeletePatientByDashboard {
+  deletePatientByDashboard {
     id
   }
 }

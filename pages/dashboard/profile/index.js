@@ -21,21 +21,37 @@ import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import toast from 'react-hot-toast'
 
+import { Auth } from 'aws-amplify'
+
 const Profile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [getPersonalInfo, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
-    graphql.queries.getPersonalInfo
+  const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
+    graphql.queries.getPatientByEmail
   )
-  const [savePersonalInfo] = useMutation(graphql.mutations.savePersonalInfo)
-  const [deletePersonalInfo] = useMutation(graphql.mutations.deletePersonalInfo)
+  const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
+  const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
 
   useEffect(() => {
-    getPersonalInfo()
+    let email = ''
+    Auth.currentAuthenticatedUser()
+      .then(response => {
+        if (response?.attributes?.email) {
+          email = response.attributes.email
+          getPatientByEmail({
+            variables: {
+              email: email,
+            },
+          })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
     setIsMounted(true)
     return () => setIsMounted(false)
-  }, [getPersonalInfo])
+  }, [])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -47,14 +63,13 @@ const Profile = () => {
   // variables
   const router = useRouter()
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
-  const [uploadFile, setUploadFile] = useState({})
+  const [uploadFile, setUploadFile] = useState(null)
   const [personalInfo, setPersonalInfo] = useState({
     id: -1,
     avatar: '',
     name: '',
     surname: '',
     email: '',
-    date: '',
     password: '',
     meet: '',
     telephone: '',
@@ -98,12 +113,28 @@ const Profile = () => {
     } else {
       router.push('/dashboard/profile#personal', undefined, { shallow: true })
     }
-  }, [router])
+  }, [router.pathname])
 
   useEffect(() => {
-    if (!personalError && personalData && personalData.getPersonalInfo) {
-      console.log('personal information ', personalData.getPersonalInfo)
-      setPersonalInfo(personalData.getPersonalInfo)
+    if (!personalError && personalData && personalData.getPatientByEmail) {
+      console.log('personal information ', personalData.getPatientByEmail)
+      const data = personalData.getPatientByEmail
+      // setPersonalInfo(personalData.getPatientByEmail)
+      let _personalInfo = {
+        ...personalInfo,
+        id: data.id,
+        avatar: data.avatar,
+        name: data.name,
+        surname: data.lastname,
+        email: data.email,
+        meet: data.known_us,
+        telephone: data.mobile,
+        emergencyPhone: data.eg_number,
+        birthday: data.birth_date,
+        code: data.dni,
+        gender: data.genre,
+      }
+      setPersonalInfo(_personalInfo)
     }
   }, [personalLoading, personalData, personalError])
 
@@ -125,14 +156,15 @@ const Profile = () => {
     dispatch({ type: 'set', isLoading: true })
     let _personalInfo = { ...personalInfo }
     _personalInfo = { ..._personalInfo, imageFile: uploadFile }
-    savePersonalInfo({
+
+    updatePatientByDashboard({
       variables: {
         _personalInfo,
       },
     })
       .then(response => {
-        if (response.data.savePersonalInfo) {
-          getPersonalInfo()
+        if (response.data.updatePatientByDashboard) {
+          getPatientByEmail()
           toast.success('Successfully save personal account!')
           dispatch({ type: 'set', isLoading: false })
         }
@@ -172,10 +204,10 @@ const Profile = () => {
 
   const handleDeleteAccount = () => {
     dispatch({ type: 'set', isLoading: true })
-    deletePersonalInfo()
+    deletePatientByDashboard()
       .then(response => {
-        if (response.data.deletePersonalInfo) {
-          getPersonalInfo()
+        if (response.data.deletePatientByDashboard) {
+          getPatientByEmail()
           toast.success('Successfully delete personal information!')
           dispatch({ type: 'set', isLoading: false })
         }
