@@ -64,12 +64,12 @@ const Profile = () => {
     surname: '',
     email: email || '',
     password: '',
-    meet: '',
+    meet: 'INSTAGRAM',
     telephone: '',
     emergencyPhone: '',
     birthday: new Date(),
     code: '',
-    gender: '',
+    gender: 'WOMAN',
   })
   const [healthInfo, setHealthInfo] = useState({
     fatPercentage: '',
@@ -144,9 +144,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
-      console.log('personal information ', personalData.getPatientByEmail)
       const data = personalData.getPatientByEmail
-      // setPersonalInfo(personalData.getPatientByEmail)
       let _personalInfo = {
         ...personalInfo,
         id: data.id,
@@ -178,7 +176,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
-      console.log('personal information ', healthData.getAnthropmetryByDashboard)
+      console.log('getAnthropmetryByDashboard information ', healthData.getAnthropmetryByDashboard)
     }
   }, [healthLoading, healthData, healthError])
 
@@ -196,7 +194,6 @@ const Profile = () => {
   }
 
   const handleSavePersonal = () => {
-    console.log('handleSavePersonal', uploadFile)
     if (personalInfo.name === '' || personalInfo.surname === '') {
       toast.error('Please input data!')
       return
@@ -204,7 +201,7 @@ const Profile = () => {
     dispatch({ type: 'set', isLoading: true })
     let _personalInfo = { ...personalInfo }
     _personalInfo = { ..._personalInfo, imageFile: uploadFile }
-    const variable = {
+    const variables = {
       email: email,
       name: personalInfo.name,
       lastname: personalInfo.surname,
@@ -214,7 +211,7 @@ const Profile = () => {
       known_us: personalInfo.meet,
       avatar: uploadFile,
       genre: personalInfo.gender,
-      birth_date: personalInfo.birthday,
+      birth_date: new Date(personalInfo.birthday),
       bill_alias: shippingInfo.aliasAddress,
       bill_name: shippingInfo.name,
       bill_address: shippingInfo.address,
@@ -225,7 +222,7 @@ const Profile = () => {
     }
 
     updatePatientByDashboard({
-      variables: variable,
+      variables: variables,
     })
       .then(response => {
         if (response.data.updatePatientByDashboard) {
@@ -258,10 +255,32 @@ const Profile = () => {
 
   const handleDeleteAccount = () => {
     dispatch({ type: 'set', isLoading: true })
-    deletePatientByDashboard()
+    deletePatientByDashboard({ variables: { patient_id: personalInfo.id } })
       .then(response => {
         if (response.data.deletePatientByDashboard) {
-          getPatientByEmail()
+          setPersonalInfo({
+            id: -1,
+            avatar: '',
+            name: '',
+            surname: '',
+            email: email || '',
+            password: '',
+            meet: 'INSTAGRAM',
+            telephone: '',
+            emergencyPhone: '',
+            birthday: new Date(),
+            code: '',
+            gender: 'WOMAN',
+          })
+          setShippingInfo({
+            name: '',
+            address: '',
+            town: '',
+            country: '',
+            aliasAddress: '',
+            cp: '',
+            province: '',
+          })
           toast.success('Successfully delete personal information!')
           dispatch({ type: 'set', isLoading: false })
         }

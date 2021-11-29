@@ -7,6 +7,7 @@ query GetAnthropmetryByDashboard($patient_id: Int) {
 }
 
 mutation UpdatePatientByDashboard(
+  $email: String
   $name: String
   $lastname: String
   $dni: String
@@ -25,6 +26,7 @@ mutation UpdatePatientByDashboard(
   $bill_country: String
 ) {
   updatePatientByDashboard(
+    email: $email
     name: $name
     lastname: $lastname
     dni: $dni
@@ -88,8 +90,8 @@ mutation UpdatePatientHealthByDashboard(
   }
 }
 
-mutation DeletePatientByDashboard {
-  deletePatientByDashboard {
+mutation DeletePatientByDashboard($patient_id: Int!) {
+  deletePatientByDashboard(patient_id: $patient_id) {
     id
   }
 }
