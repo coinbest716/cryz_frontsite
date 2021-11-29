@@ -45,6 +45,7 @@ const Menopause = () => {
   const [disciplineID, setDisciplineID] = useState(1)
 
   const [femHealthService, setFemHealthService] = useState({})
+  const [text, setText] = useState('')
   const [
     getFemHealthService,
     { data: femHealthServiceData, loading: femHealthServiceLoading, error: femHealthServiceError },
@@ -69,6 +70,13 @@ const Menopause = () => {
     }
   }, [femHealthServiceLoading, femHealthServiceData, femHealthServiceError])
 
+  useEffect(() => {
+    if (femHealthService.text !== undefined) {
+      let str = femHealthService.text.replace(/<\/?[^>]+(>|$)/g, '')
+      setText(str)
+    }
+  }, [femHealthService])
+
   const handleReadMore = state => {
     setReadMoreCurrentState(state)
   }
@@ -86,8 +94,12 @@ const Menopause = () => {
               <div className={styles.pinkTitle}>{femHealthService.title_two}</div>
               <div className={styles.divider} />
               <div className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}>
-                <div id="text" dangerouslySetInnerHTML={{ __html: femHealthService.text }}></div>
-                <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+                <div id="text" dangerouslySetInnerHTML={{ __html: text }}></div>
+                {text.length > 550 ? (
+                  <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className={'col-span-7 relative flex justify-end'}>
