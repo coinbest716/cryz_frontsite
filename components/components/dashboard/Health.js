@@ -29,7 +29,7 @@ const Health = props => {
             <CommonText
               value={healthInfo.fatPercentage}
               handleChange={e => handleChangeHealth(e, 'fatPercentage')}
-              label={'Porcentaje grasa'}
+              label={'Porcentaje grasa(%)'}
               placeholder={''}
               type={'text'}
             />
@@ -38,7 +38,7 @@ const Health = props => {
             <CommonText
               value={healthInfo.visceralFat}
               handleChange={e => handleChangeHealth(e, 'visceralFat')}
-              label={'Grasa visceral'}
+              label={'Grasa visceral(%)'}
               placeholder={''}
               type={'text'}
             />
@@ -47,7 +47,7 @@ const Health = props => {
             <CommonText
               value={healthInfo.boneMass}
               handleChange={e => handleChangeHealth(e, 'boneMass')}
-              label={'Indice Masa Osea'}
+              label={'Indice Masa Osea(%)'}
               placeholder={''}
               type={'text'}
             />
@@ -67,7 +67,7 @@ const Health = props => {
             <CommonText
               value={healthInfo.waterPercentage}
               handleChange={e => handleChangeHealth(e, 'waterPercentage')}
-              label={'Porcentaje agua'}
+              label={'Porcentaje agua(%)'}
               placeholder={''}
               type={'text'}
             />
@@ -76,7 +76,7 @@ const Health = props => {
             <CommonText
               value={healthInfo.muscleMass}
               handleChange={e => handleChangeHealth(e, 'muscleMass')}
-              label={'Indice Masa Muscualr'}
+              label={'Indice Masa Muscualr(%)'}
               placeholder={''}
               type={'text'}
             />
@@ -85,7 +85,7 @@ const Health = props => {
             <CommonText
               value={healthInfo.metabolicExpense}
               handleChange={e => handleChangeHealth(e, 'metabolicExpense')}
-              label={'Gasto Metabólico'}
+              label={'Gasto Metabólico(kcal)'}
               placeholder={''}
               type={'text'}
             />
@@ -94,7 +94,7 @@ const Health = props => {
             <CommonText
               value={healthInfo.metabolicAge}
               handleChange={e => handleChangeHealth(e, 'metabolicAge')}
-              label={'Edad Metabolica'}
+              label={'Edad Metabolica(años)'}
               placeholder={''}
               type={'text'}
             />
@@ -106,7 +106,7 @@ const Health = props => {
           <CommonText
             value={healthInfo.weight}
             handleChange={e => handleChangeHealth(e, 'weight')}
-            label={'Peso'}
+            label={'Peso(kg)'}
             placeholder={''}
             type={'text'}
           />
@@ -115,7 +115,7 @@ const Health = props => {
           <CommonText
             value={healthInfo.height}
             handleChange={e => handleChangeHealth(e, 'height')}
-            label={'Altura'}
+            label={'Altura(cm)'}
             placeholder={''}
             type={'text'}
           />
@@ -126,7 +126,7 @@ const Health = props => {
           <CommonText
             value={healthInfo.waist}
             handleChange={e => handleChangeHealth(e, 'waist')}
-            label={'Cintura'}
+            label={'Cintura(cm)'}
             placeholder={''}
             type={'text'}
           />
@@ -144,7 +144,7 @@ const Health = props => {
           <CommonText
             value={healthInfo.hips}
             handleChange={e => handleChangeHealth(e, 'hips')}
-            label={'Cadera'}
+            label={'Cadera(cm)'}
             placeholder={''}
             type={'text'}
           />
@@ -153,7 +153,7 @@ const Health = props => {
           <CommonText
             value={healthInfo.thigh}
             handleChange={e => handleChangeHealth(e, 'thigh')}
-            label={'Muslo'}
+            label={'Muslo(cm)'}
             placeholder={''}
             type={'text'}
           />
