@@ -191,7 +191,6 @@ const Profile = () => {
 
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
-      console.log('getAnthropmetryByDashboard information ', healthData.getAnthropmetryByDashboard)
       const data = healthData.getAnthropmetryByDashboard
       let _healthInfo = { ...healthInfo }
       data.map((item, index) => {
@@ -325,7 +324,22 @@ const Profile = () => {
   }
 
   const handleDiscardMeasure = () => {
-    console.log('handleDiscardMeasure')
+    setHealthInfo({
+      fatPercentage: '', // grasa %
+      visceralFat: '', //  visceral %
+      boneMass: '', // osea %
+      bodyMass: '', // imc
+      waterPercentage: '', // agua %
+      muscleMass: '', // muscular %
+      metabolicExpense: '', // basal kcal
+      metabolicAge: '', // edad años
+      weight: '', // peso  kg
+      height: '', // altura cm
+      waist: '', // cintura cm
+      arm: '', // brazo
+      hips: '', // cadera cm
+      thigh: '', // muslo cm
+    })
   }
 
   const handleChangeHealth = (event, key) => {
