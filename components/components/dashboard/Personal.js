@@ -13,6 +13,7 @@ const Personal = props => {
     handleChangeShipping,
     handleDeleteAccount,
     personalInfo,
+    shippingInfo,
     handleChangeAvatar,
   } = props
   const list = ['male', 'female']
@@ -145,7 +146,7 @@ const Personal = props => {
                 label={'Nombre'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.name}
+                value={shippingInfo.name}
               />
             </div>
             <div className={'py-2'}>
@@ -154,7 +155,7 @@ const Personal = props => {
                 label={'Dirección'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.address}
+                value={shippingInfo.address}
               />
             </div>
             <div className={'py-2'}>
@@ -163,7 +164,7 @@ const Personal = props => {
                 label={'Ciudad'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.town}
+                value={shippingInfo.town}
               />
             </div>
             <div className={'py-2'}>
@@ -172,7 +173,7 @@ const Personal = props => {
                 label={'Pais'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.country}
+                value={shippingInfo.country}
               />
             </div>
           </div>
@@ -183,7 +184,7 @@ const Personal = props => {
                 label={'Alias de la dirección ( ej. casa, trabajo…)'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.aliasAddress}
+                value={shippingInfo.aliasAddress}
               />
             </div>
             <div className={'py-2'}>
@@ -192,7 +193,7 @@ const Personal = props => {
                 label={'CP'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.cp}
+                value={shippingInfo.cp}
               />
             </div>
             <div className={'py-2'}>
@@ -201,7 +202,7 @@ const Personal = props => {
                 label={'Provincia'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.province}
+                value={shippingInfo.province}
               />
             </div>
           </div>

@@ -27,28 +27,8 @@ const Profile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
-    graphql.queries.getPatientByEmail
-  )
-  const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
-  const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
 
   useEffect(() => {
-    let email = ''
-    Auth.currentAuthenticatedUser()
-      .then(response => {
-        if (response?.attributes?.email) {
-          email = response.attributes.email
-          getPatientByEmail({
-            variables: {
-              email: email,
-            },
-          })
-        }
-      })
-      .catch(error => {
-        toast.error(error.message)
-      })
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
@@ -62,6 +42,13 @@ const Profile = () => {
 
   // variables
   const router = useRouter()
+  const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
+    graphql.queries.getPatientByEmail
+  )
+  const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
+  const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
+
+  const [email, setEmail] = useState('')
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
   const [uploadFile, setUploadFile] = useState(null)
   const [personalInfo, setPersonalInfo] = useState({
@@ -107,6 +94,25 @@ const Profile = () => {
 
   // handlers
   useEffect(() => {
+    let _email = ''
+    Auth.currentAuthenticatedUser()
+      .then(response => {
+        if (response?.attributes?.email) {
+          _email = response.attributes.email
+          setEmail(_email)
+          getPatientByEmail({
+            variables: {
+              email: _email,
+            },
+          })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
+  }, [])
+
+  useEffect(() => {
     const currentState = router.asPath.split('#')
     if (currentState[1] === 'health') {
       setActiveTab({ personal: false, health: true, graphic: false })
@@ -135,6 +141,17 @@ const Profile = () => {
         gender: data.genre,
       }
       setPersonalInfo(_personalInfo)
+      let _shippingInfo = {
+        ...shippingInfo,
+        name: data.bill_name,
+        address: data.bill_address,
+        town: data.bill_town,
+        country: data.bill_country,
+        aliasAddress: data.bill_alias,
+        cp: data.bill_postal_code,
+        province: data.bill_province,
+      }
+      setShippingInfo(_shippingInfo)
     }
   }, [personalLoading, personalData, personalError])
 
@@ -153,14 +170,35 @@ const Profile = () => {
 
   const handleSavePersonal = () => {
     console.log('handleSavePersonal', uploadFile)
+    if (personalInfo.name === '' || personalInfo.surname === '') {
+      toast.error('Please input data!')
+      return
+    }
     dispatch({ type: 'set', isLoading: true })
     let _personalInfo = { ...personalInfo }
     _personalInfo = { ..._personalInfo, imageFile: uploadFile }
-
+    const variable = {
+      id: personalInfo.id,
+      email: email,
+      name: personalInfo.name,
+      lastname: personalInfo.surname,
+      dni: personalInfo.code,
+      mobile: personalInfo.telephone,
+      eg_number: personalInfo.emergencyPhone,
+      known_us: personalInfo.meet,
+      avatar: uploadFile,
+      genre: personalInfo.gender,
+      birth_date: personalInfo.birthday,
+      bill_alias: shippingInfo.aliasAddress,
+      bill_name: shippingInfo.name,
+      bill_address: shippingInfo.address,
+      bill_province: shippingInfo.province,
+      bill_town: shippingInfo.town,
+      bill_postal_code: shippingInfo.cp,
+      bill_country: shippingInfo.country,
+    }
     updatePatientByDashboard({
-      variables: {
-        _personalInfo,
-      },
+      variables: variable,
     })
       .then(response => {
         if (response.data.updatePatientByDashboard) {
@@ -176,21 +214,10 @@ const Profile = () => {
   }
 
   const handleDiscardPersonal = () => {
-    setPersonalInfo({
-      avatar: '',
-      name: '',
-      surname: '',
-      email: '',
-      country: '',
-      address: '',
-      town: '',
-      date: '',
-      password: '',
-      meet: '',
-      telephone: '',
-      emergencyPhone: '',
-      code: '',
-      gender: '',
+    getPatientByEmail({
+      variables: {
+        email: _email,
+      },
     })
   }
 
@@ -261,6 +288,7 @@ const Profile = () => {
         {activeTab.personal && (
           <Personal
             personalInfo={personalInfo}
+            shippingInfo={shippingInfo}
             handleChangeAvatar={handleChangeAvatar}
             handleSave={handleSavePersonal}
             handleDiscard={handleDiscardPersonal}
