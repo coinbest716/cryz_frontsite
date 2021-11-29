@@ -122,10 +122,14 @@ const Contact = () => {
               <div className={'pt-5 ' + styles.lowTitle}>Direcciones de E-mail</div>
               <div className={'pt-6 pb-14 ' + styles.lowDescription}>
                 <div className={'cursor-pointer'}>
-                  <a href={'mailto:' + emailOne}>{emailOne}</a>
+                  <a target="_blank" href={'mailto:' + emailOne} rel="noopener noreferrer">
+                    {emailOne}
+                  </a>
                 </div>
                 <div className={'cursor-pointer'}>
-                  <a href={'mailto:' + emailTwo}>{emailTwo}</a>
+                  <a target="_blank" href={'mailto:' + emailTwo} rel="noopener noreferrer">
+                    {emailTwo}
+                  </a>
                 </div>
               </div>
             </div>
