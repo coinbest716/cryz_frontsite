@@ -4,8 +4,6 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 
 // images
-import PlusGrayIcon from 'assets/images/plus-gray.svg'
-import PlusWhiteIcon from 'assets/images/plus-white.svg'
 import TrashIcon from 'assets/images/trash.svg'
 
 // styles
