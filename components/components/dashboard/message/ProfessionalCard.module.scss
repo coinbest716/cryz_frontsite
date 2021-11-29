@@ -9,43 +9,37 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.newMessageButton {
+  height: 30px;
+  padding-left: 14px;
+  padding-right: 14px;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
+  font-size: 10px;
+  color: $blue-gray-400-color;
   &:hover {
-    background-color: $white-color;
+    color: $white-color;
+    background-color: $blue-gray-400-color;
   }
 }
 
-.active {
-  background-color: $white-color;
-}
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 6px;
-  background: #d8d8d8;
+.newMessageButtonHover {
+  height: 30px;
+  padding-left: 14px;
+  padding-right: 14px;
+  border: 1px solid #c4c4c4;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  font-size: 10px;
   color: $white-color;
-  font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 20px;
-}
-
-.title {
-  color: #333333;
-  font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 20px;
-}
-
-.text {
-  color: #999999;
-  font-family: Montserrat;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 15px;
+  background-color: $blue-gray-400-color;
 }

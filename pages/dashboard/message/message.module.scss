@@ -40,8 +40,37 @@
 .professionalArea {
   border: 1px solid #c4c4c4;
   border-top-left-radius: 10px;
+  @media (max-width: 767px) {
+    border-top-right-radius: 10px;
+  }
+  @media (min-width: 768px) {
+    border-top-right-radius: 0px;
+  }
   height: 98px;
   overflow-y: auto;
+}
+
+.dropMenuArea {
+  position: absolute;
+  left: 26px;
+  top: 77px;
+  border: 1px solid $blue-gray-400-color;
+  background-color: $white-color;
+  width: 192px;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  z-index: 1000;
+  cursor: pointer;
+}
+.dropMenuItemArea {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  &:hover {
+    background-color: #c4c4c4;
+  }
 }
 
 .subjectArea {

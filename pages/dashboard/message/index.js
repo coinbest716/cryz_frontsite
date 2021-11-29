@@ -73,6 +73,8 @@ const Message = () => {
   }
   const [messageInput, setMessageInput] = useState('')
 
+  const [dropdownButtonHover, setDropdownButtonHover] = useState(false)
+
   // handlers
   useEffect(() => {
     getUsersByPatient()
@@ -113,18 +115,34 @@ const Message = () => {
       </div>
       {/* body part */}
       <div className={'w-full flex flex-wrap mt-6 ' + styles.contentBorder}>
-        <div className={'w-full md:w-1/2 '}>
+        <div className={'w-full md:w-1/2 relative '}>
           {/* professional area */}
           <div className={styles.professionalArea}>
-            <PerfectScrollbar>
-              <div className={'mx-6 my-2 ' + styles.messageText}>Profesionales</div>
-              <ProfessionalCard />
-              <ProfessionalCard />
-              <ProfessionalCard />
-              <ProfessionalCard />
-              <ProfessionalCard />
-            </PerfectScrollbar>
+            <ProfessionalCard
+              data={usersByPatient}
+              dropdownButtonHover={dropdownButtonHover}
+              onClickButton={bool => setDropdownButtonHover(bool)}
+            />
           </div>
+          {/* dropdown menu part */}
+          {dropdownButtonHover ? (
+            <div className={styles.dropMenuArea} onClick={() => setDropdownButtonHover(false)}>
+              {usersByPatient !== '' ? (
+                usersByPatient.map((item, index) => {
+                  return (
+                    <div key={index} className={styles.dropMenuItemArea}>
+                      {item.name}
+                    </div>
+                  )
+                })
+              ) : (
+                <></>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
+
           {/* message area */}
           <div className={styles.subjectArea}>
             <PerfectScrollbar>

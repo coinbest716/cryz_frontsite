@@ -7,5 +7,10 @@ query GetUsersByPatient {
     specialties
     active
     high_date
+    speicalty
+    degree
+    avatar
+    facebook
+    instragram
   }
 }
