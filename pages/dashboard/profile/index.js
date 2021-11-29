@@ -72,21 +72,21 @@ const Profile = () => {
     gender: 'WOMAN',
   })
   const [healthInfo, setHealthInfo] = useState({
-    fatPercentage: '',
-    visceralFat: '',
-    boneMass: '',
-    bodyMass: '',
-    waterPercentage: '',
-    muscleMass: '',
-    metabolicExpense: '',
-    metabolicAge: '',
-    weight: '',
-    height: '',
-    waist: '',
-    arm: '',
-    hips: '',
-    thigh: '',
-    twin: '',
+    fatPercentage: '', // grasa %
+    visceralFat: '', //  visceral %
+    boneMass: '', // osea %
+    bodyMass: '', // imc
+    waterPercentage: '', // agua %
+    muscleMass: '', // muscular %
+    metabolicExpense: '', // basal kcal
+    metabolicAge: '', // edad años
+    weight: '', // peso  kg
+    height: '', // altura cm
+    waist: '', // cintura cm
+    arm: '', // brazo
+    hips: '', // cadera cm
+    thigh: '', // muslo cm
+    // twin: '', //
   })
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
@@ -177,6 +177,92 @@ const Profile = () => {
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
       console.log('getAnthropmetryByDashboard information ', healthData.getAnthropmetryByDashboard)
+      const data = healthData.getAnthropmetryByDashboard
+      let _healthInfo = { ...healthInfo }
+      data.map((item, index) => {
+        let tempValue = ''
+        switch (item.name) {
+          case 'grasa':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value.value
+            }
+            _healthInfo = { ..._healthInfo, fatPercentage: tempValue }
+            break
+          case 'visceral':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, visceralFat: tempValue }
+            break
+          case 'osea':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, boneMass: tempValue }
+            break
+          case 'imc':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, bodyMass: tempValue }
+            break
+          case 'agua':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, waterPercentage: tempValue }
+            break
+          case 'basal':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, metabolicExpense: tempValue }
+            break
+          case 'edad':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, metabolicAge: tempValue }
+            break
+          case 'peso':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, weight: tempValue }
+            break
+          case 'altura':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, height: tempValue }
+            break
+          case 'cintura':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, waist: tempValue }
+            break
+          case 'brazo':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, arm: tempValue }
+            break
+          case 'cadera':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, hips: tempValue }
+            break
+          case 'muslo':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, thigh: tempValue }
+            break
+        }
+      })
+      setHealthInfo(_healthInfo)
     }
   }, [healthLoading, healthData, healthError])
 
@@ -345,6 +431,7 @@ const Profile = () => {
         )}
         {activeTab.health && (
           <Health
+            healthInfo={healthInfo}
             handleSave={handleSaveMeasure}
             handleDiscard={handleDiscardMeasure}
             handleClickTab={handleClickTab}
