@@ -21,21 +21,19 @@ import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import toast from 'react-hot-toast'
 
+import { Auth } from 'aws-amplify'
+
+import moment from 'moment'
+
 const Profile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [getPersonalInfo, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
-    graphql.queries.getPersonalInfo
-  )
-  const [savePersonalInfo] = useMutation(graphql.mutations.savePersonalInfo)
-  const [deletePersonalInfo] = useMutation(graphql.mutations.deletePersonalInfo)
 
   useEffect(() => {
-    getPersonalInfo()
     setIsMounted(true)
     return () => setIsMounted(false)
-  }, [getPersonalInfo])
+  }, [])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -46,39 +44,49 @@ const Profile = () => {
 
   // variables
   const router = useRouter()
+  const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
+    graphql.queries.getPatientByEmail
+  )
+  const [getAnthropmetryByDashboard, { data: healthData, loading: healthLoading, error: healthError }] = useLazyQuery(
+    graphql.queries.getAnthropmetryByDashboard
+  )
+  const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
+  const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
+  const [updatePatientHealthByDashboard] = useMutation(graphql.mutations.updatePatientHealthByDashboard)
+
+  const [email, setEmail] = useState('')
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
-  const [uploadFile, setUploadFile] = useState({})
+  const [uploadFile, setUploadFile] = useState(null)
   const [personalInfo, setPersonalInfo] = useState({
     id: -1,
     avatar: '',
     name: '',
     surname: '',
-    email: '',
-    date: '',
+    email: email || '',
     password: '',
-    meet: '',
+    meet: 'INSTAGRAM',
     telephone: '',
     emergencyPhone: '',
-    birthday: '',
+    birthday: new Date(),
     code: '',
-    gender: '',
+    gender: 'WOMAN',
   })
   const [healthInfo, setHealthInfo] = useState({
-    fatPercentage: '',
-    visceralFat: '',
-    boneMass: '',
-    bodyMass: '',
-    waterPercentage: '',
-    muscleMass: '',
-    metabolicExpense: '',
-    metabolicAge: '',
-    weight: '',
-    height: '',
-    waist: '',
-    arm: '',
-    hips: '',
-    thigh: '',
-    twin: '',
+    fatPercentage: '', // grasa %
+    visceralFat: '', //  visceral %
+    boneMass: '', // osea %
+    bodyMass: '', // imc
+    waterPercentage: '', // agua %
+    muscleMass: '', // muscular %
+    metabolicExpense: '', // basal kcal
+    metabolicAge: '', // edad años
+    weight: '', // peso  kg
+    height: '', // altura cm
+    waist: '', // cintura cm
+    arm: '', // brazo
+    hips: '', // cadera cm
+    thigh: '', // muslo cm
+    // twin: '', //
   })
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
@@ -92,20 +100,171 @@ const Profile = () => {
 
   // handlers
   useEffect(() => {
+    let _email = ''
+    Auth.currentAuthenticatedUser()
+      .then(response => {
+        if (response?.attributes?.email) {
+          _email = response.attributes.email
+          const _personalInfo = { ...personalInfo, email: _email }
+          setPersonalInfo(_personalInfo)
+          setEmail(_email)
+          getPatientByEmail({
+            variables: {
+              email: _email,
+            },
+          })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
+    if (activeTab.health) {
+      if (personalInfo.id > 0) {
+        getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (activeTab.health) {
+      if (personalInfo.id > 0) {
+        getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
+      }
+    }
+  }, [activeTab])
+
+  useEffect(() => {
     const currentState = router.asPath.split('#')
     if (currentState[1] === 'health') {
       setActiveTab({ personal: false, health: true, graphic: false })
     } else {
       router.push('/dashboard/profile#personal', undefined, { shallow: true })
     }
-  }, [router])
+  }, [router.pathname])
 
   useEffect(() => {
-    if (!personalError && personalData && personalData.getPersonalInfo) {
-      console.log('personal information ', personalData.getPersonalInfo)
-      setPersonalInfo(personalData.getPersonalInfo)
+    if (!personalError && personalData && personalData.getPatientByEmail) {
+      const data = personalData.getPatientByEmail
+      let _personalInfo = {
+        ...personalInfo,
+        id: data.id,
+        avatar: data.avatar,
+        name: data.name,
+        surname: data.lastname,
+        email: data.email,
+        meet: data.known_us,
+        telephone: data.mobile,
+        emergencyPhone: data.eg_number,
+        birthday: data.birth_date,
+        code: data.dni,
+        gender: data.genre,
+      }
+      setPersonalInfo(_personalInfo)
+      let _shippingInfo = {
+        ...shippingInfo,
+        name: data.bill_name,
+        address: data.bill_address,
+        town: data.bill_town,
+        country: data.bill_country,
+        aliasAddress: data.bill_alias,
+        cp: data.bill_postal_code,
+        province: data.bill_province,
+      }
+      setShippingInfo(_shippingInfo)
     }
   }, [personalLoading, personalData, personalError])
+
+  useEffect(() => {
+    if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
+      console.log('getAnthropmetryByDashboard information ', healthData.getAnthropmetryByDashboard)
+      const data = healthData.getAnthropmetryByDashboard
+      let _healthInfo = { ...healthInfo }
+      data.map((item, index) => {
+        let tempValue = ''
+        switch (item.name) {
+          case 'grasa':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value.value
+            }
+            _healthInfo = { ..._healthInfo, fatPercentage: tempValue }
+            break
+          case 'visceral':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, visceralFat: tempValue }
+            break
+          case 'osea':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, boneMass: tempValue }
+            break
+          case 'imc':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, bodyMass: tempValue }
+            break
+          case 'agua':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, waterPercentage: tempValue }
+            break
+          case 'basal':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, metabolicExpense: tempValue }
+            break
+          case 'edad':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, metabolicAge: tempValue }
+            break
+          case 'peso':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, weight: tempValue }
+            break
+          case 'altura':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, height: tempValue }
+            break
+          case 'cintura':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, waist: tempValue }
+            break
+          case 'brazo':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, arm: tempValue }
+            break
+          case 'cadera':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, hips: tempValue }
+            break
+          case 'muslo':
+            if (item.data.length > 0) {
+              tempValue = item.data[0].value
+            }
+            _healthInfo = { ..._healthInfo, thigh: tempValue }
+            break
+        }
+      })
+      setHealthInfo(_healthInfo)
+    }
+  }, [healthLoading, healthData, healthError])
 
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
@@ -121,18 +280,39 @@ const Profile = () => {
   }
 
   const handleSavePersonal = () => {
-    console.log('handleSavePersonal', uploadFile)
+    if (personalInfo.name === '' || personalInfo.surname === '') {
+      toast.error('Please input data!')
+      return
+    }
     dispatch({ type: 'set', isLoading: true })
     let _personalInfo = { ...personalInfo }
     _personalInfo = { ..._personalInfo, imageFile: uploadFile }
-    savePersonalInfo({
-      variables: {
-        _personalInfo,
-      },
+    const variables = {
+      email: email,
+      name: personalInfo.name,
+      lastname: personalInfo.surname,
+      dni: personalInfo.code,
+      mobile: personalInfo.telephone,
+      eg_number: personalInfo.emergencyPhone,
+      known_us: personalInfo.meet,
+      avatar: uploadFile,
+      genre: personalInfo.gender,
+      birth_date: new Date(personalInfo.birthday),
+      bill_alias: shippingInfo.aliasAddress,
+      bill_name: shippingInfo.name,
+      bill_address: shippingInfo.address,
+      bill_province: shippingInfo.province,
+      bill_town: shippingInfo.town,
+      bill_postal_code: shippingInfo.cp,
+      bill_country: shippingInfo.country,
+    }
+
+    updatePatientByDashboard({
+      variables: variables,
     })
       .then(response => {
-        if (response.data.savePersonalInfo) {
-          getPersonalInfo()
+        if (response.data.updatePatientByDashboard) {
+          getPatientByEmail({ variables: { email: email } })
           toast.success('Successfully save personal account!')
           dispatch({ type: 'set', isLoading: false })
         }
@@ -144,21 +324,10 @@ const Profile = () => {
   }
 
   const handleDiscardPersonal = () => {
-    setPersonalInfo({
-      avatar: '',
-      name: '',
-      surname: '',
-      email: '',
-      country: '',
-      address: '',
-      town: '',
-      date: '',
-      password: '',
-      meet: '',
-      telephone: '',
-      emergencyPhone: '',
-      code: '',
-      gender: '',
+    getPatientByEmail({
+      variables: {
+        email: email,
+      },
     })
   }
 
@@ -172,10 +341,32 @@ const Profile = () => {
 
   const handleDeleteAccount = () => {
     dispatch({ type: 'set', isLoading: true })
-    deletePersonalInfo()
+    deletePatientByDashboard({ variables: { patient_id: personalInfo.id } })
       .then(response => {
-        if (response.data.deletePersonalInfo) {
-          getPersonalInfo()
+        if (response.data.deletePatientByDashboard) {
+          setPersonalInfo({
+            id: -1,
+            avatar: '',
+            name: '',
+            surname: '',
+            email: email || '',
+            password: '',
+            meet: 'INSTAGRAM',
+            telephone: '',
+            emergencyPhone: '',
+            birthday: new Date(),
+            code: '',
+            gender: 'WOMAN',
+          })
+          setShippingInfo({
+            name: '',
+            address: '',
+            town: '',
+            country: '',
+            aliasAddress: '',
+            cp: '',
+            province: '',
+          })
           toast.success('Successfully delete personal information!')
           dispatch({ type: 'set', isLoading: false })
         }
@@ -229,6 +420,7 @@ const Profile = () => {
         {activeTab.personal && (
           <Personal
             personalInfo={personalInfo}
+            shippingInfo={shippingInfo}
             handleChangeAvatar={handleChangeAvatar}
             handleSave={handleSavePersonal}
             handleDiscard={handleDiscardPersonal}
@@ -239,6 +431,7 @@ const Profile = () => {
         )}
         {activeTab.health && (
           <Health
+            healthInfo={healthInfo}
             handleSave={handleSaveMeasure}
             handleDiscard={handleDiscardMeasure}
             handleClickTab={handleClickTab}

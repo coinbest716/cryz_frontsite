@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './CommonText.module.scss'
 
 const CommonText = props => {
-  const { handleChange, value, label, placeholder, type, list } = props
+  const { handleChange, value, label, placeholder, type, list, disabled } = props
   return (
     <div className={'max-w-sm'}>
       <div className={styles.label + ' pb-2'}>
@@ -30,6 +30,7 @@ const CommonText = props => {
           value={value}
           onChange={handleChange}
           placeholder={placeholder}
+          disabled={disabled}
         />
       )}
     </div>

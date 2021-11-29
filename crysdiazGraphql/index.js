@@ -8,7 +8,13 @@ import {
   GetCmsServiceSubjectByType,
 } from './services.gql'
 import { GetContactInfo, GetUser, CreateUser } from './crysdiaz.gql'
-import { GetPersonalInfo, SavePersonalInfo, DeletePersonalInfo } from './personal.gql'
+import {
+  GetPatientByEmail,
+  GetAnthropmetryByDashboard,
+  UpdatePatientByDashboard,
+  DeletePatientByDashboard,
+  UpdatePatientHealthByDashboard,
+} from './personal.gql'
 import { GetAcademy, GetAcademyById } from './academy.gql'
 
 // dashboard part
@@ -41,7 +47,9 @@ export default {
 
     // other part
     getUser: GetUser,
-    getPersonalInfo: GetPersonalInfo,
+    // profile part
+    getPatientByEmail: GetPatientByEmail,
+    getAnthropmetryByDashboard: GetAnthropmetryByDashboard,
 
     // dashboard part
     // message part
@@ -49,7 +57,8 @@ export default {
   },
   mutations: {
     createUser: CreateUser,
-    savePersonalInfo: SavePersonalInfo,
-    deletePersonalInfo: DeletePersonalInfo,
+    updatePatientByDashboard: UpdatePatientByDashboard,
+    deletePatientByDashboard: DeletePatientByDashboard,
+    updatePatientHealthByDashboard: UpdatePatientHealthByDashboard,
   },
 }

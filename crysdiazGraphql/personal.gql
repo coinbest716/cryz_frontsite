@@ -1,65 +1,97 @@
-query GetPersonalInfo {
-  getPersonalInfo {
-    id
-    avatar
-    name
-    surname
-    email
-    country
-    address
-    town
-    date
-    password
-    meet
-    telephone
-    emergencyPhone
-    code
-    gender
-  }
+query GetPatientByEmail($email: String) {
+  getPatientByEmail(email: $email)
 }
 
-mutation SavePersonalInfo(
-  $id: Int
-  $avatar: String
-  $name: String
-  $surname: String
+query GetAnthropmetryByDashboard($patient_id: Int) {
+  getAnthropmetryByDashboard(patient_id: $patient_id)
+}
+
+mutation UpdatePatientByDashboard(
   $email: String
-  $country: String
-  $address: String
-  $town: String
-  $date: Date
-  $password: String
-  $meet: String
-  $telephone: String
-  $emergencyPhone: String
-  $code: String
-  $gender: String
-  $imageFile: Upload
+  $name: String
+  $lastname: String
+  $dni: String
+  $mobile: String
+  $eg_number: String
+  $known_us: String
+  $avatar: Upload
+  $genre: String
+  $birth_date: Date
+  $bill_alias: String
+  $bill_name: String
+  $bill_address: String
+  $bill_province: String
+  $bill_town: String
+  $bill_postal_code: String
+  $bill_country: String
 ) {
-  savePersonalInfo(
-    id: $id
-    avatar: $avatar
-    name: $name
-    surname: $surname
+  updatePatientByDashboard(
     email: $email
-    country: $country
-    address: $address
-    town: $town
-    date: $date
-    password: $password
-    meet: $meet
-    telephone: $telephone
-    emergencyPhone: $emergencyPhone
-    code: $code
-    gender: $gender
-    imageFile: $imageFile
+    name: $name
+    lastname: $lastname
+    dni: $dni
+    mobile: $mobile
+    eg_number: $eg_number
+    known_us: $known_us
+    avatar: $avatar
+    genre: $genre
+    birth_date: $birth_date
+    bill_alias: $bill_alias
+    bill_name: $bill_name
+    bill_address: $bill_address
+    bill_province: $bill_province
+    bill_town: $bill_town
+    bill_postal_code: $bill_postal_code
+    bill_country: $bill_country
   ) {
     id
   }
 }
 
-mutation DeletePersonalInfo {
-  deletePersonalInfo {
+mutation UpdatePatientHealthByDashboard(
+  $id: Int
+  $name: String
+  $lastname: String
+  $dni: String
+  $mobile: String
+  $eg_number: String
+  $known_us: String
+  $avatar: Upload
+  $genre: String
+  $birth_date: Date
+  $bill_alias: String
+  $bill_name: String
+  $bill_address: String
+  $bill_province: String
+  $bill_town: String
+  $bill_postal_code: String
+  $bill_country: String
+) {
+  updatePatientHealthByDashboard(
+    id: $id
+    name: $name
+    lastname: $lastname
+    dni: $dni
+    mobile: $mobile
+    eg_number: $eg_number
+    known_us: $known_us
+    avatar: $avatar
+    genre: $genre
+    birth_date: $birth_date
+    bill_alias: $bill_alias
+    bill_name: $bill_name
+    bill_address: $bill_address
+    bill_province: $bill_province
+    bill_town: $bill_town
+    bill_postal_code: $bill_postal_code
+    bill_country: $bill_country
+  ) {
+    id
+  }
+}
+
+mutation DeletePatientByDashboard($patient_id: Int!) {
+  deletePatientByDashboard(patient_id: $patient_id) {
     id
   }
 }

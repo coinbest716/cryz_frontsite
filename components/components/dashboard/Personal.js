@@ -3,6 +3,7 @@ import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
 import CommonButton from 'components/components/purchase/CommonButton'
 import CommonText from 'components/components/purchase/CommonText'
 import styles from './Personal.module.scss'
+import moment from 'moment'
 
 const Personal = props => {
   const {
@@ -12,16 +13,18 @@ const Personal = props => {
     handleChangeShipping,
     handleDeleteAccount,
     personalInfo,
+    shippingInfo,
     handleChangeAvatar,
   } = props
-  const list = ['male', 'female']
+  const genderList = ['WOMAN', 'MAN']
+  const meetList = ['INSTAGRAM', 'FACEBOOK', 'PRENSA']
 
   return (
     <div className={'w-full h-full'}>
       <div className={'px-24 py-8 ' + styles.container}>
         <div className={'flex justify-between items-center'}>
           <div className={'flex justify-between items-center'}>
-            <PurchaseAvatar avatar={personalInfo.avatar} handleChangeAvatar={handleChangeAvatar} />
+            <PurchaseAvatar avatar={personalInfo.avatar || ''} handleChangeAvatar={handleChangeAvatar} />
             <div className={'pl-5'}>
               <div className={styles.profileName}>Mariano Pérez Fanjul</div>
               <div className={styles.profileCounry}>Madrid, Spain</div>
@@ -74,19 +77,10 @@ const Personal = props => {
             <div className={'py-2'}>
               <CommonText
                 label={'Sexo'}
-                list={list}
+                list={genderList}
                 handleChange={e => handleChangePersonal(e, 'gender')}
                 type={'select'}
                 value={personalInfo.gender}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'date')}
-                label={'Fecha de nacimiento'}
-                placeholder={''}
-                type={'date'}
-                value={personalInfo.date}
               />
             </div>
           </div>
@@ -106,7 +100,8 @@ const Personal = props => {
                 handleChange={e => handleChangePersonal(e, 'meet')}
                 label={'Como nos conoció…'}
                 placeholder={''}
-                type={'password'}
+                type={'select'}
+                list={meetList}
                 value={personalInfo.meet}
               />
             </div>
@@ -117,6 +112,7 @@ const Personal = props => {
                 placeholder={''}
                 type={'email'}
                 value={personalInfo.email}
+                disabled={true}
               />
             </div>
 
@@ -134,8 +130,8 @@ const Personal = props => {
                 handleChange={e => handleChangePersonal(e, 'birthday')}
                 label={'Fecha nacimiento'}
                 placeholder={''}
-                type={'birthday'}
-                value={personalInfo.birthday}
+                type={'date'}
+                value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
               />
             </div>
           </div>
@@ -152,7 +148,7 @@ const Personal = props => {
                 label={'Nombre'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.name}
+                value={shippingInfo.name}
               />
             </div>
             <div className={'py-2'}>
@@ -161,7 +157,7 @@ const Personal = props => {
                 label={'Dirección'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.address}
+                value={shippingInfo.address}
               />
             </div>
             <div className={'py-2'}>
@@ -170,7 +166,7 @@ const Personal = props => {
                 label={'Ciudad'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.town}
+                value={shippingInfo.town}
               />
             </div>
             <div className={'py-2'}>
@@ -179,7 +175,7 @@ const Personal = props => {
                 label={'Pais'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.country}
+                value={shippingInfo.country}
               />
             </div>
           </div>
@@ -190,7 +186,7 @@ const Personal = props => {
                 label={'Alias de la dirección ( ej. casa, trabajo…)'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.aliasAddress}
+                value={shippingInfo.aliasAddress}
               />
             </div>
             <div className={'py-2'}>
@@ -199,7 +195,7 @@ const Personal = props => {
                 label={'CP'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.cp}
+                value={shippingInfo.cp}
               />
             </div>
             <div className={'py-2'}>
@@ -208,7 +204,7 @@ const Personal = props => {
                 label={'Provincia'}
                 placeholder={''}
                 type={'text'}
-                value={personalInfo.province}
+                value={shippingInfo.province}
               />
             </div>
           </div>
