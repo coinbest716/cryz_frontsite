@@ -23,6 +23,8 @@ import toast from 'react-hot-toast'
 
 import { Auth } from 'aws-amplify'
 
+import moment from 'moment'
+
 const Profile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -45,8 +47,12 @@ const Profile = () => {
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
   )
+  const [getAnthropmetryByDashboard, { data: healthData, loading: healthLoading, error: healthError }] = useLazyQuery(
+    graphql.queries.getAnthropmetryByDashboard
+  )
   const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
   const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
+  const [updatePatientHealthByDashboard] = useMutation(graphql.mutations.updatePatientHealthByDashboard)
 
   const [email, setEmail] = useState('')
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
@@ -56,12 +62,12 @@ const Profile = () => {
     avatar: '',
     name: '',
     surname: '',
-    email: '',
+    email: email || '',
     password: '',
     meet: '',
     telephone: '',
     emergencyPhone: '',
-    birthday: '',
+    birthday: new Date(),
     code: '',
     gender: '',
   })
@@ -99,6 +105,8 @@ const Profile = () => {
       .then(response => {
         if (response?.attributes?.email) {
           _email = response.attributes.email
+          const _personalInfo = { ...personalInfo, email: _email }
+          setPersonalInfo(_personalInfo)
           setEmail(_email)
           getPatientByEmail({
             variables: {
@@ -110,7 +118,20 @@ const Profile = () => {
       .catch(error => {
         toast.error(error.message)
       })
+    if (activeTab.health) {
+      if (personalInfo.id > 0) {
+        getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
+      }
+    }
   }, [])
+
+  useEffect(() => {
+    if (activeTab.health) {
+      if (personalInfo.id > 0) {
+        getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
+      }
+    }
+  }, [activeTab])
 
   useEffect(() => {
     const currentState = router.asPath.split('#')
@@ -155,6 +176,12 @@ const Profile = () => {
     }
   }, [personalLoading, personalData, personalError])
 
+  useEffect(() => {
+    if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
+      console.log('personal information ', healthData.getAnthropmetryByDashboard)
+    }
+  }, [healthLoading, healthData, healthError])
+
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
     router.push(`/dashboard/profile#${tabType}`, undefined, { shallow: true })
@@ -178,7 +205,6 @@ const Profile = () => {
     let _personalInfo = { ...personalInfo }
     _personalInfo = { ..._personalInfo, imageFile: uploadFile }
     const variable = {
-      id: personalInfo.id,
       email: email,
       name: personalInfo.name,
       lastname: personalInfo.surname,
@@ -197,12 +223,13 @@ const Profile = () => {
       bill_postal_code: shippingInfo.cp,
       bill_country: shippingInfo.country,
     }
+
     updatePatientByDashboard({
       variables: variable,
     })
       .then(response => {
         if (response.data.updatePatientByDashboard) {
-          getPatientByEmail()
+          getPatientByEmail({ variables: { email: email } })
           toast.success('Successfully save personal account!')
           dispatch({ type: 'set', isLoading: false })
         }
@@ -216,7 +243,7 @@ const Profile = () => {
   const handleDiscardPersonal = () => {
     getPatientByEmail({
       variables: {
-        email: _email,
+        email: email,
       },
     })
   }

@@ -2,8 +2,11 @@ query GetPatientByEmail($email: String) {
   getPatientByEmail(email: $email)
 }
 
+query GetAnthropmetryByDashboard($patient_id: Int) {
+  getAnthropmetryByDashboard(patient_id: $patient_id)
+}
+
 mutation UpdatePatientByDashboard(
-  $id: Int
   $name: String
   $lastname: String
   $dni: String
@@ -22,6 +25,47 @@ mutation UpdatePatientByDashboard(
   $bill_country: String
 ) {
   updatePatientByDashboard(
+    name: $name
+    lastname: $lastname
+    dni: $dni
+    mobile: $mobile
+    eg_number: $eg_number
+    known_us: $known_us
+    avatar: $avatar
+    genre: $genre
+    birth_date: $birth_date
+    bill_alias: $bill_alias
+    bill_name: $bill_name
+    bill_address: $bill_address
+    bill_province: $bill_province
+    bill_town: $bill_town
+    bill_postal_code: $bill_postal_code
+    bill_country: $bill_country
+  ) {
+    id
+  }
+}
+
+mutation UpdatePatientHealthByDashboard(
+  $id: Int
+  $name: String
+  $lastname: String
+  $dni: String
+  $mobile: String
+  $eg_number: String
+  $known_us: String
+  $avatar: Upload
+  $genre: String
+  $birth_date: Date
+  $bill_alias: String
+  $bill_name: String
+  $bill_address: String
+  $bill_province: String
+  $bill_town: String
+  $bill_postal_code: String
+  $bill_country: String
+) {
+  updatePatientHealthByDashboard(
     id: $id
     name: $name
     lastname: $lastname

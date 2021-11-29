@@ -16,7 +16,8 @@ const Personal = props => {
     shippingInfo,
     handleChangeAvatar,
   } = props
-  const list = ['male', 'female']
+  const genderList = ['WOMAN', 'MAN']
+  const meetList = ['INSTAGRAM', 'FACEBOOK', 'PRENSA']
 
   return (
     <div className={'w-full h-full'}>
@@ -76,7 +77,7 @@ const Personal = props => {
             <div className={'py-2'}>
               <CommonText
                 label={'Sexo'}
-                list={list}
+                list={genderList}
                 handleChange={e => handleChangePersonal(e, 'gender')}
                 type={'select'}
                 value={personalInfo.gender}
@@ -99,7 +100,8 @@ const Personal = props => {
                 handleChange={e => handleChangePersonal(e, 'meet')}
                 label={'Como nos conoció…'}
                 placeholder={''}
-                type={'text'}
+                type={'select'}
+                list={meetList}
                 value={personalInfo.meet}
               />
             </div>
