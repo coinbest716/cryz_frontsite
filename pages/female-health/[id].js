@@ -115,7 +115,12 @@ const Menopause = () => {
               <OutlineButton
                 title="Compra 1 to 1 en streaming"
                 link="/buy/buy-one-to-one"
-                onClick={link => router.push(link)}
+                onClick={link =>
+                  router.push({
+                    pathname: link,
+                    query: { discipline_id: femHealthService.discipline_id, service_type: 'streaming' },
+                  })
+                }
               />
             </div>
           ) : (
@@ -123,7 +128,16 @@ const Menopause = () => {
           )}
           {femHealthService.personal_button ? (
             <div className={'col-span-4 w-full flex'}>
-              <OutlineButton title="Compra presenciales" link="/buy/buy-person" onClick={link => router.push(link)} />
+              <OutlineButton
+                title="Compra presenciales"
+                link="/buy/buy-person"
+                onClick={link =>
+                  router.push({
+                    pathname: link,
+                    query: { discipline_id: femHealthService.discipline_id, service_type: 'personal' },
+                  })
+                }
+              />
             </div>
           ) : (
             <></>
@@ -133,7 +147,12 @@ const Menopause = () => {
               <OutlineButton
                 title="Compra planes online"
                 link="/buy/buy-plans-online"
-                onClick={link => router.push(link)}
+                onClick={link =>
+                  router.push({
+                    pathname: link,
+                    query: { discipline_id: femHealthService.discipline_id, service_type: 'online' },
+                  })
+                }
               />
             </div>
           ) : (
