@@ -2,21 +2,30 @@
 
 .contentBorder {
   border: 1px solid #c4c4c4;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 10px;
 }
 
-.commonBorder {
+.subjectTitleArea {
+  height: 98px;
   border: 1px solid #c4c4c4;
+  @media (max-width: 767px) {
+    border-top-right-radius: 0px;
+  }
+  @media (min-width: 768px) {
+    border-top-right-radius: 10px;
+  }
 }
 
-.professionalBorder {
+.messageSendArea {
   border: 1px solid #c4c4c4;
-  border-top-left-radius: 10px;
-}
-
-.messageBorder {
-  border: 1px solid #c4c4c4;
-  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 159px;
+  @media (max-width: 767px) {
+    border-bottom-left-radius: 10px;
+  }
+  @media (min-width: 768px) {
+    border-bottom-left-radius: 0px;
+  }
 }
 
 .messageText {
@@ -29,16 +38,21 @@
 }
 
 .professionalArea {
-  height: 218px;
+  border: 1px solid #c4c4c4;
+  border-top-left-radius: 10px;
+  height: 98px;
   overflow-y: auto;
 }
 
-.messageArea {
-  height: calc(100vh - 48px - 50px - 24px - 220px - 70px);
+.subjectArea {
+  border: 1px solid #c4c4c4;
+  border-bottom-left-radius: 10px;
+  height: calc(100vh - 48px - 50px - 24px - 100px - 70px);
   overflow-y: auto;
 }
 
 .chatArea {
+  border: 1px solid #c4c4c4;
   height: calc(100vh - 48px - 50px - 24px - 100px - 159px - 70px);
   overflow-y: auto;
 }

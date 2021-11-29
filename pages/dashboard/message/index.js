@@ -79,9 +79,8 @@ const Message = () => {
   }, [getUsersByPatient])
 
   useEffect(() => {
-    if (!usersByPatientError && usersByPatientData && usersByPatientData.getUsersByPatient) {
-      console.log('===============', usersByPatientData.getUsersByPatient)
-      setUsersByPatient(usersByPatientData.getUsersByPatient)
+    if (!usersByPatientError && usersByPatientData && usersByPatientData.UsersByPatient) {
+      setUsersByPatient(usersByPatientData.UsersByPatient)
     }
   }, [usersByPatientLoading, usersByPatientData, usersByPatientError])
 
@@ -116,7 +115,7 @@ const Message = () => {
       <div className={'w-full flex flex-wrap mt-6 ' + styles.contentBorder}>
         <div className={'w-full md:w-1/2 '}>
           {/* professional area */}
-          <div className={styles.professionalBorder + ' ' + styles.professionalArea}>
+          <div className={styles.professionalArea}>
             <PerfectScrollbar>
               <div className={'mx-6 my-2 ' + styles.messageText}>Profesionales</div>
               <ProfessionalCard />
@@ -127,7 +126,7 @@ const Message = () => {
             </PerfectScrollbar>
           </div>
           {/* message area */}
-          <div className={styles.messageBorder + ' ' + styles.messageArea}>
+          <div className={styles.subjectArea}>
             <PerfectScrollbar>
               <div className={'flex justify-between mx-6 my-6'}>
                 <div className={styles.messageText}>Mensajes</div>
@@ -157,11 +156,11 @@ const Message = () => {
         </div>
         <div className={'w-full md:w-1/2 '}>
           {/* message select card area */}
-          <div className={styles.commonBorder}>
+          <div className={styles.subjectTitleArea}>
             <MessageSelectCard />
           </div>
           {/* chat area */}
-          <div className={styles.commonBorder + ' ' + styles.chatArea}>
+          <div className={styles.chatArea}>
             <PerfectScrollbar>
               <div className={'my-5 mx-7 flex justify-end'}>
                 <MessageCard01 message={messageContent} />
@@ -181,7 +180,7 @@ const Message = () => {
             </PerfectScrollbar>
           </div>
           {/* message input area */}
-          <div className={styles.commonBorder}>
+          <div className={styles.messageSendArea}>
             <div className={'my-5 mx-7 flex justify-end'}>
               <MessageInput message={messageInput} sendMessage={(content, type) => handleSendMessage(content, type)} />
             </div>
