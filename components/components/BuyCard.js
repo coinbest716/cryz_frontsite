@@ -28,7 +28,7 @@ const BuyCard = props => {
       </div>
       <div className={styles.card}>
         <div className={'flex'}>
-          <div className={styles.cardTitle}>{data.name}</div>
+          <div className={styles.cardTitle}>{data.web_name}</div>
           <Image src={ArrowRightPink} alt="" width={26} height={20} />
         </div>
         <div className={styles.cardDescription}>{data.description}</div>
