@@ -21,9 +21,9 @@ const ClassCard = props => {
           <span className={styles.cardPaymentType}>{data?.price}€/mes</span>
         </div>
       </div>
-      <div className={styles.cardTitle}>{data?.title}</div>
-      <div className={styles.cardDescripton}>{data?.description}</div>
       <div className={styles.cardName}>{data?.name}</div>
+      <div className={styles.cardDescripton}>{data?.description}</div>
+      <div className={styles.cardDifficulty}>Dificultad {data?.difficulty}</div>
     </div>
   )
 }
