@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 // third party components
 import toast from 'react-hot-toast'
@@ -122,9 +123,15 @@ const Course = () => {
                       <DownloadPDF onClick={handleClickDownlodPDF} url={mainData.doc} />
                     </div>
                   </div>
-                  <div className={'pt-10'} style={{ width: '500px' }}>
+                  {mainData.images.length > 0 && (
+                    <div className={'pt-10'}>
+                      <Image src={mainData.images[0].path} alt="" width={500} height={350} />
+                    </div>
+                  )}
+                  {/* <div className={'pt-10'} style={{ width: '500px' }}>
                     <CarouselAcademy sliderData={mainData.images} />
-                  </div>
+                    <Image src={item.path} alt="" width={500} height={350} className={styles.slideImage} />
+                  </div> */}
                 </div>
               </div>
             </div>
