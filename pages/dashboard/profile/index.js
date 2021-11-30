@@ -185,6 +185,7 @@ const Profile = () => {
         province: data.bill_province,
       }
       setShippingInfo(_shippingInfo)
+      getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
     }
   }, [personalLoading, personalData, personalError, personalInfo, shippingInfo])
 
