@@ -12,5 +12,6 @@ query GetUsersByPatient {
     avatar
     facebook
     instragram
+    info_visible
   }
 }

@@ -27,10 +27,16 @@ const COSection = props => {
   const [isFlipped, setIsFlipped] = useState({ id: 1, bool: false })
 
   useEffect(() => {
+    let arr = []
+    coTeam.map(item => {
+      if (item.info_visible !== true) {
+        arr.push(item)
+      }
+    })
     var size = 6
     var arrayOfArrays = []
-    for (var i = 0; i < coTeam.length; i += size) {
-      arrayOfArrays.push(coTeam.slice(i, i + size))
+    for (var i = 0; i < arr.length; i += size) {
+      arrayOfArrays.push(arr.slice(i, i + size))
     }
     setSliderData(arrayOfArrays)
   }, [coTeam])
