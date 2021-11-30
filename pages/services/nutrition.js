@@ -74,19 +74,19 @@ const Nutrition = () => {
   const handleClickBuyPersion = () => {
     router.push({
       pathname: '/buy/buy-person',
-      query: { discipline_id: 3, service_type: 'personal' },
+      query: { discipline_id: 3, service_type: 'personal', type: 'service' },
     })
   }
   const handleClickBuyPlan = () => {
     router.push({
       pathname: '/buy/buy-plans-online',
-      query: { discipline_id: 3, service_type: 'online' },
+      query: { discipline_id: 3, service_type: 'online', type: 'service' },
     })
   }
   const handleClickBuyStreaming = () => {
     router.push({
       pathname: '/buy/buy-one-to-one',
-      query: { discipline_id: 3, service_type: 'streaming' },
+      query: { discipline_id: 3, service_type: 'streaming', type: 'service' },
     })
   }
 

@@ -36,3 +36,10 @@ query GetFemHealthService($discipline_id: Int) {
     online_button
   }
 }
+
+query GetFemHealthServiceSubjectByType($discipline_id: Int, $service_type: String) {
+  getFemHealthServiceSubjectByType(discipline_id: $discipline_id, service_type: $service_type) {
+    bono_text
+    services
+  }
+}

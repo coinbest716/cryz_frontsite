@@ -1,5 +1,10 @@
 import { GetEquipo, GetFeaturedServices, GetMainImage } from './home.gql'
-import { GetFemHealth, GetDisciplineList, GetFemHealthService } from './female-health.gql'
+import {
+  GetFemHealth,
+  GetDisciplineList,
+  GetFemHealthService,
+  GetFemHealthServiceSubjectByType,
+} from './female-health.gql'
 import { GetClasslandMain, GetClasslandCategory, GetClasslandFaqs } from './classland.gql'
 import {
   GetCmsService,
@@ -30,6 +35,7 @@ export default {
     getFemHealth: GetFemHealth,
     getDisciplineList: GetDisciplineList,
     getFemHealthService: GetFemHealthService,
+    getFemHealthServiceSubjectByType: GetFemHealthServiceSubjectByType,
     // classland part
     getClasslandMain: GetClasslandMain,
     getClasslandCategory: GetClasslandCategory,

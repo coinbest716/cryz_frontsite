@@ -130,7 +130,11 @@ const Menopause = () => {
                 onClick={link =>
                   router.push({
                     pathname: link,
-                    query: { discipline_id: femHealthService.discipline_id, service_type: 'streaming' },
+                    query: {
+                      discipline_id: femHealthService.discipline_id,
+                      service_type: 'streaming',
+                      type: 'femHealth',
+                    },
                   })
                 }
               />
@@ -146,7 +150,11 @@ const Menopause = () => {
                 onClick={link =>
                   router.push({
                     pathname: link,
-                    query: { discipline_id: femHealthService.discipline_id, service_type: 'personal' },
+                    query: {
+                      discipline_id: femHealthService.discipline_id,
+                      service_type: 'personal',
+                      type: 'femHealth',
+                    },
                   })
                 }
               />
@@ -162,7 +170,7 @@ const Menopause = () => {
                 onClick={link =>
                   router.push({
                     pathname: link,
-                    query: { discipline_id: femHealthService.discipline_id, service_type: 'online' },
+                    query: { discipline_id: femHealthService.discipline_id, service_type: 'online', type: 'femHealth' },
                   })
                 }
               />
