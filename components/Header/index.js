@@ -46,26 +46,28 @@ const Header = props => {
   useEffect(() => {
     if (!disciplineListError && disciplineListData && disciplineListData.getDisciplineList) {
       let subMenus = []
-      disciplineListData.getDisciplineList.map((item, index) => {
+      disciplineListData.getDisciplineList.map(item => {
         let object = {}
-        object.title = item.name
-        object.link = '/female-health/' + item.id
-        let subMenu = []
-        let temp = {}
-        if (item.stream_button) {
-          temp = { title: '1 to 1', link: '/buy/buy-one-to-one' }
-          subMenu.push(temp)
+        if (item.id !== 8) {
+          object.title = item.name
+          object.link = '/female-health/' + item.id
+          let subMenu = []
+          let temp = {}
+          if (item.stream_button) {
+            temp = { title: '1 to 1', link: '/buy/buy-one-to-one' }
+            subMenu.push(temp)
+          }
+          if (item.personal_button) {
+            temp = { title: 'Presencial', link: '/buy/buy-person' }
+            subMenu.push(temp)
+          }
+          if (item.online_button) {
+            temp = { title: 'Planes Online', link: '/buy/buy-plans-online' }
+            subMenu.push(temp)
+          }
+          object.subMenus = subMenu
+          subMenus.push(object)
         }
-        if (item.personal_button) {
-          temp = { title: 'Presencial', link: '/buy/buy-person' }
-          subMenu.push(temp)
-        }
-        if (item.online_button) {
-          temp = { title: 'Planes Online', link: '/buy/buy-plans-online' }
-          subMenu.push(temp)
-        }
-        object.subMenus = subMenu
-        subMenus.push(object)
       })
       let menu = []
       menu.push({ title: 'Salud Fem', link: '/female-health', subMenus: subMenus })

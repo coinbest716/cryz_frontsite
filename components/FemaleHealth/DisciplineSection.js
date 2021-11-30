@@ -157,7 +157,9 @@ const DisciplineSection = props => {
       disciplineListData.getDisciplineList.map((item, index) => {
         temp = JSON.parse(JSON.stringify(item))
         temp.bgColor = ColorList[index]
-        array.push(temp)
+        if (temp.id !== 8) {
+          array.push(temp)
+        }
       })
       setDisciplineList(array)
     }
