@@ -64,3 +64,38 @@
   left: calc(50% - 32px);
   top: calc(50vh - 32px);
 }
+
+ol {
+  list-style: number;
+  padding-left: 20px !important;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #818e8e;
+  line-height: 28px;
+  padding-bottom: 5px;
+}
+
+ul {
+  list-style: disc;
+  padding-left: 20px !important;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #818e8e;
+  line-height: 28px;
+  padding-bottom: 5px;
+}
+
+p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #818e8e;
+  line-height: 28px;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.italic {
+  font-style: italic;
+}
