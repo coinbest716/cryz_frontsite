@@ -29,7 +29,7 @@ const COSection = props => {
   useEffect(() => {
     let arr = []
     coTeam.map(item => {
-      if (item.info_visible !== true) {
+      if (item.info_visible === true) {
         arr.push(item)
       }
     })
