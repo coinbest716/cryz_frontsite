@@ -18,7 +18,7 @@ import {
   GetAnthropmetryByDashboard,
   UpdatePatientByDashboard,
   DeletePatientByDashboard,
-  UpdatePatientHealthByDashboard,
+  UpdateAnthropometry,
 } from './personal.gql'
 import { GetAcademy, GetAcademyById } from './academy.gql'
 
@@ -65,6 +65,6 @@ export default {
     createUser: CreateUser,
     updatePatientByDashboard: UpdatePatientByDashboard,
     deletePatientByDashboard: DeletePatientByDashboard,
-    updatePatientHealthByDashboard: UpdatePatientHealthByDashboard,
+    updateAnthropometry: UpdateAnthropometry,
   },
 }

@@ -48,7 +48,7 @@ mutation UpdatePatientByDashboard(
   }
 }
 
-mutation UpdatePatientHealthByDashboard(
+mutation UpdateAnthropometry(
   $patient_id: Int
   $grasa: String
   $visceral: String
@@ -65,7 +65,7 @@ mutation UpdatePatientHealthByDashboard(
   $cadera: String
   $muslo: String
 ) {
-  updatePatientByDashboard(
+  updateAnthropometry(
     patient_id: $patient_id
     grasa: $grasa
     visceral: $visceral
@@ -81,9 +81,7 @@ mutation UpdatePatientHealthByDashboard(
     brazo: $brazo
     cadera: $cadera
     muslo: $muslo
-  ) {
-    id
-  }
+  )
 }
 
 mutation DeletePatientByDashboard($patient_id: Int!) {

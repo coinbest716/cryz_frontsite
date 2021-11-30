@@ -50,7 +50,7 @@ const Profile = () => {
   )
   const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
   const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
-  const [updatePatientHealthByDashboard] = useMutation(graphql.mutations.updatePatientHealthByDashboard)
+  const [updateAnthropometry] = useMutation(graphql.mutations.updateAnthropometry)
 
   const [email, setEmail] = useState('')
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
@@ -101,6 +101,7 @@ const Profile = () => {
     { name: 'osea', key: 'boneMass' },
     { name: 'imc', key: 'bodyMass' },
     { name: 'agua', key: 'waterPercentage' },
+    { name: 'muscular', key: 'muscleMass' },
     { name: 'basal', key: 'metabolicExpense' },
     { name: 'edad', key: 'metabolicAge' },
     { name: 'peso', key: 'weight' },
@@ -340,9 +341,9 @@ const Profile = () => {
     }
 
     dispatch({ type: 'set', isLoading: true })
-    updatePatientHealthByDashboard({ variables: variables })
+    updateAnthropometry({ variables: variables })
       .then(response => {
-        if (response.data.updatePatientHealthByDashboard) {
+        if (response.data.updateAnthropometry) {
           getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
           toast.success('Successfully saved anthropometric!')
           dispatch({ type: 'set', isLoading: false })
