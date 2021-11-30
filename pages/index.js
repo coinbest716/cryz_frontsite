@@ -37,6 +37,8 @@ const Home = props => {
   const [mainImage, setMainImage] = useState('')
   const [featuredServices, setFeaturedServices] = useState('')
   const [team, setTeam] = useState('')
+  const [coTeam, setCoTeam] = useState('')
+
   const [getMainImage, { data: mainImageData, loading: mainImageLoading, error: mainImageError }] = useLazyQuery(
     graphql.queries.getMainImage
   )
@@ -47,13 +49,16 @@ const Home = props => {
   const [getEquipo, { data: equipoData, loading: equipoLoading, error: equipoError }] = useLazyQuery(
     graphql.queries.getEquipo
   )
+  const [getUsersByPatient, { data: usersByPatientData, loading: usersByPatientLoading, error: usersByPatientError }] =
+    useLazyQuery(graphql.queries.getUsersByPatient)
 
   // handlers
   useEffect(() => {
     getMainImage()
     getFeaturedServices()
     getEquipo()
-  }, [getMainImage, getFeaturedServices, getEquipo])
+    getUsersByPatient()
+  }, [getMainImage, getFeaturedServices, getEquipo, getUsersByPatient])
 
   useEffect(() => {
     if (!mainImageError && mainImageData && mainImageData.getMainImage) {
@@ -79,12 +84,18 @@ const Home = props => {
     }
   }, [equipoLoading, equipoData, equipoError])
 
+  useEffect(() => {
+    if (!usersByPatientError && usersByPatientData && usersByPatientData.UsersByPatient) {
+      setCoTeam(usersByPatientData.UsersByPatient)
+    }
+  }, [usersByPatientLoading, usersByPatientData, usersByPatientError])
+
   return (
     <div className={styles.container}>
       <MainSection mainImage={mainImage} featuredServices={featuredServices} />
       <div id="team" className={'w-full h-10'} />
       <TeamSection team={team} />
-      <COSection />
+      {coTeam !== '' ? <COSection coTeam={coTeam} /> : <></>}
     </div>
   )
 }

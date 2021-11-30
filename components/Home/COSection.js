@@ -16,26 +16,23 @@ import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
 import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
 
-// json data
-import COSectionData from 'assets/data/COSectionData'
-import SocialURLData from 'assets/data/SocialURLData'
-
 // styles
 import styles from 'components/Home/COSection.module.scss'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 
-const COSection = () => {
+const COSection = props => {
+  const { coTeam } = props
   const [sliderData, setSliderData] = useState([])
   const [isFlipped, setIsFlipped] = useState({ id: 1, bool: false })
 
   useEffect(() => {
     var size = 6
     var arrayOfArrays = []
-    for (var i = 0; i < COSectionData.length; i += size) {
-      arrayOfArrays.push(COSectionData.slice(i, i + size))
+    for (var i = 0; i < coTeam.length; i += size) {
+      arrayOfArrays.push(coTeam.slice(i, i + size))
     }
     setSliderData(arrayOfArrays)
-  }, [])
+  }, [coTeam])
 
   const handleSetIsFlipped = (bool, id) => {
     setIsFlipped(isFlipped => ({ ...isFlipped, id: id }))
@@ -88,31 +85,39 @@ const COSection = () => {
                     >
                       {elem.id === isFlipped.id && isFlipped.bool === true ? (
                         <div className={styles.card}>
-                          <Image src={elem.image} alt="" width={364} height={364} layout="responsive" />
+                          {/* <div>{elem.avatar}</div> */}
+                          <Image src={elem.avatar} alt="" width={364} height={364} layout="responsive" />
                           <div className={styles.cardContent}>
                             <div>
-                              <div className={'w-full inline-block text-center ' + styles.cardText}>{elem.role}</div>
-                              <div className={'w-full inline-block ' + styles.cardName}>{elem.name}</div>
-                              <div className={'w-full inline-block ' + styles.cardDescription}>{elem.description}</div>
+                              <div className={'w-full inline-block text-center ' + styles.cardText}>
+                                {elem.speicalty}
+                              </div>
+                              <div className={'w-full inline-block ' + styles.cardName}>
+                                {elem.name} {elem.lastname}
+                              </div>
+                              <div className={'w-full inline-block ' + styles.cardDescription}>{elem.degree}</div>
                             </div>
                             <div className={'w-full flex justify-center'}>
-                              <SocialButtonGroup color="gray" socialURL={SocialURLData[0]} />
+                              <SocialButtonGroup
+                                color="gray"
+                                socialURL={{ instagram: elem.instragram, facebook: elem.facebook }}
+                              />
                             </div>
                           </div>
                         </div>
                       ) : (
                         <div className={styles.card}>
-                          <Image src={elem.image} alt="" width={364} height={364} layout="responsive" />
+                          <Image src={elem.avatar} alt="" width={364} height={364} layout="responsive" />
                         </div>
                       )}
                     </div>
                     <div className={'flex justify-start items-start'}>
                       <div className={styles.divider} />
                       <div className={styles.name}>
-                        {elem.name.split(' ')[0]}
+                        {elem.name}
                         <br />
-                        {elem.name.split(' ')[1]}
-                        <div className={styles.role}>{elem.role}</div>
+                        {elem.lastname}
+                        <div className={styles.role}>{elem.speicalty}</div>
                       </div>
                     </div>
                   </div>
