@@ -64,6 +64,7 @@ const Calendar = () => {
       let calendarApi = calendarComponentRef.current.getApi()
       calendarApi.gotoDate(eventDate) // call a method on the Calendar object
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleClickStartClass = () => {

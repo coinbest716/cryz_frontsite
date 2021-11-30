@@ -34,16 +34,29 @@ const BuyPlansOnline = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  const [getCmsServiceSubjectByType, { data: cmsSubjectData, loading: cmsSubjectLoading, error: cmsSubjectError }] =
-    useLazyQuery(graphql.queries.getCmsServiceSubjectByType)
   const [description, setDescription] = useState('')
   const [sessionData, setSessionData] = useState([])
 
+  const [getCmsServiceSubjectByType, { data: cmsSubjectData, loading: cmsSubjectLoading, error: cmsSubjectError }] =
+    useLazyQuery(graphql.queries.getCmsServiceSubjectByType)
+
+  const [
+    getFemHealthServiceSubjectByType,
+    { data: femHealthServiceSubjectData, loading: femHealthServiceSubjectLoading, error: femHealthServiceSubjectError },
+  ] = useLazyQuery(graphql.queries.getFemHealthServiceSubjectByType)
+
   useEffect(() => {
-    getCmsServiceSubjectByType({
-      variables: { discipline_id: parseInt(router.query.discipline_id), service_type: router.query.service_type },
-    })
-  }, [getCmsServiceSubjectByType])
+    if (router.query.type === 'service') {
+      getCmsServiceSubjectByType({
+        variables: { discipline_id: parseInt(router.query.discipline_id), service_type: router.query.service_type },
+      })
+    } else if (router.query.type === 'femHealth') {
+      getFemHealthServiceSubjectByType({
+        variables: { discipline_id: parseInt(router.query.discipline_id), service_type: router.query.service_type },
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getCmsServiceSubjectByType, getFemHealthServiceSubjectByType])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubjectByType) {
@@ -51,6 +64,17 @@ const BuyPlansOnline = () => {
       setSessionData(cmsSubjectData.getCmsServiceSubjectByType.services || [])
     }
   }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
+
+  useEffect(() => {
+    if (
+      !femHealthServiceSubjectError &&
+      femHealthServiceSubjectData &&
+      femHealthServiceSubjectData.getFemHealthServiceSubjectByType
+    ) {
+      setDescription(femHealthServiceSubjectData.getFemHealthServiceSubjectByType.bono_text || '')
+      setSessionData(femHealthServiceSubjectData.getFemHealthServiceSubjectByType.services || [])
+    }
+  }, [femHealthServiceSubjectLoading, femHealthServiceSubjectData, femHealthServiceSubjectError])
 
   const handleClickBuy = () => {
     router.push('/purchase-login')

@@ -138,7 +138,7 @@ const Profile = () => {
         getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
       }
     }
-  }, [])
+  }, [activeTab, getAnthropmetryByDashboard, getPatientByEmail, personalInfo])
 
   useEffect(() => {
     if (activeTab.health) {
@@ -146,7 +146,7 @@ const Profile = () => {
         getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
       }
     }
-  }, [activeTab])
+  }, [activeTab, personalInfo, getAnthropmetryByDashboard])
 
   useEffect(() => {
     const currentState = router.asPath.split('#')
@@ -155,7 +155,8 @@ const Profile = () => {
     } else {
       router.push('/dashboard/profile#personal', undefined, { shallow: true })
     }
-  }, [router.pathname])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -187,7 +188,7 @@ const Profile = () => {
       }
       setShippingInfo(_shippingInfo)
     }
-  }, [personalLoading, personalData, personalError])
+  }, [personalLoading, personalData, personalError, personalInfo, shippingInfo])
 
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
@@ -206,7 +207,8 @@ const Profile = () => {
       })
       setHealthInfo(_healthInfo)
     }
-  }, [healthLoading, healthData, healthError])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [healthLoading, healthData, healthError, healthInfo])
 
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
