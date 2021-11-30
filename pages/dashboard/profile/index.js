@@ -23,8 +23,6 @@ import toast from 'react-hot-toast'
 
 import { Auth } from 'aws-amplify'
 
-import moment from 'moment'
-
 const Profile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -52,7 +50,7 @@ const Profile = () => {
   )
   const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
   const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
-  const [updatePatientHealthByDashboard] = useMutation(graphql.mutations.updatePatientHealthByDashboard)
+  const [updateAnthropometry] = useMutation(graphql.mutations.updateAnthropometry)
 
   const [email, setEmail] = useState('')
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
@@ -103,6 +101,7 @@ const Profile = () => {
     { name: 'osea', key: 'boneMass' },
     { name: 'imc', key: 'bodyMass' },
     { name: 'agua', key: 'waterPercentage' },
+    { name: 'muscular', key: 'muscleMass' },
     { name: 'basal', key: 'metabolicExpense' },
     { name: 'edad', key: 'metabolicAge' },
     { name: 'peso', key: 'weight' },
@@ -187,6 +186,7 @@ const Profile = () => {
         province: data.bill_province,
       }
       setShippingInfo(_shippingInfo)
+      getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
     }
   }, [personalLoading, personalData, personalError, personalInfo, shippingInfo])
 
@@ -322,7 +322,37 @@ const Profile = () => {
   }
 
   const handleSaveMeasure = () => {
-    console.log('handleSaveMeasure')
+    const variables = {
+      patient_id: personalInfo.id,
+      grasa: healthInfo.fatPercentage, // grasa %
+      visceral: healthInfo.visceralFat, //  visceral %
+      osea: healthInfo.boneMass, // osea %
+      imc: healthInfo.bodyMass, // imc
+      agua: healthInfo.waterPercentage, // agua %
+      muscular: healthInfo.muscleMass, // muscular %
+      basal: healthInfo.metabolicExpense, // basal kcal
+      edad: healthInfo.metabolicAge, // edad años
+      peso: healthInfo.weight, // peso  kg
+      altura: healthInfo.height, // altura cm
+      cintura: healthInfo.waist, // cintura cm
+      brazo: healthInfo.arm, // brazo
+      cadera: healthInfo.hips, // cadera cm
+      muslo: healthInfo.thigh, // muslo cm
+    }
+
+    dispatch({ type: 'set', isLoading: true })
+    updateAnthropometry({ variables: variables })
+      .then(response => {
+        if (response.data.updateAnthropometry) {
+          getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
+          toast.success('Successfully saved anthropometric!')
+          dispatch({ type: 'set', isLoading: false })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+        dispatch({ type: 'set', isLoading: false })
+      })
   }
 
   const handleDiscardMeasure = () => {
