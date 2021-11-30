@@ -15,6 +15,7 @@ import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
 import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
 import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
+import smileIcon from 'assets/images/smile.svg'
 
 // styles
 import styles from 'components/Home/COSection.module.scss'
@@ -86,7 +87,13 @@ const COSection = props => {
                       {elem.id === isFlipped.id && isFlipped.bool === true ? (
                         <div className={styles.card}>
                           {/* <div>{elem.avatar}</div> */}
-                          <Image src={elem.avatar} alt="" width={364} height={364} layout="responsive" />
+                          <Image
+                            src={elem.avatar !== '' ? elem.avatar : smileIcon}
+                            alt=""
+                            width={364}
+                            height={364}
+                            layout="responsive"
+                          />
                           <div className={styles.cardContent}>
                             <div>
                               <div className={'w-full inline-block text-center ' + styles.cardText}>
@@ -107,7 +114,13 @@ const COSection = props => {
                         </div>
                       ) : (
                         <div className={styles.card}>
-                          <Image src={elem.avatar} alt="" width={364} height={364} layout="responsive" />
+                          <Image
+                            src={elem.avatar !== '' ? elem.avatar : smileIcon}
+                            alt=""
+                            width={364}
+                            height={364}
+                            layout="responsive"
+                          />
                         </div>
                       )}
                     </div>
