@@ -130,7 +130,7 @@ const COSection = props => {
                         {elem.name}
                         <br />
                         {elem.lastname}
-                        <div className={styles.role}>{elem.speicalty}</div>
+                        <div className={styles.specialty}>{elem.speicalty}</div>
                       </div>
                     </div>
                   </div>
