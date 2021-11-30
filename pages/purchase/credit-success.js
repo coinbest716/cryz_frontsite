@@ -44,9 +44,6 @@ const CreditSuccess = () => {
                 <Image src={successLogo} alt="" width={270} height={222} />
               </div>
               <div className={'pt-16 ' + styles.orderNumber}>TU NÚMERO DE PEDIDO ES #45486</div>
-              <div className={'pt-4 ' + styles.description}>
-                Proin in mi maximus, tempus libero vitae, hendrerit nisl. Curabitur posuere, augue a feugiat convallis.
-              </div>
             </div>
           </div>
         </div>
