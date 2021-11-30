@@ -23,8 +23,6 @@ import toast from 'react-hot-toast'
 
 import { Auth } from 'aws-amplify'
 
-import moment from 'moment'
-
 const Profile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -322,7 +320,37 @@ const Profile = () => {
   }
 
   const handleSaveMeasure = () => {
-    console.log('handleSaveMeasure')
+    const variables = {
+      patient_id: personalInfo.id,
+      grasa: healthInfo.fatPercentage, // grasa %
+      visceral: healthInfo.visceralFat, //  visceral %
+      osea: healthInfo.boneMass, // osea %
+      imc: healthInfo.bodyMass, // imc
+      agua: healthInfo.waterPercentage, // agua %
+      muscular: healthInfo.muscleMass, // muscular %
+      basal: healthInfo.metabolicExpense, // basal kcal
+      edad: healthInfo.metabolicAge, // edad años
+      peso: healthInfo.weight, // peso  kg
+      altura: healthInfo.height, // altura cm
+      cintura: healthInfo.waist, // cintura cm
+      brazo: healthInfo.arm, // brazo
+      cadera: healthInfo.hips, // cadera cm
+      muslo: healthInfo.thigh, // muslo cm
+    }
+
+    dispatch({ type: 'set', isLoading: true })
+    updatePatientHealthByDashboard({ variables: variables })
+      .then(response => {
+        if (response.data.updatePatientHealthByDashboard) {
+          getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
+          toast.success('Successfully saved anthropometric!')
+          dispatch({ type: 'set', isLoading: false })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+        dispatch({ type: 'set', isLoading: false })
+      })
   }
 
   const handleDiscardMeasure = () => {
