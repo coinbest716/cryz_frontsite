@@ -54,15 +54,15 @@ const Header = props => {
           let subMenu = []
           let temp = {}
           if (item.stream_button) {
-            temp = { title: '1 to 1', link: '/buy/buy-one-to-one' }
+            temp = { id: item.id, title: '1 to 1', link: '/buy/buy-one-to-one' }
             subMenu.push(temp)
           }
           if (item.personal_button) {
-            temp = { title: 'Presencial', link: '/buy/buy-person' }
+            temp = { id: item.id, title: 'Presencial', link: '/buy/buy-person' }
             subMenu.push(temp)
           }
           if (item.online_button) {
-            temp = { title: 'Planes Online', link: '/buy/buy-plans-online' }
+            temp = { id: item.id, title: 'Planes Online', link: '/buy/buy-plans-online' }
             subMenu.push(temp)
           }
           object.subMenus = subMenu
@@ -160,6 +160,29 @@ const Header = props => {
     }
   }
 
+  const handleGotoBuyPage = (id, link) => {
+    switch (link) {
+      case '/buy/buy-one-to-one':
+        router.push({
+          pathname: link,
+          query: { discipline_id: id, service_type: 'streaming', type: 'femHealth' },
+        })
+        break
+      case '/buy/buy-person':
+        router.push({
+          pathname: link,
+          query: { discipline_id: id, service_type: 'personal', type: 'femHealth' },
+        })
+        break
+      case '/buy/buy-plans-online':
+        router.push({
+          pathname: link,
+          query: { discipline_id: id, service_type: 'online', type: 'femHealth' },
+        })
+        break
+    }
+  }
+
   return (
     <div
       className={changeHeaderColor === true ? styles.whiteContainer : styles.transparentContainer}
@@ -233,20 +256,24 @@ const Header = props => {
                                   </button>
                                   <div className={styles.subDropdownContent}>
                                     {subMenu.subMenus.map((item, index) => (
-                                      <div key={index}>
-                                        <Link href={item.link} passHref>
-                                          <a
-                                            className={
-                                              styles.subMenuText +
-                                              ' ' +
-                                              (router.pathname === item.link || router.asPath === item.link
-                                                ? styles.active
-                                                : '')
-                                            }
-                                          >
-                                            {router.pathname === item.link ? <b>{item.title}</b> : item.title}
-                                          </a>
-                                        </Link>
+                                      <div
+                                        key={index}
+                                        onClick={() => handleGotoBuyPage(item.id, item.link)}
+                                        className={'cursor-pointer'}
+                                      >
+                                        {/* <Link href={item.link} passHref> */}
+                                        <a
+                                          className={
+                                            styles.subMenuText +
+                                            ' ' +
+                                            (router.pathname === item.link || router.asPath === item.link
+                                              ? styles.active
+                                              : '')
+                                          }
+                                        >
+                                          {router.pathname === item.link ? <b>{item.title}</b> : item.title}
+                                        </a>
+                                        {/* </Link> */}
                                       </div>
                                     ))}
                                   </div>
