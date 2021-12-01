@@ -207,9 +207,10 @@ const Purchase = () => {
   const handleFinishBilling = () => {
     if (paymentType === '') {
       toast.error('You should select payment type!')
+      router.push('/purchase/order-failed')
       return
     } else if (paymentType === 'card') {
-      router.push('/purchase/credit-success')
+      router.push('/purchase/order-success')
     } else if (paymentType === 'transfer') {
       router.push('/purchase/transfer-success')
     }
