@@ -28,24 +28,35 @@ const ShoppingCart = props => {
       <div className={styles.divider + ' mt-4 mb-4'} />
       <div className={'max-h-54 overflow-y-auto -mr-8 pr-1'}>
         {data?.map((item, index) => (
-          <div className={'flex justify-between items-center my-3'} key={index}>
-            <div className={'flex justify-between'}>
-              <div className={'mr-4'} style={{ minWidth: '88px' }}>
-                <Image src={item.image} alt={''} width={88} height={88} />
+          <div>
+            <div className={'flex justify-between items-center my-3'} key={index}>
+              <div className={'flex justify-between'}>
+                <div className={'mr-4'} style={{ minWidth: '88px' }}>
+                  <Image src={item.image} alt={''} width={88} height={88} />
+                </div>
+                <div className={'flex flex-col justify-between'}>
+                  <div className={styles.listDescription}>{item.description}</div>
+                  <div className={styles.listPrice}>€&nbsp;&nbsp;{item.price}</div>
+                </div>
               </div>
-              <div className={'flex flex-col justify-between'}>
-                <div className={styles.listDescription}>{item.description}</div>
-                <div className={styles.listPrice}>€&nbsp;&nbsp;{item.price}</div>
+              <div className="flex flex-col justify-between items-center">
+                <div className={'relative cursor-pointer ' + styles.badge}>
+                  <div className={'absoulte top-3 right-3 ' + styles.operater}>+</div>
+                </div>
+                <div className={styles.listDescription}>{item.orderCount}</div>
+                <div className={'relative cursor-pointer ' + styles.badge}>
+                  <div className={'absoulte top-3 right-3 ' + styles.operater}>-</div>
+                </div>
               </div>
             </div>
-            <div>
-              <button
-                className={'duration-200 hover:bg-gray-300 w-6 h-6 flex justify-center items-center p-2 rounded-full'}
-                onClick={() => handleRemoveCart(index)}
-              >
-                <Image src={close} alt="" width={16} height={16} />
-              </button>
-            </div>
+
+            <button
+              className={'flex justify-between items-center ' + styles.outlineButton}
+              onClick={() => handleRemoveCart(index)}
+            >
+              <Image src={'/images/trash.svg'} alt={''} width={12} height={12} />
+              <p className={'pl-3 ' + styles.outlineLabel}>Eliminar</p>
+            </button>
           </div>
         ))}
       </div>

@@ -24,6 +24,30 @@
   line-height: 24px;
   text-align: center;
 }
+.operater {
+  color: #ffffff;
+  font-family: 'Avenir Next';
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 23px;
+  text-align: center;
+}
+.outlineButton {
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border: 1px dashed #d4d4d4;
+  border-radius: 4px;
+  &:hover {
+    background-color: #e9ecec;
+  }
+}
+.outlineLabel {
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: 0;
+}
 .badge {
   height: 24px;
   width: 24px;
