@@ -11,10 +11,10 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
 import globlaStyle from 'styles/GlobalStyles.module.scss'
-import styles from './credit-success.module.scss'
+import styles from './order-success.module.scss'
 
 // images and icons
-import successLogo from 'public/images/credit-success.svg'
+import failedLogo from 'public/images/order-failed.png'
 
 const CreditSuccess = () => {
   // loading part ###########################
@@ -39,11 +39,11 @@ const CreditSuccess = () => {
         <div className={globlaStyle.container}>
           <div className={'flex justify-center items-center h-full'}>
             <div className={styles.creditSection}>
-              <div className={styles.title}>¡GRACIAS POR TU COMPRA!</div>
+              <div className={styles.title}>¡HA HABIDO UN PROBLEMA PROCESANDO TU PEDIDO! </div>
               <div className={'pt-16 text-center'}>
-                <Image src={successLogo} alt="" width={270} height={222} />
+                <Image src={failedLogo} alt="" width={270} height={245} />
               </div>
-              <div className={'pt-16 ' + styles.orderNumber}>TU NÚMERO DE PEDIDO ES #45486</div>
+              <div className={'pt-16 ' + styles.orderNumber}>INTÉNTALO DE NUEVO O PONTE EN CONTACTO CON NOSOTROS</div>
             </div>
           </div>
         </div>

@@ -2,19 +2,22 @@
   {
     "id": 1,
     "image": "/images/01.png",
-    "price": 99.90,
-    "description": "10 sesiones preparación al parto y suelo pévico" 
+    "price": 99.9,
+    "description": "10 sesiones preparación al parto y suelo pévico",
+    "orderCount": 1
   },
   {
     "id": 2,
     "image": "/images/02.png",
-    "price": 69.90,
-    "description": "10 sesiones preparación "
+    "price": 69.9,
+    "description": "10 sesiones preparación ",
+    "orderCount": 3
   },
   {
     "id": 3,
     "image": "/images/03.png",
-    "price": 32.90,
-    "description": "10 sesiones preparación al parto y suelo pévicoa"
+    "price": 32.9,
+    "description": "10 sesiones preparación al parto y suelo pévicoa",
+    "orderCount": 2
   }
 ]
