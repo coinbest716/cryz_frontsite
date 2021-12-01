@@ -28,8 +28,8 @@ const ShoppingCart = props => {
       <div className={styles.divider + ' mt-4 mb-4'} />
       <div className={'max-h-54 overflow-y-auto -mr-8 pr-1'}>
         {data?.map((item, index) => (
-          <div>
-            <div className={'flex justify-between items-center my-3'} key={index}>
+          <div key={index}>
+            <div className={'flex justify-between items-center my-3'}>
               <div className={'flex justify-between'}>
                 <div className={'mr-4'} style={{ minWidth: '88px' }}>
                   <Image src={item.image} alt={''} width={88} height={88} />
@@ -49,7 +49,6 @@ const ShoppingCart = props => {
                 </div>
               </div>
             </div>
-
             <button
               className={'flex justify-between items-center ' + styles.outlineButton}
               onClick={() => handleRemoveCart(index)}
