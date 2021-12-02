@@ -132,10 +132,12 @@ const Training = () => {
             <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
               <div className={'pt-10 pb-2 ' + styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
-              <div
-                className={styles.topDescription + ' mt-10 pb-20'}
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
+              <div className={globalStyles.tinyMCEClass}>
+                <div
+                  className={styles.topDescription + ' mt-10 pb-20 tinymce-class'}
+                  dangerouslySetInnerHTML={{ __html: description }}
+                ></div>
+              </div>
             </div>
             <div className={'col-span-12 md:col-span-1 sm:col-span-12'} />
             <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative'}>

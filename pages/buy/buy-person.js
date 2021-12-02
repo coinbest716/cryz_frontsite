@@ -89,7 +89,9 @@ const BuyPerson = () => {
           <div className={'col-span-6'}>
             <div className={styles.title}>Bonos y Sesiones</div>
             <div className={styles.divider} />
-            <div dangerouslySetInnerHTML={{ __html: description }} />
+            <div className={globalStyles.tinyMCEClass}>
+              <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: description }}></div>
+            </div>
           </div>
           <div className={'col-span-6 flex justify-end z-10'}>
             <CircularMark />

@@ -94,7 +94,9 @@ const Menopause = () => {
               <div className={styles.pinkTitle}>{femHealthService.title_two}</div>
               <div className={styles.divider} />
               <div className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}>
-                <div id="text" dangerouslySetInnerHTML={{ __html: text }}></div>
+                <div className={globalStyles.tinyMCEClass}>
+                  <div id="text" className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: text }}></div>
+                </div>
                 {text.length > 550 ? (
                   <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
                 ) : (
