@@ -79,7 +79,9 @@ const MainSection = props => {
                   <div className={'ml-4 mr-2 ' + styles.byText}>by</div>
                   <div className={styles.subTitle}>{data.sub_title}</div>
                 </div>
-                <div className={styles.text} dangerouslySetInnerHTML={{ __html: data.text }} />
+                <div className={globalStyles.tinyMCEClass}>
+                  <div className={styles.text + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: data.text }} />
+                </div>
               </div>
             </div>
             <div className={'col-span-7 flex justify-end z-10'}>

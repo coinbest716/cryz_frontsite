@@ -14,6 +14,7 @@ import MainImage from 'assets/images/main.png'
 import ArrowLeftWhite from 'assets/images/arrow-left-white.svg'
 
 // styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
@@ -90,14 +91,29 @@ const MainSection = props => {
                   <div className={index % 2 === 1 ? styles.pinkBoxArea01 : styles.pinkBoxArea}>
                     <div className={styles.pinkBoxOpacity} />
                     <div className={styles.pinkBox}>
-                      <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
-                      <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
+                      <div className={globalStyles.tinyMCEClass}>
+                        <div
+                          className={styles.pinkTitle + ' tinymce-class'}
+                          dangerouslySetInnerHTML={{ __html: item.title }}
+                        />
+                      </div>
+                      <div className={globalStyles.tinyMCEClass}>
+                        <div
+                          className={styles.pinkText + ' tinymce-class'}
+                          dangerouslySetInnerHTML={{ __html: item.detail }}
+                        />
+                      </div>
                       <div className={styles.pinkButtonArea}>
                         <button className={styles.pinkButton} onClick={() => router.push(item.url)}>
                           <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
                         </button>
                       </div>
-                      <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.text }} />
+                      <div className={globalStyles.tinyMCEClass}>
+                        <div
+                          className={styles.pinkText + ' tinymce-class'}
+                          dangerouslySetInnerHTML={{ __html: item.text }}
+                        />
+                      </div>
                     </div>
                   </div>
                   {index % 2 === 1 ? <div className={styles.blankDiv}></div> : <></>}
