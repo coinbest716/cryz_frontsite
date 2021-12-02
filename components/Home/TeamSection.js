@@ -26,7 +26,12 @@ const TeamSection = props => {
     <div className={globalStyles.container}>
       <div className={styles.title}>{team.title}</div>
       <div className={styles.divider}></div>
-      <div className={'w-full md:w-1/2 ' + styles.text} dangerouslySetInnerHTML={{ __html: team.description }} />
+      <div className={globalStyles.tinyMCEClass}>
+        <div
+          className={'w-full md:w-1/2 tinymce-class ' + styles.text}
+          dangerouslySetInnerHTML={{ __html: team.description }}
+        />
+      </div>
       <div className={'teamCarousel'}>
         {team !== '' && team.images.length !== 0 ? (
           <Carousel
@@ -83,7 +88,9 @@ const TeamSection = props => {
           <Image src={team.avatar !== null ? team.avatar : TeamMember01} alt="" width={355} height={368} />
         </div>
         <div className={'w-full md:w-1/2 flex flex-wrap justify-start items-center'}>
-          <div className={styles.text} dangerouslySetInnerHTML={{ __html: team.text_one }} />
+          <div className={globalStyles.tinyMCEClass}>
+            <div className={styles.text + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: team.text_one }} />
+          </div>
           <div className={'w-full flex justify-between my-4'}>
             <Image
               src={team.sign !== null ? team.sign : SignImg}
@@ -96,7 +103,9 @@ const TeamSection = props => {
               <SocialButtonGroup color="gray" socialURL={{ instagram: team.instagram, facebook: team.facebook }} />
             </div>
           </div>
-          <div className={styles.text} dangerouslySetInnerHTML={{ __html: team.text_two }} />
+          <div className={globalStyles.tinyMCEClass}>
+            <div className={styles.text + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: team.text_two }} />
+          </div>
         </div>
       </div>
     </div>
