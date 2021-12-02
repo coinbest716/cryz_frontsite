@@ -188,7 +188,7 @@ const Profile = () => {
       setShippingInfo(_shippingInfo)
       getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
     }
-  }, [personalLoading, personalData, personalError, personalInfo, shippingInfo])
+  }, [personalLoading, personalData, personalError, personalInfo, shippingInfo, getAnthropmetryByDashboard])
 
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
