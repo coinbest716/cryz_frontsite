@@ -23,7 +23,10 @@ const AcademyCard = props => {
         </div>
         <div className={styles.cardTitle}>{data?.name}</div>
         <div className={globalStyles.tinyMCEClass}>
-          <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: data?.description }} />
+          <div
+            className={styles.cardDescripton + ' tinymce-class'}
+            dangerouslySetInnerHTML={{ __html: data?.description }}
+          />
         </div>
         <div className={styles.cardName}>{data?.category}</div>
       </div>
