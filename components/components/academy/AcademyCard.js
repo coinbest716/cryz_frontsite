@@ -1,7 +1,14 @@
 import React from 'react'
+
+// next components
 import Image from 'next/image'
-import styles from './AcademyCard.module.scss'
+
+// custom components
 import ArrowButton from 'components/components/academy/ArrowButton'
+
+// styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
+import styles from './AcademyCard.module.scss'
 
 const AcademyCard = props => {
   const { data, handleClickPayment } = props
@@ -15,7 +22,9 @@ const AcademyCard = props => {
           )}
         </div>
         <div className={styles.cardTitle}>{data?.name}</div>
-        <div className={styles.cardDescripton} dangerouslySetInnerHTML={{ __html: data?.description }} />
+        <div className={globalStyles.tinyMCEClass}>
+          <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: data?.description }} />
+        </div>
         <div className={styles.cardName}>{data?.category}</div>
       </div>
       <div className={'mt-2'}>
