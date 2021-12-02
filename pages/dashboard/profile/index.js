@@ -188,7 +188,7 @@ const Profile = () => {
       }
       setShippingInfo(_shippingInfo)
     }
-  }, [personalLoading, personalData, personalError, personalInfo, shippingInfo])
+  }, [personalLoading, personalData, personalError, personalInfo, shippingInfo, getAnthropmetryByDashboard])
 
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
