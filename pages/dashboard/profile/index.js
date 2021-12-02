@@ -137,7 +137,7 @@ const Profile = () => {
         getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
       }
     }
-  }, [activeTab, getAnthropmetryByDashboard, getPatientByEmail, personalInfo])
+  }, [activeTab])
 
   useEffect(() => {
     if (activeTab.health) {
@@ -145,7 +145,7 @@ const Profile = () => {
         getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
       }
     }
-  }, [activeTab, personalInfo, getAnthropmetryByDashboard])
+  }, [activeTab])
 
   useEffect(() => {
     const currentState = router.asPath.split('#')
@@ -188,7 +188,7 @@ const Profile = () => {
       setShippingInfo(_shippingInfo)
       getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
     }
-  }, [personalLoading, personalData, personalError, personalInfo, shippingInfo, getAnthropmetryByDashboard])
+  }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
@@ -208,7 +208,7 @@ const Profile = () => {
       setHealthInfo(_healthInfo)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [healthLoading, healthData, healthError, healthInfo])
+  }, [healthLoading, healthData, healthError])
 
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
