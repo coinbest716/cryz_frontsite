@@ -109,7 +109,9 @@ const Nutrition = () => {
                 <div
                   className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}
                 >
-                  <div dangerouslySetInnerHTML={{ __html: description }}></div>
+                  <div className={globalStyles.tinyMCEClass}>
+                    <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: description }}></div>
+                  </div>
                   <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
                 </div>
               </div>

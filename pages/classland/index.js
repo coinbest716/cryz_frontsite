@@ -122,7 +122,12 @@ const Classland = () => {
               <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
                 <div className={styles.topTitle}>{main?.title}</div>
                 <div className={styles.topDash} />
-                <div className={styles.topDescription} dangerouslySetInnerHTML={{ __html: main?.text }} />
+                <div className={globalStyles.tinyMCEClass}>
+                  <div
+                    className={styles.topDescription + ' tinymce-class'}
+                    dangerouslySetInnerHTML={{ __html: main?.text }}
+                  ></div>
+                </div>
               </div>
               <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
                 <div className={styles.topRightSection}>

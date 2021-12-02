@@ -112,7 +112,12 @@ const Services = () => {
             <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
               <div className={styles.topTitle + ' pb-2'}>{title}</div>
               <div className={styles.topDash} />
-              <div className={styles.topDescription} dangerouslySetInnerHTML={{ __html: description }}></div>
+              <div className={globalStyles.tinyMCEClass}>
+                <div
+                  className={styles.topDescription + ' tinymce-class'}
+                  dangerouslySetInnerHTML={{ __html: description }}
+                ></div>
+              </div>
             </div>
             <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
               <div className={'z-10 ' + styles.circularMark}>
