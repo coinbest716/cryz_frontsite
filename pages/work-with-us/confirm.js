@@ -10,7 +10,7 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './confirm.module.scss'
 
 // images
@@ -47,7 +47,7 @@ const Confirm = () => {
 
   return (
     <div className={'flex flex-wrap justify-center'}>
-      <div className={globlaStyle.container}>
+      <div className={globalStyles.container}>
         <div className={styles.container}>
           <div className={'w-full flex justify-center ' + styles.title}>¡GRACIAS POR TU CV!</div>
           <div className={'w-full flex justify-center'}>

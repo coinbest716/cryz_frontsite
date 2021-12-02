@@ -11,7 +11,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './training.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
@@ -124,7 +124,7 @@ const Training = () => {
         <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
       </div>
       <div className={'flex flex-wrap justify-center pb-20'}>
-        <div className={globlaStyle.container}>
+        <div className={globalStyles.container}>
           <div className={'mt-9'}>
             <BackButton />
           </div>

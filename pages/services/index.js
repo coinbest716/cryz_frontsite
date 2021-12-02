@@ -12,7 +12,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './services.module.scss'
 
 // images and icons
@@ -106,7 +106,7 @@ const Services = () => {
 
   return (
     <div className={'flex flex-wrap justify-center'}>
-      <div className={globlaStyle.container}>
+      <div className={globalStyles.container}>
         <div className={styles.container}>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>

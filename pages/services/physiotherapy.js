@@ -15,7 +15,7 @@ import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './physiotherapy.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
@@ -97,7 +97,7 @@ const Physiotherapy = () => {
   return (
     <div className={styles.container}>
       <div className={'flex flex-wrap justify-center pb-20'}>
-        <div className={globlaStyle.container}>
+        <div className={globalStyles.container}>
           <div className={'mt-9'}>
             <BackButton />
           </div>

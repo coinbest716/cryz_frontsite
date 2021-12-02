@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './index.module.scss'
 
 const WorkWithUs = () => {
@@ -41,7 +41,7 @@ const WorkWithUs = () => {
 
   return (
     <div className={'flex flex-wrap justify-center'}>
-      <div className={globlaStyle.container}>
+      <div className={globalStyles.container}>
         <div className={styles.container}>
           <div className={styles.title}>Trabaja con nosotros</div>
           <div className={styles.divider} />
