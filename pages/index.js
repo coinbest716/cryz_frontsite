@@ -46,6 +46,7 @@ const Home = props => {
     getFeaturedServices,
     { data: featuredServicesData, loading: featuredServicesLoading, error: featuredServicesError },
   ] = useLazyQuery(graphql.queries.getFeaturedServices)
+
   const [getEquipo, { data: equipoData, loading: equipoLoading, error: equipoError }] = useLazyQuery(
     graphql.queries.getEquipo
   )
@@ -61,13 +62,13 @@ const Home = props => {
   }, [getMainImage, getFeaturedServices, getEquipo, getUsersByPatient])
 
   useEffect(() => {
-    if (!mainImageError && mainImageData && mainImageData.getMainImage) {
+    if (!mainImageLoading && !mainImageError && mainImageData && mainImageData.getMainImage) {
       setMainImage(mainImageData.getMainImage)
     }
   }, [mainImageLoading, mainImageData, mainImageError])
 
   useEffect(() => {
-    if (!featuredServicesError && featuredServicesData && featuredServicesData.getFeaturedServices) {
+    if (!featuredServicesLoading && !featuredServicesError && featuredServicesData && featuredServicesData.getFeaturedServices) {
       let array = []
       featuredServicesData.getFeaturedServices.map((item, index) => {
         if (item.active === true) {
@@ -79,13 +80,14 @@ const Home = props => {
   }, [featuredServicesLoading, featuredServicesData, featuredServicesError])
 
   useEffect(() => {
-    if (!equipoError && equipoData && equipoData.getEquipo) {
+    if (!equipoLoading && !equipoError && equipoData && equipoData.getEquipo) {
       setTeam(equipoData.getEquipo)
+      console.log(equipoData.getEquipo)
     }
   }, [equipoLoading, equipoData, equipoError])
 
   useEffect(() => {
-    if (!usersByPatientError && usersByPatientData && usersByPatientData.UsersByPatient) {
+    if (!usersByPatientLoading && !usersByPatientError && usersByPatientData && usersByPatientData.UsersByPatient) {
       setCoTeam(usersByPatientData.UsersByPatient)
     }
   }, [usersByPatientLoading, usersByPatientData, usersByPatientError])

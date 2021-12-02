@@ -22,6 +22,7 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 
 const TeamSection = props => {
   const { team } = props
+    console.log(team)
   return team !== '' ? (
     <div className={globalStyles.container}>
       <div className={styles.title}>{team.title}</div>
@@ -71,7 +72,7 @@ const TeamSection = props => {
             {team !== '' &&
               team.images.map((item, index) => (
                 <div key={index} className={'mx-1'}>
-                  {item.type === 'image/png' ? (
+                  {item.type === 'image/png' || item.type === 'image/jpeg' ? (
                     <Image src={item.path} alt="" width={902} height={388} layout={'responsive'} objectFit={'cover'} />
                   ) : (
                     <></>
