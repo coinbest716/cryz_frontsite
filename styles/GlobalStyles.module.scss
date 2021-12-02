@@ -65,8 +65,8 @@
   top: calc(50vh - 32px);
 }
 
-.someCSSModulesClass {
-  :global(.some-global-class) {
+.tinyMCEClass {
+  :global(.tinymce-class) {
     ol {
       list-style: number;
       padding-left: 20px !important;
@@ -91,13 +91,12 @@
       color: #818e8e;
       line-height: 28px;
     }
+    .bold {
+      font-weight: 600;
+    }
+
+    .italic {
+      font-style: italic;
+    }
   }
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.italic {
-  font-style: italic;
 }
