@@ -2,29 +2,25 @@ import React, { useState } from 'react'
 
 // next components
 import Image from 'next/image'
-import CommonButton from 'components/components/purchase/CommonButton'
-import CommonText from 'components/components/purchase/CommonText'
-import User from 'assets/images/team-member-01.png'
 import styles from './Graphic.module.scss'
-import measureGraphic from 'public/images/measure-graphic.svg'
 import measureEdit from 'public/images/measure-edit.svg'
 import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const Graphic = props => {
-  const { handleClickTab } = props
-  const [monthIndex, setMonthIndex] = useState(0)
+  const { handleClickTab, graphicInfo, monthData, currentMonthIndex } = props
+  const [monthIndex, setMonthIndex] = useState(currentMonthIndex)
   const month = ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic']
 
   const fatChartOptions = {
     series: [
       {
         name: '% Grasa',
-        data: [4, 20, 10, 30, 36, 80, 30, 91, 12, 43, 16, 20],
+        data: graphicInfo.fatPercentage,
       },
       {
-        name: 'Grasa visceral',
-        data: [4, 10, 14, 23, 46, 30, 40, 31, 16, 23, 26, 25],
+        name: '% Grasa visceral',
+        data: graphicInfo.visceralFat,
       },
     ],
     options: {
@@ -68,36 +64,36 @@ const Graphic = props => {
   const bodyChartOptions = {
     series: [
       {
-        name: 'Peso',
-        data: [4, 20, 10, 30, 36, 80, 30, 91, 12, 43, 16, 20],
+        name: 'kg Peso',
+        data: graphicInfo.weight,
       },
       {
-        name: 'Altura',
-        data: [4, 10, 14, 23, 46, 30, 40, 31, 16, 23, 26, 25],
+        name: 'cm Altura',
+        data: graphicInfo.height,
       },
       {
         name: '% Agua',
-        data: [20, 14, 23, 46, 4, 30, 40, 31, 16, 23, 26, 21],
+        data: graphicInfo.waterPercentage,
       },
       {
-        name: 'IMMuscular',
-        data: [23, 46, 30, 40, 31, 16, 5, 30, 14, 23, 26, 25],
+        name: '% IMMuscular',
+        data: graphicInfo.muscleMass,
       },
       {
-        name: 'IMOsea',
-        data: [23, 46, 30, 40, 31, 16, 23, 26, 25, 6, 10, 14],
+        name: '% IMOsea',
+        data: graphicInfo.boneMass,
       },
       {
-        name: 'Gasto metabolico',
-        data: [7, 10, 14, 23, 46, 30, 40, 31, 16, 23, 26, 29],
+        name: 'kcal Gasto metabolico',
+        data: graphicInfo.metabolicExpense,
       },
       {
-        name: 'Edad metabolica',
-        data: [9, 10, 40, 31, 16, 23, 26, 25, 14, 23, 46, 30],
+        name: 'años Edad metabolica',
+        data: graphicInfo.metabolicAge,
       },
       {
         name: 'IMCorporal',
-        data: [1, 10, , 23, 26, 25, 14, 23, 46, 30, 40, 31, 16],
+        data: graphicInfo.bodyMass,
       },
     ],
     options: {
@@ -138,11 +134,11 @@ const Graphic = props => {
     },
   }
 
-  const [perimeterChartOptions, setPerimeterChartOptions] = useState({
+  let perimeterChartOptions = {
     series: [
       {
         name: 'perimeters',
-        data: [10, 14, 16, 20],
+        data: monthData[monthIndex],
       },
     ],
     options: {
@@ -155,14 +151,14 @@ const Graphic = props => {
       },
       plotOptions: {
         bar: {
-          borderRadius: 20,
+          borderRadius: 18,
           dataLabels: {
             position: 'top', // top, center, bottom
           },
         },
       },
       xaxis: {
-        categories: ['Brazo', 'Cintura', 'Cadera', 'Muslo', 'Gemelo'],
+        categories: ['Brazo', 'cm Cintura', 'cm Cadera', 'cm Muslo'], // 'Muslo', 'Gemelo'
         position: 'bottom',
         tooltip: {
           enabled: true,
@@ -179,46 +175,16 @@ const Graphic = props => {
         },
       },
     },
-  })
-
-  let monthData = [
-    [10, 14, 16, 20],
-    [16, 20, 10, 14],
-    [14, 11, 18, 30],
-    [10, 14, 16, 20],
-    [16, 20, 10, 14],
-    [14, 11, 18, 30],
-    [10, 14, 16, 20],
-    [16, 20, 10, 14],
-    [14, 11, 18, 30],
-    [10, 14, 16, 20],
-    [16, 20, 10, 14],
-    [14, 11, 18, 30],
-  ]
+  }
 
   const handleClickMonth = type => {
-    let newObj = JSON.parse(JSON.stringify(perimeterChartOptions))
-
-    const _monthIndex = monthIndex
     if (type === 'previous') {
-      if (_monthIndex <= 0) {
-        setMonthIndex(11)
-        newObj.series[0].data = monthData[11]
-        setPerimeterChartOptions(newObj)
-      } else {
-        setMonthIndex(_monthIndex - 1)
-        newObj.series[0].data = monthData[_monthIndex - 1]
-        setPerimeterChartOptions(newObj)
+      if (monthIndex > 0) {
+        setMonthIndex(monthIndex - 1)
       }
     } else if (type === 'next') {
-      if (_monthIndex >= 11) {
-        setMonthIndex(0)
-        newObj.series[0].data = monthData[0]
-        setPerimeterChartOptions(newObj)
-      } else {
-        setMonthIndex(_monthIndex + 1)
-        newObj.series[0].data = monthData[_monthIndex - 1]
-        setPerimeterChartOptions(newObj)
+      if (monthIndex < 11) {
+        setMonthIndex(monthIndex + 1)
       }
     }
   }

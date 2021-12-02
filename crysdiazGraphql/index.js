@@ -19,6 +19,7 @@ import {
   UpdatePatientByDashboard,
   DeletePatientByDashboard,
   UpdateAnthropometry,
+  GetAnthroDetailDataByDashboard,
 } from './personal.gql'
 import { GetAcademy, GetAcademyById } from './academy.gql'
 
@@ -56,6 +57,7 @@ export default {
     // profile part
     getPatientByEmail: GetPatientByEmail,
     getAnthropmetryByDashboard: GetAnthropmetryByDashboard,
+    getAnthroDetailDataByDashboard: GetAnthroDetailDataByDashboard,
 
     // dashboard part
     // message part

@@ -6,6 +6,10 @@ query GetAnthropmetryByDashboard($patient_id: Int) {
   getAnthropmetryByDashboard(patient_id: $patient_id)
 }
 
+query GetAnthroDetailDataByDashboard($patient_id: Int) {
+  getAnthroDetailDataByDashboard(patient_id: $patient_id)
+}
+
 mutation UpdatePatientByDashboard(
   $email: String
   $name: String
