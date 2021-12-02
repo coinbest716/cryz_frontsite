@@ -106,10 +106,12 @@ const Course = () => {
                 <div className={'mt-6'} style={{ width: '326px' }}>
                   <ArrowButton label={mainData.price + ' €'} onClick={handleClickPayment} />
                 </div>
-                <div
-                  className={styles.topDescription + ' mt-8'}
-                  dangerouslySetInnerHTML={{ __html: mainData.description }}
-                ></div>
+                <div className={globalStyles.tinyMCEClass}>
+                  <div
+                    className={styles.topDescription + ' mt-8 tinymce-class'}
+                    dangerouslySetInnerHTML={{ __html: mainData.description }}
+                  ></div>
+                </div>
               </div>
               <div className={'col-span-12 md:col-span-7 sm:col-span-12 flex justify-end'}>
                 <div>
