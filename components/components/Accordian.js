@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 
 // styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './Accordian.module.scss'
 
 // images and icons
@@ -32,7 +33,9 @@ const Accordian = props => {
         </button>
       </div>
       {flag ? (
-        <div className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
+        <div className={globalStyles.tinyMCEClass}>
+          <div className={styles.description + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: description }} />
+        </div>
       ) : (
         <div className={styles.collapse} />
       )}
