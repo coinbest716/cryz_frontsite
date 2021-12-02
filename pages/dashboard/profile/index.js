@@ -137,7 +137,7 @@ const Profile = () => {
         getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
       }
     }
-  }, [activeTab])
+  }, [])
 
   useEffect(() => {
     if (activeTab.health) {
