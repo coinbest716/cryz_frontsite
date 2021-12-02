@@ -9,7 +9,7 @@ import AcademyCard from 'components/components/academy/AcademyCard'
 import CircularMark from 'components/components/CircularMark'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './academy.module.scss'
 
 // graphql
@@ -62,7 +62,7 @@ const Academy = () => {
   return (
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
-        <div className={globlaStyle.container}>
+        <div className={globalStyles.container}>
           <div className={'flex justify-between pt-28'}>
             <div>
               <div className={styles.topTitle}>Academy</div>

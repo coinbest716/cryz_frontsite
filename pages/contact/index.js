@@ -10,7 +10,7 @@ import CircularMark from 'components/components/CircularMark'
 import MapContainer from 'components/components/contact/MapContainer'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/contact/contact.module.scss'
 
 // images
@@ -81,7 +81,7 @@ const Contact = () => {
 
   return (
     <div className={'flex flex-wrap justify-center pt-20'}>
-      <div className={globlaStyle.container}>
+      <div className={globalStyles.container}>
         <div className={'flex justify-between pt-24'}>
           <div>
             <div className={styles.topTitle}>Contacto</div>
@@ -103,7 +103,7 @@ const Contact = () => {
         <div className={'absolute -top-9 right-9 cursor-pointer'}>
           <Image src={whatsapp} alt="" width={69} height={69} onClick={handleClickWhatsapp} />
         </div>
-        <div className={globlaStyle.container}>
+        <div className={globalStyles.container}>
           <div className={'grid grid-cols-12 gap-4 text-center'}>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12 pt-12'}>
               <Image src={phoneIcon} alt="" width={35} height={35} />

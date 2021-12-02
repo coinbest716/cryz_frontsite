@@ -21,7 +21,7 @@ import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './course.module.scss'
 import moment from 'moment'
 import 'moment/locale/es'
@@ -91,7 +91,7 @@ const Course = () => {
   return (
     <div className={styles.container}>
       <div className={'flex flex-wrap justify-center pb-20'}>
-        <div className={globlaStyle.container}>
+        <div className={globalStyles.container}>
           <div className={'mt-9'}>
             <BackButton />
           </div>

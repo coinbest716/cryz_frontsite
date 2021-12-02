@@ -13,7 +13,7 @@ import CommonButton from 'components/components/purchaseLogin/CommonButton'
 import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/purchase-login.module.scss'
 
 // json data
@@ -85,7 +85,7 @@ const PurchaseLogin = () => {
   return (
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
-        <div className={globlaStyle.container + ' pt-20'}>
+        <div className={globalStyles.container + ' pt-20'}>
           <div className={'grid grid-cols-12 gap-4 '}>
             <div className={'col-span-12 md:col-span-8 sm:col-span-12 pt-32 pb-44'}>
               <div className={'px-10'}>

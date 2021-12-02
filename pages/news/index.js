@@ -10,7 +10,7 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/news/news.module.scss'
 
 // images
@@ -36,7 +36,7 @@ const News = () => {
   return (
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
-        <div className={globlaStyle.container + ' pt-20'}>
+        <div className={globalStyles.container + ' pt-20'}>
           <div className={'h-full'}>
             <div className={'h-1/3 flex items-center'}>
               <div>

@@ -10,7 +10,7 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
-import globlaStyle from 'styles/GlobalStyles.module.scss'
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './order-success.module.scss'
 
 // images and icons
@@ -36,7 +36,7 @@ const CreditSuccess = () => {
   return (
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
-        <div className={globlaStyle.container}>
+        <div className={globalStyles.container}>
           <div className={'flex justify-center items-center h-full'}>
             <div className={styles.creditSection}>
               <div className={styles.title}>¡GRACIAS POR TU COMPRA!</div>
