@@ -48,6 +48,10 @@ const Profile = () => {
   const [getAnthropmetryByDashboard, { data: healthData, loading: healthLoading, error: healthError }] = useLazyQuery(
     graphql.queries.getAnthropmetryByDashboard
   )
+  const [
+    getAnthroDetailDataByDashboard,
+    { data: healthGraphicData, loading: healthGraphicLoading, error: healthGraphicError },
+  ] = useLazyQuery(graphql.queries.getAnthroDetailDataByDashboard)
   const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
   const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
   const [updateAnthropometry] = useMutation(graphql.mutations.updateAnthropometry)
@@ -55,6 +59,9 @@ const Profile = () => {
   const [email, setEmail] = useState('')
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
   const [uploadFile, setUploadFile] = useState(null)
+  const date = new Date()
+  const currentMonthIndex = date.getMonth()
+  const [monthData, setMonthData] = useState([])
   const [personalInfo, setPersonalInfo] = useState({
     id: -1,
     avatar: '',
@@ -95,6 +102,24 @@ const Profile = () => {
     cp: '',
     province: '',
   })
+  const [graphicInfo, setGraphicInfo] = useState({
+    fatPercentage: [], // grasa %
+    visceralFat: [], //  visceral %
+    boneMass: [], // osea %
+    bodyMass: [], // imc
+    waterPercentage: [], // agua %
+    muscleMass: [], // muscular %
+    metabolicExpense: [], // basal kcal
+    metabolicAge: [], // edad años
+    weight: [], // peso  kg
+    height: [], // altura cm
+    waist: [], // cintura cm
+    arm: [], // brazo
+    hips: [], // cadera cm
+    thigh: [], // muslo cm
+    // twin: [], //
+  })
+
   const healthItemList = [
     { name: 'grasa', key: 'fatPercentage' },
     { name: 'visceral', key: 'visceralFat' },
@@ -136,16 +161,20 @@ const Profile = () => {
       if (personalInfo.id > 0) {
         getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
       }
+    } else if (activeTab.graphic) {
+      getAnthroDetailDataByDashboard({ variables: { patient_id: personalInfo.id } })
     }
-  }, [activeTab, getAnthropmetryByDashboard, getPatientByEmail, personalInfo])
+  }, [])
 
   useEffect(() => {
     if (activeTab.health) {
       if (personalInfo.id > 0) {
         getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
       }
+    } else if (activeTab.graphic) {
+      getAnthroDetailDataByDashboard({ variables: { patient_id: personalInfo.id } })
     }
-  }, [activeTab, personalInfo, getAnthropmetryByDashboard])
+  }, [activeTab])
 
   useEffect(() => {
     const currentState = router.asPath.split('#')
@@ -186,15 +215,19 @@ const Profile = () => {
         province: data.bill_province,
       }
       setShippingInfo(_shippingInfo)
-      getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
+      if (activeTab.health) {
+        getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
+      } else if (activeTab.graphic) {
+        getAnthroDetailDataByDashboard({ variables: { patient_id: data.id } })
+      }
     }
-  }, [personalLoading, personalData, personalError, personalInfo, shippingInfo, getAnthropmetryByDashboard])
+  }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
       const data = healthData.getAnthropmetryByDashboard
       let _healthInfo = { ...healthInfo }
-      data.map((item, index) => {
+      data.map(item => {
         let tempValue = ''
         healthItemList.map(healthItem => {
           if (item.name === healthItem.name) {
@@ -208,7 +241,31 @@ const Profile = () => {
       setHealthInfo(_healthInfo)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [healthLoading, healthData, healthError, healthInfo])
+  }, [healthLoading, healthData, healthError])
+
+  useEffect(() => {
+    if (!healthGraphicError && healthGraphicData && healthGraphicData.getAnthroDetailDataByDashboard) {
+      const data = healthGraphicData.getAnthroDetailDataByDashboard
+      let _graphicInfo = { ...graphicInfo }
+      data.map(item => {
+        healthItemList.map(healthItem => {
+          if (item.type === healthItem.name) {
+            _graphicInfo = { ..._graphicInfo, [healthItem.key]: item.data }
+          }
+        })
+      })
+      setGraphicInfo(_graphicInfo)
+      // line chart info
+      let _monthData = []
+      ;[...Array(12)].forEach((_, i) => {
+        let newArr = []
+        newArr.push(_graphicInfo.arm[i], _graphicInfo.waist[i], _graphicInfo.hips[i], _graphicInfo.thigh[i])
+        _monthData.push(newArr)
+      })
+      setMonthData(_monthData)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [healthGraphicLoading, healthGraphicData, healthGraphicError])
 
   const handleClickTab = tabType => {
     setActiveTab({ [tabType]: true })
@@ -324,20 +381,20 @@ const Profile = () => {
   const handleSaveMeasure = () => {
     const variables = {
       patient_id: personalInfo.id,
-      grasa: healthInfo.fatPercentage, // grasa %
-      visceral: healthInfo.visceralFat, //  visceral %
-      osea: healthInfo.boneMass, // osea %
-      imc: healthInfo.bodyMass, // imc
-      agua: healthInfo.waterPercentage, // agua %
-      muscular: healthInfo.muscleMass, // muscular %
-      basal: healthInfo.metabolicExpense, // basal kcal
-      edad: healthInfo.metabolicAge, // edad años
-      peso: healthInfo.weight, // peso  kg
-      altura: healthInfo.height, // altura cm
-      cintura: healthInfo.waist, // cintura cm
-      brazo: healthInfo.arm, // brazo
-      cadera: healthInfo.hips, // cadera cm
-      muslo: healthInfo.thigh, // muslo cm
+      grasa: healthInfo.fatPercentage.toString(), // grasa %
+      visceral: healthInfo.visceralFat.toString(), //  visceral %
+      osea: healthInfo.boneMass.toString(), // osea %
+      imc: healthInfo.bodyMass.toString(), // imc
+      agua: healthInfo.waterPercentage.toString(), // agua %
+      muscular: healthInfo.muscleMass.toString(), // muscular %
+      basal: healthInfo.metabolicExpense.toString(), // basal kcal
+      edad: healthInfo.metabolicAge.toString(), // edad años
+      peso: healthInfo.weight.toString(), // peso  kg
+      altura: healthInfo.height.toString(), // altura cm
+      cintura: healthInfo.waist.toString(), // cintura cm
+      brazo: healthInfo.arm.toString(), // brazo
+      cadera: healthInfo.hips.toString(), // cadera cm
+      muslo: healthInfo.thigh.toString(), // muslo cm
     }
 
     dispatch({ type: 'set', isLoading: true })
@@ -427,7 +484,14 @@ const Profile = () => {
             handleChangeHealth={handleChangeHealth}
           />
         )}
-        {activeTab.graphic && <Graphic handleClickTab={handleClickTab} />}
+        {activeTab.graphic && (
+          <Graphic
+            handleClickTab={handleClickTab}
+            graphicInfo={graphicInfo}
+            monthData={monthData}
+            currentMonthIndex={currentMonthIndex}
+          />
+        )}
       </div>
     </div>
   )
