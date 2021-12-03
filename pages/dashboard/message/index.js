@@ -22,7 +22,7 @@ import MessageVideo01 from 'components/components/dashboard/message/MessageVideo
 import MessageVideo02 from 'components/components/dashboard/message/MessageVideo02'
 import MessageInput from 'components/components/dashboard/message/MessageInput'
 import ProfessionalCard from 'components/components/dashboard/message/ProfessionalCard'
-import MessageCard from 'components/components/dashboard/message/MessageCard'
+import SubjectCard from 'components/components/dashboard/message/SubjectCard'
 import MessageSelectCard from 'components/components/dashboard/message/MessageSelectCard'
 
 // images
@@ -146,15 +146,15 @@ const Message = () => {
           {/* message area */}
           <div className={styles.subjectArea}>
             <PerfectScrollbar>
-              <MessageCard />
-              <MessageCard />
-              <MessageCard />
-              <MessageCard />
-              <MessageCard />
-              <MessageCard />
-              <MessageCard />
-              <MessageCard />
-              <MessageCard />
+              <SubjectCard />
+              <SubjectCard />
+              <SubjectCard />
+              <SubjectCard />
+              <SubjectCard />
+              <SubjectCard />
+              <SubjectCard />
+              <SubjectCard />
+              <SubjectCard />
             </PerfectScrollbar>
           </div>
         </div>
