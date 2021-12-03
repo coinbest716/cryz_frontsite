@@ -18,7 +18,8 @@ const Transfer = props => {
         />
       </div>
       <div className={'pl-8 pt-2 ' + styles.creditDescription}>
-        Serás redirigido a tu entidad bancaria para efectuar la transferencia de manera segura
+        Realiza tu pago directamente en nuestra cuenta bancaria. Por favor, usa el número del pedido como referencia de
+        pago. Tu pedido no se procesará hasta que se haya recibido el importe en nuestra cuenta.
       </div>
     </div>
   )
