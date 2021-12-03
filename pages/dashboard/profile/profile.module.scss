@@ -4,6 +4,31 @@
   width: 100%;
   background-color: #f5f6fa;
 }
+.modalTitle {
+  color: #7e8f8e;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.4px;
+  line-height: 22px;
+}
+.modalDescription {
+  color: #c4c4c4;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.26px;
+  line-height: 24px;
+}
+.modalButton {
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  padding: 10px 16px;
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
 .highBoldLabel {
   color: #2a2c36;
   font-family: Montserrat;

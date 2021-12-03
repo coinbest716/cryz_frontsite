@@ -37,6 +37,7 @@
     "react-dom": "^17.0.2",
     "react-hot-toast": "^2.1.1",
     "react-loading": "^2.0.3",
+    "react-modal": "^3.14.4",
     "react-payment": "^0.1.8",
     "react-perfect-scrollbar": "^1.5.8",
     "react-player": "^2.9.0",

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -20,8 +21,23 @@ import styles from './profile.module.scss'
 import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import toast from 'react-hot-toast'
-
+import Modal from 'react-modal'
+import CloseIcon from 'public/images/close.svg'
 import { Auth } from 'aws-amplify'
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  overlay: {
+    background: 'rgba(0, 0, 0, 0.6)',
+  },
+}
 
 const Profile = () => {
   // loading part ###########################
@@ -30,6 +46,7 @@ const Profile = () => {
 
   useEffect(() => {
     setIsMounted(true)
+    Modal.setAppElement('#main')
     return () => setIsMounted(false)
   }, [])
 
@@ -62,6 +79,14 @@ const Profile = () => {
   const date = new Date()
   const currentMonthIndex = date.getMonth()
   const [monthData, setMonthData] = useState([])
+  const [modalIsOpen, setIsOpen] = React.useState(false)
+  const openModal = () => {
+    setIsOpen(true)
+  }
+  const closeModal = () => {
+    setIsOpen(false)
+  }
+
   const [personalInfo, setPersonalInfo] = useState({
     id: -1,
     avatar: '',
@@ -341,6 +366,7 @@ const Profile = () => {
   }
 
   const handleDeleteAccount = () => {
+    closeModal()
     dispatch({ type: 'set', isLoading: true })
     deletePatientByDashboard({ variables: { patient_id: personalInfo.id } })
       .then(response => {
@@ -369,6 +395,9 @@ const Profile = () => {
             province: '',
           })
           toast.success('Successfully delete personal information!')
+          dispatch({ type: 'set', isLoading: false })
+        } else {
+          toast.error('Server Error!')
           dispatch({ type: 'set', isLoading: false })
         }
       })
@@ -436,7 +465,32 @@ const Profile = () => {
   }
 
   return (
-    <div className={'pt-10 pb-24 px-24 ' + styles.container}>
+    <div className={'relative pt-10 pb-24 px-24 ' + styles.container} id="main">
+      <Modal
+        isOpen={modalIsOpen}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+      >
+        <div className="p-2 w-auto">
+          <div className="mb-2 flex justify-end cursor-pointer" onClick={closeModal}>
+            <Image src={CloseIcon} alt={''} width={16} height={16} />
+          </div>
+          <div className={styles.modalTitle}>¿Estas seguro que deseas borrar tu cuenta?</div>
+          <div className={'mt-2 ' + styles.modalDescription}>
+            Recuerda que no hay vuelta atrás para esto, tus datos e historial no se guardarán
+            <br /> en el caso que quieras remotar los servicios.
+          </div>
+          <div className={'flex justify-end mt-5'}>
+            <div className={'cursor-pointer ' + styles.modalButton} onClick={closeModal}>
+              Descartar
+            </div>
+            <div className={'cursor-pointer ml-3 ' + styles.modalButton} onClick={handleDeleteAccount}>
+              Suprimir cuenta
+            </div>
+          </div>
+        </div>
+      </Modal>
       <div className={'flex justify-between'}>
         <div>
           <div className={styles.highBoldLabel}>Perfil</div>
@@ -472,7 +526,7 @@ const Profile = () => {
             handleDiscard={handleDiscardPersonal}
             handleChangePersonal={handleChangePersonal}
             handleChangeShipping={handleChangeShipping}
-            handleDeleteAccount={handleDeleteAccount}
+            handleDeleteAccount={openModal}
           />
         )}
         {activeTab.health && (
