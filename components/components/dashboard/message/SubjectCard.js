@@ -4,12 +4,12 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from './MessageCard.module.scss'
+import styles from './SubjectCard.module.scss'
 
 // images
 import CheckIcon from 'assets/images/check.svg'
 
-const MessageCard = () => {
+const SubjectCard = () => {
   return (
     <div className={styles.container}>
       <div className={'flex justify-start'}>
@@ -32,4 +32,4 @@ const MessageCard = () => {
   )
 }
 
-export default MessageCard
+export default SubjectCard
