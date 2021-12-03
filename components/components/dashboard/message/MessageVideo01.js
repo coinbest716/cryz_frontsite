@@ -6,12 +6,14 @@ import styles from 'components/components/dashboard/message/MessageVideo01.modul
 const MessageVideo01 = props => {
   const { message } = props
   return (
-    <div className={styles.container}>
-      <video width={167} controls>
-        <source src={message.url} type="video/mp4" />
-        <source src={message.url} type="video/ogg" />
-        Your browser does not support HTML5 video.
-      </video>
+    <div className={'w-full py-5 px-7 flex justify-end'}>
+      <div className={styles.container}>
+        <video width={167} controls>
+          <source src={message.url} type="video/mp4" />
+          <source src={message.url} type="video/ogg" />
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
     </div>
   )
 }

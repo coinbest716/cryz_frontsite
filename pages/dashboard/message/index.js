@@ -146,20 +146,6 @@ const Message = () => {
           {/* message area */}
           <div className={styles.subjectArea}>
             <PerfectScrollbar>
-              <div className={'flex justify-between mx-6 my-6'}>
-                <div className={styles.messageText}>Mensajes</div>
-                <div className={'flex ' + styles.messageText}>
-                  <button className={'flex justify-center items-center mr-4'}>
-                    <div className={'flex items-center mr-4'} style={{ fontSize: '24px' }}>
-                      +
-                    </div>
-                    Nuevo mensaje
-                  </button>
-                  <button className={'grid justify-center items-center'}>
-                    <Image src={TrashIcon} alt={''} width={31} height={31} />
-                  </button>
-                </div>
-              </div>
               <MessageCard />
               <MessageCard />
               <MessageCard />
@@ -180,21 +166,13 @@ const Message = () => {
           {/* chat area */}
           <div className={styles.chatArea}>
             <PerfectScrollbar>
-              <div className={'my-5 mx-7 flex justify-end'}>
-                <MessageCard01 message={messageContent} />
-              </div>
-              <div className={'my-5 mx-7 flex justify-start'}>
-                <MessageCard02 message={messageContent} />
-              </div>
-              <div className={'my-5 mx-7 flex justify-end'}>
-                <MessageCard01 message={messageContent} />
-              </div>
-              <div className={'my-5 mx-7 flex justify-end'}>
-                <MessageImage01 message={messageImage} />
-              </div>
-              <div className={'my-5 mx-7 flex justify-end'}>
-                <MessageVideo01 message={messageVideo} />
-              </div>
+              <MessageCard01 message={messageContent} />
+              <MessageCard02 message={messageContent} />
+              <MessageCard01 message={messageContent} />
+              <MessageImage01 message={messageImage} />
+              <MessageImage02 message={messageImage} />
+              <MessageVideo01 message={messageVideo} />
+              <MessageVideo02 message={messageVideo} />
             </PerfectScrollbar>
           </div>
           {/* message input area */}
