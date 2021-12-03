@@ -15,3 +15,22 @@ query GetUsersByPatient {
     info_visible
   }
 }
+
+query GetPatientMessageById {
+  getPatientMessageById(patient_id: 1) {
+    from_id
+    from_type
+    from_name
+    from_email
+    to_id
+    to_type
+    to_name
+    to_email
+    subject
+    content
+    attachment
+    create_date
+    request_id
+    notification
+  }
+}
