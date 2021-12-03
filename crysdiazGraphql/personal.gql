@@ -68,6 +68,7 @@ mutation UpdateAnthropometry(
   $brazo: String
   $cadera: String
   $muslo: String
+  $gemelo: String
 ) {
   updateAnthropometry(
     patient_id: $patient_id
@@ -85,6 +86,7 @@ mutation UpdateAnthropometry(
     brazo: $brazo
     cadera: $cadera
     muslo: $muslo
+    gemelo: $gemelo
   )
 }
 

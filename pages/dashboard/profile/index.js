@@ -116,7 +116,7 @@ const Profile = () => {
     arm: '', // brazo
     hips: '', // cadera cm
     thigh: '', // muslo cm
-    // twin: '', //
+    twin: '', // gemelo
   })
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
@@ -142,7 +142,7 @@ const Profile = () => {
     arm: [], // brazo
     hips: [], // cadera cm
     thigh: [], // muslo cm
-    // twin: [], //
+    twin: [], // gemelo
   })
 
   const healthItemList = [
@@ -160,6 +160,7 @@ const Profile = () => {
     { name: 'brazo', key: 'arm' },
     { name: 'cadera', key: 'hips' },
     { name: 'muslo', key: 'thigh' },
+    { name: 'gemelo', key: 'twin' },
   ]
 
   // handlers
@@ -284,7 +285,13 @@ const Profile = () => {
       let _monthData = []
       ;[...Array(12)].forEach((_, i) => {
         let newArr = []
-        newArr.push(_graphicInfo.arm[i], _graphicInfo.waist[i], _graphicInfo.hips[i], _graphicInfo.thigh[i])
+        newArr.push(
+          _graphicInfo.arm[i],
+          _graphicInfo.waist[i],
+          _graphicInfo.hips[i],
+          _graphicInfo.thigh[i],
+          _graphicInfo.twin[i]
+        )
         _monthData.push(newArr)
       })
       setMonthData(_monthData)
@@ -424,6 +431,7 @@ const Profile = () => {
       brazo: healthInfo.arm.toString(), // brazo
       cadera: healthInfo.hips.toString(), // cadera cm
       muslo: healthInfo.thigh.toString(), // muslo cm
+      gemelo: healthInfo.twin.toString(), // gemelo
     }
 
     dispatch({ type: 'set', isLoading: true })
@@ -457,6 +465,7 @@ const Profile = () => {
       arm: '', // brazo
       hips: '', // cadera cm
       thigh: '', // muslo cm
+      twin: '', // gemelo cm
     })
   }
 

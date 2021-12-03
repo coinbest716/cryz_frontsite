@@ -140,7 +140,7 @@ const Graphic = props => {
         },
       },
       xaxis: {
-        categories: ['Brazo', 'Cintura', 'Cadera', 'Muslo'], // 'Muslo', 'Gemelo'
+        categories: ['Brazo', 'Cintura', 'Cadera', 'Muslo', 'Gemelo'], // 'Muslo', 'Gemelo'
         position: 'bottom',
         tooltip: {
           enabled: true,

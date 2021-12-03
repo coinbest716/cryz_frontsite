@@ -158,15 +158,15 @@ const Health = props => {
             type={'text'}
           />
         </div>
-        {/* <div className={'col-span-2 md:col-span-2 sm:col-span-4 xs:col-span-6'}>
+        <div className={'col-span-2 md:col-span-2 sm:col-span-4 xs:col-span-6'}>
           <CommonText
-          value={healthInfo.value}
+            value={healthInfo.twin}
             handleChange={e => handleChangeHealth(e, 'twin')}
             label={'Gemelo'}
             placeholder={''}
             type={'text'}
           />
-        </div> */}
+        </div>
       </div>
     </div>
   )
