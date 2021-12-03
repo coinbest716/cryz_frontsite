@@ -111,6 +111,7 @@ const Calendar = () => {
               events={events}
               locale={esLocale}
               ref={calendarComponentRef}
+              allDaySlot={false}
             />
           </div>
         </div>

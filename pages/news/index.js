@@ -40,7 +40,7 @@ const News = () => {
           <div className={'h-full'}>
             <div className={'h-1/3 flex items-center'}>
               <div>
-                <div className={styles.topTitle}>PROXIMAMENTE…</div>
+                <div className={styles.topTitle}>PRÓXIMAMENTE…</div>
                 <div className={styles.topDash + ' mt-4'} />
               </div>
             </div>
@@ -48,8 +48,7 @@ const News = () => {
               <div>
                 <Image src={news} alt="" />
                 <div className={styles.description}>
-                  Un espacio exclusivo donde poder consultar todas las novedades y ultimas <br /> publicaciones de Crys
-                  & Co
+                  Un espacio exclusivo dónde puedes consultar todas las novedades y últimas publicaciones de CrysDyaz&Co
                 </div>
               </div>
             </div>

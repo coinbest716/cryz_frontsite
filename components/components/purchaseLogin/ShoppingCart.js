@@ -12,9 +12,10 @@ import Radio from 'components/components/purchase/Radio'
 import styles from './ShoppingCart.module.scss'
 
 // images
-import close from 'public/images/close.svg'
 import down from 'public/images/down.svg'
 import up from 'public/images/up.svg'
+import plus from 'public/images/plus-gray.svg'
+import minus from 'public/images/minus-gray.svg'
 
 const ShoppingCart = props => {
   const { data, handleRemoveCart, handleAcceptDiscount, tabIndex } = props
@@ -51,12 +52,14 @@ const ShoppingCart = props => {
                 </div>
               </div>
               <div className="flex flex-col justify-between items-center">
-                <div className={'relative cursor-pointer ' + styles.badge}>
-                  <div className={'absoulte top-3 right-3 ' + styles.operater}>+</div>
+                <div className={'cursor-pointer flex justify-center items-center ' + styles.outOperater}>
+                  <Image src={plus} alt={''} width={10} height={10} />
                 </div>
-                <div className={styles.listDescription}>{item.orderCount}</div>
-                <div className={'relative cursor-pointer ' + styles.badge}>
-                  <div className={'absoulte top-3 right-3 ' + styles.operater}>-</div>
+                <div className={'cursor-pointer flex justify-center items-center my-2 ' + styles.outCounter}>
+                  <div className={styles.listDescription}>{item.orderCount}</div>
+                </div>
+                <div className={'cursor-pointer flex justify-center items-center ' + styles.outOperater}>
+                  <Image src={minus} alt={''} width={10} height={10} />
                 </div>
               </div>
             </div>

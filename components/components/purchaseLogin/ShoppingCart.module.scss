@@ -24,7 +24,7 @@
   text-align: center;
 }
 .operater {
-  color: #ffffff;
+  color: #7d8f8e;
   font-family: 'Avenir Next';
   font-size: 14px;
   font-weight: 600;
@@ -46,6 +46,19 @@
   font-family: Montserrat;
   font-size: 10px;
   letter-spacing: 0;
+}
+.outOperater {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid #7d8f8e;
+}
+.outCounter {
+  background-color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
 }
 .badge {
   height: 24px;

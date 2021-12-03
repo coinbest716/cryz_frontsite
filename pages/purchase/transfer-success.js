@@ -71,14 +71,18 @@ const TransferSuccess = () => {
                 </div>
               </div>
               <div className={'pt-10 ' + styles.description}>
-                Para agilizar el envio puede hacernos llegar el justificante de l transferencia indicando el número de
-                pedido. la siguiente dirección de email: administracion@crysdyazandco.com
+                Para agilizar tu envío, puede hacernos llegar el justificante de la transferencia indicando el número de
+                pedido a la siguiente dirección de email: administracion@crysdyazandco.com
                 <br /> <br />
-                Una vez recibido el justificante su pedido aparecerá en proceso.
+                Una vez recibida la justificación, se pondrá su pedido en proceso
               </div>
               <div className={'pt-10 font-bold ' + styles.detail}>Detalles bancarios</div>
               <div className={'mt-4 px-6 py-4 ' + styles.detailBank}>
                 <div className={'flex'}>
+                  <p className={'font-bold ' + styles.detail}>NOMBRE:</p>
+                  <p className={styles.detail}>&nbsp;&nbsp;&nbsp;CRODY SALUD</p>
+                </div>
+                <div className={'flex pt-3'}>
                   <p className={'font-bold ' + styles.detail}>BANCO:</p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;LA CAIXA</p>
                 </div>
