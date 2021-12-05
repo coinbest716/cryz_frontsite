@@ -25,7 +25,7 @@ import { GetAcademy, GetAcademyById } from './academy.gql'
 
 // dashboard part
 // message part
-import { GetUsersByPatient, GetPatientMessageById } from './dashboard/message.gql'
+import { GetUserForMessage, GetUsersByPatient, GetPatientMessageById } from './dashboard/message.gql'
 
 export default {
   queries: {
@@ -63,6 +63,7 @@ export default {
     // dashboard part
     // message part
     getUsersByPatient: GetUsersByPatient,
+    getUserForMessage: GetUserForMessage,
     getPatientMessageById: GetPatientMessageById,
   },
   mutations: {

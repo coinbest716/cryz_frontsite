@@ -7,9 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
-// next components
-import Image from 'next/image'
-
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 // import Profile from 'components/components/dashboard/Profile'
@@ -24,10 +21,6 @@ import MessageInput from 'components/components/dashboard/message/MessageInput'
 import ProfessionalCard from 'components/components/dashboard/message/ProfessionalCard'
 import SubjectCard from 'components/components/dashboard/message/SubjectCard'
 import MessageSelectCard from 'components/components/dashboard/message/MessageSelectCard'
-
-// images
-import PlusIcon from 'assets/images/plus.svg'
-import TrashIcon from 'assets/images/trash.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -55,9 +48,9 @@ const Message = () => {
   // loading part end #######################
 
   // variables
-  const [usersByPatient, setUsersByPatient] = useState('')
-  const [getUsersByPatient, { data: usersByPatientData, loading: usersByPatientLoading, error: usersByPatientError }] =
-    useLazyQuery(graphql.queries.getUsersByPatient)
+  const [userForMessage, setUserForMessage] = useState('')
+  const [getUserForMessage, { data: userForMessageData, loading: userForMessageLoading, error: userForMessageError }] =
+    useLazyQuery(graphql.queries.getUserForMessage)
 
   const messageContent = {
     content: 'Sayang, besok kamu ada acara keluar ga?',
@@ -77,14 +70,14 @@ const Message = () => {
 
   // handlers
   useEffect(() => {
-    getUsersByPatient()
-  }, [getUsersByPatient])
+    getUserForMessage()
+  }, [getUserForMessage])
 
   useEffect(() => {
-    if (!usersByPatientError && usersByPatientData && usersByPatientData.UsersByPatient) {
-      setUsersByPatient(usersByPatientData.UsersByPatient)
+    if (!userForMessageError && userForMessageData && userForMessageData.getUserForMessage) {
+      setUserForMessage(userForMessageData.getUserForMessage)
     }
-  }, [usersByPatientLoading, usersByPatientData, usersByPatientError])
+  }, [userForMessageLoading, userForMessageData, userForMessageError])
 
   const handleSendMessage = (content, type) => {
     switch (type) {
@@ -119,7 +112,7 @@ const Message = () => {
           {/* professional area */}
           <div className={styles.professionalArea}>
             <ProfessionalCard
-              data={usersByPatient}
+              data={userForMessage}
               dropdownButtonHover={dropdownButtonHover}
               onClickButton={bool => setDropdownButtonHover(bool)}
             />
@@ -127,8 +120,8 @@ const Message = () => {
           {/* dropdown menu part */}
           {dropdownButtonHover ? (
             <div className={styles.dropMenuArea} onClick={() => setDropdownButtonHover(false)}>
-              {usersByPatient !== '' ? (
-                usersByPatient.map((item, index) => {
+              {userForMessage !== '' ? (
+                userForMessage.map((item, index) => {
                   return (
                     <div key={index} className={styles.dropMenuItemArea}>
                       {item.name}
