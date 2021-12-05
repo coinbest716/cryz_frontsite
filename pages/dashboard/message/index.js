@@ -48,9 +48,14 @@ const Message = () => {
   // loading part end #######################
 
   // variables
-  const [userForMessage, setUserForMessage] = useState('')
+  const [userForMessage, setUserForMessage] = useState([])
+  const [patientMessageById, setPatientMessageById] = useState([])
   const [getUserForMessage, { data: userForMessageData, loading: userForMessageLoading, error: userForMessageError }] =
     useLazyQuery(graphql.queries.getUserForMessage)
+  const [
+    getPatientMessageById,
+    { data: patientMessageByIdData, loading: patientMessageByIdLoading, error: patientMessageByIdError },
+  ] = useLazyQuery(graphql.queries.getPatientMessageById)
 
   const messageContent = {
     content: 'Sayang, besok kamu ada acara keluar ga?',
@@ -67,6 +72,7 @@ const Message = () => {
   const [messageInput, setMessageInput] = useState('')
 
   const [dropdownButtonHover, setDropdownButtonHover] = useState(false)
+  const [selectedPatientID, setSelectedPatientID] = useState(0)
 
   // handlers
   useEffect(() => {
@@ -74,10 +80,22 @@ const Message = () => {
   }, [getUserForMessage])
 
   useEffect(() => {
+    getPatientMessageById({
+      variables: { patient_id: selectedPatientID },
+    })
+  }, [getPatientMessageById, selectedPatientID])
+
+  useEffect(() => {
     if (!userForMessageError && userForMessageData && userForMessageData.getUserForMessage) {
       setUserForMessage(userForMessageData.getUserForMessage)
     }
   }, [userForMessageLoading, userForMessageData, userForMessageError])
+
+  useEffect(() => {
+    if (!patientMessageByIdError && patientMessageByIdData && patientMessageByIdData.getPatientMessageById) {
+      setPatientMessageById(patientMessageByIdData.getPatientMessageById)
+    }
+  }, [patientMessageByIdLoading, patientMessageByIdData, patientMessageByIdError])
 
   const handleSendMessage = (content, type) => {
     switch (type) {
@@ -120,10 +138,10 @@ const Message = () => {
           {/* dropdown menu part */}
           {dropdownButtonHover ? (
             <div className={styles.dropMenuArea} onClick={() => setDropdownButtonHover(false)}>
-              {userForMessage !== '' ? (
+              {userForMessage.length !== 0 ? (
                 userForMessage.map((item, index) => {
                   return (
-                    <div key={index} className={styles.dropMenuItemArea}>
+                    <div key={index} className={styles.dropMenuItemArea} onClick={() => setSelectedPatientID(item.id)}>
                       {item.name}
                     </div>
                   )
