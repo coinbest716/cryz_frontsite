@@ -34,3 +34,12 @@ query GetPatientMessageById {
     notification
   }
 }
+
+query GetUserForMessage {
+  getUserForMessage {
+    id
+    name
+    lastname
+    email
+  }
+}
