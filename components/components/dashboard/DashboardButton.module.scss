@@ -119,9 +119,6 @@
   width: 20px;
   height: 20px;
   border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .plusLetter {
   color: white;
@@ -139,17 +136,5 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #c4c4c4;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.plusRoundLetter {
-  color: #c4c4c4;
-  font-size: 15px;
-}
-.minusRoundLetter {
-  color: #c4c4c4;
-  font-size: 15px;
+  border: 2px solid #818e8e;
 }
