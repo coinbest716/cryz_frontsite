@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 
 // next components
 import Image from 'next/image'
@@ -9,6 +9,7 @@ import styles from 'components/components/dashboard/message/MessageInput.module.
 // images
 import SendIcon from 'assets/images/send.svg'
 
+import CloseIcon from 'assets/images/close-gray.svg'
 import SmileIcon from 'assets/images/smile.svg'
 import AttachIcon from 'assets/images/attach.svg'
 import SendWhiteIcon from 'assets/images/send-white.svg'
@@ -16,6 +17,8 @@ import SendWhiteIcon from 'assets/images/send-white.svg'
 const MessageInput = props => {
   const { message, sendMessage } = props
   const [content, setContent] = useState('')
+  const fileRef = createRef()
+  const [attachedFile, setAttachedFile] = useState({})
 
   useEffect(() => {
     setContent(message)
@@ -23,6 +26,20 @@ const MessageInput = props => {
 
   const handleSetContent = event => {
     setContent(event.target.value)
+  }
+
+  // handlers
+  const handleAttachFile = event => {
+    console.log(event.target.files[0])
+    setAttachedFile(event.target.files[0])
+  }
+
+  const onClickAttachFile = () => {
+    fileRef.current.click()
+  }
+
+  const onClickRemoveFile = () => {
+    setAttachedFile({})
   }
 
   return (
@@ -50,20 +67,41 @@ const MessageInput = props => {
         </div>
       </div>
       {/* icon part */}
-      <div className={'w-full flex justify-end items-center mt-4'}>
-        <button className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}>
-          <Image src={SmileIcon} alt={''} width={21} height={21} />
-        </button>
-        <button className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}>
-          <Image src={AttachIcon} alt={''} width={21} height={21} />
-        </button>
-        <div className={'ml-4'}>
-          <button className={styles.enterButton}>
-            <div className={'flex items-center mr-3'}>
-              <Image src={SendWhiteIcon} alt={''} width={16} height={16} />
-            </div>
-            Enviar
+      <div className={'w-full flex justify-between items-center mt-4'}>
+        {/* attached file part */}
+        <div className={'w-full flex justify-start items-center'}>
+          <div>{attachedFile.name}</div>
+          {attachedFile.name !== undefined ? (
+            <button
+              className={'duration-200 hover:bg-gray-300 rounded-full p-2 flex justify-center items-center ml-3'}
+              onClick={() => onClickRemoveFile()}
+            >
+              <Image src={CloseIcon} alt={''} width={14} height={14} />
+            </button>
+          ) : (
+            <></>
+          )}
+        </div>
+
+        <div className={'w-full flex justify-end'}>
+          <button className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}>
+            <Image src={SmileIcon} alt={''} width={21} height={21} />
           </button>
+          <button
+            className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
+            onClick={onClickAttachFile}
+          >
+            <Image src={AttachIcon} alt={''} width={21} height={21} />
+          </button>
+          <input className={'hidden'} type="file" id="img_frontr" onChange={handleAttachFile} ref={fileRef} />
+          <div className={'ml-4'}>
+            <button className={styles.enterButton}>
+              <div className={'flex items-center mr-3'}>
+                <Image src={SendWhiteIcon} alt={''} width={16} height={16} />
+              </div>
+              Enviar
+            </button>
+          </div>
         </div>
       </div>
     </div>
