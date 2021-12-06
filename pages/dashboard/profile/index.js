@@ -165,24 +165,11 @@ const Profile = () => {
 
   // handlers
   useEffect(() => {
-    let _email = ''
-    Auth.currentAuthenticatedUser()
-      .then(response => {
-        if (response?.attributes?.email) {
-          _email = response.attributes.email
-          const _personalInfo = { ...personalInfo, email: _email }
-          setPersonalInfo(_personalInfo)
-          setEmail(_email)
-          getPatientByEmail({
-            variables: {
-              email: _email,
-            },
-          })
-        }
-      })
-      .catch(error => {
-        toast.error(error.message)
-      })
+    getPatientByEmail({
+      variables: {
+        email: localStorage.getItem('email'),
+      },
+    })
     if (activeTab.health) {
       if (personalInfo.id > 0) {
         getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
