@@ -81,5 +81,7 @@ mutation UpdatePatientBillByDashboard(
 }
 
 mutation DeletePatientBillByDashboard($id: Int!) {
-  deletePatientBillByDashboard(id: $id)
+  deletePatientBillByDashboard(id: $id) {
+    id
+  }
 }

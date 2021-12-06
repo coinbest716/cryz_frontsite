@@ -168,7 +168,7 @@ const Billing = () => {
         variables: variables,
       })
         .then(response => {
-          if (response.data.createPatientBillByDashboard) {
+          if (response.data.deletePatientBillByDashboard) {
             toast.success('Successfully save bill information!')
             getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
           }
