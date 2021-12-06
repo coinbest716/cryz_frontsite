@@ -11,6 +11,8 @@ import DashboardButton from 'components/components/dashboard/DashboardButton'
 import CommonText from 'components/components/purchase/CommonText'
 import CommonButton from 'components/components/purchase/CommonButton'
 
+import { useMutation, useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 // styles
 import styles from './billing.module.scss'
 
@@ -35,6 +37,8 @@ const Billing = () => {
   // loading part end #######################
 
   // variables
+  const [createPatientBillByDashboard] = useMutation(graphql.mutations.createPatientBillByDashboard)
+
   const today = useSelector(state => state.today)
   const addressInfo = {
     name: '',
