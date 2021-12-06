@@ -1,83 +1,85 @@
-query GetPatientBillByDashboard($email: String) {
-  getPatientBillByDashboard(email: $email)
+query GetPatientBillByDashboard($patient_id: Int) {
+  getPatientBillByDashboard(patient_id: $patient_id) {
+    id
+    patient_id
+    cif
+    name
+    title
+    email
+    address
+    province
+    population
+    postal_code
+    country
+  }
 }
 
 mutation CreatePatientBillByDashboard(
-  $email: String
+  $patient_id: Int
+  $type: String
+  $title: String
   $name: String
-  $lastname: String
-  $dni: String
+  $cif: String
+  $email: String
   $mobile: String
-  $eg_number: String
-  $known_us: String
-  $avatar: Upload
-  $genre: String
-  $birth_date: Date
-  $bill_alias: String
-  $bill_name: String
-  $bill_address: String
-  $bill_province: String
-  $bill_town: String
-  $bill_postal_code: String
-  $bill_country: String
+  $address: String
+  $province: String
+  $population: String
+  $postal_code: String
+  $country: String
 ) {
   createPatientBillByDashboard(
-    email: $email
+    patient_id: $patient_id
+    type: $type
+    title: $title
     name: $name
-    lastname: $lastname
-    dni: $dni
+    cif: $cif
+    email: $email
     mobile: $mobile
-    eg_number: $eg_number
-    known_us: $known_us
-    avatar: $avatar
-    genre: $genre
-    birth_date: $birth_date
-    bill_alias: $bill_alias
-    bill_name: $bill_name
-    bill_address: $bill_address
-    bill_province: $bill_province
-    bill_town: $bill_town
-    bill_postal_code: $bill_postal_code
-    bill_country: $bill_country
+    address: $address
+    province: $province
+    population: $population
+    postal_code: $postal_code
+    country: $country
   ) {
     id
   }
 }
 
 mutation UpdatePatientBillByDashboard(
+  $id: Int
   $patient_id: Int
-  $grasa: String
-  $visceral: String
-  $osea: String
-  $imc: String
-  $agua: String
-  $muscular: String
-  $basal: String
-  $edad: String
-  $peso: String
-  $altura: String
-  $cintura: String
-  $brazo: String
-  $cadera: String
-  $muslo: String
-  $gemelo: String
+  $type: String
+  $title: String
+  $name: String
+  $cif: String
+  $email: String
+  $mobile: String
+  $address: String
+  $province: String
+  $population: String
+  $postal_code: String
+  $country: String
 ) {
   updatePatientBillByDashboard(
+    id: $id
     patient_id: $patient_id
-    grasa: $grasa
-    visceral: $visceral
-    osea: $osea
-    imc: $imc
-    agua: $agua
-    muscular: $muscular
-    basal: $basal
-    edad: $edad
-    peso: $peso
-    altura: $altura
-    cintura: $cintura
-    brazo: $brazo
-    cadera: $cadera
-    muslo: $muslo
-    gemelo: $gemelo
-  )
+    type: $type
+    title: $title
+    name: $name
+    cif: $cif
+    email: $email
+    mobile: $mobile
+    address: $address
+    province: $province
+    population: $population
+    postal_code: $postal_code
+    country: $country
+  ) {
+    id
+  }
+}
+
+mutation DeletePatientBillByDashboard($id: Int!) {
+  deletePatientBillByDashboard(id: $id)
 }

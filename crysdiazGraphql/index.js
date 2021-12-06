@@ -23,7 +23,12 @@ import {
   GetAnthroDetailDataByDashboard,
 } from './personal.gql'
 import { GetAcademy, GetAcademyById } from './academy.gql'
-import { GetPatientBillByDashboard, CreatePatientBillByDashboard, UpdatePatientBillByDashboard } from './billing.gql'
+import {
+  GetPatientBillByDashboard,
+  CreatePatientBillByDashboard,
+  UpdatePatientBillByDashboard,
+  DeletePatientBillByDashboard,
+} from './billing.gql'
 
 // dashboard part
 // message part
@@ -77,5 +82,6 @@ export default {
     updateAnthropometry: UpdateAnthropometry,
     createPatientBillByDashboard: CreatePatientBillByDashboard,
     updatePatientBillByDashboard: UpdatePatientBillByDashboard,
+    deletePatientBillByDashboard: DeletePatientBillByDashboard,
   },
 }

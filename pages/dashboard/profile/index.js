@@ -23,7 +23,6 @@ import graphql from 'crysdiazGraphql'
 import toast from 'react-hot-toast'
 import Modal from 'react-modal'
 import CloseIcon from 'public/images/close.svg'
-import { Auth } from 'aws-amplify'
 
 const customStyles = {
   content: {
