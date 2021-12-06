@@ -11,6 +11,9 @@ import DashboardButton from 'components/components/dashboard/DashboardButton'
 import CommonText from 'components/components/purchase/CommonText'
 import CommonButton from 'components/components/purchase/CommonButton'
 
+import { useMutation, useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+import toast from 'react-hot-toast'
 // styles
 import styles from './billing.module.scss'
 
@@ -35,8 +38,16 @@ const Billing = () => {
   // loading part end #######################
 
   // variables
+  const [getPatientBillByDashboard, { data: billData, loading: billLoading, error: billError }] = useLazyQuery(
+    graphql.queries.getPatientBillByDashboard
+  )
+  const [createPatientBillByDashboard] = useMutation(graphql.mutations.createPatientBillByDashboard)
+  const [updatePatientBillByDashboard] = useMutation(graphql.mutations.updatePatientBillByDashboard)
+  const [deletePatientBillByDashboard] = useMutation(graphql.mutations.deletePatientBillByDashboard)
+
   const today = useSelector(state => state.today)
-  const addressInfo = {
+  const billItem = {
+    id: -1,
     name: '',
     surname: '',
     cif: '',
@@ -47,38 +58,136 @@ const Billing = () => {
     province: '',
     country: '',
     postalCode: '',
-    collapse: true,
+    collapse: false,
   }
-  const [addressDataList, setAddressDataList] = useState([])
+  const [billDataList, setBillDataList] = useState([])
 
   // handlers
   useEffect(() => {
-    setAddressDataList(BillingData)
+    getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
   }, [])
 
+  useEffect(() => {
+    if (!billError && billData && billData.getPatientBillByDashboard) {
+      let _billDataList = []
+      const billInfo = billData.getPatientBillByDashboard
+      billInfo.map(item => {
+        const _name = item.name.split(' ')
+        const _billItem = {
+          id: item.id,
+          name: _name[0],
+          surname: _name[1],
+          cif: item.cif,
+          addressAlias: item.title,
+          email: item.email,
+          population: item.population,
+          address: item.address,
+          province: item.province,
+          country: item.country,
+          postalCode: item.postal_code,
+          collapse: true,
+        }
+        _billDataList.push(_billItem)
+      })
+      setBillDataList(_billDataList)
+    }
+  }, [billLoading, billData, billError])
+
   const handleAddAddress = () => {
-    console.log('handleAddAddress')
-    let _addressDataList = [...addressDataList]
-    _addressDataList.push(addressInfo)
-    setAddressDataList(_addressDataList)
+    let _billDataList = [...billDataList]
+    _billDataList.push(billItem)
+    setBillDataList(_billDataList)
   }
   const handleChangeAddress = (event, key, index) => {
-    let newArr = [...addressDataList]
+    let newArr = [...billDataList]
     newArr[index][key] = event.target.value
-    setAddressDataList(newArr)
+    setBillDataList(newArr)
   }
+
   const handleSaveAddress = index => {
     console.log('handleSaveAddress', index)
+    const data = billDataList[index]
+    if (data.name === '' || data.cif === '') {
+      toast.error('Please input data!')
+      return
+    }
+    dispatch({ type: 'set', isLoading: true })
+    const variables = {
+      patient_id: Number(localStorage.getItem('patient_id')),
+      type: 'bill',
+      title: data.addressAlias,
+      name: data.name + ' ' + data.surname,
+      cif: data.cif,
+      email: data.email,
+      mobile: '',
+      address: data.address,
+      province: data.province,
+      population: data.population,
+      postal_code: data.postalCode,
+      country: data.country,
+    }
+    if (data.id > -1) {
+      updatePatientBillByDashboard({
+        variables: { variables, id: data.id },
+      })
+        .then(response => {
+          if (response.data.updatePatientBillByDashboard) {
+            toast.success('Successfully save bill information!')
+            getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+          }
+          dispatch({ type: 'set', isLoading: false })
+        })
+        .catch(error => {
+          dispatch({ type: 'set', isLoading: false })
+          toast.error(error.message)
+        })
+    } else {
+      createPatientBillByDashboard({
+        variables: variables,
+      })
+        .then(response => {
+          if (response.data.createPatientBillByDashboard) {
+            toast.success('Successfully save bill information!')
+            getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+          }
+          dispatch({ type: 'set', isLoading: false })
+        })
+        .catch(error => {
+          dispatch({ type: 'set', isLoading: false })
+          toast.error(error.message)
+        })
+    }
   }
   const handleDeleteAddress = index => {
-    let newArr = [...addressDataList]
-    newArr.splice(index, 1)
-    setAddressDataList(newArr)
+    const data = billDataList[index]
+    const variables = {
+      id: data.id,
+    }
+    if (data.id > -1) {
+      deletePatientBillByDashboard({
+        variables: variables,
+      })
+        .then(response => {
+          if (response.data.deletePatientBillByDashboard) {
+            toast.success('Successfully save bill information!')
+            getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+          }
+          dispatch({ type: 'set', isLoading: false })
+        })
+        .catch(error => {
+          dispatch({ type: 'set', isLoading: false })
+          toast.error(error.message)
+        })
+    } else {
+      let newArr = [...billDataList]
+      newArr.splice(index, 1)
+      setBillDataList(newArr)
+    }
   }
   const handlePlusCollapse = index => {
-    let newArr = [...addressDataList]
+    let newArr = [...billDataList]
     newArr[index].collapse = !newArr[index].collapse
-    setAddressDataList(newArr)
+    setBillDataList(newArr)
   }
 
   return (
@@ -96,7 +205,7 @@ const Billing = () => {
       <div className={'pt-12'}>
         <DashboardButton handleClick={handleAddAddress} label={'Añadir dirección'} type={'addBilling'} />
       </div>
-      {addressDataList.map((item, index) => (
+      {billDataList.map((item, index) => (
         <div className={'px-16 py-10 mt-6 ' + styles.AddressSection} key={index}>
           <div className={'flex justify-between items-center'}>
             <div className={'py-2'}>

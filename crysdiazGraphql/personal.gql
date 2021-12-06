@@ -1,3 +1,7 @@
+query GetPatientIdByDashboard($email: String) {
+  getPatientIdByDashboard(email: $email)
+}
+
 query GetPatientByEmail($email: String) {
   getPatientByEmail(email: $email)
 }

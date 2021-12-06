@@ -14,6 +14,7 @@ import {
 } from './services.gql'
 import { GetContactInfo, GetUser, CreateUser } from './crysdiaz.gql'
 import {
+  GetPatientIdByDashboard,
   GetPatientByEmail,
   GetAnthropmetryByDashboard,
   UpdatePatientByDashboard,
@@ -22,6 +23,12 @@ import {
   GetAnthroDetailDataByDashboard,
 } from './personal.gql'
 import { GetAcademy, GetAcademyById } from './academy.gql'
+import {
+  GetPatientBillByDashboard,
+  CreatePatientBillByDashboard,
+  UpdatePatientBillByDashboard,
+  DeletePatientBillByDashboard,
+} from './billing.gql'
 
 // dashboard part
 // message part
@@ -56,10 +63,12 @@ export default {
     // other part
     getUser: GetUser,
     // profile part
+    getPatientIdByDashboard: GetPatientIdByDashboard,
     getPatientByEmail: GetPatientByEmail,
     getAnthropmetryByDashboard: GetAnthropmetryByDashboard,
     getAnthroDetailDataByDashboard: GetAnthroDetailDataByDashboard,
-
+    // billing part
+    getPatientBillByDashboard: GetPatientBillByDashboard,
     // dashboard part
     // message part
     getUsersByPatient: GetUsersByPatient,
@@ -71,5 +80,8 @@ export default {
     updatePatientByDashboard: UpdatePatientByDashboard,
     deletePatientByDashboard: DeletePatientByDashboard,
     updateAnthropometry: UpdateAnthropometry,
+    createPatientBillByDashboard: CreatePatientBillByDashboard,
+    updatePatientBillByDashboard: UpdatePatientBillByDashboard,
+    deletePatientBillByDashboard: DeletePatientBillByDashboard,
   },
 }

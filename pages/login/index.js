@@ -18,8 +18,6 @@ import EyeCrossIcon from 'assets/images/eye-cross.svg'
 import EyeIcon from 'assets/images/eye.svg'
 
 import toast from 'react-hot-toast'
-import { useMutation, useLazyQuery } from '@apollo/client'
-import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
 import ReactLoading from 'react-loading'
@@ -35,9 +33,6 @@ const Login = () => {
 
   const [showPass, setShowPass] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
-  const [getUserInfo, { data: userData, loading: userLoading, error: userError }] = useLazyQuery(
-    graphql.queries.getUser
-  )
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
@@ -55,18 +50,6 @@ const Login = () => {
       router.push('/dashboard')
     }
   }, [isAuthenticated])
-
-  useEffect(() => {
-    if (!userError && userData && userData.getUser) {
-      console.log('getUser = ', userData)
-      if (userData.getUser) {
-        toast.success('You login successfuly!')
-        router.push('/dashboard')
-      } else {
-        toast.error('You failed to login!')
-      }
-    }
-  }, [userLoading, userData, userError]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChangeEmail = event => {
     setEmail(event.target.value)
@@ -96,10 +79,11 @@ const Login = () => {
           localStorage.setItem('password', password)
           localStorage.setItem('remember', rememberMe)
         } else {
-          localStorage.setItem('email', '')
+          // localStorage.setItem('email', '')
           localStorage.setItem('password', '')
           localStorage.setItem('remember', rememberMe)
         }
+        localStorage.setItem('email', email)
         if (response.challengeName !== 'NEW_PASSWORD_REQUIRED') {
           toast.success('Successfully Logged in')
           router.push('/dashboard')
@@ -109,8 +93,6 @@ const Login = () => {
         setProgressStatus(false)
         toast.error(error.message)
       })
-    // getUserInfo()
-    // router.push('/dashboard')
   }
 
   const handleUpdatePassword = async () => {

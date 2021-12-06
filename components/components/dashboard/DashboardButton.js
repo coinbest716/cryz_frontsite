@@ -2,7 +2,9 @@ import React from 'react'
 
 // next components
 import Image from 'next/image'
-
+import plus from 'public/images/plus-gray.svg'
+import plusWhite from 'public/images/plus-white.svg'
+import minus from 'public/images/minus-gray.svg'
 // styles
 import styles from './DashboardButton.module.scss'
 
@@ -71,20 +73,26 @@ const DashboardButton = props => {
       )}
       {type === 'addBilling' && (
         <button className={'flex justify-around items-center ' + styles.addBilling} onClick={handleClick}>
-          <div className={styles.plusSection}>
-            <div className={styles.plusLetter}>+</div>
+          <div className={'cursor-pointer flex justify-center items-center ' + styles.plusSection}>
+            <Image src={plusWhite} alt={''} width={10} height={10} />
           </div>
           <p className={'pr-3 ' + styles.plusLabel}>{label}</p>
         </button>
       )}
       {type === 'plusCollapse' && (
-        <button className={styles.plusRoundSection} onClick={handleClick}>
-          <div className={styles.plusRoundLetter}>+</div>
+        <button
+          className={'cursor-pointer flex justify-center items-center ' + styles.plusRoundSection}
+          onClick={handleClick}
+        >
+          <Image src={plus} alt={''} width={10} height={10} />
         </button>
       )}
       {type === 'minusCollapse' && (
-        <button className={styles.plusRoundSection} onClick={handleClick}>
-          <div className={styles.minusRoundLetter}>-</div>
+        <button
+          className={'cursor-pointer flex justify-center items-center ' + styles.plusRoundSection}
+          onClick={handleClick}
+        >
+          <Image src={minus} alt={''} width={10} height={10} />
         </button>
       )}
     </>

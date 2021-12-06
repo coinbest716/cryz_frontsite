@@ -1,0 +1,87 @@
+query GetPatientBillByDashboard($patient_id: Int) {
+  getPatientBillByDashboard(patient_id: $patient_id) {
+    id
+    patient_id
+    cif
+    name
+    title
+    email
+    address
+    province
+    population
+    postal_code
+    country
+  }
+}
+
+mutation CreatePatientBillByDashboard(
+  $patient_id: Int
+  $type: String
+  $title: String
+  $name: String
+  $cif: String
+  $email: String
+  $mobile: String
+  $address: String
+  $province: String
+  $population: String
+  $postal_code: String
+  $country: String
+) {
+  createPatientBillByDashboard(
+    patient_id: $patient_id
+    type: $type
+    title: $title
+    name: $name
+    cif: $cif
+    email: $email
+    mobile: $mobile
+    address: $address
+    province: $province
+    population: $population
+    postal_code: $postal_code
+    country: $country
+  ) {
+    id
+  }
+}
+
+mutation UpdatePatientBillByDashboard(
+  $id: Int
+  $patient_id: Int
+  $type: String
+  $title: String
+  $name: String
+  $cif: String
+  $email: String
+  $mobile: String
+  $address: String
+  $province: String
+  $population: String
+  $postal_code: String
+  $country: String
+) {
+  updatePatientBillByDashboard(
+    id: $id
+    patient_id: $patient_id
+    type: $type
+    title: $title
+    name: $name
+    cif: $cif
+    email: $email
+    mobile: $mobile
+    address: $address
+    province: $province
+    population: $population
+    postal_code: $postal_code
+    country: $country
+  ) {
+    id
+  }
+}
+
+mutation DeletePatientBillByDashboard($id: Int!) {
+  deletePatientBillByDashboard(id: $id) {
+    id
+  }
+}
