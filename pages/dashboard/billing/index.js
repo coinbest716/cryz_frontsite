@@ -128,7 +128,7 @@ const Billing = () => {
     }
     if (data.id > -1) {
       updatePatientBillByDashboard({
-        variables: { variables, id: data.id },
+        variables: { ...variables, id: data.id },
       })
         .then(response => {
           if (response.data.updatePatientBillByDashboard) {
@@ -169,7 +169,7 @@ const Billing = () => {
       })
         .then(response => {
           if (response.data.deletePatientBillByDashboard) {
-            toast.success('Successfully save bill information!')
+            toast.success('Successfully deleted bill information!')
             getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
           }
           dispatch({ type: 'set', isLoading: false })
