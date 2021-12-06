@@ -14,6 +14,7 @@ import {
 } from './services.gql'
 import { GetContactInfo, GetUser, CreateUser } from './crysdiaz.gql'
 import {
+  GetPatientIdByDashboard,
   GetPatientByEmail,
   GetAnthropmetryByDashboard,
   UpdatePatientByDashboard,
@@ -57,6 +58,7 @@ export default {
     // other part
     getUser: GetUser,
     // profile part
+    getPatientIdByDashboard: GetPatientIdByDashboard,
     getPatientByEmail: GetPatientByEmail,
     getAnthropmetryByDashboard: GetAnthropmetryByDashboard,
     getAnthroDetailDataByDashboard: GetAnthroDetailDataByDashboard,

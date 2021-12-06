@@ -26,6 +26,8 @@ import welcomeIcon from 'public/images/welcome-header.svg'
 import bonosIcon from 'public/images/bonos.svg'
 import noPendingIcon from 'public/images/no-pending.svg'
 
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 // json data
 import DashboardData from 'assets/data/DashboardData.json'
 import CalendarData from 'assets/data/CalendarData'
@@ -56,10 +58,11 @@ const Dashboard = () => {
   // loading part end #######################
 
   // variables
+  const [getPatientIdByDashboard, { data: personalData, loading: personalLoading, error: personalError }] =
+    useLazyQuery(graphql.queries.getPatientIdByDashboard)
   const [markDate, setMarkDate] = useState([])
   const [calendarValue, setCalendarValue] = useState(new Date())
   const today = useSelector(state => state.today)
-  const [value, onChange] = useState(new Date())
   const [message, setMessage] = useState([])
   const chartOptions = {
     series: [
@@ -108,7 +111,19 @@ const Dashboard = () => {
   // handlers
   useEffect(() => {
     setMessage(DashboardData)
+    getPatientIdByDashboard({
+      variables: {
+        email: localStorage.getItem('email'),
+      },
+    })
   }, [])
+
+  useEffect(() => {
+    if (!personalError && personalData && personalData.getPatientIdByDashboard) {
+      const patient_id = personalData.getPatientIdByDashboard
+      localStorage.setItem('patient_id', patient_id)
+    }
+  }, [personalLoading, personalData, personalError])
 
   const handleClickRmember = () => {
     console.log('handleClickRmember')

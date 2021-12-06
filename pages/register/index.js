@@ -20,6 +20,7 @@ import graphql from 'crysdiazGraphql'
 import ReactLoading from 'react-loading'
 
 const Register = () => {
+  const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
   const [progressStatus, setProgressStatus] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -30,7 +31,6 @@ const Register = () => {
 
   const [showPass, setShowPass] = useState(false)
   const [showRepeatPass, setShowRepeatPass] = useState(false)
-  const [createUser] = useMutation(graphql.mutations.createUser)
 
   const handleSetShowPass = bool => {
     setShowPass(bool)
@@ -58,11 +58,45 @@ const Register = () => {
     await Auth.confirmSignUp(email, verifyCode)
       .then(response => {
         console.log(response)
+        createPatient(email)
         toast.success('Successfully confirmed signed up')
         router.push('/login')
       })
       .catch(error => {
         toast.success(error.message)
+      })
+  }
+
+  const createPatient = async email => {
+    const variables = {
+      email: email,
+      name: '',
+      lastname: '',
+      dni: '',
+      mobile: '',
+      eg_number: '',
+      known_us: '',
+      avatar: '',
+      genre: '',
+      birth_date: '',
+      bill_alias: '',
+      bill_name: '',
+      bill_address: '',
+      bill_province: '',
+      bill_town: '',
+      bill_postal_code: '',
+      bill_country: '',
+    }
+    updatePatientByDashboard({
+      variables: variables,
+    })
+      .then(response => {
+        if (response.data.updatePatientByDashboard) {
+          console.log('updatePatientByDashboard')
+        }
+      })
+      .catch(error => {
+        console.log('error', error)
       })
   }
 
@@ -92,17 +126,6 @@ const Register = () => {
           toast.error(error.message)
         }
       })
-    // await createUser()
-    //   .then(response => {
-    //     console.log('register = ', response)
-    //     toast.success('You registered successfuly!')
-    //     router.push('/dashboard')
-    //   })
-    //   .catch(error => {
-    //     console.log('error signing up:', error)
-    //     toast.error('Server Error') // error.message
-    //   })
-    // router.push('/dashboard')
   }
 
   return (
