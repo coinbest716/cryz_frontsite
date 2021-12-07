@@ -12,6 +12,7 @@ import ReactPlayer from 'react-player'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
+import VideoChat from 'components/components/dashboard/Twilio/VideoChat'
 // import Profile from 'components/components/dashboard/Profile'
 
 // styles
@@ -55,7 +56,8 @@ const LiveStreaming = () => {
         <div className={'col-span-12 md:col-span-8 sm:col-span-12 pt-4'}>
           <div className={styles.title}>1 to 1 Streaming</div>
           <div className={'pt-14'}>
-            <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} />
+            {/* <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} /> */}
+            <VideoChat sessionId={event.id} />
           </div>
         </div>
         <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
