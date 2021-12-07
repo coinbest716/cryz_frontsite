@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="19px" height="20px" viewBox="0 0 19 20" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0L17 18" transform="translate(1 1)" id="Path" fill="none" fill-rule="evenodd" stroke="#818e8e" stroke-width="2" />
+  <path d="M0 18L17 0" transform="translate(1 1)" id="Path" fill="none" fill-rule="evenodd" stroke="#818e8e" stroke-width="2" />
+</svg>
