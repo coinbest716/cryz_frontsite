@@ -91,7 +91,7 @@ const Profile = () => {
     avatar: '',
     name: '',
     surname: '',
-    email: email || '',
+    email: email || localStorage.getItem('email'),
     password: '',
     meet: 'INSTAGRAM',
     telephone: '',
