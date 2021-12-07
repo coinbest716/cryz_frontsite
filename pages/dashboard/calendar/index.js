@@ -66,8 +66,11 @@ const Calendar = () => {
     let classInterval = setInterval(() => {
       const currentTime = moment(new Date())
       events.map(item => {
-        const eventTime = moment(item.start)
-        if (currentTime.diff(eventTime, 'minutes') >= 0 && currentTime.diff(eventTime, 'minutes') <= 5) {
+        const startTime = moment(item.start)
+        const endTime = moment(item.end)
+        const diffTime = startTime.diff(endTime, 'minutes')
+
+        if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
           setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
         } else {
           setStreamingEvent({ id: -1, start: '', toggle: false })
