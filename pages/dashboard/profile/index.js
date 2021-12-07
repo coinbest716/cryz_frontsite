@@ -72,7 +72,7 @@ const Profile = () => {
   const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
   const [updateAnthropometry] = useMutation(graphql.mutations.updateAnthropometry)
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(localStorage.getItem('email'))
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
   const [uploadFile, setUploadFile] = useState(null)
   const date = new Date()
