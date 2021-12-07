@@ -18,6 +18,7 @@ query GetUsersByPatient {
 
 query GetPatientMessageById($patient_id: Int) {
   getPatientMessageById(patient_id: $patient_id) {
+    id
     from_id
     from_type
     from_name
