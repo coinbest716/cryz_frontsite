@@ -67,9 +67,10 @@ const Calendar = () => {
       const currentTime = moment(new Date())
       events.map(item => {
         const eventTime = moment(item.start)
-        console.log('@@@@@@@@@@@@@@@ 2 : ', currentTime.diff(eventTime, 'minutes'))
-        if (currentTime.diff(eventTime, 'minutes') <= 5) {
+        if (currentTime.diff(eventTime, 'minutes') >= 0 && currentTime.diff(eventTime, 'minutes') <= 5) {
           setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
+        } else {
+          setStreamingEvent({ id: -1, start: '', toggle: false })
         }
       })
     }, 60000)
@@ -105,7 +106,10 @@ const Calendar = () => {
   }, [sessionLoading, sessionData, sessionError])
 
   const handleClickStartClass = () => {
-    router.push('/dashboard/live-streaming')
+    router.push({
+      pathname: '/dashboard/live-streaming',
+      query: { id: streamingEvent.id, start: streamingEvent.start },
+    })
   }
   const handleChangeDate = value => {
     setCalendarValue(value)

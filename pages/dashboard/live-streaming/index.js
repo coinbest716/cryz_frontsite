@@ -19,6 +19,7 @@ import styles from './LiveStreaming.module.scss'
 
 // json data
 import LiveStreamingData from 'assets/data/LiveStreamingData.json'
+import router from 'next/router'
 
 const LiveStreaming = () => {
   // loading part ###########################
@@ -38,9 +39,13 @@ const LiveStreaming = () => {
   // loading part end #######################
 
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
+  const [event, setEvent] = useState({ id: -1, start: '' })
   const [material, setMaterial] = useState([])
 
   useEffect(() => {
+    if (router.query.id && router.query.start) {
+      setEvent({ id: router.query.id, start: router.query.start })
+    }
     setMaterial(LiveStreamingData)
   }, [])
 
