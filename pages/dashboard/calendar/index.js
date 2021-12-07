@@ -26,8 +26,8 @@ import CheckBoxImage from 'components/components/dashboard/CheckBoxImage'
 // styles
 import styles from './calendar.module.scss'
 
-// json data
-import CalendarData from 'assets/data/CalendarData'
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const Calendar = () => {
   // loading part ###########################
@@ -46,18 +46,16 @@ const Calendar = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
+    graphql.queries.getSessionsByDashboard
+  )
   const calendarComponentRef = createRef()
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-    setEvents(CalendarData)
-    const _markDate = []
-    CalendarData.map(item => {
-      _markDate.push(moment(item.start).format('DD-MM-YYYY'))
-    })
-    setMarkDate(_markDate)
+    getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
 
     const eventDate = router.query.eventDate
     if (eventDate) {
@@ -66,6 +64,32 @@ const Calendar = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
+      console.log('@@@@@@@@@@@@@@@@@@@@@@@@', sessionData.getSessionsByDashboard)
+      const sessionArr = sessionData.getSessionsByDashboard
+      const _events = []
+      const _markDate = []
+      sessionArr.map(item => {
+        const _eventItem = {
+          id: item.id,
+          title: item.purchase.item_name,
+          start: item.start_time,
+          end: item.end_time,
+          backgroundColor: item.location.color,
+          textColor: '#ffffff',
+          label: item.location.name,
+          streaming: item.stream_event,
+        }
+        _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
+        _events.push(_eventItem)
+      })
+      console.log('@@@@@@@@@@@@@@@@@@@@@@@@', _events)
+      setEvents(_events)
+      setMarkDate(_markDate)
+    }
+  }, [sessionLoading, sessionData, sessionError])
 
   const handleClickStartClass = () => {
     router.push('/dashboard/live-streaming')
