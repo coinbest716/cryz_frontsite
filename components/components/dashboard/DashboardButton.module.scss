@@ -1,5 +1,9 @@
 @import 'styles/variable.module.scss';
 
+.outlineDisableButton {
+  border: 1.12px solid #818e8e;
+  border-radius: 10px;
+}
 .outlineButton {
   border: 1.12px solid #e30018;
   border-radius: 10px;
@@ -9,6 +13,14 @@
 }
 .outlineLabel {
   color: #e30018;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.outlineDisableLabel {
+  color: #818e8e;
   font-family: Montserrat;
   font-size: 12px;
   font-weight: bold;

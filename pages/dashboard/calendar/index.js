@@ -45,7 +45,8 @@ const Calendar = () => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
-
+  //variables
+  const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard
   )
@@ -62,12 +63,24 @@ const Calendar = () => {
       let calendarApi = calendarComponentRef.current.getApi()
       calendarApi.gotoDate(eventDate) // call a method on the Calendar object
     }
+    let classInterval = setInterval(() => {
+      const currentTime = moment(new Date())
+      events.map(item => {
+        const eventTime = moment(item.start)
+        console.log('@@@@@@@@@@@@@@@ 2 : ', currentTime.diff(eventTime, 'minutes'))
+        if (currentTime.diff(eventTime, 'minutes') <= 5) {
+          setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
+        }
+      })
+    }, 60000)
+    return () => {
+      clearInterval(classInterval)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@', sessionData.getSessionsByDashboard)
       const sessionArr = sessionData.getSessionsByDashboard
       const _events = []
       const _markDate = []
@@ -85,7 +98,7 @@ const Calendar = () => {
         _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
         _events.push(_eventItem)
       })
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@', _events)
+
       setEvents(_events)
       setMarkDate(_markDate)
     }
@@ -109,7 +122,12 @@ const Calendar = () => {
       <div className={'grid grid-cols-12 gap-12'}>
         <div className={'col-span-12 md:col-span-8 sm:col-span-12 flex justify-between'}>
           <div className={styles.highBoldLabel}>Calendario</div>
-          <DashboardButton handleClick={handleClickStartClass} label={'Comenzar clase'} type={'startClass'} />
+          <DashboardButton
+            handleClick={handleClickStartClass}
+            label={'Comenzar clase'}
+            type={'startClass'}
+            visiable={streamingEvent.toggle}
+          />
         </div>
         <div className={'col-span-12 md:col-span-4 sm:col-span-12 flex justify-between items-center'}>
           <NotificationButton />
