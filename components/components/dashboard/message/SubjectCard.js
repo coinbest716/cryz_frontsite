@@ -18,7 +18,7 @@ const SubjectCard = props => {
   today = yyyy + '-' + mm + '-' + dd
 
   return (
-    <div className={styles.container + (active === true ? styles.active : '')} onClick={() => onClick(data)}>
+    <div className={styles.container + ' ' + (active === true ? styles.active : '')} onClick={() => onClick(data)}>
       <div className={'flex justify-start'}>
         <div className={'relative mr-4 ' + styles.avatar}>
           {data?.from_name.split(' ')[0].slice(0, 1).toUpperCase()}
