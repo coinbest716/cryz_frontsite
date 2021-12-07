@@ -104,16 +104,18 @@ const Message = () => {
   }, [getUserForMessage, getPatientByEmail])
 
   useEffect(() => {
-    getPatientMessageById({
-      variables: { patient_id: patientId },
-    })
-  }, [getPatientMessageById, patientId])
-
-  useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
       setPatientId(personalData.getPatientByEmail.id)
     }
   }, [personalLoading, personalData, personalError])
+
+  useEffect(() => {
+    if (patientId !== 0) {
+      getPatientMessageById({
+        variables: { patient_id: patientId },
+      })
+    }
+  }, [getPatientMessageById, patientId])
 
   useEffect(() => {
     if (!userForMessageError && userForMessageData && userForMessageData.getUserForMessage) {
@@ -183,15 +185,8 @@ const Message = () => {
           {/* message area */}
           <div className={styles.subjectArea}>
             <PerfectScrollbar>
-              <SubjectCard />
-              <SubjectCard />
-              <SubjectCard />
-              <SubjectCard />
-              <SubjectCard />
-              <SubjectCard />
-              <SubjectCard />
-              <SubjectCard />
-              <SubjectCard />
+              {patientMessageById.length !== 0 &&
+                patientMessageById.map((item, index) => <SubjectCard data={item} key={index} />)}
             </PerfectScrollbar>
           </div>
         </div>
