@@ -26,8 +26,8 @@ import CheckBoxImage from 'components/components/dashboard/CheckBoxImage'
 // styles
 import styles from './calendar.module.scss'
 
-// json data
-import CalendarData from 'assets/data/CalendarData'
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const Calendar = () => {
   // loading part ###########################
@@ -45,30 +45,74 @@ const Calendar = () => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
-
+  //variables
+  const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
+  const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
+    graphql.queries.getSessionsByDashboard
+  )
   const calendarComponentRef = createRef()
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-    setEvents(CalendarData)
-    const _markDate = []
-    CalendarData.map(item => {
-      _markDate.push(moment(item.start).format('DD-MM-YYYY'))
-    })
-    setMarkDate(_markDate)
+    getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
 
     const eventDate = router.query.eventDate
     if (eventDate) {
       let calendarApi = calendarComponentRef.current.getApi()
       calendarApi.gotoDate(eventDate) // call a method on the Calendar object
     }
+    let classInterval = setInterval(() => {
+      const currentTime = moment(new Date())
+      events.map(item => {
+        const startTime = moment(item.start)
+        const endTime = moment(item.end)
+        const diffTime = startTime.diff(endTime, 'minutes')
+
+        if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
+          setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
+        } else {
+          setStreamingEvent({ id: -1, start: '', toggle: false })
+        }
+      })
+    }, 60000)
+    return () => {
+      clearInterval(classInterval)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
+      const sessionArr = sessionData.getSessionsByDashboard
+      const _events = []
+      const _markDate = []
+      sessionArr.map(item => {
+        const _eventItem = {
+          id: item.id,
+          title: item.purchase.item_name,
+          start: item.start_time,
+          end: item.end_time,
+          backgroundColor: item.location.color,
+          textColor: '#ffffff',
+          label: item.location.name,
+          streaming: item.stream_event,
+        }
+        _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
+        _events.push(_eventItem)
+      })
+
+      setEvents(_events)
+      setMarkDate(_markDate)
+    }
+  }, [sessionLoading, sessionData, sessionError])
+
   const handleClickStartClass = () => {
-    router.push('/dashboard/live-streaming')
+    router.push({
+      pathname: '/dashboard/live-streaming',
+      query: { id: streamingEvent.id, start: streamingEvent.start },
+    })
   }
   const handleChangeDate = value => {
     setCalendarValue(value)
@@ -85,7 +129,12 @@ const Calendar = () => {
       <div className={'grid grid-cols-12 gap-12'}>
         <div className={'col-span-12 md:col-span-8 sm:col-span-12 flex justify-between'}>
           <div className={styles.highBoldLabel}>Calendario</div>
-          <DashboardButton handleClick={handleClickStartClass} label={'Comenzar clase'} type={'startClass'} />
+          <DashboardButton
+            handleClick={handleClickStartClass}
+            label={'Comenzar clase'}
+            type={'startClass'}
+            visiable={streamingEvent.toggle}
+          />
         </div>
         <div className={'col-span-12 md:col-span-4 sm:col-span-12 flex justify-between items-center'}>
           <NotificationButton />

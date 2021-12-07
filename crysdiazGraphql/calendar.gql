@@ -1,0 +1,15 @@
+query GetSessionsByDashboard($patient_id: Int) {
+  getSessionsByDashboard(patient_id: $patient_id) {
+    id
+    start_time
+    end_time
+    location {
+      name
+      color
+    }
+    purchase {
+      item_name
+    }
+    stream_event
+  }
+}

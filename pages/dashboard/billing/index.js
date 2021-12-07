@@ -17,9 +17,6 @@ import toast from 'react-hot-toast'
 // styles
 import styles from './billing.module.scss'
 
-// json data
-import BillingData from 'assets/data/BillingData'
-
 const Billing = () => {
   // loading part ###########################
   const dispatch = useDispatch()
