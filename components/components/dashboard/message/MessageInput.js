@@ -20,10 +20,6 @@ const MessageInput = props => {
   const fileRef = createRef()
   const [attachedFile, setAttachedFile] = useState({})
 
-  useEffect(() => {
-    setContent(message)
-  }, [message])
-
   const handleSetContent = event => {
     setContent(event.target.value)
   }
@@ -42,12 +38,19 @@ const MessageInput = props => {
     setAttachedFile({})
   }
 
+  const onKeyPress = event => {
+    if (event.shiftKey === false && event.key === 'Enter') {
+      setContent('')
+      sendMessage(content, 'text')
+    }
+  }
+
   return (
     <div className={styles.container}>
       {/* input part */}
       <div className={'w-full flex bg-white'}>
         <div className={styles.inputArea}>
-          <input
+          <textarea
             type={'text'}
             value={content}
             placeholder={'Escribe tu mensaje'}
@@ -55,6 +58,7 @@ const MessageInput = props => {
             className={
               'appearance-none bg-white border-none w-full leading-tight focus:outline-none focus ' + styles.input
             }
+            onKeyPress={event => onKeyPress(event)}
           />
         </div>
         <div className={styles.iconArea}>

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 // third party components
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import toast from 'react-hot-toast'
+import { Auth } from 'aws-amplify'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -29,6 +31,7 @@ import styles from './message.module.scss'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import router from 'next/router'
 
 const Message = () => {
   // loading part ###########################
@@ -48,8 +51,14 @@ const Message = () => {
   // loading part end #######################
 
   // variables
+  const [patientId, setPatientId] = useState(0)
+  const today = useSelector(state => state.today)
   const [userForMessage, setUserForMessage] = useState([])
   const [patientMessageById, setPatientMessageById] = useState([])
+
+  const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
+    graphql.queries.getPatientByEmail
+  )
   const [getUserForMessage, { data: userForMessageData, loading: userForMessageLoading, error: userForMessageError }] =
     useLazyQuery(graphql.queries.getUserForMessage)
   const [
@@ -72,18 +81,39 @@ const Message = () => {
   const [messageInput, setMessageInput] = useState('')
 
   const [dropdownButtonHover, setDropdownButtonHover] = useState(false)
-  const [selectedPatientID, setSelectedPatientID] = useState(0)
+
+  const [selectedUserID, setSelectedUserID] = useState(0)
 
   // handlers
   useEffect(() => {
     getUserForMessage()
-  }, [getUserForMessage])
+    Auth.currentAuthenticatedUser()
+      .then(response => {
+        if (response?.attributes?.email) {
+          getPatientByEmail({
+            variables: {
+              email: response.attributes.email,
+            },
+          })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+        router.push('/')
+      })
+  }, [getUserForMessage, getPatientByEmail])
 
   useEffect(() => {
     getPatientMessageById({
-      variables: { patient_id: selectedPatientID },
+      variables: { patient_id: patientId },
     })
-  }, [getPatientMessageById, selectedPatientID])
+  }, [getPatientMessageById, patientId])
+
+  useEffect(() => {
+    if (!personalError && personalData && personalData.getPatientByEmail) {
+      setPatientId(personalData.getPatientByEmail.id)
+    }
+  }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (!userForMessageError && userForMessageData && userForMessageData.getUserForMessage) {
@@ -105,11 +135,7 @@ const Message = () => {
       default:
         break
     }
-    console.log(content)
-    console.log(type)
   }
-
-  const today = useSelector(state => state.today)
 
   return (
     <div className={globalStyles.dashContainer}>
@@ -141,7 +167,7 @@ const Message = () => {
               {userForMessage.length !== 0 ? (
                 userForMessage.map((item, index) => {
                   return (
-                    <div key={index} className={styles.dropMenuItemArea} onClick={() => setSelectedPatientID(item.id)}>
+                    <div key={index} className={styles.dropMenuItemArea} onClick={() => setSelectedUserID(item.id)}>
                       {item.name}
                     </div>
                   )
