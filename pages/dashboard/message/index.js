@@ -51,16 +51,18 @@ const Message = () => {
   // loading part end #######################
 
   // variables
-  const [patientId, setPatientId] = useState(0)
+  const [currentPatientId, setCurrentPatientId] = useState({})
   const today = useSelector(state => state.today)
-  const [userForMessage, setUserForMessage] = useState([])
+  const [userList, setUserForMessage] = useState([])
+  const [selectedUser, setSelectedUser] = useState({})
   const [patientMessageById, setPatientMessageById] = useState([])
 
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
   )
-  const [getUserForMessage, { data: userForMessageData, loading: userForMessageLoading, error: userForMessageError }] =
-    useLazyQuery(graphql.queries.getUserForMessage)
+  const [getUserForMessage, { data: userListData, loading: userListLoading, error: userListError }] = useLazyQuery(
+    graphql.queries.getUserForMessage
+  )
   const [
     getPatientMessageById,
     { data: patientMessageByIdData, loading: patientMessageByIdLoading, error: patientMessageByIdError },
@@ -81,8 +83,6 @@ const Message = () => {
   const [messageInput, setMessageInput] = useState('')
 
   const [dropdownButtonHover, setDropdownButtonHover] = useState(false)
-
-  const [selectedUserID, setSelectedUserID] = useState(0)
 
   // handlers
   useEffect(() => {
@@ -105,23 +105,23 @@ const Message = () => {
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
-      setPatientId(personalData.getPatientByEmail.id)
+      setCurrentPatientId(personalData.getPatientByEmail)
     }
   }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
-    if (patientId !== 0) {
+    if (currentPatientId.id !== 0) {
       getPatientMessageById({
-        variables: { patient_id: patientId },
+        variables: { patient_id: currentPatientId.id },
       })
     }
-  }, [getPatientMessageById, patientId])
+  }, [getPatientMessageById, currentPatientId])
 
   useEffect(() => {
-    if (!userForMessageError && userForMessageData && userForMessageData.getUserForMessage) {
-      setUserForMessage(userForMessageData.getUserForMessage)
+    if (!userListError && userListData && userListData.getUserForMessage) {
+      setUserForMessage(userListData.getUserForMessage)
     }
-  }, [userForMessageLoading, userForMessageData, userForMessageError])
+  }, [userListLoading, userListData, userListError])
 
   useEffect(() => {
     if (!patientMessageByIdError && patientMessageByIdData && patientMessageByIdData.getPatientMessageById) {
@@ -158,7 +158,7 @@ const Message = () => {
           {/* professional area */}
           <div className={styles.professionalArea}>
             <ProfessionalCard
-              data={userForMessage}
+              data={userList}
               dropdownButtonHover={dropdownButtonHover}
               onClickButton={bool => setDropdownButtonHover(bool)}
             />
@@ -166,10 +166,10 @@ const Message = () => {
           {/* dropdown menu part */}
           {dropdownButtonHover ? (
             <div className={styles.dropMenuArea} onClick={() => setDropdownButtonHover(false)}>
-              {userForMessage.length !== 0 ? (
-                userForMessage.map((item, index) => {
+              {userList.length !== 0 ? (
+                userList.map((item, index) => {
                   return (
-                    <div key={index} className={styles.dropMenuItemArea} onClick={() => setSelectedUserID(item.id)}>
+                    <div key={index} className={styles.dropMenuItemArea} onClick={() => setSelectedUser(item.id)}>
                       {item.name}
                     </div>
                   )
