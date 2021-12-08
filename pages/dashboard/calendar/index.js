@@ -138,7 +138,7 @@ const Calendar = () => {
   const handleClickStartClass = () => {
     router.push({
       pathname: '/dashboard/live-streaming',
-      query: { id: streamingEvent.id, start: streamingEvent.start },
+      query: { id: streamingEvent.id },
     })
   }
   const handleChangeDate = value => {

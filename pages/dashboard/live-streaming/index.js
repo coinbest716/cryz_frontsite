@@ -45,7 +45,7 @@ const LiveStreaming = () => {
 
   useEffect(() => {
     if (router.query.id && router.query.start) {
-      setEvent({ id: router.query.id, start: router.query.start })
+      setEvent({ id: router.query.id })
     }
     setMaterial(LiveStreamingData)
   }, [])
@@ -65,7 +65,7 @@ const LiveStreaming = () => {
             <NotificationButton />
             {/* <Profile /> */}
           </div>
-          <div className={'rounded-xl bg-white py-4 px-16 pb-10 mt-10'}>
+          <div className={'rounded-xl bg-white py-8 px-8 pb-10 mt-10'}>
             <div className={styles.material}>Material necesario</div>
             <div className={'pt-7'}>
               {material.map((item, index) => (
