@@ -8,8 +8,16 @@ query GetSessionsByDashboard($patient_id: Int) {
       color
     }
     purchase {
-      item_name
+      item_web_name
     }
     stream_event
+  }
+}
+
+query GetLocationByDashboard {
+  getLocationByDashboard {
+    id
+    name
+    color
   }
 }

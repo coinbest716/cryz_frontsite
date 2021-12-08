@@ -73,6 +73,7 @@ const Profile = () => {
   const [updateAnthropometry] = useMutation(graphql.mutations.updateAnthropometry)
 
   const [email, setEmail] = useState(localStorage.getItem('email'))
+  const [profilePercentage, setProfilePercentage] = useState(0)
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
   const [uploadFile, setUploadFile] = useState(null)
   const date = new Date()
@@ -178,6 +179,29 @@ const Profile = () => {
     }
   }, [])
 
+  const getProfilePercentage = (_personalInfo, _shippingInfo) => {
+    let fillCount = -3
+    Object.values(_personalInfo).map(item => {
+      if (item !== '') {
+        fillCount += 1
+      }
+    })
+    Object.values(_shippingInfo).map(item => {
+      if (item !== '') {
+        fillCount += 1
+      }
+    })
+    const temp = (fillCount / 14) * 100
+    const percentage = Math.ceil(temp / 5) * 5
+    if (percentage <= 0) {
+      setProfilePercentage(0)
+    } else if (percentage >= 100) {
+      setProfilePercentage(100)
+    } else {
+      setProfilePercentage(percentage)
+    }
+  }
+
   useEffect(() => {
     if (activeTab.health) {
       if (personalInfo.id > 0) {
@@ -227,6 +251,7 @@ const Profile = () => {
         province: data.bill_province,
       }
       setShippingInfo(_shippingInfo)
+      getProfilePercentage(_personalInfo, _shippingInfo)
       if (activeTab.health) {
         getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
       } else if (activeTab.graphic) {
@@ -489,7 +514,7 @@ const Profile = () => {
       <div className={'flex justify-between'}>
         <div>
           <div className={styles.highBoldLabel}>Perfil</div>
-          <div className={'pt-2 ' + styles.mediumLabel}>80% Perfil Completado</div>
+          <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
         </div>
         <div className={'flex justify-end items-center'}>
           <NotificationButton />

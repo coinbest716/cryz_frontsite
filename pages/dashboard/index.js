@@ -30,7 +30,6 @@ import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 // json data
 import DashboardData from 'assets/data/DashboardData.json'
-import CalendarData from 'assets/data/CalendarData'
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
@@ -41,11 +40,6 @@ const Dashboard = () => {
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    let _markDate = []
-    CalendarData.map(item => {
-      _markDate.push(moment(item.start).format('DD-MM-YYYY'))
-    })
-    setMarkDate(_markDate)
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
@@ -58,6 +52,9 @@ const Dashboard = () => {
   // loading part end #######################
 
   // variables
+  const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
+    graphql.queries.getSessionsByDashboard
+  )
   const [getPatientIdByDashboard, { data: personalData, loading: personalLoading, error: personalError }] =
     useLazyQuery(graphql.queries.getPatientIdByDashboard)
   const [markDate, setMarkDate] = useState([])
@@ -122,8 +119,20 @@ const Dashboard = () => {
     if (!personalError && personalData && personalData.getPatientIdByDashboard) {
       const patient_id = personalData.getPatientIdByDashboard
       localStorage.setItem('patient_id', patient_id)
+      getSessionsByDashboard({ variables: { patient_id: patient_id } })
     }
   }, [personalLoading, personalData, personalError])
+
+  useEffect(() => {
+    if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
+      const sessionArr = sessionData.getSessionsByDashboard
+      const _markDate = []
+      sessionArr.map(item => {
+        _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
+      })
+      setMarkDate(_markDate)
+    }
+  }, [sessionLoading, sessionData, sessionError])
 
   const handleClickRmember = () => {
     console.log('handleClickRmember')

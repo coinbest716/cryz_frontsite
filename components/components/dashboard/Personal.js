@@ -26,8 +26,10 @@ const Personal = props => {
           <div className={'flex justify-between items-center'}>
             <PurchaseAvatar avatar={personalInfo.avatar || ''} handleChangeAvatar={handleChangeAvatar} />
             <div className={'pl-5'}>
-              <div className={styles.profileName}>Mariano Pérez Fanjul</div>
-              <div className={styles.profileCounry}>Madrid, Spain</div>
+              <div className={styles.profileName}>{personalInfo.name + ' ' + personalInfo.surname}</div>
+              <div className={styles.profileCounry}>
+                {shippingInfo.province ? shippingInfo.province + ', ' + shippingInfo.country : shippingInfo.country}
+              </div>
             </div>
           </div>
           <div className={'flex justify-between items-center gap-6'}>
@@ -172,7 +174,7 @@ const Personal = props => {
             <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangeShipping(e, 'country')}
-                label={'Pais'}
+                label={'País'}
                 placeholder={''}
                 type={'text'}
                 value={shippingInfo.country}

@@ -45,7 +45,7 @@ const LiveStreaming = () => {
 
   useEffect(() => {
     if (router.query.id && router.query.start) {
-      setEvent({ id: router.query.id, start: router.query.start })
+      setEvent({ id: router.query.id })
     }
     setMaterial(LiveStreamingData)
   }, [])
@@ -53,19 +53,19 @@ const LiveStreaming = () => {
   return (
     <div className={'h-fll pt-12 pl-14 pr-8 h-screen ' + styles.container}>
       <div className={'grid grid-cols-12 gap-6'}>
-        <div className={'col-span-12 md:col-span-8 sm:col-span-12 pt-4'}>
+        <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-4'}>
           <div className={styles.title}>1 to 1 Streaming</div>
           <div className={'pt-14'}>
             {/* <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} /> */}
             <VideoChat sessionId={event.id} />
           </div>
         </div>
-        <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
+        <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
           <div className={'flex justify-end items-center'}>
             <NotificationButton />
             {/* <Profile /> */}
           </div>
-          <div className={'rounded-xl bg-white py-4 px-16 pb-10 mt-10'}>
+          <div className={'rounded-xl bg-white py-8 px-8 pb-10 mt-10'}>
             <div className={styles.material}>Material necesario</div>
             <div className={'pt-7'}>
               {material.map((item, index) => (

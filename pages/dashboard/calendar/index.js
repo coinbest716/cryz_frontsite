@@ -50,38 +50,49 @@ const Calendar = () => {
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard
   )
+  const [getLocationByDashboard, { data: roomData, loading: roomLoading, error: roomError }] = useLazyQuery(
+    graphql.queries.getLocationByDashboard
+  )
   const calendarComponentRef = createRef()
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
+  const [roomList, setRoomList] = useState([])
 
   useEffect(() => {
     getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
-
+    getLocationByDashboard()
     const eventDate = router.query.eventDate
     if (eventDate) {
       let calendarApi = calendarComponentRef.current.getApi()
       calendarApi.gotoDate(eventDate) // call a method on the Calendar object
     }
-    let classInterval = setInterval(() => {
-      const currentTime = moment(new Date())
-      events.map(item => {
-        const startTime = moment(item.start)
-        const endTime = moment(item.end)
-        const diffTime = startTime.diff(endTime, 'minutes')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-        if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
-          setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
-        } else {
-          setStreamingEvent({ id: -1, start: '', toggle: false })
-        }
-      })
-    }, 60000)
+  useEffect(() => {
+    setAvailableEvent()
+    let classInterval = setInterval(() => {
+      setAvailableEvent
+    }, 10000)
     return () => {
       clearInterval(classInterval)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [events])
+
+  const setAvailableEvent = () => {
+    const currentTime = moment(new Date())
+    events.map(item => {
+      const startTime = moment(item.start)
+      const endTime = moment(item.end)
+      const diffTime = startTime.diff(endTime, 'minutes')
+      if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
+        setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
+      } else {
+        setStreamingEvent({ id: -1, start: '', toggle: false })
+      }
+    })
+  }
 
   useEffect(() => {
     if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
@@ -91,7 +102,7 @@ const Calendar = () => {
       sessionArr.map(item => {
         const _eventItem = {
           id: item.id,
-          title: item.purchase.item_name,
+          title: item.purchase.item_web_name,
           start: item.start_time,
           end: item.end_time,
           backgroundColor: item.location.color,
@@ -108,10 +119,26 @@ const Calendar = () => {
     }
   }, [sessionLoading, sessionData, sessionError])
 
+  useEffect(() => {
+    if (!roomError && roomData && roomData.getLocationByDashboard) {
+      const roomArr = roomData.getLocationByDashboard
+      const _roomList = []
+      roomArr.map(item => {
+        const _roomItem = {
+          id: item.id,
+          name: item.name,
+          color: item.color,
+        }
+        _roomList.push(_roomItem)
+      })
+      setRoomList(_roomList)
+    }
+  }, [roomLoading, roomData, roomError])
+
   const handleClickStartClass = () => {
     router.push({
       pathname: '/dashboard/live-streaming',
-      query: { id: streamingEvent.id, start: streamingEvent.start },
+      query: { id: streamingEvent.id },
     })
   }
   const handleChangeDate = value => {
@@ -180,9 +207,9 @@ const Calendar = () => {
           </div>
           <div className={'mt-8 px-5 py-4 ' + styles.roomContainer}>
             <div className={'pb-3 ' + styles.roomTitle}>Crys&Co Room</div>
-            {events.map((item, index) => (
+            {roomList.map((item, index) => (
               <div className={'py-3'} key={index}>
-                <CheckBoxImage label={item.label} color={item.backgroundColor} />
+                <CheckBoxImage label={item.name} color={item.color} />
               </div>
             ))}
           </div>

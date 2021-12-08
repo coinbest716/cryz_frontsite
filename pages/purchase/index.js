@@ -133,7 +133,7 @@ const Purchase = () => {
     {
       value: 'country',
       type: 'text',
-      label: 'Pais',
+      label: 'País',
     },
   ]
   const list = ['Hombre', 'Mujer']
@@ -322,7 +322,7 @@ const Purchase = () => {
                         <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'country')}
-                            label={'Pais'}
+                            label={'País'}
                             placeholder={''}
                             type={'text'}
                             value={personalInfo.country}

@@ -276,7 +276,7 @@ const Billing = () => {
                     <div className={'py-2'}>
                       <CommonText
                         handleChange={e => handleChangeAddress(e, 'country', index)}
-                        label={'Pais'}
+                        label={'País'}
                         placeholder={''}
                         type={'country'}
                         value={item.country}
