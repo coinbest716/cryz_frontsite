@@ -15,7 +15,7 @@ query GetSessionsByDashboard($patient_id: Int) {
 }
 
 query GetLocationByDashboard {
-  getSessionsByDashboard {
+  getLocationByDashboard {
     id
     name
     color
