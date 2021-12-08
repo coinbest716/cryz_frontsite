@@ -10,7 +10,7 @@ import styles from './SubjectCard.module.scss'
 import CheckIcon from 'assets/images/check.svg'
 
 const SubjectCard = props => {
-  const { data } = props
+  const { data, active, onClick } = props
   let today = new Date()
   let dd = String(today.getDate()).padStart(2, '0')
   let mm = String(today.getMonth() + 1).padStart(2, '0') //January is 0!
@@ -18,7 +18,7 @@ const SubjectCard = props => {
   today = yyyy + '-' + mm + '-' + dd
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container + ' ' + (active === true ? styles.active : '')} onClick={() => onClick(data)}>
       <div className={'flex justify-start'}>
         <div className={'relative mr-4 ' + styles.avatar}>
           {data?.from_name.split(' ')[0].slice(0, 1).toUpperCase()}

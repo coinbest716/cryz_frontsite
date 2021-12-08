@@ -51,11 +51,12 @@ const Message = () => {
   // loading part end #######################
 
   // variables
-  const [currentPatientId, setCurrentPatientId] = useState({})
+  const [currentPatient, setCurrentPatient] = useState({})
   const today = useSelector(state => state.today)
   const [userList, setUserForMessage] = useState([])
   const [selectedUser, setSelectedUser] = useState({})
-  const [patientMessageById, setPatientMessageById] = useState([])
+  const [messageList, setMessageList] = useState([])
+  const [selectedSubject, setSelectedSubject] = useState({})
 
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
@@ -63,10 +64,8 @@ const Message = () => {
   const [getUserForMessage, { data: userListData, loading: userListLoading, error: userListError }] = useLazyQuery(
     graphql.queries.getUserForMessage
   )
-  const [
-    getPatientMessageById,
-    { data: patientMessageByIdData, loading: patientMessageByIdLoading, error: patientMessageByIdError },
-  ] = useLazyQuery(graphql.queries.getPatientMessageById)
+  const [getPatientMessageById, { data: messageListData, loading: messageListLoading, error: messageListError }] =
+    useLazyQuery(graphql.queries.getPatientMessageById)
 
   const messageContent = {
     content: 'Sayang, besok kamu ada acara keluar ga?',
@@ -105,17 +104,17 @@ const Message = () => {
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
-      setCurrentPatientId(personalData.getPatientByEmail)
+      setCurrentPatient(personalData.getPatientByEmail)
     }
   }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
-    if (currentPatientId.id !== 0) {
+    if (currentPatient.id !== 0) {
       getPatientMessageById({
-        variables: { patient_id: currentPatientId.id },
+        variables: { patient_id: currentPatient.id },
       })
     }
-  }, [getPatientMessageById, currentPatientId])
+  }, [getPatientMessageById, currentPatient])
 
   useEffect(() => {
     if (!userListError && userListData && userListData.getUserForMessage) {
@@ -124,10 +123,10 @@ const Message = () => {
   }, [userListLoading, userListData, userListError])
 
   useEffect(() => {
-    if (!patientMessageByIdError && patientMessageByIdData && patientMessageByIdData.getPatientMessageById) {
-      setPatientMessageById(patientMessageByIdData.getPatientMessageById)
+    if (!messageListError && messageListData && messageListData.getPatientMessageById) {
+      setMessageList(messageListData.getPatientMessageById)
     }
-  }, [patientMessageByIdLoading, patientMessageByIdData, patientMessageByIdError])
+  }, [messageListLoading, messageListData, messageListError])
 
   const handleSendMessage = (content, type) => {
     switch (type) {
@@ -137,6 +136,11 @@ const Message = () => {
       default:
         break
     }
+  }
+
+  const handleSelectSubject = data => {
+    console.log('data', data)
+    setSelectedSubject(data)
   }
 
   return (
@@ -185,8 +189,15 @@ const Message = () => {
           {/* message area */}
           <div className={styles.subjectArea}>
             <PerfectScrollbar>
-              {patientMessageById.length !== 0 &&
-                patientMessageById.map((item, index) => <SubjectCard data={item} key={index} />)}
+              {messageList.length !== 0 &&
+                messageList.map((item, index) => (
+                  <SubjectCard
+                    data={item}
+                    key={index}
+                    active={selectedSubject.id === item.id ? true : false}
+                    onClick={data => handleSelectSubject(data)}
+                  />
+                ))}
             </PerfectScrollbar>
           </div>
         </div>
