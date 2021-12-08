@@ -48,6 +48,8 @@ query GetUserForMessage {
 query GetSubMessagesByDashboard($message_id: Int) {
   getSubMessagesByDashboard(message_id: $message_id) {
     id
+    attachment
+    create_date
     from_id
     from_name
     from_email

@@ -54,8 +54,24 @@ const Message = () => {
   const [currentPatient, setCurrentPatient] = useState({})
   const today = useSelector(state => state.today)
   const [userList, setUserForMessage] = useState([])
-  const [newMessage, setNewMessage] = useState({})
+  const [newMessage, setNewMessage] = useState({
+    attachment: [],
+    content: '',
+    create_date: new Date(),
+    from_email: '',
+    from_id: 0,
+    from_name: '',
+    id: 0,
+    notification: 'unread',
+    request_id: 0,
+    subject: '',
+    to_email: '',
+    to_id: 0,
+    to_name: '',
+    to_type: 'user',
+  })
   const [messageList, setMessageList] = useState([])
+  const [subMessageList, setSubMessageList] = useState([])
   const [selectedSubject, setSelectedSubject] = useState({})
 
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
@@ -66,6 +82,11 @@ const Message = () => {
   )
   const [getPatientMessageById, { data: messageListData, loading: messageListLoading, error: messageListError }] =
     useLazyQuery(graphql.queries.getPatientMessageById)
+
+  const [
+    getSubMessagesByDashboard,
+    { data: subMessageListData, loading: subMessageListLoading, error: subMessageListError },
+  ] = useLazyQuery(graphql.queries.getSubMessagesByDashboard)
 
   const messageContent = {
     content: 'Sayang, besok kamu ada acara keluar ga?',
@@ -133,8 +154,34 @@ const Message = () => {
     }
   }, [messageListLoading, messageListData, messageListError])
 
+  useEffect(() => {
+    if (!subMessageListError && subMessageListData && subMessageListData.getSubMessagesByDashboard) {
+      console.log('=====received: ', subMessageListData.getSubMessagesByDashboard)
+      setSubMessageList(subMessageListData.getSubMessagesByDashboard)
+    }
+  }, [subMessageListLoading, subMessageListData, subMessageListError])
+
   const handleSelectSubject = data => {
     setSelectedSubject(data)
+    let object = {}
+    object.attachment = []
+    object.content = ''
+    object.create_date = new Date()
+    object.from_email = data.from_email
+    object.from_id = data.from_id
+    object.from_name = data.from_name
+    object.id = data.id
+    object.notification = 'unread'
+    object.request_id = data.request_id
+    object.subject = data.subject
+    object.to_email = data.to_email
+    object.to_id = data.to_id
+    object.to_name = data.to_name
+    object.to_type = 'user'
+    setNewMessage(object)
+    getSubMessagesByDashboard({
+      variables: { message_id: data.id },
+    })
   }
 
   const handleSelectUser = item => {
@@ -152,7 +199,7 @@ const Message = () => {
     object.to_email = item.email
     object.to_id = item.id
     object.to_name = item.name
-    object.to_type = 'patient'
+    object.to_type = 'user'
     setNewMessage(object)
     setSelectedSubject({})
   }
@@ -161,11 +208,15 @@ const Message = () => {
     switch (type) {
       case 'text':
         setMessageInput(content)
+        setNewMessage(newMessage => ({ ...newMessage, create_date: new Date() }))
         setNewMessage(newMessage => ({ ...newMessage, content: content }))
+        setNewMessage(newMessage => ({ ...newMessage, attachment: [] }))
         break
       case 'file':
         let array = []
         array.push(content)
+        setNewMessage(newMessage => ({ ...newMessage, create_date: new Date() }))
+        setNewMessage(newMessage => ({ ...newMessage, content: '' }))
         setNewMessage(newMessage => ({ ...newMessage, attachment: array }))
         break
       default:
@@ -234,19 +285,31 @@ const Message = () => {
         <div className={'w-full md:w-1/2 '}>
           {/* message select card area */}
           <div className={styles.subjectTitleArea}>
-            <MessageSelectCard />
+            <MessageSelectCard data={selectedSubject} />
           </div>
           {/* chat area */}
           <div className={styles.chatArea}>
             <PerfectScrollbar>
-              {console.log('new message', newMessage)}
-              <MessageCard01 message={messageContent} />
+              {subMessageList.map((item, index) =>
+                item.to_type === 'user' ? (
+                  item.content !== '' ? (
+                    <MessageCard01 key={index} message={{ content: item.content, time: item.create_date }} />
+                  ) : (
+                    <>aaa</>
+                  )
+                ) : item.content !== '' ? (
+                  <MessageCard02 key={index} message={{ content: item.content, time: item.create_date }} />
+                ) : (
+                  <>bbb</>
+                )
+              )}
+              {/* <MessageCard01 message={messageContent} />
               <MessageCard02 message={messageContent} />
               <MessageCard01 message={messageContent} />
               <MessageImage01 message={messageImage} />
               <MessageImage02 message={messageImage} />
               <MessageVideo01 message={messageVideo} />
-              <MessageVideo02 message={messageVideo} />
+              <MessageVideo02 message={messageVideo} /> */}
             </PerfectScrollbar>
           </div>
           {/* message input area */}
