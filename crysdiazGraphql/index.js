@@ -29,7 +29,7 @@ import {
   UpdatePatientBillByDashboard,
   DeletePatientBillByDashboard,
 } from './billing.gql'
-import { GetSessionsByDashboard } from './calendar.gql'
+import { GetSessionsByDashboard, GetLocationByDashboard } from './calendar.gql'
 
 // message part
 import { GetUserForMessage, GetUsersByPatient, GetPatientMessageById } from './dashboard/message.gql'
@@ -69,8 +69,9 @@ export default {
     getAnthroDetailDataByDashboard: GetAnthroDetailDataByDashboard,
     // billing part
     getPatientBillByDashboard: GetPatientBillByDashboard,
-    // dashboard part
+    // dashboard calendar part
     getSessionsByDashboard: GetSessionsByDashboard,
+    getLocationByDashboard: GetLocationByDashboard,
     // message part
     getUsersByPatient: GetUsersByPatient,
     getUserForMessage: GetUserForMessage,
