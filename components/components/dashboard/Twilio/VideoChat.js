@@ -55,7 +55,9 @@ const VideoChat = props => {
   const screenHeight = window.screen.height
 
   useEffect(() => {
-    initTwilioConnet(`Crysdyaz_${sessionId}`, localStorage.getItem('email'))
+    if (sessionId > 0) {
+      initTwilioConnet(`Crysdyaz_${sessionId}`, localStorage.getItem('email'))
+    }
     // Auth.currentSession()
     //   .then(data => {
     //     initTwilioConnet(`Crysdyaz_${sessionId}`, data.idToken.payload.email)
@@ -65,7 +67,7 @@ const VideoChat = props => {
     return () => {
       handleLogout()
     }
-  }, [])
+  }, [sessionId])
 
   useEffect(() => {
     if (room) {
