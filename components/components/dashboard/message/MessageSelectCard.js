@@ -9,14 +9,32 @@ import styles from './MessageSelectCard.module.scss'
 // images
 import TrashIcon from 'assets/images/trash.svg'
 
-const MessageSelectCard = () => {
+const MessageSelectCard = props => {
+  const { data } = props
+
+  const handleChangeSubject = event => {
+    console.log('event', event.target.value)
+  }
   return (
     <div className={styles.container}>
-      <div className={'flex justify-start'}>
-        <div className={'relative mr-4 ' + styles.avatar}>CS</div>
-        <div className={'inline-grid justify-start items-center'}>
-          <div className={styles.title}>Entrenamiento de resistencia</div>
-          <div className={'mt-2 ' + styles.text}>Marcus Donegan</div>
+      <div className={'flex justify-start w-full'}>
+        <div className={'relative mr-4 ' + styles.avatar}>
+          {data?.from_name?.split(' ')[0].slice(0, 1).toUpperCase()}
+          {data?.from_name?.split(' ')[1].slice(0, 1).toUpperCase()}
+        </div>
+        <div className={'w-full justify-start items-center'}>
+          {data.subject !== '' ? (
+            <div className={styles.title}>{data.subject}</div>
+          ) : (
+            <input
+              type="text"
+              autoComplete="new-password"
+              placeholder="Subject"
+              className={'w-full h-full bg-transparent py-1 px-2 text-black ' + styles.input}
+              onChange={event => handleChangeSubject(event)}
+            />
+          )}
+          <div className={'mt-2 ' + styles.text}>{data.from_name}</div>
         </div>
       </div>
       <div className={'grid justify-center items-center'}>
