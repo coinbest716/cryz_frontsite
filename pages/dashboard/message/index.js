@@ -280,7 +280,7 @@ const Message = () => {
               {subMessageList.map((item, index) =>
                 item.to_type === 'user' ? (
                   item.content !== '' ? (
-                    <MessageCard01 key={index} message={{ content: item.content, time: item.create_date }} />
+                    <MessageCard01 key={index} message={item} />
                   ) : item.attachment[0].type.split('/')[0] === 'image' ? (
                     <MessageImage01
                       key={index}
@@ -292,10 +292,10 @@ const Message = () => {
                       message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }}
                     />
                   ) : (
-                    <div key={index}></div>
+                    <div key={index}>{item.attachment[0].name}</div>
                   )
                 ) : item.content !== '' ? (
-                  <MessageCard02 key={index} message={{ content: item.content, time: item.create_date }} />
+                  <MessageCard02 key={index} message={item} />
                 ) : item.attachment[0].type.split('/')[0] === 'image' ? (
                   <MessageImage02
                     key={index}
@@ -307,7 +307,7 @@ const Message = () => {
                     message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }}
                   />
                 ) : (
-                  <div key={index}></div>
+                  <div key={index}>{item.attachment[0].name}</div>
                 )
               )}
             </PerfectScrollbar>
