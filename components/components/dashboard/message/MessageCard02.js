@@ -3,6 +3,7 @@ import React from 'react'
 // custom components
 import MessageImage02 from 'components/components/dashboard/message/MessageImage02'
 import MessageVideo02 from 'components/components/dashboard/message/MessageVideo02'
+import MessageDownload02 from 'components/components/dashboard/message/MessageDownload02'
 
 // styles
 import styles from 'components/components/dashboard/message/MessageCard02.module.scss'
@@ -22,7 +23,7 @@ const MessageCard02 = props => {
           ) : message.attachment[0].type.split('/')[0] === 'video' ? (
             <MessageVideo02 message={message} />
           ) : (
-            <div>{message.attachment[0].name}</div>
+            <MessageDownload02 message={message} />
           )
         ) : (
           <></>

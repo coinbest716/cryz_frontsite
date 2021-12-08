@@ -19,6 +19,8 @@ import MessageImage01 from 'components/components/dashboard/message/MessageImage
 import MessageImage02 from 'components/components/dashboard/message/MessageImage02'
 import MessageVideo01 from 'components/components/dashboard/message/MessageVideo01'
 import MessageVideo02 from 'components/components/dashboard/message/MessageVideo02'
+import MessageDownload01 from 'components/components/dashboard/message/MessageDownload01'
+import MessageDownload02 from 'components/components/dashboard/message/MessageDownload02'
 import MessageInput from 'components/components/dashboard/message/MessageInput'
 import ProfessionalCard from 'components/components/dashboard/message/ProfessionalCard'
 import SubjectCard from 'components/components/dashboard/message/SubjectCard'
@@ -286,7 +288,7 @@ const Message = () => {
                   ) : item.attachment[0].type.split('/')[0] === 'video' ? (
                     <MessageVideo01 key={index} message={item} />
                   ) : (
-                    <div key={index}>{item.attachment[0].name}</div>
+                    <MessageDownload01 key={index} message={item} />
                   )
                 ) : item.content !== '' ? (
                   <MessageCard02 key={index} message={item} />
@@ -295,7 +297,7 @@ const Message = () => {
                 ) : item.attachment[0].type.split('/')[0] === 'video' ? (
                   <MessageVideo02 key={index} message={item} />
                 ) : (
-                  <div key={index}>{item.attachment[0].name}</div>
+                  <MessageDownload02 key={index} message={item} />
                 )
               )}
             </PerfectScrollbar>
