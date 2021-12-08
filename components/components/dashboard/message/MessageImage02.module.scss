@@ -4,8 +4,10 @@
   width: 125px;
   height: 101px;
   opacity: 0.77;
+  border: solid 1px #cccccc !important;
   border-radius: 10px;
   border-top-left-radius: 0px;
+  object-fit: cover;
 }
 
 .download {

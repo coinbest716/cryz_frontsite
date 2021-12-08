@@ -88,18 +88,6 @@ const Message = () => {
     { data: subMessageListData, loading: subMessageListLoading, error: subMessageListError },
   ] = useLazyQuery(graphql.queries.getSubMessagesByDashboard)
 
-  const messageContent = {
-    content: 'Sayang, besok kamu ada acara keluar ga?',
-    time: '10:56 AM',
-  }
-  const messageImage = {
-    thumbnail: '/images/01.png',
-    url: '/images/01.png',
-  }
-  const messageVideo = {
-    thumbnail: '/images/01.png',
-    url: 'https://www.w3schools.com/html/mov_bbb.mp4',
-  }
   const [messageInput, setMessageInput] = useState('')
 
   const [dropdownButtonHover, setDropdownButtonHover] = useState(false)
@@ -156,7 +144,6 @@ const Message = () => {
 
   useEffect(() => {
     if (!subMessageListError && subMessageListData && subMessageListData.getSubMessagesByDashboard) {
-      console.log('=====received: ', subMessageListData.getSubMessagesByDashboard)
       setSubMessageList(subMessageListData.getSubMessagesByDashboard)
     }
   }, [subMessageListLoading, subMessageListData, subMessageListError])
@@ -294,22 +281,23 @@ const Message = () => {
                 item.to_type === 'user' ? (
                   item.content !== '' ? (
                     <MessageCard01 key={index} message={{ content: item.content, time: item.create_date }} />
+                  ) : item.attachment[0].type.split('/')[0] === 'image' ? (
+                    <MessageImage01 message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }} />
+                  ) : item.attachment[0].type.split('/')[0] === 'video' ? (
+                    <MessageVideo01 message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }} />
                   ) : (
-                    <>aaa</>
+                    <></>
                   )
                 ) : item.content !== '' ? (
                   <MessageCard02 key={index} message={{ content: item.content, time: item.create_date }} />
+                ) : item.attachment[0].type.split('/')[0] === 'image' ? (
+                  <MessageImage02 message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }} />
+                ) : item.attachment[0].type.split('/')[0] === 'video' ? (
+                  <MessageVideo02 message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }} />
                 ) : (
-                  <>bbb</>
+                  <></>
                 )
               )}
-              {/* <MessageCard01 message={messageContent} />
-              <MessageCard02 message={messageContent} />
-              <MessageCard01 message={messageContent} />
-              <MessageImage01 message={messageImage} />
-              <MessageImage02 message={messageImage} />
-              <MessageVideo01 message={messageVideo} />
-              <MessageVideo02 message={messageVideo} /> */}
             </PerfectScrollbar>
           </div>
           {/* message input area */}
