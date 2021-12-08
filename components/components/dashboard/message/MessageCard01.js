@@ -1,7 +1,9 @@
 import React from 'react'
 
-// next components
-import Image from 'next/image'
+// custom components
+import MessageImage01 from 'components/components/dashboard/message/MessageImage01'
+import MessageVideo01 from 'components/components/dashboard/message/MessageVideo01'
+import MessageDownload01 from 'components/components/dashboard/message/MessageDownload01'
 
 // styles
 import styles from 'components/components/dashboard/message/MessageCard01.module.scss'
@@ -13,8 +15,19 @@ const MessageCard01 = props => {
       <div className={styles.container}>
         <div className={styles.content}>{message.content}</div>
         <div className={'mt-4 flex justify-end items-center'}>
-          <div className={styles.time}>{message.time}</div>
+          <div className={styles.time}>{message.create_date.slice(11, 16)}</div>
         </div>
+        {message.attachment.length !== 0 ? (
+          message.attachment[0].type.split('/')[0] === 'image' ? (
+            <MessageImage01 message={message} />
+          ) : message.attachment[0].type.split('/')[0] === 'video' ? (
+            <MessageVideo01 message={message} />
+          ) : (
+            <MessageDownload01 message={message} />
+          )
+        ) : (
+          <></>
+        )}
         <div className={styles.triangle}></div>
       </div>
     </div>
