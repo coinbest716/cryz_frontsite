@@ -71,23 +71,28 @@ const Calendar = () => {
   }, [])
 
   useEffect(() => {
+    setAvailableEvent()
     let classInterval = setInterval(() => {
-      const currentTime = moment(new Date())
-      events.map(item => {
-        const startTime = moment(item.start)
-        const endTime = moment(item.end)
-        const diffTime = startTime.diff(endTime, 'minutes')
-        if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
-          setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
-        } else {
-          setStreamingEvent({ id: -1, start: '', toggle: false })
-        }
-      })
-    }, 60000)
+      setAvailableEvent
+    }, 10000)
     return () => {
       clearInterval(classInterval)
     }
   }, [events])
+
+  const setAvailableEvent = () => {
+    const currentTime = moment(new Date())
+    events.map(item => {
+      const startTime = moment(item.start)
+      const endTime = moment(item.end)
+      const diffTime = startTime.diff(endTime, 'minutes')
+      if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
+        setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
+      } else {
+        setStreamingEvent({ id: -1, start: '', toggle: false })
+      }
+    })
+  }
 
   useEffect(() => {
     if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
