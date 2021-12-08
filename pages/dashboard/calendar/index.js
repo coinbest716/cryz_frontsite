@@ -67,13 +67,16 @@ const Calendar = () => {
       let calendarApi = calendarComponentRef.current.getApi()
       calendarApi.gotoDate(eventDate) // call a method on the Calendar object
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
     let classInterval = setInterval(() => {
       const currentTime = moment(new Date())
       events.map(item => {
         const startTime = moment(item.start)
         const endTime = moment(item.end)
         const diffTime = startTime.diff(endTime, 'minutes')
-
         if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
           setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
         } else {
@@ -84,8 +87,7 @@ const Calendar = () => {
     return () => {
       clearInterval(classInterval)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [events])
 
   useEffect(() => {
     if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
