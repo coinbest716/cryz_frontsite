@@ -32,7 +32,12 @@ import {
 import { GetSessionsByDashboard, GetLocationByDashboard } from './calendar.gql'
 
 // message part
-import { GetUserForMessage, GetUsersByPatient, GetPatientMessageById } from './dashboard/message.gql'
+import {
+  GetUserForMessage,
+  GetUsersByPatient,
+  GetPatientMessageById,
+  GetSubMessagesByDashboard,
+} from './dashboard/message.gql'
 
 export default {
   queries: {
@@ -76,6 +81,7 @@ export default {
     getUsersByPatient: GetUsersByPatient,
     getUserForMessage: GetUserForMessage,
     getPatientMessageById: GetPatientMessageById,
+    getSubMessagesByDashboard: GetSubMessagesByDashboard,
   },
   mutations: {
     createUser: CreateUser,

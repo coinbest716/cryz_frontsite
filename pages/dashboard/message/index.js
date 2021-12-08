@@ -54,7 +54,7 @@ const Message = () => {
   const [currentPatient, setCurrentPatient] = useState({})
   const today = useSelector(state => state.today)
   const [userList, setUserForMessage] = useState([])
-  const [selectedUser, setSelectedUser] = useState({})
+  const [newMessage, setNewMessage] = useState({})
   const [messageList, setMessageList] = useState([])
   const [selectedSubject, setSelectedSubject] = useState({})
 
@@ -104,7 +104,12 @@ const Message = () => {
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
-      setCurrentPatient(personalData.getPatientByEmail)
+      if (personalData === null) {
+        toast.error('Please insert your personal information in Profile page.')
+        router.push('/dashboard/profile')
+      } else {
+        setCurrentPatient(personalData.getPatientByEmail)
+      }
     }
   }, [personalLoading, personalData, personalError])
 
@@ -128,19 +133,44 @@ const Message = () => {
     }
   }, [messageListLoading, messageListData, messageListError])
 
+  const handleSelectSubject = data => {
+    setSelectedSubject(data)
+  }
+
+  const handleSelectUser = item => {
+    let object = {}
+    object.attachment = []
+    object.content = ''
+    object.create_date = new Date()
+    object.from_email = currentPatient.email
+    object.from_id = currentPatient.id
+    object.from_name = currentPatient.name
+    object.id = 0
+    object.notification = 'unread'
+    object.request_id = 0
+    object.subject = ''
+    object.to_email = item.email
+    object.to_id = item.id
+    object.to_name = item.name
+    object.to_type = 'patient'
+    setNewMessage(object)
+    setSelectedSubject({})
+  }
+
   const handleSendMessage = (content, type) => {
     switch (type) {
       case 'text':
         setMessageInput(content)
+        setNewMessage(newMessage => ({ ...newMessage, content: content }))
+        break
+      case 'file':
+        let array = []
+        array.push(content)
+        setNewMessage(newMessage => ({ ...newMessage, attachment: array }))
         break
       default:
         break
     }
-  }
-
-  const handleSelectSubject = data => {
-    console.log('data', data)
-    setSelectedSubject(data)
   }
 
   return (
@@ -173,7 +203,7 @@ const Message = () => {
               {userList.length !== 0 ? (
                 userList.map((item, index) => {
                   return (
-                    <div key={index} className={styles.dropMenuItemArea} onClick={() => setSelectedUser(item.id)}>
+                    <div key={index} className={styles.dropMenuItemArea} onClick={() => handleSelectUser(item)}>
                       {item.name}
                     </div>
                   )
@@ -209,6 +239,7 @@ const Message = () => {
           {/* chat area */}
           <div className={styles.chatArea}>
             <PerfectScrollbar>
+              {console.log('new message', newMessage)}
               <MessageCard01 message={messageContent} />
               <MessageCard02 message={messageContent} />
               <MessageCard01 message={messageContent} />

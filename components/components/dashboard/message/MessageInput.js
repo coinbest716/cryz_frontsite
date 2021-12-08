@@ -20,8 +20,17 @@ const MessageInput = props => {
   const fileRef = createRef()
   const [attachedFile, setAttachedFile] = useState({})
 
-  const handleSetContent = event => {
-    setContent(event.target.value)
+  const handleSetContent = (event, type) => {
+    switch (type) {
+      case 'common':
+        if (event.target.value !== '\n') {
+          setContent(event.target.value)
+        }
+        break
+      case 'enter':
+        setContent('')
+        break
+    }
   }
 
   // handlers
@@ -38,11 +47,21 @@ const MessageInput = props => {
     setAttachedFile({})
   }
 
-  const onKeyPress = event => {
+  const handleTextareaOnKeyPress = event => {
     if (event.shiftKey === false && event.key === 'Enter') {
-      setContent('')
       sendMessage(content, 'text')
+      handleSetContent(event, 'enter')
     }
+  }
+
+  const handleSendMessage = () => {
+    sendMessage(content, 'text')
+    setContent('')
+  }
+
+  const handleSendFile = () => {
+    sendMessage(attachedFile, 'file')
+    setAttachedFile({})
   }
 
   return (
@@ -54,17 +73,17 @@ const MessageInput = props => {
             type={'text'}
             value={content}
             placeholder={'Escribe tu mensaje'}
-            onChange={event => handleSetContent(event)}
+            onChange={event => handleSetContent(event, 'common')}
             className={
               'appearance-none bg-white border-none w-full leading-tight focus:outline-none focus ' + styles.input
             }
-            onKeyPress={event => onKeyPress(event)}
+            onKeyPress={event => handleTextareaOnKeyPress(event)}
           />
         </div>
         <div className={styles.iconArea}>
           <button
             className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
-            onClick={() => sendMessage(content, 'text')}
+            onClick={() => handleSendMessage()}
           >
             <Image src={SendIcon} alt={''} width={18} height={18} />
           </button>
@@ -99,7 +118,7 @@ const MessageInput = props => {
           </button>
           <input className={'hidden'} type="file" id="img_frontr" onChange={handleAttachFile} ref={fileRef} />
           <div className={'ml-4'}>
-            <button className={styles.enterButton}>
+            <button className={styles.enterButton} onClick={() => handleSendFile()}>
               <div className={'flex items-center mr-3'}>
                 <Image src={SendWhiteIcon} alt={''} width={16} height={16} />
               </div>

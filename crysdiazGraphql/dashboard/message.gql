@@ -44,3 +44,20 @@ query GetUserForMessage {
     email
   }
 }
+
+query GetSubMessagesByDashboard($message_id: Int) {
+  getSubMessagesByDashboard(message_id: $message_id) {
+    id
+    from_id
+    from_name
+    from_email
+    from_type
+    to_id
+    to_name
+    to_email
+    to_type
+    request_id
+    subject
+    content
+  }
+}
