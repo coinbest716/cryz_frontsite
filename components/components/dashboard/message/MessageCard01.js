@@ -18,9 +18,9 @@ const MessageCard01 = props => {
         </div>
         {message.attachment.length !== 0 ? (
           message.attachment[0].type.split('/')[0] === 'image' ? (
-            <MessageImage01 message={{ thumbnail: message.attachment[0].path, url: message.attachment[0].path }} />
+            <MessageImage01 message={message} />
           ) : message.attachment[0].type.split('/')[0] === 'video' ? (
-            <MessageVideo01 message={{ thumbnail: message.attachment[0].path, url: message.attachment[0].path }} />
+            <MessageVideo01 message={message} />
           ) : (
             <div>{message.attachment[0].name}</div>
           )

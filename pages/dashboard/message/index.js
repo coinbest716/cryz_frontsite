@@ -282,30 +282,18 @@ const Message = () => {
                   item.content !== '' ? (
                     <MessageCard01 key={index} message={item} />
                   ) : item.attachment[0].type.split('/')[0] === 'image' ? (
-                    <MessageImage01
-                      key={index}
-                      message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }}
-                    />
+                    <MessageImage01 key={index} message={item} />
                   ) : item.attachment[0].type.split('/')[0] === 'video' ? (
-                    <MessageVideo01
-                      key={index}
-                      message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }}
-                    />
+                    <MessageVideo01 key={index} message={item} />
                   ) : (
                     <div key={index}>{item.attachment[0].name}</div>
                   )
                 ) : item.content !== '' ? (
                   <MessageCard02 key={index} message={item} />
                 ) : item.attachment[0].type.split('/')[0] === 'image' ? (
-                  <MessageImage02
-                    key={index}
-                    message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }}
-                  />
+                  <MessageImage02 key={index} message={item} />
                 ) : item.attachment[0].type.split('/')[0] === 'video' ? (
-                  <MessageVideo02
-                    key={index}
-                    message={{ thumbnail: item.attachment[0].path, url: item.attachment[0].path }}
-                  />
+                  <MessageVideo02 key={index} message={item} />
                 ) : (
                   <div key={index}>{item.attachment[0].name}</div>
                 )
