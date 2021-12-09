@@ -52,11 +52,27 @@ const Dashboard = () => {
   // loading part end #######################
 
   // variables
+  const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
+    graphql.queries.getPatientByEmail
+  )
+  const [getAnthropmetryByDashboard, { data: healthData, loading: healthLoading, error: healthError }] = useLazyQuery(
+    graphql.queries.getAnthropmetryByDashboard
+  )
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard
   )
-  const [getPatientIdByDashboard, { data: personalData, loading: personalLoading, error: personalError }] =
-    useLazyQuery(graphql.queries.getPatientIdByDashboard)
+  const [getPatientIdByDashboard, { data: patientData, loading: patientLoading, error: patientError }] = useLazyQuery(
+    graphql.queries.getPatientIdByDashboard
+  )
+  const [profilePercentage, setProfilePercentage] = useState(0)
+  const [personalInfo, setPersonalInfo] = useState({
+    name: '',
+    surname: '',
+    avatar: '',
+    province: '',
+    weight: '',
+    height: '',
+  })
   const [markDate, setMarkDate] = useState([])
   const [calendarValue, setCalendarValue] = useState(new Date())
   const today = useSelector(state => state.today)
@@ -113,15 +129,45 @@ const Dashboard = () => {
         email: localStorage.getItem('email'),
       },
     })
+    getPatientByEmail({
+      variables: {
+        email: localStorage.getItem('email'),
+      },
+    })
   }, [])
 
   useEffect(() => {
-    if (!personalError && personalData && personalData.getPatientIdByDashboard) {
-      const patient_id = personalData.getPatientIdByDashboard
-      localStorage.setItem('patient_id', patient_id)
-      getSessionsByDashboard({ variables: { patient_id: patient_id } })
+    if (!personalError && personalData && personalData.getPatientByEmail) {
+      const data = personalData.getPatientByEmail
+      setPersonalInfo({
+        ...personalInfo,
+        name: data.name,
+        surname: data.surname,
+        avatar: data.avatar,
+        province: data.province,
+      })
+      getProfilePercentage(data)
     }
   }, [personalLoading, personalData, personalError])
+
+  useEffect(() => {
+    if (!patientError && patientData && patientData.getPatientIdByDashboard) {
+      const patient_id = patientData.getPatientIdByDashboard
+      localStorage.setItem('patient_id', patient_id)
+      getSessionsByDashboard({ variables: { patient_id: patient_id } })
+      getAnthropmetryByDashboard({ variables: { patient_id: patient_id } })
+    }
+  }, [patientLoading, patientData, patientError])
+
+  useEffect(() => {
+    if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
+      const data = healthData.getAnthropmetryByDashboard
+      data.map(item => {
+        setPersonalInfo({ ...personalInfo, weight: item.peso, height: item.altura })
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [healthLoading, healthData, healthError])
 
   useEffect(() => {
     if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
@@ -133,6 +179,24 @@ const Dashboard = () => {
       setMarkDate(_markDate)
     }
   }, [sessionLoading, sessionData, sessionError])
+
+  const getProfilePercentage = _personalInfo => {
+    let fillCount = -6
+    Object.values(_personalInfo).map(item => {
+      if (item !== '' && item !== undefined) {
+        fillCount += 1
+      }
+    })
+    const temp = (fillCount / 14) * 100
+    const percentage = Math.ceil(temp / 5) * 5
+    if (percentage <= 0) {
+      setProfilePercentage(0)
+    } else if (percentage >= 100) {
+      setProfilePercentage(100)
+    } else {
+      setProfilePercentage(percentage)
+    }
+  }
 
   const handleClickRmember = () => {
     console.log('handleClickRmember')
@@ -304,7 +368,7 @@ const Dashboard = () => {
           <div className={'bg-white h-full px-9 py-10'}>
             <div>
               <div className={styles.highBoldLabel}>Perfil</div>
-              <div className={'pt-2 ' + styles.mediumLabel}>80% Perfil Completado</div>
+              <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
               <div className={'p-8 text-center'}>
                 <div className={'pt-7 flex justify-center'}>
                   <div
@@ -321,8 +385,10 @@ const Dashboard = () => {
                     />
                   </div>
                 </div>
-                <div className={'pt-4 ' + styles.highBoldLabel}>Mariano Pérez</div>
-                <div className={'pt-2 ' + styles.mediumLabel}>Madrid</div>
+                <div className={'pt-4 ' + styles.highBoldLabel}>
+                  {personalInfo.name}&nbsp;{personalInfo.surname}
+                </div>
+                <div className={'pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
                 <div className={'pt-6 flex justify-center'}>
                   <DashboardButton
                     handleClick={() => handleClickRedirect('editProfile')}
@@ -339,7 +405,9 @@ const Dashboard = () => {
                         type={'iconWeight'}
                       />
                       <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
-                      <div className={'pt-3 ' + styles.mediumBoldLabel}>56,6 kg</div>
+                      <div className={'pt-3 ' + styles.mediumBoldLabel}>
+                        {personalInfo.weight && personalInfo.weight + ' kg'}
+                      </div>
                     </div>
                   </div>
                   <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
@@ -350,7 +418,9 @@ const Dashboard = () => {
                         type={'iconHeight'}
                       />
                       <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
-                      <div className={'pt-3 ' + styles.mediumBoldLabel}>170 cm</div>
+                      <div className={'pt-3 ' + styles.mediumBoldLabel}>
+                        {personalInfo.height && personalInfo.height + ' cm'}
+                      </div>
                     </div>
                   </div>
                 </div>
