@@ -67,7 +67,7 @@ const Dashboard = () => {
   const [profilePercentage, setProfilePercentage] = useState(0)
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
-    surname: '',
+    lastname: '',
     avatar: '',
     province: '',
     weight: '',
@@ -142,9 +142,9 @@ const Dashboard = () => {
       setPersonalInfo({
         ...personalInfo,
         name: data.name,
-        surname: data.surname,
+        lastname: data.lastname,
         avatar: data.avatar,
-        province: data.province,
+        province: data.bill_province,
       })
       getProfilePercentage(data)
     }
@@ -162,9 +162,15 @@ const Dashboard = () => {
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
       const data = healthData.getAnthropmetryByDashboard
+      let _personalInfo = { ...personalInfo }
       data.map(item => {
-        setPersonalInfo({ ...personalInfo, weight: item.peso, height: item.altura })
+        if (item.name === 'peso' && item.data.length > 0) {
+          _personalInfo = { ..._personalInfo, weight: item.data[0].value }
+        } else if (item.name === 'altura' && item.data.length > 0) {
+          _personalInfo = { ..._personalInfo, height: item.data[0].value }
+        }
       })
+      setPersonalInfo(_personalInfo)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [healthLoading, healthData, healthError])
@@ -376,7 +382,7 @@ const Dashboard = () => {
                     style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
                   >
                     <Image
-                      src={'/images/default-avatar.svg'}
+                      src={personalInfo.avatar || '/images/default-avatar.svg'}
                       alt=""
                       width={140}
                       height={140}
@@ -386,7 +392,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className={'pt-4 ' + styles.highBoldLabel}>
-                  {personalInfo.name}&nbsp;{personalInfo.surname}
+                  {personalInfo.name}&nbsp;{personalInfo.lastname}
                 </div>
                 <div className={'pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
                 <div className={'pt-6 flex justify-center'}>
