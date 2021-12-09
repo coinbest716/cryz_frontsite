@@ -65,7 +65,7 @@ query GetSubMessagesByDashboard($message_id: Int) {
 }
 
 mutation CreateMessageByDashboard(
-  $attachment: Array
+  $attachment: [Upload]
   $content: String
   $from_email: String
   $from_id: Int
