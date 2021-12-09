@@ -146,12 +146,6 @@ const Message = () => {
   }, [messageListLoading, messageListData, messageListError])
 
   useEffect(() => {
-    if (messageList.length !== 0) {
-      handleSelectSubject(selectedSubject)
-    }
-  }, [messageList, selectedSubject])
-
-  useEffect(() => {
     if (!subMessageListError && subMessageListData && subMessageListData.getSubMessagesByDashboard) {
       setSubMessageList(subMessageListData.getSubMessagesByDashboard)
     }
@@ -163,9 +157,9 @@ const Message = () => {
     let object = {}
     object.attachment = []
     object.content = ''
-    object.from_email = data.to_email
-    object.from_id = data.to_id
-    object.from_name = data.to_name
+    object.from_email = currentPatient.email
+    object.from_id = currentPatient.id
+    object.from_name = currentPatient.name + ' ' + currentPatient.lastname
     object.from_type = 'patient'
     object.request_id = data.id
     object.subject = data.subject
@@ -217,9 +211,13 @@ const Message = () => {
       createMessageByDashboard({
         variables: object,
       })
-        .then(() => {
+        .then(response => {
+          console.log('resposne', response)
           getPatientMessageById({
             variables: { patient_id: currentPatient.id },
+          })
+          getSubMessagesByDashboard({
+            variables: { message_id: response.data.createMessageByDashboard.request_id },
           })
         })
         .catch(error => {

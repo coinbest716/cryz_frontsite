@@ -93,5 +93,6 @@ mutation CreateMessageByDashboard(
     to_type: $to_type
   ) {
     id
+    request_id
   }
 }
