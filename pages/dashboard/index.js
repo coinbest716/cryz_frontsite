@@ -280,7 +280,9 @@ const Dashboard = () => {
           <div className={'flex justify-between items-center mt-7 pl-9 pr-12 ' + styles.welcomeSection}>
             <div className={'py-4 pr-4'}>
               <div className={styles.welcomeLabel}>Bienvenido</div>
-              <div className={styles.welcomeLabel}>Mariano Perez</div>
+              <div className={styles.welcomeLabel}>
+                {personalInfo.name}&nbsp;{personalInfo.lastname}
+              </div>
               <div className={'pt-2 ' + styles.welcomeDescription}>
                 Muy pronto vas a finalizar tu Bono 10 sesiones de Entrenamiento Intensivo… <br /> Puedes consultar tus
                 sesiones y renovar tu bono pinchando a continuación en el botón
