@@ -31,7 +31,7 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './message.module.scss'
 
 // graphql
-import { useLazyQuery } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import router from 'next/router'
 
@@ -63,7 +63,7 @@ const Message = () => {
     from_email: '',
     from_id: 0,
     from_name: '',
-    id: 0,
+    from_type: 'patient',
     notification: 'unread',
     request_id: 0,
     subject: '',
@@ -72,6 +72,7 @@ const Message = () => {
     to_name: '',
     to_type: 'user',
   })
+  const [newMessageBool, setNewMessageBool] = useState(false)
   const [messageList, setMessageList] = useState([])
   const [subMessageList, setSubMessageList] = useState([])
   const [selectedSubject, setSelectedSubject] = useState({})
@@ -89,6 +90,8 @@ const Message = () => {
     getSubMessagesByDashboard,
     { data: subMessageListData, loading: subMessageListLoading, error: subMessageListError },
   ] = useLazyQuery(graphql.queries.getSubMessagesByDashboard)
+
+  const [createMessageByDashboard] = useMutation(graphql.mutations.createMessageByDashboard)
 
   const [messageInput, setMessageInput] = useState('')
 
@@ -125,7 +128,7 @@ const Message = () => {
   }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
-    if (currentPatient.id !== 0) {
+    if (JSON.stringify(currentPatient) !== JSON.stringify({})) {
       getPatientMessageById({
         variables: { patient_id: currentPatient.id },
       })
@@ -151,6 +154,7 @@ const Message = () => {
   }, [subMessageListLoading, subMessageListData, subMessageListError])
 
   const handleSelectSubject = data => {
+    setNewMessageBool(false)
     setSelectedSubject(data)
     let object = {}
     object.attachment = []
@@ -159,9 +163,9 @@ const Message = () => {
     object.from_email = data.from_email
     object.from_id = data.from_id
     object.from_name = data.from_name
-    object.id = data.id
+    object.from_type = 'patient'
     object.notification = 'unread'
-    object.request_id = data.request_id
+    object.request_id = data.id
     object.subject = data.subject
     object.to_email = data.to_email
     object.to_id = data.to_id
@@ -180,37 +184,58 @@ const Message = () => {
     object.create_date = new Date()
     object.from_email = currentPatient.email
     object.from_id = currentPatient.id
-    object.from_name = currentPatient.name
-    object.id = 0
+    object.from_name = currentPatient.name + ' ' + currentPatient.lastname
+    object.from_type = 'patient'
     object.notification = 'unread'
     object.request_id = 0
     object.subject = ''
     object.to_email = item.email
     object.to_id = item.id
-    object.to_name = item.name
+    object.to_name = item.name + ' ' + item.lastname
     object.to_type = 'user'
     setNewMessage(object)
     setSelectedSubject({})
+    setNewMessageBool(true)
   }
 
   const handleSendMessage = (content, type) => {
+    setNewMessageBool(false)
+    let date = new Date().toISOString()
+    let object = newMessage
     switch (type) {
       case 'text':
         setMessageInput(content)
-        setNewMessage(newMessage => ({ ...newMessage, create_date: new Date() }))
+        setNewMessage(newMessage => ({ ...newMessage, create_date: date }))
         setNewMessage(newMessage => ({ ...newMessage, content: content }))
         setNewMessage(newMessage => ({ ...newMessage, attachment: [] }))
+        object.create_date = date
+        object.content = content
+        object.attachment = []
         break
       case 'file':
         let array = []
         array.push(content)
-        setNewMessage(newMessage => ({ ...newMessage, create_date: new Date() }))
+        setNewMessage(newMessage => ({ ...newMessage, create_date: date }))
         setNewMessage(newMessage => ({ ...newMessage, content: '' }))
         setNewMessage(newMessage => ({ ...newMessage, attachment: array }))
+        object.create_date = date
+        object.content = ''
+        object.attachment = array
         break
       default:
         break
     }
+    dispatch({ type: 'set', isLoading: true })
+    createMessageByDashboard({
+      variables: object,
+    })
+      .then(() => {
+        dispatch({ type: 'set', isLoading: false })
+      })
+      .catch(error => {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(error.message)
+      })
   }
 
   return (
@@ -244,7 +269,7 @@ const Message = () => {
                 userList.map((item, index) => {
                   return (
                     <div key={index} className={styles.dropMenuItemArea} onClick={() => handleSelectUser(item)}>
-                      {item.name}
+                      {item.name} {item.lastname}
                     </div>
                   )
                 })
@@ -274,7 +299,7 @@ const Message = () => {
         <div className={'w-full md:w-1/2 '}>
           {/* message select card area */}
           <div className={styles.subjectTitleArea}>
-            <MessageSelectCard data={selectedSubject} />
+            <MessageSelectCard data={newMessageBool ? newMessage : selectedSubject} />
           </div>
           {/* chat area */}
           <div className={styles.chatArea}>

@@ -22,7 +22,7 @@ const MessageSelectCard = props => {
           {data?.from_name?.split(' ')[0].slice(0, 1).toUpperCase()}
           {data?.from_name?.split(' ')[1].slice(0, 1).toUpperCase()}
         </div>
-        <div className={'w-full justify-start items-center'}>
+        <div className={'inline-grid justify-start items-center'}>
           {data.subject !== '' ? (
             <div className={styles.title}>{data.subject}</div>
           ) : (
