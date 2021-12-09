@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -92,6 +92,8 @@ const Message = () => {
   const [createMessageByDashboard] = useMutation(graphql.mutations.createMessageByDashboard)
 
   const [dropdownButtonHover, setDropdownButtonHover] = useState(false)
+
+  const [scrollEl, setScrollEl] = useState()
 
   // handlers
   useEffect(() => {
@@ -229,6 +231,12 @@ const Message = () => {
     setNewMessageBool(false)
   }
 
+  useEffect(() => {
+    if (scrollEl) {
+      scrollEl.scrollTop = Number.MAX_SAFE_INTEGER
+    }
+  }, [scrollEl, subMessageList])
+
   return (
     <div className={globalStyles.dashContainer}>
       {/* header part */}
@@ -298,7 +306,11 @@ const Message = () => {
           </div>
           {/* chat area */}
           <div className={styles.chatArea}>
-            <PerfectScrollbar>
+            <PerfectScrollbar
+              containerRef={ref => {
+                setScrollEl(ref)
+              }}
+            >
               {newMessageBool ? (
                 <></>
               ) : (
