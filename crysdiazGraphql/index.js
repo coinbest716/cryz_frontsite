@@ -37,6 +37,7 @@ import {
   GetUsersByPatient,
   GetPatientMessageById,
   GetSubMessagesByDashboard,
+  CreateMessageByDashboard,
 } from './dashboard/message.gql'
 
 export default {
@@ -91,5 +92,8 @@ export default {
     createPatientBillByDashboard: CreatePatientBillByDashboard,
     updatePatientBillByDashboard: UpdatePatientBillByDashboard,
     deletePatientBillByDashboard: DeletePatientBillByDashboard,
+
+    // message part
+    createMessageByDashboard: CreateMessageByDashboard,
   },
 }
