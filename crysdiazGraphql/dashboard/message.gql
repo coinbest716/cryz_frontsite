@@ -71,6 +71,7 @@ mutation CreateMessageByDashboard(
   $from_id: Int
   $from_name: String
   $from_type: String
+  $request_id: Int
   $subject: String
   $to_email: String
   $to_id: Int
@@ -84,6 +85,7 @@ mutation CreateMessageByDashboard(
     from_id: $from_id
     from_name: $from_name
     from_type: $from_type
+    request_id: $request_id
     subject: $subject
     to_email: $to_email
     to_id: $to_id

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -59,12 +59,10 @@ const Message = () => {
   const [newMessage, setNewMessage] = useState({
     attachment: [],
     content: '',
-    create_date: new Date(),
     from_email: '',
     from_id: 0,
     from_name: '',
     from_type: 'patient',
-    notification: 'unread',
     request_id: 0,
     subject: '',
     to_email: '',
@@ -93,9 +91,9 @@ const Message = () => {
 
   const [createMessageByDashboard] = useMutation(graphql.mutations.createMessageByDashboard)
 
-  const [messageInput, setMessageInput] = useState('')
-
   const [dropdownButtonHover, setDropdownButtonHover] = useState(false)
+
+  const [scrollEl, setScrollEl] = useState()
 
   // handlers
   useEffect(() => {
@@ -148,6 +146,12 @@ const Message = () => {
   }, [messageListLoading, messageListData, messageListError])
 
   useEffect(() => {
+    if (messageList.length !== 0) {
+      handleSelectSubject(selectedSubject)
+    }
+  }, [messageList, selectedSubject])
+
+  useEffect(() => {
     if (!subMessageListError && subMessageListData && subMessageListData.getSubMessagesByDashboard) {
       setSubMessageList(subMessageListData.getSubMessagesByDashboard)
     }
@@ -159,17 +163,15 @@ const Message = () => {
     let object = {}
     object.attachment = []
     object.content = ''
-    object.create_date = new Date()
-    object.from_email = data.from_email
-    object.from_id = data.from_id
-    object.from_name = data.from_name
+    object.from_email = data.to_email
+    object.from_id = data.to_id
+    object.from_name = data.to_name
     object.from_type = 'patient'
-    object.notification = 'unread'
     object.request_id = data.id
     object.subject = data.subject
-    object.to_email = data.to_email
-    object.to_id = data.to_id
-    object.to_name = data.to_name
+    object.to_email = data.from_email
+    object.to_id = data.from_id
+    object.to_name = data.from_name
     object.to_type = 'user'
     setNewMessage(object)
     getSubMessagesByDashboard({
@@ -181,12 +183,10 @@ const Message = () => {
     let object = {}
     object.attachment = []
     object.content = ''
-    object.create_date = new Date()
     object.from_email = currentPatient.email
     object.from_id = currentPatient.id
     object.from_name = currentPatient.name + ' ' + currentPatient.lastname
     object.from_type = 'patient'
-    object.notification = 'unread'
     object.request_id = 0
     object.subject = ''
     object.to_email = item.email
@@ -198,45 +198,44 @@ const Message = () => {
     setNewMessageBool(true)
   }
 
-  const handleSendMessage = (content, type) => {
-    setNewMessageBool(false)
-    let date = new Date().toISOString()
-    let object = newMessage
-    switch (type) {
-      case 'text':
-        setMessageInput(content)
-        setNewMessage(newMessage => ({ ...newMessage, create_date: date }))
-        setNewMessage(newMessage => ({ ...newMessage, content: content }))
-        setNewMessage(newMessage => ({ ...newMessage, attachment: [] }))
-        object.create_date = date
-        object.content = content
-        object.attachment = []
-        break
-      case 'file':
-        let array = []
-        array.push(content)
-        setNewMessage(newMessage => ({ ...newMessage, create_date: date }))
-        setNewMessage(newMessage => ({ ...newMessage, content: '' }))
-        setNewMessage(newMessage => ({ ...newMessage, attachment: array }))
-        object.create_date = date
-        object.content = ''
-        object.attachment = array
-        break
-      default:
-        break
-    }
-    dispatch({ type: 'set', isLoading: true })
-    createMessageByDashboard({
-      variables: object,
-    })
-      .then(() => {
-        dispatch({ type: 'set', isLoading: false })
-      })
-      .catch(error => {
-        dispatch({ type: 'set', isLoading: false })
-        toast.error(error.message)
-      })
+  const handleChangeSubject = value => {
+    setNewMessage(newMessage => ({ ...newMessage, subject: value }))
   }
+
+  const handleSendMessage = (content, attachedFile) => {
+    let object = newMessage
+    if (object.subject !== '') {
+      if (!newMessageBool) {
+        object.request_id = selectedSubject.id
+      } else {
+        object.request_id = 0
+      }
+      object.content = content
+      if (attachedFile !== '') {
+        object.attachment.push(attachedFile)
+      }
+      createMessageByDashboard({
+        variables: object,
+      })
+        .then(() => {
+          getPatientMessageById({
+            variables: { patient_id: currentPatient.id },
+          })
+        })
+        .catch(error => {
+          toast.error(error.message)
+        })
+    } else {
+      toast.error('Please insert subject!')
+    }
+    setNewMessageBool(false)
+  }
+
+  useEffect(() => {
+    if (scrollEl) {
+      scrollEl.scrollTop = Number.MAX_SAFE_INTEGER
+    }
+  }, [scrollEl, subMessageList])
 
   return (
     <div className={globalStyles.dashContainer}>
@@ -290,7 +289,7 @@ const Message = () => {
                     data={item}
                     key={index}
                     active={selectedSubject.id === item.id ? true : false}
-                    onClick={data => handleSelectSubject(data)}
+                    onClick={() => handleSelectSubject(item)}
                   />
                 ))}
             </PerfectScrollbar>
@@ -299,38 +298,52 @@ const Message = () => {
         <div className={'w-full md:w-1/2 '}>
           {/* message select card area */}
           <div className={styles.subjectTitleArea}>
-            <MessageSelectCard data={newMessageBool ? newMessage : selectedSubject} />
+            <MessageSelectCard
+              data={newMessageBool ? newMessage : selectedSubject}
+              newMessageBool={newMessageBool}
+              onChangeSubject={value => handleChangeSubject(value)}
+            />
           </div>
           {/* chat area */}
           <div className={styles.chatArea}>
-            <PerfectScrollbar>
-              {subMessageList.map((item, index) =>
-                item.to_type === 'user' ? (
-                  item.content !== '' ? (
-                    <MessageCard01 key={index} message={item} />
-                  ) : item.attachment[0].type.split('/')[0] === 'image' ? (
-                    <MessageImage01 key={index} message={item} />
-                  ) : item.attachment[0].type.split('/')[0] === 'video' ? (
-                    <MessageVideo01 key={index} message={item} />
-                  ) : (
-                    <MessageDownload01 key={index} message={item} />
-                  )
-                ) : item.content !== '' ? (
-                  <MessageCard02 key={index} message={item} />
-                ) : item.attachment[0].type.split('/')[0] === 'image' ? (
-                  <MessageImage02 key={index} message={item} />
-                ) : item.attachment[0].type.split('/')[0] === 'video' ? (
-                  <MessageVideo02 key={index} message={item} />
-                ) : (
-                  <MessageDownload02 key={index} message={item} />
-                )
+            <PerfectScrollbar
+              containerRef={ref => {
+                setScrollEl(ref)
+              }}
+            >
+              {newMessageBool ? (
+                <></>
+              ) : (
+                <>
+                  {subMessageList.map((item, index) =>
+                    item.to_type === 'user' ? (
+                      item.content !== '' ? (
+                        <MessageCard01 key={index} message={item} />
+                      ) : item.attachment[0].type.split('/')[0] === 'image' ? (
+                        <MessageImage01 key={index} message={item} />
+                      ) : item.attachment[0].type.split('/')[0] === 'video' ? (
+                        <MessageVideo01 key={index} message={item} />
+                      ) : (
+                        <MessageDownload01 key={index} message={item} />
+                      )
+                    ) : item.content !== '' ? (
+                      <MessageCard02 key={index} message={item} />
+                    ) : item.attachment[0].type.split('/')[0] === 'image' ? (
+                      <MessageImage02 key={index} message={item} />
+                    ) : item.attachment[0].type.split('/')[0] === 'video' ? (
+                      <MessageVideo02 key={index} message={item} />
+                    ) : (
+                      <MessageDownload02 key={index} message={item} />
+                    )
+                  )}
+                </>
               )}
             </PerfectScrollbar>
           </div>
           {/* message input area */}
           <div className={styles.messageSendArea}>
             <div className={'my-5 mx-7 flex justify-end'}>
-              <MessageInput message={messageInput} sendMessage={(content, type) => handleSendMessage(content, type)} />
+              <MessageInput sendMessage={(content, attachedFile) => handleSendMessage(content, attachedFile)} />
             </div>
           </div>
         </div>

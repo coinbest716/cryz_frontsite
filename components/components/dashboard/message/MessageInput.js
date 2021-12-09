@@ -15,10 +15,10 @@ import AttachIcon from 'assets/images/attach.svg'
 import SendWhiteIcon from 'assets/images/send-white.svg'
 
 const MessageInput = props => {
-  const { message, sendMessage } = props
+  const { sendMessage } = props
   const [content, setContent] = useState('')
   const fileRef = createRef()
-  const [attachedFile, setAttachedFile] = useState({})
+  const [attachedFile, setAttachedFile] = useState('')
 
   const handleSetContent = (event, type) => {
     switch (type) {
@@ -35,7 +35,6 @@ const MessageInput = props => {
 
   // handlers
   const handleAttachFile = event => {
-    console.log(event.target.files[0])
     setAttachedFile(event.target.files[0])
   }
 
@@ -44,24 +43,21 @@ const MessageInput = props => {
   }
 
   const onClickRemoveFile = () => {
-    setAttachedFile({})
+    setAttachedFile('')
   }
 
   const handleTextareaOnKeyPress = event => {
     if (event.shiftKey === false && event.key === 'Enter') {
-      sendMessage(content, 'text')
+      sendMessage(content, attachedFile)
       handleSetContent(event, 'enter')
+      setAttachedFile('')
     }
   }
 
   const handleSendMessage = () => {
-    sendMessage(content, 'text')
+    sendMessage(content, attachedFile)
     setContent('')
-  }
-
-  const handleSendFile = () => {
-    sendMessage(attachedFile, 'file')
-    setAttachedFile({})
+    setAttachedFile('')
   }
 
   return (
@@ -79,14 +75,6 @@ const MessageInput = props => {
             }
             onKeyPress={event => handleTextareaOnKeyPress(event)}
           />
-        </div>
-        <div className={styles.iconArea}>
-          <button
-            className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
-            onClick={() => handleSendMessage()}
-          >
-            <Image src={SendIcon} alt={''} width={18} height={18} />
-          </button>
         </div>
       </div>
       {/* icon part */}
@@ -118,7 +106,7 @@ const MessageInput = props => {
           </button>
           <input className={'hidden'} type="file" id="img_frontr" onChange={handleAttachFile} ref={fileRef} />
           <div className={'ml-4'}>
-            <button className={styles.enterButton} onClick={() => handleSendFile()}>
+            <button className={styles.enterButton} onClick={() => handleSendMessage()}>
               <div className={'flex items-center mr-3'}>
                 <Image src={SendWhiteIcon} alt={''} width={16} height={16} />
               </div>
