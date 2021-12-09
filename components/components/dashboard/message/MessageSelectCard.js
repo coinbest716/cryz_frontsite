@@ -10,10 +10,11 @@ import styles from './MessageSelectCard.module.scss'
 import TrashIcon from 'assets/images/trash.svg'
 
 const MessageSelectCard = props => {
-  const { data } = props
+  const { data, onChangeSubject, newMessageBool } = props
 
   const handleChangeSubject = event => {
     console.log('event', event.target.value)
+    onChangeSubject(event.target.value)
   }
   return (
     <div className={styles.container}>
@@ -23,7 +24,7 @@ const MessageSelectCard = props => {
           {data?.from_name?.split(' ')[1].slice(0, 1).toUpperCase()}
         </div>
         <div className={'inline-grid justify-start items-center'}>
-          {data.subject !== '' ? (
+          {!newMessageBool ? (
             <div className={styles.title}>{data.subject}</div>
           ) : (
             <input
@@ -31,6 +32,7 @@ const MessageSelectCard = props => {
               autoComplete="new-password"
               placeholder="Subject"
               className={'w-full h-full bg-transparent py-1 px-2 text-black ' + styles.input}
+              value={data.subject}
               onChange={event => handleChangeSubject(event)}
             />
           )}

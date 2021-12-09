@@ -198,44 +198,55 @@ const Message = () => {
     setNewMessageBool(true)
   }
 
+  const handleChangeSubject = value => {
+    setNewMessage(newMessage => ({ ...newMessage, subject: value }))
+  }
+
   const handleSendMessage = (content, type) => {
     setNewMessageBool(false)
-    let date = new Date().toISOString()
     let object = newMessage
-    switch (type) {
-      case 'text':
-        setMessageInput(content)
-        setNewMessage(newMessage => ({ ...newMessage, create_date: date }))
-        setNewMessage(newMessage => ({ ...newMessage, content: content }))
-        setNewMessage(newMessage => ({ ...newMessage, attachment: [] }))
-        object.create_date = date
-        object.content = content
-        object.attachment = []
-        break
-      case 'file':
-        let array = []
-        array.push(content)
-        setNewMessage(newMessage => ({ ...newMessage, create_date: date }))
-        setNewMessage(newMessage => ({ ...newMessage, content: '' }))
-        setNewMessage(newMessage => ({ ...newMessage, attachment: array }))
-        object.create_date = date
-        object.content = ''
-        object.attachment = array
-        break
-      default:
-        break
+    if (object.subject !== '') {
+      let date = new Date().toISOString()
+      switch (type) {
+        case 'text':
+          setMessageInput(content)
+          setNewMessage(newMessage => ({ ...newMessage, create_date: date }))
+          setNewMessage(newMessage => ({ ...newMessage, content: content }))
+          setNewMessage(newMessage => ({ ...newMessage, attachment: [] }))
+          object.create_date = date
+          object.content = content
+          object.attachment = []
+          break
+        case 'file':
+          let array = []
+          array.push(content)
+          setNewMessage(newMessage => ({ ...newMessage, create_date: date }))
+          setNewMessage(newMessage => ({ ...newMessage, content: '' }))
+          setNewMessage(newMessage => ({ ...newMessage, attachment: array }))
+          object.create_date = date
+          object.content = ''
+          object.attachment = array
+          break
+        default:
+          break
+      }
+      dispatch({ type: 'set', isLoading: true })
+      createMessageByDashboard({
+        variables: object,
+      })
+        .then(() => {
+          dispatch({ type: 'set', isLoading: false })
+          getPatientMessageById({
+            variables: { patient_id: currentPatient.id },
+          })
+        })
+        .catch(error => {
+          dispatch({ type: 'set', isLoading: false })
+          toast.error(error.message)
+        })
+    } else {
+      toast.error('Please insert subject!')
     }
-    dispatch({ type: 'set', isLoading: true })
-    createMessageByDashboard({
-      variables: object,
-    })
-      .then(() => {
-        dispatch({ type: 'set', isLoading: false })
-      })
-      .catch(error => {
-        dispatch({ type: 'set', isLoading: false })
-        toast.error(error.message)
-      })
   }
 
   return (
@@ -299,31 +310,41 @@ const Message = () => {
         <div className={'w-full md:w-1/2 '}>
           {/* message select card area */}
           <div className={styles.subjectTitleArea}>
-            <MessageSelectCard data={newMessageBool ? newMessage : selectedSubject} />
+            <MessageSelectCard
+              data={newMessageBool ? newMessage : selectedSubject}
+              newMessageBool={newMessageBool}
+              onChangeSubject={value => handleChangeSubject(value)}
+            />
           </div>
           {/* chat area */}
           <div className={styles.chatArea}>
             <PerfectScrollbar>
-              {subMessageList.map((item, index) =>
-                item.to_type === 'user' ? (
-                  item.content !== '' ? (
-                    <MessageCard01 key={index} message={item} />
-                  ) : item.attachment[0].type.split('/')[0] === 'image' ? (
-                    <MessageImage01 key={index} message={item} />
-                  ) : item.attachment[0].type.split('/')[0] === 'video' ? (
-                    <MessageVideo01 key={index} message={item} />
-                  ) : (
-                    <MessageDownload01 key={index} message={item} />
-                  )
-                ) : item.content !== '' ? (
-                  <MessageCard02 key={index} message={item} />
-                ) : item.attachment[0].type.split('/')[0] === 'image' ? (
-                  <MessageImage02 key={index} message={item} />
-                ) : item.attachment[0].type.split('/')[0] === 'video' ? (
-                  <MessageVideo02 key={index} message={item} />
-                ) : (
-                  <MessageDownload02 key={index} message={item} />
-                )
+              {newMessageBool ? (
+                <></>
+              ) : (
+                <>
+                  {subMessageList.map((item, index) =>
+                    item.to_type === 'user' ? (
+                      item.content !== '' ? (
+                        <MessageCard01 key={index} message={item} />
+                      ) : item.attachment[0].type.split('/')[0] === 'image' ? (
+                        <MessageImage01 key={index} message={item} />
+                      ) : item.attachment[0].type.split('/')[0] === 'video' ? (
+                        <MessageVideo01 key={index} message={item} />
+                      ) : (
+                        <MessageDownload01 key={index} message={item} />
+                      )
+                    ) : item.content !== '' ? (
+                      <MessageCard02 key={index} message={item} />
+                    ) : item.attachment[0].type.split('/')[0] === 'image' ? (
+                      <MessageImage02 key={index} message={item} />
+                    ) : item.attachment[0].type.split('/')[0] === 'video' ? (
+                      <MessageVideo02 key={index} message={item} />
+                    ) : (
+                      <MessageDownload02 key={index} message={item} />
+                    )
+                  )}
+                </>
               )}
             </PerfectScrollbar>
           </div>
