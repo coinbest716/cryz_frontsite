@@ -97,7 +97,6 @@ const Message = () => {
 
   // handlers
   useEffect(() => {
-    getUserForMessage()
     Auth.currentAuthenticatedUser()
       .then(response => {
         if (response?.attributes?.email) {
@@ -121,9 +120,14 @@ const Message = () => {
         router.push('/dashboard/profile')
       } else {
         setCurrentPatient(personalData.getPatientByEmail)
+        getUserForMessage({
+          variables: {
+            patient_id: personalData.getPatientByEmail.id,
+          },
+        })
       }
     }
-  }, [personalLoading, personalData, personalError])
+  }, [getUserForMessage, personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (JSON.stringify(currentPatient) !== JSON.stringify({})) {

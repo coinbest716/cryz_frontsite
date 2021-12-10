@@ -36,8 +36,8 @@ query GetPatientMessageById($patient_id: Int) {
   }
 }
 
-query GetUserForMessage {
-  getUserForMessage {
+query GetUserForMessage($patient_id: Int) {
+  getUserForMessage(patient_id: $patient_id) {
     id
     name
     lastname
