@@ -13,16 +13,23 @@ const MessageSelectCard = props => {
   const { data, onChangeSubject, newMessageBool } = props
 
   const handleChangeSubject = event => {
-    console.log('event', event.target.value)
     onChangeSubject(event.target.value)
   }
   return (
     <div className={styles.container}>
       <div className={'flex justify-start w-full'}>
-        <div className={'relative mr-4 ' + styles.avatar}>
-          {data?.from_name?.split(' ')[0].slice(0, 1).toUpperCase()}
-          {data?.from_name?.split(' ')[1].slice(0, 1).toUpperCase()}
-        </div>
+        {JSON.stringify(data) !== JSON.stringify({}) ? (
+          <div className={'relative mr-4 ' + styles.avatar}>
+            {data?.from_type === 'user'
+              ? data?.from_name.split(' ')[0].slice(0, 1).toUpperCase()
+              : data?.to_name.split(' ')[0].slice(0, 1).toUpperCase()}
+            {data?.from_type === 'user'
+              ? data?.from_name.split(' ')[1].slice(0, 1).toUpperCase()
+              : data?.to_name.split(' ')[1].slice(0, 1).toUpperCase()}
+          </div>
+        ) : (
+          <></>
+        )}
         <div className={'inline-grid justify-start items-center'}>
           {!newMessageBool ? (
             <div className={styles.title}>{data.subject}</div>
