@@ -321,21 +321,21 @@ const Message = () => {
                     item.to_type === 'user' ? (
                       item.content !== '' ? (
                         <MessageCard01 key={index} message={item} />
-                      ) : item.attachment[0].type.split('/')[0] === 'image' ? (
+                      ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'image' ? (
                         <MessageImage01 key={index} message={item} />
-                      ) : item.attachment[0].type.split('/')[0] === 'video' ? (
+                      ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'video' ? (
                         <MessageVideo01 key={index} message={item} />
                       ) : (
-                        <MessageDownload01 key={index} message={item} />
+                        item.attachment.length !== 0 && <MessageDownload01 key={index} message={item} />
                       )
                     ) : item.content !== '' ? (
                       <MessageCard02 key={index} message={item} />
-                    ) : item.attachment[0].type.split('/')[0] === 'image' ? (
+                    ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'image' ? (
                       <MessageImage02 key={index} message={item} />
-                    ) : item.attachment[0].type.split('/')[0] === 'video' ? (
+                    ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'video' ? (
                       <MessageVideo02 key={index} message={item} />
                     ) : (
-                      <MessageDownload02 key={index} message={item} />
+                      item.attachment.length !== 0 && <MessageDownload02 key={index} message={item} />
                     )
                   )}
                 </>
