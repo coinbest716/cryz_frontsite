@@ -21,8 +21,12 @@ const SubjectCard = props => {
     <div className={styles.container + ' ' + (active === true ? styles.active : '')} onClick={() => onClick(data)}>
       <div className={'flex justify-start'}>
         <div className={'relative mr-4 ' + styles.avatar}>
-          {data?.from_name.split(' ')[0].slice(0, 1).toUpperCase()}
-          {data?.from_name.split(' ')[1].slice(0, 1).toUpperCase()}
+          {data?.from_type === 'user'
+            ? data?.from_name.split(' ')[0].slice(0, 1).toUpperCase()
+            : data?.to_name.split(' ')[0].slice(0, 1).toUpperCase()}
+          {data?.from_type === 'user'
+            ? data?.from_name.split(' ')[1].slice(0, 1).toUpperCase()
+            : data?.to_name.split(' ')[1].slice(0, 1).toUpperCase()}
           {data.notification === 'unread' ? (
             <div className={styles.status} style={{ backgroundColor: '#5D51C6' }}></div>
           ) : (
