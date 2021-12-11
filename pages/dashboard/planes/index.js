@@ -30,6 +30,10 @@ import downIcon from 'public/images/down.svg'
 import PlanData from 'assets/data/PlanData.json'
 import MonthListData from 'assets/data/MonthListData.json'
 
+// graphql
+import { useLazyQuery, useMutation } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
 const Planes = () => {
@@ -61,13 +65,28 @@ const Planes = () => {
   const noteDescription =
     'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.'
 
+  const [getOnlinePlanByDashboard, { data: onlinePlanData, loading: onlinePlanLoading, error: onlinePlanError }] = useLazyQuery(
+    graphql.queries.getOnlinePlanByDashboard
+  )
+
   // handlers
   useEffect(() => {
     setMaterials(PlanData.materialData)
     setGrayMaterials(PlanData.grayMaterialData)
     setGreenMaterials(PlanData.greenMaterialData)
     setCurrentMonth(MonthListData[new Date().getMonth()].month)
+    getOnlinePlanByDashboard({
+      variables: {
+        patient_id: 1, select_date: new Date().toISOString()
+      },
+    })
   }, [])
+
+  useEffect(() => {
+    if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
+      console.log(onlinePlanData.getOnlinePlanByDashboard)
+    }
+  }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
 
   useEffect(() => {
     setFeature([
