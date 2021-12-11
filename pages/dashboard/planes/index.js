@@ -10,6 +10,8 @@ import dynamic from 'next/dynamic'
 // third party components
 import ReactPlayer from 'react-player'
 import 'react-calendar/dist/Calendar.css'
+import toast from 'react-hot-toast'
+import { Auth } from 'aws-amplify'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -27,7 +29,6 @@ import styles from './planes.module.scss'
 import downIcon from 'public/images/down.svg'
 
 // json data
-import PlanData from 'assets/data/PlanData.json'
 import MonthListData from 'assets/data/MonthListData.json'
 
 // graphql
@@ -55,49 +56,83 @@ const Planes = () => {
 
   // variables
   const [plansOnlineData, setPlansOnlineData] = useState({})
-  const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
+  const [selectedVideo, setSelectedVideo] = useState({})
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
   const [currentMonth, setCurrentMonth] = useState('')
-  const [materials, setMaterials] = useState([])
-  const [grayMaterials, setGrayMaterials] = useState([])
-  const [greenMaterials, setGreenMaterials] = useState([])
-  const noteDescription =
-    'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.'
-
+  const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
+    graphql.queries.getPatientByEmail
+  )
   const [getOnlinePlanByDashboard, { data: onlinePlanData, loading: onlinePlanLoading, error: onlinePlanError }] =
     useLazyQuery(graphql.queries.getOnlinePlanByDashboard)
 
   // handlers
   useEffect(() => {
-    setMaterials(PlanData.materialData)
-    setGrayMaterials(PlanData.grayMaterialData)
-    setGreenMaterials(PlanData.greenMaterialData)
     setCurrentMonth(MonthListData[new Date().getMonth()].month)
-    getOnlinePlanByDashboard({
-      variables: {
-        patient_id: 1,
-        select_date: new Date().toISOString(),
-      },
-    })
-  }, [getOnlinePlanByDashboard])
+  }, [])
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then(response => {
+        if (response?.attributes?.email) {
+          getPatientByEmail({
+            variables: {
+              email: response.attributes.email,
+            },
+          })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+        router.push('/')
+      })
+  }, [getPatientByEmail])
+
+  useEffect(() => {
+    if (!personalError && personalData && personalData.getPatientByEmail) {
+      if (personalData === null) {
+        toast.error('Please insert your personal information in Profile page.')
+        router.push('/dashboard/profile')
+      } else {
+        getOnlinePlanByDashboard({
+          variables: {
+            patient_id: personalData.getPatientByEmail.id,
+            select_date: new Date().toISOString(),
+          },
+        })
+      }
+    }
+  }, [getOnlinePlanByDashboard, personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
       console.log(onlinePlanData.getOnlinePlanByDashboard)
       setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
+      setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
     }
   }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
 
   useEffect(() => {
     setFeature([
-      { id: 0, path: '/images/category.svg', bgColor: '#D2DADA', topLabel: 'Nivel', lowLabel: '1' },
-      { id: 1, path: '/images/type.svg', bgColor: '#DFDBD5', topLabel: 'Tandas', lowLabel: '2' },
-      { id: 2, path: '/images/time.svg', bgColor: '#E3BBAA', topLabel: 'Descanso', lowLabel: '20 seg' },
-      { id: 3, path: '/images/star.svg', bgColor: '#F5DEC2', topLabel: 'Peso', lowLabel: '05 kg' },
+      {
+        id: 0,
+        path: '/images/category.svg',
+        bgColor: '#D2DADA',
+        topLabel: 'Nivel',
+        lowLabel: selectedVideo.effort_level,
+      },
+      { id: 1, path: '/images/type.svg', bgColor: '#DFDBD5', topLabel: 'Tandas', lowLabel: selectedVideo.time },
+      {
+        id: 2,
+        path: '/images/time.svg',
+        bgColor: '#E3BBAA',
+        topLabel: 'Descanso',
+        lowLabel: selectedVideo.break + 'seg',
+      },
+      { id: 3, path: '/images/star.svg', bgColor: '#F5DEC2', topLabel: 'Peso', lowLabel: selectedVideo.weight + 'kg' },
     ])
-  }, [])
+  }, [selectedVideo])
 
   const handleClickMonth = () => {
     setShowCalendar(!showCalendar)
@@ -131,7 +166,17 @@ const Planes = () => {
             <div className={styles.chapterTitle}>{plansOnlineData.name}</div>
           </div>
           <div className={'pt-6'}>
-            <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} />
+            {JSON.stringify(selectedVideo) !== JSON.stringify({}) ? (
+              <ReactPlayer
+                url={selectedVideo.link}
+                width="100%"
+                height="100%"
+                className={styles.reactPlayer}
+                controls={true}
+              />
+            ) : (
+              <></>
+            )}
           </div>
 
           <div className={'flex flex-wrap justify-between pt-12 gap-4'}>
@@ -152,21 +197,30 @@ const Planes = () => {
 
           <div className={styles.noteSection + ' mt-5 px-4 py-8 block lg:hidden'}>
             <div className={styles.notes}>Notas :</div>
-            <div className={styles.noteDescription}>{noteDescription}</div>
+            <div className={styles.noteDescription}>{plansOnlineData?.routine?.sections[0]?.details}</div>
           </div>
 
           <div className={'w-full flex pt-7'}>
             <div className={'mr-8 px-8 py-5 ' + styles.materialSection}>
               <div className={styles.materialTitle + ' pb-2'}>Material necesario</div>
-              {materials.map((item, index) => (
+              {/* {materials.map((item, index) => (
                 <div className={'py-2'} key={index}>
                   <Material item={item} />
+                </div>
+              ))} */}
+              {plansOnlineData?.routine?.sections.map((item, index) => (
+                <div key={index}>
+                  {item.videos.map((video, index) => (
+                    <div className={'py-2'} key={index}>
+                      <Material item={video} />
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
             <div className={'hidden lg:block px-4 py-8 ' + styles.noteSection}>
               <div className={styles.notes}>Notas :</div>
-              <div className={styles.noteDescription}>{noteDescription}</div>
+              <div className={styles.noteDescription}>{plansOnlineData?.routine?.sections[0]?.details}</div>
             </div>
             <div className={'flex justify-end lg:hidden'}>
               <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
@@ -196,22 +250,31 @@ const Planes = () => {
                 navigationLabel={({ label }) => updateCalendarLabel(label)}
               />
             </div>
-            <div className={styles.videoMaterialTitle + ' pt-8'}>CALENTAMIENTO</div>
-            <div className={'pt-7'}>
-              {grayMaterials.map((item, index) => (
-                <div className={'py-2'} key={index}>
-                  <Material item={item} type={'gray'} />
+            {plansOnlineData?.routine?.sections.map((item, index) => (
+              <div key={index}>
+                <div className={styles.videoMaterialTitle + ' pt-8'}>{item.name}</div>
+                <div className={'pt-7'}>
+                  {item.videos.map((video, index) => (
+                    <div className={'py-2'} key={index}>
+                      <Material
+                        item={video}
+                        selectedVideo={selectedVideo}
+                        type={'green'}
+                        onClick={data => setSelectedVideo(data)}
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
             <div className={styles.videoMaterialTitle + ' pt-8'}>ABDOMINALES</div>
-            <div className={'pt-7'}>
+            {/* <div className={'pt-7'}>
               {greenMaterials.map((item, index) => (
                 <div className={'py-2'} key={index}>
                   <Material item={item} type={'green'} />
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
