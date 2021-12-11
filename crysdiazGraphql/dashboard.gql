@@ -1,0 +1,3 @@
+query GetPurchaseListByDashboard($patient_id: Int) {
+  getPurchaseListByDashboard(patient_id: $patient_id)
+}
