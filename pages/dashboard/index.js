@@ -64,6 +64,9 @@ const Dashboard = () => {
   const [getPatientIdByDashboard, { data: patientData, loading: patientLoading, error: patientError }] = useLazyQuery(
     graphql.queries.getPatientIdByDashboard
   )
+  const [getPurchaseListByDashboard, { data: bonusData, loading: bonusLoading, error: bonusError }] = useLazyQuery(
+    graphql.queries.getPurchaseListByDashboard
+  )
   const [profilePercentage, setProfilePercentage] = useState(0)
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
@@ -75,6 +78,7 @@ const Dashboard = () => {
   })
   const [markDate, setMarkDate] = useState([])
   const [calendarValue, setCalendarValue] = useState(new Date())
+  const [purchaseData, setPurchaseData] = useState([])
   const today = useSelector(state => state.today)
   const [message, setMessage] = useState([])
   const chartOptions = {
@@ -151,11 +155,19 @@ const Dashboard = () => {
   }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
+    if (!bonusError && bonusData && bonusData.getPurchaseListByDashboard) {
+      const data = bonusData.getPurchaseListByDashboard
+      setPurchaseData(data)
+    }
+  }, [bonusLoading, bonusData, bonusError])
+
+  useEffect(() => {
     if (!patientError && patientData && patientData.getPatientIdByDashboard) {
       const patient_id = patientData.getPatientIdByDashboard
       localStorage.setItem('patient_id', patient_id)
       getSessionsByDashboard({ variables: { patient_id: patient_id } })
       getAnthropmetryByDashboard({ variables: { patient_id: patient_id } })
+      getPurchaseListByDashboard({ variables: { patient_id: patient_id } })
     }
   }, [patientLoading, patientData, patientError])
 
@@ -358,15 +370,11 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div>
-                  <div className={'py-3 h-full pt-6'}>
-                    <ProgressBar percentage={70} label={'Mujer'} type={'women'} />
-                  </div>
-                  <div className={'py-3'}>
-                    <ProgressBar percentage={50} label={'Nutrición'} type={'nutrition'} />
-                  </div>
-                  <div className={'py-3'}>
-                    <ProgressBar percentage={30} label={'Entrenamiento'} type={'training'} />
-                  </div>
+                  {purchaseData.map(item => {
+                    ;<div className={'py-3 h-full pt-6'} key={index}>
+                      <ProgressBar data={item} />
+                    </div>
+                  })}
                 </div>
               </div>
             </div>
