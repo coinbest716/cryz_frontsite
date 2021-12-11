@@ -54,6 +54,7 @@ const Planes = () => {
   // loading part end #######################
 
   // variables
+  const [plansOnlineData, setPlansOnlineData] = useState({})
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
@@ -65,9 +66,8 @@ const Planes = () => {
   const noteDescription =
     'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.'
 
-  const [getOnlinePlanByDashboard, { data: onlinePlanData, loading: onlinePlanLoading, error: onlinePlanError }] = useLazyQuery(
-    graphql.queries.getOnlinePlanByDashboard
-  )
+  const [getOnlinePlanByDashboard, { data: onlinePlanData, loading: onlinePlanLoading, error: onlinePlanError }] =
+    useLazyQuery(graphql.queries.getOnlinePlanByDashboard)
 
   // handlers
   useEffect(() => {
@@ -77,7 +77,8 @@ const Planes = () => {
     setCurrentMonth(MonthListData[new Date().getMonth()].month)
     getOnlinePlanByDashboard({
       variables: {
-        patient_id: 1, select_date: new Date().toISOString()
+        patient_id: 1,
+        select_date: new Date().toISOString(),
       },
     })
   }, [])
@@ -85,6 +86,7 @@ const Planes = () => {
   useEffect(() => {
     if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
       console.log(onlinePlanData.getOnlinePlanByDashboard)
+      setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
     }
   }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
 
@@ -96,10 +98,6 @@ const Planes = () => {
       { id: 3, path: '/images/star.svg', bgColor: '#F5DEC2', topLabel: 'Peso', lowLabel: '05 kg' },
     ])
   }, [])
-
-  const handleClickDownlodPDF = () => {
-    console.log('handleClickDownlodPDF')
-  }
 
   const handleClickMonth = () => {
     setShowCalendar(!showCalendar)
@@ -130,7 +128,7 @@ const Planes = () => {
           <div className={'flex items-center'}>
             <div className={styles.chapter}>Chapter 2 &nbsp; </div>
             <div className={styles.dot}></div>
-            <div className={styles.chapterTitle}>&nbsp;How to create wireframe</div>
+            <div className={styles.chapterTitle}>{plansOnlineData.name}</div>
           </div>
           <div className={'pt-6'}>
             <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} />
@@ -148,7 +146,7 @@ const Planes = () => {
               </div>
             </div>
             <div className={'hidden lg:flex'}>
-              <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
+              <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
             </div>
           </div>
 
@@ -171,7 +169,7 @@ const Planes = () => {
               <div className={styles.noteDescription}>{noteDescription}</div>
             </div>
             <div className={'flex justify-end lg:hidden'}>
-              <DownloadPDF onClick={handleClickDownlodPDF} type={'plan'} />
+              <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
             </div>
           </div>
         </div>
