@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "3.4.17",
+    "@apollo/client": "3.5.6",
     "@fullcalendar/common": "^5.10.0",
     "@fullcalendar/core": "^5.10.1",
     "@fullcalendar/daygrid": "^5.10.0",
