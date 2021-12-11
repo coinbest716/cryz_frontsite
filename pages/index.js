@@ -68,7 +68,12 @@ const Home = props => {
   }, [mainImageLoading, mainImageData, mainImageError])
 
   useEffect(() => {
-    if (!featuredServicesLoading && !featuredServicesError && featuredServicesData && featuredServicesData.getFeaturedServices) {
+    if (
+      !featuredServicesLoading &&
+      !featuredServicesError &&
+      featuredServicesData &&
+      featuredServicesData.getFeaturedServices
+    ) {
       let array = []
       featuredServicesData.getFeaturedServices.map((item, index) => {
         if (item.active === true) {
@@ -82,7 +87,6 @@ const Home = props => {
   useEffect(() => {
     if (!equipoLoading && !equipoError && equipoData && equipoData.getEquipo) {
       setTeam(equipoData.getEquipo)
-      console.log(equipoData.getEquipo)
     }
   }, [equipoLoading, equipoData, equipoError])
 
