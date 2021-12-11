@@ -216,7 +216,6 @@ const Message = () => {
         variables: object,
       })
         .then(response => {
-          console.log('resposne', response)
           getPatientMessageById({
             variables: { patient_id: currentPatient.id },
           })

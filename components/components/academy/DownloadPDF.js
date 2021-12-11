@@ -5,14 +5,21 @@ import DownloadPDFIcon from 'public/images/downloadPDF.svg'
 import DownloadWhiteIcon from 'public/images/downloadWhite.svg'
 
 const DownloadPDF = props => {
-  const { onClick, type, url } = props
+  const { onClick, data, type, url } = props
+
+  const download = (fileUrl, fileName) => {
+    var a = document.createElement('a')
+    a.href = fileUrl
+    a.setAttribute('download', fileName)
+    a.click()
+  }
 
   return (
     <div>
       {type === 'plan' ? (
         <button
           className={'flex justify-between w-full items-center px-8 py-3 ' + styles.downloadPlan}
-          onClick={onClick}
+          onClick={() => download(data.path, data.path.split('/').pop())}
         >
           <div className={styles.labelPlan}>{'Documentación'}&nbsp;&nbsp;</div>
           <div className={'w-4 h-4 flex items-center'}>

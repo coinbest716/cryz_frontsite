@@ -40,6 +40,11 @@ import {
   CreateMessageByDashboard,
 } from './dashboard/message.gql'
 
+// plans online part
+import {
+  GetOnlinePlanByDashboard
+} from './dashboard/plans-online.gql'
+
 export default {
   queries: {
     // home part
@@ -83,6 +88,8 @@ export default {
     getUserForMessage: GetUserForMessage,
     getPatientMessageById: GetPatientMessageById,
     getSubMessagesByDashboard: GetSubMessagesByDashboard,
+    // plans online part
+    getOnlinePlanByDashboard: GetOnlinePlanByDashboard,
   },
   mutations: {
     createUser: CreateUser,

@@ -1,0 +1,3 @@
+query GetOnlinePlanByDashboard($patient_id: Int, $select_date: Date) {
+  getOnlinePlanByDashboard(patient_id: $patient_id, select_date: $select_date)
+}
