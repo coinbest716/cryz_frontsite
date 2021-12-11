@@ -81,7 +81,7 @@ const Planes = () => {
         select_date: new Date().toISOString(),
       },
     })
-  }, [])
+  }, [getOnlinePlanByDashboard])
 
   useEffect(() => {
     if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
