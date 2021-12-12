@@ -1,5 +1,9 @@
 @import 'styles/variable.module.scss';
 
+.active {
+  background-color: #cccccc;
+}
+
 .label {
   color: #333333;
   font-family: Montserrat;
@@ -20,4 +24,9 @@
   object-fit: 'cover';
   object-position: 'center';
   opacity: 0.6;
+}
+.reactPlayer {
+  video {
+    border-radius: 10px;
+  }
 }

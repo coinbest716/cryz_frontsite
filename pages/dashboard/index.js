@@ -370,11 +370,11 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div>
-                  {purchaseData.map(item => {
-                    ;<div className={'py-3 h-full pt-6'} key={index}>
+                  {purchaseData.map((item, index) => (
+                    <div className={'py-3 h-full pt-6'} key={index}>
                       <ProgressBar data={item} />
                     </div>
-                  })}
+                  ))}
                 </div>
               </div>
             </div>
