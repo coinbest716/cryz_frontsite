@@ -1,14 +1,15 @@
 [
-  { "id": 0, "month": "Enero" },
-  { "id": 1, "month": "Febrero" },
-  { "id": 2, "month": "Marzo" },
-  { "id": 3, "month": "Abril" },
-  { "id": 4, "month": "Mayo" },
-  { "id": 5, "month": "Junio" },
-  { "id": 6, "month": "Julio" },
-  { "id": 7, "month": "Agosto" },
-  { "id": 8, "month": "Septiembre" },
-  { "id": 9, "month": "Octubre" },
-  { "id": 10, "month": "Noviembre" },
-  { "id": 11, "month": "Diciembre" }
+  { "id": 0, "month": "Todo", "value": 0 },
+  { "id": 1, "month": "Enero", "value": 1 },
+  { "id": 2, "month": "Febrero", "value": 2 },
+  { "id": 3, "month": "Marzo", "value": 3 },
+  { "id": 4, "month": "Abril", "value": 4 },
+  { "id": 5, "month": "Mayo", "value": 5 },
+  { "id": 6, "month": "Junio", "value": 6 },
+  { "id": 7, "month": "Julio", "value": 7 },
+  { "id": 8, "month": "Agosto", "value": 8 },
+  { "id": 9, "month": "Septiembre", "value": 9 },
+  { "id": 10, "month": "Octubre", "value": 10 },
+  { "id": 11, "month": "Noviembre", "value": 11 },
+  { "id": 12, "month": "Diciembre", "value": 12 }
 ]

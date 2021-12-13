@@ -31,6 +31,8 @@ import {
 } from './billing.gql'
 import { GetSessionsByDashboard, GetLocationByDashboard } from './calendar.gql'
 import { GetPurchaseListByDashboard } from './dashboard.gql'
+// shopping part
+import { GetServicePurchaseByDashboard } from './dashboard/shopping.gql'
 // message part
 import {
   GetUserForMessage,
@@ -82,6 +84,8 @@ export default {
     getSessionsByDashboard: GetSessionsByDashboard,
     getLocationByDashboard: GetLocationByDashboard,
     getPurchaseListByDashboard: GetPurchaseListByDashboard,
+    // shopping part
+    getServicePurchaseByDashboard: GetServicePurchaseByDashboard,
     // message part
     getUsersByPatient: GetUsersByPatient,
     getUserForMessage: GetUserForMessage,
