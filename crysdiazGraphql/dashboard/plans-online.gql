@@ -6,5 +6,6 @@ query GetVideoMaterial($video_id: Int) {
   getVideoMaterial(video_id: $video_id) {
     id
     name
+    details
   }
 }
