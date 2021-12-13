@@ -121,3 +121,39 @@
   letter-spacing: 0;
   line-height: 15px;
 }
+
+.imageContainer {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-family: Montserrat;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  color: $blue-gray-400-color;
+}
+.subTitle {
+  display: inline;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  color: $blue-gray-400-color;
+}
+.outlineButton {
+  width: 331px;
+  height: 106px;
+  background-color: transparent;
+  border: 1px solid $gray-500-color;
+
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  color: $blue-gray-400-color;
+}
