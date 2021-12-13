@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
+import Script from 'next/script'
 
 // aws components
 import Amplify, { Auth } from 'aws-amplify'
@@ -56,6 +57,8 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <ApolloProvider client={client}>
+        <Script src="https://js.stripe.com/v2/"></Script>
+        <Script id="stripe-js" src="https://js.stripe.com/v3/" async></Script>
         <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
         <Toaster position="top-right" reverseOrder={false} />
       </ApolloProvider>
