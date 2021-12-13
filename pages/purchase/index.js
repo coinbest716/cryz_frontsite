@@ -29,6 +29,9 @@ import shoppingCartData from 'assets/data/ShoppingCartData'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './purchase.module.scss'
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -53,7 +56,12 @@ const Purchase = () => {
   // loading part end #######################
 
   // variables
+  const [checkout, { data: purchaseData, loading: purchaseLoading, error: purchaseError }] = useLazyQuery(
+    graphql.queries.checkout
+  )
+
   const router = useRouter()
+  const [session, setSession] = useState({})
   const [cartData, setCartData] = useState([])
   const [tabIndex, setTabIndex] = useState(0)
   const [personalInfo, setPersonalInfo] = useState({
@@ -162,6 +170,12 @@ const Purchase = () => {
     }
   }, [router.query])
 
+  useEffect(() => {
+    if (!purchaseLoading && !purchaseError && purchaseData && purchaseData.checkout) {
+      setSession(purchaseData.checkout)
+    }
+  }, [purchaseLoading, purchaseData, purchaseError])
+
   const handleRemoveCart = index => {
     let array = [...cartData]
     array.splice(index, 1)
@@ -235,8 +249,12 @@ const Purchase = () => {
               toast.error(res.error.message)
             dispatch({ type: 'set', isLoading: false })
           } else if (res.id) {
-            // param = { ...param, token: res.id };
-            console.log('########## token = ', res.id)
+            checkout({
+              variables: {
+                serviceId: router.query.service_id,
+                ccToken: res.id,
+              },
+            })
             dispatch({ type: 'set', isLoading: false })
           }
         })
