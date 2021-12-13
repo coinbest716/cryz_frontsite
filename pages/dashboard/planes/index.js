@@ -60,6 +60,7 @@ const Planes = () => {
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
+  const [dateISOString, setDateISOSTring] = useState(new Date().toISOString())
   const [currentMonth, setCurrentMonth] = useState('')
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
@@ -100,12 +101,12 @@ const Planes = () => {
         getOnlinePlanByDashboard({
           variables: {
             patient_id: personalData.getPatientByEmail.id,
-            select_date: new Date().toISOString(),
+            select_date: dateISOString,
           },
         })
       }
     }
-  }, [getOnlinePlanByDashboard, personalLoading, personalData, personalError])
+  }, [getOnlinePlanByDashboard, dateISOString, personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
@@ -162,6 +163,7 @@ const Planes = () => {
 
   const handleChangeDate = value => {
     setDate(value)
+    setDateISOSTring(value.toISOString())
     setShowCalendar(false)
   }
 
@@ -227,8 +229,8 @@ const Planes = () => {
               <div className={styles.materialTitle + ' pb-2'}>Material necesario</div>
               {materialData?.map((item, index) => (
                 <div className={'py-2'} key={index}>
-                  {/* <Material item={item} /> */}
-                  {index} {item.name}
+                  <div className={styles.label}>{item.name}</div>
+                  <div className={styles.description}>{item.details}</div>
                 </div>
               ))}
             </div>
