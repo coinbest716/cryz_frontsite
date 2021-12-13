@@ -80,7 +80,6 @@ const BuyPerson = () => {
   }, [femHealthServiceSubjectLoading, femHealthServiceSubjectData, femHealthServiceSubjectError])
 
   const handleClickBuy = service_id => {
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@', service_id)
     router.push(
       {
         pathname: '/purchase',
@@ -91,16 +90,16 @@ const BuyPerson = () => {
         shallow: false,
       }
     )
-    // Auth.currentAuthenticatedUser()
-    //   .then(() => {
-    //     router.push({
-    //       pathname: '/purchase',
-    //       query: { service_id: service_id, tab: 2 },
-    //     })
-    //   })
-    //   .catch(() => {
-    //     router.push('/purchase-login')
-    //   })
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        router.push({
+          pathname: '/purchase',
+          query: { service_id: service_id, tab: 2 },
+        })
+      })
+      .catch(() => {
+        router.push('/purchase-login')
+      })
   }
   return (
     <div className={styles.container}>

@@ -205,6 +205,10 @@ const Purchase = () => {
       router.push('/purchase/order-failed')
       return
     } else if (paymentType === 'card') {
+      if (!router.query.service_id) {
+        toast.error('You did not select any Service!')
+        return
+      }
       if (!cardInfo.name || !cardInfo.number || !cardInfo.expiry || !cardInfo.cvc) {
         toast.error('You should input Card information!')
         return
@@ -224,7 +228,6 @@ const Purchase = () => {
 
         window.Stripe.createToken(card_info, async (req, res) => {
           if (res.error) {
-            console.log('@@@@@@@@@@@@@@@', res)
             if (res.error.code === 'invalid_number' || res.error.code === 'incorrect_number')
               toast.error(res.error.message)
             if (res.error.code === 'incorrect_cvc' || res.error.code === 'invaild_cvc') toast.error(res.error.message)
