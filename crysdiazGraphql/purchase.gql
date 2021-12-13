@@ -1,4 +1,4 @@
-query Checkout($serviceId: Int, $ccToken: String) {
+mutation Checkout($serviceId: Int, $ccToken: String) {
   checkout(serviceId: $serviceId, ccToken: $ccToken) {
     id
     patient_id
