@@ -298,11 +298,11 @@ const Planes = () => {
         </div>
       ) : (
         <div className={styles.imageContainer}>
-          <div className={styles.title}>ACTUALMENTE NO TIENES NINGÚN PLAN ACTIVO</div>
-          <div>
+          <div className={styles.title + ' mt-48'}>ACTUALMENTE NO TIENES NINGÚN PLAN ACTIVO</div>
+          <div className={'mt-14'}>
             <Image src={PlansImage} width={274} height={226} />
           </div>
-          <div className={styles.subTitle}>
+          {/* <div className={styles.subTitle}>
             PUEDES RENOVAR TU BONO
             <br />
             <strong>10 SESIONES DE SUELO PÉLVICO</strong>
@@ -312,7 +312,7 @@ const Planes = () => {
               <p className={'mr-4'}>Quiero renovar mi bono</p>
               <Image src={ArrowRightUpGray} alt="" width={36} height={34} />
             </button>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
