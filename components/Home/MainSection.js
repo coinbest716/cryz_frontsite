@@ -92,16 +92,10 @@ const MainSection = props => {
                     <div className={styles.pinkBoxOpacity} />
                     <div className={styles.pinkBox}>
                       <div className={globalStyles.tinyMCEClass}>
-                        <div
-                          className={styles.pinkTitle + ' tinymce-class'}
-                          dangerouslySetInnerHTML={{ __html: item.title }}
-                        />
+                        <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
                       </div>
                       <div className={globalStyles.tinyMCEClass}>
-                        <div
-                          className={styles.pinkText + ' tinymce-class'}
-                          dangerouslySetInnerHTML={{ __html: item.detail }}
-                        />
+                        <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
                       </div>
                       <div className={styles.pinkButtonArea}>
                         <button className={styles.pinkButton} onClick={() => router.push(item.url)}>
@@ -109,10 +103,7 @@ const MainSection = props => {
                         </button>
                       </div>
                       <div className={globalStyles.tinyMCEClass}>
-                        <div
-                          className={styles.pinkText + ' tinymce-class'}
-                          dangerouslySetInnerHTML={{ __html: item.text }}
-                        />
+                        <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.text }} />
                       </div>
                     </div>
                   </div>
