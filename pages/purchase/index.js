@@ -30,7 +30,7 @@ import shoppingCartData from 'assets/data/ShoppingCartData'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './purchase.module.scss'
 // graphql
-import { useLazyQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 const Tabs = dynamic(
@@ -56,9 +56,7 @@ const Purchase = () => {
   // loading part end #######################
 
   // variables
-  const [checkout, { data: purchaseData, loading: purchaseLoading, error: purchaseError }] = useLazyQuery(
-    graphql.queries.checkout
-  )
+  const [checkout] = useMutation(graphql.mutations.checkout)
 
   const router = useRouter()
   const [session, setSession] = useState({})
@@ -170,12 +168,6 @@ const Purchase = () => {
     }
   }, [router.query])
 
-  useEffect(() => {
-    if (!purchaseLoading && !purchaseError && purchaseData && purchaseData.checkout) {
-      setSession(purchaseData.checkout)
-    }
-  }, [purchaseLoading, purchaseData, purchaseError])
-
   const handleRemoveCart = index => {
     let array = [...cartData]
     array.splice(index, 1)
@@ -254,6 +246,12 @@ const Purchase = () => {
                 serviceId: router.query.service_id,
                 ccToken: res.id,
               },
+            }).then(response => {
+              if (response.data.checkout) {
+                setSession(response.data.checkout)
+                toast.success('Successfully buy Service!')
+                router.push('/purchase/order-success')
+              }
             })
             dispatch({ type: 'set', isLoading: false })
           }
@@ -262,7 +260,6 @@ const Purchase = () => {
         dispatch({ type: 'set', isLoading: false })
         toast.error(err.message)
       }
-      // router.push('/purchase/order-success')
     } else if (paymentType === 'transfer') {
       router.push('/purchase/transfer-success')
     }

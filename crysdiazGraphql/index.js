@@ -98,7 +98,6 @@ export default {
     getOnlinePlanByDashboard: GetOnlinePlanByDashboard,
     getVideoMaterial: GetVideoMaterial,
     // purchase
-    checkout: Checkout,
   },
   mutations: {
     createUser: CreateUser,
@@ -111,5 +110,6 @@ export default {
 
     // message part
     createMessageByDashboard: CreateMessageByDashboard,
+    checkout: Checkout,
   },
 }
