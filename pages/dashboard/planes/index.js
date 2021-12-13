@@ -109,35 +109,45 @@ const Planes = () => {
 
   useEffect(() => {
     if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
-      setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
-      setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
+      if (JSON.stringify(onlinePlanData.getOnlinePlanByDashboard) !== JSON.stringify({})) {
+        setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
+        setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
+      }
     }
   }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
 
   useEffect(() => {
-    setFeature([
-      {
-        id: 0,
-        path: '/images/category.svg',
-        bgColor: '#D2DADA',
-        topLabel: 'Nivel',
-        lowLabel: selectedVideo.effort_level,
-      },
-      { id: 1, path: '/images/type.svg', bgColor: '#DFDBD5', topLabel: 'Tandas', lowLabel: selectedVideo.time },
-      {
-        id: 2,
-        path: '/images/time.svg',
-        bgColor: '#E3BBAA',
-        topLabel: 'Descanso',
-        lowLabel: selectedVideo.break + 'seg',
-      },
-      { id: 3, path: '/images/star.svg', bgColor: '#F5DEC2', topLabel: 'Peso', lowLabel: selectedVideo.weight + 'kg' },
-    ])
-    getVideoMaterial({
-      variables: {
-        video_id: selectedVideo.id,
-      },
-    })
+    if (JSON.stringify(selectedVideo) !== JSON.stringify({})) {
+      setFeature([
+        {
+          id: 0,
+          path: '/images/category.svg',
+          bgColor: '#D2DADA',
+          topLabel: 'Nivel',
+          lowLabel: selectedVideo.effort_level,
+        },
+        { id: 1, path: '/images/type.svg', bgColor: '#DFDBD5', topLabel: 'Tandas', lowLabel: selectedVideo.time },
+        {
+          id: 2,
+          path: '/images/time.svg',
+          bgColor: '#E3BBAA',
+          topLabel: 'Descanso',
+          lowLabel: selectedVideo.break + 'seg',
+        },
+        {
+          id: 3,
+          path: '/images/star.svg',
+          bgColor: '#F5DEC2',
+          topLabel: 'Peso',
+          lowLabel: selectedVideo.weight + 'kg',
+        },
+      ])
+      getVideoMaterial({
+        variables: {
+          video_id: selectedVideo.id,
+        },
+      })
+    }
   }, [selectedVideo])
 
   useEffect(() => {
@@ -254,7 +264,7 @@ const Planes = () => {
                 navigationLabel={({ label }) => updateCalendarLabel(label)}
               />
             </div>
-            {plansOnlineData?.routine?.sections.map((item, index) => (
+            {plansOnlineData?.routine?.sections?.map((item, index) => (
               <div key={index}>
                 <div className={styles.videoMaterialTitle + ' pt-8'}>{item.name}</div>
                 <div className={'pt-7'}>
