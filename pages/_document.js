@@ -18,6 +18,8 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Montserrat:400,400italic,700&display=swap"
             rel="stylesheet"
           />
+          <script src="https://js.stripe.com/v2/"></script>
+          <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
         </Head>
         <body>
           <Main />

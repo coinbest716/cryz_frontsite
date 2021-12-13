@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 //next components
-import router from 'next/router'
+// import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom component
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -16,6 +17,7 @@ import styles from 'pages/buy/index.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { Auth } from 'aws-amplify'
 
 const BuyPerson = () => {
   // loading part ###########################
@@ -34,6 +36,7 @@ const BuyPerson = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  const router = useRouter()
   const [description, setDescription] = useState('')
   const [sessionData, setSessionData] = useState([])
 
@@ -46,6 +49,7 @@ const BuyPerson = () => {
   ] = useLazyQuery(graphql.queries.getFemHealthServiceSubjectByType)
 
   useEffect(() => {
+    console.log(router.query.type)
     if (router.query.type === 'service') {
       getCmsServiceSubjectByType({
         variables: { discipline_id: parseInt(router.query.discipline_id), service_type: router.query.service_type },
@@ -56,7 +60,7 @@ const BuyPerson = () => {
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getCmsServiceSubjectByType, getFemHealthServiceSubjectByType])
+  }, [router.query])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubjectByType) {
@@ -76,8 +80,19 @@ const BuyPerson = () => {
     }
   }, [femHealthServiceSubjectLoading, femHealthServiceSubjectData, femHealthServiceSubjectError])
 
-  const handleClickBuy = () => {
-    router.push('/purchase-login')
+  const handleClickBuy = service_id => {
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@', service_id)
+    router.push('/purchase#payment')
+    // Auth.currentAuthenticatedUser()
+    //   .then(() => {
+    //     router.push({
+    //       pathname: '/purchase#payment/',
+    //       query: { service_id: service_id },
+    //     })
+    //   })
+    //   .catch(() => {
+    //     router.push('/purchase-login')
+    //   })
   }
   return (
     <div className={styles.container}>

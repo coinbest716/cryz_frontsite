@@ -143,7 +143,7 @@ const Purchase = () => {
 
   const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('')
-  const [cardData, setCardData] = useState({ number: '', name: '', expiry: '', cvc: '' })
+  const [cardInfo, setCardInfo] = useState({ number: '', name: '', expiry: '', cvc: '' })
 
   // handlers
   useEffect(() => {
@@ -153,8 +153,12 @@ const Purchase = () => {
     if (currentState[1] === 'address') {
       setTabIndex(1)
       router.push('/purchase#address', undefined, { shallow: true })
-    } else {
+    } else if (currentState[1] === 'information') {
+      setTabIndex(0)
       router.push('/purchase#information', undefined, { shallow: true })
+    } else if (currentState[1] === 'payment') {
+      setTabIndex(2)
+      router.push('/purchase#payment', undefined, { shallow: true })
     }
   }, [])
 
@@ -201,8 +205,7 @@ const Purchase = () => {
     setPaymentType(event.target.name)
   }
   const handleChangeCardData = (name, value) => {
-    console.log(name, value)
-    setCardData({ ...cardData, [name]: value })
+    setCardInfo({ ...cardInfo, [name]: value })
   }
   const handleFinishBilling = () => {
     if (paymentType === '') {
@@ -210,7 +213,43 @@ const Purchase = () => {
       router.push('/purchase/order-failed')
       return
     } else if (paymentType === 'card') {
-      router.push('/purchase/order-success')
+      if (!cardInfo.name || !cardInfo.number || !cardInfo.expiry || !cardInfo.cvc) {
+        toast.error('You should input Card information!')
+        return
+      }
+      try {
+        dispatch({ type: 'set', isLoading: true })
+        window.Stripe.setPublishableKey(process.env.NEXT_PUBLIC_STRIPE_KEY)
+
+        const exp_month = cardInfo.expiry.split('/')[0]
+        const exp_year = cardInfo.expiry.split('/')[1]
+        const card_info = {
+          number: cardInfo.number,
+          exp_month: exp_month,
+          exp_year: exp_year,
+          cvc: cardInfo.cvc,
+        }
+
+        window.Stripe.createToken(card_info, async (req, res) => {
+          if (res.error) {
+            console.log('@@@@@@@@@@@@@@@', res)
+            if (res.error.code === 'invalid_number' || res.error.code === 'incorrect_number')
+              toast.error(res.error.message)
+            if (res.error.code === 'incorrect_cvc' || res.error.code === 'invaild_cvc') toast.error(res.error.message)
+            if (res.error.code === 'invalid_expiry_month' || res.error.code === 'invalid_expiry_year')
+              toast.error(res.error.message)
+            dispatch({ type: 'set', isLoading: false })
+          } else if (res.id) {
+            // param = { ...param, token: res.id };
+            console.log('########## token = ', res.id)
+            dispatch({ type: 'set', isLoading: false })
+          }
+        })
+      } catch (err) {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(err.message)
+      }
+      // router.push('/purchase/order-success')
     } else if (paymentType === 'transfer') {
       router.push('/purchase/transfer-success')
     }
