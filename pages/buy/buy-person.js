@@ -49,7 +49,6 @@ const BuyPerson = () => {
   ] = useLazyQuery(graphql.queries.getFemHealthServiceSubjectByType)
 
   useEffect(() => {
-    console.log(router.query.type)
     if (router.query.type === 'service') {
       getCmsServiceSubjectByType({
         variables: { discipline_id: parseInt(router.query.discipline_id), service_type: router.query.service_type },
@@ -82,12 +81,21 @@ const BuyPerson = () => {
 
   const handleClickBuy = service_id => {
     console.log('@@@@@@@@@@@@@@@@@@@@@@@', service_id)
-    router.push('/purchase#payment')
+    router.push(
+      {
+        pathname: '/purchase',
+        query: { tab: 2, service_id: service_id },
+      },
+      undefined,
+      {
+        shallow: false,
+      }
+    )
     // Auth.currentAuthenticatedUser()
     //   .then(() => {
     //     router.push({
-    //       pathname: '/purchase#payment/',
-    //       query: { service_id: service_id },
+    //       pathname: '/purchase',
+    //       query: { service_id: service_id, tab: 2 },
     //     })
     //   })
     //   .catch(() => {

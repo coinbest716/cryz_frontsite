@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 // next components
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 
 // third party components
@@ -53,6 +53,7 @@ const Purchase = () => {
   // loading part end #######################
 
   // variables
+  const router = useRouter()
   const [cartData, setCartData] = useState([])
   const [tabIndex, setTabIndex] = useState(0)
   const [personalInfo, setPersonalInfo] = useState({
@@ -149,18 +150,17 @@ const Purchase = () => {
   useEffect(() => {
     setCartData(shoppingCartData)
     setRedsys(false)
-    const currentState = router.asPath.split('#')
-    if (currentState[1] === 'address') {
-      setTabIndex(1)
-      router.push('/purchase#address', undefined, { shallow: true })
-    } else if (currentState[1] === 'information') {
-      setTabIndex(0)
-      router.push('/purchase#information', undefined, { shallow: true })
-    } else if (currentState[1] === 'payment') {
-      setTabIndex(2)
-      router.push('/purchase#payment', undefined, { shallow: true })
-    }
   }, [])
+
+  useEffect(() => {
+    if (Number(router.query.tab) === 0) {
+      setTabIndex(0)
+    } else if (Number(router.query.tab) === 1) {
+      setTabIndex(1)
+    } else if (Number(router.query.tab) === 2) {
+      setTabIndex(2)
+    }
+  }, [router.query])
 
   const handleRemoveCart = index => {
     let array = [...cartData]
@@ -171,19 +171,11 @@ const Purchase = () => {
   const handleDiscard = () => {}
   const handleSave = () => {}
   const handleContinue = tabIndex => {
-    setTabIndex(tabIndex)
-    switch (tabIndex) {
-      case 0:
-        router.push('/purchase#information', undefined, { shallow: true })
-        break
-
-      case 1:
-        router.push('/purchase#address', undefined, { shallow: true })
-        break
-      case 2:
-        router.push('/purchase#payment', undefined, { shallow: true })
-        break
+    let query = { tab: tabIndex }
+    if (router.query.service_id) {
+      query = { ...query, service_id: router.query.service_id }
     }
+    router.push({ pathname: '/purchase', query: query }, undefined, { shallow: true })
   }
 
   const handleChangeInfo = (event, key) => {
@@ -258,7 +250,18 @@ const Purchase = () => {
   const handleAcceptDiscount = () => {}
 
   const onClickTab = tabType => {
-    router.push(`/purchase#${tabType}`, undefined, { shallow: true })
+    let query = { tab: tabType }
+    if (router.query.service_id) {
+      query = { ...query, service_id: router.query.service_id }
+    }
+    router.push(
+      {
+        pathname: '/purchase',
+        query: query,
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   return (
@@ -275,9 +278,9 @@ const Purchase = () => {
                   selectedTabClassName={styles.selectedTab}
                 >
                   <TabList className={styles.tabsList}>
-                    <Tab onClick={() => onClickTab('information')}>01 INFORMACIÓN</Tab>
-                    <Tab onClick={() => onClickTab('address')}>02 DIRECCIONES FACTURACIÓN</Tab>
-                    <Tab onClick={() => onClickTab('payment')}>03 MÉTODO DE PAGO</Tab>
+                    <Tab onClick={() => onClickTab(0)}>01 INFORMACIÓN</Tab>
+                    <Tab onClick={() => onClickTab(1)}>02 DIRECCIONES FACTURACIÓN</Tab>
+                    <Tab onClick={() => onClickTab(2)}>03 MÉTODO DE PAGO</Tab>
                   </TabList>
                   <TabPanel>
                     <div className={'p-4 pt-16'}>

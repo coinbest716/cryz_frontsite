@@ -79,7 +79,12 @@ const PurchaseLogin = () => {
   }
 
   const handleClickEnter = () => {
-    router.push('/purchase#address')
+    router.push({
+      pathname: '/purchase',
+      query: {
+        tab: 1,
+      },
+    })
   }
 
   return (
