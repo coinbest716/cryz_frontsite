@@ -41,9 +41,7 @@ import {
 } from './dashboard/message.gql'
 
 // plans online part
-import {
-  GetOnlinePlanByDashboard
-} from './dashboard/plans-online.gql'
+import { GetOnlinePlanByDashboard, GetVideoMaterial } from './dashboard/plans-online.gql'
 
 export default {
   queries: {
@@ -91,6 +89,7 @@ export default {
     getSubMessagesByDashboard: GetSubMessagesByDashboard,
     // plans online part
     getOnlinePlanByDashboard: GetOnlinePlanByDashboard,
+    getVideoMaterial: GetVideoMaterial,
   },
   mutations: {
     createUser: CreateUser,

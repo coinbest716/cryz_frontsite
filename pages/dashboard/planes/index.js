@@ -16,7 +16,6 @@ import { Auth } from 'aws-amplify'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
-// import Profile from 'components/components/dashboard/Profile'
 import Material from 'components/components/dashboard/Material'
 import Feature from 'components/components/academy/Feature'
 import DownloadPDF from 'components/components/academy/DownloadPDF'
@@ -32,7 +31,7 @@ import downIcon from 'public/images/down.svg'
 import MonthListData from 'assets/data/MonthListData.json'
 
 // graphql
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
@@ -57,6 +56,7 @@ const Planes = () => {
   // variables
   const [plansOnlineData, setPlansOnlineData] = useState({})
   const [selectedVideo, setSelectedVideo] = useState({})
+  const [materialData, setMaterialData] = useState([])
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
@@ -66,6 +66,8 @@ const Planes = () => {
   )
   const [getOnlinePlanByDashboard, { data: onlinePlanData, loading: onlinePlanLoading, error: onlinePlanError }] =
     useLazyQuery(graphql.queries.getOnlinePlanByDashboard)
+  const [getVideoMaterial, { data: videoMaterialData, loading: videoMaterailLoading, error: videoMaterialError }] =
+    useLazyQuery(graphql.queries.getVideoMaterial)
 
   // handlers
   useEffect(() => {
@@ -107,32 +109,52 @@ const Planes = () => {
 
   useEffect(() => {
     if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
-      console.log(onlinePlanData.getOnlinePlanByDashboard)
-      setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
-      setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
+      if (JSON.stringify(onlinePlanData.getOnlinePlanByDashboard) !== JSON.stringify({})) {
+        setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
+        setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
+      }
     }
   }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
 
   useEffect(() => {
-    setFeature([
-      {
-        id: 0,
-        path: '/images/category.svg',
-        bgColor: '#D2DADA',
-        topLabel: 'Nivel',
-        lowLabel: selectedVideo.effort_level,
-      },
-      { id: 1, path: '/images/type.svg', bgColor: '#DFDBD5', topLabel: 'Tandas', lowLabel: selectedVideo.time },
-      {
-        id: 2,
-        path: '/images/time.svg',
-        bgColor: '#E3BBAA',
-        topLabel: 'Descanso',
-        lowLabel: selectedVideo.break + 'seg',
-      },
-      { id: 3, path: '/images/star.svg', bgColor: '#F5DEC2', topLabel: 'Peso', lowLabel: selectedVideo.weight + 'kg' },
-    ])
+    if (JSON.stringify(selectedVideo) !== JSON.stringify({})) {
+      setFeature([
+        {
+          id: 0,
+          path: '/images/category.svg',
+          bgColor: '#D2DADA',
+          topLabel: 'Nivel',
+          lowLabel: selectedVideo.effort_level,
+        },
+        { id: 1, path: '/images/type.svg', bgColor: '#DFDBD5', topLabel: 'Tandas', lowLabel: selectedVideo.time },
+        {
+          id: 2,
+          path: '/images/time.svg',
+          bgColor: '#E3BBAA',
+          topLabel: 'Descanso',
+          lowLabel: selectedVideo.break + 'seg',
+        },
+        {
+          id: 3,
+          path: '/images/star.svg',
+          bgColor: '#F5DEC2',
+          topLabel: 'Peso',
+          lowLabel: selectedVideo.weight + 'kg',
+        },
+      ])
+      getVideoMaterial({
+        variables: {
+          video_id: selectedVideo.id,
+        },
+      })
+    }
   }, [selectedVideo])
+
+  useEffect(() => {
+    if (!videoMaterialError && videoMaterialData && videoMaterialData.getVideoMaterial) {
+      setMaterialData(videoMaterialData.getVideoMaterial)
+    }
+  }, [videoMaterailLoading, videoMaterialData, videoMaterialError])
 
   const handleClickMonth = () => {
     setShowCalendar(!showCalendar)
@@ -203,18 +225,10 @@ const Planes = () => {
           <div className={'w-full flex pt-7'}>
             <div className={'mr-8 px-8 py-5 ' + styles.materialSection}>
               <div className={styles.materialTitle + ' pb-2'}>Material necesario</div>
-              {/* {materials.map((item, index) => (
+              {materialData?.map((item, index) => (
                 <div className={'py-2'} key={index}>
-                  <Material item={item} />
-                </div>
-              ))} */}
-              {plansOnlineData?.routine?.sections.map((item, index) => (
-                <div key={index}>
-                  {item.videos.map((video, index) => (
-                    <div className={'py-2'} key={index}>
-                      <Material item={video} />
-                    </div>
-                  ))}
+                  {/* <Material item={item} /> */}
+                  {index} {item.name}
                 </div>
               ))}
             </div>
@@ -250,7 +264,7 @@ const Planes = () => {
                 navigationLabel={({ label }) => updateCalendarLabel(label)}
               />
             </div>
-            {plansOnlineData?.routine?.sections.map((item, index) => (
+            {plansOnlineData?.routine?.sections?.map((item, index) => (
               <div key={index}>
                 <div className={styles.videoMaterialTitle + ' pt-8'}>{item.name}</div>
                 <div className={'pt-7'}>
