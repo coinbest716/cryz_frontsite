@@ -250,6 +250,7 @@ const Purchase = () => {
               if (response.data.checkout) {
                 setSession(response.data.checkout)
                 toast.success('Successfully buy Service!')
+                router.push('/purchase/order-success')
               }
             })
             dispatch({ type: 'set', isLoading: false })
@@ -259,7 +260,6 @@ const Purchase = () => {
         dispatch({ type: 'set', isLoading: false })
         toast.error(err.message)
       }
-      // router.push('/purchase/order-success')
     } else if (paymentType === 'transfer') {
       router.push('/purchase/transfer-success')
     }
