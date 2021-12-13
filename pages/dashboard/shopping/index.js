@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
+// third party components
+import toast from 'react-hot-toast'
+import { Auth } from 'aws-amplify'
+
 // redux
 import { useDispatch } from 'react-redux'
 
@@ -27,6 +31,10 @@ import DownloadDisableIcon from 'assets/images/download-disable.svg'
 import OrderStateData from 'assets/data/OrderStateData.json'
 import MonthList from 'assets/data/MonthListData.json'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Shopping = () => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -45,11 +53,61 @@ const Shopping = () => {
   // loading part end #######################
 
   // variables
-  const [selectedMonth, setSelectedMonth] = useState('January')
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1)
+  const [shoppingData, setShoppingData] = useState([])
+
+  const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
+    graphql.queries.getPatientByEmail
+  )
+
+  const [getServicePurchaseByDashboard, { data: billingData, loading: billingLoading, error: billingError }] =
+    useLazyQuery(graphql.queries.getServicePurchaseByDashboard)
 
   // handlers
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then(response => {
+        if (response?.attributes?.email) {
+          getPatientByEmail({
+            variables: {
+              email: response.attributes.email,
+            },
+          })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+        router.push('/')
+      })
+  }, [getPatientByEmail])
+
+  useEffect(() => {
+    if (!personalError && personalData && personalData.getPatientByEmail) {
+      if (personalData === null) {
+        toast.error('Please insert your personal information in Profile page.')
+        router.push('/dashboard/profile')
+      } else {
+        getServicePurchaseByDashboard({
+          variables: {
+            patient_id: personalData.getPatientByEmail.id,
+            month: selectedMonth,
+          },
+        })
+      }
+    }
+  }, [selectedMonth, getServicePurchaseByDashboard, personalLoading, personalData, personalError])
+
+  useEffect(() => {
+    if (!billingError && billingData && billingData.getServicePurchaseByDashboard) {
+      console.log(billingData.getServicePurchaseByDashboard)
+      setShoppingData(billingData.getServicePurchaseByDashboard)
+    } else {
+      setShoppingData([])
+    }
+  }, [billingLoading, billingData, billingError])
+
   const handleChange = event => {
-    setSelectedMonth(event.target.value)
+    setSelectedMonth(Number(event.target.value))
   }
 
   const handleGotoOrderDetail = () => {
@@ -75,7 +133,7 @@ const Shopping = () => {
           className={'cursor-pointer flex justify-start items-center ' + styles.monthSelect}
         >
           {MonthList.map((item, index) => (
-            <option key={index} value={item.month}>
+            <option key={index} value={item.value}>
               {item.month}
             </option>
           ))}
