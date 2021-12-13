@@ -45,6 +45,9 @@ import {
 // plans online part
 import { GetOnlinePlanByDashboard, GetVideoMaterial } from './dashboard/plans-online.gql'
 
+// purchase
+import { Checkout } from './purchase.gql'
+
 export default {
   queries: {
     // home part
@@ -94,6 +97,8 @@ export default {
     // plans online part
     getOnlinePlanByDashboard: GetOnlinePlanByDashboard,
     getVideoMaterial: GetVideoMaterial,
+    // purchase
+    checkout: Checkout,
   },
   mutations: {
     createUser: CreateUser,

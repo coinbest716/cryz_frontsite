@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 //next components
-import router from 'next/router'
+// import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom component
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -16,6 +17,7 @@ import styles from 'pages/buy/index.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { Auth } from 'aws-amplify'
 
 const BuyPerson = () => {
   // loading part ###########################
@@ -34,6 +36,7 @@ const BuyPerson = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  const router = useRouter()
   const [description, setDescription] = useState('')
   const [sessionData, setSessionData] = useState([])
 
@@ -56,7 +59,7 @@ const BuyPerson = () => {
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getCmsServiceSubjectByType, getFemHealthServiceSubjectByType])
+  }, [router.query])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubjectByType) {
@@ -76,8 +79,27 @@ const BuyPerson = () => {
     }
   }, [femHealthServiceSubjectLoading, femHealthServiceSubjectData, femHealthServiceSubjectError])
 
-  const handleClickBuy = () => {
-    router.push('/purchase-login')
+  const handleClickBuy = service_id => {
+    router.push(
+      {
+        pathname: '/purchase',
+        query: { tab: 2, service_id: service_id },
+      },
+      undefined,
+      {
+        shallow: false,
+      }
+    )
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        router.push({
+          pathname: '/purchase',
+          query: { service_id: service_id, tab: 2 },
+        })
+      })
+      .catch(() => {
+        router.push('/purchase-login')
+      })
   }
   return (
     <div className={styles.container}>

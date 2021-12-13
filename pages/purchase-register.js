@@ -75,7 +75,12 @@ const Register = () => {
   }
 
   const handleClickEnter = () => {
-    router.push('/purchase#information')
+    router.push({
+      pathname: '/purchase',
+      query: {
+        tab: 0,
+      },
+    })
   }
 
   return (

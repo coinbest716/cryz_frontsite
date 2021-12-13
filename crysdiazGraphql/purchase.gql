@@ -1,0 +1,23 @@
+query Checkout($serviceId: Int, $ccToken: String) {
+  checkout(serviceId: $serviceId, ccToken: $ccToken) {
+    id
+    patient_id
+    item_kind
+    item_id
+    item_name
+    item_web_name
+    item_speciality
+    item_count
+    item_iva
+    item_sessions
+    item_used
+    status
+    purchase_date
+    purchase_type
+    bill_number
+    price
+    gross_amount
+    discount
+    amount
+  }
+}

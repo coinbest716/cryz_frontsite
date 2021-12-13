@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 // next components
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 
 // third party components
@@ -29,6 +29,9 @@ import shoppingCartData from 'assets/data/ShoppingCartData'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './purchase.module.scss'
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -53,6 +56,12 @@ const Purchase = () => {
   // loading part end #######################
 
   // variables
+  const [checkout, { data: purchaseData, loading: purchaseLoading, error: purchaseError }] = useLazyQuery(
+    graphql.queries.checkout
+  )
+
+  const router = useRouter()
+  const [session, setSession] = useState({})
   const [cartData, setCartData] = useState([])
   const [tabIndex, setTabIndex] = useState(0)
   const [personalInfo, setPersonalInfo] = useState({
@@ -143,20 +152,29 @@ const Purchase = () => {
 
   const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('')
-  const [cardData, setCardData] = useState({ number: '', name: '', expiry: '', cvc: '' })
+  const [cardInfo, setCardInfo] = useState({ number: '', name: '', expiry: '', cvc: '' })
 
   // handlers
   useEffect(() => {
     setCartData(shoppingCartData)
     setRedsys(false)
-    const currentState = router.asPath.split('#')
-    if (currentState[1] === 'address') {
-      setTabIndex(1)
-      router.push('/purchase#address', undefined, { shallow: true })
-    } else {
-      router.push('/purchase#information', undefined, { shallow: true })
-    }
   }, [])
+
+  useEffect(() => {
+    if (Number(router.query.tab) === 0) {
+      setTabIndex(0)
+    } else if (Number(router.query.tab) === 1) {
+      setTabIndex(1)
+    } else if (Number(router.query.tab) === 2) {
+      setTabIndex(2)
+    }
+  }, [router.query])
+
+  useEffect(() => {
+    if (!purchaseLoading && !purchaseError && purchaseData && purchaseData.checkout) {
+      setSession(purchaseData.checkout)
+    }
+  }, [purchaseLoading, purchaseData, purchaseError])
 
   const handleRemoveCart = index => {
     let array = [...cartData]
@@ -167,19 +185,11 @@ const Purchase = () => {
   const handleDiscard = () => {}
   const handleSave = () => {}
   const handleContinue = tabIndex => {
-    setTabIndex(tabIndex)
-    switch (tabIndex) {
-      case 0:
-        router.push('/purchase#information', undefined, { shallow: true })
-        break
-
-      case 1:
-        router.push('/purchase#address', undefined, { shallow: true })
-        break
-      case 2:
-        router.push('/purchase#payment', undefined, { shallow: true })
-        break
+    let query = { tab: tabIndex }
+    if (router.query.service_id) {
+      query = { ...query, service_id: router.query.service_id }
     }
+    router.push({ pathname: '/purchase', query: query }, undefined, { shallow: true })
   }
 
   const handleChangeInfo = (event, key) => {
@@ -201,8 +211,7 @@ const Purchase = () => {
     setPaymentType(event.target.name)
   }
   const handleChangeCardData = (name, value) => {
-    console.log(name, value)
-    setCardData({ ...cardData, [name]: value })
+    setCardInfo({ ...cardInfo, [name]: value })
   }
   const handleFinishBilling = () => {
     if (paymentType === '') {
@@ -210,7 +219,50 @@ const Purchase = () => {
       router.push('/purchase/order-failed')
       return
     } else if (paymentType === 'card') {
-      router.push('/purchase/order-success')
+      if (!router.query.service_id) {
+        toast.error('You did not select any Service!')
+        return
+      }
+      if (!cardInfo.name || !cardInfo.number || !cardInfo.expiry || !cardInfo.cvc) {
+        toast.error('You should input Card information!')
+        return
+      }
+      try {
+        dispatch({ type: 'set', isLoading: true })
+        window.Stripe.setPublishableKey(process.env.NEXT_PUBLIC_STRIPE_KEY)
+
+        const exp_month = cardInfo.expiry.split('/')[0]
+        const exp_year = cardInfo.expiry.split('/')[1]
+        const card_info = {
+          number: cardInfo.number,
+          exp_month: exp_month,
+          exp_year: exp_year,
+          cvc: cardInfo.cvc,
+        }
+
+        window.Stripe.createToken(card_info, async (req, res) => {
+          if (res.error) {
+            if (res.error.code === 'invalid_number' || res.error.code === 'incorrect_number')
+              toast.error(res.error.message)
+            if (res.error.code === 'incorrect_cvc' || res.error.code === 'invaild_cvc') toast.error(res.error.message)
+            if (res.error.code === 'invalid_expiry_month' || res.error.code === 'invalid_expiry_year')
+              toast.error(res.error.message)
+            dispatch({ type: 'set', isLoading: false })
+          } else if (res.id) {
+            checkout({
+              variables: {
+                serviceId: router.query.service_id,
+                ccToken: res.id,
+              },
+            })
+            dispatch({ type: 'set', isLoading: false })
+          }
+        })
+      } catch (err) {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(err.message)
+      }
+      // router.push('/purchase/order-success')
     } else if (paymentType === 'transfer') {
       router.push('/purchase/transfer-success')
     }
@@ -219,7 +271,18 @@ const Purchase = () => {
   const handleAcceptDiscount = () => {}
 
   const onClickTab = tabType => {
-    router.push(`/purchase#${tabType}`, undefined, { shallow: true })
+    let query = { tab: tabType }
+    if (router.query.service_id) {
+      query = { ...query, service_id: router.query.service_id }
+    }
+    router.push(
+      {
+        pathname: '/purchase',
+        query: query,
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   return (
@@ -236,9 +299,9 @@ const Purchase = () => {
                   selectedTabClassName={styles.selectedTab}
                 >
                   <TabList className={styles.tabsList}>
-                    <Tab onClick={() => onClickTab('information')}>01 INFORMACIÓN</Tab>
-                    <Tab onClick={() => onClickTab('address')}>02 DIRECCIONES FACTURACIÓN</Tab>
-                    <Tab onClick={() => onClickTab('payment')}>03 MÉTODO DE PAGO</Tab>
+                    <Tab onClick={() => onClickTab(0)}>01 INFORMACIÓN</Tab>
+                    <Tab onClick={() => onClickTab(1)}>02 DIRECCIONES FACTURACIÓN</Tab>
+                    <Tab onClick={() => onClickTab(2)}>03 MÉTODO DE PAGO</Tab>
                   </TabList>
                   <TabPanel>
                     <div className={'p-4 pt-16'}>
