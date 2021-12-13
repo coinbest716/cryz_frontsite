@@ -113,7 +113,11 @@ const Planes = () => {
       if (JSON.stringify(onlinePlanData.getOnlinePlanByDashboard) !== JSON.stringify({})) {
         setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
         setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
+      } else {
+        setSelectedVideo({})
       }
+    } else {
+      setPlansOnlineData({})
     }
   }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
 
