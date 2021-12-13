@@ -9,3 +9,7 @@ query GetVideoMaterial($video_id: Int) {
     details
   }
 }
+
+query GetAvailablePlanDates($patient_id: Int) {
+  getAvailablePlanDates(patient_id: $patient_id)
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="274px" height="226px" viewBox="0 0 274 226" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient x1="0.5" y1="0" x2="0.1699059" y2="1.4257203" id="gradient_1">
+      <stop offset="0" stop-color="#818E8E" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient x1="0.5" y1="0" x2="0.1699059" y2="1.4257203" id="gradient_2">
+      <stop offset="0" stop-color="#939E9E" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient x1="0.5" y1="0" x2="0.1699059" y2="1.4257203" id="gradient_3">
+      <stop offset="0" stop-color="#859191" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient x1="0.5" y1="0" x2="0.1699059" y2="1.4257203" id="gradient_4">
+      <stop offset="0" stop-color="#919C9C" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient x1="0.5" y1="0" x2="0.1699059" y2="1.4257203" id="gradient_5">
+      <stop offset="0" stop-color="#889494" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <filter filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB" id="filter_1">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+      <feMorphology radius="-1" operator="dilate" in="SourceAlpha" result="effect0_dropShadow" />
+      <feOffset dx="0" dy="16" />
+      <feGaussianBlur stdDeviation="8" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.039215688 0 0 0 0 0.08627451 0 0 0 0 0.27450982 0 0 0 0.101960786 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect0_dropShadow" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+      <feOffset dx="0" dy="0" />
+      <feGaussianBlur stdDeviation="0.5" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.039215688 0 0 0 0 0.08627451 0 0 0 0 0.27450982 0 0 0 0.05882353 0" />
+      <feBlend mode="normal" in2="effect0_dropShadow" result="effect1_dropShadow" />
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+    </filter>
+  </defs>
+  <g id="logo" transform="translate(2.5 2.5)">
+    <path d="M135.472 206.942C185.177 206.942 225.472 166.424 225.472 116.442C225.472 66.4601 185.177 25.9419 135.472 25.9419C85.7661 25.9419 45.4717 66.4601 45.4717 116.442C45.4717 166.424 85.7661 206.942 135.472 206.942Z" id="Oval-4" fill="url(#gradient_1)" fill-rule="evenodd" stroke="none" filter="url(#filter_1)" />
+    <path d="M59.0454 118.649C63.9746 149.801 93.1998 171.055 124.322 166.121C155.444 161.187 176.677 131.933 171.748 100.781C166.818 69.6294 137.593 48.3755 106.471 53.3095C75.3495 58.2435 54.1161 87.4969 59.0454 118.649Z" id="Oval-4" fill="url(#gradient_2)" fill-rule="evenodd" stroke="none" />
+    <path d="M1.88754 15.6894C2.92892 22.2708 9.10326 26.7611 15.6783 25.7187C22.2533 24.6763 26.7393 18.496 25.6979 11.9146C24.6565 5.33322 18.4822 0.842966 11.9071 1.88536C5.33207 2.92775 0.846151 9.10805 1.88754 15.6894Z" id="Oval-4" fill="url(#gradient_3)" fill-rule="evenodd" stroke="none" />
+    <path d="M66.7748 215.247C67.2607 218.318 70.1421 220.414 73.2105 219.927C76.2788 219.441 78.3722 216.557 77.8863 213.485C77.4003 210.414 74.5189 208.319 71.4506 208.805C68.3822 209.291 66.2888 212.176 66.7748 215.247Z" id="Oval-4" fill="url(#gradient_4)" fill-rule="evenodd" stroke="none" />
+    <path d="M253.455 38.2706C254.08 42.2194 257.784 44.9136 261.729 44.2882C265.674 43.6627 268.366 39.9545 267.741 36.0057C267.116 32.0569 263.412 29.3627 259.467 29.9881C255.522 30.6136 252.83 34.3218 253.455 38.2706Z" id="Oval-4" fill="url(#gradient_5)" fill-rule="evenodd" stroke="none" />
+  </g>
+  <path d="M701.95 416.425C701.95 415.528 701.222 414.8 700.325 414.8C699.427 414.8 698.7 415.528 698.7 416.425L698.7 419.675C698.7 424.162 702.338 427.8 706.825 427.8L742.575 427.8C747.062 427.8 750.7 424.162 750.7 419.675L750.7 370.925C750.7 366.438 747.062 362.8 742.575 362.8L706.825 362.8C702.338 362.8 698.7 366.438 698.7 370.925L698.7 374.175C698.7 375.073 699.427 375.8 700.325 375.8C701.222 375.8 701.95 375.073 701.95 374.175L701.95 370.925C701.95 368.233 704.133 366.05 706.825 366.05L742.575 366.05C745.267 366.05 747.45 368.233 747.45 370.925L747.45 419.675C747.45 422.367 745.267 424.55 742.575 424.55L706.825 424.55C704.133 424.55 701.95 422.367 701.95 419.675L701.95 416.425ZM694.901 379.457C693.851 378.531 692.2 379.275 692.2 380.675L692.2 409.925C692.2 411.325 693.851 412.07 694.901 411.143L711.463 396.518C712.195 395.871 712.195 394.729 711.463 394.082L694.901 379.457ZM707.932 395.3L695.45 406.322L695.45 384.278L707.932 395.3Z" id="Shape" fill="#FFFFFF" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="2.3" />
+</svg>
