@@ -33,6 +33,8 @@ import styles from './purchase.module.scss'
 import { useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
+import { Auth } from 'aws-amplify'
+
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
   { ssr: false }
@@ -58,6 +60,7 @@ const Purchase = () => {
   // variables
   const [checkout] = useMutation(graphql.mutations.checkout)
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const router = useRouter()
   const [session, setSession] = useState({})
   const [cartData, setCartData] = useState([])
@@ -156,6 +159,15 @@ const Purchase = () => {
   useEffect(() => {
     setCartData(shoppingCartData)
     setRedsys(false)
+
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        setIsAuthenticated(true)
+      })
+      .catch(() => {
+        router.push('/purchase-login')
+        setIsAuthenticated(false)
+      })
   }, [])
 
   useEffect(() => {
@@ -282,7 +294,7 @@ const Purchase = () => {
     )
   }
 
-  return (
+  return isAuthenticated ? (
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globalStyles.container + ' pt-20'}>
@@ -552,6 +564,8 @@ const Purchase = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   )
 }
 export default Purchase

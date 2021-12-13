@@ -61,7 +61,7 @@ const PurchaseLogin = () => {
       .catch(() => {
         setIsAuthenticated(false)
       })
-    setRememberMe(localStorage.getItem('remember'))
+    setRememberMe(Boolean(localStorage.getItem('remember')))
     if (localStorage.getItem('remember')) {
       setEmail(localStorage.getItem('email'))
       setPassword(localStorage.getItem('password'))
