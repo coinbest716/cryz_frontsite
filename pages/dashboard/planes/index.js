@@ -12,6 +12,7 @@ import ReactPlayer from 'react-player'
 import 'react-calendar/dist/Calendar.css'
 import toast from 'react-hot-toast'
 import { Auth } from 'aws-amplify'
+import moment from 'moment'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -102,7 +103,7 @@ const Planes = () => {
         getOnlinePlanByDashboard({
           variables: {
             patient_id: personalData.getPatientByEmail.id,
-            select_date: new Date(date.getTime() - date.getTimezoneOffset() * 60000),
+            select_date: moment(date).format('YYYY-MM-DDTHH:mm:ssZ'),
           },
         })
       }
