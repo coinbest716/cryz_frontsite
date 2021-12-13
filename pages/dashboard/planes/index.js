@@ -62,7 +62,6 @@ const Planes = () => {
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
-  const [dateISOString, setDateISOSTring] = useState(new Date().toISOString())
   const [currentMonth, setCurrentMonth] = useState('')
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
@@ -103,12 +102,12 @@ const Planes = () => {
         getOnlinePlanByDashboard({
           variables: {
             patient_id: personalData.getPatientByEmail.id,
-            select_date: dateISOString,
+            select_date: new Date(date.getTime() - date.getTimezoneOffset() * 60000),
           },
         })
       }
     }
-  }, [getOnlinePlanByDashboard, dateISOString, personalLoading, personalData, personalError])
+  }, [getOnlinePlanByDashboard, date, personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
@@ -155,7 +154,7 @@ const Planes = () => {
         },
       })
     }
-  }, [selectedVideo])
+  }, [selectedVideo, getVideoMaterial])
 
   useEffect(() => {
     if (!videoMaterialError && videoMaterialData && videoMaterialData.getVideoMaterial) {
@@ -168,8 +167,8 @@ const Planes = () => {
   }
 
   const handleChangeDate = value => {
+    console.log('value', value)
     setDate(value)
-    setDateISOSTring(value.toISOString())
     setShowCalendar(false)
   }
 
