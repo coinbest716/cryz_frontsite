@@ -18,7 +18,8 @@ const Material = props => {
   return (
     <div
       className={
-        'flex justify-start items-center py-2 cursor-pointer ' + (item.id === selectedVideo?.id ? styles.active : '')
+        'flex justify-start items-center py-2 px-2 cursor-pointer rounded ' +
+        (item.id === selectedVideo?.id ? styles.active : '')
       }
       onClick={() => onClick(item)}
     >
