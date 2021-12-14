@@ -30,7 +30,7 @@ import {
   DeletePatientBillByDashboard,
 } from './billing.gql'
 import { GetSessionsByDashboard, GetLocationByDashboard } from './calendar.gql'
-import { GetPurchaseListByDashboard } from './dashboard.gql'
+import { GetPurchaseListByDashboard, GetWeekDaySessionsByDashboard } from './dashboard.gql'
 // shopping part
 import { GetServicePurchaseByDashboard } from './dashboard/shopping.gql'
 // message part
@@ -87,6 +87,7 @@ export default {
     getSessionsByDashboard: GetSessionsByDashboard,
     getLocationByDashboard: GetLocationByDashboard,
     getPurchaseListByDashboard: GetPurchaseListByDashboard,
+    getWeekDaySessionsByDashboard: GetWeekDaySessionsByDashboard,
     // shopping part
     getServicePurchaseByDashboard: GetServicePurchaseByDashboard,
     // message part
