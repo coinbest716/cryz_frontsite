@@ -10,7 +10,7 @@ import Image from 'next/image'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CommonButton from 'components/components/purchaseLogin/CommonButton'
-import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
+import ShoppingCart from 'components/components/purchase/ShoppingCart'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
