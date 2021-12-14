@@ -46,7 +46,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         client.clearStore()
         localStorage.clear()
         // Auth.signOut()
-        router.push('/')
+        router.push('/login')
       }
     })
 
