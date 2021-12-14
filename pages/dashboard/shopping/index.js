@@ -97,7 +97,15 @@ const Shopping = () => {
 
   useEffect(() => {
     if (!billingError && billingData && billingData.getServicePurchaseByDashboard) {
-      setShoppingData(billingData.getServicePurchaseByDashboard)
+      let array = billingData.getServicePurchaseByDashboard
+      let tempArray = []
+      array.map(item => {
+        let obj = JSON.parse(JSON.stringify(item))
+        obj.purchase_date =
+          item.purchase_date.slice(8, 10) + '/' + item.purchase_date.slice(5, 7) + '/' + item.purchase_date.slice(0, 4)
+        tempArray.push(obj)
+      })
+      setShoppingData(tempArray)
     } else {
       setShoppingData([])
     }
@@ -169,7 +177,7 @@ const Shopping = () => {
                     styles.tableCellText
                   }
                 >
-                  <div className={'flex items-start'}>Order #{item.bill_number}</div>
+                  <div className={'flex items-start'}>#{item.bill_number}</div>
                   <div className={'flex items-end mb-2'}>
                     <Chip
                       data={
@@ -197,14 +205,12 @@ const Shopping = () => {
                 </div>
               </td>
               <td>
-                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                  {item.purchase_date.slice(5, 10).replace('-', '/')}
-                </div>
+                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.purchase_date}</div>
               </td>
               <td>
                 <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                   <div className={'inline-grid'}>
-                    <span className={styles.price}>${item.price}</span>
+                    <span className={styles.price}>{item.price}€</span>
                     <span className={styles.payment}>Paypal</span>
                   </div>
                 </div>
