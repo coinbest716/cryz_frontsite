@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import Menu from 'components/Menu/Menu'
 
 // images
-import CartIcon from 'assets/images/cart.svg'
+// import CartIcon from 'assets/images/cart.svg'
 import AccountIcon from 'assets/images/account.svg'
 import MessageIcon from 'assets/images/message-box.svg'
 
@@ -133,9 +133,9 @@ const Header = props => {
     }
   }
 
-  const handleClickShoppingCard = bool => {
-    setOpenCart(bool)
-  }
+  // const handleClickShoppingCard = bool => {
+  //   setOpenCart(bool)
+  // }
 
   const handleRemoveCart = index => {
     let array = [...cartData]
@@ -345,16 +345,16 @@ const Header = props => {
               )
             })}
           {/* icon menu part */}
-          <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
+          {/* <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
             <button
               className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
               onMouseOver={() => handleClickShoppingCard(true)}
             >
               <Image src={CartIcon} alt="" width={22} height={19} />
             </button>
-          </li>
+          </li> */}
           <li
-            className={'flex justify-center items-center ' + styles.iconMenuItem}
+            className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}
             onClick={() => handleGotoRouter('login')}
           >
             <button
