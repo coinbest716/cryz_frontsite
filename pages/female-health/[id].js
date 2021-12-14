@@ -42,7 +42,7 @@ const Menopause = () => {
   // variables
   const router = useRouter()
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
-  const [disciplineID, setDisciplineID] = useState(1)
+  const [disciplineID, setDisciplineID] = useState(null)
 
   const [femHealthService, setFemHealthService] = useState({})
   const [text, setText] = useState('')
@@ -54,15 +54,14 @@ const Menopause = () => {
   // handlers
   useEffect(() => {
     dispatch({ type: 'set', isLoading: false })
-    setFemHealthService({})
     setDisciplineID(Number(router.asPath.split('/')[2]))
-  }, [dispatch, router.pathname])
+  }, [dispatch, router])
 
   useEffect(() => {
-    if (disciplineID !== null) {
+    if (disciplineID) {
       getFemHealthService({ variables: { discipline_id: disciplineID } })
     }
-  }, [disciplineID, getFemHealthService])
+  }, [disciplineID, setDisciplineID])
 
   useEffect(() => {
     if (!femHealthServiceError && femHealthServiceData && femHealthServiceData.getFemHealthService) {

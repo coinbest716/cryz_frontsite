@@ -91,6 +91,7 @@ const PurchaseLogin = () => {
       _shoppingInfo = { ..._shoppingInfo, price: Number(router.query.price) }
     }
     setShoppingInfo(_shoppingInfo)
+    console.log(_shoppingInfo)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
 
