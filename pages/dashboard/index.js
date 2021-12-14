@@ -89,7 +89,7 @@ const Dashboard = () => {
     series: [
       {
         name: 'Actividad semanal',
-        data: [4, 20, 10, 30, 36, 80, 30, 91],
+        data: [0, 0, 0, 0, 0, 0, 0],
       },
     ],
     options: {
@@ -128,6 +128,7 @@ const Dashboard = () => {
       },
     },
   })
+  const [eventMins, setEventMins] = useState(0)
 
   // handlers
   useEffect(() => {
@@ -168,10 +169,11 @@ const Dashboard = () => {
   useEffect(() => {
     if (!weekDaySessionsError && weekDaySessionsData && weekDaySessionsData.getWeekDaySessionsByDashboard) {
       const data = weekDaySessionsData.getWeekDaySessionsByDashboard
+      setEventMins(data.at(-1))
       let array = [
         {
           name: 'Actividad semanal',
-          data: data,
+          data: data.slice(0, -1),
         },
       ]
       setChartOptions(chartOptions => ({ ...chartOptions, series: array }))
@@ -340,7 +342,11 @@ const Dashboard = () => {
             </div>
             <div className={'px-2 '}>
               <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
-              <DashboardButton handleClick={() => handleClickRedirect('hour')} label={'75,2'} type={'hour'} />
+              <DashboardButton
+                handleClick={() => handleClickRedirect('hour')}
+                label={(eventMins / 60).toString().replace('.', ',')}
+                type={'hour'}
+              />
             </div>
           </div>
           {message.length ? (
