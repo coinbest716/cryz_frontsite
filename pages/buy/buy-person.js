@@ -37,7 +37,6 @@ const BuyPerson = () => {
   // loading part end #######################
 
   const router = useRouter()
-  const [shoppingImage, setShoppingImage] = useState('')
   const [description, setDescription] = useState('')
   const [sessionData, setSessionData] = useState([])
 
@@ -50,9 +49,6 @@ const BuyPerson = () => {
   ] = useLazyQuery(graphql.queries.getFemHealthServiceSubjectByType)
 
   useEffect(() => {
-    if (router.query.image) {
-      setShoppingImage(router.query.image)
-    }
     if (router.query.type === 'service') {
       getCmsServiceSubjectByType({
         variables: { discipline_id: parseInt(router.query.discipline_id), service_type: router.query.service_type },
@@ -94,7 +90,7 @@ const BuyPerson = () => {
       .catch(() => {
         router.push({
           pathname: '/purchase-login',
-          query: { service_id: service_id, tab: 1, image: shoppingImage, description: description, price: price },
+          query: { service_id: service_id, tab: 1, image: router.query.image, description: description, price: price },
         })
       })
   }

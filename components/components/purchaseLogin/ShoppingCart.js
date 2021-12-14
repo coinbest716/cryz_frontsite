@@ -8,7 +8,7 @@ import styles from './ShoppingCart.module.scss'
 
 const ShoppingCart = props => {
   const { shoppingInfo } = props
-  console.log('######################', shoppingInfo)
+
   return (
     <div className={styles.shoppingCart}>
       <div className={'flex justify-between'}>
