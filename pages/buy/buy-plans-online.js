@@ -17,6 +17,8 @@ import styles from 'pages/buy/index.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
+import { Auth } from 'aws-amplify'
+
 const BuyPlansOnline = () => {
   // loading part ###########################
   const dispatch = useDispatch()

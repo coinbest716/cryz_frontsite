@@ -146,9 +146,9 @@ const Header = props => {
     }
   }
 
-  // const handleClickShoppingCard = bool => {
-  //   setOpenCart(bool)
-  // }
+  const handleClickShoppingCard = bool => {
+    setOpenCart(bool)
+  }
 
   const handleRemoveCart = index => {
     let array = [...cartData]
