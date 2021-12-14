@@ -426,18 +426,28 @@ const Purchase = () => {
                         <div className={'w-full'}>
                           <div className={styles.tabTitle}>Información general</div>
                           <div className={'w-full flex justify-between items-center pt-10'}>
-                            <div className={'flex justify-start items-center'}>
+                            <div className={'flex flex-wrap justify-start items-center'}>
                               <PurchaseAvatar
                                 avatar={personalInfo.avatar || ''}
                                 handleChangeAvatar={handleChangeAvatar}
                               />
                               <div className={'pl-5'}>
-                                <div className={styles.profileName}>Mariano Pérez Fanjul</div>
-                                <div className={styles.profileCounry}>Madrid, Spain</div>
+                                <div className={styles.profileName}>
+                                  {personalInfo.name + ' ' + personalInfo.surname}
+                                </div>
+                                <div className={styles.profileCounry}>
+                                  {billingAddress.province
+                                    ? billingAddress.province + ', ' + billingAddress.country
+                                    : billingAddress.country}
+                                </div>
                               </div>
                             </div>
-                            <CommonButton label={'Descartar'} handleClick={handleDiscard} type={'outline'} />
-                            <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
+                            <div className="flex flex-wrap">
+                              <CommonButton label={'Descartar'} handleClick={handleDiscard} type={'outline'} />
+                              <div className="ml-5">
+                                <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
