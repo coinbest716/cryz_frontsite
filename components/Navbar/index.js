@@ -89,12 +89,12 @@ const Navbar = () => {
       iconBlack: calendarBlackIcon,
       title: 'Calendario',
     },
-    {
-      href: '/dashboard/nutrition',
-      icon: nutritionIcon,
-      iconBlack: nutritionBlackIcon,
-      title: 'Nutrición',
-    },
+    // {
+    //   href: '/dashboard/nutrition',
+    //   icon: nutritionIcon,
+    //   iconBlack: nutritionBlackIcon,
+    //   title: 'Nutrición',
+    // },
     {
       href: '/dashboard/planes',
       icon: plansIcon,
