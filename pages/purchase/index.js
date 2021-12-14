@@ -21,7 +21,7 @@ import BillingDoc from 'components/components/purchase/BillingDoc'
 import PreviousButton from 'components/components/purchase/PreviousButton'
 import Credit from 'components/components/purchase/Credit'
 import Transfer from 'components/components/purchase/Transfer'
-import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
+import ShoppingCart from 'components/components/purchase/ShoppingCart'
 
 // json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
@@ -34,6 +34,7 @@ import { useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
+import { route } from 'next/dist/server/router'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -255,7 +256,7 @@ const Purchase = () => {
           } else if (res.id) {
             checkout({
               variables: {
-                serviceId: router.query.service_id,
+                serviceId: Number(router.query.service_id),
                 ccToken: res.id,
               },
             }).then(response => {

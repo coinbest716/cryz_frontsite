@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 // next components
 import Image from 'next/image'
 import Link from 'next/link'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -43,6 +43,7 @@ const PurchaseLogin = () => {
   // loading part end #######################
 
   // variables
+  const router = useRouter()
   const [cartData, setCartData] = useState([])
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [authChallenge, setAuthChallenge] = useState('')
@@ -50,6 +51,13 @@ const PurchaseLogin = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPass, setShowPass] = useState(false)
+  const [serviceId, setServiceId] = useState('')
+  const [tab, setTab] = useState('')
+  const [shoppingInfo, setShoppingInfo] = useState({
+    image: '',
+    description: '',
+    price: '',
+  })
 
   // handlers
   useEffect(() => {
@@ -68,6 +76,28 @@ const PurchaseLogin = () => {
       setPassword(localStorage.getItem('password'))
     }
   }, [])
+
+  useEffect(() => {
+    let _shoppingInfo = { ...shoppingInfo }
+    if (router.query.service_id) {
+      setServiceId(Number(router.query.service_id))
+    }
+    if (router.query.tab) {
+      setTab(Number(router.query.tab))
+    }
+    if (router.query.image) {
+      _shoppingInfo = { ..._shoppingInfo, image: decodeURIComponent(JSON.parse(`"${router.query.image}"`)) }
+    }
+    if (router.query.description) {
+      _shoppingInfo = { ..._shoppingInfo, description: decodeURIComponent(JSON.parse(`"${router.query.description}"`)) }
+    }
+    if (router.query.price) {
+      _shoppingInfo = { ..._shoppingInfo, price: Number(router.query.price) }
+    }
+    setShoppingInfo(_shoppingInfo)
+    console.log('$$$$$$$$$$$$$$$$$$$$$$', router.query, '$$$$$$$$$$$$$$$', _shoppingInfo)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query])
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -130,7 +160,7 @@ const PurchaseLogin = () => {
         localStorage.setItem('email', email)
         if (response.challengeName !== 'NEW_PASSWORD_REQUIRED') {
           toast.success('Successfully Logged in')
-          router.push({ pathname: '/purchase', query: { tab: 1 } })
+          router.push({ pathname: '/purchase', query: { service_id: serviceId, tab: tab || 1 } })
         }
         dispatch({ type: 'set', isLoading: false })
       })
@@ -272,7 +302,7 @@ const PurchaseLogin = () => {
               </div>
             )}
             <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
-              <ShoppingCart data={cartData} handleRemoveCart={handleRemoveCart} />
+              <ShoppingCart data={cartData} handleRemoveCart={handleRemoveCart} shoppingInfo={shoppingInfo} />
             </div>
           </div>
         </div>

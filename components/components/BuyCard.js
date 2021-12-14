@@ -33,7 +33,7 @@ const BuyCard = props => {
         </div>
         <div className={styles.cardDescription}>{data.description}</div>
       </div>
-      <button className={styles.button} onClick={() => handleClickBuy(data.id)}>
+      <button className={styles.button} onClick={() => handleClickBuy(data.id, data.description, data.price)}>
         <div className={'flex justify-start'}>
           <div className={styles.buttonText}>
             {'Comprar por'} <b>{data.price} €</b>

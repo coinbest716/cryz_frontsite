@@ -74,19 +74,34 @@ const Physiotherapy = () => {
   const handleClickBuyPersion = () => {
     router.push({
       pathname: '/buy/buy-person',
-      query: { discipline_id: 2, service_type: 'personal', type: 'service' },
+      query: {
+        discipline_id: 2,
+        service_type: 'personal',
+        type: 'service',
+        image: sliderData.length > 0 ? sliderData[0].path : '',
+      },
     })
   }
   const handleClickBuyPlan = () => {
     router.push({
       pathname: '/buy/buy-plans-online',
-      query: { discipline_id: 2, service_type: 'online', type: 'service' },
+      query: {
+        discipline_id: 2,
+        service_type: 'online',
+        type: 'service',
+        image: sliderData.length > 0 ? sliderData[0].path : '',
+      },
     })
   }
   const handleClickBuyStreaming = () => {
     router.push({
       pathname: '/buy/buy-one-to-one',
-      query: { discipline_id: 2, service_type: 'streaming', type: 'service' },
+      query: {
+        discipline_id: 2,
+        service_type: 'streaming',
+        type: 'service',
+        image: sliderData.length > 0 ? sliderData[0].path : '',
+      },
     })
   }
 
