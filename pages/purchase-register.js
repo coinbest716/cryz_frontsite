@@ -135,47 +135,13 @@ const Register = () => {
     await Auth.confirmSignUp(email, verifyCode)
       .then(response => {
         console.log(response)
-        createPatient(email)
         toast.success('Successfully confirmed signed up')
-        router.push('/purchase-login')
+        router.push({ pathname: '/purchase', query: { tab: 0 } })
         dispatch({ type: 'set', isLoading: false })
       })
       .catch(error => {
         toast.error(error.message)
         dispatch({ type: 'set', isLoading: false })
-      })
-  }
-
-  const createPatient = async email => {
-    const variables = {
-      email: email,
-      name: '',
-      lastname: '',
-      dni: '',
-      mobile: '',
-      eg_number: '',
-      known_us: '',
-      avatar: '',
-      genre: '',
-      birth_date: '',
-      bill_alias: '',
-      bill_name: '',
-      bill_address: '',
-      bill_province: '',
-      bill_town: '',
-      bill_postal_code: '',
-      bill_country: '',
-    }
-    updatePatientByDashboard({
-      variables: variables,
-    })
-      .then(response => {
-        if (response.data.updatePatientByDashboard) {
-          console.log('updatePatientByDashboard')
-        }
-      })
-      .catch(error => {
-        console.log('error', error)
       })
   }
 
