@@ -63,7 +63,6 @@ const Planes = () => {
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
-  const [bool, setBool] = useState(false)
   const [markDate, setMarkDate] = useState([])
   const [currentMonth, setCurrentMonth] = useState('')
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
@@ -190,7 +189,7 @@ const Planes = () => {
   }, [videoMaterailLoading, videoMaterialData, videoMaterialError])
 
   useEffect(() => {
-    if (JSON.stringify(plansOnlineData) === JSON.stringify({}) && !bool) {
+    if (JSON.stringify(plansOnlineData) === JSON.stringify({})) {
       if (markDate.length !== 0) {
         let array = []
         markDate.map((item, index) =>
@@ -203,7 +202,6 @@ const Planes = () => {
             } else {
               setDate(array[i - 1])
             }
-            setBool(true)
             break
           }
         }
