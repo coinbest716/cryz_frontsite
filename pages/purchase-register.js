@@ -20,8 +20,6 @@ import EyeCrossIcon from 'assets/images/eye-cross-gray.svg'
 import EyeIcon from 'assets/images/eye-gray.svg'
 import toast from 'react-hot-toast'
 
-import { useMutation } from '@apollo/client'
-import graphql from 'crysdiazGraphql'
 // json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
 
@@ -43,7 +41,6 @@ const Register = () => {
   // loading part end #######################
 
   // variables
-  const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
 
   const [cartData, setCartData] = useState([])
   const [email, setEmail] = useState('')
