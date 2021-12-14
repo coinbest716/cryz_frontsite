@@ -28,6 +28,7 @@ Amplify.configure({ ...awsconfig, ssr: true })
 Auth.configure(awsconfig)
 
 const MyApp = ({ Component, pageProps }) => {
+  const MainImage = '/images/main-mobile.png'
   const getLayout = Component.getLayout || (page => page)
 
   const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
@@ -59,7 +60,30 @@ const MyApp = ({ Component, pageProps }) => {
       <ApolloProvider client={client}>
         <Script src="https://js.stripe.com/v2/"></Script>
         <Script id="stripe-js" src="https://js.stripe.com/v3/" async></Script>
-        <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
+        {viewport !== 'mobile' ? (
+          <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
+        ) : (
+          <div className={'w-full flex flex-wrap'}>
+            <div className="-z-10 w-full h-full">
+              <img src={MainImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <div className={'w-full flex flex-wrap -mt-8 pt-12 pb-32 px-4 justify-center z-10 bottomStyle'}>
+              <div className="w-full title">¡Seguimos poniéndonos en forma!</div>
+              <div className="w-full text text-center mt-9">
+                En breve, cumpliremos nuestro objetivo y estará lista la versión móvil.
+                <br />
+                <br />
+                Mientras tanto, puedes visitar
+                <br />
+                <br />
+                <strong>https://crysdyazandco.com</strong>
+                <br />
+                <br />
+                en tu ordenador o tablet
+              </div>
+            </div>
+          </div>
+        )}
         <Toaster position="top-right" reverseOrder={false} />
       </ApolloProvider>
     </>

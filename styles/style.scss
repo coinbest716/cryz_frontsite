@@ -24,6 +24,28 @@
   font-weight: 600;
   font-style: normal;
 }
+.bottomStyle {
+  background-color: #ffffff;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  .title {
+    color: $blue-gray-400-color;
+    font-family: Montserrat;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: -0.42px;
+    line-height: 32px;
+    text-align: center;
+  }
+  .text {
+    color: #8c8c8c;
+    font-family: Montserrat;
+    font-size: 14px;
+    letter-spacing: -0.22px;
+    line-height: 20px;
+    text-align: center;
+  }
+}
 
 .calendarWrapper {
   .react-calendar {
