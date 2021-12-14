@@ -21,6 +21,7 @@ import EyeCrossIcon from 'assets/images/eye-cross-gray.svg'
 import EyeIcon from 'assets/images/eye-gray.svg'
 
 import { Auth } from 'aws-amplify'
+import toast from 'react-hot-toast'
 // json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
 

@@ -15,7 +15,7 @@ import EyeCrossIcon from 'assets/images/eye-cross.svg'
 import EyeIcon from 'assets/images/eye.svg'
 
 import toast from 'react-hot-toast'
-import { useMutation, useLazyQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import ReactLoading from 'react-loading'
 
@@ -55,15 +55,18 @@ const Register = () => {
   }
 
   const handleVerifyCode = async () => {
+    dispatch({ type: 'set', isLoading: true })
     await Auth.confirmSignUp(email, verifyCode)
       .then(response => {
         console.log(response)
         createPatient(email)
         toast.success('Successfully confirmed signed up')
         router.push('/login')
+        dispatch({ type: 'set', isLoading: false })
       })
       .catch(error => {
-        toast.success(error.message)
+        toast.error(error.message)
+        dispatch({ type: 'set', isLoading: false })
       })
   }
 
@@ -118,14 +121,19 @@ const Register = () => {
       })
       .catch(error => {
         console.log('error signing up:', error)
+        toast.error(error.message)
         if (error.code === 'UsernameExistsException') {
           setProgressStatus(false)
           setUserConfirmed(false)
+          resendSignUp(email)
         } else {
           setProgressStatus(false)
-          toast.error(error.message)
         }
       })
+  }
+
+  const resendSignUp = async email => {
+    await Auth.resendSignUp(email)
   }
 
   return (
