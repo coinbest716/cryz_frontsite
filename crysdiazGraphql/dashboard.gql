@@ -5,3 +5,7 @@ query GetPurchaseListByDashboard($patient_id: Int) {
 query GetWeekDaySessionsByDashboard($patient_id: Int) {
   getWeekDaySessionsByDashboard(patient_id: $patient_id)
 }
+
+query GetPaymentStatusForDashboard($patient_id: Int) {
+  getPaymentStatusForDashboard(patient_id: $patient_id)
+}
