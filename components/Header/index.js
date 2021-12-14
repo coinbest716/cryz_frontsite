@@ -358,7 +358,7 @@ const Header = props => {
               )
             })}
           {/* icon menu part */}
-          <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
+          {/* <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
             {showCart && (
               <button
                 className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
@@ -367,7 +367,7 @@ const Header = props => {
                 <Image src={CartIcon} alt="" width={22} height={19} />
               </button>
             )}
-          </li>
+          </li> */}
           <li
             className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}
             onClick={() => handleGotoRouter('login')}
