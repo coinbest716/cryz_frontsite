@@ -105,11 +105,12 @@ const Navbar = () => {
 
   const handleClickLogout = async () => {
     dispatch({ type: 'set', isLoading: true })
-    localStorage.clear()
     await client.resetStore()
     await client.clearStore()
     await Auth.signOut()
     router.push('/login')
+    localStorage.removeItem('email')
+    localStorage.removeItem('password')
   }
 
   const handleGotoRouter = link => {
