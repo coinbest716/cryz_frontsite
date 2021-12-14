@@ -34,7 +34,6 @@ import { useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
-import { route } from 'next/dist/server/router'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),

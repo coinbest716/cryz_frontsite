@@ -100,19 +100,19 @@ const Training = () => {
       case 'type1':
         router.push({
           pathname: '/buy/buy-person',
-          query: { discipline_id: 1, service_type: 'personal', type: 'service' },
+          query: { discipline_id: 1, service_type: 'personal', type: 'service', image: imageOne || '' },
         })
         break
       case 'type2':
         router.push({
           pathname: '/buy/buy-plans-online',
-          query: { discipline_id: 1, service_type: 'online', type: 'service' },
+          query: { discipline_id: 1, service_type: 'online', type: 'service', image: imageOne || '' },
         })
         break
       case 'type3':
         router.push({
           pathname: '/buy/buy-one-to-one',
-          query: { discipline_id: 1, service_type: 'streaming', type: 'service' },
+          query: { discipline_id: 1, service_type: 'streaming', type: 'service', image: imageOne || '' },
         })
         break
     }

@@ -94,7 +94,7 @@ const BuyPerson = () => {
       .catch(() => {
         router.push({
           pathname: '/purchase-login',
-          query: { service_id: service_id, tab: 2, image: shoppingImage, description: description, price: price },
+          query: { service_id: service_id, tab: 1, image: shoppingImage, description: description, price: price },
         })
       })
   }

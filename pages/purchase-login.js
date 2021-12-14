@@ -22,8 +22,6 @@ import EyeIcon from 'assets/images/eye-gray.svg'
 
 import { Auth } from 'aws-amplify'
 import toast from 'react-hot-toast'
-// json data
-import shoppingCartData from 'assets/data/ShoppingCartData'
 
 const PurchaseLogin = () => {
   // loading part ###########################
@@ -44,7 +42,6 @@ const PurchaseLogin = () => {
 
   // variables
   const router = useRouter()
-  const [cartData, setCartData] = useState([])
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [authChallenge, setAuthChallenge] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
@@ -61,7 +58,6 @@ const PurchaseLogin = () => {
 
   // handlers
   useEffect(() => {
-    setCartData(shoppingCartData)
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
@@ -106,12 +102,6 @@ const PurchaseLogin = () => {
 
   const handleSetRememberMe = () => {
     setRememberMe(!rememberMe)
-  }
-
-  const handleRemoveCart = index => {
-    let array = [...cartData]
-    array.splice(index, 1)
-    setCartData(array)
   }
 
   const handleChangeEmail = event => {
@@ -301,7 +291,7 @@ const PurchaseLogin = () => {
               </div>
             )}
             <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
-              <ShoppingCart data={cartData} handleRemoveCart={handleRemoveCart} shoppingInfo={shoppingInfo} />
+              <ShoppingCart shoppingInfo={shoppingInfo} />
             </div>
           </div>
         </div>
