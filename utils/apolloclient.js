@@ -5,6 +5,8 @@ import { createUploadLink } from 'apollo-upload-client'
 import * as Sentry from '@sentry/nextjs'
 import { SentryLink } from 'apollo-link-sentry'
 import { Auth } from 'aws-amplify'
+import router from 'next/router'
+import toast from 'react-hot-toast'
 
 const uploadLink = createUploadLink({
   uri: process.env.NEXT_PUBLIC_BACKEND_ENDPOINT, // Apollo Server is served from port 8000
@@ -39,10 +41,12 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     graphQLErrors.forEach(({ message, locations, path }) => {
       console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
       if (message === 'Unauthorized Patient.') {
+        toast.error(message)
         client.resetStore()
         client.clearStore()
         localStorage.clear()
-        Auth.signOut()
+        // Auth.signOut()
+        router.push('/login')
       }
     })
 
