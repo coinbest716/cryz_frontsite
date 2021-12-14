@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import Menu from 'components/Menu/Menu'
 
 // images
-// import CartIcon from 'assets/images/cart.svg'
+import CartIcon from 'assets/images/cart.svg'
 import AccountIcon from 'assets/images/account.svg'
 import MessageIcon from 'assets/images/message-box.svg'
 
