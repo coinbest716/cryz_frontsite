@@ -30,10 +30,12 @@ import shoppingCartData from 'assets/data/ShoppingCartData'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './purchase.module.scss'
 // graphql
-import { useMutation } from '@apollo/client'
+import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
+import moment from 'moment'
+import { setRequestMeta } from 'next/dist/server/request-meta'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -59,17 +61,25 @@ const Purchase = () => {
 
   // variables
   const [checkout] = useMutation(graphql.mutations.checkout)
+  const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
+  const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
+    graphql.queries.getPatientByEmail
+  )
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const router = useRouter()
   const [session, setSession] = useState({})
   const [cartData, setCartData] = useState([])
   const [tabIndex, setTabIndex] = useState(0)
+  const [uploadFile, setUploadFile] = useState(null)
+  const [email, setEmail] = useState('')
   const [personalInfo, setPersonalInfo] = useState({
+    id: -1,
+    avatar: '',
     name: '',
     password: '',
     surname: '',
-    meet: '',
+    meet: 'INSTAGRAM',
     email: '',
     telephone: '',
     country: '',
@@ -77,7 +87,7 @@ const Purchase = () => {
     address: '',
     code: '',
     town: '',
-    gender: '',
+    gender: 'WOMAN',
     birthday: new Date(),
   })
   const [billingAddress, setBillingAddress] = useState({
@@ -146,8 +156,8 @@ const Purchase = () => {
       label: 'País',
     },
   ]
-  const list = ['Hombre', 'Mujer']
-  const meetList = ['Instagram', 'Facebook', 'Prensa', 'Por un amigo', 'Otros']
+  const genderList = ['WOMAN', 'MAN']
+  const meetList = ['INSTAGRAM', 'FACEBOOK', 'PRENSA']
 
   const [frameType, setFrameType] = useState('frame1')
 
@@ -160,6 +170,14 @@ const Purchase = () => {
     setCartData(shoppingCartData)
     setRedsys(false)
 
+    setEmail(localStorage.getItem('email'))
+    setPersonalInfo({ ...personalInfo, email: localStorage.getItem('email') })
+    setBillingAddress({ ...billingAddress, email: localStorage.getItem('email') })
+    getPatientByEmail({
+      variables: {
+        email: localStorage.getItem('email'),
+      },
+    })
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
@@ -169,6 +187,43 @@ const Purchase = () => {
         setIsAuthenticated(false)
       })
   }, [])
+
+  useEffect(() => {
+    if (!personalError && personalData && personalData.getPatientByEmail) {
+      const data = personalData.getPatientByEmail
+      let _personalInfo = {
+        ...personalInfo,
+        id: data.id,
+        avatar: data.avatar,
+        name: data.name,
+        surname: data.lastname,
+        email: data.email,
+        meet: data.known_us,
+        telephone: data.mobile,
+        emergencyPhone: data.eg_number,
+        birthday: data.birth_date,
+        code: data.dni,
+        gender: data.genre,
+        address: data.bill_address,
+        town: data.bill_town,
+        country: data.bill_country,
+      }
+      setPersonalInfo(_personalInfo)
+      let _billingAddress = {
+        addressAlias: data.bill_alias,
+        surname: data.lastname,
+        email: data.email,
+        town: data.bill_town,
+        postal: data.bill_postal_code,
+        name: data.bill_name,
+        code: data.dni,
+        address: data.bill_address,
+        province: data.bill_province,
+        country: data.bill_country,
+      }
+      setBillingAddress(_billingAddress)
+    }
+  }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (Number(router.query.tab) === 0) {
@@ -186,8 +241,61 @@ const Purchase = () => {
     setCartData(array)
   }
 
-  const handleDiscard = () => {}
-  const handleSave = () => {}
+  const handleDiscard = () => {
+    getPatientByEmail({
+      variables: {
+        email: email,
+      },
+    })
+  }
+
+  const handleChangeAvatar = event => {
+    const newImage = event.target.files[0]
+    setUploadFile(newImage)
+    if (newImage) {
+      setPersonalInfo({ ...personalInfo, avatar: URL.createObjectURL(newImage) })
+    }
+  }
+
+  const handleSave = () => {
+    console.log(personalInfo)
+    if (personalInfo.name === '' || personalInfo.surname === '') {
+      toast.error('Please input data!')
+      return
+    }
+    dispatch({ type: 'set', isLoading: true })
+    const variables = {
+      email: personalInfo.email,
+      name: personalInfo.name,
+      lastname: personalInfo.surname,
+      dni: personalInfo.code,
+      mobile: personalInfo.telephone,
+      eg_number: personalInfo.emergencyPhone,
+      known_us: personalInfo.meet,
+      avatar: uploadFile,
+      genre: personalInfo.gender,
+      birth_date: new Date(personalInfo.birthday),
+      bill_address: personalInfo.address,
+      bill_town: personalInfo.town,
+      bill_country: personalInfo.country,
+    }
+
+    updatePatientByDashboard({
+      variables: variables,
+    })
+      .then(response => {
+        if (response.data.updatePatientByDashboard) {
+          getPatientByEmail({ variables: { email: email } })
+          toast.success('Successfully save personal account!')
+          dispatch({ type: 'set', isLoading: false })
+        }
+      })
+      .catch(error => {
+        console.log('+++++++++++++++++', error.message)
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(error.message)
+      })
+  }
   const handleContinue = tabIndex => {
     let query = { tab: tabIndex }
     if (router.query.service_id) {
@@ -319,14 +427,17 @@ const Purchase = () => {
                           <div className={styles.tabTitle}>Información general</div>
                           <div className={'w-full flex justify-between items-center pt-10'}>
                             <div className={'flex justify-start items-center'}>
-                              <PurchaseAvatar avatar={''} />
+                              <PurchaseAvatar
+                                avatar={personalInfo.avatar || ''}
+                                handleChangeAvatar={handleChangeAvatar}
+                              />
                               <div className={'pl-5'}>
                                 <div className={styles.profileName}>Mariano Pérez Fanjul</div>
                                 <div className={styles.profileCounry}>Madrid, Spain</div>
                               </div>
                             </div>
-                            <CommonButton label={'Descartar'} handleClick={handleSave} type={'outline'} />
-                            <CommonButton label={'Aprobar cambios'} handleClick={handleDiscard} type={'fill'} />
+                            <CommonButton label={'Descartar'} handleClick={handleDiscard} type={'outline'} />
+                            <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
                           </div>
                         </div>
                       </div>
@@ -378,6 +489,7 @@ const Purchase = () => {
                             placeholder={''}
                             type={'email'}
                             value={personalInfo.email}
+                            disabled={true}
                           />
                         </div>
                         <div className={'w-2/5'}>
@@ -444,7 +556,7 @@ const Purchase = () => {
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'gender')}
                             label={'Sexo'}
-                            list={list}
+                            list={genderList}
                             type={'select'}
                             value={personalInfo.gender}
                           />
@@ -457,7 +569,7 @@ const Purchase = () => {
                             label={'Fecha de nacimiento'}
                             placeholder={''}
                             type={'date'}
-                            value={personalInfo.birthday}
+                            value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
                           />
                         </div>
                         <div className={'w-2/5'}></div>
