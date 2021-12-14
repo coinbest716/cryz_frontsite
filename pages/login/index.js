@@ -211,19 +211,19 @@ const Login = () => {
                 Olvidaste contraseña
               </div>
               {/* ------------------- or ------------------- part */}
-              <div className={'mt-11 flex justify-between items-center'}>
+              {/* <div className={'mt-11 flex justify-between items-center'}>
                 <div className={styles.line} />
                 <div className={styles.orText}>or</div>
                 <div className={styles.line} />
-              </div>
+              </div> */}
               {/* facebook button */}
-              <div className={'mt-11'}>
+              {/* <div className={'mt-11'}>
                 <CommonButton handleClick={facebookLogin} label={'LOGIN CON FACEBOOK'} type={'facebook'} />
-              </div>
+              </div> */}
               {/* google button */}
-              <div className={'mt-6'}>
+              {/* <div className={'mt-6'}>
                 <CommonButton handleClick={googleLogin} label={'LOGIN CON GOOGLE'} type={'google'} />
-              </div>
+              </div> */}
             </div>
           </div>
         ) : (

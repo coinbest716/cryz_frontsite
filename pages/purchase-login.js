@@ -129,7 +129,7 @@ const PurchaseLogin = () => {
                       <p className={styles.forgetPassword}>Olvidaste contraseña</p>
                     </Link>
                   </div>
-                  <div className={'flex justify-between items-center pt-10'}>
+                  {/* <div className={'flex justify-between items-center pt-10'}>
                     <div className={styles.divider} />
                     <div className={styles.remember}>or</div>
                     <div className={styles.divider} />
@@ -139,7 +139,7 @@ const PurchaseLogin = () => {
                   </div>
                   <div className={'flex justify-between items-center pt-5'}>
                     <CommonButton handleClick={handleClickGoogle} label={'LOGIN CON GOOGLE'} type={'google'} />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
