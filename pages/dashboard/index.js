@@ -67,6 +67,10 @@ const Dashboard = () => {
     graphql.queries.getPurchaseListByDashboard
   )
   const [
+    getPaymentStatusForDashboard,
+    { data: paymentStatusData, loading: paymentStatusLoading, error: paymentStatusError },
+  ] = useLazyQuery(graphql.queries.getPaymentStatusForDashboard)
+  const [
     getWeekDaySessionsByDashboard,
     { data: weekDaySessionsData, loading: weekDaySessionsLoading, error: weekDaySessionsError },
   ] = useLazyQuery(graphql.queries.getWeekDaySessionsByDashboard)
@@ -131,6 +135,31 @@ const Dashboard = () => {
 
   const [getPatientMessageById, { data: messageListData, loading: messageListLoading, error: messageListError }] =
     useLazyQuery(graphql.queries.getPatientMessageById)
+
+  const statusArray = [
+    {
+      id: 0,
+      text: 'Quizás nos estemos equivocando, pero parece que tienes un pago pendiente. Compruébalo pinchando a continuación en el botón',
+      link: '/dashboar/shopping',
+    },
+    {
+      id: 1,
+      text: '¡Muy pronto vas a finalizar tu bono! Consulta tus sesiones y renuévalo pinchando a continuación en el botón',
+      link: '/dashboar/shopping',
+    },
+    {
+      id: 2,
+      text: '¡Uiii! ¿Es posible que todavía no hayas probado ninguno de nuestros servicios? \n Anímate y consigue todos tus objetivos con el apoyo de nuestros especialistas \n ¡Hoy es el día, ahora el momento!',
+      link: '/',
+    },
+    {
+      id: 3,
+      text: '¡Hoy es un buen día! \n Sigue haciéndolo tan bien como hasta ahora, y ya verás cómo consigues todo lo que te propongas',
+      link: '/',
+    },
+  ]
+
+  const [status, setStatus] = useState(0)
 
   // handlers
   useEffect(() => {
@@ -197,6 +226,7 @@ const Dashboard = () => {
       getPurchaseListByDashboard({ variables: { patient_id: patient_id } })
       getWeekDaySessionsByDashboard({ variables: { patient_id: patient_id } })
       getPatientMessageById({ variables: { patient_id: patient_id } })
+      getPaymentStatusForDashboard({ variables: { patient_id: patient_id } })
     }
   }, [patientLoading, patientData, patientError])
 
@@ -227,6 +257,13 @@ const Dashboard = () => {
     }
   }, [sessionLoading, sessionData, sessionError])
 
+  useEffect(() => {
+    if (!paymentStatusError && paymentStatusData && paymentStatusData.getPaymentStatusForDashboard) {
+      const data = paymentStatusData.getPaymentStatusForDashboard
+      setStatus(data - 1)
+    }
+  }, [paymentStatusLoading, paymentStatusData, paymentStatusError])
+
   const getProfilePercentage = _personalInfo => {
     let fillCount = -6
     Object.values(_personalInfo).map(item => {
@@ -255,7 +292,7 @@ const Dashboard = () => {
         router.push('/dashboard/live-streaming')
         break
       case 'view':
-        router.push('/dashboard/shopping')
+        router.push(id)
         break
       case 'hour':
         router.push('/dashboard/profile#health')
@@ -324,12 +361,17 @@ const Dashboard = () => {
               <div className={styles.welcomeLabel}>
                 {personalInfo.name}&nbsp;{personalInfo.lastname}
               </div>
-              <div className={'pt-2 ' + styles.welcomeDescription}>
-                Muy pronto vas a finalizar tu Bono 10 sesiones de Entrenamiento Intensivo… <br /> Puedes consultar tus
-                sesiones y renovar tu bono pinchando a continuación en el botón
-              </div>
+              <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[status].text}</div>
               <div className={'pt-4'}>
-                <DashboardButton handleClick={() => handleClickRedirect('view')} label={'Ver'} type={'view'} />
+                {status !== 3 ? (
+                  <DashboardButton
+                    handleClick={() => handleClickRedirect('view', statusArray[status].link)}
+                    label={'Ver'}
+                    type={'view'}
+                  />
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div style={{ minWidth: '220px' }}>
