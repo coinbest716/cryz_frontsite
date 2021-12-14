@@ -56,7 +56,7 @@ const Menopause = () => {
     dispatch({ type: 'set', isLoading: false })
     setFemHealthService({})
     setDisciplineID(Number(router.asPath.split('/')[2]))
-  }, [dispatch, router])
+  }, [dispatch, router.pathname])
 
   useEffect(() => {
     if (disciplineID !== null) {
@@ -136,6 +136,8 @@ const Menopause = () => {
                       discipline_id: femHealthService.discipline_id,
                       service_type: 'streaming',
                       type: 'femHealth',
+                      image:
+                        femHealthService?.carousel_image.length > 0 ? femHealthService?.carousel_image[0].path : '',
                     },
                   })
                 }
@@ -156,6 +158,8 @@ const Menopause = () => {
                       discipline_id: femHealthService.discipline_id,
                       service_type: 'personal',
                       type: 'femHealth',
+                      image:
+                        femHealthService?.carousel_image.length > 0 ? femHealthService?.carousel_image[0].path : '',
                     },
                   })
                 }
@@ -172,7 +176,13 @@ const Menopause = () => {
                 onClick={link =>
                   router.push({
                     pathname: link,
-                    query: { discipline_id: femHealthService.discipline_id, service_type: 'online', type: 'femHealth' },
+                    query: {
+                      discipline_id: femHealthService.discipline_id,
+                      service_type: 'online',
+                      type: 'femHealth',
+                      image:
+                        femHealthService?.carousel_image.length > 0 ? femHealthService?.carousel_image[0].path : '',
+                    },
                   })
                 }
               />
