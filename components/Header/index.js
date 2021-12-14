@@ -37,7 +37,7 @@ const Header = props => {
   const [openCart, setOpenCart] = useState(false)
   const [cartData, setCartData] = useState([])
   const [menus, setMenus] = useState([])
-  const [hideShoppingCart, setHideShoppingCart] = useState(false)
+  const [showCart, setShowCart] = useState(true)
 
   // handlers
   useEffect(() => {
@@ -106,7 +106,7 @@ const Header = props => {
       router.pathname === '/purchase/order-success' ||
       router.pathname === '/purchase/transfer-success'
     ) {
-      setHideShoppingCart(true)
+      setShowCart(false)
     }
   }, [router.pathname])
 
@@ -359,7 +359,7 @@ const Header = props => {
             })}
           {/* icon menu part */}
           <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
-            {!hideShoppingCart && (
+            {showCart && (
               <button
                 className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
                 onMouseOver={() => handleClickShoppingCard(true)}
