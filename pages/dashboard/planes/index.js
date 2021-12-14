@@ -12,6 +12,7 @@ import ReactPlayer from 'react-player'
 import 'react-calendar/dist/Calendar.css'
 import toast from 'react-hot-toast'
 import { Auth } from 'aws-amplify'
+import moment from 'moment'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -62,7 +63,8 @@ const Planes = () => {
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
-  const [dateISOString, setDateISOSTring] = useState(new Date().toISOString())
+  const [bool, setBool] = useState(false)
+  const [markDate, setMarkDate] = useState([])
   const [currentMonth, setCurrentMonth] = useState('')
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
@@ -71,6 +73,11 @@ const Planes = () => {
     useLazyQuery(graphql.queries.getOnlinePlanByDashboard)
   const [getVideoMaterial, { data: videoMaterialData, loading: videoMaterailLoading, error: videoMaterialError }] =
     useLazyQuery(graphql.queries.getVideoMaterial)
+
+  const [
+    getAvailablePlanDates,
+    { data: availablePlanDatesData, loading: availablePlanDatesLoading, error: availablePlanDatesError },
+  ] = useLazyQuery(graphql.queries.getAvailablePlanDates)
 
   // handlers
   useEffect(() => {
@@ -103,12 +110,17 @@ const Planes = () => {
         getOnlinePlanByDashboard({
           variables: {
             patient_id: personalData.getPatientByEmail.id,
-            select_date: dateISOString,
+            select_date: moment(date).format('YYYY-MM-DDTHH:mm:ssZ'),
+          },
+        })
+        getAvailablePlanDates({
+          variables: {
+            patient_id: personalData.getPatientByEmail.id,
           },
         })
       }
     }
-  }, [getOnlinePlanByDashboard, dateISOString, personalLoading, personalData, personalError])
+  }, [getOnlinePlanByDashboard, getAvailablePlanDates, date, personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
@@ -116,12 +128,26 @@ const Planes = () => {
         setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
         setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
       } else {
+        setPlansOnlineData({})
         setSelectedVideo({})
       }
     } else {
       setPlansOnlineData({})
+      setSelectedVideo({})
     }
   }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
+
+  useEffect(() => {
+    if (!availablePlanDatesError && availablePlanDatesData && availablePlanDatesData.getAvailablePlanDates) {
+      const _markDate = []
+      availablePlanDatesData.getAvailablePlanDates.map(item => {
+        _markDate.push(moment(item).format('DD-MM-YYYY'))
+      })
+      setMarkDate(_markDate)
+    } else {
+      setMarkDate([])
+    }
+  }, [availablePlanDatesLoading, availablePlanDatesData, availablePlanDatesError])
 
   useEffect(() => {
     if (JSON.stringify(selectedVideo) !== JSON.stringify({})) {
@@ -155,7 +181,7 @@ const Planes = () => {
         },
       })
     }
-  }, [selectedVideo])
+  }, [selectedVideo, getVideoMaterial])
 
   useEffect(() => {
     if (!videoMaterialError && videoMaterialData && videoMaterialData.getVideoMaterial) {
@@ -163,13 +189,34 @@ const Planes = () => {
     }
   }, [videoMaterailLoading, videoMaterialData, videoMaterialError])
 
+  useEffect(() => {
+    if (JSON.stringify(plansOnlineData) === JSON.stringify({}) && !bool) {
+      if (markDate.length !== 0) {
+        let array = []
+        markDate.map((item, index) =>
+          array.push(new Date(item.split('-')[2], item.split('-')[1] - 1, item.split('-')[0]))
+        )
+        for (let i = 0; i < array.length; i++) {
+          if (new Date() < array[i]) {
+            if (i - 1 < 0) {
+              setDate(array[i])
+            } else {
+              setDate(array[i - 1])
+            }
+            setBool(true)
+            break
+          }
+        }
+      }
+    }
+  }, [markDate, plansOnlineData])
+
   const handleClickMonth = () => {
     setShowCalendar(!showCalendar)
   }
 
   const handleChangeDate = value => {
     setDate(value)
-    setDateISOSTring(value.toISOString())
     setShowCalendar(false)
   }
 
@@ -272,6 +319,11 @@ const Planes = () => {
                     showNavigation={true}
                     locale="es"
                     navigationLabel={({ label }) => updateCalendarLabel(label)}
+                    tileClassName={({ date, view }) => {
+                      if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                        return 'highlight'
+                      }
+                    }}
                   />
                 </div>
                 {plansOnlineData?.routine?.sections?.map((item, index) => (

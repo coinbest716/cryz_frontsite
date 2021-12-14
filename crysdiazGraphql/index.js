@@ -43,7 +43,7 @@ import {
 } from './dashboard/message.gql'
 
 // plans online part
-import { GetOnlinePlanByDashboard, GetVideoMaterial } from './dashboard/plans-online.gql'
+import { GetOnlinePlanByDashboard, GetVideoMaterial, GetAvailablePlanDates } from './dashboard/plans-online.gql'
 
 // purchase
 import { Checkout } from './purchase.gql'
@@ -97,7 +97,7 @@ export default {
     // plans online part
     getOnlinePlanByDashboard: GetOnlinePlanByDashboard,
     getVideoMaterial: GetVideoMaterial,
-    // purchase
+    getAvailablePlanDates: GetAvailablePlanDates,
   },
   mutations: {
     createUser: CreateUser,
