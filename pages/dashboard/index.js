@@ -26,10 +26,9 @@ import welcomeIcon from 'public/images/welcome-header.svg'
 import bonosIcon from 'public/images/bonos.svg'
 import noPendingIcon from 'public/images/no-pending.svg'
 
+// graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-// json data
-import DashboardData from 'assets/data/DashboardData.json'
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
@@ -130,9 +129,11 @@ const Dashboard = () => {
   })
   const [eventMins, setEventMins] = useState(0)
 
+  const [getPatientMessageById, { data: messageListData, loading: messageListLoading, error: messageListError }] =
+    useLazyQuery(graphql.queries.getPatientMessageById)
+
   // handlers
   useEffect(() => {
-    setMessage(DashboardData)
     getPatientIdByDashboard({
       variables: {
         email: localStorage.getItem('email'),
@@ -181,6 +182,13 @@ const Dashboard = () => {
   }, [weekDaySessionsLoading, weekDaySessionsData, weekDaySessionsError])
 
   useEffect(() => {
+    if (!messageListError && messageListData && messageListData.getPatientMessageById) {
+      const data = messageListData.getPatientMessageById
+      setMessage(data)
+    }
+  }, [messageListLoading, messageListData, messageListError])
+
+  useEffect(() => {
     if (!patientError && patientData && patientData.getPatientIdByDashboard) {
       const patient_id = patientData.getPatientIdByDashboard
       localStorage.setItem('patient_id', patient_id)
@@ -188,6 +196,7 @@ const Dashboard = () => {
       getAnthropmetryByDashboard({ variables: { patient_id: patient_id } })
       getPurchaseListByDashboard({ variables: { patient_id: patient_id } })
       getWeekDaySessionsByDashboard({ variables: { patient_id: patient_id } })
+      getPatientMessageById({ variables: { patient_id: patient_id } })
     }
   }, [patientLoading, patientData, patientError])
 
@@ -240,7 +249,7 @@ const Dashboard = () => {
     console.log('handleClickRmember')
   }
 
-  const handleClickRedirect = type => {
+  const handleClickRedirect = (type, id) => {
     switch (type) {
       case 'startClass':
         router.push('/dashboard/live-streaming')
@@ -258,7 +267,7 @@ const Dashboard = () => {
         router.push('/dashboard/profile#health')
         break
       case 'messageBox':
-        router.push('/dashboard/message')
+        router.push('/dashboard/message?message_id=' + id)
         break
       case 'calendar':
         router.push('/dashboard/calendar')
@@ -474,8 +483,8 @@ const Dashboard = () => {
                       {message.map((item, index) => (
                         <div className={'py-2 flex justify-center'} key={index}>
                           <NewMessageBox
-                            handleClickMessage={() => handleClickRedirect('messageBox')}
-                            name={item.name}
+                            handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
+                            name={item.from_name}
                             content={item.content}
                           />
                         </div>
