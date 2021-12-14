@@ -45,7 +45,7 @@ const LiveStreaming = () => {
 
   useEffect(() => {
     if (router.query.id) {
-      setEvent({ id: router.query.id })
+      setEvent({ id: Number(router.query.id) })
     }
     setMaterial(LiveStreamingData)
   }, [])

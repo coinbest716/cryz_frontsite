@@ -21,7 +21,7 @@ import BillingDoc from 'components/components/purchase/BillingDoc'
 import PreviousButton from 'components/components/purchase/PreviousButton'
 import Credit from 'components/components/purchase/Credit'
 import Transfer from 'components/components/purchase/Transfer'
-import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
+import ShoppingCart from 'components/components/purchase/ShoppingCart'
 
 // json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
@@ -32,6 +32,8 @@ import styles from './purchase.module.scss'
 // graphql
 import { useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+
+import { Auth } from 'aws-amplify'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -58,6 +60,7 @@ const Purchase = () => {
   // variables
   const [checkout] = useMutation(graphql.mutations.checkout)
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const router = useRouter()
   const [session, setSession] = useState({})
   const [cartData, setCartData] = useState([])
@@ -156,6 +159,15 @@ const Purchase = () => {
   useEffect(() => {
     setCartData(shoppingCartData)
     setRedsys(false)
+
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        setIsAuthenticated(true)
+      })
+      .catch(() => {
+        router.push('/purchase-login')
+        setIsAuthenticated(false)
+      })
   }, [])
 
   useEffect(() => {
@@ -243,7 +255,7 @@ const Purchase = () => {
           } else if (res.id) {
             checkout({
               variables: {
-                serviceId: router.query.service_id,
+                serviceId: Number(router.query.service_id),
                 ccToken: res.id,
               },
             }).then(response => {
@@ -282,7 +294,7 @@ const Purchase = () => {
     )
   }
 
-  return (
+  return isAuthenticated ? (
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globalStyles.container + ' pt-20'}>
@@ -552,6 +564,8 @@ const Purchase = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   )
 }
 export default Purchase

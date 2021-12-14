@@ -43,6 +43,10 @@ const Login = () => {
       .catch(() => {
         setIsAuthenticated(false)
       })
+    if (localStorage.getItem('remember')) {
+      setEmail(localStorage.getItem('email'))
+      setPassword(localStorage.getItem('password'))
+    }
   }, [])
 
   useEffect(() => {

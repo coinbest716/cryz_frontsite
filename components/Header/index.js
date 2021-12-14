@@ -37,6 +37,7 @@ const Header = props => {
   const [openCart, setOpenCart] = useState(false)
   const [cartData, setCartData] = useState([])
   const [menus, setMenus] = useState([])
+  const [hideShoppingCart, setHideShoppingCart] = useState(false)
 
   // handlers
   useEffect(() => {
@@ -97,6 +98,18 @@ const Header = props => {
     setCartData(shoppingCartData)
   }, [])
 
+  useEffect(() => {
+    if (
+      router.pathname === '/purchase-login' ||
+      router.pathname === '/purchase-register' ||
+      router.pathname === '/purchase/order-failed' ||
+      router.pathname === '/purchase/order-success' ||
+      router.pathname === '/purchase/transfer-success'
+    ) {
+      setHideShoppingCart(true)
+    }
+  }, [router.pathname])
+
   const gotoTeamSection = () => {
     if (router.pathname === '/') {
       const sectionPosition = document.getElementById('team').offsetTop
@@ -121,7 +134,7 @@ const Header = props => {
         window.removeEventListener('scroll', headerColorChange)
       }
     }
-  })
+  }, [])
 
   const headerColorChange = () => {
     const { changeColorOnScroll } = props
@@ -345,14 +358,16 @@ const Header = props => {
               )
             })}
           {/* icon menu part */}
-          {/* <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
-            <button
-              className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
-              onMouseOver={() => handleClickShoppingCard(true)}
-            >
-              <Image src={CartIcon} alt="" width={22} height={19} />
-            </button>
-          </li> */}
+          <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
+            {!hideShoppingCart && (
+              <button
+                className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
+                onMouseOver={() => handleClickShoppingCard(true)}
+              >
+                <Image src={CartIcon} alt="" width={22} height={19} />
+              </button>
+            )}
+          </li>
           <li
             className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}
             onClick={() => handleGotoRouter('login')}

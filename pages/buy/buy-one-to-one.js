@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 // next components
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom component
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -33,7 +33,7 @@ const BuyOneToOne = () => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
-
+  const router = useRouter()
   const [description, setDescription] = useState('')
   const [sessionData, setSessionData] = useState([])
 
@@ -56,7 +56,7 @@ const BuyOneToOne = () => {
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getCmsServiceSubjectByType, getFemHealthServiceSubjectByType])
+  }, [router.query])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubjectByType) {
@@ -76,8 +76,20 @@ const BuyOneToOne = () => {
     }
   }, [femHealthServiceSubjectLoading, femHealthServiceSubjectData, femHealthServiceSubjectError])
 
-  const handleClickBuy = () => {
-    router.push('/purchase-login')
+  const handleClickBuy = (service_id, description, price) => {
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        router.push({
+          pathname: '/purchase',
+          query: { service_id: service_id, tab: 2 },
+        })
+      })
+      .catch(() => {
+        router.push({
+          pathname: '/purchase-login',
+          query: { service_id: service_id, tab: 1, image: router.query.image, description: description, price: price },
+        })
+      })
   }
   return (
     <div className={styles.container}>
