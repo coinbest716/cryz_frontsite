@@ -140,12 +140,12 @@ const Dashboard = () => {
     {
       id: 0,
       text: 'Quizás nos estemos equivocando, pero parece que tienes un pago pendiente. Compruébalo pinchando a continuación en el botón',
-      link: '/dashboar/shopping',
+      link: '/dashboard/shopping',
     },
     {
       id: 1,
       text: '¡Muy pronto vas a finalizar tu bono! Consulta tus sesiones y renuévalo pinchando a continuación en el botón',
-      link: '/dashboar/shopping',
+      link: '/dashboard/shopping',
     },
     {
       id: 2,
