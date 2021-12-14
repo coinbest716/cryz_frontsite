@@ -10,12 +10,16 @@ const NewMessageBox = ({ handleClickMessage, name, content }) => {
       className={'flex justify-between p-4 px-7 rounded-xl hover:bg-gray-200 cursor-pointer ' + styles.bodyInfo}
       onClick={handleClickMessage}
     >
-      <Image src={messageBoxIcon} width={24} height={24} alt="" />
-      <div className={'flex flex-col justify-between'}>
+      <div className={'flex justify-start items-center'} style={{ width: '30px', height: '30px' }}>
+        <Image src={messageBoxIcon} width={24} height={24} alt="" />
+      </div>
+      <div className={'flex flex-col justify-between'} style={{ flex: 1 }}>
         <div className={styles.mediumBoldLabel}>{name}</div>
         <div className={styles.mediumLabel}>{content}</div>
       </div>
-      <Image src={meesageRightIcon} width={8} height={10} alt="" />
+      <div className={'flex justify-end items-center'} style={{ width: '14px', height: '30px' }}>
+        <Image src={meesageRightIcon} width={8} height={10} alt="" />
+      </div>
     </div>
   )
 }

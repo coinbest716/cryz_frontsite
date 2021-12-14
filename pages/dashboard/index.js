@@ -485,7 +485,7 @@ const Dashboard = () => {
                           <NewMessageBox
                             handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
                             name={item.from_name}
-                            content={item.content}
+                            content={item.subject}
                           />
                         </div>
                       ))}
