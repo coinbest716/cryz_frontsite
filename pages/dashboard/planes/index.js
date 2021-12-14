@@ -63,6 +63,7 @@ const Planes = () => {
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [date, setDate] = useState(new Date())
+  const [bool, setBool] = useState(false)
   const [markDate, setMarkDate] = useState([])
   const [currentMonth, setCurrentMonth] = useState('')
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
@@ -127,10 +128,12 @@ const Planes = () => {
         setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
         setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
       } else {
+        setPlansOnlineData({})
         setSelectedVideo({})
       }
     } else {
       setPlansOnlineData({})
+      setSelectedVideo({})
     }
   }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
 
@@ -185,6 +188,28 @@ const Planes = () => {
       setMaterialData(videoMaterialData.getVideoMaterial)
     }
   }, [videoMaterailLoading, videoMaterialData, videoMaterialError])
+
+  useEffect(() => {
+    if (JSON.stringify(plansOnlineData) === JSON.stringify({}) && !bool) {
+      if (markDate.length !== 0) {
+        let array = []
+        markDate.map((item, index) =>
+          array.push(new Date(item.split('-')[2], item.split('-')[1] - 1, item.split('-')[0]))
+        )
+        for (let i = 0; i < array.length; i++) {
+          if (new Date() < array[i]) {
+            if (i - 1 < 0) {
+              setDate(array[i])
+            } else {
+              setDate(array[i - 1])
+            }
+            setBool(true)
+            break
+          }
+        }
+      }
+    }
+  }, [markDate, plansOnlineData])
 
   const handleClickMonth = () => {
     setShowCalendar(!showCalendar)
