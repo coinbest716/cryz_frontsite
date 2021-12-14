@@ -57,6 +57,8 @@ const Planes = () => {
   // loading part end #######################
 
   // variables
+  const [bool, setBool] = useState(false)
+  const [patientID, setPatientID] = useState(-1)
   const [plansOnlineData, setPlansOnlineData] = useState({})
   const [selectedVideo, setSelectedVideo] = useState({})
   const [materialData, setMaterialData] = useState([])
@@ -106,20 +108,31 @@ const Planes = () => {
         toast.error('Please insert your personal information in Profile page.')
         router.push('/dashboard/profile')
       } else {
-        getOnlinePlanByDashboard({
-          variables: {
-            patient_id: personalData.getPatientByEmail.id,
-            select_date: moment(date).format('YYYY-MM-DDTHH:mm:ssZ'),
-          },
-        })
-        getAvailablePlanDates({
-          variables: {
-            patient_id: personalData.getPatientByEmail.id,
-          },
-        })
+        setPatientID(personalData.getPatientByEmail.id)
       }
     }
-  }, [getOnlinePlanByDashboard, getAvailablePlanDates, date, personalLoading, personalData, personalError])
+  }, [personalLoading, personalData, personalError])
+
+  useEffect(() => {
+    if (patientID !== -1) {
+      getAvailablePlanDates({
+        variables: {
+          patient_id: patientID,
+        },
+      })
+    }
+  }, [getAvailablePlanDates, patientID])
+
+  useEffect(() => {
+    if (patientID !== -1) {
+      getOnlinePlanByDashboard({
+        variables: {
+          patient_id: patientID,
+          select_date: moment(date).format('YYYY-MM-DDTHH:mm:ssZ'),
+        },
+      })
+    }
+  }, [date, patientID, getOnlinePlanByDashboard])
 
   useEffect(() => {
     if (!onlinePlanError && onlinePlanData && onlinePlanData.getOnlinePlanByDashboard) {
@@ -189,32 +202,50 @@ const Planes = () => {
   }, [videoMaterailLoading, videoMaterialData, videoMaterialError])
 
   useEffect(() => {
-    if (JSON.stringify(plansOnlineData) === JSON.stringify({})) {
-      if (markDate.length !== 0) {
-        let array = []
-        markDate.map((item, index) =>
-          array.push(new Date(item.split('-')[2], item.split('-')[1] - 1, item.split('-')[0]))
-        )
-        for (let i = 0; i < array.length; i++) {
-          if (new Date() < array[i]) {
-            if (i - 1 < 0) {
-              setDate(array[i])
-            } else {
-              setDate(array[i - 1])
+    if (!bool) {
+      if (JSON.stringify(plansOnlineData) === JSON.stringify({})) {
+        if (markDate.length !== 0) {
+          let array = []
+          markDate.map((item, index) =>
+            array.push(new Date(item.split('-')[2], item.split('-')[1] - 1, item.split('-')[0]))
+          )
+          const newArray = array.sort((a, b) => a - b)
+          for (let i = 1; i < newArray.length; i++) {
+            if (new Date() < newArray[i - 1]) {
+              setDate(newArray[i - 1])
+              break
+            } else if (new Date() > newArray[i - 1] && new Date() < newArray[i]) {
+              setDate(newArray[i - 1])
+              break
             }
-            break
           }
+          setBool(true)
         }
       }
     }
-  }, [markDate, plansOnlineData])
+  }, [markDate, plansOnlineData, bool])
 
   const handleClickMonth = () => {
     setShowCalendar(!showCalendar)
   }
 
   const handleChangeDate = value => {
-    setDate(value)
+    if (markDate.length !== 0) {
+      let array = []
+      markDate.map((item, index) =>
+        array.push(new Date(item.split('-')[2], item.split('-')[1] - 1, item.split('-')[0]))
+      )
+      const newArray = array.sort((a, b) => a - b)
+      for (let i = 1; i < newArray.length; i++) {
+        if (value < newArray[i - 1]) {
+          setDate(newArray[i - 1])
+          break
+        } else if (value > newArray[i - 1] && value < newArray[i]) {
+          setDate(newArray[i - 1])
+          break
+        }
+      }
+    }
     setShowCalendar(false)
   }
 
