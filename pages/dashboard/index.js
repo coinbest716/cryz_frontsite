@@ -67,6 +67,10 @@ const Dashboard = () => {
   const [getPurchaseListByDashboard, { data: bonusData, loading: bonusLoading, error: bonusError }] = useLazyQuery(
     graphql.queries.getPurchaseListByDashboard
   )
+  const [
+    getWeekDaySessionsByDashboard,
+    { data: weekDaySessionsData, loading: weekDaySessionsLoading, error: weekDaySessionsError },
+  ] = useLazyQuery(graphql.queries.getWeekDaySessionsByDashboard)
   const [profilePercentage, setProfilePercentage] = useState(0)
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
@@ -81,7 +85,7 @@ const Dashboard = () => {
   const [purchaseData, setPurchaseData] = useState([])
   const today = useSelector(state => state.today)
   const [message, setMessage] = useState([])
-  const chartOptions = {
+  const [chartOptions, setChartOptions] = useState({
     series: [
       {
         name: 'Actividad semanal',
@@ -123,7 +127,7 @@ const Dashboard = () => {
         show: false,
       },
     },
-  }
+  })
 
   // handlers
   useEffect(() => {
@@ -162,12 +166,26 @@ const Dashboard = () => {
   }, [bonusLoading, bonusData, bonusError])
 
   useEffect(() => {
+    if (!weekDaySessionsError && weekDaySessionsData && weekDaySessionsData.getWeekDaySessionsByDashboard) {
+      const data = weekDaySessionsData.getWeekDaySessionsByDashboard
+      let array = [
+        {
+          name: 'Actividad semanal',
+          data: data,
+        },
+      ]
+      setChartOptions(chartOptions => ({ ...chartOptions, series: array }))
+    }
+  }, [weekDaySessionsLoading, weekDaySessionsData, weekDaySessionsError])
+
+  useEffect(() => {
     if (!patientError && patientData && patientData.getPatientIdByDashboard) {
       const patient_id = patientData.getPatientIdByDashboard
       localStorage.setItem('patient_id', patient_id)
       getSessionsByDashboard({ variables: { patient_id: patient_id } })
       getAnthropmetryByDashboard({ variables: { patient_id: patient_id } })
       getPurchaseListByDashboard({ variables: { patient_id: patient_id } })
+      getWeekDaySessionsByDashboard({ variables: { patient_id: patient_id } })
     }
   }, [patientLoading, patientData, patientError])
 
