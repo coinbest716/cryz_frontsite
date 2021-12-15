@@ -1,6 +1,6 @@
 [
-  { "id": 0, "status": "Complated", "label": "REALIZADA", "bgColor": "#54BD97" },
-  { "id": 1, "status": "Scheduled", "label": "PROGRAMADA", "bgColor": "#3A3838" },
-  { "id": 2, "status": "Cancelled", "label": "CANCELADA", "bgColor": "#BD5B54" },
-  { "id": 3, "status": "Consumed", "label": "CONSUMIDA", "bgColor": "#A8BAB3" }
+  { "id": 0, "status": "DONE", "label": "REALIZADA", "bgColor": "#54BD97" },
+  { "id": 1, "status": "SCHEDULED", "label": "PROGRAMADA", "bgColor": "#3A3838" },
+  { "id": 2, "status": "REMOVED ", "label": "CANCELADA", "bgColor": "#BD5B54" },
+  { "id": 3, "status": "CONSUMED", "label": "CONSUMIDA", "bgColor": "#A8BAB3" }
 ]
