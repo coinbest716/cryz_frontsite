@@ -132,7 +132,7 @@ const OrderDetail = () => {
               </td>
               <td>
                 <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                  {item.user.name + ' ' + item.user.last_name}
+                  {item.user.name + ' ' + item.user.lastname}
                 </div>
               </td>
               <td>
