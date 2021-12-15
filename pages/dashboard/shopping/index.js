@@ -299,7 +299,7 @@ const Shopping = () => {
                     <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                       <div className={'inline-grid'}>
                         <span className={styles.price}>{item.price}€</span>
-                        <span className={styles.payment}>Paypal</span>
+                        <span className={styles.payment}>{item.status === 'PAID' ? item.purchase_type : ''}</span>
                       </div>
                     </div>
                   </td>
