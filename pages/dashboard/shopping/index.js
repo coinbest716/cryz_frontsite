@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 // third party components
 import toast from 'react-hot-toast'
 import { Auth } from 'aws-amplify'
+import 'react-perfect-scrollbar/dist/css/styles.css'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -213,85 +215,98 @@ const Shopping = () => {
         </select>
       </div>
       {/* table part */}
-      <table className={'w-full table-auto'}>
-        <thead className={styles.tableHead}>
-          <tr>
-            <th>
-              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PEDIDO</div>
-            </th>
-            <th>
-              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>DETALLE</div>
-            </th>
-            <th>
-              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>FECHA</div>
-            </th>
-            <th>
-              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PRECIO</div>
-            </th>
-            <th>
-              <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PDF</div>
-            </th>
-          </tr>
-        </thead>
-        <tbody className={'mt-4 ' + styles.tbody}>
-          {shoppingData.map((item, index) => (
-            <tr key={index} className={index % 2 === 1 ? 'bg-white' : ''}>
-              <td className={'h-full relative'}>
-                <div
-                  className={
-                    'absolute top-0 bottom-0 flex flex-col justify-around ' +
-                    styles.tableContentArea +
-                    ' ' +
-                    styles.tableCellText
-                  }
-                >
-                  <div className={'flex items-start'}>#{item.bill_number}</div>
-                  <div className={'flex items-end mb-2'}>
-                    <Chip
-                      data={
-                        item.status === 'PAID'
-                          ? OrderStateData[0]
-                          : item.status === 'UNPAID'
-                          ? OrderStateData[1]
-                          : OrderStateData[2]
+      <div style={{ height: 'calc(100vh - 390px)', overflow: 'auto' }}>
+        <PerfectScrollbar>
+          <table className={'w-full table-auto'}>
+            <thead className={styles.tableHead}>
+              <tr>
+                <th>
+                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PEDIDO</div>
+                </th>
+                <th>
+                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>DETALLE</div>
+                </th>
+                <th>
+                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>FECHA</div>
+                </th>
+                <th>
+                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PRECIO</div>
+                </th>
+                <th>
+                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PDF</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody className={'mt-4 ' + styles.tbody}>
+              {shoppingData.map((item, index) => (
+                <tr key={index} className={index % 2 === 1 ? 'bg-white' : ''}>
+                  <td className={'h-full relative'}>
+                    <div
+                      className={
+                        'absolute top-0 bottom-0 flex flex-col justify-around ' +
+                        styles.tableContentArea +
+                        ' ' +
+                        styles.tableCellText
                       }
-                      onClick={() => {}}
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                  <div className={'inline-grid'}>
-                    {item.purchases.map((detail, idx) => (
-                      <div key={idx} className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail(detail)}>
-                        <Image src={FileViewIcon} alt={''} width={29} height={29} />
-                        <div className={'ml-5'}>{detail.item_web_name}</div>
+                    >
+                      <div className={'flex items-start'}>#{item.bill_number}</div>
+                      <div className={'flex items-end mb-2'}>
+                        <Chip
+                          data={
+                            item.status === 'PAID'
+                              ? OrderStateData[0]
+                              : item.status === 'UNPAID'
+                              ? OrderStateData[1]
+                              : OrderStateData[2]
+                          }
+                          onClick={() => {}}
+                        />
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.purchase_date}</div>
-              </td>
-              <td>
-                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                  <div className={'inline-grid'}>
-                    <span className={styles.price}>{item.price}€</span>
-                    <span className={styles.payment}>Paypal</span>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                  <Image src={item.sent_invoice ? DownloadIcon : DownloadDisableIcon} alt={''} width={18} height={22} />
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                    </div>
+                  </td>
+                  <td>
+                    <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                      <div className={'inline-grid'}>
+                        {item.purchases.map((detail, idx) => (
+                          <div
+                            key={idx}
+                            className={'flex cursor-pointer'}
+                            onClick={() => handleGotoOrderDetail(detail)}
+                          >
+                            <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                            <div className={'ml-5'}>{detail.item_web_name}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.purchase_date}</div>
+                  </td>
+                  <td>
+                    <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                      <div className={'inline-grid'}>
+                        <span className={styles.price}>{item.price}€</span>
+                        <span className={styles.payment}>Paypal</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                      <Image
+                        src={item.sent_invoice ? DownloadIcon : DownloadDisableIcon}
+                        alt={''}
+                        width={18}
+                        height={22}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </PerfectScrollbar>
+      </div>
       <div className={'w-full flex justify-end mt-6'}>
         {onlinePlanList.map((item, index) => (
           <button
