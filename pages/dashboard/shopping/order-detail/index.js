@@ -144,7 +144,7 @@ const OrderDetail = () => {
         </thead>
         <tbody className={'mt-4'}>
           {orderDetailList.map((item, index) => (
-            <tr className={index % 2 === 0 ? 'bg-white' : 'bg-transparent'} key={index}>
+            <tr className={index % 2 === 1 ? 'bg-white' : 'bg-transparent'} key={index}>
               <td>
                 <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.session_count}</div>
               </td>
