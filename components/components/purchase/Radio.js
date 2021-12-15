@@ -10,12 +10,12 @@ const Radio = props => {
         type="radio"
         value={value}
         name={type}
-        checked={value === type}
+        checked={value == type}
         onChange={handleChangeType}
         className={styles.inputRadio}
       />
       <div>
-        {type === 'billAddress' ? (
+        {type > -1 ? (
           <p className={'pl-3 ' + styles.billAddress}>{label}</p>
         ) : (
           <p className={'pl-3 ' + styles.creditTitle}>{label}</p>

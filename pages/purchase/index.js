@@ -35,7 +35,6 @@ import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
 import moment from 'moment'
-import { setRequestMeta } from 'next/dist/server/request-meta'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -60,7 +59,14 @@ const Purchase = () => {
   // loading part end #######################
 
   // variables
-  const [checkout] = useMutation(graphql.mutations.checkout)
+  const [Checkout] = useMutation(graphql.mutations.Checkout)
+  const [getPatientIdByDashboard, { data: patientData, loading: patientLoading, error: patientError }] = useLazyQuery(
+    graphql.queries.getPatientIdByDashboard
+  )
+  const [getPatientBillByDashboard, { data: billData, loading: billLoading, error: billError }] = useLazyQuery(
+    graphql.queries.getPatientBillByDashboard
+  )
+  const [createPatientBillByDashboard] = useMutation(graphql.mutations.createPatientBillByDashboard)
   const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
@@ -73,6 +79,20 @@ const Purchase = () => {
   const [tabIndex, setTabIndex] = useState(0)
   const [uploadFile, setUploadFile] = useState(null)
   const [email, setEmail] = useState('')
+  const personalKey = [
+    'name',
+    'surname',
+    'meet',
+    'email',
+    'telephone',
+    'country',
+    'emergencyPhone',
+    'address',
+    'code',
+    'town',
+    'gender',
+    'birthday',
+  ]
   const [personalInfo, setPersonalInfo] = useState({
     id: -1,
     avatar: '',
@@ -90,14 +110,26 @@ const Purchase = () => {
     gender: 'WOMAN',
     birthday: new Date(),
   })
+  const billingAddressKey = [
+    'addressAlias',
+    'surname',
+    'email',
+    'population',
+    'postalCode',
+    'name',
+    'cif',
+    'address',
+    'province',
+    'country',
+  ]
   const [billingAddress, setBillingAddress] = useState({
     addressAlias: '',
     surname: '',
     email: '',
-    town: '',
-    postal: '',
+    population: '',
+    postalCode: '',
     name: '',
-    code: '',
+    cif: '',
     address: '',
     province: '',
     country: '',
@@ -119,12 +151,12 @@ const Purchase = () => {
       label: 'Email',
     },
     {
-      value: 'town',
+      value: 'population',
       type: 'text',
       label: 'Población',
     },
     {
-      value: 'postal',
+      value: 'postalCode',
       type: 'text',
       label: 'CP',
     },
@@ -136,7 +168,7 @@ const Purchase = () => {
       label: 'Nombre',
     },
     {
-      value: 'code',
+      value: 'cif',
       type: 'text',
       label: 'DNI/NIF',
     },
@@ -159,7 +191,8 @@ const Purchase = () => {
   const genderList = ['WOMAN', 'MAN']
   const meetList = ['INSTAGRAM', 'FACEBOOK', 'PRENSA']
 
-  const [frameType, setFrameType] = useState('frame1')
+  const [frameType, setFrameType] = useState(-1)
+  const [billDataList, setBillDataList] = useState([])
 
   const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('')
@@ -169,15 +202,18 @@ const Purchase = () => {
   useEffect(() => {
     setCartData(shoppingCartData)
     setRedsys(false)
-
-    setEmail(localStorage.getItem('email'))
-    setPersonalInfo({ ...personalInfo, email: localStorage.getItem('email') })
-    setBillingAddress({ ...billingAddress, email: localStorage.getItem('email') })
+    getPatientIdByDashboard({
+      variables: {
+        email: localStorage.getItem('email'),
+      },
+    })
     getPatientByEmail({
       variables: {
         email: localStorage.getItem('email'),
       },
     })
+    setEmail(localStorage.getItem('email'))
+    setPersonalInfo({ ...personalInfo, email: localStorage.getItem('email') })
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
@@ -187,6 +223,44 @@ const Purchase = () => {
         setIsAuthenticated(false)
       })
   }, [])
+
+  useEffect(() => {
+    if (!patientError && patientData && patientData.getPatientIdByDashboard) {
+      const patient_id = patientData.getPatientIdByDashboard
+      localStorage.setItem('patient_id', patient_id)
+      getPatientBillByDashboard({ variables: { patient_id: patient_id } })
+      if (patient_id > -1) {
+        setTabIndex(1)
+      } else {
+        setTabIndex(0)
+      }
+    }
+  }, [patientLoading, patientData, patientError])
+
+  useEffect(() => {
+    if (!billError && billData && billData.getPatientBillByDashboard) {
+      let _billDataList = []
+      const billInfo = billData.getPatientBillByDashboard
+      billInfo.map(item => {
+        const _name = item.name.split(' ')
+        const _billItem = {
+          id: item.id,
+          name: _name[0],
+          surname: _name[1],
+          cif: item.cif,
+          addressAlias: item.title,
+          email: item.email,
+          population: item.population,
+          address: item.address,
+          province: item.province,
+          country: item.country,
+          postalCode: item.postal_code,
+        }
+        _billDataList.push(_billItem)
+      })
+      setBillDataList(_billDataList)
+    }
+  }, [billLoading, billData, billError])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -209,19 +283,6 @@ const Purchase = () => {
         country: data.bill_country,
       }
       setPersonalInfo(_personalInfo)
-      let _billingAddress = {
-        addressAlias: data.bill_alias,
-        surname: data.lastname,
-        email: data.email,
-        town: data.bill_town,
-        postal: data.bill_postal_code,
-        name: data.bill_name,
-        code: data.dni,
-        address: data.bill_address,
-        province: data.bill_province,
-        country: data.bill_country,
-      }
-      setBillingAddress(_billingAddress)
     }
   }, [personalLoading, personalData, personalError])
 
@@ -258,8 +319,15 @@ const Purchase = () => {
   }
 
   const handleSave = () => {
-    console.log(personalInfo)
-    if (personalInfo.name === '' || personalInfo.surname === '') {
+    console.log('personalInfo')
+    let emptyField = false
+    personalKey.map(key => {
+      if (personalInfo[key] === '') {
+        emptyField = true
+        return
+      }
+    })
+    if (emptyField) {
       toast.error('Please input data!')
       return
     }
@@ -278,6 +346,10 @@ const Purchase = () => {
       bill_address: personalInfo.address,
       bill_town: personalInfo.town,
       bill_country: personalInfo.country,
+      bill_alias: '',
+      bill_name: '',
+      bill_province: '',
+      bill_postal_code: '',
     }
 
     updatePatientByDashboard({
@@ -291,7 +363,6 @@ const Purchase = () => {
         }
       })
       .catch(error => {
-        console.log('+++++++++++++++++', error.message)
         dispatch({ type: 'set', isLoading: false })
         toast.error(error.message)
       })
@@ -311,13 +382,59 @@ const Purchase = () => {
   const handleChangeBillingAddress = (event, key) => {
     setBillingAddress({ ...billingAddress, [key]: event.target.value })
   }
-
+  const [selectedDoc, setSelectedDoc] = useState(null)
   const handleChangeFrame = event => {
     setFrameType(event.target.name)
+    billDataList.map(item => {
+      if (item.id == event.target.name) {
+        setSelectedDoc(item)
+      }
+    })
   }
 
   const handleDeleteBilling = () => {}
-  const handleSaveBilling = () => {}
+  const handleSaveBilling = () => {
+    let empty = false
+    billingAddressKey.map(key => {
+      if (billingAddress[key] === '') {
+        empty = true
+        return
+      }
+    })
+    if (empty) {
+      toast.error('Please input data!')
+      return
+    }
+    dispatch({ type: 'set', isLoading: true })
+    const variables = {
+      patient_id: Number(localStorage.getItem('patient_id')),
+      type: 'bill',
+      title: billingAddress.addressAlias,
+      name: billingAddress.name + ' ' + billingAddress.surname,
+      cif: billingAddress.cif,
+      email: billingAddress.email,
+      mobile: '',
+      address: billingAddress.address,
+      province: billingAddress.province,
+      population: billingAddress.population,
+      postal_code: billingAddress.postalCode,
+      country: billingAddress.country,
+    }
+    createPatientBillByDashboard({
+      variables: variables,
+    })
+      .then(response => {
+        if (response.data.createPatientBillByDashboard) {
+          toast.success('Successfully save bill information!')
+          getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+        }
+        dispatch({ type: 'set', isLoading: false })
+      })
+      .catch(error => {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(error.message)
+      })
+  }
 
   const handleChangePaymentType = event => {
     setPaymentType(event.target.name)
@@ -361,19 +478,25 @@ const Purchase = () => {
               toast.error(res.error.message)
             dispatch({ type: 'set', isLoading: false })
           } else if (res.id) {
-            checkout({
+            dispatch({ type: 'set', isLoading: true })
+            Checkout({
               variables: {
                 serviceId: Number(router.query.service_id),
                 ccToken: res.id,
               },
-            }).then(response => {
-              if (response.data.checkout) {
-                setSession(response.data.checkout)
-                toast.success('Successfully buy Service!')
-                router.push('/purchase/order-success')
-              }
             })
-            dispatch({ type: 'set', isLoading: false })
+              .then(response => {
+                if (response.data.Checkout) {
+                  setSession(response.data.Checkout)
+                  toast.success('Successfully buy Service!')
+                  dispatch({ type: 'set', isLoading: false })
+                  router.push('/purchase/order-success')
+                }
+              })
+              .catch(error => {
+                toast.error(error.message)
+                dispatch({ type: 'set', isLoading: false })
+              })
           }
         })
       } catch (err) {
@@ -436,9 +559,9 @@ const Purchase = () => {
                                   {personalInfo.name + ' ' + personalInfo.surname}
                                 </div>
                                 <div className={styles.profileCounry}>
-                                  {billingAddress.province
-                                    ? billingAddress.province + ', ' + billingAddress.country
-                                    : billingAddress.country}
+                                  {personalInfo.town
+                                    ? personalInfo.town + ', ' + personalInfo.country
+                                    : personalInfo.country}
                                 </div>
                               </div>
                             </div>
@@ -594,12 +717,16 @@ const Purchase = () => {
                     <div className={'p-4 pt-16'}>
                       <div className={styles.tabTitle}>Direcciones facturación</div>
                       <div className={'grid grid-cols-12 gap-4 pt-8'}>
-                        <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
-                          <BillingDoc handleChangeFrame={handleChangeFrame} frameType={'frame1'} value={frameType} />
-                        </div>
-                        <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
-                          <BillingDoc handleChangeFrame={handleChangeFrame} frameType={'frame2'} value={frameType} />
-                        </div>
+                        {billDataList.map((item, index) => (
+                          <div className={'col-span-12 md:col-span-6 sm:col-span-12 '} key={index}>
+                            <BillingDoc
+                              handleChangeFrame={handleChangeFrame}
+                              data={item}
+                              frameType={item.id}
+                              value={frameType}
+                            />
+                          </div>
+                        ))}
                       </div>
                       <div className={'pt-6 ' + styles.newAddress}>Nueva dirección</div>
                       <div className={'grid grid-cols-12 gap-4 pt-8'}>
@@ -631,7 +758,7 @@ const Purchase = () => {
                         </div>
                       </div>
                       <div className={'flex justify-end gap-8 pt-6'}>
-                        <CommonButton label={'Borrar dirección'} handleClick={handleDeleteBilling} type={'icon'} />
+                        {/* <CommonButton label={'Borrar dirección'} handleClick={handleDeleteBilling} type={'icon'} /> */}
                         <CommonButton label={'Aceptar cambios'} handleClick={handleSaveBilling} type={'fill'} />
                       </div>
                       <div className={'w-full mt-20 ' + styles.divider} />
@@ -680,6 +807,7 @@ const Purchase = () => {
                 handleRemoveCart={handleRemoveCart}
                 handleAcceptDiscount={handleAcceptDiscount}
                 tabIndex={tabIndex}
+                docData={selectedDoc}
               />
             </div>
           </div>
