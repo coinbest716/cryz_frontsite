@@ -55,7 +55,7 @@ import {
 import { GetOnlinePlanByDashboard, GetVideoMaterial, GetAvailablePlanDates } from './dashboard/plans-online.gql'
 
 // purchase
-import { Checkout } from './purchase.gql'
+import { Checkout, CheckoutVerify } from './purchase.gql'
 
 export default {
   queries: {
@@ -111,6 +111,8 @@ export default {
     getOnlinePlanByDashboard: GetOnlinePlanByDashboard,
     getVideoMaterial: GetVideoMaterial,
     getAvailablePlanDates: GetAvailablePlanDates,
+    //purchase
+    checkoutVerify: CheckoutVerify,
   },
   mutations: {
     createUser: CreateUser,

@@ -22,3 +22,27 @@ mutation Checkout($serviceId: Int, $ccToken: String) {
     next
   }
 }
+
+query CheckoutVerify($intentId: String) {
+  checkoutVerify(intent_id: $intentId) {
+    item_web_name
+    status
+    id
+    patient_id
+    item_kind
+    item_name
+    item_id
+    item_speciality
+    item_count
+    item_iva
+    item_sessions
+    item_used
+    purchase_date
+    purchase_type
+    bill_number
+    price
+    gross_amount
+    discount
+    amount
+  }
+}

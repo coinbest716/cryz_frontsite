@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -15,6 +16,10 @@ import styles from './order-success.module.scss'
 
 // images and icons
 import successLogo from 'public/images/order-success.svg'
+
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const CreditSuccess = () => {
   // loading part ###########################
@@ -32,6 +37,25 @@ const CreditSuccess = () => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
+  const router = useRouter()
+  const [checkoutVerify, { data: orderData, loading: orderLoading, error: orderError }] = useLazyQuery(
+    graphql.queries.checkoutVerify
+  )
+  const [orderInfo, setOrderInfo] = useState(null)
+  useEffect(() => {
+    if (router.query.intentId) {
+      checkoutVerify({ variables: { intentId: decodeURIComponent(JSON.parse(`"${router.query.intentId}"`)) } })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query])
+
+  useEffect(() => {
+    if (!orderError && orderData && orderData.getPatientByEmail) {
+      const data = orderData.checkoutVerify
+      console.log(data)
+      setOrderInfo(data)
+    }
+  }, [orderLoading, orderData, orderError])
 
   return (
     <div className={'flex flex-wrap justify-center'}>
@@ -43,7 +67,7 @@ const CreditSuccess = () => {
               <div className={'pt-16 text-center'}>
                 <Image src={successLogo} alt="" width={270} height={222} />
               </div>
-              <div className={'pt-16 ' + styles.orderNumber}>TU NÚMERO DE PEDIDO ES #45486</div>
+              <div className={'pt-16 ' + styles.orderNumber}>TU NÚMERO DE PEDIDO ES #{orderInfo?.id}</div>
             </div>
           </div>
         </div>

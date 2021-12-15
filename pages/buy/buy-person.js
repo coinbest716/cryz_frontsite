@@ -84,7 +84,7 @@ const BuyPerson = () => {
       .then(() => {
         router.push({
           pathname: '/purchase',
-          query: { service_id: service_id, tab: 2 },
+          query: { service_id: service_id, tab: 2, image: router.query.image, description: description, price: price },
         })
       })
       .catch(() => {
