@@ -168,12 +168,13 @@ const Shopping = () => {
     router.push('/dashboard/shopping/order-detail?purchase_id=' + item.id)
   }
 
-  const handleCancelSubscription = id => {
+  const handleCancelSubscription = item => {
     CancelOnlinePlanSubscriptionByDashboard({
-      variables: { purchase_id: id },
+      variables: { purchase_id: item.id },
     })
       .then(response => {
         if (response.data.CancelOnlinePlanSubscriptionByDashboard) {
+          toast.success(item.item_name + ' is cancelled successfully.')
           getPurchasedOnlinePlanList({
             variables: {
               patient_id: Number(localStorage.getItem('patient_id')),
@@ -294,8 +295,9 @@ const Shopping = () => {
       <div className={'w-full flex justify-end mt-6'}>
         {onlinePlanList.map((item, index) => (
           <button
+            key={index}
             className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton}
-            onClick={() => handleCancelSubscription(item.id)}
+            onClick={() => handleCancelSubscription(item)}
           >
             <p>
               <strong>Anular subscripción: </strong> {item.item_name}
