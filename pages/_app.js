@@ -4,6 +4,8 @@ import Script from 'next/script'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
+import * as gtag from '../utils/gtag'
+
 // aws components
 import Amplify, { Auth } from 'aws-amplify'
 import awsconfig from 'utils/aws-exports'

@@ -103,9 +103,10 @@ const Course = () => {
                   Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
                   {moment(mainData.end_date).format('MMMM YYYY')}
                 </div>
-                <div className={'mt-6'} style={{ width: '326px' }}>
+                {/*<div className={'mt-6'} style={{ width: '326px' }}>
                   <ArrowButton label={mainData.price + ' €'} onClick={handleClickPayment} />
-                </div>
+                </div>*/}
+
                 <div className={globalStyles.tinyMCEClass}>
                   <div
                     className={styles.topDescription + ' mt-8 tinymce-class'}
