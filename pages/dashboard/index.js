@@ -520,7 +520,7 @@ const Dashboard = () => {
                 <div className={styles.highBoldLabel}>Mensajes</div>
                 {message.length ? (
                   <div>
-                    <div className={'pt-2 ' + styles.mediumLabel}>Tienes 3 mensajes nuevos</div>
+                    <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
                     <div className={'pt-6'}>
                       {message.map((item, index) => (
                         <div className={'py-2 flex justify-center'} key={index}>
