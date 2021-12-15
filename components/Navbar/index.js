@@ -109,8 +109,11 @@ const Navbar = () => {
     await client.clearStore()
     await Auth.signOut()
     router.push('/login')
-    localStorage.removeItem('email')
-    localStorage.removeItem('password')
+    if (!Boolean(localStorage.getItem('remember'))) {
+      localStorage.removeItem('email')
+      localStorage.removeItem('password')
+      localStorage.removeItem('patient_id')
+    }
   }
 
   const handleGotoRouter = link => {

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Auth } from 'aws-amplify'
-// redux
-import { useDispatch } from 'react-redux'
+import { Auth, signInButton } from 'aws-amplify'
 // next components
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -22,9 +20,7 @@ import graphql from 'crysdiazGraphql'
 import ReactLoading from 'react-loading'
 
 const Register = () => {
-  const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
   const router = useRouter()
-  const dispatch = useDispatch()
 
   const [progressStatus, setProgressStatus] = useState(false)
   const [email, setEmail] = useState('')
@@ -38,8 +34,10 @@ const Register = () => {
   const [showRepeatPass, setShowRepeatPass] = useState(false)
 
   useEffect(() => {
-    if (Boolean(router.query.userConfirmed) === false) {
-      setUserConfirmed(false)
+    if (router.query.userConfirmed) {
+      setUserConfirmed(Boolean(router.query.userConfirmed))
+      setEmail(localStorage.getItem('email'))
+      setPassword(localStorage.getItem('password'))
     }
   }, [router.query])
 
@@ -66,51 +64,24 @@ const Register = () => {
   }
 
   const handleVerifyCode = async () => {
-    dispatch({ type: 'set', isLoading: true })
+    setProgressStatus(true)
+
     await Auth.confirmSignUp(email, verifyCode)
       .then(response => {
         console.log(response)
-        // createPatient(email)
         toast.success('Successfully confirmed signed up')
-        router.push('/dashboard')
-        dispatch({ type: 'set', isLoading: false })
+        Auth.signIn(email, password).then(response => {
+          console.log('register : ', response)
+          toast.success('Successfully Logged in')
+          setProgressStatus(false)
+          localStorage.setItem('email', email)
+          router.push('/dashboard')
+        })
+        setProgressStatus(false)
       })
       .catch(error => {
         toast.error(error.message)
-        dispatch({ type: 'set', isLoading: false })
-      })
-  }
-
-  const createPatient = async email => {
-    const variables = {
-      email: email,
-      name: '',
-      lastname: '',
-      dni: '',
-      mobile: '',
-      eg_number: '',
-      known_us: '',
-      avatar: '',
-      genre: '',
-      birth_date: '',
-      bill_alias: '',
-      bill_name: '',
-      bill_address: '',
-      bill_province: '',
-      bill_town: '',
-      bill_postal_code: '',
-      bill_country: '',
-    }
-    updatePatientByDashboard({
-      variables: variables,
-    })
-      .then(response => {
-        if (response.data.updatePatientByDashboard) {
-          console.log('updatePatientByDashboard')
-        }
-      })
-      .catch(error => {
-        console.log('error', error)
+        setProgressStatus(false)
       })
   }
 

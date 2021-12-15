@@ -45,9 +45,12 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         client.resetStore()
         client.clearStore()
         Auth.signOut()
-        localStorage.removeItem('email')
-        localStorage.removeItem('password')
         router.push('/login')
+        if (!Boolean(localStorage.getItem('remember'))) {
+          localStorage.removeItem('email')
+          localStorage.removeItem('password')
+          localStorage.removeItem('patient_id')
+        }
       }
     })
 

@@ -80,8 +80,8 @@ const Login = () => {
     }
     await Auth.signIn(email, password)
       .then(response => {
-        setProgressStatus(false)
         console.log(response)
+        setProgressStatus(false)
         setAuthUser(response)
         setAuthChallenge(response.challengeName)
         if (rememberMe) {
@@ -100,19 +100,19 @@ const Login = () => {
         }
       })
       .catch(error => {
-        console.log('=+++++++++++++++++++++++++++', error)
         toast.error(error.message)
-        if (error.code === 'UserNotConfirmedException') {
-          resendSignUp(email)
-        }
         setProgressStatus(false)
-        toast.error(error.message)
+        if (error.code === 'UserNotConfirmedException') {
+          resendSignUp(email, password)
+        }
       })
   }
 
-  const resendSignUp = async email => {
+  const resendSignUp = async (email, password) => {
+    localStorage.setItem('email', email)
+    localStorage.setItem('password', password)
+
     await Auth.resendSignUp(email).then(response => {
-      console.log(response)
       router
         .push({
           pathname: '/register',
