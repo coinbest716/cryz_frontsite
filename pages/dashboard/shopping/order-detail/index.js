@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 // redux
 import { useDispatch } from 'react-redux'
 
+// next components
+import router from 'next/router'
+
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 // import Profile from 'components/components/dashboard/Profile'
@@ -15,8 +18,11 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/dashboard/shopping/order-detail/OrderDetail.module.scss'
 
 // json data
-import OrderDetailData from 'assets/data/OrderDetailData.json'
 import OrderDetailStateData from 'assets/data/OrderDetailStateData.json'
+
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const OrderDetail = () => {
   // loading part ###########################
@@ -34,6 +40,49 @@ const OrderDetail = () => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
+
+  // variables
+  const [purchaseID, setPurchaseID] = useState(-1)
+  const [orderDetailList, setOrderDetailList] = useState([])
+
+  const [
+    getSessionsByIdFromDashboard,
+    { data: orderDetailData, loading: orderDetailLoading, error: orderDetailError },
+  ] = useLazyQuery(graphql.queries.getSessionsByIdFromDashboard)
+
+  // handlers
+  useEffect(() => {
+    setPurchaseID(Number(router.query.purchase_id))
+  }, [router.query])
+
+  useEffect(() => {
+    if (purchaseID !== -1 && purchaseID !== NaN) {
+      getSessionsByIdFromDashboard({
+        variables: {
+          patient_id: Number(localStorage.getItem('patient_id')),
+          purchase_id: purchaseID,
+        },
+      })
+    }
+  }, [getSessionsByIdFromDashboard, purchaseID])
+
+  useEffect(() => {
+    if (!orderDetailError && orderDetailData && orderDetailData.getSessionsByIdFromDashboard) {
+      let array = orderDetailData.getSessionsByIdFromDashboard
+      let tempArray = []
+      array.map(item => {
+        let obj = JSON.parse(JSON.stringify(item))
+        obj.date = item.date.slice(8, 10) + '/' + item.date.slice(5, 7) + '/' + item.date.slice(0, 4)
+        OrderDetailStateData.map((elem, idx) => {
+          if (elem.status === item.status) {
+            obj.status = elem
+          }
+        })
+        tempArray.push(obj)
+      })
+      setOrderDetailList(tempArray)
+    }
+  }, [orderDetailLoading, orderDetailData, orderDetailError])
 
   const handleClickButton = () => {
     console.log('clicked button')
@@ -76,13 +125,15 @@ const OrderDetail = () => {
           </tr>
         </thead>
         <tbody className={'mt-4'}>
-          {OrderDetailData.map((item, index) => (
+          {orderDetailList.map((item, index) => (
             <tr className={index % 2 === 0 ? 'bg-white' : 'bg-transparent'} key={index}>
               <td>
-                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.session}</div>
+                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.session_count}</div>
               </td>
               <td>
-                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.trainer}</div>
+                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                  {item.user.name + ' ' + item.user.last_name}
+                </div>
               </td>
               <td>
                 <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.date}</div>
@@ -90,7 +141,7 @@ const OrderDetail = () => {
               <td>
                 <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                   <div className={'flex items-end mb-2'}>
-                    <Chip data={OrderDetailStateData[item.orderState]} onClick={() => {}} />
+                    <Chip data={item.status} onClick={() => {}} />
                   </div>
                 </div>
               </td>
