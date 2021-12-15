@@ -382,9 +382,14 @@ const Purchase = () => {
   const handleChangeBillingAddress = (event, key) => {
     setBillingAddress({ ...billingAddress, [key]: event.target.value })
   }
-
+  const [selectedDoc, setSelectedDoc] = useState(null)
   const handleChangeFrame = event => {
     setFrameType(event.target.name)
+    billDataList.map(item => {
+      if (item.id == event.target.name) {
+        setSelectedDoc(item)
+      }
+    })
   }
 
   const handleDeleteBilling = () => {}
@@ -796,6 +801,7 @@ const Purchase = () => {
                 handleRemoveCart={handleRemoveCart}
                 handleAcceptDiscount={handleAcceptDiscount}
                 tabIndex={tabIndex}
+                docData={selectedDoc}
               />
             </div>
           </div>

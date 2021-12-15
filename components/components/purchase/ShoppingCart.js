@@ -18,7 +18,7 @@ import plus from 'public/images/plus-gray.svg'
 import minus from 'public/images/minus-gray.svg'
 
 const ShoppingCart = props => {
-  const { data, handleRemoveCart, handleAcceptDiscount, tabIndex, shoppingInfo } = props
+  const { data, handleRemoveCart, handleAcceptDiscount, tabIndex, shoppingInfo, docData } = props
   const [expend, setExpend] = useState(false)
 
   const handleClickExpand = () => {
@@ -104,7 +104,7 @@ const ShoppingCart = props => {
         <div className={styles.listDescription}>Total +IVA</div>
         <div className={styles.listPrice}>€&nbsp;{total.toFixed(2)}</div>
       </div>
-      {tabIndex === 2 && (
+      {docData && (
         <div className={'pt-36'}>
           <Radio
             handleChangeType={handleChangeFrame}
@@ -113,11 +113,10 @@ const ShoppingCart = props => {
             label={'Dirección facturación'}
           />
           <div className={'pt-2 pl-8 ' + styles.billAddress}>
-            <p>Jamy Larson</p>
-            <p>Unit 2 Green Mount Retail Park</p>
-            <p>Halifax</p>
-            <p>HX1 5QN</p>
-            <p>Tel: 0344 332 5931</p>
+            <div>{docData.name + ' ' + docData.surname}</div>
+            <div>{docData.address}</div>
+            <div>{docData.province}</div>
+            <div>{docData.postalCode}</div>
           </div>
         </div>
       )}
