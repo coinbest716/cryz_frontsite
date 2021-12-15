@@ -224,6 +224,18 @@ const Shopping = () => {
           ))}
         </tbody>
       </table>
+      <div className={'w-full flex justify-end mt-6'}>
+        <button className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton} onClick={() => {}}>
+          <p>
+            <strong>Anular subscripción: </strong> Plan online menopausia
+          </p>
+        </button>
+        <button className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton} onClick={() => {}}>
+          <p>
+            <strong>Anular subscripción: </strong> Plan integral online nutrición
+          </p>
+        </button>
+      </div>
     </div>
   )
 }
