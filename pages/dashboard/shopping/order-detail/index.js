@@ -42,7 +42,9 @@ const OrderDetail = () => {
   // loading part end #######################
 
   // variables
+  const [billNumber, setBillNumber] = useState(-1)
   const [purchaseID, setPurchaseID] = useState(-1)
+  const [status, setStatus] = useState('PAID')
   const [orderDetailList, setOrderDetailList] = useState([])
 
   const [
@@ -52,7 +54,9 @@ const OrderDetail = () => {
 
   // handlers
   useEffect(() => {
+    setBillNumber(Number(router.query.bill_number))
     setPurchaseID(Number(router.query.purchase_id))
+    setStatus(router.query.status)
   }, [router.query])
 
   useEffect(() => {
@@ -87,6 +91,10 @@ const OrderDetail = () => {
   const handleClickButton = () => {
     console.log('clicked button')
   }
+
+  const handlePayButton = () => {
+    router.push('/purchase?tab=1&bill_number=' + billNumber)
+  }
   return (
     <div className={globalStyles.dashContainer}>
       {/* header part */}
@@ -99,9 +107,13 @@ const OrderDetail = () => {
       </div>
       {/* button part */}
       <div className={'w-full flex justify-start mt-11 mb-8'}>
-        <div className={'mr-4'}>
-          <CommonButton label={'Pagar bono'} bgColor={'#BD5B54'} handleClickButton={() => handleClickButton()} />
-        </div>
+        {status !== 'PAID' ? (
+          <div className={'mr-4'}>
+            <CommonButton label={'Pagar bono'} bgColor={'#BD5B54'} handleClickButton={() => handlePayButton()} />
+          </div>
+        ) : (
+          <></>
+        )}
         <div>
           <CommonButton label={'Comprar bono'} bgColor={'#818E8E'} handleClickButton={() => handleClickButton()} />
         </div>

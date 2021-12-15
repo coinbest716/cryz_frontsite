@@ -166,8 +166,15 @@ const Shopping = () => {
     setSelectedYear(Number(event.target.value))
   }
 
-  const handleGotoOrderDetail = item => {
-    router.push('/dashboard/shopping/order-detail?purchase_id=' + item.id)
+  const handleGotoOrderDetail = (item, detail) => {
+    router.push(
+      '/dashboard/shopping/order-detail?bill_number=' +
+        item.bill_number +
+        '&purchase_id=' +
+        detail.id +
+        '&status=' +
+        detail.status
+    )
   }
 
   const handleCancelSubscription = item => {
@@ -271,7 +278,7 @@ const Shopping = () => {
                           <div
                             key={idx}
                             className={'flex cursor-pointer'}
-                            onClick={() => handleGotoOrderDetail(detail)}
+                            onClick={() => handleGotoOrderDetail(item, detail)}
                           >
                             <Image src={FileViewIcon} alt={''} width={29} height={29} />
                             <div className={'ml-5'}>{detail.item_web_name}</div>
