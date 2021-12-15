@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Auth } from 'aws-amplify'
+// redux
+import { useDispatch } from 'react-redux'
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // styles
 import styles from 'pages/register/Register.module.scss'
@@ -21,6 +23,9 @@ import ReactLoading from 'react-loading'
 
 const Register = () => {
   const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
+  const router = useRouter()
+  const dispatch = useDispatch()
+
   const [progressStatus, setProgressStatus] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -31,6 +36,12 @@ const Register = () => {
 
   const [showPass, setShowPass] = useState(false)
   const [showRepeatPass, setShowRepeatPass] = useState(false)
+
+  useEffect(() => {
+    if (Boolean(router.query.userConfirmed) === false) {
+      setUserConfirmed(false)
+    }
+  }, [router.query])
 
   const handleSetShowPass = bool => {
     setShowPass(bool)
@@ -59,9 +70,9 @@ const Register = () => {
     await Auth.confirmSignUp(email, verifyCode)
       .then(response => {
         console.log(response)
-        createPatient(email)
+        // createPatient(email)
         toast.success('Successfully confirmed signed up')
-        router.push('/login')
+        router.push('/dashboard')
         dispatch({ type: 'set', isLoading: false })
       })
       .catch(error => {
@@ -124,16 +135,11 @@ const Register = () => {
         toast.error(error.message)
         if (error.code === 'UsernameExistsException') {
           setProgressStatus(false)
-          setUserConfirmed(false)
-          resendSignUp(email)
+          router.push('/login')
         } else {
           setProgressStatus(false)
         }
       })
-  }
-
-  const resendSignUp = async email => {
-    await Auth.resendSignUp(email)
   }
 
   return (

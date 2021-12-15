@@ -43,10 +43,11 @@ const Login = () => {
       .catch(() => {
         setIsAuthenticated(false)
       })
-    setRememberMe(Boolean(localStorage.getItem('remember')))
+
     if (localStorage.getItem('remember')) {
-      setEmail(localStorage.getItem('email'))
-      setPassword(localStorage.getItem('password'))
+      setRememberMe(Boolean(localStorage.getItem('remember')))
+      setEmail(localStorage.getItem('email') || '')
+      setPassword(localStorage.getItem('password') || '')
     }
   }, [])
 
@@ -73,6 +74,10 @@ const Login = () => {
 
   const handleClickLogin = async () => {
     setProgressStatus(true)
+    if (email === '' || password === '') {
+      toast.error('You should input email or password!')
+      return
+    }
     await Auth.signIn(email, password)
       .then(response => {
         setProgressStatus(false)
@@ -95,9 +100,30 @@ const Login = () => {
         }
       })
       .catch(error => {
+        console.log('=+++++++++++++++++++++++++++', error)
+        toast.error(error.message)
+        if (error.code === 'UserNotConfirmedException') {
+          resendSignUp(email)
+        }
         setProgressStatus(false)
         toast.error(error.message)
       })
+  }
+
+  const resendSignUp = async email => {
+    await Auth.resendSignUp(email).then(response => {
+      console.log(response)
+      router
+        .push({
+          pathname: '/register',
+          query: {
+            userConfirmed: false,
+          },
+        })
+        .catch(error => {
+          toast.error(error.message)
+        })
+    })
   }
 
   const handleUpdatePassword = async () => {
