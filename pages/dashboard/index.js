@@ -157,6 +157,11 @@ const Dashboard = () => {
       text: '¡Hoy es un buen día! \n Sigue haciéndolo tan bien como hasta ahora, y ya verás cómo consigues todo lo que te propongas',
       link: '/',
     },
+    {
+      id: 4,
+      text: 'Este es tu espacio personal desde el que podrás acceder a toda la información sobre pedidos, calendario de sesiones, tu evolución, planes online, clases en directo y otras novedades.',
+      link: '/',
+    },
   ]
 
   const [status, setStatus] = useState(0)
@@ -363,7 +368,7 @@ const Dashboard = () => {
               </div>
               <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[status].text}</div>
               <div className={'pt-4'}>
-                {status !== 3 ? (
+                {status !== 3 && status !== 4 ? (
                   <DashboardButton
                     handleClick={() => handleClickRedirect('view', statusArray[status].link)}
                     label={'Ver'}
