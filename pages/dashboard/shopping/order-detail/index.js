@@ -108,7 +108,7 @@ const OrderDetail = () => {
         </div>
       </div>
       {/* button part */}
-      <div className={'w-full flex justify-start mt-11 mb-8'}>
+      {/* <div className={'w-full flex justify-start mt-11 mb-8'}>
         {status !== 'PAID' ? (
           <div className={'mr-4'}>
             <CommonButton
@@ -123,7 +123,7 @@ const OrderDetail = () => {
         <div>
           <CommonButton label={'Comprar bono'} bgColor={'#818E8E'} handleClickButton={() => handleClickButton()} />
         </div>
-      </div>
+      </div> */}
       {/* table part */}
       <table className={'w-full table-auto'}>
         <thead className={styles.tableHead}>
