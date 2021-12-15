@@ -62,7 +62,16 @@ const PurchaseLogin = () => {
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
-        router.push({ pathname: '/purchase', query: { tab: 1 } })
+        router.push({
+          pathname: '/purchase',
+          query: {
+            service_id: router.query.service_id,
+            tab: 1,
+            image: router.query.image,
+            description: router.query.description,
+            price: router.query.price,
+          },
+        })
       })
       .catch(() => {
         setIsAuthenticated(false)
@@ -97,7 +106,16 @@ const PurchaseLogin = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push({ pathname: '/purchase', query: { tab: 1 } })
+      router.push({
+        pathname: '/purchase',
+        query: {
+          service_id: router.query.service_id,
+          tab: 1,
+          image: router.query.image,
+          description: router.query.description,
+          price: router.query.price,
+        },
+      })
     }
   }, [isAuthenticated])
 
@@ -147,7 +165,16 @@ const PurchaseLogin = () => {
         setAuthUser(response)
         setAuthChallenge('')
         toast.success('Successfully update password')
-        router.push('/purchase-login')
+        router.push({
+          pathname: '/purchase-login',
+          query: {
+            service_id: router.query.service_id,
+            tab: 1,
+            image: router.query.image,
+            description: router.query.description,
+            price: router.query.price,
+          },
+        })
       })
       .catch(error => {
         dispatch({ type: 'set', isLoading: false })
@@ -185,7 +212,17 @@ const PurchaseLogin = () => {
         localStorage.setItem('email', email)
         if (response.challengeName !== 'NEW_PASSWORD_REQUIRED') {
           toast.success('Successfully Logged in')
-          router.push({ pathname: '/purchase', query: { service_id: serviceId, tab: tab || 1 } })
+
+          router.push({
+            pathname: '/purchase',
+            query: {
+              service_id: router.query.service_id,
+              tab: 1,
+              image: router.query.image,
+              description: router.query.description,
+              price: router.query.price,
+            },
+          })
         }
         dispatch({ type: 'set', isLoading: false })
       })
@@ -208,6 +245,11 @@ const PurchaseLogin = () => {
           pathname: '/purchase-register',
           query: {
             userConfirmed: false,
+            service_id: router.query.service_id,
+            tab: 0,
+            image: router.query.image,
+            description: router.query.description,
+            price: router.query.price,
           },
         })
         .catch(error => {

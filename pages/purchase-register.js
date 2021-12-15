@@ -148,7 +148,16 @@ const Register = () => {
         dispatch({ type: 'set', isLoading: false })
         if (error.code === 'UsernameExistsException') {
           dispatch({ type: 'set', isLoading: false })
-          router.push('/purchase-login')
+          router.push({
+            pathname: '/purchase-login',
+            query: {
+              service_id: router.query.service_id,
+              tab: 1,
+              image: router.query.image,
+              description: router.query.description,
+              price: router.query.price,
+            },
+          })
         } else {
           dispatch({ type: 'set', isLoading: false })
           toast.error(error.message)
@@ -179,7 +188,17 @@ const Register = () => {
           toast.success('Successfully Logged in')
           localStorage.setItem('email', email)
           dispatch({ type: 'set', isLoading: false })
-          router.push({ pathname: '/purchase', query: { tab: 0 } })
+
+          router.push({
+            pathname: '/purchase',
+            query: {
+              service_id: router.query.service_id,
+              tab: 0,
+              image: router.query.image,
+              description: router.query.description,
+              price: router.query.price,
+            },
+          })
         })
       })
       .catch(error => {

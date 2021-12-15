@@ -21,7 +21,7 @@ import BillingDoc from 'components/components/purchase/BillingDoc'
 import PreviousButton from 'components/components/purchase/PreviousButton'
 import Credit from 'components/components/purchase/Credit'
 import Transfer from 'components/components/purchase/Transfer'
-import ShoppingCart from 'components/components/purchase/ShoppingCart'
+import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 
 // json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
@@ -79,6 +79,11 @@ const Purchase = () => {
   const [tabIndex, setTabIndex] = useState(0)
   const [uploadFile, setUploadFile] = useState(null)
   const [email, setEmail] = useState('')
+  const [shoppingInfo, setShoppingInfo] = useState({
+    image: '',
+    description: '',
+    price: '',
+  })
   const personalKey = [
     'name',
     'surname',
@@ -223,6 +228,22 @@ const Purchase = () => {
         setIsAuthenticated(false)
       })
   }, [])
+
+  useEffect(() => {
+    let _shoppingInfo = { ...shoppingInfo }
+
+    if (router.query.image) {
+      _shoppingInfo = { ..._shoppingInfo, image: decodeURIComponent(JSON.parse(`"${router.query.image}"`)) }
+    }
+    if (router.query.description) {
+      _shoppingInfo = { ..._shoppingInfo, description: decodeURIComponent(JSON.parse(`"${router.query.description}"`)) }
+    }
+    if (router.query.price) {
+      _shoppingInfo = { ..._shoppingInfo, price: Number(router.query.price) }
+    }
+    setShoppingInfo(_shoppingInfo)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query])
 
   useEffect(() => {
     if (!patientError && patientData && patientData.getPatientIdByDashboard) {
@@ -494,7 +515,7 @@ const Purchase = () => {
                   if (checkoutData.next?.redirect_to_url.url) {
                     window.open(checkoutData.next?.redirect_to_url.url, '_self')
                   } else {
-                  router.push('/purchase/order')
+                    router.push('/purchase/order')
                   }
                 }
               })
@@ -792,7 +813,6 @@ const Purchase = () => {
                       {/*<div className={'pt-5'}>
                         <Transfer handleChangePaymentType={handleChangePaymentType} value={paymentType} />
                       </div>*/}
-
                     </div>
                     <div className={'pt-24 flex justify-between items-center'}>
                       <div>
@@ -808,6 +828,7 @@ const Purchase = () => {
               </div>
             </div>
             <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
+              <ShoppingCart shoppingInfo={shoppingInfo} />
               {/* <ShoppingCart
                 data={cartData}
                 handleRemoveCart={handleRemoveCart}
