@@ -42,6 +42,7 @@ const PurchaseLogin = () => {
 
   // variables
   const router = useRouter()
+  const [authUser, setAuthUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [authChallenge, setAuthChallenge] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
@@ -114,10 +115,36 @@ const PurchaseLogin = () => {
 
   const handleClickLogin = () => {
     router.push('/purchase-login')
+    router.push({
+      pathname: '/purchase-login',
+      query: {
+        service_id: serviceId,
+        tab: 1,
+        image: router.query.image,
+        description: description,
+        price: price,
+      },
+    })
   }
 
   const handleClickRegister = () => {
     router.push('/purchase-register')
+  }
+
+  const handleUpdatePassword = async () => {
+    dispatch({ type: 'set', isLoading: true })
+    await Auth.completeNewPassword(authUser, password)
+      .then(response => {
+        dispatch({ type: 'set', isLoading: false })
+        setAuthUser(response)
+        setAuthChallenge('')
+        toast.success('Successfully update password')
+        router.push('/purchase-login')
+      })
+      .catch(error => {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(error.message)
+      })
   }
 
   const handleClickGoogle = () => {
@@ -136,6 +163,7 @@ const PurchaseLogin = () => {
     dispatch({ type: 'set', isLoading: true })
     await Auth.signIn(email, password)
       .then(response => {
+        setAuthUser(response)
         setAuthChallenge(response.challengeName)
         if (rememberMe) {
           localStorage.setItem('email', email)
