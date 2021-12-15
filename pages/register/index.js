@@ -15,8 +15,6 @@ import EyeCrossIcon from 'assets/images/eye-cross.svg'
 import EyeIcon from 'assets/images/eye.svg'
 
 import toast from 'react-hot-toast'
-import { useMutation } from '@apollo/client'
-import graphql from 'crysdiazGraphql'
 import ReactLoading from 'react-loading'
 
 const Register = () => {

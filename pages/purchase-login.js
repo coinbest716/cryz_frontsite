@@ -66,10 +66,10 @@ const PurchaseLogin = () => {
       .catch(() => {
         setIsAuthenticated(false)
       })
-    setRememberMe(Boolean(localStorage.getItem('remember')))
     if (localStorage.getItem('remember')) {
-      setEmail(localStorage.getItem('email'))
-      setPassword(localStorage.getItem('password'))
+      setRememberMe(Boolean(localStorage.getItem('remember')))
+      setEmail(localStorage.getItem('email') || '')
+      setPassword(localStorage.getItem('password') || '')
     }
   }, [])
 
@@ -91,7 +91,6 @@ const PurchaseLogin = () => {
       _shoppingInfo = { ..._shoppingInfo, price: Number(router.query.price) }
     }
     setShoppingInfo(_shoppingInfo)
-    console.log(_shoppingInfo)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
 
@@ -157,7 +156,28 @@ const PurchaseLogin = () => {
       .catch(error => {
         dispatch({ type: 'set', isLoading: false })
         toast.error(error.message)
+        if (error.code === 'UserNotConfirmedException') {
+          resendSignUp(email, password)
+        }
       })
+  }
+
+  const resendSignUp = async (email, password) => {
+    localStorage.setItem('email', email)
+    localStorage.setItem('password', password)
+
+    await Auth.resendSignUp(email).then(response => {
+      router
+        .push({
+          pathname: '/purchase-register',
+          query: {
+            userConfirmed: false,
+          },
+        })
+        .catch(error => {
+          toast.error(error.message)
+        })
+    })
   }
 
   const handleSetShowPass = bool => {
@@ -232,7 +252,7 @@ const PurchaseLogin = () => {
                         <p className={styles.forgetPassword}>Olvidaste contraseña</p>
                       </Link>
                     </div>
-                    <div className={'flex justify-between items-center pt-10'}>
+                    {/* <div className={'flex justify-between items-center pt-10'}>
                       <div className={styles.divider} />
                       <div className={styles.remember}>or</div>
                       <div className={styles.divider} />
@@ -242,7 +262,7 @@ const PurchaseLogin = () => {
                     </div>
                     <div className={'flex justify-between items-center pt-5'}>
                       <CommonButton handleClick={handleClickGoogle} label={'LOGIN CON GOOGLE'} type={'google'} />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
