@@ -67,7 +67,7 @@ const CreditSuccess = () => {
               <div className={'pt-16 text-center'}>
                 <Image src={successLogo} alt="" width={270} height={222} />
               </div>
-              <div className={'pt-16 ' + styles.orderNumber}>TU NÚMERO DE PEDIDO ES #45486</div>
+              <div className={'pt-16 ' + styles.orderNumber}>TU NÚMERO DE PEDIDO ES #{orderInfo?.id}</div>
             </div>
           </div>
         </div>
