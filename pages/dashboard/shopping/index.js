@@ -27,7 +27,6 @@ import DownloadDisableIcon from 'assets/images/download-disable.svg'
 
 // json data
 import OrderStateData from 'assets/data/OrderStateData.json'
-import MonthList from 'assets/data/MonthListData.json'
 
 // graphql
 import { useLazyQuery } from '@apollo/client'
@@ -51,7 +50,25 @@ const Shopping = () => {
   // loading part end #######################
 
   // variables
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1)
+  const [yearList, setYearList] = useState([])
+
+  useEffect(() => {
+    let array = []
+    let object = {}
+    object.id = 0
+    object.year = 'Todo'
+    object.value = 0
+    array.push(object)
+    for (let i = 1900; i < 2100; i++) {
+      let obj = {}
+      obj.id = i
+      obj.year = i
+      obj.value = i
+      array.push(obj)
+    }
+    setYearList(array)
+  }, [])
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [shoppingData, setShoppingData] = useState([])
 
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
@@ -88,23 +105,31 @@ const Shopping = () => {
         getServicePurchaseByDashboard({
           variables: {
             patient_id: personalData.getPatientByEmail.id,
-            month: selectedMonth,
+            year: selectedYear,
           },
         })
       }
     }
-  }, [selectedMonth, getServicePurchaseByDashboard, personalLoading, personalData, personalError])
+  }, [selectedYear, getServicePurchaseByDashboard, personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (!billingError && billingData && billingData.getServicePurchaseByDashboard) {
-      setShoppingData(billingData.getServicePurchaseByDashboard)
+      let array = billingData.getServicePurchaseByDashboard
+      let tempArray = []
+      array.map(item => {
+        let obj = JSON.parse(JSON.stringify(item))
+        obj.purchase_date =
+          item.purchase_date.slice(8, 10) + '/' + item.purchase_date.slice(5, 7) + '/' + item.purchase_date.slice(0, 4)
+        tempArray.push(obj)
+      })
+      setShoppingData(tempArray)
     } else {
       setShoppingData([])
     }
   }, [billingLoading, billingData, billingError])
 
   const handleChange = event => {
-    setSelectedMonth(Number(event.target.value))
+    setSelectedYear(Number(event.target.value))
   }
 
   const handleGotoOrderDetail = () => {
@@ -121,17 +146,17 @@ const Shopping = () => {
           {/* <Profile /> */}
         </div>
       </div>
-      {/* month select part */}
-      <div className={styles.monthArea}>
+      {/* year select part */}
+      <div className={styles.yearArea}>
         <select
           name="select"
           onChange={handleChange}
-          value={selectedMonth}
-          className={'cursor-pointer flex justify-start items-center ' + styles.monthSelect}
+          value={selectedYear}
+          className={'cursor-pointer flex justify-start items-center ' + styles.yearSelect}
         >
-          {MonthList.map((item, index) => (
+          {yearList.map((item, index) => (
             <option key={index} value={item.value}>
-              {item.month}
+              {item.year}
             </option>
           ))}
         </select>
@@ -169,7 +194,7 @@ const Shopping = () => {
                     styles.tableCellText
                   }
                 >
-                  <div className={'flex items-start'}>Order #{item.bill_number}</div>
+                  <div className={'flex items-start'}>#{item.bill_number}</div>
                   <div className={'flex items-end mb-2'}>
                     <Chip
                       data={
@@ -197,14 +222,12 @@ const Shopping = () => {
                 </div>
               </td>
               <td>
-                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                  {item.purchase_date.slice(5, 10).replace('-', '/')}
-                </div>
+                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.purchase_date}</div>
               </td>
               <td>
                 <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                   <div className={'inline-grid'}>
-                    <span className={styles.price}>${item.price}</span>
+                    <span className={styles.price}>{item.price}€</span>
                     <span className={styles.payment}>Paypal</span>
                   </div>
                 </div>
@@ -218,6 +241,18 @@ const Shopping = () => {
           ))}
         </tbody>
       </table>
+      <div className={'w-full flex justify-end mt-6'}>
+        <button className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton} onClick={() => {}}>
+          <p>
+            <strong>Anular subscripción: </strong> Plan online menopausia
+          </p>
+        </button>
+        <button className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton} onClick={() => {}}>
+          <p>
+            <strong>Anular subscripción: </strong> Plan integral online nutrición
+          </p>
+        </button>
+      </div>
     </div>
   )
 }

@@ -8,12 +8,12 @@
   height: 100vh;
 }
 
-.monthArea {
+.yearArea {
   margin-top: 57px;
   margin-bottom: 21px;
 }
 
-.monthSelect {
+.yearSelect {
   width: 120px;
   height: 40px;
   border: 1px solid #d4d4d4;
@@ -85,4 +85,17 @@
   font-size: 13px;
   letter-spacing: 0.97px;
   line-height: 24px;
+}
+
+.outlineButton {
+  width: 300px;
+  height: 106px;
+  background-color: transparent;
+  border: 1px solid #bd5b54;
+
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  color: #bd5b54;
 }

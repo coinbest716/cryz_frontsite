@@ -1,3 +1,3 @@
-query GetServicePurchaseByDashboard($patient_id: Int, $month: Int) {
-  getServicePurchaseByDashboard(patient_id: $patient_id, month: $month)
+query GetServicePurchaseByDashboard($patient_id: Int, $year: Int) {
+  getServicePurchaseByDashboard(patient_id: $patient_id, year: $year)
 }
