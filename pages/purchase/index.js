@@ -59,7 +59,7 @@ const Purchase = () => {
   // loading part end #######################
 
   // variables
-  const [checkout] = useMutation(graphql.mutations.checkout)
+  const [Checkout] = useMutation(graphql.mutations.Checkout)
   const [getPatientIdByDashboard, { data: patientData, loading: patientLoading, error: patientError }] = useLazyQuery(
     graphql.queries.getPatientIdByDashboard
   )
@@ -478,19 +478,25 @@ const Purchase = () => {
               toast.error(res.error.message)
             dispatch({ type: 'set', isLoading: false })
           } else if (res.id) {
-            checkout({
+            dispatch({ type: 'set', isLoading: true })
+            Checkout({
               variables: {
                 serviceId: Number(router.query.service_id),
                 ccToken: res.id,
               },
-            }).then(response => {
-              if (response.data.checkout) {
-                setSession(response.data.checkout)
-                toast.success('Successfully buy Service!')
-                router.push('/purchase/order-success')
-              }
             })
-            dispatch({ type: 'set', isLoading: false })
+              .then(response => {
+                if (response.data.Checkout) {
+                  setSession(response.data.Checkout)
+                  toast.success('Successfully buy Service!')
+                  dispatch({ type: 'set', isLoading: false })
+                  router.push('/purchase/order-success')
+                }
+              })
+              .catch(error => {
+                toast.error(error.message)
+                dispatch({ type: 'set', isLoading: false })
+              })
           }
         })
       } catch (err) {

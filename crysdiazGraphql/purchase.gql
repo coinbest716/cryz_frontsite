@@ -1,5 +1,5 @@
 mutation Checkout($serviceId: Int, $ccToken: String) {
-  checkout(serviceId: $serviceId, ccToken: $ccToken) {
+  Checkout(service_id: $serviceId, cc_token: $ccToken) {
     id
     patient_id
     item_kind

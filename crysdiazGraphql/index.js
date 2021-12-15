@@ -123,7 +123,7 @@ export default {
 
     // message part
     createMessageByDashboard: CreateMessageByDashboard,
-    checkout: Checkout,
+    Checkout: Checkout,
 
     // shopping part
     CancelOnlinePlanSubscriptionByDashboard: CancelOnlinePlanSubscriptionByDashboard,
