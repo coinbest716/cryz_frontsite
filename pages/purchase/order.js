@@ -12,7 +12,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './order-success.module.scss'
+import styles from './transfer-success.module.scss'
 
 // images and icons
 import successLogo from 'public/images/order-success.svg'
@@ -20,6 +20,7 @@ import successLogo from 'public/images/order-success.svg'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import ShoppingCart from "../../components/components/purchase/ShoppingCart";
 
 const CreditSuccess = () => {
   // loading part ###########################
@@ -43,8 +44,8 @@ const CreditSuccess = () => {
   )
   const [orderInfo, setOrderInfo] = useState(null)
   useEffect(() => {
-    if (router.query.intentId) {
-      checkoutVerify({ variables: { intentId: decodeURIComponent(JSON.parse(`"${router.query.intentId}"`)) } })
+    if (router.query.payment_intent) {
+      checkoutVerify({ variables: { intentId: decodeURIComponent(JSON.parse(`"${router.query.payment_intent}"`)) } })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
@@ -58,21 +59,34 @@ const CreditSuccess = () => {
   }, [orderLoading, orderData, orderError])
 
   return (
-    <div className={'flex flex-wrap justify-center'}>
-      <div className={styles.container}>
-        <div className={globalStyles.container}>
-          <div className={'flex justify-center items-center h-full'}>
-            <div className={styles.creditSection}>
-              <div className={styles.title}>¡GRACIAS POR TU COMPRA!</div>
-              <div className={'pt-16 text-center'}>
-                <Image src={successLogo} alt="" width={270} height={222} />
+      <div className={'flex flex-wrap justify-center'}>
+        <div className={styles.container}>
+          <div className={globalStyles.container + ' pt-20'}>
+            <div className={'grid grid-cols-12 gap-4 '}>
+              <div className={'col-span-12 md:col-span-8 sm:col-span-12 p-5 pt-32 pb-44'}>
+                <div className={styles.title}>GRACIAS, tu pedido ha sido recibido.</div>
+                <div className={'pt-12'}>
+                  <div className={'flex'}>
+                    <p className={'font-bold ' + styles.detail}>NÚMERO DE PEDIDO:</p>
+                    <p className={styles.detail}>&nbsp;&nbsp;&nbsp;#{orderInfo?.id}</p>
+                  </div>
+                  <div className={'flex pt-3'}>
+                    <p className={'font-bold ' + styles.detail}>SERVICIO: </p>
+                    <p className={styles.detail}>&nbsp;&nbsp;&nbsp;{orderInfo?.item_name}</p>
+                  </div>
+                  <div className={'flex pt-3'}>
+                    <p className={'font-bold ' + styles.detail}>TOTAL:</p>
+                    <p className={styles.detail}>&nbsp;&nbsp;&nbsp;{orderInfo?.price}€</p>
+                  </div>
+                </div>
+                <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
+                </div>
               </div>
-              <div className={'pt-16 ' + styles.orderNumber}>TU NÚMERO DE PEDIDO ES #{orderInfo?.id}</div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
   )
 }
 export default CreditSuccess

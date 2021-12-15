@@ -19,6 +19,8 @@ mutation Checkout($serviceId: Int, $ccToken: String) {
     gross_amount
     discount
     amount
+    stripe_payment_intent_id
+    stripe_subscription_id
     next
   }
 }

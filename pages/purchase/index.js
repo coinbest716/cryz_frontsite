@@ -515,7 +515,7 @@ const Purchase = () => {
                   if (checkoutData.next?.redirect_to_url.url) {
                     window.open(checkoutData.next?.redirect_to_url.url, '_self')
                   } else {
-                    router.push('/purchase/order')
+                    router.push(`/purchase/order?payment_intent=${checkoutData.stripe_payment_intent_id}&subscription_id=${checkoutData.stripe_subscription_id}`)
                   }
                 }
               })
