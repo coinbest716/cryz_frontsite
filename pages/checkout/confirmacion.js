@@ -17,7 +17,7 @@ import styles from './confirmacion.module.scss'
 // images and icons
 import successLogo from 'public/images/order-success.svg'
 
-const confirmacion = () => {
+const Confirmacion = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -87,8 +87,8 @@ const confirmacion = () => {
     </div>
   )
 }
-export default confirmacion
+export default Confirmacion
 
-confirmacion.getLayout = function getLayout(page) {
+Confirmacion.getLayout = function getLayout(page) {
   return <PrimaryLayout>{page}</PrimaryLayout>
 }
