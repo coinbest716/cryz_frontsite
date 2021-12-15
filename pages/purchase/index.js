@@ -487,9 +487,13 @@ const Purchase = () => {
             })
               .then(response => {
                 if (response.data.Checkout) {
-                  setSession(response.data.Checkout)
+                  const checkoutData = response.data.Checkout
+                  setSession(checkoutData)
                   toast.success('Successfully buy Service!')
                   dispatch({ type: 'set', isLoading: false })
+                  if (checkoutData.next?.url) {
+                    window.open(checkoutData.next?.url, '_blank')
+                  }
                   router.push('/purchase/order-success')
                 }
               })
