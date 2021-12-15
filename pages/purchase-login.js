@@ -114,21 +114,29 @@ const PurchaseLogin = () => {
   }
 
   const handleClickLogin = () => {
-    router.push('/purchase-login')
     router.push({
       pathname: '/purchase-login',
       query: {
-        service_id: serviceId,
+        service_id: router.query.service_id,
         tab: 1,
         image: router.query.image,
-        description: description,
-        price: price,
+        description: router.query.description,
+        price: router.query.price,
       },
     })
   }
 
   const handleClickRegister = () => {
-    router.push('/purchase-register')
+    router.push({
+      pathname: '/purchase-register',
+      query: {
+        service_id: router.query.service_id,
+        tab: 0,
+        image: router.query.image,
+        description: router.query.description,
+        price: router.query.price,
+      },
+    })
   }
 
   const handleUpdatePassword = async () => {

@@ -10,7 +10,7 @@ import Image from 'next/image'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CommonButton from 'components/components/purchaseLogin/CommonButton'
-import ShoppingCart from 'components/components/purchase/ShoppingCart'
+import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -51,12 +51,30 @@ const Register = () => {
 
   const [userConfirmed, setUserConfirmed] = useState(null)
   const [verifyCode, setVerifyCode] = useState('')
+
+  const [shoppingInfo, setShoppingInfo] = useState({
+    image: '',
+    description: '',
+    price: '',
+  })
   // handlers
   useEffect(() => {
     setCartData(shoppingCartData)
   }, [])
 
   useEffect(() => {
+    let _shoppingInfo = { ...shoppingInfo }
+    if (router.query.image) {
+      _shoppingInfo = { ..._shoppingInfo, image: decodeURIComponent(JSON.parse(`"${router.query.image}"`)) }
+    }
+    if (router.query.description) {
+      _shoppingInfo = { ..._shoppingInfo, description: decodeURIComponent(JSON.parse(`"${router.query.description}"`)) }
+    }
+    if (router.query.price) {
+      _shoppingInfo = { ..._shoppingInfo, price: Number(router.query.price) }
+    }
+    setShoppingInfo(_shoppingInfo)
+
     if (router.query.userConfirmed) {
       setUserConfirmed(Boolean(router.query.userConfirmed))
       setEmail(localStorage.getItem('email'))
@@ -83,11 +101,29 @@ const Register = () => {
   }
 
   const handleClickLogin = () => {
-    router.push('/purchase-login')
+    router.push({
+      pathname: '/purchase-login',
+      query: {
+        service_id: router.query.service_id,
+        tab: 1,
+        image: router.query.image,
+        description: router.query.description,
+        price: router.query.price,
+      },
+    })
   }
 
   const handleClickRegister = () => {
-    router.push('/purchase-register')
+    router.push({
+      pathname: '/purchase-register',
+      query: {
+        service_id: router.query.service_id,
+        tab: 0,
+        image: router.query.image,
+        description: router.query.description,
+        price: router.query.price,
+      },
+    })
   }
 
   const handleClickPurchaseRegister = async () => {
@@ -254,7 +290,7 @@ const Register = () => {
               )}
             </div>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
-              <ShoppingCart data={cartData} handleRemoveCart={handleRemoveCart} />
+              <ShoppingCart shoppingInfo={shoppingInfo} />
             </div>
           </div>
         </div>
