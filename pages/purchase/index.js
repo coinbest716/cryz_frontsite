@@ -789,9 +789,10 @@ const Purchase = () => {
                           redsys={redsys}
                         />
                       </div>
-                      <div className={'pt-5'}>
+                      {/*<div className={'pt-5'}>
                         <Transfer handleChangePaymentType={handleChangePaymentType} value={paymentType} />
-                      </div>
+                      </div>*/}
+
                     </div>
                     <div className={'pt-24 flex justify-between items-center'}>
                       <div>
@@ -807,13 +808,13 @@ const Purchase = () => {
               </div>
             </div>
             <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
-              <ShoppingCart
+              {/* <ShoppingCart
                 data={cartData}
                 handleRemoveCart={handleRemoveCart}
                 handleAcceptDiscount={handleAcceptDiscount}
                 tabIndex={tabIndex}
                 docData={selectedDoc}
-              />
+              />*/}
             </div>
           </div>
         </div>
