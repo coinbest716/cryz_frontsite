@@ -50,7 +50,7 @@ const CreditSuccess = () => {
   }, [router.query])
 
   useEffect(() => {
-    if (!orderError && orderData && orderData.getPatientByEmail) {
+    if (!orderError && orderData && orderData.checkoutVerify) {
       const data = orderData.checkoutVerify
       console.log(data)
       setOrderInfo(data)
