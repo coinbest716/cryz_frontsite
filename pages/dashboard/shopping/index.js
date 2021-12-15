@@ -132,8 +132,8 @@ const Shopping = () => {
     setSelectedYear(Number(event.target.value))
   }
 
-  const handleGotoOrderDetail = () => {
-    router.push('/dashboard/shopping/order-detail')
+  const handleGotoOrderDetail = item => {
+    router.push('/dashboard/shopping/order-detail?purchase_id=' + item.id)
   }
 
   return (
@@ -213,7 +213,7 @@ const Shopping = () => {
                 <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
                   <div className={'inline-grid'}>
                     {item.purchases.map((detail, idx) => (
-                      <div key={idx} className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail()}>
+                      <div key={idx} className={'flex cursor-pointer'} onClick={() => handleGotoOrderDetail(detail)}>
                         <Image src={FileViewIcon} alt={''} width={29} height={29} />
                         <div className={'ml-5'}>{detail.item_web_name}</div>
                       </div>
