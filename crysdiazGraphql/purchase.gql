@@ -19,5 +19,6 @@ mutation Checkout($serviceId: Int, $ccToken: String) {
     gross_amount
     discount
     amount
+    next
   }
 }
