@@ -111,7 +111,11 @@ const OrderDetail = () => {
       <div className={'w-full flex justify-start mt-11 mb-8'}>
         {status !== 'PAID' ? (
           <div className={'mr-4'}>
-            <CommonButton label={'Pagar bono'} bgColor={'#BD5B54'} handleClickButton={() => handlePayButton()} />
+            <CommonButton
+              label={'Pagar pedido pendiente'}
+              bgColor={'#BD5B54'}
+              handleClickButton={() => handlePayButton()}
+            />
           </div>
         ) : (
           <></>
