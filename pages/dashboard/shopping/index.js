@@ -222,7 +222,12 @@ const Shopping = () => {
         </select>
       </div>
       {/* table part */}
-      <div style={{ height: 'calc(100vh - 390px)', overflow: 'auto' }}>
+      <div
+        style={{
+          height: onlinePlanList.length !== 0 ? 'calc(100vh - 390px)' : 'calc(100vh - 312px)',
+          overflow: 'auto',
+        }}
+      >
         <PerfectScrollbar>
           <table className={'w-full table-auto'}>
             <thead className={styles.tableHead}>
