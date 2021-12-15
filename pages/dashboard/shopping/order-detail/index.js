@@ -42,6 +42,7 @@ const OrderDetail = () => {
   // loading part end #######################
 
   // variables
+  const [title, setTitle] = useState('')
   const [billNumber, setBillNumber] = useState(-1)
   const [purchaseID, setPurchaseID] = useState(-1)
   const [status, setStatus] = useState('PAID')
@@ -57,6 +58,7 @@ const OrderDetail = () => {
     setBillNumber(Number(router.query.bill_number))
     setPurchaseID(Number(router.query.purchase_id))
     setStatus(router.query.status)
+    setTitle(router.query.title)
   }, [router.query])
 
   useEffect(() => {
@@ -99,7 +101,7 @@ const OrderDetail = () => {
     <div className={globalStyles.dashContainer}>
       {/* header part */}
       <div className={'w-full flex flex-wrap justify-between items-center'}>
-        <div className={globalStyles.dashTitle}>Bono 10 sesiones Preparación parto</div>
+        <div className={globalStyles.dashTitle}>{title}</div>
         <div className={'flex justify-end'}>
           <NotificationButton />
           {/* <Profile /> */}

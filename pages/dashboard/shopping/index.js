@@ -173,7 +173,9 @@ const Shopping = () => {
         '&purchase_id=' +
         detail.id +
         '&status=' +
-        detail.status
+        detail.status +
+        '&title=' +
+        detail.item_web_name
     )
   }
 
