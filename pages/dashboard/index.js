@@ -366,8 +366,9 @@ const Dashboard = () => {
               <div className={styles.welcomeLabel}>
                 {personalInfo.name}&nbsp;{personalInfo.lastname}
               </div>
-              <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[status].text}</div>
-              <div className={'pt-4'}>
+              {/* <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[status].text}</div> */}
+              <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[4].text}</div>
+              {/* <div className={'pt-4'}>
                 {status !== 3 && status !== 4 ? (
                   <DashboardButton
                     handleClick={() => handleClickRedirect('view', statusArray[status].link)}
@@ -377,7 +378,7 @@ const Dashboard = () => {
                 ) : (
                   <></>
                 )}
-              </div>
+              </div> */}
             </div>
             <div style={{ minWidth: '220px' }}>
               <Image src={welcomeIcon} alt="" width={220} height={254} />
