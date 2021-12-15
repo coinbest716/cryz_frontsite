@@ -43,8 +43,8 @@ const CreditSuccess = () => {
   )
   const [orderInfo, setOrderInfo] = useState(null)
   useEffect(() => {
-    if (router.query.intentId) {
-      checkoutVerify({ variables: { intentId: decodeURIComponent(JSON.parse(`"${router.query.intentId}"`)) } })
+    if (router.query.payment_intent) {
+      checkoutVerify({ variables: { intentId: decodeURIComponent(JSON.parse(`"${router.query.payment_intent}"`)) } })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
