@@ -177,7 +177,7 @@ const Planes = () => {
           path: '/images/time.svg',
           bgColor: '#E3BBAA',
           topLabel: 'Descanso',
-          lowLabel: selectedVideo.break + 'seg',
+          lowLabel: selectedVideo.break !== 0 ? selectedVideo.break : selectedVideo.repetitions + 'seg',
         },
         {
           id: 3,
