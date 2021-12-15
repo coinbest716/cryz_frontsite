@@ -491,10 +491,11 @@ const Purchase = () => {
                   setSession(checkoutData)
                   toast.success('Successfully buy Service!')
                   dispatch({ type: 'set', isLoading: false })
-                  if (checkoutData.next?.url) {
-                    window.open(checkoutData.next?.url, '_blank')
+                  if (checkoutData.next?.redirect_to_url.url) {
+                    window.open(checkoutData.next?.redirect_to_url.url, '_self')
+                  } else {
+                  router.push('/purchase/order')
                   }
-                  router.push('/purchase/order-success')
                 }
               })
               .catch(error => {
