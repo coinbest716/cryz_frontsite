@@ -17,6 +17,7 @@ import NewMessageBox from 'components/components/dashboard/NewMessageBox'
 // third party components
 import 'react-calendar/dist/Calendar.css'
 import moment from 'moment'
+import toast from 'react-hot-toast'
 
 // styles
 import styles from './dashboard.module.scss'
@@ -225,13 +226,18 @@ const Dashboard = () => {
   useEffect(() => {
     if (!patientError && patientData && patientData.getPatientIdByDashboard) {
       const patient_id = patientData.getPatientIdByDashboard
-      localStorage.setItem('patient_id', patient_id)
-      getSessionsByDashboard({ variables: { patient_id: patient_id } })
-      getAnthropmetryByDashboard({ variables: { patient_id: patient_id } })
-      getPurchaseListByDashboard({ variables: { patient_id: patient_id } })
-      getWeekDaySessionsByDashboard({ variables: { patient_id: patient_id } })
-      getPatientMessageById({ variables: { patient_id: patient_id } })
-      getPaymentStatusForDashboard({ variables: { patient_id: patient_id } })
+      if (patient_id !== -1) {
+        localStorage.setItem('patient_id', patient_id)
+        getSessionsByDashboard({ variables: { patient_id: patient_id } })
+        getAnthropmetryByDashboard({ variables: { patient_id: patient_id } })
+        getPurchaseListByDashboard({ variables: { patient_id: patient_id } })
+        getWeekDaySessionsByDashboard({ variables: { patient_id: patient_id } })
+        getPatientMessageById({ variables: { patient_id: patient_id } })
+        getPaymentStatusForDashboard({ variables: { patient_id: patient_id } })
+      } else {
+        toast.error('Please complete your profile.')
+        router.push('/dashboard/profile')
+      }
     }
   }, [patientLoading, patientData, patientError])
 
