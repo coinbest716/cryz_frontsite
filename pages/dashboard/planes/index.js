@@ -269,8 +269,6 @@ const Planes = () => {
           <div className={'grid grid-cols-12 gap-8'}>
             <div className={'col-span-12 md:col-span-9 sm:col-span-12'}>
               <div className={'flex items-center'}>
-                <div className={styles.chapter}>Chapter 2 &nbsp; </div>
-                <div className={styles.dot}></div>
                 <div className={styles.chapterTitle}>{plansOnlineData.name}</div>
               </div>
               <div className={'pt-6'}>
@@ -298,9 +296,13 @@ const Planes = () => {
                     ))}
                   </div>
                 </div>
-                <div className={'hidden lg:flex'}>
-                  <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
-                </div>
+                {JSON.stringify(plansOnlineData?.routine?.document[0]) !== JSON.stringify({}) ? (
+                  <div className={'hidden lg:flex'}>
+                    <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
 
               <div className={styles.noteSection + ' mt-5 px-4 py-8 block lg:hidden'}>
@@ -372,7 +374,6 @@ const Planes = () => {
                     </div>
                   </div>
                 ))}
-                <div className={styles.videoMaterialTitle + ' pt-8'}>ABDOMINALES</div>
               </div>
             </div>
           </div>
