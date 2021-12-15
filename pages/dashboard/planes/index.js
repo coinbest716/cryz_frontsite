@@ -279,6 +279,9 @@ const Planes = () => {
                     height="100%"
                     className={styles.reactPlayer}
                     controls={true}
+                    loop={true}
+                    muted={true}
+                    playing={true}
                   />
                 ) : (
                   <></>
