@@ -35,7 +35,6 @@ import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
 import moment from 'moment'
-import { setRequestMeta } from 'next/dist/server/request-meta'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -61,6 +60,9 @@ const Purchase = () => {
 
   // variables
   const [checkout] = useMutation(graphql.mutations.checkout)
+  const [getPatientIdByDashboard, { data: patientData, loading: patientLoading, error: patientError }] = useLazyQuery(
+    graphql.queries.getPatientIdByDashboard
+  )
   const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
@@ -73,6 +75,20 @@ const Purchase = () => {
   const [tabIndex, setTabIndex] = useState(0)
   const [uploadFile, setUploadFile] = useState(null)
   const [email, setEmail] = useState('')
+  const personalKey = [
+    'name',
+    'surname',
+    'meet',
+    'email',
+    'telephone',
+    'country',
+    'emergencyPhone',
+    'address',
+    'code',
+    'town',
+    'gender',
+    'birthday',
+  ]
   const [personalInfo, setPersonalInfo] = useState({
     id: -1,
     avatar: '',
@@ -169,15 +185,19 @@ const Purchase = () => {
   useEffect(() => {
     setCartData(shoppingCartData)
     setRedsys(false)
-
-    setEmail(localStorage.getItem('email'))
-    setPersonalInfo({ ...personalInfo, email: localStorage.getItem('email') })
-    setBillingAddress({ ...billingAddress, email: localStorage.getItem('email') })
+    getPatientIdByDashboard({
+      variables: {
+        email: localStorage.getItem('email'),
+      },
+    })
     getPatientByEmail({
       variables: {
         email: localStorage.getItem('email'),
       },
     })
+    setEmail(localStorage.getItem('email'))
+    setPersonalInfo({ ...personalInfo, email: localStorage.getItem('email') })
+    setBillingAddress({ ...billingAddress, email: localStorage.getItem('email') })
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
@@ -187,6 +207,17 @@ const Purchase = () => {
         setIsAuthenticated(false)
       })
   }, [])
+
+  useEffect(() => {
+    if (!patientError && patientData && patientData.getPatientIdByDashboard) {
+      const patient_id = patientData.getPatientIdByDashboard
+      if (patient_id > -1) {
+        setTabIndex(1)
+      } else {
+        setTabIndex(0)
+      }
+    }
+  }, [patientLoading, patientData, patientError])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -258,8 +289,16 @@ const Purchase = () => {
   }
 
   const handleSave = () => {
-    console.log(personalInfo)
-    if (personalInfo.name === '' || personalInfo.surname === '') {
+    console.log('personalInfo')
+    let emptyField = false
+    personalKey.map(key => {
+      if (personalInfo[key] === '') {
+        console.log(key)
+        emptyField = true
+        return
+      }
+    })
+    if (emptyField) {
       toast.error('Please input data!')
       return
     }
@@ -278,6 +317,10 @@ const Purchase = () => {
       bill_address: personalInfo.address,
       bill_town: personalInfo.town,
       bill_country: personalInfo.country,
+      bill_alias: '',
+      bill_name: '',
+      bill_province: '',
+      bill_postal_code: '',
     }
 
     updatePatientByDashboard({
@@ -291,7 +334,6 @@ const Purchase = () => {
         }
       })
       .catch(error => {
-        console.log('+++++++++++++++++', error.message)
         dispatch({ type: 'set', isLoading: false })
         toast.error(error.message)
       })
@@ -436,9 +478,9 @@ const Purchase = () => {
                                   {personalInfo.name + ' ' + personalInfo.surname}
                                 </div>
                                 <div className={styles.profileCounry}>
-                                  {billingAddress.province
-                                    ? billingAddress.province + ', ' + billingAddress.country
-                                    : billingAddress.country}
+                                  {personalInfo.town
+                                    ? personalInfo.town + ', ' + personalInfo.country
+                                    : personalInfo.country}
                                 </div>
                               </div>
                             </div>
