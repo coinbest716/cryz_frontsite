@@ -36,7 +36,7 @@ import {
   GetPaymentStatusForDashboard,
 } from './dashboard.gql'
 // shopping part
-import { GetServicePurchaseByDashboard } from './dashboard/shopping.gql'
+import { GetServicePurchaseByDashboard, GetSessionsByIdFromDashboard } from './dashboard/shopping.gql'
 // message part
 import {
   GetUserForMessage,
@@ -95,6 +95,7 @@ export default {
     getPaymentStatusForDashboard: GetPaymentStatusForDashboard,
     // shopping part
     getServicePurchaseByDashboard: GetServicePurchaseByDashboard,
+    getSessionsByIdFromDashboard: GetSessionsByIdFromDashboard,
     // message part
     getUsersByPatient: GetUsersByPatient,
     getUserForMessage: GetUserForMessage,
