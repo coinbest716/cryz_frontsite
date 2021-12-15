@@ -128,7 +128,7 @@ const OrderDetail = () => {
           {orderDetailList.map((item, index) => (
             <tr className={index % 2 === 0 ? 'bg-white' : 'bg-transparent'} key={index}>
               <td>
-                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.session_count}</div>
+                <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.id}</div>
               </td>
               <td>
                 <div className={styles.tableContentArea + ' ' + styles.tableCellText}>

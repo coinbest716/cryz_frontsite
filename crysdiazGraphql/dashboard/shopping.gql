@@ -16,3 +16,14 @@ query GetSessionsByIdFromDashboard($patient_id: Int, $purchase_id: Int) {
     }
   }
 }
+
+query GetPurchasedOnlinePlanList($patient_id: Int) {
+  getPurchasedOnlinePlanList(patient_id: $patient_id) {
+    id
+    item_name
+  }
+}
+
+mutation CancelOnlinePlanSubscriptionByDashboard($purchase_id: Int) {
+  CancelOnlinePlanSubscriptionByDashboard(purchase_id: $purchase_id)
+}

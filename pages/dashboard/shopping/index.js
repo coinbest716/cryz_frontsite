@@ -29,7 +29,7 @@ import DownloadDisableIcon from 'assets/images/download-disable.svg'
 import OrderStateData from 'assets/data/OrderStateData.json'
 
 // graphql
-import { useLazyQuery } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 const Shopping = () => {
@@ -77,6 +77,16 @@ const Shopping = () => {
 
   const [getServicePurchaseByDashboard, { data: billingData, loading: billingLoading, error: billingError }] =
     useLazyQuery(graphql.queries.getServicePurchaseByDashboard)
+  const [
+    getPurchasedOnlinePlanList,
+    { data: purchasedOnlinePlanListData, loading: purchasedOnlinePlanListLoading, error: purchasedOnlinePlanListError },
+  ] = useLazyQuery(graphql.queries.getPurchasedOnlinePlanList)
+
+  const [onlinePlanList, setOnlinePlanList] = useState([])
+
+  const [CancelOnlinePlanSubscriptionByDashboard] = useMutation(
+    graphql.mutations.CancelOnlinePlanSubscriptionByDashboard
+  )
 
   // handlers
   useEffect(() => {
@@ -108,9 +118,21 @@ const Shopping = () => {
             year: selectedYear,
           },
         })
+        getPurchasedOnlinePlanList({
+          variables: {
+            patient_id: personalData.getPatientByEmail.id,
+          },
+        })
       }
     }
-  }, [selectedYear, getServicePurchaseByDashboard, personalLoading, personalData, personalError])
+  }, [
+    selectedYear,
+    getServicePurchaseByDashboard,
+    getPurchasedOnlinePlanList,
+    personalLoading,
+    personalData,
+    personalError,
+  ])
 
   useEffect(() => {
     if (!billingError && billingData && billingData.getServicePurchaseByDashboard) {
@@ -128,12 +150,40 @@ const Shopping = () => {
     }
   }, [billingLoading, billingData, billingError])
 
+  useEffect(() => {
+    if (
+      !purchasedOnlinePlanListError &&
+      purchasedOnlinePlanListData &&
+      purchasedOnlinePlanListData.getPurchasedOnlinePlanList
+    ) {
+      setOnlinePlanList(purchasedOnlinePlanListData.getPurchasedOnlinePlanList)
+    }
+  }, [purchasedOnlinePlanListLoading, purchasedOnlinePlanListData, purchasedOnlinePlanListError])
+
   const handleChange = event => {
     setSelectedYear(Number(event.target.value))
   }
 
   const handleGotoOrderDetail = item => {
     router.push('/dashboard/shopping/order-detail?purchase_id=' + item.id)
+  }
+
+  const handleCancelSubscription = id => {
+    CancelOnlinePlanSubscriptionByDashboard({
+      variables: { purchase_id: id },
+    })
+      .then(response => {
+        if (response.data.CancelOnlinePlanSubscriptionByDashboard) {
+          getPurchasedOnlinePlanList({
+            variables: {
+              patient_id: Number(localStorage.getItem('patient_id')),
+            },
+          })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
   }
 
   return (
@@ -242,16 +292,16 @@ const Shopping = () => {
         </tbody>
       </table>
       <div className={'w-full flex justify-end mt-6'}>
-        <button className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton} onClick={() => {}}>
-          <p>
-            <strong>Anular subscripción: </strong> Plan online menopausia
-          </p>
-        </button>
-        <button className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton} onClick={() => {}}>
-          <p>
-            <strong>Anular subscripción: </strong> Plan integral online nutrición
-          </p>
-        </button>
+        {onlinePlanList.map((item, index) => (
+          <button
+            className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton}
+            onClick={() => handleCancelSubscription(item.id)}
+          >
+            <p>
+              <strong>Anular subscripción: </strong> {item.item_name}
+            </p>
+          </button>
+        ))}
       </div>
     </div>
   )

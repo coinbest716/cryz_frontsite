@@ -36,7 +36,12 @@ import {
   GetPaymentStatusForDashboard,
 } from './dashboard.gql'
 // shopping part
-import { GetServicePurchaseByDashboard, GetSessionsByIdFromDashboard } from './dashboard/shopping.gql'
+import {
+  GetServicePurchaseByDashboard,
+  GetSessionsByIdFromDashboard,
+  GetPurchasedOnlinePlanList,
+  CancelOnlinePlanSubscriptionByDashboard,
+} from './dashboard/shopping.gql'
 // message part
 import {
   GetUserForMessage,
@@ -96,6 +101,7 @@ export default {
     // shopping part
     getServicePurchaseByDashboard: GetServicePurchaseByDashboard,
     getSessionsByIdFromDashboard: GetSessionsByIdFromDashboard,
+    getPurchasedOnlinePlanList: GetPurchasedOnlinePlanList,
     // message part
     getUsersByPatient: GetUsersByPatient,
     getUserForMessage: GetUserForMessage,
@@ -118,5 +124,8 @@ export default {
     // message part
     createMessageByDashboard: CreateMessageByDashboard,
     checkout: Checkout,
+
+    // shopping part
+    CancelOnlinePlanSubscriptionByDashboard: CancelOnlinePlanSubscriptionByDashboard,
   },
 }
