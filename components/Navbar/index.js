@@ -105,11 +105,15 @@ const Navbar = () => {
 
   const handleClickLogout = async () => {
     dispatch({ type: 'set', isLoading: true })
-    localStorage.clear()
     await client.resetStore()
     await client.clearStore()
     await Auth.signOut()
     router.push('/login')
+    if (!Boolean(localStorage.getItem('remember'))) {
+      localStorage.removeItem('email')
+      localStorage.removeItem('password')
+      localStorage.removeItem('patient_id')
+    }
   }
 
   const handleGotoRouter = link => {

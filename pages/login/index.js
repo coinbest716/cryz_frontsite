@@ -43,9 +43,11 @@ const Login = () => {
       .catch(() => {
         setIsAuthenticated(false)
       })
+
     if (localStorage.getItem('remember')) {
-      setEmail(localStorage.getItem('email'))
-      setPassword(localStorage.getItem('password'))
+      setRememberMe(Boolean(localStorage.getItem('remember')))
+      setEmail(localStorage.getItem('email') || '')
+      setPassword(localStorage.getItem('password') || '')
     }
   }, [])
 
@@ -72,10 +74,14 @@ const Login = () => {
 
   const handleClickLogin = async () => {
     setProgressStatus(true)
+    if (email === '' || password === '') {
+      toast.error('You should input email or password!')
+      return
+    }
     await Auth.signIn(email, password)
       .then(response => {
-        setProgressStatus(false)
         console.log(response)
+        setProgressStatus(false)
         setAuthUser(response)
         setAuthChallenge(response.challengeName)
         if (rememberMe) {
@@ -94,9 +100,30 @@ const Login = () => {
         }
       })
       .catch(error => {
-        setProgressStatus(false)
         toast.error(error.message)
+        setProgressStatus(false)
+        if (error.code === 'UserNotConfirmedException') {
+          resendSignUp(email, password)
+        }
       })
+  }
+
+  const resendSignUp = async (email, password) => {
+    localStorage.setItem('email', email)
+    localStorage.setItem('password', password)
+
+    await Auth.resendSignUp(email).then(response => {
+      router
+        .push({
+          pathname: '/register',
+          query: {
+            userConfirmed: false,
+          },
+        })
+        .catch(error => {
+          toast.error(error.message)
+        })
+    })
   }
 
   const handleUpdatePassword = async () => {

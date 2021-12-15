@@ -22,7 +22,7 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 
 const TeamSection = props => {
   const { team } = props
-    console.log(team)
+
   return team !== '' ? (
     <div className={globalStyles.container}>
       <div className={styles.title}>{team.title}</div>

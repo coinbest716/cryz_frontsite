@@ -40,13 +40,17 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) => {
       console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
-      if (message === 'Unauthorized Patient.') {
+      if (message === 'UNAUTHENTICATED') {
         toast.error(message)
         client.resetStore()
         client.clearStore()
-        localStorage.clear()
-        // Auth.signOut()
+        Auth.signOut()
         router.push('/login')
+        if (!Boolean(localStorage.getItem('remember'))) {
+          localStorage.removeItem('email')
+          localStorage.removeItem('password')
+          localStorage.removeItem('patient_id')
+        }
       }
     })
 

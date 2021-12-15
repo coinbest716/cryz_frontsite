@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Auth } from 'aws-amplify'
+import { Auth, signInButton } from 'aws-amplify'
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // styles
 import styles from 'pages/register/Register.module.scss'
@@ -20,7 +20,8 @@ import graphql from 'crysdiazGraphql'
 import ReactLoading from 'react-loading'
 
 const Register = () => {
-  const [updatePatientByDashboard] = useMutation(graphql.mutations.updatePatientByDashboard)
+  const router = useRouter()
+
   const [progressStatus, setProgressStatus] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -31,6 +32,14 @@ const Register = () => {
 
   const [showPass, setShowPass] = useState(false)
   const [showRepeatPass, setShowRepeatPass] = useState(false)
+
+  useEffect(() => {
+    if (router.query.userConfirmed) {
+      setUserConfirmed(Boolean(router.query.userConfirmed))
+      setEmail(localStorage.getItem('email'))
+      setPassword(localStorage.getItem('password'))
+    }
+  }, [router.query])
 
   const handleSetShowPass = bool => {
     setShowPass(bool)
@@ -55,51 +64,24 @@ const Register = () => {
   }
 
   const handleVerifyCode = async () => {
-    dispatch({ type: 'set', isLoading: true })
+    setProgressStatus(true)
+
     await Auth.confirmSignUp(email, verifyCode)
       .then(response => {
         console.log(response)
-        createPatient(email)
         toast.success('Successfully confirmed signed up')
-        router.push('/login')
-        dispatch({ type: 'set', isLoading: false })
+        Auth.signIn(email, password).then(response => {
+          console.log('register : ', response)
+          toast.success('Successfully Logged in')
+          setProgressStatus(false)
+          localStorage.setItem('email', email)
+          router.push('/dashboard')
+        })
+        setProgressStatus(false)
       })
       .catch(error => {
         toast.error(error.message)
-        dispatch({ type: 'set', isLoading: false })
-      })
-  }
-
-  const createPatient = async email => {
-    const variables = {
-      email: email,
-      name: '',
-      lastname: '',
-      dni: '',
-      mobile: '',
-      eg_number: '',
-      known_us: '',
-      avatar: '',
-      genre: '',
-      birth_date: '',
-      bill_alias: '',
-      bill_name: '',
-      bill_address: '',
-      bill_province: '',
-      bill_town: '',
-      bill_postal_code: '',
-      bill_country: '',
-    }
-    updatePatientByDashboard({
-      variables: variables,
-    })
-      .then(response => {
-        if (response.data.updatePatientByDashboard) {
-          console.log('updatePatientByDashboard')
-        }
-      })
-      .catch(error => {
-        console.log('error', error)
+        setProgressStatus(false)
       })
   }
 
@@ -124,16 +106,11 @@ const Register = () => {
         toast.error(error.message)
         if (error.code === 'UsernameExistsException') {
           setProgressStatus(false)
-          setUserConfirmed(false)
-          resendSignUp(email)
+          router.push('/login')
         } else {
           setProgressStatus(false)
         }
       })
-  }
-
-  const resendSignUp = async email => {
-    await Auth.resendSignUp(email)
   }
 
   return (
