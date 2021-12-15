@@ -4,7 +4,7 @@ import { Auth } from 'aws-amplify'
 import { useDispatch } from 'react-redux'
 
 // next components
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 // custom components
@@ -41,10 +41,10 @@ const Register = () => {
   // loading part end #######################
 
   // variables
-
+  const router = useRouter()
   const [cartData, setCartData] = useState([])
   const [email, setEmail] = useState('')
-  const [password, setPasssword] = useState('')
+  const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPass, setShowPass] = useState(false)
   const [showPassConfirm, setShowPassConfirm] = useState(false)
@@ -55,6 +55,14 @@ const Register = () => {
   useEffect(() => {
     setCartData(shoppingCartData)
   }, [])
+
+  useEffect(() => {
+    if (router.query.userConfirmed) {
+      setUserConfirmed(Boolean(router.query.userConfirmed))
+      setEmail(localStorage.getItem('email'))
+      setPassword(localStorage.getItem('password'))
+    }
+  }, [router.query])
 
   const handleRemoveCart = index => {
     let array = [...cartData]
@@ -67,7 +75,7 @@ const Register = () => {
   }
 
   const handleChangePassword = event => {
-    setPasssword(event.target.value)
+    setPassword(event.target.value)
   }
 
   const handleChangeConfirmPassword = event => {
@@ -75,12 +83,10 @@ const Register = () => {
   }
 
   const handleClickLogin = () => {
-    console.log('handleClickLogin')
     router.push('/purchase-login')
   }
 
   const handleClickRegister = () => {
-    console.log('handleClickRegister')
     router.push('/purchase-register')
   }
 
@@ -101,19 +107,17 @@ const Register = () => {
         toast.success('Signup Successfully')
       })
       .catch(error => {
+        console.log('error signing up:', error)
         toast.error(error.message)
         dispatch({ type: 'set', isLoading: false })
         if (error.code === 'UsernameExistsException') {
-          resendSignUp(email)
-          setUserConfirmed(false)
+          dispatch({ type: 'set', isLoading: false })
+          router.push('/purchase-login')
         } else {
+          dispatch({ type: 'set', isLoading: false })
           toast.error(error.message)
         }
       })
-  }
-
-  const resendSignUp = async email => {
-    await Auth.resendSignUp(email)
   }
 
   const handleSetShowPass = bool => {
@@ -129,12 +133,18 @@ const Register = () => {
 
   const handleVerifyCode = async () => {
     dispatch({ type: 'set', isLoading: true })
+
     await Auth.confirmSignUp(email, verifyCode)
       .then(response => {
         console.log(response)
         toast.success('Successfully confirmed signed up')
-        router.push({ pathname: '/purchase', query: { tab: 0 } })
-        dispatch({ type: 'set', isLoading: false })
+        Auth.signIn(email, password).then(response => {
+          console.log('register : ', response)
+          toast.success('Successfully Logged in')
+          localStorage.setItem('email', email)
+          dispatch({ type: 'set', isLoading: false })
+          router.push({ pathname: '/purchase', query: { tab: 0 } })
+        })
       })
       .catch(error => {
         toast.error(error.message)
