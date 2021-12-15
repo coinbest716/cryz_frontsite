@@ -539,8 +539,15 @@ const Purchase = () => {
   const onClickTab = tabType => {
     let query = { tab: tabType }
     if (router.query.service_id) {
-      query = { ...query, service_id: router.query.service_id }
+      query = {
+        ...query,
+        service_id: router.query.service_id,
+        image: router.query.image,
+        description: router.query.description,
+        price: router.query.price,
+      }
     }
+
     router.push(
       {
         pathname: '/purchase',
