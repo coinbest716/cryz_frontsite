@@ -34,6 +34,7 @@ import {
   GetPurchaseListByDashboard,
   GetWeekDaySessionsByDashboard,
   GetPaymentStatusForDashboard,
+  GetPendingQuestionnaireByDashboard,
 } from './dashboard.gql'
 // shopping part
 import {
