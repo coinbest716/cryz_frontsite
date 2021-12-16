@@ -36,6 +36,11 @@
   font-size: 24px;
   letter-spacing: 0;
   line-height: 29px;
+  margin-bottom: 75px;
+}
+
+.scrollbarArea {
+  height: calc(100vh - 400px);
 }
 
 .subTitle {
@@ -45,6 +50,45 @@
   font-weight: bold;
   letter-spacing: 0;
   line-height: 22px;
-  margin-top: 75px;
-  margin-bottom: 26px;
+}
+
+.text {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.26px;
+  line-height: 18px;
+}
+
+.inputArea {
+  box-sizing: border-box;
+  height: 41px;
+  width: 251px;
+  border: 1px solid #818e8e;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.outlineButton {
+  box-sizing: border-box;
+  height: 54px;
+  width: 230px;
+  border: 2px solid #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 2px 7px 0 rgba(120, 137, 149, 0.25);
+
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
+  &:hover {
+    background-color: #e9ecec;
+    color: #7d8f8e;
+  }
 }
