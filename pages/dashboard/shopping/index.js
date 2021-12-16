@@ -147,6 +147,7 @@ const Shopping = () => {
         tempArray.push(obj)
       })
       setShoppingData(tempArray)
+      console.log(tempArray)
     } else {
       setShoppingData([])
     }
@@ -167,6 +168,7 @@ const Shopping = () => {
   }
 
   const handleGotoOrderDetail = (item, detail) => {
+    console.log(detail)
     router.push(
       '/dashboard/shopping/order-detail?bill_number=' +
         item.bill_number +
@@ -175,7 +177,9 @@ const Shopping = () => {
         '&status=' +
         detail.status +
         '&title=' +
-        detail.item_web_name
+        detail.item_web_name +
+        '&price=' +
+        detail.price
     )
   }
 
@@ -288,7 +292,7 @@ const Shopping = () => {
                             onClick={() => handleGotoOrderDetail(item, detail)}
                           >
                             <Image src={FileViewIcon} alt={''} width={29} height={29} />
-                            <div className={'ml-5'}>{detail.item_web_name}</div>
+                            <div className={'ml-5'}>{detail.item_name}</div>
                           </div>
                         ))}
                       </div>

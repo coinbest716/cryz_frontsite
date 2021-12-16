@@ -43,6 +43,7 @@ const OrderDetail = () => {
 
   // variables
   const [title, setTitle] = useState('')
+  const [price, setPrice] = useState('')
   const [billNumber, setBillNumber] = useState(-1)
   const [purchaseID, setPurchaseID] = useState(-1)
   const [status, setStatus] = useState('PAID')
@@ -59,6 +60,7 @@ const OrderDetail = () => {
     setPurchaseID(Number(router.query.purchase_id))
     setStatus(router.query.status)
     setTitle(router.query.title)
+    setPrice(router.query.price)
   }, [router.query])
 
   useEffect(() => {
@@ -94,8 +96,12 @@ const OrderDetail = () => {
     console.log('clicked button')
   }
 
+  const handleBuyAnotherButton = () => {
+    router.push(`/purchase?tab=2&service_id=${purchaseID}&description=${title}&price=${price}`)
+  }
+
   const handlePayButton = () => {
-    router.push('/purchase?tab=1&bill_number=' + billNumber)
+    // router.push(`/purchase?tab=2&service_id=${purchaseID}&description=${title}&price=${price}`)
   }
   return (
     <div className={globalStyles.dashContainer}>
@@ -108,8 +114,8 @@ const OrderDetail = () => {
         </div>
       </div>
       {/* button part */}
-      {/* <div className={'w-full flex justify-start mt-11 mb-8'}>
-        {status !== 'PAID' ? (
+      <div className={'w-full flex justify-start mt-11 mb-8'}>
+      {/* {status !== 'PAID' ? (
           <div className={'mr-4'}>
             <CommonButton
               label={'Pagar pedido pendiente'}
@@ -119,11 +125,11 @@ const OrderDetail = () => {
           </div>
         ) : (
           <></>
-        )}
+        )} */}
         <div>
-          <CommonButton label={'Comprar bono'} bgColor={'#818E8E'} handleClickButton={() => handleClickButton()} />
+          <CommonButton label={'Comprar bono'} bgColor={'#818E8E'} handleClickButton={() => handleBuyAnotherButton()} />
         </div>
-      </div> */}
+      </div>
       {/* table part */}
       <table className={'w-full table-auto'}>
         <thead className={styles.tableHead}>
