@@ -82,6 +82,7 @@ const Dashboard = () => {
     weight: '',
     height: '',
   })
+  const [patientID, setPatientID] = useState(-1)
   const [markDate, setMarkDate] = useState([])
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [purchaseData, setPurchaseData] = useState([])
@@ -165,6 +166,7 @@ const Dashboard = () => {
 
   const [status, setStatus] = useState(0)
   const [showQuestionnaire, setShowQuestionnaire] = useState(false)
+  const [count, setCount] = useState(0)
 
   // handlers
   useEffect(() => {
@@ -185,27 +187,32 @@ const Dashboard = () => {
         avatar: data.avatar,
         province: data.bill_province,
       })
-      console.log('personalData.getPatientByEmail.id', personalData.getPatientByEmail.id)
-      const patientID = personalData.getPatientByEmail.id
-      getProfilePercentage(data)
+      setPatientID(data.id)
+      let num = count - 1
+      setCount(num)
+    } else {
+      let num = count + 1
+      setCount(num)
+    }
+  }, [personalLoading, personalData, personalError])
 
-      if (patientID !== -1) {
-        localStorage.setItem('patient_id', patientID)
-        getSessionsByDashboard({ variables: { patient_id: patientID } })
-        getAnthropmetryByDashboard({ variables: { patient_id: patientID } })
-        getPurchaseListByDashboard({ variables: { patient_id: patientID } })
-        getWeekDaySessionsByDashboard({ variables: { patient_id: patientID } })
-        getPatientMessageById({ variables: { patient_id: patientID } })
-        getPaymentStatusForDashboard({ variables: { patient_id: patientID } })
-      } else {
-        toast.error('Please complete your profile.')
-        router.push('/dashboard/profile')
-      }
+  useEffect(() => {
+    if (patientID !== -1) {
+      localStorage.setItem('patient_id', patientID)
+      getProfilePercentage(personalInfo)
+      getSessionsByDashboard({ variables: { patient_id: patientID } })
+      getAnthropmetryByDashboard({ variables: { patient_id: patientID } })
+      getPurchaseListByDashboard({ variables: { patient_id: patientID } })
+      getWeekDaySessionsByDashboard({ variables: { patient_id: patientID } })
+      getPatientMessageById({ variables: { patient_id: patientID } })
+      getPaymentStatusForDashboard({ variables: { patient_id: patientID } })
+    } else if (count === 3 && patientID === -1) {
+      toast.error('Please complete your profile.')
+      router.push('dashboard/profile')
     }
   }, [
-    personalLoading,
-    personalData,
-    personalError,
+    patientID,
+    count,
     getSessionsByDashboard,
     getAnthropmetryByDashboard,
     getPurchaseListByDashboard,
