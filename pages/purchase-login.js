@@ -59,6 +59,7 @@ const PurchaseLogin = () => {
 
   // handlers
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: true })
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
@@ -76,6 +77,7 @@ const PurchaseLogin = () => {
       .catch(() => {
         setIsAuthenticated(false)
       })
+    dispatch({ type: 'set', isLoading: false })
     if (localStorage.getItem('remember')) {
       setRememberMe(Boolean(localStorage.getItem('remember')))
       setEmail(localStorage.getItem('email') || '')
