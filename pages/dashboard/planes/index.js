@@ -383,7 +383,11 @@ const Planes = () => {
         </div>
       ) : (
         <div className={styles.imageContainer}>
-          <div className={styles.title + ' mt-48'}>ACTUALMENTE NO TIENES NINGÚN PLAN ACTIVO</div>
+          <div className={styles.title + ' mt-48'}>
+            ESTAMOS PREPARANDO TU PLAN ONLINE PERSONALIZADO
+            <br />
+            EN BREVE ESTARÁ LISTO
+          </div>
           <div className={'mt-14'}>
             <Image src={PlansImage} width={274} height={226} />
           </div>
