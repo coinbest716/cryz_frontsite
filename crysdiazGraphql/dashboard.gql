@@ -9,3 +9,7 @@ query GetWeekDaySessionsByDashboard($patient_id: Int) {
 query GetPaymentStatusForDashboard($patient_id: Int) {
   getPaymentStatusForDashboard(patient_id: $patient_id)
 }
+
+query GetPendingQuestionnaireByDashboard($patient_id: Int) {
+  getPendingQuestionnaireByDashboard(patient_id: $patient_id)
+}
