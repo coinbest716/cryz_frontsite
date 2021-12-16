@@ -180,7 +180,7 @@ const Shopping = () => {
         detail.item_web_name +
         '&price=' +
         detail.price +
-        '&service_id' + detail.item_id
+        '&service_id=' + detail.item_id
     )
   }
 
