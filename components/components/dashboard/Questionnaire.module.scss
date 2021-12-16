@@ -1,12 +1,50 @@
 @import 'styles/variable.module.scss';
 
 .card {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
-  width: 600px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px - 1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14);
-  background-color: #333333;
+  right: 0;
+  width: 672px;
+  background-color: #7d8f8e;
   z-index: 10;
+  padding-top: 65px;
+  padding-left: 105px;
+  padding-right: 35px;
+  padding-bottom: 81px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 55px;
+  right: 61.5px;
+  cursor: pointer;
+}
+
+.underline {
+  position: absolute;
+  width: 390px;
+  height: 2px;
+  background-color: #ffffff;
+  top: 107px;
+  left: 0px;
+}
+
+.title {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 29px;
+}
+
+.subTitle {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin-top: 75px;
+  margin-bottom: 26px;
 }

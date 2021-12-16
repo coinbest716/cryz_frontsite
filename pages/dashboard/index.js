@@ -13,6 +13,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import ProgressBar from 'components/components/dashboard/ProgressBar'
 import NewMessageBox from 'components/components/dashboard/NewMessageBox'
+import Questionnaire from 'components/components/dashboard/Questionnaire'
 
 // third party components
 import 'react-calendar/dist/Calendar.css'
@@ -60,9 +61,6 @@ const Dashboard = () => {
   )
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard
-  )
-  const [getPatientIdByDashboard, { data: patientData, loading: patientLoading, error: patientError }] = useLazyQuery(
-    graphql.queries.getPatientIdByDashboard
   )
   const [getPurchaseListByDashboard, { data: bonusData, loading: bonusLoading, error: bonusError }] = useLazyQuery(
     graphql.queries.getPurchaseListByDashboard
@@ -166,20 +164,16 @@ const Dashboard = () => {
   ]
 
   const [status, setStatus] = useState(0)
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false)
 
   // handlers
   useEffect(() => {
-    getPatientIdByDashboard({
-      variables: {
-        email: localStorage.getItem('email'),
-      },
-    })
     getPatientByEmail({
       variables: {
         email: localStorage.getItem('email'),
       },
     })
-  }, [])
+  }, [getPatientByEmail])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -191,9 +185,34 @@ const Dashboard = () => {
         avatar: data.avatar,
         province: data.bill_province,
       })
+      console.log('personalData.getPatientByEmail.id', personalData.getPatientByEmail.id)
+      const patientID = personalData.getPatientByEmail.id
       getProfilePercentage(data)
+
+      if (patientID !== -1) {
+        localStorage.setItem('patient_id', patientID)
+        getSessionsByDashboard({ variables: { patient_id: patientID } })
+        getAnthropmetryByDashboard({ variables: { patient_id: patientID } })
+        getPurchaseListByDashboard({ variables: { patient_id: patientID } })
+        getWeekDaySessionsByDashboard({ variables: { patient_id: patientID } })
+        getPatientMessageById({ variables: { patient_id: patientID } })
+        getPaymentStatusForDashboard({ variables: { patient_id: patientID } })
+      } else {
+        toast.error('Please complete your profile.')
+        router.push('/dashboard/profile')
+      }
     }
-  }, [personalLoading, personalData, personalError])
+  }, [
+    personalLoading,
+    personalData,
+    personalError,
+    getSessionsByDashboard,
+    getAnthropmetryByDashboard,
+    getPurchaseListByDashboard,
+    getWeekDaySessionsByDashboard,
+    getPatientMessageById,
+    getPaymentStatusForDashboard,
+  ])
 
   useEffect(() => {
     if (!bonusError && bonusData && bonusData.getPurchaseListByDashboard) {
@@ -222,24 +241,6 @@ const Dashboard = () => {
       setMessage(data)
     }
   }, [messageListLoading, messageListData, messageListError])
-
-  useEffect(() => {
-    if (!patientError && patientData && patientData.getPatientIdByDashboard) {
-      const patient_id = patientData.getPatientIdByDashboard
-      if (patient_id !== -1) {
-        localStorage.setItem('patient_id', patient_id)
-        getSessionsByDashboard({ variables: { patient_id: patient_id } })
-        getAnthropmetryByDashboard({ variables: { patient_id: patient_id } })
-        getPurchaseListByDashboard({ variables: { patient_id: patient_id } })
-        getWeekDaySessionsByDashboard({ variables: { patient_id: patient_id } })
-        getPatientMessageById({ variables: { patient_id: patient_id } })
-        getPaymentStatusForDashboard({ variables: { patient_id: patient_id } })
-      } else {
-        toast.error('Please complete your profile.')
-        router.push('/dashboard/profile')
-      }
-    }
-  }, [patientLoading, patientData, patientError])
 
   useEffect(() => {
     if (!healthError && healthData && healthData.getAnthropmetryByDashboard) {
@@ -295,6 +296,7 @@ const Dashboard = () => {
 
   const handleClickRmember = () => {
     console.log('handleClickRmember')
+    setShowQuestionnaire(true)
   }
 
   const handleClickRedirect = (type, id) => {
@@ -555,6 +557,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      {showQuestionnaire && <Questionnaire onClick={() => setShowQuestionnaire(false)} />}
     </div>
   )
 }
