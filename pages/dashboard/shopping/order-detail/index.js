@@ -44,6 +44,7 @@ const OrderDetail = () => {
   // variables
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
+  const [serviceId, setServiceId] = useState('')
   const [billNumber, setBillNumber] = useState(-1)
   const [purchaseID, setPurchaseID] = useState(-1)
   const [status, setStatus] = useState('PAID')
@@ -61,6 +62,7 @@ const OrderDetail = () => {
     setStatus(router.query.status)
     setTitle(router.query.title)
     setPrice(router.query.price)
+    setServiceId(router.query.service_id)
   }, [router.query])
 
   useEffect(() => {
@@ -97,7 +99,7 @@ const OrderDetail = () => {
   }
 
   const handleBuyAnotherButton = () => {
-    router.push(`/purchase?tab=2&service_id=${purchaseID}&description=${title}&price=${price}`)
+    router.push(`/purchase?tab=2&service_id=${serviceId}&description=${title}&price=${price}`)
   }
 
   const handlePayButton = () => {
