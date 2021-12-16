@@ -1,5 +1,5 @@
-mutation Checkout($serviceId: Int, $ccToken: String) {
-  Checkout(service_id: $serviceId, cc_token: $ccToken) {
+mutation Checkout($serviceId: Int, $ccToken: String, $paymentType: String) {
+  Checkout(service_id: $serviceId, cc_token: $ccToken, payment_type: $paymentType) {
     id
     patient_id
     item_kind
@@ -25,8 +25,8 @@ mutation Checkout($serviceId: Int, $ccToken: String) {
   }
 }
 
-query CheckoutVerify($intentId: String) {
-  checkoutVerify(intent_id: $intentId) {
+query CheckoutVerify($intentId: String, $subscriptionId: String, $purchaseId: String) {
+  checkoutVerify(intent_id: $intentId, subscription_id: $subscriptionId, purchase_id: $purchaseId) {
     item_web_name
     status
     id

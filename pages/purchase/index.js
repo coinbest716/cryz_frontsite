@@ -458,6 +458,7 @@ const Purchase = () => {
   }
 
   const handleChangePaymentType = event => {
+    console.log(event.target.name)
     setPaymentType(event.target.name)
   }
   const handleChangeCardData = (name, value) => {
@@ -504,6 +505,7 @@ const Purchase = () => {
               variables: {
                 serviceId: Number(router.query.service_id),
                 ccToken: res.id,
+                paymentType: paymentType,
               },
             })
               .then(response => {
@@ -515,7 +517,9 @@ const Purchase = () => {
                   if (checkoutData.next?.redirect_to_url.url) {
                     window.open(checkoutData.next?.redirect_to_url.url, '_self')
                   } else {
-                    router.push(`/purchase/order?payment_intent=${checkoutData.stripe_payment_intent_id}&subscription_id=${checkoutData.stripe_subscription_id}`)
+                    router.push(
+                      `/purchase/order?payment_intent=${checkoutData.stripe_payment_intent_id}&subscription_id=${checkoutData.stripe_subscription_id}`
+                    )
                   }
                 }
               })
@@ -530,7 +534,33 @@ const Purchase = () => {
         toast.error(err.message)
       }
     } else if (paymentType === 'transfer') {
-      router.push('/purchase/transfer-success')
+      try {
+        dispatch({ type: 'set', isLoading: true })
+        Checkout({
+          variables: {
+            serviceId: Number(router.query.service_id),
+            ccToken: 'none',
+            paymentType: paymentType,
+          },
+        })
+          .then(response => {
+            if (response.data.Checkout) {
+              const checkoutData = response.data.Checkout
+              setSession(checkoutData)
+              toast.success('Successfully buy Service!')
+              dispatch({ type: 'set', isLoading: false })
+              //router.push('/purchase/transfer-success')
+              router.push(`/purchase/order?&purchase_id=${checkoutData.id}`)
+            }
+          })
+          .catch(error => {
+            toast.error(error.message)
+            dispatch({ type: 'set', isLoading: false })
+          })
+      } catch (err) {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(err.message)
+      }
     }
   }
 
@@ -817,9 +847,9 @@ const Purchase = () => {
                           redsys={redsys}
                         />
                       </div>
-                      {/*<div className={'pt-5'}>
+                      <div className={'pt-5'}>
                         <Transfer handleChangePaymentType={handleChangePaymentType} value={paymentType} />
-                      </div>*/}
+                      </div>
                     </div>
                     <div className={'pt-24 flex justify-between items-center'}>
                       <div>
