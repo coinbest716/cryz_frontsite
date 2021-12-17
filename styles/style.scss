@@ -160,6 +160,25 @@
   margin: 8px !important;
 }
 
+.mainMobileCarouselArea {
+  position: absolute;
+  top: 25px;
+  padding-bottom: 25px;
+  left: 25px;
+  right: 25px;
+}
+.mainMobileCarouselArea .carousel-root .carousel-slider {
+  padding-bottom: 25px;
+}
+.mainMobileCarouselArea .carousel-root .control-dots {
+  width: 100%;
+  height: 10px;
+  display: flex;
+  bottom: 0px;
+  justify-content: center;
+  align-items: center;
+}
+
 // team carousel style
 .teamCarousel {
   margin-top: -80px;
