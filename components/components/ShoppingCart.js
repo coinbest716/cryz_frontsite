@@ -35,7 +35,7 @@ const ShoppingCart = props => {
                 <div className={'mr-4'} style={{ minWidth: '88px' }}>
                   <Image src={item.image} alt={''} width={88} height={88} />
                 </div>
-                <div className={'flex flex-col justify-evenly'}>
+                  <div className={'flex flex-col justify-evenly'}>
                   <div className={styles.listDescription}>{item.description}</div>
                   <div className={styles.listPrice}>€&nbsp;&nbsp;{item.price}</div>
                 </div>

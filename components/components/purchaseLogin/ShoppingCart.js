@@ -8,7 +8,7 @@ import Radio from 'components/components/purchase/Radio'
 import styles from './ShoppingCart.module.scss'
 
 const ShoppingCart = props => {
-  const { shoppingInfo, docData, handleChangeFrame } = props
+    const { shoppingInfo, docData, handleChangeFrame } = props
 
   return (
     <div className={styles.shoppingCart}>

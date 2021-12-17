@@ -27,10 +27,14 @@ const withGraphql = require('next-plugin-graphql')
 const appConfig = {
   images: {
     domains: ['crysdiaz-public.s3.eu-west-1.amazonaws.com', 'via.placeholder.com'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 640, 768, 1024, 1536, 2048],
+    formats: ['image/avif', 'image/webp'],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  poweredByHeader: false,
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   webpackDevMiddleware: config => {
