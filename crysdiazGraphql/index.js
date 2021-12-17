@@ -34,6 +34,7 @@ import {
   GetPurchaseListByDashboard,
   GetWeekDaySessionsByDashboard,
   GetPaymentStatusForDashboard,
+  GetPendingQuestionnaireByDashboard,
 } from './dashboard.gql'
 // shopping part
 import {
@@ -63,54 +64,67 @@ export default {
     getEquipo: GetEquipo,
     getFeaturedServices: GetFeaturedServices,
     getMainImage: GetMainImage,
+
     // female health part
     getFemHealth: GetFemHealth,
     getDisciplineList: GetDisciplineList,
     getFemHealthService: GetFemHealthService,
     getFemHealthServiceSubjectByType: GetFemHealthServiceSubjectByType,
+
     // classland part
     getClasslandMain: GetClasslandMain,
     getClasslandCategory: GetClasslandCategory,
     getClasslandFaqs: GetClasslandFaqs,
+
     // services part
     getCmsService: GetCmsService,
     getCmsServiceDisciplineList: GetCmsServiceDisciplineList,
     getCmsServiceSubject: GetCmsServiceSubject,
     getCmsServiceSubjectByType: GetCmsServiceSubjectByType,
+
     // academy part
     getAcademy: GetAcademy,
     getAcademyById: GetAcademyById,
+
     // contact part
     getContactInfo: GetContactInfo,
 
     // other part
     getUser: GetUser,
+
     // profile part
     getPatientIdByDashboard: GetPatientIdByDashboard,
     getPatientByEmail: GetPatientByEmail,
     getAnthropmetryByDashboard: GetAnthropmetryByDashboard,
     getAnthroDetailDataByDashboard: GetAnthroDetailDataByDashboard,
+
     // billing part
     getPatientBillByDashboard: GetPatientBillByDashboard,
-    // dashboard calendar part
+
+    // dashboard part
     getSessionsByDashboard: GetSessionsByDashboard,
     getLocationByDashboard: GetLocationByDashboard,
     getPurchaseListByDashboard: GetPurchaseListByDashboard,
     getWeekDaySessionsByDashboard: GetWeekDaySessionsByDashboard,
     getPaymentStatusForDashboard: GetPaymentStatusForDashboard,
+    getPendingQuestionnaireByDashboard: GetPendingQuestionnaireByDashboard,
+
     // shopping part
     getServicePurchaseByDashboard: GetServicePurchaseByDashboard,
     getSessionsByIdFromDashboard: GetSessionsByIdFromDashboard,
     getPurchasedOnlinePlanList: GetPurchasedOnlinePlanList,
+
     // message part
     getUsersByPatient: GetUsersByPatient,
     getUserForMessage: GetUserForMessage,
     getPatientMessageById: GetPatientMessageById,
     getSubMessagesByDashboard: GetSubMessagesByDashboard,
+
     // plans online part
     getOnlinePlanByDashboard: GetOnlinePlanByDashboard,
     getVideoMaterial: GetVideoMaterial,
     getAvailablePlanDates: GetAvailablePlanDates,
+
     //purchase
     checkoutVerify: CheckoutVerify,
   },

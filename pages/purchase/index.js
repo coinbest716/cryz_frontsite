@@ -865,7 +865,7 @@ const Purchase = () => {
               </div>
             </div>
             <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
-              <ShoppingCart shoppingInfo={shoppingInfo} />
+              <ShoppingCart shoppingInfo={shoppingInfo} docData={selectedDoc} handleChangeFrame={() => {}} />
               {/* <ShoppingCart
                 data={cartData}
                 handleRemoveCart={handleRemoveCart}

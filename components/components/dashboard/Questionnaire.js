@@ -36,13 +36,13 @@ const Questionnaire = props => {
           <div className="ml-3">
             <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
             <div className="mt-5">
-              <Radio type={'yes'} value={true} label={'Sí'} />
+              <Radio name={'group1'} value={'yes'} label={'Sí'} />
             </div>
             <div className="mt-5">
               <input placeholder="Padezco de…" className={styles.inputArea} />
             </div>
             <div className="mt-5">
-              <Radio type={'no'} value={true} label={'No'} />
+              <Radio name={'group1'} value={'no'} label={'No'} />
             </div>
             <div className={styles.subTitle + ' mt-5'}>TEXT FIELD</div>
             <div className="mt-5">
@@ -55,13 +55,13 @@ const Questionnaire = props => {
               MÚLTIPLES RESPUESTAS
             </div>
             <div className="mt-5">
-              <Radio type={'yes'} value={true} label={'Sí'} />
+              <Radio name={'group2'} value={'yes'} label={'Sí'} />
             </div>
             <div className="mt-5">
-              <Radio type={'no'} value={true} label={'No'} />
+              <Radio name={'group2'} value={'no'} label={'No'} />
             </div>
             <div className="mt-5">
-              <Radio type={'no'} value={true} label={'Ocasionalmente'} />
+              <Radio name={'group2'} value={'occasionally'} label={'Ocasionalmente'} />
             </div>
             <div className={styles.subTitle + ' mt-5'}>TEXT FIELD</div>
             <div className="mt-5">

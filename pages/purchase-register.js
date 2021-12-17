@@ -105,7 +105,7 @@ const Register = () => {
       pathname: '/purchase-login',
       query: {
         service_id: router.query.service_id,
-        tab: 1,
+        tab: 0,
         image: router.query.image,
         description: router.query.description,
         price: router.query.price,
@@ -152,7 +152,7 @@ const Register = () => {
             pathname: '/purchase-login',
             query: {
               service_id: router.query.service_id,
-              tab: 1,
+              tab: 0,
               image: router.query.image,
               description: router.query.description,
               price: router.query.price,

@@ -59,6 +59,7 @@ const PurchaseLogin = () => {
 
   // handlers
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: true })
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
@@ -66,7 +67,7 @@ const PurchaseLogin = () => {
           pathname: '/purchase',
           query: {
             service_id: router.query.service_id,
-            tab: 1,
+            tab: 0,
             image: router.query.image,
             description: router.query.description,
             price: router.query.price,
@@ -76,6 +77,7 @@ const PurchaseLogin = () => {
       .catch(() => {
         setIsAuthenticated(false)
       })
+    dispatch({ type: 'set', isLoading: false })
     if (localStorage.getItem('remember')) {
       setRememberMe(Boolean(localStorage.getItem('remember')))
       setEmail(localStorage.getItem('email') || '')
@@ -110,7 +112,7 @@ const PurchaseLogin = () => {
         pathname: '/purchase',
         query: {
           service_id: router.query.service_id,
-          tab: 1,
+          tab: 0,
           image: router.query.image,
           description: router.query.description,
           price: router.query.price,
@@ -136,7 +138,7 @@ const PurchaseLogin = () => {
       pathname: '/purchase-login',
       query: {
         service_id: router.query.service_id,
-        tab: 1,
+        tab: 0,
         image: router.query.image,
         description: router.query.description,
         price: router.query.price,
@@ -169,7 +171,7 @@ const PurchaseLogin = () => {
           pathname: '/purchase-login',
           query: {
             service_id: router.query.service_id,
-            tab: 1,
+            tab: 0,
             image: router.query.image,
             description: router.query.description,
             price: router.query.price,
@@ -217,7 +219,7 @@ const PurchaseLogin = () => {
             pathname: '/purchase',
             query: {
               service_id: router.query.service_id,
-              tab: 1,
+              tab: 0,
               image: router.query.image,
               description: router.query.description,
               price: router.query.price,

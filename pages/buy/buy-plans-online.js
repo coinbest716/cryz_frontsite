@@ -83,13 +83,13 @@ const BuyPlansOnline = () => {
       .then(() => {
         router.push({
           pathname: '/purchase',
-          query: { service_id: service_id, tab: 2, image: router.query.image, description: description, price: price },
+          query: { service_id: service_id, tab: 0, image: router.query.image, description: description, price: price },
         })
       })
       .catch(() => {
         router.push({
           pathname: '/purchase-login',
-          query: { service_id: service_id, tab: 1, image: router.query.image, description: description, price: price },
+          query: { service_id: service_id, tab: 0, image: router.query.image, description: description, price: price },
         })
       })
   }
