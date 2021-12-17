@@ -8,6 +8,7 @@ import router from 'next/router'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import ReactPlayer from 'react-player'
+import { isMobile } from 'react-device-detect'
 
 // images
 import MainImage from 'assets/images/main.png'
@@ -18,7 +19,7 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
-  const { mainImage, featuredServices, viewport } = props
+  const { mainImage, featuredServices } = props
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
@@ -40,8 +41,7 @@ const MainSection = props => {
       <div id="bottomToTop" className={styles.bottomToTop}>
         {mainImage.text_one}
       </div>
-      {console.log(viewport)}
-      {viewport !== 'mobile' ? (
+      {!isMobile ? (
         <div className={'absolute flex justify-end top-0 right-0 p-0 m-0 h-screen ' + styles.mainRightArea}>
           <div className={'absolute top-0 left-0 h-screen -z-10 w-full ' + styles.mainCarouselOpacityArea} />
           <div className={'mainCarouselArea'}>

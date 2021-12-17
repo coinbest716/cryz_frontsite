@@ -12,6 +12,7 @@ import awsconfig from 'utils/aws-exports'
 
 // third party components
 import { Toaster } from 'react-hot-toast'
+import { isMobile } from 'react-device-detect'
 
 // graphql components
 import { ApolloProvider } from '@apollo/client'
@@ -108,9 +109,11 @@ const MyApp = ({ Component, pageProps }) => {
       <ApolloProvider client={client}>
         <Script src="https://js.stripe.com/v2/"></Script>
         <Script id="stripe-js" src="https://js.stripe.com/v3/" async></Script>
-        {/* {viewport !== 'mobile' ? ( */}
-        <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
-        {/* ) : (
+        {!isMobile ? (
+          <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
+        ) : process.env.NEXT_PUBLIC_MOBILE_VIEW === 'true' && isMobile ? (
+          <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
+        ) : (
           <div className={'w-full flex flex-wrap'}>
             <div className="-z-10 w-full h-full">
               <img src={MainImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -131,7 +134,7 @@ const MyApp = ({ Component, pageProps }) => {
               </div>
             </div>
           </div>
-        )} */}
+        )}
         <Toaster position="top-right" reverseOrder={false} />
       </ApolloProvider>
     </>
