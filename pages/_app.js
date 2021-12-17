@@ -78,40 +78,39 @@ const MyApp = ({ Component, pageProps }) => {
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta
-            name="viewport"
-            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+          name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
         <meta name="description" content="Fisioterapia, entrenamiento personal y mucho más" />
         <meta name="keywords" content="Fisioterapia, entrenamiento personal y mucho más" />
         <title>CrysDyaz&Co</title>
 
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
-        <link rel="manifest" href="/site.webmanifest"/>
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
-        <meta name="apple-mobile-web-app-title" content="CrysDyaz And Co"/>
-        <meta name="application-name" content="CrysDyaz And Co"/>
-        <meta name="msapplication-TileColor" content="#da532c"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="apple-mobile-web-app-title" content="CrysDyaz And Co" />
+        <meta name="application-name" content="CrysDyaz And Co" />
+        <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-
       </Head>
       <DefaultSeo
-          title="CrysDyaz&Co"
-          description="Fisioterapia, entrenamiento personal y mucho más"
-          openGraph={{
-            type: 'website',
-            locale: 'es_ES',
-            url: 'https://crysdyazandco.com/',
-            site_name: 'CrysDyaz&Co',
-          }}
+        title="CrysDyaz&Co"
+        description="Fisioterapia, entrenamiento personal y mucho más"
+        openGraph={{
+          type: 'website',
+          locale: 'es_ES',
+          url: 'https://crysdyazandco.com/',
+          site_name: 'CrysDyaz&Co',
+        }}
       />
       <ApolloProvider client={client}>
         <Script src="https://js.stripe.com/v2/"></Script>
         <Script id="stripe-js" src="https://js.stripe.com/v3/" async></Script>
-        {viewport !== 'mobile' ? (
-          <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
-        ) : (
+        {/* {viewport !== 'mobile' ? ( */}
+        <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
+        {/* ) : (
           <div className={'w-full flex flex-wrap'}>
             <div className="-z-10 w-full h-full">
               <img src={MainImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -132,7 +131,7 @@ const MyApp = ({ Component, pageProps }) => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
         <Toaster position="top-right" reverseOrder={false} />
       </ApolloProvider>
     </>
