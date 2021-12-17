@@ -35,6 +35,7 @@ Amplify.configure({ ...awsconfig, ssr: true })
 Auth.configure(awsconfig)
 
 const MyApp = ({ Component, pageProps }) => {
+  const [mobile, setMobile] = useState(false)
   const MainImage = '/images/main-mobile.png'
   const router = useRouter()
   const getLayout = Component.getLayout || (page => page)
@@ -48,6 +49,10 @@ const MyApp = ({ Component, pageProps }) => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.events])
+
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [isMobile])
 
   const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
   useEffect(() => {
@@ -109,9 +114,9 @@ const MyApp = ({ Component, pageProps }) => {
       <ApolloProvider client={client}>
         <Script src="https://js.stripe.com/v2/"></Script>
         <Script id="stripe-js" src="https://js.stripe.com/v3/" async></Script>
-        {!isMobile ? (
+        {mobile === false ? (
           <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
-        ) : process.env.NEXT_PUBLIC_MOBILE_VIEW === 'true' && isMobile ? (
+        ) : process.env.NEXT_PUBLIC_MOBILE_VIEW === 'true' && mobile === true ? (
           <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
         ) : (
           <div className={'w-full flex flex-wrap'}>
