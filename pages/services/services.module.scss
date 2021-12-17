@@ -4,6 +4,12 @@
   padding-top: 80px;
   padding-bottom: 119px;
 }
+.m_container {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
 .topTitle {
   font-family: DrukWideCyWeb-Bold;
   font-size: 35px;
@@ -15,25 +21,40 @@
   margin-top: 109px;
   margin-bottom: 10px;
 }
+.m_topTitle {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 25px;
+  letter-spacing: 0px;
+  background: linear-gradient(20.89deg, #e2d2e2 0%, #b7a1b7 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-grid;
+  margin-top: 109px;
+  margin-bottom: 5px;
+}
 .topDash {
   width: 42px;
   height: 7px;
   background-color: #decede;
 }
 .topDescription {
-  margin-top: 52px;
-  margin-bottom: 20px;
   color: $blue-gray-400-color;
   font-family: Montserrat;
   font-size: 14px;
   letter-spacing: 0.62px;
-  line-height: 28px;
   text-align: justify;
 }
 .circularMark {
   padding-top: 91px;
   display: flex;
   justify-content: flex-end;
+}
+.m_circularMark {
+  padding-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  right: -30px;
 }
 .serverText {
   position: absolute;
@@ -45,10 +66,24 @@
   top: 117px;
   left: 48px;
 }
+.m_serverText {
+  position: absolute;
+  color: #000000;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 1px;
+  top: 50px;
+  left: 23px;
+}
 .serverArrow {
   position: absolute;
   top: 217px;
   left: 45px;
+}
+.m_serverArrow {
+  position: absolute;
+  top: 92px;
+  left: 23px;
 }
 .boxToRightActive {
   flex: 1 1 25%;

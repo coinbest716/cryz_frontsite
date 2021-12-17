@@ -23,13 +23,16 @@ import ArrowRightUpGrayIcon from 'public/images/arrow-right-up.svg'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
+import { isMobile } from 'react-device-detect'
+
 const Services = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-
+  const [mobile, setIsMobile] = useState(null)
   useEffect(() => {
     setIsMounted(true)
+    setIsMobile(isMobile)
     return () => setIsMounted(false)
   }, [])
 
@@ -107,97 +110,160 @@ const Services = () => {
   return (
     <div className={'flex flex-wrap justify-center'}>
       <div className={globalStyles.container}>
-        <div className={styles.container}>
+        <div className={mobile ? styles.m_container : styles.container}>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
-              <div className={styles.topTitle + ' pb-2'}>{title}</div>
+              <div className={mobile ? styles.m_topTitle : styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
               <div className={globalStyles.tinyMCEClass}>
                 <div
-                  className={styles.topDescription + ' tinymce-class'}
+                  className={styles.topDescription + ' tinymce-class' + (mobile ? ' mt-4 mb-1' : ' mt-11 mb-5')}
                   dangerouslySetInnerHTML={{ __html: description }}
                 ></div>
               </div>
             </div>
             <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
-              <div className={'z-10 ' + styles.circularMark}>
-                <CircularMark />
+              {!mobile && (
+                <div className={'z-10 ' + styles.circularMark}>
+                  <CircularMark />
+                </div>
+              )}
+            </div>
+          </div>
+          {mobile ? (
+            <div className={'w-full mt-5 overflow-hidden'}>
+              <div className="flex">
+                <div
+                  className={'relative cursor-pointer w-1/2 '}
+                  onMouseOver={() => handleMouseOver('type1')}
+                  onClick={() => handleClick(mainService[0].id)}
+                >
+                  <img
+                    src={mainService[0]?.image || placeholder1}
+                    alt=""
+                    style={{ width: '100%', height: '150px', opacity: 0.4 }}
+                  />
+                  <div className={styles.m_serverText}>{mainService[0]?.name}</div>
+                  <div className={styles.m_serverArrow}>
+                    <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
+                  </div>
+                </div>
+
+                <div
+                  className={'relative cursor-pointer w-1/2 '}
+                  onMouseOver={() => handleMouseOver('type2')}
+                  onClick={() => handleClick(mainService[1].id)}
+                >
+                  <img
+                    src={mainService[1]?.image || placeholder2}
+                    alt=""
+                    style={{ width: '100%', height: '150px', opacity: 0.4 }}
+                  />
+                  <div className={styles.m_serverText}>{mainService[1]?.name}</div>
+                  <div className={styles.m_serverArrow}>
+                    <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
+                  </div>
+                </div>
+              </div>
+              <div className="flex">
+                <div
+                  className={'relative cursor-pointer w-1/2 '}
+                  onMouseOver={() => handleMouseOver('type3')}
+                  onClick={() => handleClick(mainService[2].id)}
+                >
+                  <img
+                    src={mainService[2]?.image || placeholder3}
+                    alt=""
+                    style={{ width: '100%', height: '150px', opacity: 0.4 }}
+                  />
+                  <div className={styles.m_serverText}>{mainService[2]?.name}</div>
+                  <div className={styles.m_serverArrow}>
+                    <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
+                  </div>
+                </div>
+                <div className="relative coursor-pointer w-1/2">
+                  <div className={'z-10 ' + styles.m_circularMark}>
+                    <CircularMark mobile={mobile} />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className={'flex w-full mt-5 overflow-hidden'}>
-            <div
-              className={
-                'relative cursor-pointer ' + (contactType.type1 ? styles.boxToRightActive : styles.boxDeactive)
-              }
-              onMouseOver={() => handleMouseOver('type1')}
-              onClick={() => handleClick(mainService[0].id)}
-            >
-              <img
-                src={contactType.type1 ? mainService[0]?.image : placeholder1}
-                alt=""
-                style={{ width: '100%', height: '288px', opacity: 0.4 }}
-                className={styles.box1}
-              />
+          ) : (
+            <div className={'flex w-full mt-5 overflow-hidden'}>
+              <div
+                className={
+                  'relative cursor-pointer ' + (contactType.type1 ? styles.boxToRightActive : styles.boxDeactive)
+                }
+                onMouseOver={() => handleMouseOver('type1')}
+                onClick={() => handleClick(mainService[0].id)}
+              >
+                <img
+                  src={contactType.type1 ? mainService[0]?.image : placeholder1}
+                  alt=""
+                  style={{ width: '100%', height: '288px', opacity: 0.4 }}
+                />
 
-              <div className={styles.serverText}>{mainService[0]?.name}</div>
-              {contactType.type1 ? (
-                <div className={styles.serverArrow}>
-                  <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
-                </div>
-              ) : (
-                <div className={styles.serverArrow}>
-                  <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
-                </div>
-              )}
-            </div>
+                <div className={styles.serverText}>{mainService[0]?.name}</div>
+                {contactType.type1 ? (
+                  <div className={styles.serverArrow}>
+                    <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
+                  </div>
+                ) : (
+                  <div className={styles.serverArrow}>
+                    <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
+                  </div>
+                )}
+              </div>
 
-            <div
-              className={'relative cursor-pointer ' + (contactType.type2 ? styles.boxToLeftActive : styles.boxDeactive)}
-              onMouseOver={() => handleMouseOver('type2')}
-              onClick={() => handleClick(mainService[1].id)}
-            >
-              <img
-                src={contactType.type2 ? mainService[1]?.image : placeholder2}
-                alt=""
-                style={{ width: '100%', height: '288px', opacity: 0.4 }}
-                className={styles.box1}
-              />
-              <div className={styles.serverText}>{mainService[1]?.name}</div>
-              {contactType.type2 ? (
-                <div className={styles.serverArrow}>
-                  <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
-                </div>
-              ) : (
-                <div className={styles.serverArrow}>
-                  <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
-                </div>
-              )}
-            </div>
+              <div
+                className={
+                  'relative cursor-pointer ' + (contactType.type2 ? styles.boxToLeftActive : styles.boxDeactive)
+                }
+                onMouseOver={() => handleMouseOver('type2')}
+                onClick={() => handleClick(mainService[1].id)}
+              >
+                <img
+                  src={contactType.type2 ? mainService[1]?.image : placeholder2}
+                  alt=""
+                  style={{ width: '100%', height: '288px', opacity: 0.4 }}
+                />
+                <div className={styles.serverText}>{mainService[1]?.name}</div>
+                {contactType.type2 ? (
+                  <div className={styles.serverArrow}>
+                    <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
+                  </div>
+                ) : (
+                  <div className={styles.serverArrow}>
+                    <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
+                  </div>
+                )}
+              </div>
 
-            <div
-              className={'relative cursor-pointer ' + (contactType.type3 ? styles.boxToLeftActive : styles.boxDeactive)}
-              onMouseOver={() => handleMouseOver('type3')}
-              onClick={() => handleClick(mainService[2].id)}
-            >
-              <img
-                src={contactType.type3 ? mainService[2]?.image : placeholder3}
-                alt=""
-                style={{ width: '100%', height: '288px', opacity: 0.4 }}
-                className={styles.box1}
-              />
-              <div className={styles.serverText}>{mainService[2]?.name}</div>
-              {contactType.type3 ? (
-                <div className={styles.serverArrow}>
-                  <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
-                </div>
-              ) : (
-                <div className={styles.serverArrow}>
-                  <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
-                </div>
-              )}
+              <div
+                className={
+                  'relative cursor-pointer ' + (contactType.type3 ? styles.boxToLeftActive : styles.boxDeactive)
+                }
+                onMouseOver={() => handleMouseOver('type3')}
+                onClick={() => handleClick(mainService[2].id)}
+              >
+                <img
+                  src={contactType.type3 ? mainService[2]?.image : placeholder3}
+                  alt=""
+                  style={{ width: '100%', height: '288px', opacity: 0.4 }}
+                />
+                <div className={styles.serverText}>{mainService[2]?.name}</div>
+                {contactType.type3 ? (
+                  <div className={styles.serverArrow}>
+                    <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
+                  </div>
+                ) : (
+                  <div className={styles.serverArrow}>
+                    <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
