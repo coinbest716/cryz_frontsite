@@ -37,7 +37,7 @@ const MessageSelectCard = props => {
             <input
               type="text"
               autoComplete="new-password"
-              placeholder="Subject"
+              placeholder="Haz click aquí y escribe el título de tu mensaje"
               className={'w-full h-full bg-transparent py-1 px-2 text-black ' + styles.input}
               value={data.subject}
               onChange={event => handleChangeSubject(event)}
