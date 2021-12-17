@@ -85,14 +85,37 @@ const TeamSection = props => {
         )}
       </div>
       <div className={'w-full flex mt-20 mb-11'}>
-        <div className={'w-full md:w-1/2 flex justify-center items-center'}>
+        <div className={'hidden lg:block lg:w-1/2 flex justify-center items-center'}>
           <Image src={team.avatar !== null ? team.avatar : TeamMember01} alt="" width={355} height={368} />
         </div>
-        <div className={'w-full md:w-1/2 flex flex-wrap justify-start items-center'}>
+        <div className={'w-full lg:w-1/2 flex flex-wrap justify-start items-center'}>
           <div className={globalStyles.tinyMCEClass}>
             <div className={styles.text + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: team.text_one }} />
           </div>
-          <div className={'w-full flex justify-between my-4'}>
+          <div className={'w-full lg:hidden flex justify-center items-center'}>
+            <Image src={team.avatar !== null ? team.avatar : TeamMember01} alt="" width={355} height={368} />
+          </div>
+          <div className={'w-full hidden lg:flex justify-between my-4'}>
+            <div style={{ flex: 1 }}>
+              <Image
+                src={team.sign !== null ? team.sign : SignImg}
+                alt={''}
+                width={467}
+                height={234}
+                className={styles.imageArea}
+              />
+            </div>
+            <div className={'flex justify-end items-center'} style={{ width: '80px' }}>
+              <SocialButtonGroup color="gray" socialURL={{ instagram: team.instagram, facebook: team.facebook }} />
+            </div>
+          </div>
+          <div className={globalStyles.tinyMCEClass}>
+            <div className={styles.text + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: team.text_two }} />
+          </div>
+          <div className={'w-full lg:hidden flex justify-between my-4'}>
+            <div className={'w-full flex justify-end items-center'}>
+              <SocialButtonGroup color="gray" socialURL={{ instagram: team.instagram, facebook: team.facebook }} />
+            </div>
             <Image
               src={team.sign !== null ? team.sign : SignImg}
               alt={''}
@@ -100,12 +123,6 @@ const TeamSection = props => {
               height={234}
               className={styles.imageArea}
             />
-            <div className={'w-full flex justify-end items-center'}>
-              <SocialButtonGroup color="gray" socialURL={{ instagram: team.instagram, facebook: team.facebook }} />
-            </div>
-          </div>
-          <div className={globalStyles.tinyMCEClass}>
-            <div className={styles.text + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: team.text_two }} />
           </div>
         </div>
       </div>
