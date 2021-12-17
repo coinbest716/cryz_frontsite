@@ -612,7 +612,7 @@ const Purchase = () => {
                         <div className={'w-full'}>
                           <div className={styles.tabTitle}>Información general</div>
                           <div className={'w-full flex justify-between items-center pt-10'}>
-                            <div className={'flex flex-wrap justify-start items-center'}>
+                            {/* <div className={'flex flex-wrap justify-start items-center'}>
                               <PurchaseAvatar
                                 avatar={personalInfo.avatar || ''}
                                 handleChangeAvatar={handleChangeAvatar}
@@ -633,7 +633,7 @@ const Purchase = () => {
                               <div className="ml-5">
                                 <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
                               </div>
-                            </div>
+                            </div>*/}
                           </div>
                         </div>
                       </div>
@@ -647,7 +647,7 @@ const Purchase = () => {
                             value={personalInfo.name}
                           />
                         </div>
-                        <div className={'w-2/5'}>
+                        {/*<div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'password')}
                             label={'Contraseña'}
@@ -655,7 +655,7 @@ const Purchase = () => {
                             type={'password'}
                             value={personalInfo.password}
                           />
-                        </div>
+                        </div>*/}
                       </div>
                       <div className={'flex justify-between gap-8 pt-4'}>
                         <div className={'w-3/5'}>
@@ -667,7 +667,7 @@ const Purchase = () => {
                             value={personalInfo.surname}
                           />
                         </div>
-                        <div className={'w-2/5'}>
+                        {/*<div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'meet')}
                             label={'Como nos conoció…'}
@@ -675,10 +675,10 @@ const Purchase = () => {
                             type={'select'}
                             value={personalInfo.meet}
                           />
-                        </div>
+                        </div>*/}
                       </div>
-                      <div className={'flex justify-between gap-8 pt-4'}>
-                        <div className={'w-3/5'}>
+                      {/* <div className={'flex justify-between gap-8 pt-4'}>
+                         <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'email')}
                             label={'Email'}
@@ -688,7 +688,7 @@ const Purchase = () => {
                             disabled={true}
                           />
                         </div>
-                        <div className={'w-2/5'}>
+                         <div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'telephone')}
                             label={'Teléfono'}
@@ -697,7 +697,7 @@ const Purchase = () => {
                             value={personalInfo.telephone}
                           />
                         </div>
-                      </div>
+                      </div> */}
                       <div className={'flex justify-between gap-8 pt-4'}>
                         <div className={'w-3/5'}>
                           <CommonText
@@ -708,7 +708,7 @@ const Purchase = () => {
                             value={personalInfo.country}
                           />
                         </div>
-                        <div className={'w-2/5'}>
+                        {/* <div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'emergencyPhone')}
                             label={'Teléfono emergencia'}
@@ -716,7 +716,7 @@ const Purchase = () => {
                             type={'tel'}
                             value={personalInfo.emergencyPhone}
                           />
-                        </div>
+                        </div>*/}
                       </div>
                       <div className={'flex justify-between gap-8 pt-4'}>
                         <div className={'w-3/5'}>
@@ -728,7 +728,7 @@ const Purchase = () => {
                             value={personalInfo.address}
                           />
                         </div>
-                        <div className={'w-2/5'}>
+                        {/*<div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'code')}
                             label={'DNI'}
@@ -736,19 +736,19 @@ const Purchase = () => {
                             type={'text'}
                             value={personalInfo.code}
                           />
-                        </div>
+                        </div>*/}
                       </div>
                       <div className={'flex justify-between gap-8 pt-4'}>
                         <div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'town')}
-                            label={'Ciudad'}
+                            label={'Provincia'}
                             placeholder={''}
                             type={'text'}
                             value={personalInfo.town}
                           />
                         </div>
-                        <div className={'w-2/5'}>
+                        {/*<div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'gender')}
                             label={'Sexo'}
@@ -756,10 +756,10 @@ const Purchase = () => {
                             type={'select'}
                             value={personalInfo.gender}
                           />
-                        </div>
+                        </div>*/}
                       </div>
                       <div className={'flex justify-between gap-8 pt-4'}>
-                        <div className={'w-3/5'}>
+                        {/*<div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'birthday')}
                             label={'Fecha de nacimiento'}
@@ -767,7 +767,7 @@ const Purchase = () => {
                             type={'date'}
                             value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
                           />
-                        </div>
+                        </div>*/}
                         <div className={'w-2/5'}></div>
                       </div>
                       <div className={'w-full mt-20 ' + styles.divider} />
