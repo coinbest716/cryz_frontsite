@@ -45,17 +45,17 @@ const Course = () => {
   // loading part end #######################
 
   // variables
-  const [getAcademyById, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
-    graphql.queries.getAcademyById
+  const [getAcademyWithPlazasById, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
+    graphql.queries.getAcademyWithPlazasById
   )
   const [mainData, setMainData] = useState(null)
   const [feature, setFeature] = useState([])
 
   // handlers
   useEffect(() => {
-    if (!courseError && courseData && courseData.getAcademyById) {
-      setMainData(courseData.getAcademyById)
-      const temp = courseData.getAcademyById
+    if (!courseError && courseData && courseData.getAcademyWithPlazasById) {
+      setMainData(courseData.getAcademyWithPlazasById)
+      const temp = courseData.getAcademyWithPlazasById
       setFeature([
         {
           id: 0,
@@ -77,8 +77,8 @@ const Course = () => {
   }, [courseLoading, courseData, courseError])
 
   useEffect(() => {
-    getAcademyById({ variables: { id: Number(router.asPath.split('/')[2]) } })
-  }, [getAcademyById, router.asPath])
+    getAcademyWithPlazasById({ variables: { id: Number(router.asPath.split('/')[2]) } })
+  }, [getAcademyWithPlazasById, router.asPath])
 
   const handleClickPayment = () => {
     toast.error('You did not connected payment!')
@@ -103,9 +103,13 @@ const Course = () => {
                   Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
                   {moment(mainData.end_date).format('MMMM YYYY')}
                 </div>
-                {/*<div className={'mt-6'} style={{ width: '326px' }}>
-                  <ArrowButton label={mainData.price + ' €'} onClick={handleClickPayment} />
-                </div>*/}
+                {/* <div className={'mt-6'} style={{ width: '326px' }}>
+                  <ArrowButton
+                    plazas={mainData.plazas}
+                    label={mainData.price + ' €'}
+                    onClick={mainData.plazas ? handleClickPayment : null}
+                  />
+                </div> */}
 
                 <div className={globalStyles.tinyMCEClass}>
                   <div
