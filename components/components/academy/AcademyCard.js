@@ -31,7 +31,11 @@ const AcademyCard = props => {
         <div className={styles.cardName}>{data?.category}</div>
       </div>
       <div className={'mt-2'}>
-        <ArrowButton label={data.price + ' €'} onClick={() => handleClickPayment(data)} />
+        <ArrowButton
+          plazas={data.plazas}
+          label={data.price + ' €'}
+          onClick={() => (data.plazas ? handleClickPayment(data) : null)}
+        />
       </div>
     </div>
   )

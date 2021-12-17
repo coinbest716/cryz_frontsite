@@ -14,6 +14,10 @@ query GetAcademy($nameId: [Int], $type: String) {
   }
 }
 
+query GetAcademyWithPlazas {
+  getAcademyWithPlazas
+}
+
 query GetAcademyById($id: Int) {
   getAcademyById(id: $id) {
     id

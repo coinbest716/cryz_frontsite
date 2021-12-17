@@ -34,23 +34,21 @@ const Academy = () => {
   // loading part end #######################
 
   const router = useRouter()
-  const [getAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
-    graphql.queries.getAcademy
+  // const [getAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
+  //   graphql.queries.getAcademy
+  // )
+  const [getAcademyWithPlazas, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
+    graphql.queries.getAcademyWithPlazas
   )
   const [cardData, setCardData] = useState([])
 
   useEffect(() => {
-    getAcademy({
-      variables: {
-        nameId: [],
-        type: 'ALL',
-      },
-    })
-  }, [getAcademy])
+    getAcademyWithPlazas()
+  }, [getAcademyWithPlazas])
 
   useEffect(() => {
-    if (!mainError && mainData && mainData.getAcademy) {
-      setCardData(mainData.getAcademy)
+    if (!mainError && mainData && mainData.getAcademyWithPlazas) {
+      setCardData(mainData.getAcademyWithPlazas)
     }
   }, [mainLoading, mainData, mainError])
 
