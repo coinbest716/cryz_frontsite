@@ -64,7 +64,12 @@
   background: rgba(200, 200, 200, 0.9);
   width: 100%; /* Set the width of the positioned div */
   height: 100%;
-  padding: 99px 40px 40px 40px;
+  @media (max-width: 1023px) {
+    padding: 40px 40px 40px 40px;
+  }
+  @media (min-width: 1024px) {
+    padding: 99px 40px 40px 40px;
+  }
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;

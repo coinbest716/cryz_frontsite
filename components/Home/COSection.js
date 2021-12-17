@@ -83,7 +83,7 @@ const COSection = props => {
             }
           >
             {sliderData.map((item, index) => (
-              <div key={index} className={'grid grid-cols-3 gap-4'}>
+              <div key={index} className={'grid grid-cols-2 lg:grid-cols-3 gap-4'}>
                 {item.map((elem, idx) => (
                   <div key={idx}>
                     <div

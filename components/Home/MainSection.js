@@ -18,7 +18,7 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
-  const { mainImage, featuredServices } = props
+  const { mainImage, featuredServices, viewport } = props
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
@@ -40,37 +40,38 @@ const MainSection = props => {
       <div id="bottomToTop" className={styles.bottomToTop}>
         {mainImage.text_one}
       </div>
-      <div className={'absolute flex justify-end w-1/3 top-0 right-0 p-0 m-0 h-screen ' + styles.mainRightArea}>
+      <div className={'absolute flex justify-end bottom-0 right-0 p-0 m-0 ' + styles.mainRightArea}>
         <div className={'absolute top-0 left-0 h-screen -z-10 w-full ' + styles.mainCarouselOpacityArea} />
-        <div className={'mainCarouselArea'}>
-          <Carousel
-            showArrows={false}
-            showThumbs={false}
-            autoPlay={true}
-            stopOnHover={true}
-            showStatus={false}
-            showIndicators={true}
-            infiniteLoop={true}
-            interval={5000}
-            axis="vertical"
-            dynamicHeight={true}
-          >
-            {featuredServices &&
-              featuredServices.map((item, index) => (
-                <div key={index}>
-                  {index % 2 === 0 ? (
-                    <>
-                      {/* {item.type === 'image' ? ( */}
-                      <div className={styles.imageArea}>
-                        <Image
-                          src={item.image !== null ? item.image : MainImage}
-                          alt=""
-                          width={345}
-                          height={194}
-                          layout="responsive"
-                        />
-                      </div>
-                      {/* ) : (
+        {viewport !== 'mobile' ? (
+          <div className={'mainCarouselArea'}>
+            <Carousel
+              showArrows={false}
+              showThumbs={false}
+              autoPlay={true}
+              stopOnHover={true}
+              showStatus={false}
+              showIndicators={true}
+              infiniteLoop={true}
+              interval={5000}
+              axis="vertical"
+              dynamicHeight={true}
+            >
+              {featuredServices &&
+                featuredServices.map((item, index) => (
+                  <div key={index}>
+                    {index % 2 === 0 ? (
+                      <>
+                        {/* {item.type === 'image' ? ( */}
+                        <div className={styles.imageArea}>
+                          <Image
+                            src={item.image !== null ? item.image : MainImage}
+                            alt=""
+                            width={345}
+                            height={194}
+                            layout="responsive"
+                          />
+                        </div>
+                        {/* ) : (
                       <div className={styles.videoArea}>
                         <div className={styles.playerWrapper}>
                           <ReactPlayer
@@ -83,44 +84,44 @@ const MainSection = props => {
                         </div>
                       </div>
                     )} */}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  {index % 2 === 0 ? <div className={styles.blankDiv}></div> : <></>}
-                  <div className={index % 2 === 1 ? styles.pinkBoxArea01 : styles.pinkBoxArea}>
-                    <div className={styles.pinkBoxOpacity} />
-                    <div className={styles.pinkBox}>
-                      <div className={globalStyles.tinyMCEClass}>
-                        <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
-                      </div>
-                      <div className={globalStyles.tinyMCEClass}>
-                        <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
-                      </div>
-                      <div className={styles.pinkButtonArea}>
-                        <button className={styles.pinkButton} onClick={() => router.push(item.url)}>
-                          <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
-                        </button>
-                      </div>
-                      <div className={globalStyles.tinyMCEClass}>
-                        <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.text }} />
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    {index % 2 === 0 ? <div className={styles.blankDiv}></div> : <></>}
+                    <div className={index % 2 === 1 ? styles.pinkBoxArea01 : styles.pinkBoxArea}>
+                      <div className={styles.pinkBoxOpacity} />
+                      <div className={styles.pinkBox}>
+                        <div className={globalStyles.tinyMCEClass}>
+                          <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
+                        </div>
+                        <div className={globalStyles.tinyMCEClass}>
+                          <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
+                        </div>
+                        <div className={styles.pinkButtonArea}>
+                          <button className={styles.pinkButton} onClick={() => router.push(item.url)}>
+                            <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
+                          </button>
+                        </div>
+                        <div className={globalStyles.tinyMCEClass}>
+                          <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.text }} />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  {index % 2 === 1 ? <div className={styles.blankDiv}></div> : <></>}
-                  {index % 2 === 1 ? (
-                    <>
-                      {/* {item.type === 'image' ? ( */}
-                      <div className={styles.imageArea + ' mb-5'}>
-                        <Image
-                          src={item.image !== null ? item.image : MainImage}
-                          alt=""
-                          width={345}
-                          height={194}
-                          layout="responsive"
-                        />
-                      </div>
-                      {/* ) : (
+                    {index % 2 === 1 ? <div className={styles.blankDiv}></div> : <></>}
+                    {index % 2 === 1 ? (
+                      <>
+                        {/* {item.type === 'image' ? ( */}
+                        <div className={styles.imageArea + ' mb-5'}>
+                          <Image
+                            src={item.image !== null ? item.image : MainImage}
+                            alt=""
+                            width={345}
+                            height={194}
+                            layout="responsive"
+                          />
+                        </div>
+                        {/* ) : (
                         <div className={styles.videoArea + ' mb-5'}>
                           <div className={styles.playerWrapper}>
                             <ReactPlayer
@@ -133,14 +134,115 @@ const MainSection = props => {
                           </div>
                         </div>
                       )} */}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              ))}
-          </Carousel>
-        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                ))}
+            </Carousel>
+          </div>
+        ) : (
+          <div className={'mainCarouselArea'}>
+            <Carousel
+              showArrows={false}
+              showThumbs={false}
+              autoPlay={true}
+              stopOnHover={true}
+              showStatus={false}
+              showIndicators={true}
+              infiniteLoop={true}
+              interval={5000}
+              // axis="vertical"
+              dynamicHeight={true}
+            >
+              {featuredServices &&
+                featuredServices.map((item, index) => (
+                  <div key={index}>
+                    {index % 2 === 0 ? (
+                      <>
+                        {/* {item.type === 'image' ? ( */}
+                        <div className={styles.imageArea}>
+                          <Image
+                            src={item.image !== null ? item.image : MainImage}
+                            alt=""
+                            width={345}
+                            height={194}
+                            layout="responsive"
+                          />
+                        </div>
+                        {/* ) : (
+                      <div className={styles.videoArea}>
+                        <div className={styles.playerWrapper}>
+                          <ReactPlayer
+                            url={item.video}
+                            width="100%"
+                            height="100%"
+                            className={styles.reactPlayer}
+                            controls={true}
+                          />
+                        </div>
+                      </div>
+                    )} */}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    {index % 2 === 0 ? <div className={styles.blankDiv}></div> : <></>}
+                    <div className={index % 2 === 1 ? styles.pinkBoxArea01 : styles.pinkBoxArea}>
+                      <div className={styles.pinkBoxOpacity} />
+                      <div className={styles.pinkBox}>
+                        <div className={globalStyles.tinyMCEClass}>
+                          <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
+                        </div>
+                        <div className={globalStyles.tinyMCEClass}>
+                          <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
+                        </div>
+                        <div className={styles.pinkButtonArea}>
+                          <button className={styles.pinkButton} onClick={() => router.push(item.url)}>
+                            <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
+                          </button>
+                        </div>
+                        <div className={globalStyles.tinyMCEClass}>
+                          <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.text }} />
+                        </div>
+                      </div>
+                    </div>
+                    {index % 2 === 1 ? <div className={styles.blankDiv}></div> : <></>}
+                    {index % 2 === 1 ? (
+                      <>
+                        {/* {item.type === 'image' ? ( */}
+                        <div className={styles.imageArea + ' mb-5'}>
+                          <Image
+                            src={item.image !== null ? item.image : MainImage}
+                            alt=""
+                            width={345}
+                            height={194}
+                            layout="responsive"
+                          />
+                        </div>
+                        {/* ) : (
+                        <div className={styles.videoArea + ' mb-5'}>
+                          <div className={styles.playerWrapper}>
+                            <ReactPlayer
+                              url={item.url}
+                              width="100%"
+                              height="100%"
+                              className={styles.reactPlayer}
+                              controls={true}
+                            />
+                          </div>
+                        </div>
+                      )} */}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                ))}
+            </Carousel>
+          </div>
+        )}
       </div>
     </div>
   )

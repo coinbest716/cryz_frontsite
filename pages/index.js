@@ -17,6 +17,7 @@ import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 const Home = props => {
+  const { viewport } = props
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -98,7 +99,7 @@ const Home = props => {
 
   return (
     <div className={styles.container}>
-      <MainSection mainImage={mainImage} featuredServices={featuredServices} />
+      <MainSection mainImage={mainImage} featuredServices={featuredServices} viewport={viewport} />
       <div id="team" className={'w-full h-10'} />
       <TeamSection team={team} />
       {coTeam !== '' ? <COSection coTeam={coTeam} /> : <></>}
