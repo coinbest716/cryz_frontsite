@@ -35,6 +35,7 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false)
 
   useEffect(() => {
+    setProgressStatus(true)
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
@@ -43,7 +44,7 @@ const Login = () => {
       .catch(() => {
         setIsAuthenticated(false)
       })
-
+    setProgressStatus(false)
     if (localStorage.getItem('remember')) {
       setRememberMe(Boolean(localStorage.getItem('remember')))
       setEmail(localStorage.getItem('email') || '')
