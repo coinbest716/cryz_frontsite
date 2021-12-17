@@ -80,14 +80,7 @@
 }
 
 .mainRightArea {
-  @media (max-width: 1023px) {
-    width: 100%;
-    height: 187px;
-  }
-  @media (min-width: 1024px) {
-    width: 450px;
-    height: 100vh;
-  }
+  width: 450px;
 }
 .mainCarouselOpacityArea {
   background-color: #637a76;
