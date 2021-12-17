@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -38,11 +39,16 @@ const Header = props => {
   const [cartData, setCartData] = useState([])
   const [menus, setMenus] = useState([])
   const [showCart, setShowCart] = useState(true)
+  const [mobile, setMobile] = useState(null)
 
   // handlers
   useEffect(() => {
     getDisciplineList()
   }, [getDisciplineList])
+
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [setMobile])
 
   useEffect(() => {
     if (!disciplineListError && disciplineListData && disciplineListData.getDisciplineList) {
@@ -207,9 +213,10 @@ const Header = props => {
         </Link>
       </div>
       <div className={'flex'}>
-        <ul className={'flex flex-col sm:flex-row list-none items-center justify-end mr-24'}>
+        <ul className={'flex flex-row list-none items-center justify-end mr-24'}>
           {/* text menu part */}
-          {menus &&
+          {!mobile &&
+            menus &&
             menus.map((menu, key) => {
               return (
                 <li
@@ -357,17 +364,6 @@ const Header = props => {
                 </li>
               )
             })}
-          {/* icon menu part */}
-          {/* <li className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}>
-            {showCart && (
-              <button
-                className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
-                onMouseOver={() => handleClickShoppingCard(true)}
-              >
-                <Image src={CartIcon} alt="" width={22} height={19} />
-              </button>
-            )}
-          </li> */}
           <li
             className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}
             onClick={() => handleGotoRouter('login')}

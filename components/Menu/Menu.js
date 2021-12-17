@@ -90,7 +90,7 @@ const Menu = () => {
 
   const [activeImage, setActiveImage] = useState('')
   const [activeHover, setActiveHover] = useState(false)
-  const [mobile, setMobile] = useState()
+  const [mobile, setMobile] = useState(null)
 
   useEffect(() => {
     setMobile(isMobile)
