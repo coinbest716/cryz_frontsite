@@ -16,6 +16,7 @@ import EyeIcon from 'assets/images/eye.svg'
 
 import toast from 'react-hot-toast'
 import ReactLoading from 'react-loading'
+import * as gtag from "../../utils/gtag";
 
 const Register = () => {
   const router = useRouter()
@@ -94,6 +95,10 @@ const Register = () => {
       password: password,
     })
       .then(response => {
+        gtag.event({
+          action: 'sign_up',
+          params: {}
+        })
         console.log(response)
         setProgressStatus(false)
         setUserConfirmed(response.userConfirmed)

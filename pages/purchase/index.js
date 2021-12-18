@@ -35,6 +35,7 @@ import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
 import moment from 'moment'
+import * as gtag from "../../utils/gtag";
 
 
 const Tabs = dynamic(
@@ -220,6 +221,23 @@ const Purchase = () => {
     })
     setEmail(localStorage.getItem('email'))
     setPersonalInfo({ ...personalInfo, email: localStorage.getItem('email') })
+
+    gtag.event({
+      action: 'begin_checkout',
+      params: {
+        currency: "EUR",
+        value: shoppingInfo.price,
+        items: [
+          {
+            item_id: router.query.service_id,
+            item_name: shoppingInfo.description,
+            currency: "EUR",
+            price: shoppingInfo.price,
+            quantity: 1
+          }
+        ]
+      }
+    })
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
