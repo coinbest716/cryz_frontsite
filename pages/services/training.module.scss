@@ -35,10 +35,9 @@
   padding-top: 20px;
   padding-bottom: 8px;
 }
-.m_circularMark {
-  position: absolute;
-  right: -26px;
-  bottom: -100px;
+.m_carouselSection {
+  width: 350px;
+  padding-top: 50px;
 }
 .topDash {
   width: 42px;
@@ -69,34 +68,6 @@
   white-space: pre;
   bottom: 0%;
   left: 25%;
-}
-.m_verticalText {
-  cursor: pointer;
-  align-items: flex-end;
-  justify-content: flex-start;
-  display: flex;
-  position: relative;
-  .number {
-    color: #ffffff;
-    font-family: Montserrat;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.8px;
-    position: absolute;
-    top: 10px;
-  }
-  .typograph {
-    color: #818e8e;
-    font-family: Montserrat;
-    font-size: 24px;
-    font-weight: 500;
-    letter-spacing: 1.8px;
-    line-height: 55px;
-    padding-left: 27px;
-  }
-  .arrowIcon {
-    transform: rotate(90deg);
-  }
 }
 .verticalText:hover .number {
   color: white;
