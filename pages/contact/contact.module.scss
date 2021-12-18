@@ -10,24 +10,43 @@
 .topTitle {
   color: $blue-gray-400-color;
   font-family: 'DrukWideCyWeb-Bold';
-  font-size: 36px;
-  font-weight: bold;
   letter-spacing: 0;
   line-height: 44px;
+  @media (max-width: 576px) {
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: 300;
+  }
+  @media (min-width: 577px) {
+    font-size: 36px;
+    font-weight: bold;
+  }
 }
 .topDash {
-  width: 42px;
-  height: 7px;
   background-color: $pink-100-color;
-  margin-top: 16px;
+  @media (max-width: 576px) {
+    width: 15px;
+    height: 4px;
+  }
+  @media (min-width: 577px) {
+    margin-top: 16px;
+    width: 42px;
+    height: 7px;
+  }
 }
 .topDescription {
   color: $pink-100-color;
   font-family: 'DrukWideCyWeb-Bold';
-  font-size: 24px;
-  font-weight: bold;
   letter-spacing: 0;
   line-height: 32px;
+  @media (max-width: 576px) {
+    width: 300px;
+    font-size: 20px;
+  }
+  @media (min-width: 577px) {
+    font-size: 24px;
+    font-weight: bold;
+  }
 }
 .lowTitle {
   color: #ffffff;
@@ -40,9 +59,14 @@
 .lowDescription {
   color: #ffffff;
   font-family: Montserrat;
-  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.6px;
   line-height: 21px;
   text-align: center;
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
+  @media (min-width: 577px) {
+    font-size: 12px;
+  }
 }
