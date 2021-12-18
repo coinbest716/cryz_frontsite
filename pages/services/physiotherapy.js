@@ -13,6 +13,7 @@ import CarouselService from 'components/components/service/CarouselService'
 import ArrowButton from 'components/components/service/ArrowButton'
 import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
+import ServiceButton from 'components/components/service/ServiceButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -136,12 +137,36 @@ const Physiotherapy = () => {
                   <ReadMoreButton
                     currentState={readMoreCurrentState}
                     onClick={state => handleReadMore(state)}
-                    mobile={mobile}
+                    type={'physiotherapy'}
                   />
                 </div>
               </div>
             </div>
-            <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end'}>
+            {mobile && (
+              <div className={'col-span-12'}>
+                {personalButton && (
+                  <div className={'w-2/3 py-2'}>
+                    <ServiceButton label={'Compra Presenciales'} onClick={handleClickBuyPersion} />
+                  </div>
+                )}
+                {onlineButton && (
+                  <div className={'w-2/3 py-2'}>
+                    <ServiceButton label={'Compra planes online'} onClick={handleClickBuyPlan} />
+                  </div>
+                )}
+                {streamButton && (
+                  <div className={'w-2/3 py-2'}>
+                    <ServiceButton label={'Compra 1 to 1 en streaming'} onClick={handleClickBuyStreaming} />
+                  </div>
+                )}
+              </div>
+            )}
+            <div
+              className={
+                'col-span-12 md:col-span-7 sm:col-span-12 relative flex ' +
+                (mobile ? ' justify-center' : ' justify-end')
+              }
+            >
               {!mobile && (
                 <div className={'absolute top-10 z-10'}>
                   <CircularMark />
@@ -154,32 +179,34 @@ const Physiotherapy = () => {
           </div>
         </div>
       </div>
-      <div className={'flex justify-start'}>
-        {personalButton && (
-          <div className={'w-1/3'}>
-            <ArrowButton
-              label={'Compra person'}
-              onClick={handleClickBuyPersion}
-              type={'physiotherapy'}
-              mobile={mobile}
-            />
-          </div>
-        )}
-        {onlineButton && (
-          <div className={'w-1/3'}>
-            <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} type={'physiotherapy'} />
-          </div>
-        )}
-        {streamButton && (
-          <div className={'w-1/3'}>
-            <ArrowButton
-              label={'Compra 1 to 1 en streaming'}
-              onClick={handleClickBuyStreaming}
-              type={'physiotherapy'}
-            />
-          </div>
-        )}
-      </div>
+      {!mobile && (
+        <div className={'flex justify-start'}>
+          {personalButton && (
+            <div className={'w-1/3'}>
+              <ArrowButton
+                label={'Compra person'}
+                onClick={handleClickBuyPersion}
+                type={'physiotherapy'}
+                mobile={mobile}
+              />
+            </div>
+          )}
+          {onlineButton && (
+            <div className={'w-1/3'}>
+              <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} type={'physiotherapy'} />
+            </div>
+          )}
+          {streamButton && (
+            <div className={'w-1/3'}>
+              <ArrowButton
+                label={'Compra 1 to 1 en streaming'}
+                onClick={handleClickBuyStreaming}
+                type={'physiotherapy'}
+              />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

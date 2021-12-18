@@ -4,7 +4,7 @@ import styles from './ServiceButton.module.scss'
 import RightGrayIcon from 'public/images/arrow-right-gray.svg'
 
 const ServiceButton = props => {
-  const { label, onClick, type } = props
+  const { label, onClick } = props
 
   return (
     <div>
