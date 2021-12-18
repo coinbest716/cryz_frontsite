@@ -1,24 +1,48 @@
 @import 'styles/variable.module.scss';
 
-.container {
-  padding-top: 75px;
-  padding-bottom: 67px;
+@media (max-width: 1023px) {
+  .container {
+    padding-top: 20px;
+    padding-bottom: 33px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    padding-top: 75px;
+    padding-bottom: 67px;
+  }
 }
 
 .title {
   font-family: DrukWideCyWeb-Bold;
-  font-size: 28px;
+  @media (max-width: 1023px) {
+    font-size: 14px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 28px;
+  }
   line-height: 32px;
   letter-spacing: 0px;
   color: $blue-gray-300-color;
 }
 
-.divider {
-  width: 40px;
-  height: 4px;
-  background-color: $blue-gray-300-color;
-  margin-top: 22px;
-  margin-bottom: 37px;
+@media (max-width: 1023px) {
+  .divider {
+    width: 16px;
+    height: 4px;
+    background-color: #ebb9a7;
+    margin-top: 6px;
+    margin-bottom: 14px;
+  }
+}
+@media (min-width: 1024px) {
+  .divider {
+    width: 40px;
+    height: 4px;
+    background-color: $blue-gray-300-color;
+    margin-top: 22px;
+    margin-bottom: 37px;
+  }
 }
 
 .disciplineCard {
@@ -101,4 +125,35 @@
 .imageArea {
   object-fit: cover;
   opacity: 0.4;
+}
+
+.previousButton {
+  margin-left: calc(100% - 100px);
+  // margin-bottom: 66px;
+}
+
+.nextButton {
+  position: absolute;
+  top: 0px;
+  margin-left: calc(100% - 20px);
+  // margin-bottom: 66px;
+}
+
+.sliderTitle {
+  bottom: 68px;
+  left: 20px;
+  font-family: Montserrat;
+  font-size: 14px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  color: #3a3939;
+  z-index: 100;
+  text-align: start;
+}
+
+.sliderArrow {
+  bottom: 30px;
+  left: 20px;
+  display: flex;
+  z-index: 100;
 }
