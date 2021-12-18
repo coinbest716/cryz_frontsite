@@ -23,10 +23,10 @@ const ReadMoreButton = props => {
   ) : type === 'nutrition' ? (
     <p
       onClick={() => handleOnClick()}
-      className={styles.readMore + ' ' + (currentState === 'less' ? ' ' : styles.expand)}
+      className={styles.n_readMore + ' ' + (currentState === 'less' ? ' ' : styles.expand)}
     >
       {currentState === 'less' ? '[leer mas…]' : '[Leer menos...]'}
-      <span className={styles.bgArea} />
+      <span className={styles.n_bgArea} />
     </p>
   ) : (
     <p
