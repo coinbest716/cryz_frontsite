@@ -87,16 +87,16 @@ const Purchase = () => {
   const personalKey = [
     'name',
     'surname',
-    'meet',
-    'email',
-    'telephone',
-    'country',
-    'emergencyPhone',
-    'address',
-    'code',
-    'town',
-    'gender',
-    'birthday',
+   // 'meet',
+    //'email',
+    //'telephone',
+   // 'country',
+   // 'emergencyPhone',
+   // 'address',
+   // 'code',
+   // 'town',
+   // 'gender',
+   // 'birthday',
   ]
   const [personalInfo, setPersonalInfo] = useState({
     id: -1,
@@ -312,9 +312,9 @@ const Purchase = () => {
       setTabIndex(0)
     } else if (Number(router.query.tab) === 1) {
       setTabIndex(1)
-    } else if (Number(router.query.tab) === 2) {
+    } /*else if (Number(router.query.tab) === 2) {
       setTabIndex(2)
-    }
+    }*/
   }, [router.query])
 
   const handleRemoveCart = index => {
@@ -393,6 +393,7 @@ const Purchase = () => {
     if (router.query.service_id) {
       query = { ...query, service_id: router.query.service_id }
     }
+    handleSave()
     router.push({ pathname: '/purchase', query: query }, undefined, { shallow: true })
   }
 
@@ -603,8 +604,8 @@ const Purchase = () => {
                 >
                   <TabList className={styles.tabsList}>
                     <Tab onClick={() => onClickTab(0)}>01 INFORMACIÓN</Tab>
-                    <Tab onClick={() => onClickTab(1)}>02 DIRECCIONES FACTURACIÓN</Tab>
-                    <Tab onClick={() => onClickTab(2)}>03 MÉTODO DE PAGO</Tab>
+                    {/*<Tab onClick={() => onClickTab(1)}>02 DIRECCIONES FACTURACIÓN</Tab>*/}
+                    <Tab onClick={() => onClickTab(1)}>02 MÉTODO DE PAGO</Tab>
                   </TabList>
                   <TabPanel>
                     <div className={'p-4 pt-16'}>
@@ -699,7 +700,7 @@ const Purchase = () => {
                         </div>
                       </div> */}
                       <div className={'flex justify-between gap-8 pt-4'}>
-                        <div className={'w-3/5'}>
+                        {/*<div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'country')}
                             label={'País'}
@@ -707,7 +708,7 @@ const Purchase = () => {
                             type={'text'}
                             value={personalInfo.country}
                           />
-                        </div>
+                        </div>*/}
                         {/* <div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'emergencyPhone')}
@@ -719,7 +720,7 @@ const Purchase = () => {
                         </div>*/}
                       </div>
                       <div className={'flex justify-between gap-8 pt-4'}>
-                        <div className={'w-3/5'}>
+                        {/*<div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'address')}
                             label={'Dirección'}
@@ -727,7 +728,7 @@ const Purchase = () => {
                             type={'text'}
                             value={personalInfo.address}
                           />
-                        </div>
+                        </div>*/}
                         {/*<div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'code')}
@@ -739,7 +740,7 @@ const Purchase = () => {
                         </div>*/}
                       </div>
                       <div className={'flex justify-between gap-8 pt-4'}>
-                        <div className={'w-3/5'}>
+                        {/*<div className={'w-3/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'town')}
                             label={'Provincia'}
@@ -747,7 +748,7 @@ const Purchase = () => {
                             type={'text'}
                             value={personalInfo.town}
                           />
-                        </div>
+                        </div>*/}
                         {/*<div className={'w-2/5'}>
                           <CommonText
                             handleChange={e => handleChangeInfo(e, 'gender')}
@@ -776,66 +777,7 @@ const Purchase = () => {
                       </div>
                     </div>
                   </TabPanel>
-                  <TabPanel>
-                    <div className={'p-4 pt-16'}>
-                      <div className={styles.tabTitle}>Direcciones facturación</div>
-                      <div className={'grid grid-cols-12 gap-4 pt-8'}>
-                        {billDataList.map((item, index) => (
-                          <div className={'col-span-12 md:col-span-6 sm:col-span-12 '} key={index}>
-                            <BillingDoc
-                              handleChangeFrame={handleChangeFrame}
-                              data={item}
-                              frameType={item.id}
-                              value={frameType}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                      <div className={'pt-6 ' + styles.newAddress}>Nueva dirección</div>
-                      <div className={'grid grid-cols-12 gap-4 pt-8'}>
-                        <div className={'col-span-12 md:col-span-7 sm:col-span-12'}>
-                          {billingAddressLeftInfo.map((item, index) => (
-                            <div className={'py-2'} key={index}>
-                              <CommonText
-                                handleChange={e => handleChangeBillingAddress(e, item.value)}
-                                label={item.label}
-                                placeholder={''}
-                                type={item.type}
-                                value={billingAddress[item.value]}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-                          {billingAddressRightInfo.map((item, index) => (
-                            <div className={'py-2'} key={index}>
-                              <CommonText
-                                handleChange={e => handleChangeBillingAddress(e, item.value)}
-                                label={item.label}
-                                placeholder={''}
-                                type={item.type}
-                                value={billingAddress[item.value]}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className={'flex justify-end gap-8 pt-6'}>
-                        {/* <CommonButton label={'Borrar dirección'} handleClick={handleDeleteBilling} type={'icon'} /> */}
-                        <CommonButton label={'Aceptar cambios'} handleClick={handleSaveBilling} type={'fill'} />
-                      </div>
-                      <div className={'w-full mt-20 ' + styles.divider} />
-                      <div className={'pt-24 flex justify-between items-center'}>
-                        <div>
-                          <PreviousButton
-                            handleChangePrevious={() => handleContinue(0)}
-                            label={'Volver a Información'}
-                          />
-                        </div>
-                        <CommonButton label={'CONTINUAR'} handleClick={() => handleContinue(2)} type={'continue'} />
-                      </div>
-                    </div>
-                  </TabPanel>
+
                   <TabPanel>
                     <div className={'p-4 pt-16'}>
                       <div className={styles.tabTitle}>Método de pago</div>
