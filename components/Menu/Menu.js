@@ -149,6 +149,7 @@ const Menu = () => {
           <div className={styles.menuMobileContainer}>
             {menuList.map(menuItem => (
               <div
+                key={menuItem.label}
                 className={`mb-6 ml-1 text-white text-lg flex items-center ${
                   router.asPath === menuItem.nav && 'font-black'
                 }`}
