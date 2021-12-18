@@ -8,6 +8,7 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import FaqButton from 'components/components/FaqButton'
 import ClasslandCarousel from 'components/components/ClasslandCarousel'
+import MobileClasslandCarousel from 'components/components/MobileClasslandCarousel'
 import FilterButton from 'components/components/FilterButton'
 import ClassCard from 'components/components/ClassCard'
 import Accordian from 'components/components/Accordian'
@@ -23,16 +24,22 @@ import topImage from 'public/images/classland-top-image.svg'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { isMobile } from 'react-device-detect'
 
 const Classland = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -115,31 +122,50 @@ const Classland = () => {
 
   return (
     <div className={'flex flex-wrap justify-center'}>
-      <div className={styles.container}>
-        <div className={globalStyles.container + ' mt-20'}>
-          <div className={styles.topSection}>
-            <div className={'grid grid-cols-12 gap-4'}>
-              <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-                <div className={styles.topTitle}>{main?.title}</div>
-                <div className={styles.topDash} />
-                <div className={globalStyles.tinyMCEClass}>
-                  <div
-                    className={styles.topDescription + ' tinymce-class'}
-                    dangerouslySetInnerHTML={{ __html: main?.text }}
-                  ></div>
-                </div>
+      {mobile ? (
+        <div className={styles.m_container}>
+          <div className={globalStyles.container}>
+            <div className={styles.topSection}>
+              <div className={styles.m_topTitle}>{main?.title}</div>
+              <div className={styles.topDash} />
+            </div>
+            <div className={styles.m_topRightSection}>
+              <div className={styles.topRightLetImage}>
+                <Image src={topImage} alt="" width={200} height={231} className={styles.topImage} />
               </div>
-              <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
-                <div className={styles.topRightSection}>
-                  <div className={styles.topRightLetImage}>
-                    <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
+              <div className={'absolute bottom-3 right-2'}>
+                <FaqButton onClick={executeScroll} mobile={mobile} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.container}>
+          <div className={globalStyles.container + ' mt-20'}>
+            <div className={styles.topSection}>
+              <div className={'grid grid-cols-12 gap-4'}>
+                <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
+                  <div className={styles.topTitle}>{main?.title}</div>
+                  <div className={styles.topDash} />
+                  <div className={globalStyles.tinyMCEClass}>
+                    <div
+                      className={styles.topDescription + ' tinymce-class'}
+                      dangerouslySetInnerHTML={{ __html: main?.text }}
+                    ></div>
                   </div>
-                  <div>
-                    <div className={'z-10'}>
-                      <CircularMark />
+                </div>
+                <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
+                  <div className={styles.topRightSection}>
+                    <div className={styles.topRightLetImage}>
+                      <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
                     </div>
-                    <div className={'mt-6'}>
-                      <FaqButton onClick={executeScroll} />
+                    <div>
+                      <div className={'z-10'}>
+                        <CircularMark />
+                      </div>
+                      <div className={'mt-6'}>
+                        <FaqButton onClick={executeScroll} />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -147,12 +173,19 @@ const Classland = () => {
             </div>
           </div>
         </div>
-      </div>
+      )}
       <div className={'w-full ' + globalStyles.container}>
-        <div className={styles.middleSection}>
-          <div className={styles.fullPass}>Full Pass</div>
-          {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} /> : <></>}
-        </div>
+        {mobile ? (
+          <div className={styles.middleSection}>
+            <div className={styles.m_fullPass}>Full Pass</div>
+            {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} /> : <></>}
+          </div>
+        ) : (
+          <div className={styles.middleSection}>
+            <div className={styles.fullPass}>Full Pass</div>
+            {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} /> : <></>}
+          </div>
+        )}
         <div className={styles.buttonGroup}>
           {filter.map((item, index) => (
             <div className={'mr-3'} key={index}>
