@@ -9,7 +9,8 @@ import { useRouter } from 'next/router'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
-import CircularMark from 'components/components/CircularMark'
+import ServiceButton from 'components/components/service/ServiceButton'
+import CarouselService from 'components/components/service/CarouselService'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -49,6 +50,7 @@ const Training = () => {
   const [description, setDescription] = useState('')
 
   const forwardGrayIcon = '/images/arrow-right-gray.svg'
+  const [sliderData, setSliderData] = useState([])
   const [imageOne, setImageOne] = useState('')
   const [imageTwo, setImageTwo] = useState('')
   const [imageThree, setImageThree] = useState('')
@@ -66,11 +68,22 @@ const Training = () => {
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
+      let _sliderData = [...sliderData]
       setTitle(cmsSubjectData.getCmsServiceSubject.title_two)
       setDescription(cmsSubjectData.getCmsServiceSubject.text)
       setImageOne(cmsSubjectData.getCmsServiceSubject.personal_image[0]?.path)
       setImageTwo(cmsSubjectData.getCmsServiceSubject.online_image[0]?.path)
       setImageThree(cmsSubjectData.getCmsServiceSubject.stream_image[0]?.path)
+      if (cmsSubjectData.getCmsServiceSubject.personal_image[0]?.path) {
+        _sliderData = [..._sliderData, { path: cmsSubjectData.getCmsServiceSubject.personal_image[0]?.path }]
+      }
+      if (cmsSubjectData.getCmsServiceSubject.online_image[0]?.path) {
+        _sliderData = [..._sliderData, { path: cmsSubjectData.getCmsServiceSubject.online_image[0]?.path }]
+      }
+      if (cmsSubjectData.getCmsServiceSubject.stream_image[0]?.path) {
+        _sliderData = [..._sliderData, { path: cmsSubjectData.getCmsServiceSubject.stream_image[0]?.path }]
+      }
+      setSliderData(_sliderData)
     }
   }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
 
@@ -149,17 +162,26 @@ const Training = () => {
               </div>
             </div>
             {mobile ? (
-              <div className="flex flex-wrap w-full col-span-12 ">
-                <div className="w-1/2 pr-1">
-                  <img src={imageOne} alt="" style={{ width: '100%', height: '150px', opacity: 0.4 }} />
+              <div className={'col-span-12 '}>
+                <div className={'w-2/3 py-2'}>
+                  <ServiceButton label={'Compra Presenciales'} onClick={() => handleClick('type1')} type={'training'} />
                 </div>
-                <div className="w-1/2 pl-1">
-                  <img src={imageTwo} alt="" style={{ width: '100%', height: '150px', opacity: 0.4 }} />
+                <div className={'w-2/3 py-2'}>
+                  <ServiceButton
+                    label={'Compra Planes online'}
+                    onClick={() => handleClick('type2')}
+                    type={'training'}
+                  />
                 </div>
-                <div className="relative w-full">
-                  <div className={'z-10 coursor-pointer ' + styles.m_circularMark}>
-                    <CircularMark mobile={mobile} />
-                  </div>
+                <div className={'w-2/3 py-2'}>
+                  <ServiceButton
+                    label={'Compra 1 to 1 streaming'}
+                    onClick={() => handleClick('type3')}
+                    type={'training'}
+                  />
+                </div>
+                <div className={styles.m_carouselSection}>
+                  <CarouselService sliderData={sliderData} mobile={mobile} />
                 </div>
               </div>
             ) : (
@@ -167,44 +189,7 @@ const Training = () => {
             )}
             <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative'}>
               {mobile ? (
-                <div className={'h-full'}>
-                  <div className={'py-2 ' + styles.activeSection}>
-                    <div className={styles.m_verticalText} onClick={() => handleClick('type1')}>
-                      <span className={styles.number}>01&nbsp;&nbsp;</span>
-                      <span className={styles.typograph}>Personal&nbsp;</span>
-                      <img
-                        src={forwardGrayIcon}
-                        alt=""
-                        className={styles.arrowIcon}
-                        style={{ width: '20px', height: '20px', minWidth: '20px' }}
-                      />
-                    </div>
-                  </div>
-                  <div className={'py-2 ' + styles.activeSection}>
-                    <div className={styles.m_verticalText} onClick={() => handleClick('type2')}>
-                      <span className={styles.number}>02&nbsp;&nbsp;</span>
-                      <span className={styles.typograph}>Planes online&nbsp;</span>
-                      <img
-                        src={forwardGrayIcon}
-                        alt=""
-                        className={styles.arrowIcon}
-                        style={{ width: '20px', height: '20px', minWidth: '20px' }}
-                      />
-                    </div>
-                  </div>
-                  <div className={'py-2 ' + styles.activeSection}>
-                    <div className={styles.m_verticalText} onClick={() => handleClick('type3')}>
-                      <span className={styles.number}>03&nbsp;&nbsp;</span>
-                      <span className={styles.typograph}>1 to 1 en streaming&nbsp;</span>
-                      <img
-                        src={forwardGrayIcon}
-                        alt=""
-                        className={styles.arrowIcon}
-                        style={{ width: '20px', height: '20px', minWidth: '20px' }}
-                      />
-                    </div>
-                  </div>
-                </div>
+                <div></div>
               ) : (
                 <div className={'flex h-full'}>
                   <div className={'w-1/3 px-12 '}>
