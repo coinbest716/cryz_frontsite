@@ -42,7 +42,7 @@
   margin: 0;
   padding: 30px 0 0 0;
   width: 100%;
-  background-image: linear-gradient(to bottom, transparent, #d5d7ce);
+  background-image: linear-gradient(to bottom, transparent, #e4e5de);
   z-index: 1;
 }
 .p_bgArea {
@@ -51,10 +51,36 @@
   left: 0;
   right: 0;
   height: 28px;
-  background-color: #d5d7ce;
+  background-color: #e4e5de;
   z-index: -1;
 }
+.n_readMore {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.62px;
+  color: #56181c;
+  cursor: pointer;
 
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 30px 0 0 0;
+  width: 100%;
+  background-image: linear-gradient(to bottom, transparent, #f2e9dd);
+  z-index: 1;
+}
+.n_bgArea {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background-color: #f2e9dd;
+  z-index: -1;
+}
 .expand {
   background-image: none;
 }
