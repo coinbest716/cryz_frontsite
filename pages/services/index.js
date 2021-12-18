@@ -184,11 +184,6 @@ const Services = () => {
                     <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
                   </div>
                 </div>
-                <div className="relative coursor-pointer w-1/2">
-                  <div className={'z-10 ' + styles.m_circularMark}>
-                    <CircularMark mobile={mobile} />
-                  </div>
-                </div>
               </div>
             </div>
           ) : (

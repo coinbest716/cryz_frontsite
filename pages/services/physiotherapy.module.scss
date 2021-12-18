@@ -5,6 +5,12 @@
   background: linear-gradient(90deg, #ffffff 68%, #d5d7ce 32%);
   overflow: hidden;
 }
+.m_container {
+  padding: 16px;
+  padding-top: 80px;
+  background: linear-gradient(90deg, #ffffff 68%, #d5d7ce 32%);
+  overflow: hidden;
+}
 .topTitle {
   font-family: DrukWideCyWeb-Bold;
   font-size: 35px;
@@ -13,6 +19,17 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-grid;
+}
+.m_topTitle {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 25px;
+  letter-spacing: 0px;
+  background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-grid;
+  padding-top: 20px;
+  padding-bottom: 8px;
 }
 .topDash {
   width: 42px;
@@ -35,6 +52,10 @@
 .carouselSection {
   width: 500px;
   padding-top: 100px;
+}
+.m_carouselSection {
+  width: 350px;
+  padding-top: 50px;
 }
 .text {
   font-family: Montserrat;

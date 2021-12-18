@@ -20,16 +20,22 @@ import styles from './physiotherapy.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { isMobile } from 'react-device-detect'
 
 const Physiotherapy = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -111,16 +117,16 @@ const Physiotherapy = () => {
 
   return (
     <div className={styles.container}>
-      <div className={'flex flex-wrap justify-center pb-20'}>
+      <div className={'flex flex-wrap justify-center p-4 ' + (mobile ? ' pb-5' : ' pb-20')}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
             <BackButton />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={'pt-10 pb-2 ' + styles.topTitle}>{title}</div>
+              <div className={mobile ? styles.m_topTitle : styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
-              <div className={styles.topDescription + ' mt-10 pb-20'}>
+              <div className={styles.topDescription + (mobile ? ' mt-5' : ' mt-10 pb-20')}>
                 <div
                   className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}
                 >
@@ -131,12 +137,23 @@ const Physiotherapy = () => {
                 </div>
               </div>
             </div>
-            <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end'}>
-              <div className={'absolute top-10 z-10'}>
-                <CircularMark />
-              </div>
-              <div className={styles.carouselSection}>
-                <CarouselService sliderData={sliderData} />
+            <div
+              className={
+                'col-span-12 md:col-span-7 sm:col-span-12 relative flex ' +
+                (mobile ? ' justify-center' : ' justify-end')
+              }
+            >
+              {mobile ? (
+                <div className={'z-10 coursor-pointer absolute -right-11'}>
+                  <CircularMark mobile={mobile} />
+                </div>
+              ) : (
+                <div className={'absolute top-10 z-10'}>
+                  <CircularMark />
+                </div>
+              )}
+              <div className={mobile ? styles.m_carouselSection : styles.carouselSection}>
+                <CarouselService sliderData={sliderData} mobile={mobile} />
               </div>
             </div>
           </div>
@@ -145,7 +162,12 @@ const Physiotherapy = () => {
       <div className={'flex justify-start'}>
         {personalButton && (
           <div className={'w-1/3'}>
-            <ArrowButton label={'Compra person'} onClick={handleClickBuyPersion} type={'physiotherapy'} />
+            <ArrowButton
+              label={'Compra person'}
+              onClick={handleClickBuyPersion}
+              type={'physiotherapy'}
+              mobile={mobile}
+            />
           </div>
         )}
         {onlineButton && (
