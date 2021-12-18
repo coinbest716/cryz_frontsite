@@ -36,6 +36,7 @@ import graphql from 'crysdiazGraphql'
 import { Auth } from 'aws-amplify'
 import moment from 'moment'
 
+
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
   { ssr: false }

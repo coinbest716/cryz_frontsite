@@ -22,6 +22,8 @@ import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import ShoppingCart from '../../components/components/purchase/ShoppingCart'
 
+import * as gtag from '../../utils/gtag'
+
 const CreditSuccess = () => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -45,6 +47,7 @@ const CreditSuccess = () => {
   const [orderInfo, setOrderInfo] = useState(null)
   useEffect(() => {
     if (router.query.payment_intent || router.query.subscription_intent || router.query.purchase_id) {
+
       checkoutVerify({
         variables: {
           intentId: decodeURIComponent(JSON.parse(`"${router.query.payment_intent}"`)),
@@ -59,7 +62,28 @@ const CreditSuccess = () => {
   useEffect(() => {
     if (!orderError && orderData && orderData.checkoutVerify) {
       const data = orderData.checkoutVerify
-      console.log(data)
+      gtag.event({
+        action: 'purchase',
+        params: {
+          "transaction_id": data.id,
+          "affiliation": "Crys Dyaz & Co",
+          "value": data.price,
+          "currency": "EUR",
+          "tax": (parseFloat(data.item_iva)) / 100.0 + 1,
+          "shipping": 0,
+          "items": [
+            {
+              "id": data.item_id,
+              "name": data.item_name,
+              "list_name": data.item_web_name,
+              "brand": "Crys Dyaz & Co",
+              "category": "Services",
+              "quantity": 1,
+              "price": data.price
+            },
+          ]
+        }
+      })
       setOrderInfo(data)
     }
   }, [orderLoading, orderData, orderError])

@@ -18,6 +18,7 @@ import styles from 'pages/buy/index.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import { Auth } from 'aws-amplify'
+import * as gtag from "../../utils/gtag";
 
 const BuyPerson = () => {
   // loading part ###########################
@@ -65,6 +66,27 @@ const BuyPerson = () => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubjectByType) {
       setDescription(cmsSubjectData.getCmsServiceSubjectByType.bono_text || '')
       setSessionData(cmsSubjectData.getCmsServiceSubjectByType.services || [])
+
+      const servicesViewed = []
+
+      for (let service of cmsSubjectData.getCmsServiceSubjectByType.services) {
+        servicesViewed.push({
+          "id": service.id,
+          "name": service.name,
+          "list_name": service.web_name,
+          "brand": "Crys Dyaz & Co",
+          "quantity": 1,
+          "price": service.price
+        })
+      }
+
+      gtag.event({
+        action: 'view_item_list',
+        params: {
+          "items": servicesViewed
+        }
+      })
+
     }
   }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
 
@@ -80,6 +102,23 @@ const BuyPerson = () => {
   }, [femHealthServiceSubjectLoading, femHealthServiceSubjectData, femHealthServiceSubjectError])
 
   const handleClickBuy = (service_id, description, price) => {
+
+    gtag.event({
+      action: 'select_content',
+      params: {
+        "content_type": "product",
+        "items": [
+          {
+            "id": service_id,
+            "name": description,
+            "brand": "Crys Dyaz & Co",
+            "quantity": 1,
+            "price": price
+          }
+        ]
+      }
+    })
+
     Auth.currentAuthenticatedUser()
       .then(() => {
         router.push({
