@@ -48,7 +48,7 @@ const CreditSuccess = () => {
       checkoutVerify({
         variables: {
           intentId: decodeURIComponent(JSON.parse(`"${router.query.payment_intent}"`)),
-          subscriptionId: decodeURIComponent(JSON.parse(`"${router.query.subscription_intent}"`)),
+          subscriptionId: decodeURIComponent(JSON.parse(`"${router.query.subscription_id}"`)),
           purchaseId: decodeURIComponent(JSON.parse(`"${router.query.purchase_id}"`)),
         },
       })
