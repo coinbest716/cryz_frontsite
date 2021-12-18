@@ -116,7 +116,7 @@ const Physiotherapy = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={mobile ? styles.m_container : styles.container}>
       <div className={'flex flex-wrap justify-center p-4 ' + (mobile ? ' pb-5' : ' pb-20')}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
@@ -133,7 +133,11 @@ const Physiotherapy = () => {
                   <div className={globalStyles.tinyMCEClass}>
                     <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: description }}></div>
                   </div>
-                  <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+                  <ReadMoreButton
+                    currentState={readMoreCurrentState}
+                    onClick={state => handleReadMore(state)}
+                    mobile={mobile}
+                  />
                 </div>
               </div>
             </div>
