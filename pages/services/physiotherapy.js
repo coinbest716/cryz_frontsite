@@ -137,17 +137,8 @@ const Physiotherapy = () => {
                 </div>
               </div>
             </div>
-            <div
-              className={
-                'col-span-12 md:col-span-7 sm:col-span-12 relative flex ' +
-                (mobile ? ' justify-center' : ' justify-end')
-              }
-            >
-              {mobile ? (
-                <div className={'z-10 coursor-pointer absolute -right-11'}>
-                  <CircularMark mobile={mobile} />
-                </div>
-              ) : (
+            <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end'}>
+              {!mobile && (
                 <div className={'absolute top-10 z-10'}>
                   <CircularMark />
                 </div>
