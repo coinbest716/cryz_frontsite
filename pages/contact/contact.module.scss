@@ -38,14 +38,15 @@
   color: $pink-100-color;
   font-family: 'DrukWideCyWeb-Bold';
   letter-spacing: 0;
-  line-height: 32px;
   @media (max-width: 576px) {
     width: 300px;
     font-size: 20px;
+    line-height: 28px;
   }
   @media (min-width: 577px) {
     font-size: 24px;
     font-weight: bold;
+    line-height: 32px;
   }
 }
 .lowTitle {

@@ -94,7 +94,7 @@ const Contact = () => {
     <div className={'flex flex-wrap justify-center pt-20'}>
       <div className={globalStyles.container}>
         <div className={'flex justify-between' + (mobile ? ' pt-4' : ' pt-24')}>
-          <div>
+          <div className={'px-4'}>
             <div className={styles.topTitle}>Contacto</div>
             <div className={styles.topDash} />
             <div className={styles.topDescription + (mobile ? ' pt-4' : ' pt-9')}>
