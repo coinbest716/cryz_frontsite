@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
+import CircularMark from 'components/components/CircularMark'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -16,16 +17,22 @@ import styles from './training.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { isMobile } from 'react-device-detect'
 
 const Training = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -119,84 +126,143 @@ const Training = () => {
   }
 
   return (
-    <div className={'z-10 ' + styles.container} onMouseMove={handleMouseMover}>
-      <div className={'z-0 ' + styles.circleImageCover} id="shark">
-        <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
-      </div>
-      <div className={'flex flex-wrap justify-center pb-20'}>
+    <div className={'z-10 ' + (mobile ? styles.m_container : styles.container)} onMouseMove={handleMouseMover}>
+      {!mobile && (
+        <div className={'z-0 ' + styles.circleImageCover} id="shark">
+          <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
+        </div>
+      )}
+      <div className={'flex flex-wrap justify-center ' + (mobile ? ' pb-4' : ' pb-20')}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
             <BackButton />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-              <div className={'pt-10 pb-2 ' + styles.topTitle}>{title}</div>
+              <div className={mobile ? styles.m_topTitle : styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
               <div className={globalStyles.tinyMCEClass}>
                 <div
-                  className={styles.topDescription + ' mt-10 pb-20 tinymce-class'}
+                  className={styles.topDescription + ' tinymce-class' + (mobile ? ' mt-5' : ' mt-10 pb-20')}
                   dangerouslySetInnerHTML={{ __html: description }}
                 ></div>
               </div>
             </div>
-            <div className={'col-span-12 md:col-span-1 sm:col-span-12'} />
+            {mobile ? (
+              <div className="flex flex-wrap w-full col-span-12 ">
+                <div className="w-1/2 pr-1">
+                  <img src={imageOne} alt="" style={{ width: '100%', height: '150px', opacity: 0.4 }} />
+                </div>
+                <div className="w-1/2 pl-1">
+                  <img src={imageTwo} alt="" style={{ width: '100%', height: '150px', opacity: 0.4 }} />
+                </div>
+                <div className="relative w-full">
+                  <div className={'z-10 coursor-pointer ' + styles.m_circularMark}>
+                    <CircularMark mobile={mobile} />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className={'col-span-12 md:col-span-1 sm:col-span-12'} />
+            )}
             <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative'}>
-              <div className={'flex h-full'}>
-                <div className={'w-1/3 px-12 '}>
-                  <div
-                    className={'h-full relative ' + styles.activeSection}
-                    onMouseOver={() => handleMouseOver('type1')}
-                    onMouseLeave={() => handleMouseLeave('type1')}
-                  >
-                    <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type1')}>
+              {mobile ? (
+                <div className={'h-full'}>
+                  <div className={'py-2 ' + styles.activeSection}>
+                    <div className={styles.m_verticalText} onClick={() => handleClick('type1')}>
                       <span className={styles.number}>01&nbsp;&nbsp;</span>
                       <span className={styles.typograph}>Personal&nbsp;</span>
                       <img
                         src={forwardGrayIcon}
                         alt=""
                         className={styles.arrowIcon}
-                        style={{ width: '35px', height: '28px', minWidth: '35px' }}
+                        style={{ width: '20px', height: '20px', minWidth: '20px' }}
                       />
                     </div>
                   </div>
-                </div>
-                <div className={'w-1/3 px-12'}>
-                  <div
-                    className={'h-full relative ' + styles.activeSection}
-                    onMouseOver={() => handleMouseOver('type2')}
-                    onMouseLeave={() => handleMouseLeave('type2')}
-                  >
-                    <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type2')}>
+                  <div className={'py-2 ' + styles.activeSection}>
+                    <div className={styles.m_verticalText} onClick={() => handleClick('type2')}>
                       <span className={styles.number}>02&nbsp;&nbsp;</span>
                       <span className={styles.typograph}>Planes online&nbsp;</span>
                       <img
                         src={forwardGrayIcon}
                         alt=""
                         className={styles.arrowIcon}
-                        style={{ width: '35px', height: '28px', minWidth: '35px' }}
+                        style={{ width: '20px', height: '20px', minWidth: '20px' }}
                       />
                     </div>
                   </div>
-                </div>
-                <div className={'w-1/3 px-12'}>
-                  <div
-                    className={'h-full relative ' + styles.activeSection}
-                    onMouseOver={() => handleMouseOver('type3')}
-                    onMouseLeave={() => handleMouseLeave('type3')}
-                  >
-                    <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type3')}>
+                  <div className={'py-2 ' + styles.activeSection}>
+                    <div className={styles.m_verticalText} onClick={() => handleClick('type3')}>
                       <span className={styles.number}>03&nbsp;&nbsp;</span>
                       <span className={styles.typograph}>1 to 1 en streaming&nbsp;</span>
                       <img
                         src={forwardGrayIcon}
                         alt=""
                         className={styles.arrowIcon}
-                        style={{ width: '35px', height: '28px', minWidth: '35px' }}
+                        style={{ width: '20px', height: '20px', minWidth: '20px' }}
                       />
                     </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className={'flex h-full'}>
+                  <div className={'w-1/3 px-12 '}>
+                    <div
+                      className={'h-full relative ' + styles.activeSection}
+                      onMouseOver={() => handleMouseOver('type1')}
+                      onMouseLeave={() => handleMouseLeave('type1')}
+                    >
+                      <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type1')}>
+                        <span className={styles.number}>01&nbsp;&nbsp;</span>
+                        <span className={styles.typograph}>Personal&nbsp;</span>
+                        <img
+                          src={forwardGrayIcon}
+                          alt=""
+                          className={styles.arrowIcon}
+                          style={{ width: '35px', height: '28px', minWidth: '35px' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={'w-1/3 px-12'}>
+                    <div
+                      className={'h-full relative ' + styles.activeSection}
+                      onMouseOver={() => handleMouseOver('type2')}
+                      onMouseLeave={() => handleMouseLeave('type2')}
+                    >
+                      <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type2')}>
+                        <span className={styles.number}>02&nbsp;&nbsp;</span>
+                        <span className={styles.typograph}>Planes online&nbsp;</span>
+                        <img
+                          src={forwardGrayIcon}
+                          alt=""
+                          className={styles.arrowIcon}
+                          style={{ width: '35px', height: '28px', minWidth: '35px' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={'w-1/3 px-12'}>
+                    <div
+                      className={'h-full relative ' + styles.activeSection}
+                      onMouseOver={() => handleMouseOver('type3')}
+                      onMouseLeave={() => handleMouseLeave('type3')}
+                    >
+                      <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type3')}>
+                        <span className={styles.number}>03&nbsp;&nbsp;</span>
+                        <span className={styles.typograph}>1 to 1 en streaming&nbsp;</span>
+                        <img
+                          src={forwardGrayIcon}
+                          alt=""
+                          className={styles.arrowIcon}
+                          style={{ width: '35px', height: '28px', minWidth: '35px' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

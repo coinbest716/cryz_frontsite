@@ -32,9 +32,12 @@ const Services = () => {
   const [mobile, setIsMobile] = useState(null)
   useEffect(() => {
     setIsMounted(true)
-    setIsMobile(isMobile)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
