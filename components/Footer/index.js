@@ -42,24 +42,20 @@ const Footer = () => {
       </div>
       <div className={'w-full flex flex-wrap justify-center items-center'}>
         <div className={globalStyles.container + ' pt-7'}>
-          <div className={'w-full flex justify-between items-center'}>
-            <div className={styles.text}>
+          <div className={'w-full flex flex-wrap justify-between items-center ' + styles.text}>
+            <div className={'flex flex-wrap justify-between'} style={{ width: '500px' }}>
               <Link href={'/docs/terms'} passHref>
                 <p>Terminos y Condiciones</p>
               </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
               <Link href={'/docs/privacy-policy'} passHref>
                 <p>Politica Privacidad</p>
               </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
               <Link href={'/docs/legal'} passHref>
                 <p>Legal</p>
               </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
               <Link href={'/docs/cookies'} passHref>
                 <p>Cookies</p>
               </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
               <Link href={'/docs/sale'} passHref>
                 <p>Venta</p>
               </Link>

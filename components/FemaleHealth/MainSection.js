@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
-import { Carousel } from 'react-responsive-carousel'
 
 // next components
+import Image from 'next/image'
 import { useRouter } from 'next/router'
+
+// third party components
+import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
+import { Carousel } from 'react-responsive-carousel'
+import { isMobile } from 'react-device-detect'
 
 // custom component
 import CircularMark from 'components/components/CircularMark'
@@ -17,8 +20,21 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/FemaleHealth/MainSection.module.scss'
 
 const MainSection = props => {
+  // variables
   const { data } = props
   const router = useRouter()
+  const [mobile, setMobile] = useState(false)
+  const [carouselData, setCarouselData] = useState([])
+
+  // handlers
+  useEffect(() => {
+    if (data.images.length !== 0) {
+      setCarouselData(data.images)
+    }
+  }, [data])
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [isMobile])
 
   const handleGotoDiscipline = () => {
     const sectionPosition = document.getElementById('discipline').offsetTop
@@ -30,7 +46,7 @@ const MainSection = props => {
       router.push('/female-health#discipline')
     }, 500)
   }
-  return (
+  return !mobile ? (
     <div className={'w-full p-0'}>
       <div className={'relative w-full p-0 m-0 h-screen flex flex-wrap justify-center ' + styles.container}>
         {/* carousel part */}
@@ -39,7 +55,7 @@ const MainSection = props => {
           <div className={'col-span-7 flex ml-0 md:ml-11'}>
             <div className={'col-span-7 flex justify-center items-center'}>
               <div>
-                {data.images.length !== 0 ? (
+                {carouselData.length !== 0 ? (
                   <Carousel
                     showArrows={false}
                     showThumbs={false}
@@ -52,7 +68,7 @@ const MainSection = props => {
                     centerSlidePercentage={33}
                     interval={3000}
                   >
-                    {data.images.map((item, index) => (
+                    {carouselData.map((item, index) => (
                       <div key={index} className={'mx-1.5'}>
                         <Image src={item.path} alt="" width={283} height={544} className={styles.slideImage} />
                       </div>
@@ -97,6 +113,25 @@ const MainSection = props => {
           >
             <div className={styles.continueBrowsing}>Seguir navegando</div>
             <Image src={StarGroup} alt="" width={29} height={64} />
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className={'w-full p-0'}>
+      <div className={'w-full p-0 pb-8 m-0 flex flex-wrap justify-center ' + styles.container}>
+        <div className={globalStyles.container}>
+          <div className={'inline-grid'}>
+            <p className={styles.title}>{data.title_one}</p>
+            <p className={styles.title}>{data.title_two}</p>
+          </div>
+          <div className={'w-full flex items-end '}>
+            <div className={styles.divider} />
+            <div className={'ml-4 mr-2 ' + styles.byText}>by</div>
+            <div className={styles.subTitle}>{data.sub_title}</div>
+          </div>
+          <div className={globalStyles.tinyMCEClass}>
+            <div className={styles.text + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: data.text }} />
           </div>
         </div>
       </div>

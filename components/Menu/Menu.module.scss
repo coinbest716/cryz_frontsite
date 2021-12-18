@@ -62,6 +62,33 @@
   justify-content: center;
 }
 
+.menuMobileOpen {
+  width: 100vw;
+  height: 100vh;
+  background-color: $blue-gray-400-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  animation-name: menuOpen;
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation-direction: alternate;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.menuMobileContainer {
+  margin: 128px 40px;
+}
+
+.menuNumber {
+  font-size: 8px;
+  font-weight: bold;
+  padding-right: 16px;
+}
+
 .menuClose {
   width: 100vw;
   height: 100vh;

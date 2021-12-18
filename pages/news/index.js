@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -20,6 +21,11 @@ const News = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setMobile] = useState(null)
+
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [setMobile])
 
   useEffect(() => {
     setIsMounted(true)
@@ -41,12 +47,15 @@ const News = () => {
             <div className={'h-1/3 flex items-center'}>
               <div>
                 <div className={styles.topTitle}>PRÓXIMAMENTE…</div>
-                <div className={styles.topDash + ' mt-4'} />
+                <div className={styles.topDash + (mobile ? ' mt-2' : ' mt-4')} />
               </div>
             </div>
             <div className={'h-1/3 flex items-center justify-center'}>
               <div>
-                <Image src={news} alt="" />
+                <div className={'flex justify-center'}>
+                  <Image src={news} width={mobile ? 273 : 400} height={mobile ? 52 : 93} alt="" />
+                </div>
+
                 <div className={styles.description}>
                   Un espacio exclusivo dónde puedes consultar todas las novedades y últimas publicaciones de CrysDyaz&Co
                 </div>
