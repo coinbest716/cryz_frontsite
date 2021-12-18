@@ -25,16 +25,31 @@
   color: $blue-gray-400-color;
 }
 
-.previousButton {
-  position: absolute;
-  margin-left: calc(100% - 100px);
-  top: 0px;
-}
+@media (max-width: 1023px) {
+  .previousButton {
+    position: absolute;
+    bottom: 0px;
+    margin-left: calc(100% - 100px);
+  }
 
-.nextButton {
-  position: absolute;
-  top: 0px;
-  margin-left: calc(100% - 20px);
+  .nextButton {
+    position: absolute;
+    bottom: 0px;
+    margin-left: calc(100% - 20px);
+  }
+}
+@media (min-width: 1024px) {
+  .previousButton {
+    position: absolute;
+    top: 0px;
+    margin-left: calc(100% - 100px);
+  }
+
+  .nextButton {
+    position: absolute;
+    top: 0px;
+    margin-left: calc(100% - 20px);
+  }
 }
 
 .imageArea {

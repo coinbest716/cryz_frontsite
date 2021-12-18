@@ -9,9 +9,16 @@
 }
 
 .divider {
-  width: 42px;
-  height: 8px;
-  margin-top: 24px;
+  @media (max-width: 1023px) {
+    width: 16px;
+    height: 7px;
+    margin-top: 14px;
+  }
+  @media (min-width: 1024px) {
+    width: 42px;
+    height: 8px;
+    margin-top: 24px;
+  }
   background-color: $pink-100-color;
 }
 
@@ -104,16 +111,25 @@
 }
 
 .name {
+  flex: 1;
   font-family: 'Montserrat';
-  font-size: 18px;
   font-weight: 700;
-  line-height: 22px;
   letter-spacing: 0.9px;
   color: $blue-gray-400-color;
   display: block;
   text-align: start;
-  margin-left: 25px;
-  margin-top: 20px;
+  @media (max-width: 1023px) {
+    font-size: 12px;
+    line-height: 13px;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 18px;
+    line-height: 22px;
+    margin-left: 25px;
+    margin-top: 20px;
+  }
 }
 
 .name .specialty {

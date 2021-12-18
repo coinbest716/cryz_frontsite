@@ -84,7 +84,7 @@ const TeamSection = props => {
           <></>
         )}
       </div>
-      <div className={'w-full flex mt-20 mb-11'}>
+      <div className={'w-full flex lg:mt-20 mb-11'}>
         <div className={'hidden lg:block lg:w-1/2 flex justify-center items-center'}>
           <Image src={team.avatar !== null ? team.avatar : TeamMember01} alt="" width={355} height={368} />
         </div>
