@@ -16,7 +16,7 @@ import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
 import styles from './CarouselFemaleHealth.module.scss'
 
 const CarouselFemaleHealth = props => {
-  const { sliderData } = props
+  const { sliderData, mobile } = props
 
   const [data, setData] = useState([])
 
@@ -31,60 +31,62 @@ const CarouselFemaleHealth = props => {
 
   return (
     <div className={'relative w-full h-full'}>
-      <div className={'absolute top-0 left-0 w-full femaleCarousel'}>
-        <div className={'absolute top-0 left-0 bottom-0 h-full w-1/12 z-10 bg-white'}></div>
-        {data.length !== 0 ? (
-          <Carousel
-            showArrows={true}
-            showThumbs={false}
-            autoPlay={true}
-            stopOnHover={true}
-            showStatus={false}
-            showIndicators={true}
-            infiniteLoop={true}
-            centerMode={true}
-            centerSlidePercentage={84}
-            interval={2500}
-            renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
-              hasPrev ? (
-                <button onClick={clickHandler} className={styles.previousButton}>
-                  <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
-                </button>
-              ) : (
-                <button onClick={clickHandler} className={styles.previousButton}>
-                  <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
-                </button>
-              )
-            }
-            renderArrowNext={(clickHandler, hasNext, labelNext) =>
-              hasNext ? (
-                <button onClick={clickHandler} className={styles.nextButton}>
-                  <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
-                </button>
-              ) : (
-                <button onClick={clickHandler} className={styles.nextButton}>
-                  <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
-                </button>
-              )
-            }
-          >
-            {data.map((item, index) => (
-              <div key={index} className={'pb-12 px-5'}>
-                <Image
-                  src={item.path}
-                  alt=""
-                  width={379}
-                  height={index % 2 === 0 ? 379 : 474}
-                  layout="responsive"
-                  objectFit="cover"
-                  className={index % 2 === 0 ? styles.circleImage : ''}
-                />
-              </div>
-            ))}
-          </Carousel>
-        ) : (
-          <></>
-        )}
+      <div className={'w-full h-full femaleCarousel flex'}>
+        {mobile ? <></> : <div className={'absolute top-0 left-0 h-full w-1/12 z-10 bg-white'}></div>}
+        <div className="w-full ">
+          {data.length !== 0 ? (
+            <Carousel
+              showArrows={true}
+              showThumbs={false}
+              autoPlay={true}
+              stopOnHover={true}
+              showStatus={false}
+              showIndicators={true}
+              infiniteLoop={true}
+              centerMode={true}
+              centerSlidePercentage={mobile ? 100 : 84}
+              interval={2500}
+              renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
+                hasPrev ? (
+                  <button onClick={clickHandler} className={styles.previousButton}>
+                    <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
+                  </button>
+                ) : (
+                  <button onClick={clickHandler} className={styles.previousButton}>
+                    <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
+                  </button>
+                )
+              }
+              renderArrowNext={(clickHandler, hasNext, labelNext) =>
+                hasNext ? (
+                  <button onClick={clickHandler} className={styles.nextButton}>
+                    <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
+                  </button>
+                ) : (
+                  <button onClick={clickHandler} className={styles.nextButton}>
+                    <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
+                  </button>
+                )
+              }
+            >
+              {data.map((item, index) => (
+                <div key={index} className={'pb-12 px-5 h-full'}>
+                  <Image
+                    src={item.path}
+                    alt=""
+                    width={379}
+                    height={index % 2 === 0 ? 379 : 474}
+                    layout="responsive"
+                    objectFit="cover"
+                    className={index % 2 === 0 ? styles.circleImage : ''}
+                  />
+                </div>
+              ))}
+            </Carousel>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   )
