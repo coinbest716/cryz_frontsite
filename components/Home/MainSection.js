@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // next components
 import Image from 'next/image'
@@ -12,6 +12,7 @@ import { isMobile } from 'react-device-detect'
 
 // images
 import MainImage from 'assets/images/main.png'
+import MainMobileImage from 'assets/images/main-mobile.png'
 import ArrowLeftWhite from 'assets/images/arrow-left-white.svg'
 
 // styles
@@ -20,12 +21,18 @@ import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
   const { mainImage, featuredServices } = props
+
+  const [mobile, setMobile] = useState(false)
+
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [isMobile])
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
         {mainImage !== '' ? (
           <Image
-            src={mainImage.path ? mainImage.path : MainImage}
+            src={mainImage.path ? mainImage.path : mobile ? MainMobileImage : MainImage}
             alt=""
             layout="fill"
             objectFit="cover"
@@ -41,7 +48,7 @@ const MainSection = props => {
       <div id="bottomToTop" className={styles.bottomToTop}>
         {mainImage.text_one}
       </div>
-      {!isMobile ? (
+      {!mobile ? (
         <div className={'absolute flex justify-end top-0 right-0 p-0 m-0 h-screen ' + styles.mainRightArea}>
           <div className={'absolute top-0 left-0 h-screen -z-10 w-full ' + styles.mainCarouselOpacityArea} />
           <div className={'mainCarouselArea'}>
