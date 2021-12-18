@@ -164,7 +164,7 @@ const Training = () => {
             {mobile ? (
               <div className={'col-span-12 '}>
                 <div className={'w-2/3 py-2'}>
-                  <ServiceButton label={'Compra Presenciales'} onClick={() => handleClick('type1')} type={'training'} />
+                  <ServiceButton label={'Compra Presenciales'} onClick={() => handleClick('type1')} />
                 </div>
                 <div className={'w-2/3 py-2'}>
                   <ServiceButton
