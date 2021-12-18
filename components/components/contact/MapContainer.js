@@ -3,10 +3,10 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 import googleMapStyles from 'assets/data/GoogleMapStylesData.json'
 
 const MapContainer = props => {
-  const { locations } = props
+  const { isMobile, locations, showContactView } = props
 
   const mapStyles = {
-    height: '431px',
+    height: isMobile ? '360px' : '431px',
     width: '100%',
   }
 
@@ -19,6 +19,12 @@ const MapContainer = props => {
 
   const onSelect = item => {
     setSelected(item)
+    showContactView(item ? true : false)
+  }
+
+  const hideContact = () => {
+    setSelected({})
+    showContactView(false)
   }
 
   return (
@@ -35,6 +41,7 @@ const MapContainer = props => {
           // mapTypeControl: false,
           styles: googleMapStyles,
         }}
+        onClick={selected ? hideContact : null}
       >
         {locations.map(item => {
           return (
@@ -47,7 +54,7 @@ const MapContainer = props => {
           )
         })}
         {selected.location && (
-          <InfoWindow position={selected.location} clickable={true} onCloseClick={() => setSelected({})}>
+          <InfoWindow position={selected.location} clickable={true} onCloseClick={hideContact}>
             <p>{selected.name}</p>
           </InfoWindow>
         )}
