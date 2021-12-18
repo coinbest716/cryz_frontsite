@@ -179,6 +179,12 @@ const Classland = () => {
           <div className={styles.middleSection}>
             <div className={styles.m_fullPass}>Full Pass</div>
             {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} /> : <></>}
+            <div className={globalStyles.tinyMCEClass}>
+              <div
+                className={styles.topDescription + ' tinymce-class mt-4'}
+                dangerouslySetInnerHTML={{ __html: main?.text }}
+              ></div>
+            </div>
           </div>
         ) : (
           <div className={styles.middleSection}>

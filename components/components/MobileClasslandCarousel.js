@@ -22,7 +22,7 @@ const MobileClasslandCarousel = props => {
     <Carousel
       showArrows={true}
       showThumbs={false}
-      // autoPlay={true}
+      autoPlay={true}
       stopOnHover={true}
       showStatus={false}
       showIndicators={false}
