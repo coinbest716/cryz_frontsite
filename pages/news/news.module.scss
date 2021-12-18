@@ -11,23 +11,41 @@
   font-size: 54px;
   color: #818e8e;
   font-family: 'DrukWideCyWeb-Bold';
-  font-size: 36px;
-  font-weight: bold;
   letter-spacing: 0;
   line-height: 44px;
+  @media (max-width: 576px) {
+    font-size: 18px;
+  }
+  @media (min-width: 577px) {
+    font-size: 36px;
+    font-weight: bold;
+  }
 }
 .topDash {
-  width: 42px;
-  height: 7px;
   background-color: #818e8e;
+  @media (max-width: 576px) {
+    width: 15px;
+    height: 4px;
+  }
+  @media (min-width: 577px) {
+    width: 42px;
+    height: 7px;
+  }
 }
 .description {
   color: #818e8e;
   font-family: Montserrat;
-  font-size: 14px;
   letter-spacing: 0.7px;
   line-height: 22px;
-  text-align: center;
   top: calc(50% + 167px);
   max-width: 656px;
+
+  @media (max-width: 576px) {
+    font-size: 10px;
+    margin: 10px 44px;
+  }
+  @media (min-width: 577px) {
+    font-size: 14px;
+    text-align: center;
+  }
 }
