@@ -2,13 +2,23 @@
 
 .container {
   background: linear-gradient(135deg, #dfdbd5, #f0eeeb);
-  padding-top: 220px;
+  @media (max-width: 1023px) {
+    padding-top: 112px;
+  }
+  @media (min-width: 1024px) {
+    padding-top: 220px;
+  }
 }
 
 .title {
   display: inline-grid;
   font-family: DrukWideCyWeb-Bold;
-  font-size: 32px;
+  @media (max-width: 1023px) {
+    font-size: 16px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 32px;
+  }
   line-height: 100%;
   letter-spacing: 0px;
   background: linear-gradient(19.89deg, #d2aea1 0%, #5f5e5e 100%);
@@ -18,14 +28,26 @@
 }
 
 .divider {
-  width: 40px;
-  height: 4px;
+  @media (max-width: 1023px) {
+    width: 16px;
+    height: 2px;
+    margin-bottom: 6px;
+  }
+  @media (min-width: 1024px) {
+    width: 40px;
+    height: 4px;
+  }
   background-color: $pink-150-color;
 }
 
 .byText {
   font-family: Montserrat;
-  font-size: 12px;
+  @media (max-width: 1023px) {
+    font-size: 8px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 12px;
+  }
   font-weight: bold;
   letter-spacing: 0.23px;
   line-height: 15px;
@@ -34,7 +56,12 @@
 
 .subTitle {
   font-family: Cartoon Marker;
-  font-size: 12px;
+  @media (max-width: 1023px) {
+    font-size: 6px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 12px;
+  }
   letter-spacing: 0.23px;
   line-height: 24px;
   color: #97827c;

@@ -1,6 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+// next components
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+
+// third party components
+import { isMobile } from 'react-device-detect'
 
 // images
 import ArrowRightGrayIcon from 'assets/images/arrow-right-black.svg'
@@ -20,6 +25,12 @@ const DisciplineSection = props => {
   // variables
   const { viewport } = props
   const router = useRouter()
+  const [mobile, setMobile] = useState(false)
+
+  // handlers
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [isMobile])
 
   const [disciplineList, setDisciplineList] = useState([])
   const [getDisciplineList, { data: disciplineListData, loading: disciplineListLoading, error: disciplineListError }] =
@@ -177,7 +188,7 @@ const DisciplineSection = props => {
     router.push('/female-health/' + id)
   }
 
-  return (
+  return !mobile ? (
     <div className={globalStyles.container}>
       <div className={styles.container}>
         <div className={styles.title}>Disciplinas</div>
@@ -235,6 +246,8 @@ const DisciplineSection = props => {
         )}
       </div>
     </div>
+  ) : (
+    <div className={globalStyles.container}></div>
   )
 }
 
