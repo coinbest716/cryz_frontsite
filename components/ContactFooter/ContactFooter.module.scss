@@ -3,8 +3,14 @@
 .footerArea {
   width: 100%;
   background-color: $white-color;
-  padding-top: 31px;
-  padding-bottom: 31px;
+  @media (max-width: 576px) {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  @media (min-width: 577px) {
+    padding-top: 31px;
+    padding-bottom: 31px;
+  }
 }
 
 .workWithUsButton {
@@ -33,9 +39,14 @@
 .text {
   color: $gray-800-color;
   font-family: Montserrat;
-  font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.26px;
   cursor: pointer;
   display: flex;
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
+  @media (min-width: 577px) {
+    font-size: 12px;
+  }
 }

@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { isMobile } from 'react-device-detect'
 
+// custom components
+import SocialButtonGroup from 'components/SocialButtonGroup'
+
+// json data
+import SocialURLData from 'assets/data/SocialURLData'
+
 // next components
 import Image from 'next/image'
 
@@ -111,7 +117,7 @@ const Contact = () => {
         <div
           style={{
             position: 'relative',
-            height: mobile ? '360px' : '433px',
+            height: mobile ? '380px' : '433px',
             width: '100%',
             marginTop: mobile ? '20px' : '10px',
           }}
@@ -127,7 +133,7 @@ const Contact = () => {
           >
             {mobile && showContact && (
               <div className={globalStyles.container}>
-                <div className={'grid grid-cols-12 text-center px-4 py-5'}>
+                <div className={'grid grid-cols-12 text-center px-4 pt-5 pb-2'}>
                   <div
                     className={'col-span-4'}
                     style={{ border: '1px solid #fff', borderRight: 'none', paddingTop: '10px' }}
@@ -171,13 +177,16 @@ const Contact = () => {
                     </div>
                   </div>
                 </div>
+                <div className={'pb-2'}>
+                  <SocialButtonGroup color="white" socialURL={SocialURLData[0]} />
+                </div>
               </div>
             )}
           </div>
         </div>
       </div>
       {mobile ? (
-        <div className={'cursor-pointer'} style={{ position: 'fixed', zIndex: 999, right: '20px', bottom: '40px' }}>
+        <div className={'cursor-pointer'} style={{ position: 'fixed', zIndex: 999, right: '20px', bottom: '0px' }}>
           <Image src={whatsapp} alt="" width={69} height={69} onClick={handleClickWhatsapp} />
         </div>
       ) : (
