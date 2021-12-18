@@ -186,8 +186,8 @@ const Contact = () => {
         </div>
       </div>
       {mobile ? (
-        <div className={'cursor-pointer'} style={{ position: 'fixed', zIndex: 999, right: '20px', bottom: '0px' }}>
-          <Image src={whatsapp} alt="" width={69} height={69} onClick={handleClickWhatsapp} />
+        <div className={'cursor-pointer'} style={{ position: 'fixed', zIndex: 999, right: '10px', bottom: '0px' }}>
+          <Image src={whatsapp} alt="" width={53} height={53} onClick={handleClickWhatsapp} />
         </div>
       ) : (
         <div className={styles.container + ' relative'}>
