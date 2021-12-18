@@ -42,7 +42,7 @@ const Footer = () => {
       </div>
       <div className={'w-full flex flex-wrap justify-center items-center'}>
         <div className={globalStyles.container + ' pt-7'}>
-          <div className={'w-full flex justify-between items-center'}>
+          <div className={'w-full flex flex-wrap justify-between items-center'}>
             <div className={styles.text}>
               <Link href={'/docs/terms'} passHref>
                 <p>Terminos y Condiciones</p>
