@@ -305,10 +305,7 @@ const DisciplineSection = props => {
               <div key={index} className={'grid grid-cols-2 lg:grid-cols-3 gap-4'}>
                 {item.map((elem, idx) => (
                   <div key={idx}>
-                    <div
-                      onMouseOver={() => handleSetIsFlipped(true, elem.id)}
-                      onMouseLeave={() => handleSetIsFlipped(false, elem.id)}
-                    >
+                    <div onClick={() => router.push('/female-health/' + elem.id)}>
                       <div className={styles.card + ' relative'}>
                         <Image src={elem.image} alt="" width={173} height={173} layout="responsive" objectFit="cover" />
                         <div className={'absolute ' + styles.sliderTitle}>{elem.name}</div>
