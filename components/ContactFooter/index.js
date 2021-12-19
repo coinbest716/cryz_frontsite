@@ -1,6 +1,9 @@
+import React, { useEffect, useState } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import router from 'next/router'
+import { isMobile } from 'react-device-detect'
 
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
@@ -17,30 +20,57 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/ContactFooter/ContactFooter.module.scss'
 
 const ContactFooter = () => {
+  const [mobile, setMobile] = useState(null)
+
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [setMobile])
+
   return (
-    <div className={'w-full flex flex-wrap justify-center items-center divide-y divide-gray-400 ' + styles.footerArea}>
+    <div
+      className={
+        'w-full flex flex-wrap justify-center items-center' +
+        (mobile ? ' ' : ' divide-y divide-gray-400 ') +
+        styles.footerArea
+      }
+    >
       <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + ' pb-7'}>
-          <div className={'w-full flex justify-between items-center'}>
-            <button
-              className={styles.workWithUsButton + ' flex justify-between'}
-              onClick={() => router.push('work-with-us')}
-            >
-              <p className={'mr-4'}>Trabaja con nosotros</p>
-              <Image src={ArrowLeftIcon} alt="" width={23} height={22} />
-            </button>
-            <Link href={'/'} passHref>
-              <button className={styles.logo}>
-                <p className={styles.logo}>CRYS DYAZ & CO</p>
+        <div className={globalStyles.container + (mobile ? ' pb-3' : ' pb-7')}>
+          {mobile ? (
+            <div className={'w-full justify-center'}>
+              <div className={'w-full flex justify-center'}>
+                <button
+                  className={styles.workWithUsButton + ' flex justify-between'}
+                  onClick={() => router.push('work-with-us')}
+                >
+                  <p className={'mr-4'}>Trabaja con nosotros</p>
+                  <Image src={ArrowLeftIcon} alt="" width={23} height={22} />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className={'w-full flex justify-between items-center'}>
+              <button
+                className={styles.workWithUsButton + ' flex justify-between'}
+                onClick={() => router.push('work-with-us')}
+              >
+                <p className={'mr-4'}>Trabaja con nosotros</p>
+                <Image src={ArrowLeftIcon} alt="" width={23} height={22} />
               </button>
-            </Link>
-            <SocialButtonGroup color="gray" socialURL={SocialURLData[0]} />
-          </div>
+              <Link href={'/'} passHref>
+                <button className={styles.logo}>
+                  <p className={styles.logo}>CRYS DYAZ & CO</p>
+                </button>
+              </Link>
+              <SocialButtonGroup color="gray" socialURL={SocialURLData[0]} />
+            </div>
+          )}
         </div>
       </div>
+
       <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + ' pt-7'}>
-          <div className={'w-full flex justify-between items-center'}>
+        <div className={globalStyles.container + (mobile ? ' ' : ' pt-7')}>
+          <div className={'w-full flex items-center' + (mobile ? ' justify-center' : ' justify-between')}>
             <div className={styles.text}>
               <Link href={'/docs/terms'} passHref>
                 <p>Terminos y Condiciones</p>
@@ -62,7 +92,8 @@ const ContactFooter = () => {
                 <p>Venta</p>
               </Link>
             </div>
-            <div className={styles.text}>CrysDyaz&Co © Todos los derechos reservados</div>
+
+            {!mobile && <div className={styles.text}>CrysDyaz&Co © Todos los derechos reservados</div>}
           </div>
         </div>
       </div>
