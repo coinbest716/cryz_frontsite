@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 // redux
 import { useDispatch } from 'react-redux'
 
+// third party components
+import { isMobile } from 'react-device-detect'
+
 // custom component
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
@@ -41,6 +44,7 @@ const Menopause = () => {
 
   // variables
   const router = useRouter()
+  const [mobile, setMobile] = useState(false)
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
   const [disciplineID, setDisciplineID] = useState(null)
 
@@ -52,6 +56,10 @@ const Menopause = () => {
   ] = useLazyQuery(graphql.queries.getFemHealthService)
 
   // handlers
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [isMobile])
+
   useEffect(() => {
     dispatch({ type: 'set', isLoading: false })
     setDisciplineID(Number(router.asPath.split('/')[2]))
@@ -88,7 +96,7 @@ const Menopause = () => {
         </div>
         {JSON.stringify(femHealthService) !== JSON.stringify({}) ? (
           <div className={'grid grid-cols-12 gap-4'} style={{ minHeight: '634px' }}>
-            <div className={'col-span-5 block'}>
+            <div className={mobile ? 'col-span-12 block' : 'col-span-5 block'}>
               <div className={styles.strokeTitle}>{femHealthService.title_one}</div>
               <div className={styles.pinkTitle}>{femHealthService.title_two}</div>
               <div className={styles.divider} />
@@ -103,13 +111,19 @@ const Menopause = () => {
                 )}
               </div>
             </div>
-            <div className={'col-span-7 relative flex justify-end'}>
-              <div className={'absolute top-10 z-10'}>
-                <CircularMark />
-              </div>
-              <div className={'w-full h-full mt-20 pb-20'}>
+            <div
+              className={mobile ? 'col-span-12 relative flex justify-center' : 'col-span-7 relative flex justify-end'}
+            >
+              {mobile ? (
+                <></>
+              ) : (
+                <div className={'absolute top-10 z-10'}>
+                  <CircularMark />
+                </div>
+              )}
+              <div className={mobile ? 'w-full mt-7 pb-7' : 'w-full mt-20 pb-20'}>
                 {femHealthService?.carousel_image !== undefined ? (
-                  <CarouselFemaleHealth sliderData={femHealthService?.carousel_image} />
+                  <CarouselFemaleHealth sliderData={femHealthService?.carousel_image} mobile={mobile} />
                 ) : (
                   <></>
                 )}
