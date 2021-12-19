@@ -23,11 +23,39 @@ const MainSection = props => {
   // varaibles
   const { mainImage, featuredServices } = props
   const [mobile, setMobile] = useState(false)
+  const [sliderData, setSliderData] = useState([])
 
   // handlers
   useEffect(() => {
     setMobile(isMobile)
   }, [isMobile])
+  useEffect(() => {
+    if (mobile) {
+      let array = []
+      array = featuredServices
+      let tempArray = []
+      if (array.length !== 0) {
+        array.map(item => {
+          let imgObject = {
+            type: 'image',
+            image: item.image,
+          }
+          tempArray.push(imgObject)
+          let textObject = {
+            type: 'text',
+            title: item.title,
+            text: item.text,
+            detail: item.detail,
+            url: item.url,
+          }
+          tempArray.push(textObject)
+        })
+        setSliderData(tempArray)
+      }
+    } else {
+      setSliderData(featuredServices)
+    }
+  }, [mobile, featuredServices])
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
@@ -65,8 +93,8 @@ const MainSection = props => {
               axis="vertical"
               dynamicHeight={true}
             >
-              {featuredServices &&
-                featuredServices.map((item, index) => (
+              {sliderData &&
+                sliderData.map((item, index) => (
                   <div key={index}>
                     {index % 2 === 0 ? (
                       <>
@@ -168,33 +196,33 @@ const MainSection = props => {
               centerSlidePercentage={80}
               interval={5000}
             >
-              {featuredServices &&
-                featuredServices.map((item, index) => (
-                  <div className={styles.mobileImageArea} key={'image-' + index}>
-                    <Image
-                      src={item.image !== null ? item.image : MainImage}
-                      alt=""
-                      width={219}
-                      height={136}
-                      layout="responsive"
-                    />
-                  </div>
-                ))}
-              {featuredServices &&
-                featuredServices.map((item, index) => (
-                  <div className={styles.mobilePinkBoxArea} key={'text-' + index}>
-                    <div className={styles.mobilePinkBoxOpacity} />
-                    <div className={styles.mobilePinkBox}>
-                      <div className={styles.mobilePinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
-                      <div className={styles.mobilePinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
-                      <div className={styles.mobilePinkButtonArea}>
-                        <button className={styles.mobilePinkButton} onClick={() => router.push(item.url)}>
-                          <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
-                        </button>
+              {sliderData &&
+                sliderData.map((item, index) =>
+                  item.type === 'image' ? (
+                    <div className={styles.mobileImageArea} key={index}>
+                      <Image
+                        src={item.image !== null ? item.image : MainImage}
+                        alt=""
+                        width={219}
+                        height={136}
+                        layout="responsive"
+                      />
+                    </div>
+                  ) : (
+                    <div className={styles.mobilePinkBoxArea} key={index}>
+                      <div className={styles.mobilePinkBoxOpacity} />
+                      <div className={styles.mobilePinkBox}>
+                        <div className={styles.mobilePinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
+                        <div className={styles.mobilePinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
+                        <div className={styles.mobilePinkButtonArea}>
+                          <button className={styles.mobilePinkButton} onClick={() => router.push(item.url)}>
+                            <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
             </Carousel>
           </div>
         </div>
