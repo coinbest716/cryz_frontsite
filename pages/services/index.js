@@ -32,9 +32,12 @@ const Services = () => {
   const [mobile, setIsMobile] = useState(null)
   useEffect(() => {
     setIsMounted(true)
-    setIsMobile(isMobile)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -179,11 +182,6 @@ const Services = () => {
                   <div className={styles.m_serverText}>{mainService[2]?.name}</div>
                   <div className={styles.m_serverArrow}>
                     <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
-                  </div>
-                </div>
-                <div className="relative coursor-pointer w-1/2">
-                  <div className={'z-10 ' + styles.m_circularMark}>
-                    <CircularMark mobile={mobile} />
                   </div>
                 </div>
               </div>

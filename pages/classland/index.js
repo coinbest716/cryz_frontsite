@@ -8,6 +8,8 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import FaqButton from 'components/components/FaqButton'
 import ClasslandCarousel from 'components/components/ClasslandCarousel'
+import MobileClasslandCarousel from 'components/components/MobileClasslandCarousel'
+import MobileDoubleClasslandCarousel from 'components/components/MobileDoubleClasslandCarousel'
 import FilterButton from 'components/components/FilterButton'
 import ClassCard from 'components/components/ClassCard'
 import Accordian from 'components/components/Accordian'
@@ -23,16 +25,22 @@ import topImage from 'public/images/classland-top-image.svg'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { isMobile } from 'react-device-detect'
 
 const Classland = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -48,6 +56,7 @@ const Classland = () => {
   const [cardData, setCardData] = useState([])
   const [faqData, setFaqData] = useState([])
   const [filterKey, setFilterKey] = useState(0)
+  const [filterValue, setFilterValue] = useState('ALL')
   const [filter, setFilter] = useState([
     { id: 'ALL', value: 'TODO' },
     {
@@ -109,82 +118,164 @@ const Classland = () => {
     getClasslandCategory({ variables: { category: filter[index].id } })
   }
 
+  const handleClickSelectFilter = event => {
+    console.log(event.target.value)
+    setFilterValue(event.target.value)
+    // setFilterKey(index)
+    getClasslandCategory({ variables: { category: event.target.value } })
+  }
+
   const executeScroll = () => {
     faqRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' })
   }
 
   return (
     <div className={'flex flex-wrap justify-center'}>
-      <div className={styles.container}>
-        <div className={globalStyles.container + ' mt-20'}>
-          <div className={styles.topSection}>
-            <div className={'grid grid-cols-12 gap-4'}>
-              <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-                <div className={styles.topTitle}>{main?.title}</div>
-                <div className={styles.topDash} />
-                <div className={globalStyles.tinyMCEClass}>
-                  <div
-                    className={styles.topDescription + ' tinymce-class'}
-                    dangerouslySetInnerHTML={{ __html: main?.text }}
-                  ></div>
+      {mobile ? (
+        <div className={styles.m_container}>
+          <div className={globalStyles.container}>
+            <div className={styles.topSection}>
+              <div className={styles.m_topTitle}>{main?.title}</div>
+              <div className={styles.topDash} />
+            </div>
+            <div className={styles.m_topRightSection}>
+              <div className={styles.topRightLetImage}>
+                <Image src={topImage} alt="" width={200} height={231} className={styles.topImage} />
+              </div>
+              <div className={'absolute bottom-3 right-2'}>
+                <FaqButton onClick={executeScroll} mobile={mobile} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.container}>
+          <div className={globalStyles.container + ' mt-20'}>
+            <div className={styles.topSection}>
+              <div className={'grid grid-cols-12 gap-4'}>
+                <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
+                  <div className={styles.topTitle}>{main?.title}</div>
+                  <div className={styles.topDash} />
+                  <div className={globalStyles.tinyMCEClass}>
+                    <div
+                      className={styles.topDescription + ' tinymce-class'}
+                      dangerouslySetInnerHTML={{ __html: main?.text }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
+                  <div className={styles.topRightSection}>
+                    <div className={styles.topRightLetImage}>
+                      <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
+                    </div>
+                    <div>
+                      <div className={'z-10'}>
+                        <CircularMark />
+                      </div>
+                      <div className={'mt-6'}>
+                        <FaqButton onClick={executeScroll} />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
-                <div className={styles.topRightSection}>
-                  <div className={styles.topRightLetImage}>
-                    <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={'w-full px-4'}>
+        {mobile ? (
+          <div className={styles.middleSection}>
+            <div className={styles.m_fullPass}>Full Pass</div>
+            {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} /> : <></>}
+            <div className={globalStyles.tinyMCEClass}>
+              <div
+                className={styles.topDescription + ' tinymce-class mt-4'}
+                dangerouslySetInnerHTML={{ __html: main?.text }}
+              ></div>
+            </div>
+          </div>
+        ) : (
+          <div className={styles.middleSection}>
+            <div className={styles.fullPass}>Full Pass</div>
+            {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} /> : <></>}
+          </div>
+        )}
+        <div className={styles.m_buttonGroup}>
+          {mobile ? (
+            <select
+              name="select"
+              onChange={handleClickSelectFilter}
+              value={filterValue}
+              className={'flex justify-end items-center ' + styles.select}
+            >
+              {filter.map((item, index) => (
+                <option key={index} value={item.id} className={styles.option}>
+                  {item.value}
+                </option>
+              ))}
+            </select>
+          ) : (
+            filter.map((item, index) => (
+              <div className={'mr-3'} key={index}>
+                <FilterButton
+                  active={index === filterKey}
+                  filter={item}
+                  onClick={() => handleClickFilter(index)}
+                  key={index}
+                />
+              </div>
+            ))
+          )}
+        </div>
+        {mobile ? (
+          <div className={styles.m_cardSection}>
+            {cardData.length !== 0 ? <MobileDoubleClasslandCarousel coTeam={cardData} /> : <></>}
+          </div>
+        ) : (
+          <div className={styles.cardSection}>
+            <div className={'grid grid-cols-12 gap-8'}>
+              {cardData?.map((card, index) =>
+                card.visible ? (
+                  <div className={'col-span-12 flex md:col-span-6 lg:col-span-4 ' + styles.cardAlign} key={index}>
+                    <ClassCard data={card} key={index} />
                   </div>
-                  <div>
-                    <div className={'z-10'}>
-                      <CircularMark />
-                    </div>
-                    <div className={'mt-6'}>
-                      <FaqButton onClick={executeScroll} />
-                    </div>
-                  </div>
+                ) : (
+                  <div></div>
+                )
+              )}
+            </div>
+          </div>
+        )}
+        {mobile ? (
+          <div>
+            <div className={'my-6 ' + styles.m_divider} />
+            <div className="mb-5">
+              <div ref={faqRef} className={'mb-4 ' + styles.m_faqString}>
+                FAQ
+              </div>
+              {faqData?.map((data, index) => (
+                <div style={{ padding: '7px 0px' }} key={index}>
+                  <Accordian title={data.name} description={data.description} mobile={mobile} />
                 </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className={styles.divider} />
+            <div style={{ marginBottom: '100px' }}>
+              <div ref={faqRef} className={styles.faqString}>
+                FAQ
               </div>
+              {faqData?.map((data, index) => (
+                <div style={{ padding: '7px 0px' }} key={index}>
+                  <Accordian title={data.name} description={data.description} />
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </div>
-      <div className={'w-full ' + globalStyles.container}>
-        <div className={styles.middleSection}>
-          <div className={styles.fullPass}>Full Pass</div>
-          {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} /> : <></>}
-        </div>
-        <div className={styles.buttonGroup}>
-          {filter.map((item, index) => (
-            <div className={'mr-3'} key={index}>
-              <FilterButton
-                active={index === filterKey}
-                filter={item}
-                onClick={() => handleClickFilter(index)}
-                key={index}
-              />
-            </div>
-          ))}
-        </div>
-        <div className={styles.cardSection}>
-          <div className={'grid grid-cols-12 gap-8'}>
-            {cardData?.map((card, index) => (
-              <div className={'col-span-12 flex md:col-span-6 lg:col-span-4 ' + styles.cardAlign} key={index}>
-                <ClassCard data={card} key={index} />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={styles.divider} />
-        <div style={{ marginBottom: '100px' }}>
-          <div ref={faqRef} className={styles.faqString}>
-            FAQ
-          </div>
-          {faqData?.map((data, index) => (
-            <div style={{ padding: '7px 0px' }} key={index}>
-              <Accordian title={data.name} description={data.description} />
-            </div>
-          ))}
-        </div>
+        )}
       </div>
     </div>
   )

@@ -12,7 +12,7 @@ import PlusIcon from 'assets/images/plus.svg'
 import MinusIcon from 'assets/images/minus.svg'
 
 const Accordian = props => {
-  const { title, description } = props
+  const { title, description, mobile } = props
   const [defaultIcon, setDefautIcon] = useState(PlusIcon)
   const [flag, setFalg] = useState(false)
   const handleClick = () => {
@@ -27,7 +27,7 @@ const Accordian = props => {
   return (
     <div>
       <div className={styles.accordianSection}>
-        <div className={styles.title}>{title}</div>
+        <div className={mobile ? styles.m_title : styles.title}>{title}</div>
         <button className={styles.button} onClick={handleClick}>
           <Image src={defaultIcon} alt="" width={35} height={35} />
         </button>

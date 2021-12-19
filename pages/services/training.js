@@ -9,6 +9,8 @@ import { useRouter } from 'next/router'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
+import ServiceButton from 'components/components/service/ServiceButton'
+import CarouselService from 'components/components/service/CarouselService'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -16,16 +18,22 @@ import styles from './training.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { isMobile } from 'react-device-detect'
 
 const Training = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -42,6 +50,7 @@ const Training = () => {
   const [description, setDescription] = useState('')
 
   const forwardGrayIcon = '/images/arrow-right-gray.svg'
+  const [sliderData, setSliderData] = useState([])
   const [imageOne, setImageOne] = useState('')
   const [imageTwo, setImageTwo] = useState('')
   const [imageThree, setImageThree] = useState('')
@@ -59,11 +68,22 @@ const Training = () => {
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
+      let _sliderData = [...sliderData]
       setTitle(cmsSubjectData.getCmsServiceSubject.title_two)
       setDescription(cmsSubjectData.getCmsServiceSubject.text)
       setImageOne(cmsSubjectData.getCmsServiceSubject.personal_image[0]?.path)
       setImageTwo(cmsSubjectData.getCmsServiceSubject.online_image[0]?.path)
       setImageThree(cmsSubjectData.getCmsServiceSubject.stream_image[0]?.path)
+      if (cmsSubjectData.getCmsServiceSubject.personal_image[0]?.path) {
+        _sliderData = [..._sliderData, { path: cmsSubjectData.getCmsServiceSubject.personal_image[0]?.path }]
+      }
+      if (cmsSubjectData.getCmsServiceSubject.online_image[0]?.path) {
+        _sliderData = [..._sliderData, { path: cmsSubjectData.getCmsServiceSubject.online_image[0]?.path }]
+      }
+      if (cmsSubjectData.getCmsServiceSubject.stream_image[0]?.path) {
+        _sliderData = [..._sliderData, { path: cmsSubjectData.getCmsServiceSubject.stream_image[0]?.path }]
+      }
+      setSliderData(_sliderData)
     }
   }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
 
@@ -119,84 +139,115 @@ const Training = () => {
   }
 
   return (
-    <div className={'z-10 ' + styles.container} onMouseMove={handleMouseMover}>
-      <div className={'z-0 ' + styles.circleImageCover} id="shark">
-        <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
-      </div>
-      <div className={'flex flex-wrap justify-center pb-20'}>
+    <div className={'z-10 ' + (mobile ? styles.m_container : styles.container)} onMouseMove={handleMouseMover}>
+      {!mobile && (
+        <div className={'z-0 ' + styles.circleImageCover} id="shark">
+          <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
+        </div>
+      )}
+      <div className={'flex flex-wrap justify-center ' + (mobile ? ' pb-4' : ' pb-20')}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
             <BackButton />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-              <div className={'pt-10 pb-2 ' + styles.topTitle}>{title}</div>
+              <div className={mobile ? styles.m_topTitle : styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
               <div className={globalStyles.tinyMCEClass}>
                 <div
-                  className={styles.topDescription + ' mt-10 pb-20 tinymce-class'}
+                  className={styles.topDescription + ' tinymce-class' + (mobile ? ' mt-5' : ' mt-10 pb-20')}
                   dangerouslySetInnerHTML={{ __html: description }}
                 ></div>
               </div>
             </div>
-            <div className={'col-span-12 md:col-span-1 sm:col-span-12'} />
-            <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative'}>
-              <div className={'flex h-full'}>
-                <div className={'w-1/3 px-12 '}>
-                  <div
-                    className={'h-full relative ' + styles.activeSection}
-                    onMouseOver={() => handleMouseOver('type1')}
-                    onMouseLeave={() => handleMouseLeave('type1')}
-                  >
-                    <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type1')}>
-                      <span className={styles.number}>01&nbsp;&nbsp;</span>
-                      <span className={styles.typograph}>Personal&nbsp;</span>
-                      <img
-                        src={forwardGrayIcon}
-                        alt=""
-                        className={styles.arrowIcon}
-                        style={{ width: '35px', height: '28px', minWidth: '35px' }}
-                      />
-                    </div>
-                  </div>
+            {mobile ? (
+              <div className={'col-span-12 '}>
+                <div className={'w-2/3 py-2'}>
+                  <ServiceButton label={'Compra Presenciales'} onClick={() => handleClick('type1')} />
                 </div>
-                <div className={'w-1/3 px-12'}>
-                  <div
-                    className={'h-full relative ' + styles.activeSection}
-                    onMouseOver={() => handleMouseOver('type2')}
-                    onMouseLeave={() => handleMouseLeave('type2')}
-                  >
-                    <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type2')}>
-                      <span className={styles.number}>02&nbsp;&nbsp;</span>
-                      <span className={styles.typograph}>Planes online&nbsp;</span>
-                      <img
-                        src={forwardGrayIcon}
-                        alt=""
-                        className={styles.arrowIcon}
-                        style={{ width: '35px', height: '28px', minWidth: '35px' }}
-                      />
-                    </div>
-                  </div>
+                <div className={'w-2/3 py-2'}>
+                  <ServiceButton
+                    label={'Compra Planes online'}
+                    onClick={() => handleClick('type2')}
+                    type={'training'}
+                  />
                 </div>
-                <div className={'w-1/3 px-12'}>
-                  <div
-                    className={'h-full relative ' + styles.activeSection}
-                    onMouseOver={() => handleMouseOver('type3')}
-                    onMouseLeave={() => handleMouseLeave('type3')}
-                  >
-                    <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type3')}>
-                      <span className={styles.number}>03&nbsp;&nbsp;</span>
-                      <span className={styles.typograph}>1 to 1 en streaming&nbsp;</span>
-                      <img
-                        src={forwardGrayIcon}
-                        alt=""
-                        className={styles.arrowIcon}
-                        style={{ width: '35px', height: '28px', minWidth: '35px' }}
-                      />
-                    </div>
-                  </div>
+                <div className={'w-2/3 py-2'}>
+                  <ServiceButton
+                    label={'Compra 1 to 1 streaming'}
+                    onClick={() => handleClick('type3')}
+                    type={'training'}
+                  />
+                </div>
+                <div className={styles.m_carouselSection}>
+                  <CarouselService sliderData={sliderData} mobile={mobile} />
                 </div>
               </div>
+            ) : (
+              <div className={'col-span-12 md:col-span-1 sm:col-span-12'} />
+            )}
+            <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative'}>
+              {mobile ? (
+                <div></div>
+              ) : (
+                <div className={'flex h-full'}>
+                  <div className={'w-1/3 px-12 '}>
+                    <div
+                      className={'h-full relative ' + styles.activeSection}
+                      onMouseOver={() => handleMouseOver('type1')}
+                      onMouseLeave={() => handleMouseLeave('type1')}
+                    >
+                      <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type1')}>
+                        <span className={styles.number}>01&nbsp;&nbsp;</span>
+                        <span className={styles.typograph}>Personal&nbsp;</span>
+                        <img
+                          src={forwardGrayIcon}
+                          alt=""
+                          className={styles.arrowIcon}
+                          style={{ width: '35px', height: '28px', minWidth: '35px' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={'w-1/3 px-12'}>
+                    <div
+                      className={'h-full relative ' + styles.activeSection}
+                      onMouseOver={() => handleMouseOver('type2')}
+                      onMouseLeave={() => handleMouseLeave('type2')}
+                    >
+                      <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type2')}>
+                        <span className={styles.number}>02&nbsp;&nbsp;</span>
+                        <span className={styles.typograph}>Planes online&nbsp;</span>
+                        <img
+                          src={forwardGrayIcon}
+                          alt=""
+                          className={styles.arrowIcon}
+                          style={{ width: '35px', height: '28px', minWidth: '35px' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={'w-1/3 px-12'}>
+                    <div
+                      className={'h-full relative ' + styles.activeSection}
+                      onMouseOver={() => handleMouseOver('type3')}
+                      onMouseLeave={() => handleMouseLeave('type3')}
+                    >
+                      <div className={'w-1/3 absolute ' + styles.verticalText} onClick={() => handleClick('type3')}>
+                        <span className={styles.number}>03&nbsp;&nbsp;</span>
+                        <span className={styles.typograph}>1 to 1 en streaming&nbsp;</span>
+                        <img
+                          src={forwardGrayIcon}
+                          alt=""
+                          className={styles.arrowIcon}
+                          style={{ width: '35px', height: '28px', minWidth: '35px' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

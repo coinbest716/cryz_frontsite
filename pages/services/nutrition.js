@@ -13,6 +13,7 @@ import CarouselService from 'components/components/service/CarouselService'
 import ArrowButton from 'components/components/service/ArrowButton'
 import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
+import ServiceButton from 'components/components/service/ServiceButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -20,16 +21,22 @@ import styles from './nutrition.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { isMobile } from 'react-device-detect'
 
 const Nutrition = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -110,7 +117,7 @@ const Nutrition = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={mobile ? styles.m_container : styles.container}>
       <div className={'flex flex-wrap justify-center pb-20'}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
@@ -118,47 +125,78 @@ const Nutrition = () => {
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={'pt-10 pb-2 ' + styles.topTitle}>{title}</div>
+              <div className={mobile ? styles.m_topTitle : styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
-              <div className={styles.topDescription + ' mt-10 pb-20'}>
+              <div className={styles.topDescription + (mobile ? ' mt-5' : ' mt-10 pb-20')}>
                 <div
                   className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}
                 >
                   <div className={globalStyles.tinyMCEClass}>
                     <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: description }}></div>
                   </div>
-                  <ReadMoreButton currentState={readMoreCurrentState} onClick={state => handleReadMore(state)} />
+                  <ReadMoreButton
+                    currentState={readMoreCurrentState}
+                    onClick={state => handleReadMore(state)}
+                    type={'nutrition'}
+                  />
                 </div>
               </div>
             </div>
-            <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative flex justify-end'}>
-              <div className={'absolute top-10 z-10'}>
-                <CircularMark />
+            {mobile && (
+              <div className={'col-span-12'}>
+                {personalButton && (
+                  <div className={'w-2/3 py-2'}>
+                    <ServiceButton label={'Compra Presenciales'} onClick={handleClickBuyPersion} />
+                  </div>
+                )}
+                {onlineButton && (
+                  <div className={'w-2/3 py-2'}>
+                    <ServiceButton label={'Compra planes online'} onClick={handleClickBuyPlan} />
+                  </div>
+                )}
+                {streamButton && (
+                  <div className={'w-2/3 py-2'}>
+                    <ServiceButton label={'Compra 1 to 1 en streaming'} onClick={handleClickBuyStreaming} />
+                  </div>
+                )}
               </div>
-              <div className={styles.carouselSection}>
-                <CarouselService sliderData={sliderData} />
+            )}
+            <div
+              className={
+                'col-span-12 md:col-span-7 sm:col-span-12 relative flex' + (mobile ? ' justify-center' : ' justify-end')
+              }
+            >
+              {!mobile && (
+                <div className={'absolute top-10 z-10'}>
+                  <CircularMark />
+                </div>
+              )}
+              <div className={mobile ? styles.m_carouselSection : styles.carouselSection}>
+                <CarouselService sliderData={sliderData} mobile={mobile} />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className={'flex justify-start'}>
-        {personalButton && (
-          <div className={'w-1/3'}>
-            <ArrowButton label={'Compra person'} onClick={handleClickBuyPersion} type={'nutrition'} />
-          </div>
-        )}
-        {onlineButton && (
-          <div className={'w-1/3'}>
-            <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} type={'nutrition'} />
-          </div>
-        )}
-        {streamButton && (
-          <div className={'w-1/3'}>
-            <ArrowButton label={'Compra 1 to 1 en streaming'} onClick={handleClickBuyStreaming} type={'nutrition'} />
-          </div>
-        )}
-      </div>
+      {!mobile && (
+        <div className={'flex justify-start'}>
+          {personalButton && (
+            <div className={'w-1/3'}>
+              <ArrowButton label={'Compra person'} onClick={handleClickBuyPersion} type={'nutrition'} />
+            </div>
+          )}
+          {onlineButton && (
+            <div className={'w-1/3'}>
+              <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} type={'nutrition'} />
+            </div>
+          )}
+          {streamButton && (
+            <div className={'w-1/3'}>
+              <ArrowButton label={'Compra 1 to 1 en streaming'} onClick={handleClickBuyStreaming} type={'nutrition'} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

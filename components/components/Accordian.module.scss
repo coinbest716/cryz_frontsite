@@ -23,6 +23,20 @@
   text-align: justify;
   padding: 28px 29px;
 }
+.m_title {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #b18c96;
+  color: #b18c96;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.62px;
+  text-align: justify;
+  align-items: center;
+  display: flex;
+  padding: 5px 8px;
+}
 .description {
   box-sizing: border-box;
   border: 1px solid #b18c96;

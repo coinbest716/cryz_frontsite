@@ -13,6 +13,18 @@
     background-color: #dbcbd0;
   }
 }
+.m_nextButton {
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border: 2px solid #b1989f;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: #dbcbd0;
+  }
+}
 .faqString {
   height: 18px;
   width: 32px;

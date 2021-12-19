@@ -1,0 +1,18 @@
+@import 'styles/variable.module.scss';
+
+.workWithUsButton {
+  font-family: Montserrat;
+  // font-size: 10px;
+  letter-spacing: 0.7px;
+  box-sizing: border-box;
+  border: 1px solid #818e8e;
+  color: #818e8e;
+  padding: 10px 15px;
+}
+
+.label {
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.7px;
+  // line-height: 26px;
+}
