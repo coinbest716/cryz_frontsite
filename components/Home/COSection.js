@@ -6,6 +6,7 @@ import Image from 'next/image'
 // third party components
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
+import { isMobile } from 'react-device-detect'
 
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
@@ -22,9 +23,16 @@ import styles from 'components/Home/COSection.module.scss'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 
 const COSection = props => {
+  // variables
   const { coTeam } = props
   const [sliderData, setSliderData] = useState([])
   const [isFlipped, setIsFlipped] = useState({ id: 1, bool: false })
+  const [mobile, setMobile] = useState(false)
+
+  // handlers
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     let arr = []
@@ -33,13 +41,13 @@ const COSection = props => {
         arr.push(item)
       }
     })
-    var size = 6
+    var size = mobile ? 4 : 6
     var arrayOfArrays = []
     for (var i = 0; i < arr.length; i += size) {
       arrayOfArrays.push(arr.slice(i, i + size))
     }
     setSliderData(arrayOfArrays)
-  }, [coTeam])
+  }, [coTeam, mobile])
 
   const handleSetIsFlipped = (bool, id) => {
     setIsFlipped(isFlipped => ({ ...isFlipped, id: id }))
