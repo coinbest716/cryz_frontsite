@@ -7,26 +7,47 @@
 .strokeTitle {
   -webkit-text-stroke: 1px $gray-500-color;
   font-family: DrukWideCyWeb-Bold;
-  font-size: 48px;
-  line-height: 120px;
+  @media (max-width: 1023px) {
+    margin-top: 5px;
+    font-size: 22px;
+    line-height: 1;
+  }
+  @media (min-width: 1024px) {
+    margin-top: 40px;
+    font-size: 48px;
+    line-height: 1;
+  }
   letter-spacing: 2.4px;
   color: transparent;
 }
 
 .pinkTitle {
-  margin-top: -46px;
+  margin-top: -6px;
   font-family: DrukWideCyWeb-Bold;
-  font-size: 30px;
-  line-height: 1;
+  @media (max-width: 1023px) {
+    font-size: 21px;
+    line-height: 1;
+  }
+  @media (min-width: 1024px) {
+    font-size: 30px;
+    line-height: 1;
+  }
   letter-spacing: 1.5px;
-  color: #e3d1d2;
+  color: #cdb2a7;
 }
 
 .divider {
-  width: 40px;
-  height: 4px;
-  background-color: #e3d1d2;
-  margin-top: 19px;
+  @media (max-width: 1023px) {
+    margin-top: 5px;
+    width: 16px;
+    height: 4px;
+  }
+  @media (min-width: 1024px) {
+    margin-top: 19px;
+    width: 40px;
+    height: 4px;
+  }
+  background-color: #cdb2a7;
   margin-bottom: 19px;
 }
 
