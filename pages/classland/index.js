@@ -9,6 +9,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import FaqButton from 'components/components/FaqButton'
 import ClasslandCarousel from 'components/components/ClasslandCarousel'
 import MobileClasslandCarousel from 'components/components/MobileClasslandCarousel'
+import MobileDoubleClasslandCarousel from 'components/components/MobileDoubleClasslandCarousel'
 import FilterButton from 'components/components/FilterButton'
 import ClassCard from 'components/components/ClassCard'
 import Accordian from 'components/components/Accordian'
@@ -182,7 +183,7 @@ const Classland = () => {
           </div>
         </div>
       )}
-      <div className={'w-full ' + globalStyles.container}>
+      <div className={'w-full px-4'}>
         {mobile ? (
           <div className={styles.middleSection}>
             <div className={styles.m_fullPass}>Full Pass</div>
@@ -227,15 +228,25 @@ const Classland = () => {
             ))
           )}
         </div>
-        <div className={styles.cardSection}>
-          <div className={'grid grid-cols-12 gap-8'}>
-            {cardData?.map((card, index) => (
-              <div className={'col-span-12 flex md:col-span-6 lg:col-span-4 ' + styles.cardAlign} key={index}>
-                <ClassCard data={card} key={index} />
-              </div>
-            ))}
+        {mobile ? (
+          <div className={styles.m_cardSection}>
+            {cardData.length !== 0 ? <MobileDoubleClasslandCarousel coTeam={cardData} /> : <></>}
           </div>
-        </div>
+        ) : (
+          <div className={styles.cardSection}>
+            <div className={'grid grid-cols-12 gap-8'}>
+              {cardData?.map((card, index) =>
+                card.visible ? (
+                  <div className={'col-span-12 flex md:col-span-6 lg:col-span-4 ' + styles.cardAlign} key={index}>
+                    <ClassCard data={card} key={index} />
+                  </div>
+                ) : (
+                  <div></div>
+                )
+              )}
+            </div>
+          </div>
+        )}
         <div className={styles.divider} />
         <div style={{ marginBottom: '100px' }}>
           <div ref={faqRef} className={styles.faqString}>
