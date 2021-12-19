@@ -55,7 +55,7 @@ const MobileClasslandCarousel = props => {
     >
       {sliderData?.map((item, index) => (
         <div key={index} className="mx-1 mb-6">
-          <Image src={item.path} alt="" width={1165} height={415} className={styles.slideImage} />
+          <Image src={item.path} alt="" width={865} height={415} className={styles.slideImage} />
         </div>
       ))}
     </Carousel>

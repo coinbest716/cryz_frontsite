@@ -96,6 +96,11 @@
   display: flex;
   margin-top: 55px;
 }
+.m_buttonGroup {
+  display: flex;
+  margin-top: 25px;
+  justify-content: flex-end;
+}
 .cardSection {
   padding-top: 53px;
 }
@@ -119,4 +124,21 @@
   line-height: 22px;
   padding-bottom: 21px;
   padding-top: 80px;
+}
+.option {
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 14px;
+}
+.select {
+  width: 33%;
+  border: 1px solid #d0dae9;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 12px 14px;
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.23px;
+  line-height: 35px;
 }

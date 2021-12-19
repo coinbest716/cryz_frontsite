@@ -55,6 +55,7 @@ const Classland = () => {
   const [cardData, setCardData] = useState([])
   const [faqData, setFaqData] = useState([])
   const [filterKey, setFilterKey] = useState(0)
+  const [filterValue, setFilterValue] = useState('ALL')
   const [filter, setFilter] = useState([
     { id: 'ALL', value: 'TODO' },
     {
@@ -114,6 +115,13 @@ const Classland = () => {
   const handleClickFilter = index => {
     setFilterKey(index)
     getClasslandCategory({ variables: { category: filter[index].id } })
+  }
+
+  const handleClickSelectFilter = event => {
+    console.log(event.target.value)
+    setFilterValue(event.target.value)
+    // setFilterKey(index)
+    getClasslandCategory({ variables: { category: event.target.value } })
   }
 
   const executeScroll = () => {
@@ -192,17 +200,32 @@ const Classland = () => {
             {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} /> : <></>}
           </div>
         )}
-        <div className={styles.buttonGroup}>
-          {filter.map((item, index) => (
-            <div className={'mr-3'} key={index}>
-              <FilterButton
-                active={index === filterKey}
-                filter={item}
-                onClick={() => handleClickFilter(index)}
-                key={index}
-              />
-            </div>
-          ))}
+        <div className={styles.m_buttonGroup}>
+          {mobile ? (
+            <select
+              name="select"
+              onChange={handleClickSelectFilter}
+              value={filterValue}
+              className={'flex justify-end items-center ' + styles.select}
+            >
+              {filter.map((item, index) => (
+                <option key={index} value={item.id} className={styles.option}>
+                  {item.value}
+                </option>
+              ))}
+            </select>
+          ) : (
+            filter.map((item, index) => (
+              <div className={'mr-3'} key={index}>
+                <FilterButton
+                  active={index === filterKey}
+                  filter={item}
+                  onClick={() => handleClickFilter(index)}
+                  key={index}
+                />
+              </div>
+            ))
+          )}
         </div>
         <div className={styles.cardSection}>
           <div className={'grid grid-cols-12 gap-8'}>
