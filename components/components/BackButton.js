@@ -22,7 +22,7 @@ const BackButton = () => {
 
   return (
     <button
-      className={'flex justify-between items-center hover:bg-gray-300 px-2 py-1 z-10'}
+      className={'flex justify-between items-center hover:bg-gray-300 pr-2 py-1 z-10'}
       onClick={() => handleGotoBack()}
     >
       <Image src={backGrayIcon} alt="" width={20} height={15} />
