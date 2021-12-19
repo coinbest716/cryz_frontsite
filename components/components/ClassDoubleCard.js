@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './ClassDoubleCard.module.scss'
-import router from 'next/router'
 
 const ClassDoubleCard = props => {
   const { data } = props
