@@ -188,9 +188,59 @@
   height: 187px;
 }
 .mobileImageArea {
-  width: 100%;
   height: 136px;
+  margin-right: 20px;
 }
 .mobilePinkBoxArea {
   height: 136px;
+  margin-right: 20px;
+}
+.mobilePinkBoxOpacity {
+  position: absolute;
+  background-color: $pink-150-color;
+  opacity: 0.62;
+  width: calc(100% - 20px);
+  height: 100%;
+}
+.mobilePinkBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 20px);
+  height: 100%;
+  padding: 10px 22px 22px 22px;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  opacity: 1;
+}
+.mobilePinkTitle {
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 12px;
+  line-height: 19px;
+  letter-spacing: 0.8px;
+  color: $white-color;
+  text-align: right;
+  width: 100%;
+}
+
+.mobilePinkText {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.53px;
+  color: $white-color;
+  text-align: right;
+  width: 100%;
+}
+.mobilePinkButtonArea {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mobilePinkButton {
+  justify-content: center;
+  align-items: center;
 }

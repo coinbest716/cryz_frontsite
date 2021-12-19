@@ -20,13 +20,42 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
+  // varaibles
   const { mainImage, featuredServices } = props
-
   const [mobile, setMobile] = useState(false)
+  const [sliderData, setSliderData] = useState([])
 
+  // handlers
   useEffect(() => {
     setMobile(isMobile)
   }, [isMobile])
+  useEffect(() => {
+    if (mobile) {
+      let array = []
+      array = featuredServices
+      let tempArray = []
+      if (array.length !== 0) {
+        array.map(item => {
+          let imgObject = {
+            type: 'image',
+            image: item.image,
+          }
+          tempArray.push(imgObject)
+          let textObject = {
+            type: 'text',
+            title: item.title,
+            text: item.text,
+            detail: item.detail,
+            url: item.url,
+          }
+          tempArray.push(textObject)
+        })
+        setSliderData(tempArray)
+      }
+    } else {
+      setSliderData(featuredServices)
+    }
+  }, [mobile, featuredServices])
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
@@ -64,8 +93,8 @@ const MainSection = props => {
               axis="vertical"
               dynamicHeight={true}
             >
-              {featuredServices &&
-                featuredServices.map((item, index) => (
+              {sliderData &&
+                sliderData.map((item, index) => (
                   <div key={index}>
                     {index % 2 === 0 ? (
                       <>
@@ -163,12 +192,14 @@ const MainSection = props => {
               showStatus={false}
               showIndicators={true}
               infiniteLoop={true}
+              centerMode={true}
+              centerSlidePercentage={80}
               interval={5000}
             >
-              {featuredServices &&
-                featuredServices.map((item, index) => (
-                  <div key={index} className="flex">
-                    <div className={styles.mobileImageArea}>
+              {sliderData &&
+                sliderData.map((item, index) =>
+                  item.type === 'image' ? (
+                    <div className={styles.mobileImageArea} key={index}>
                       <Image
                         src={item.image !== null ? item.image : MainImage}
                         alt=""
@@ -177,27 +208,21 @@ const MainSection = props => {
                         layout="responsive"
                       />
                     </div>
-                    <div className={styles.mobilePinkBoxArea}>
-                      <div className={styles.pinkBoxOpacity} />
-                      <div className={styles.pinkBox}>
-                        <div className={globalStyles.tinyMCEClass}>
-                          <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
-                        </div>
-                        <div className={globalStyles.tinyMCEClass}>
-                          <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
-                        </div>
-                        <div className={styles.pinkButtonArea}>
-                          <button className={styles.pinkButton} onClick={() => router.push(item.url)}>
+                  ) : (
+                    <div className={styles.mobilePinkBoxArea} key={index}>
+                      <div className={styles.mobilePinkBoxOpacity} />
+                      <div className={styles.mobilePinkBox}>
+                        <div className={styles.mobilePinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
+                        <div className={styles.mobilePinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
+                        <div className={styles.mobilePinkButtonArea}>
+                          <button className={styles.mobilePinkButton} onClick={() => router.push(item.url)}>
                             <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
                           </button>
                         </div>
-                        <div className={globalStyles.tinyMCEClass}>
-                          <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.text }} />
-                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
             </Carousel>
           </div>
         </div>
