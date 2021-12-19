@@ -35,15 +35,15 @@ const BuyCard = props => {
         </div>
         <div className={styles.cardDescription}>{data.description}</div>
       </div>
-        { (data.plazas_used >= data.plazas) && (
-      <button className={styles.button} onClick={() => handleClickBuy(data.id, data.web_name, data.price)}>
+
+      <button  disabled={(data.plazas_used >= data.plazas && data.plazas !== 0)}  className={styles.button} onClick={() => handleClickBuy(data.id, data.web_name, data.price)}>
         <div className={'flex justify-start'}>
           <div className={styles.buttonText}>
-            {'Comprar por'} <b>{data.price} €</b>
+              {(data.plazas_used >= data.plazas && data.plazas !== 0) ? `Plazas agotadas`  : <>Comprar por  <b>{data.price} €</b></>}
           </div>
         </div>
         <Image src={ArrowRightWhite} alt="" width={26} height={20} />
-      </button>) }
+      </button>
     </div>
   )
 }
