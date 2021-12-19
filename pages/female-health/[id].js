@@ -12,6 +12,7 @@ import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
 import CircularMark from 'components/components/CircularMark'
 import CarouselFemaleHealth from 'components/FemaleHealth/CarouselFemaleHealth'
+import BuyOutlineButton from 'components/components/BuyOutlineButton'
 import OutlineButton from 'components/components/OutlineButton'
 
 // styles
@@ -111,6 +112,86 @@ const Menopause = () => {
                 )}
               </div>
             </div>
+            {/* buy button part start */}
+            {mobile ? (
+              <div className={'col-span-12'}>
+                {femHealthService.stream_button ? (
+                  <div className="my-1">
+                    <BuyOutlineButton
+                      title="Compra 1 to 1 en streaming"
+                      link="/buy/buy-one-to-one"
+                      onClick={link =>
+                        router.push({
+                          pathname: link,
+                          query: {
+                            discipline_id: femHealthService.discipline_id,
+                            service_type: 'streaming',
+                            type: 'femHealth',
+                            image:
+                              femHealthService?.carousel_image.length > 0
+                                ? femHealthService?.carousel_image[0].path
+                                : '',
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {femHealthService.personal_button ? (
+                  <div className="my-1">
+                    <BuyOutlineButton
+                      title="Compra presenciales"
+                      link="/buy/buy-person"
+                      onClick={link =>
+                        router.push({
+                          pathname: link,
+                          query: {
+                            discipline_id: femHealthService.discipline_id,
+                            service_type: 'personal',
+                            type: 'femHealth',
+                            image:
+                              femHealthService?.carousel_image.length > 0
+                                ? femHealthService?.carousel_image[0].path
+                                : '',
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {femHealthService.online_button ? (
+                  <div className="my-1">
+                    <BuyOutlineButton
+                      title="Compra planes online"
+                      link="/buy/buy-plans-online"
+                      onClick={link =>
+                        router.push({
+                          pathname: link,
+                          query: {
+                            discipline_id: femHealthService.discipline_id,
+                            service_type: 'online',
+                            type: 'femHealth',
+                            image:
+                              femHealthService?.carousel_image.length > 0
+                                ? femHealthService?.carousel_image[0].path
+                                : '',
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
+            {/* buy button part end */}
             <div
               className={mobile ? 'col-span-12 relative flex justify-center' : 'col-span-7 relative flex justify-end'}
             >
@@ -121,7 +202,7 @@ const Menopause = () => {
                   <CircularMark />
                 </div>
               )}
-              <div className={mobile ? 'w-full mt-7 pb-7' : 'w-full mt-20 pb-20'}>
+              <div className={mobile ? 'w-full mt-3 pb-7' : 'w-full mt-20 pb-20'}>
                 {femHealthService?.carousel_image !== undefined ? (
                   <CarouselFemaleHealth sliderData={femHealthService?.carousel_image} mobile={mobile} />
                 ) : (
@@ -135,10 +216,10 @@ const Menopause = () => {
         )}
       </div>
       {/* Button group part */}
-      <div className={'w-full pt-32'}>
-        <div className={'grid grid-cols-12 gap-0'}>
-          {femHealthService.stream_button ? (
-            <div className={'col-span-4 w-full flex'}>
+      {!mobile ? (
+        <div className={'w-full ' + (mobile ? '' : 'pt-32')}>
+          <div className={'grid grid-cols-12 gap-0'}>
+            {femHealthService.stream_button ? (
               <OutlineButton
                 title="Compra 1 to 1 en streaming"
                 link="/buy/buy-one-to-one"
@@ -155,12 +236,10 @@ const Menopause = () => {
                   })
                 }
               />
-            </div>
-          ) : (
-            <></>
-          )}
-          {femHealthService.personal_button ? (
-            <div className={'col-span-4 w-full flex'}>
+            ) : (
+              <></>
+            )}
+            {femHealthService.personal_button ? (
               <OutlineButton
                 title="Compra presenciales"
                 link="/buy/buy-person"
@@ -177,12 +256,10 @@ const Menopause = () => {
                   })
                 }
               />
-            </div>
-          ) : (
-            <></>
-          )}
-          {femHealthService.online_button ? (
-            <div className={'col-span-4 w-full flex'}>
+            ) : (
+              <></>
+            )}
+            {femHealthService.online_button ? (
               <OutlineButton
                 title="Compra planes online"
                 link="/buy/buy-plans-online"
@@ -199,12 +276,14 @@ const Menopause = () => {
                   })
                 }
               />
-            </div>
-          ) : (
-            <></>
-          )}
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }
