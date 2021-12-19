@@ -12,6 +12,8 @@ import styles from 'components/components/BuyCard.module.scss'
 
 const BuyCard = props => {
   const { data, index, handleClickBuy } = props
+
+    console.log(data)
   return (
     <div className={'block'}>
       <div
@@ -33,6 +35,7 @@ const BuyCard = props => {
         </div>
         <div className={styles.cardDescription}>{data.description}</div>
       </div>
+        { (data.plazas_used >= data.plazas) && (
       <button className={styles.button} onClick={() => handleClickBuy(data.id, data.web_name, data.price)}>
         <div className={'flex justify-start'}>
           <div className={styles.buttonText}>
@@ -40,7 +43,7 @@ const BuyCard = props => {
           </div>
         </div>
         <Image src={ArrowRightWhite} alt="" width={26} height={20} />
-      </button>
+      </button>) }
     </div>
   )
 }

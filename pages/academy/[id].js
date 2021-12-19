@@ -81,8 +81,10 @@ const Course = () => {
   }, [getAcademyWithPlazasById, router.asPath])
 
   const handleClickPayment = () => {
-    toast.error('You did not connected payment!')
-    router.push('/purchase-login')
+    router.push({
+      pathname: '/purchase',
+      query: { service_id: mainData.list[0].id, tab: 0, image: mainData.images[0].path, description: mainData.list[0].description, price: mainData.list[0].price },
+    })
   }
   const handleClickDownlodPDF = () => {
     console.log('handleClickDownlodPDF')
@@ -103,13 +105,13 @@ const Course = () => {
                   Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
                   {moment(mainData.end_date).format('MMMM YYYY')}
                 </div>
-                {/* <div className={'mt-6'} style={{ width: '326px' }}>
+                <div className={'mt-6'} style={{ width: '326px' }}>
                   <ArrowButton
                     plazas={mainData.plazas}
                     label={mainData.price + ' €'}
                     onClick={mainData.plazas ? handleClickPayment : null}
                   />
-                </div> */}
+                </div>
 
                 <div className={globalStyles.tinyMCEClass}>
                   <div
