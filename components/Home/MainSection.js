@@ -20,10 +20,11 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
+  // varaibles
   const { mainImage, featuredServices } = props
-
   const [mobile, setMobile] = useState(false)
 
+  // handlers
   useEffect(() => {
     setMobile(isMobile)
   }, [isMobile])
@@ -163,37 +164,33 @@ const MainSection = props => {
               showStatus={false}
               showIndicators={true}
               infiniteLoop={true}
+              centerMode={true}
+              centerSlidePercentage={80}
               interval={5000}
             >
               {featuredServices &&
                 featuredServices.map((item, index) => (
-                  <div key={index} className="flex">
-                    <div className={styles.mobileImageArea}>
-                      <Image
-                        src={item.image !== null ? item.image : MainImage}
-                        alt=""
-                        width={219}
-                        height={136}
-                        layout="responsive"
-                      />
-                    </div>
-                    <div className={styles.mobilePinkBoxArea}>
-                      <div className={styles.pinkBoxOpacity} />
-                      <div className={styles.pinkBox}>
-                        <div className={globalStyles.tinyMCEClass}>
-                          <div className={styles.pinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
-                        </div>
-                        <div className={globalStyles.tinyMCEClass}>
-                          <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
-                        </div>
-                        <div className={styles.pinkButtonArea}>
-                          <button className={styles.pinkButton} onClick={() => router.push(item.url)}>
-                            <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
-                          </button>
-                        </div>
-                        <div className={globalStyles.tinyMCEClass}>
-                          <div className={styles.pinkText} dangerouslySetInnerHTML={{ __html: item.text }} />
-                        </div>
+                  <div className={styles.mobileImageArea} key={'image-' + index}>
+                    <Image
+                      src={item.image !== null ? item.image : MainImage}
+                      alt=""
+                      width={219}
+                      height={136}
+                      layout="responsive"
+                    />
+                  </div>
+                ))}
+              {featuredServices &&
+                featuredServices.map((item, index) => (
+                  <div className={styles.mobilePinkBoxArea} key={'text-' + index}>
+                    <div className={styles.mobilePinkBoxOpacity} />
+                    <div className={styles.mobilePinkBox}>
+                      <div className={styles.mobilePinkTitle} dangerouslySetInnerHTML={{ __html: item.title }} />
+                      <div className={styles.mobilePinkText} dangerouslySetInnerHTML={{ __html: item.detail }} />
+                      <div className={styles.mobilePinkButtonArea}>
+                        <button className={styles.mobilePinkButton} onClick={() => router.push(item.url)}>
+                          <Image src={ArrowLeftWhite} alt="" width={42} height={16} layout="fixed" />
+                        </button>
                       </div>
                     </div>
                   </div>
