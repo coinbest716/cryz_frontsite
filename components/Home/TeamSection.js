@@ -92,8 +92,8 @@ const TeamSection = props => {
           <div className={globalStyles.tinyMCEClass}>
             <div className={styles.text + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: team.text_one }} />
           </div>
-          <div className={'w-full lg:hidden flex justify-center items-center'}>
-            <Image src={team.avatar !== null ? team.avatar : TeamMember01} alt="" width={355} height={368} />
+          <div className={'w-full lg:hidden flex justify-center items-center mb-2'}>
+            <Image src={team.avatar !== null ? team.avatar : TeamMember01} alt="" width={151} height={157} />
           </div>
           <div className={'w-full hidden lg:flex justify-between my-4'}>
             <div style={{ flex: 1 }}>
@@ -113,7 +113,7 @@ const TeamSection = props => {
             <div className={styles.text + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: team.text_two }} />
           </div>
           <div className={'w-full lg:hidden flex justify-between my-4'}>
-            <div className={'w-full flex justify-end items-center'}>
+            <div className={'w-full flex justify-start items-center'}>
               <SocialButtonGroup color="gray" socialURL={{ instagram: team.instagram, facebook: team.facebook }} />
             </div>
             <Image
