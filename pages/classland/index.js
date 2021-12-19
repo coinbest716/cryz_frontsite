@@ -247,17 +247,35 @@ const Classland = () => {
             </div>
           </div>
         )}
-        <div className={styles.divider} />
-        <div style={{ marginBottom: '100px' }}>
-          <div ref={faqRef} className={styles.faqString}>
-            FAQ
-          </div>
-          {faqData?.map((data, index) => (
-            <div style={{ padding: '7px 0px' }} key={index}>
-              <Accordian title={data.name} description={data.description} />
+        {mobile ? (
+          <div>
+            <div className={'my-6 ' + styles.m_divider} />
+            <div className="mb-5">
+              <div ref={faqRef} className={'mb-4 ' + styles.m_faqString}>
+                FAQ
+              </div>
+              {faqData?.map((data, index) => (
+                <div style={{ padding: '7px 0px' }} key={index}>
+                  <Accordian title={data.name} description={data.description} mobile={mobile} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div>
+            <div className={styles.divider} />
+            <div style={{ marginBottom: '100px' }}>
+              <div ref={faqRef} className={styles.faqString}>
+                FAQ
+              </div>
+              {faqData?.map((data, index) => (
+                <div style={{ padding: '7px 0px' }} key={index}>
+                  <Accordian title={data.name} description={data.description} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

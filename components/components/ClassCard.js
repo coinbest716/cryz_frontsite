@@ -1,13 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './ClassCard.module.scss'
-import router from 'next/router'
 
 const ClassCard = props => {
   const { data } = props
 
   return (
-    <a target="_blank" href={data?.url} rel="noopener noreferrer">
+    <a target="_blank" href={data?.url} rel="noopener noreferrer" className="w-full">
       <div className={'cursor-pointer ' + styles.singleCard}>
         <div className={styles.cardImageLayer}>
           <Image
@@ -22,9 +21,11 @@ const ClassCard = props => {
             <span className={styles.cardPaymentType}>{data?.price}€/mes</span>
           </div>
         </div>
-        <div className={styles.cardName}>{data?.name}</div>
-        <div className={styles.cardDescripton}>{data?.description}</div>
-        <div className={styles.cardDifficulty}>Dificultad {data?.difficulty}</div>
+        <div style={{ wordBreak: 'keep-all' }}>
+          <div className={styles.cardName}>{data?.name}</div>
+          <div className={styles.cardDescripton}>{data?.description.slice(0, 50) + '...'}</div>
+          <div className={styles.cardDifficulty}>Dificultad {data?.difficulty}</div>
+        </div>
       </div>
     </a>
   )

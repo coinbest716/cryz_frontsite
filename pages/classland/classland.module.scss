@@ -62,7 +62,7 @@
   position: relative;
 }
 .topImage {
-  opacity: 0.23;
+  opacity: 8.23;
 }
 .topRightLetImage {
   // position: absolute;
@@ -118,6 +118,12 @@
   justify-content: center;
   margin: 85px 76px 0px 76px;
 }
+.m_divider {
+  height: 1px;
+  background-color: #e0ced3;
+  display: flex;
+  justify-content: center;
+}
 .faqString {
   color: #ab8e96;
   font-family: Montserrat;
@@ -127,6 +133,16 @@
   line-height: 22px;
   padding-bottom: 21px;
   padding-top: 80px;
+}
+.m_faqString {
+  color: #ab8e96;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: -0.58px;
+  line-height: 22px;
+  // padding-bottom: 21px;
+  // padding-top: 80px;
 }
 .option {
   color: #011632;
