@@ -18,7 +18,7 @@ const SocialButtonGroup = props => {
   }, [setMobile])
 
   return (
-    <div className={'flex justify-between' + (mobile ? ' px-20' : '')}>
+    <div className={'flex justify-between'}>
       <div className={'mx-1'}>
         <a target="_blank" href={socialURL.instagram} rel="noopener noreferrer">
           <button className={'w-8 h-8 duration-200 hover:bg-gray-500 rounded-full flex justify-center items-center'}>
