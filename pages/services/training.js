@@ -147,7 +147,11 @@ const Training = () => {
         <div></div>
       ) : (
         <div className={'z-0 ' + styles.circleImageCover} id="shark">
-          <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
+          {activeImage === '' ? (
+            <div></div>
+          ) : (
+            <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
+          )}
         </div>
       )}
       <div className={'flex flex-wrap justify-center ' + (mobile ? ' pb-4' : ' pb-20')}>
