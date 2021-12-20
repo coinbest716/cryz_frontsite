@@ -166,14 +166,14 @@ const Login = () => {
     <div className={'relative'}>
       <div className={'w-full h-screen grid grid-cols-12'}>
         {mobile ? (
-          <div className={'col-span-12 p-10 pt-24 flex justify-center items-center ' + styles.whiteArea}>
+          <div className={'col-span-12 pt-20 flex justify-center items-center ' + styles.whiteArea}>
             <div className={styles.whiteAreaContent}>
-              <div styles={'w-full'}>
+              <div className={'px-16 pb-2'}>
                 <Image src={LoginImage} alt="" width={484} height={416} />
               </div>
               <div className={'w-full text-center ' + styles.title}>LOG IN</div>
               {authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
-                <div className="flex justify-center items-center mt-4">
+                <div className="flex justify-center items-center mt-6">
                   <div className={styles.text}>¿No tienes una cuenta?</div>
                   <div className={'font-bold ml-4 ' + styles.text} onClick={() => router.push('/register')}>
                     Regístrate
@@ -211,7 +211,7 @@ const Login = () => {
             >
               <div className={styles.grayAreaContent}>
                 {/* email input */}
-                <div className={'w-full mt-2 ' + styles.inputArea}>
+                <div className={'w-full mt-6 ' + styles.inputArea}>
                   <input
                     type="text"
                     placeholder="Email"
