@@ -278,11 +278,11 @@ const PurchaseLogin = () => {
           <div className={'grid grid-cols-12 gap-4 '}>
             {authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
               mobile ? (
-                <div className={'col-span-12 pt-24 pb-14'}>
+                <div className={'col-span-12 pt-20 pb-14'}>
                   <div className={'w-full px-16'}>
                     <Image src={LoginImage} alt="" width={484} height={416} />
                   </div>
-                  <div className={styles.m_title + ' mt-2 px-5'}>Login para continuar con la compra</div>
+                  <div className={styles.m_title + ' mt-5 px-5'}>Login para continuar con la compra</div>
                   <div className="flex justify-center items-center mt-4">
                     <div className={styles.text}>¿No tienes una cuenta?</div>
                     <div className={'font-bold ml-4 ' + styles.text} onClick={handleClickRegister}>
@@ -290,7 +290,7 @@ const PurchaseLogin = () => {
                     </div>
                   </div>
                   <div className={'flex justify-center'}>
-                    <div className={'pt-8'} style={{ maxWidth: '300px', width: '100%' }}>
+                    <div className={'pt-3'} style={{ maxWidth: '300px', width: '100%' }}>
                       <div className={'pt-4'}>
                         <input
                           type="email"
@@ -300,7 +300,7 @@ const PurchaseLogin = () => {
                           onChange={handleChangeEmail}
                         />
                       </div>
-                      <div className={'w-full relative flex items-center mt-8 ' + styles.inputArea}>
+                      <div className={'w-full relative flex items-center mt-6 ' + styles.inputArea}>
                         <input
                           type={showPass === true ? 'text' : 'password'}
                           placeholder="Contraseña"
