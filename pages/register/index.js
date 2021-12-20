@@ -15,6 +15,7 @@ import EyeCrossIcon from 'assets/images/eye-cross.svg'
 import EyeIcon from 'assets/images/eye.svg'
 import EyeCrossGrayIcon from 'assets/images/eye-cross-gray.svg'
 import EyeGrayIcon from 'assets/images/eye-gray.svg'
+import ConfirmImage from 'assets/images/confirm_code.png'
 
 import toast from 'react-hot-toast'
 import ReactLoading from 'react-loading'
@@ -123,13 +124,24 @@ const Register = () => {
     <div className={'relative'}>
       <div className={'w-full h-screen grid grid-cols-12'}>
         {mobile ? (
-          <div className={'col-span-12 px-20 pt-24 flex justify-center items-center ' + styles.whiteArea}>
-            <div className={styles.whiteAreaContent + ' text-center'}>
-              <div styles={'w-full flex justify-center '}>
-                <Image src={RegisterImage} alt="" width={342} height={415} />
+          userConfirmed ? (
+            <div className={'col-span-12 px-20 pt-5 flex justify-center items-center ' + styles.confirmAreaContent}>
+              <div className={styles.whiteAreaContent + ' text-center'}>
+                <div styles={'w-full flex justify-center '}>
+                  <Image src={ConfirmImage} alt="" width={342} height={345} />
+                </div>
+                <div className={styles.verifyString}>Verifica tu código</div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className={'col-span-12 px-20 pt-24 flex justify-center items-center ' + styles.whiteArea}>
+              <div className={styles.whiteAreaContent + ' text-center'}>
+                <div styles={'w-full flex justify-center '}>
+                  <Image src={RegisterImage} alt="" width={342} height={415} />
+                </div>
+              </div>
+            </div>
+          )
         ) : (
           <div
             className={
@@ -155,15 +167,17 @@ const Register = () => {
               styles.whiteArea
             }
           >
-            <div className={'w-full text-center ' + styles.title}>REGISTRO</div>
-            {/* <div className="flex"> */}
-            <div className="w-full flex justify-center items-center mt-4">
-              <div className={styles.text}>¿Ya tienes una cuenta?</div>
-              <div className={'font-bold ml-4 ' + styles.text} onClick={() => router.push('/login')}>
-                Log in
+            {!userConfirmed && (
+              <div>
+                <div className={'w-full text-center ' + styles.title}>REGISTRO</div>
+                <div className="w-full flex justify-center items-center mt-4">
+                  <div className={styles.text}>¿Ya tienes una cuenta?</div>
+                  <div className={'font-bold ml-4 ' + styles.text} onClick={() => router.push('/login')}>
+                    Log in
+                  </div>
+                </div>
               </div>
-            </div>
-            {/* </div> */}
+            )}
             {userConfirmed === null ? (
               <div className={styles.grayAreaContent}>
                 {/* email input */}
@@ -247,22 +261,29 @@ const Register = () => {
             ) : (
               <div className={styles.grayAreaContent}>
                 <div>
-                  <div className={styles.updatePassword}>Verifica tu código.</div>
                   <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
                     <input
                       type={showPass === true ? 'text' : 'password'}
                       autoComplete="new-password"
                       placeholder="Verifica tu código"
-                      className={'w-full h-full border border-white rounded bg-transparent py-1 pl-2 text-white pr-10'}
+                      className={
+                        'w-full h-full border border-gray-400 rounded bg-transparent py-1 pl-2 text-gray-400 pr-10'
+                      }
                       value={verifyCode}
                       onChange={handleChangeVerifyCode}
                     />
-                    <div className={'absolute right-3 cursor-pointer'}>
+                    <div className={'absolute right-3 cursor-pointer flex items-center'}>
                       {showPass === true ? (
-                        <Image src={EyeIcon} alt="" width={17} height={17} onClick={() => handleSetShowPass(false)} />
+                        <Image
+                          src={EyeGrayIcon}
+                          alt=""
+                          width={17}
+                          height={17}
+                          onClick={() => handleSetShowPass(false)}
+                        />
                       ) : (
                         <Image
-                          src={EyeCrossIcon}
+                          src={EyeCrossGrayIcon}
                           alt=""
                           width={17}
                           height={17}
@@ -271,8 +292,8 @@ const Register = () => {
                       )}
                     </div>
                   </div>
-                  <div className={'mt-10 flex justify-end'}>
-                    <button className={styles.enterButton} onClick={handleVerifyCode}>
+                  <div className={'mt-10 flex justify-center'}>
+                    <button className={styles.m_enterButton} onClick={handleVerifyCode}>
                       Entrar
                     </button>
                   </div>
