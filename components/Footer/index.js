@@ -92,11 +92,13 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div style={{ position: 'relative', width: '100%', height: '42px', background: '#fff', marginTop: '24px' }}>
-        <div className={'cursor-pointer'} style={{ position: 'absolute', right: '10px', bottom: '0px' }}>
-          <Image src={whatsapp} alt="" width={53} height={53} onClick={handleClickWhatsapp} />
+      {mobile && (
+        <div style={{ position: 'relative', width: '100%', height: '42px', background: '#fff', marginTop: '24px' }}>
+          <div className={'cursor-pointer'} style={{ position: 'absolute', right: '10px', bottom: '0px' }}>
+            <Image src={whatsapp} alt="" width={53} height={53} onClick={handleClickWhatsapp} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
