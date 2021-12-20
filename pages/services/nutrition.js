@@ -182,7 +182,7 @@ const Nutrition = () => {
         <div className={'flex justify-start'}>
           {personalButton && (
             <div className={'w-1/3'}>
-              <ArrowButton label={'Compra person'} onClick={handleClickBuyPersion} type={'nutrition'} />
+              <ArrowButton label={'Compra presencial'} onClick={handleClickBuyPersion} type={'nutrition'} />
             </div>
           )}
           {onlineButton && (
