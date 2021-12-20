@@ -1,0 +1,68 @@
+@import 'styles/variable.module.scss';
+
+.singleCard {
+  width: 100%;
+  height: 300px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  border: 1px solid #818e8e;
+}
+.cardImageLayer {
+  position: relative;
+}
+.cardImage {
+  opacity: 1;
+  object-fit: cover;
+  object-position: center;
+}
+.cardPayment {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardPaymentType {
+  color: #7e7d7d;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0;
+  padding: 2px 3px;
+}
+.cardTitle {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  padding: 16px 19px 0px 19px;
+}
+.cardDescripton {
+  color: #acb1b2;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.75px;
+  line-height: 19px;
+  padding: 0px 19px 0px 19px;
+}
+.cardName {
+  color: #acb1b2;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 19px;
+  padding: 14px 19px 10px 19px;
+}
+.cardDifficulty {
+  color: #acb1b2;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 1px;
+  // line-height: 19px;
+  padding: 14px 19px 10px 19px;
+}

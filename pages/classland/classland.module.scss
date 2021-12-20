@@ -4,6 +4,13 @@
   justify-content: center;
   background: linear-gradient(309.58deg, rgba(219, 203, 208, 0.3) 0%, #dbcbd0 100%);
 }
+.m_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(309.58deg, rgba(219, 203, 208, 0.3) 0%, #dbcbd0 100%);
+  height: 330px;
+}
 .topSection {
   padding-top: 100px;
 }
@@ -16,12 +23,23 @@
   -webkit-text-fill-color: transparent;
   display: inline-grid;
   padding-top: 20px;
+  margin-bottom: 22px;
+}
+.m_topTitle {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 25px;
+  letter-spacing: 0px;
+  background: linear-gradient(59.79deg, #c6a8b1 0%, #74676b 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-grid;
+  padding-top: 20px;
+  margin-bottom: 10px;
 }
 .topDash {
   width: 42px;
   height: 7px;
   background-color: #bda1a9;
-  margin-top: 22px;
 }
 .topDescription {
   color: #818e8e;
@@ -30,18 +48,28 @@
   letter-spacing: 0.62px;
   line-height: 28px;
   text-align: justify;
-  margin-top: 48px;
-  margin-bottom: 20px;
+  // margin-top: 48px;
+  // margin-bottom: 20px;
 }
 .topRightSection {
   display: flex;
   justify-content: flex-end;
   position: relative;
 }
+.m_topRightSection {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
 .topImage {
-  opacity: 0.93;
+  opacity: 8.23;
 }
 .topRightLetImage {
+  // position: absolute;
+  // right: 152px;
+  // top: -25px;
+}
+.m_topRightLetImage {
   position: absolute;
   right: 152px;
   top: -25px;
@@ -57,12 +85,27 @@
   letter-spacing: -0.43px;
   line-height: 22px;
 }
+.m_fullPass {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: -0.43px;
+}
 .buttonGroup {
   display: flex;
   margin-top: 55px;
 }
+.m_buttonGroup {
+  display: flex;
+  margin-top: 25px;
+  justify-content: flex-end;
+}
 .cardSection {
   padding-top: 53px;
+}
+.m_cardSection {
+  padding-top: 23px;
 }
 .cardAlign {
   display: flex;
@@ -75,6 +118,12 @@
   justify-content: center;
   margin: 85px 76px 0px 76px;
 }
+.m_divider {
+  height: 1px;
+  background-color: #e0ced3;
+  display: flex;
+  justify-content: center;
+}
 .faqString {
   color: #ab8e96;
   font-family: Montserrat;
@@ -84,4 +133,31 @@
   line-height: 22px;
   padding-bottom: 21px;
   padding-top: 80px;
+}
+.m_faqString {
+  color: #ab8e96;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: -0.58px;
+  line-height: 22px;
+  // padding-bottom: 21px;
+  // padding-top: 80px;
+}
+.option {
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 14px;
+}
+.select {
+  width: 33%;
+  border: 1px solid #d0dae9;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 12px 14px;
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.23px;
+  line-height: 35px;
 }
