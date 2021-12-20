@@ -40,6 +40,11 @@
   color: $gray-500-color;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+}
+
+.link {
+  word-break: break-word;
 }
 
 .mobileContent {
