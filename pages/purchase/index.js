@@ -265,7 +265,7 @@ const Purchase = () => {
       localStorage.setItem('patient_id', patient_id)
       getPatientBillByDashboard({ variables: { patient_id: patient_id } })
       if (patient_id > -1) {
-        setTabIndex(1)
+        setTabIndex(0)
       } else {
         setTabIndex(0)
       }
