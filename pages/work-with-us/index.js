@@ -1,4 +1,5 @@
 import React, { createRef, useEffect, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -14,6 +15,7 @@ const WorkWithUs = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
@@ -26,6 +28,10 @@ const WorkWithUs = () => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
+
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [setMobile])
 
   // variables
   const fileRef = createRef()
@@ -43,8 +49,8 @@ const WorkWithUs = () => {
     <div className={'flex flex-wrap justify-center'}>
       <div className={globalStyles.container}>
         <div className={styles.container}>
-          <div className={styles.title}>Trabaja con nosotros</div>
-          <div className={styles.divider} />
+          <div className={mobile ? styles.mobileTitle : styles.title}>Trabaja con nosotros</div>
+          <div className={mobile ? styles.mobileDivider : styles.divider} />
           <div className={'w-full md:w-2/3 ' + styles.text}>
             Si quieres formar parte de la familia de Crys Dyaz & CO, rellena este formulario, adjunta tu CV y cuéntanos
             un poco más sobre ti

@@ -11,7 +11,12 @@
 }
 .topTitle {
   font-family: DrukWideCyWeb-Bold;
-  font-size: 35px;
+  @media (max-width: 1023px) {
+    font-size: 16px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 35px;
+  }
   letter-spacing: 0px;
   background: linear-gradient(237.31deg, #818e8e 0%, #b8c2c2 100%);
   background-clip: text;
@@ -19,8 +24,14 @@
   display: inline-grid;
 }
 .topDash {
-  width: 42px;
-  height: 7px;
+  @media (max-width: 1023px) {
+    width: 16px;
+    height: 4px;
+  }
+  @media (min-width: 1024px) {
+    width: 42px;
+    height: 4px;
+  }
   background-color: #9da9a9;
 }
 .topDescription {

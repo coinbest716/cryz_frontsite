@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -6,6 +7,7 @@ import { useDispatch } from 'react-redux'
 // next components
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 
 // third party components
 import { Tab, TabList, TabPanel } from 'react-tabs'
@@ -22,6 +24,7 @@ import PreviousButton from 'components/components/purchase/PreviousButton'
 import Credit from 'components/components/purchase/Credit'
 import Transfer from 'components/components/purchase/Transfer'
 import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
+import { formatCreditCardNumber, formatCVC, formatExpirationDate } from 'components/components/purchase/utils'
 
 // json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
@@ -37,7 +40,6 @@ import { Auth } from 'aws-amplify'
 import moment from 'moment'
 import * as gtag from "../../utils/gtag";
 
-
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
   { ssr: false }
@@ -47,11 +49,22 @@ const Purchase = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setMobile] = useState(null)
+
+  const listGrey = '/images/list-grey.svg'
+  const listWhite = '/images/list-white.svg'
+  const docGrey = '/images/doc-grey.svg'
+  const docWhite = '/images/doc-white.svg'
+  const logoRedSys = '/images/logo-redsys.svg'
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [setMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -89,16 +102,16 @@ const Purchase = () => {
   const personalKey = [
     'name',
     'surname',
-   // 'meet',
+    // 'meet',
     //'email',
     //'telephone',
-   // 'country',
-   // 'emergencyPhone',
-   // 'address',
-   // 'code',
-   // 'town',
-   // 'gender',
-   // 'birthday',
+    // 'country',
+    // 'emergencyPhone',
+    // 'address',
+    // 'code',
+    // 'town',
+    // 'gender',
+    // 'birthday',
   ]
   const [personalInfo, setPersonalInfo] = useState({
     id: -1,
@@ -202,7 +215,7 @@ const Purchase = () => {
   const [billDataList, setBillDataList] = useState([])
 
   const [redsys, setRedsys] = useState(false)
-  const [paymentType, setPaymentType] = useState('')
+  const [paymentType, setPaymentType] = useState('card')
   const [cardInfo, setCardInfo] = useState({ number: '', name: '', expiry: '', cvc: '' })
 
   // handlers
@@ -412,7 +425,7 @@ const Purchase = () => {
     if (router.query.service_id) {
       query = { ...query, service_id: router.query.service_id }
     }
-    handleSave()
+    // handleSave()
     router.push({ pathname: '/purchase', query: query }, undefined, { shallow: true })
   }
 
@@ -478,7 +491,6 @@ const Purchase = () => {
   }
 
   const handleChangePaymentType = event => {
-    console.log(event.target.name)
     setPaymentType(event.target.name)
   }
   const handleChangeCardData = (name, value) => {
@@ -608,222 +620,395 @@ const Purchase = () => {
     )
   }
 
+  const handleInputChange = ({ target }) => {
+    if (target.name === 'number') {
+      target.value = formatCreditCardNumber(target.value)
+    } else if (target.name === 'expiry') {
+      target.value = formatExpirationDate(target.value)
+    } else if (target.name === 'cvc') {
+      target.value = formatCVC(target.value)
+    }
+    handleChangeCardData(target.name, target.value)
+  }
+
   return isAuthenticated ? (
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globalStyles.container + ' pt-20'}>
           <div className={'grid grid-cols-12 gap-4 '}>
             <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-20 px-5'}>
-              <div className={'pt-3.5'}>
-                <Tabs
-                  selectedIndex={tabIndex}
-                  onSelect={index => setTabIndex(index)}
-                  className={styles.tabs}
-                  selectedTabClassName={styles.selectedTab}
-                >
-                  <TabList className={styles.tabsList}>
-                    <Tab onClick={() => onClickTab(0)}>01 INFORMACIÓN</Tab>
-                    {/*<Tab onClick={() => onClickTab(1)}>02 DIRECCIONES FACTURACIÓN</Tab>*/}
-                    <Tab onClick={() => onClickTab(1)}>02 MÉTODO DE PAGO</Tab>
-                  </TabList>
-                  <TabPanel>
-                    <div className={'p-4 pt-16'}>
-                      <div className={'flex justify-between gap-8'}>
-                        <div className={'w-full'}>
-                          <div className={styles.tabTitle}>Información general</div>
-                          <div className={'w-full flex justify-between items-center pt-10'}>
-                            {/* <div className={'flex flex-wrap justify-start items-center'}>
-                              <PurchaseAvatar
-                                avatar={personalInfo.avatar || ''}
-                                handleChangeAvatar={handleChangeAvatar}
-                              />
-                              <div className={'pl-5'}>
-                                <div className={styles.profileName}>
-                                  {personalInfo.name + ' ' + personalInfo.surname}
-                                </div>
-                                <div className={styles.profileCounry}>
-                                  {personalInfo.town
-                                    ? personalInfo.town + ', ' + personalInfo.country
-                                    : personalInfo.country}
-                                </div>
+              {mobile ? (
+                <div>
+                  {tabIndex === 0 ? (
+                    <>
+                      <div className={'pt-3.5 flex items-center justify-between'}>
+                        <button
+                          className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.activeTabIcon}
+                        >
+                          <Image src={listWhite} alt={''} width={16} height={16} />
+                        </button>
+                        <div className={styles.directionLine} />
+                        <button
+                          className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.inactiveTabIcon}
+                          onClick={() => onClickTab(1)}
+                        >
+                          <Image src={docGrey} alt={''} width={16} height={16} />
+                        </button>
+                      </div>
+                      <div className={styles.mobileTabTitle + ' pt-3.5'}>Datos</div>
+                      <div className={'pt-4'}>
+                        <div className={styles.formLabel}>Nombre</div>
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder=""
+                          onChange={e => handleChangeInfo(e, 'name')}
+                          className={styles.formControl}
+                          value={personalInfo.name}
+                        />
+                      </div>
+                      <div className={'pt-4'}>
+                        <div className={styles.formLabel}>Apellidos</div>
+                        <input
+                          type="text"
+                          name="surname"
+                          placeholder=""
+                          onChange={e => handleChangeInfo(e, 'surname')}
+                          className={styles.formControl}
+                          value={personalInfo.surname}
+                        />
+                      </div>
+                      <button
+                        className={'flex justify-between items-center pt-4 ' + styles.finishButton}
+                        onClick={() => handleContinue(1)}
+                      >
+                        <p className={styles.finishButtonLabel}>Siguiente paso</p>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div className={'pt-3.5 flex items-center justify-between'}>
+                        <button
+                          className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.inactiveTabIcon}
+                          onClick={() => onClickTab(0)}
+                        >
+                          <Image src={listGrey} alt={''} width={16} height={16} />
+                        </button>
+                        <div className={styles.directionLine} />
+                        <button
+                          className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.activeTabIcon}
+                        >
+                          <Image src={docWhite} alt={''} width={16} height={16} />
+                        </button>
+                      </div>
+                      <div className={styles.mobileTabTitle + ' pt-3.5'}>Datos de pago</div>
+                      <div className={'flex justify-between pt-3.5'}>
+                        <div
+                          className={
+                            paymentType === 'card' ? styles.activeCard + ' pt-2' : styles.inactiveCard + ' pt-2'
+                          }
+                          onClick={() => setPaymentType('card')}
+                        >
+                          <span className={styles.mobileTabTitle}>Tarjeta bancaria</span>
+                          <Image src={logoRedSys} alt={''} width={78} height={38} />
+                        </div>
+                        <div
+                          className={paymentType === 'transfer' ? styles.activeCard : styles.inactiveCard}
+                          onClick={() => setPaymentType('transfer')}
+                        >
+                          <span className={styles.mobileTabTitle + ' text-center'}>
+                            Transferencia <br />
+                            bancaria
+                          </span>
+                        </div>
+                      </div>
+                      {paymentType === 'card' ? (
+                        <div>
+                          <div className={'pt-4'}>
+                            <div className={styles.formLabel}>Numero de tarjeta</div>
+                            <input
+                              type="tel"
+                              name="number"
+                              placeholder="Card Number"
+                              pattern="[\d| ]{16,22}"
+                              required
+                              onChange={handleInputChange}
+                              className={styles.formControl}
+                            />
+                          </div>
+                          <div className={'pt-4'}>
+                            <div className={styles.formLabel}>Nombre completo</div>
+                            <input
+                              type="text"
+                              name="name"
+                              placeholder="Name on Card"
+                              pattern="[\d| ]{16,22}"
+                              required
+                              onChange={handleInputChange}
+                              className={styles.formControl}
+                            />
+                          </div>
+                          <div className={'pt-4'}>
+                            <div className={styles.formLabel}>Fecha expiración</div>
+                            <input
+                              type="tel"
+                              name="expiry"
+                              placeholder="MM/YY"
+                              pattern="\d\d/\d\d"
+                              required
+                              onChange={handleInputChange}
+                              className={styles.formControl}
+                            />
+                          </div>
+                          <div className={'pt-4'}>
+                            <div className={styles.formLabel}>CVV CODE</div>
+                            <input
+                              type="tel"
+                              name="cvc"
+                              placeholder="CVC"
+                              pattern="\d{3,4}"
+                              required
+                              onChange={handleInputChange}
+                              className={styles.formControl}
+                            />
+                          </div>
+                          <button
+                            className={'flex justify-between items-center pt-4 ' + styles.finishButton}
+                            onClick={handleFinishBilling}
+                          >
+                            <p className={styles.finishButtonLabel}>Finalizar</p>
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <div className={'text-center mt-16 ' + styles.transferDetail}>
+                            Realiza tu pago directamente en nuestra cuenta bancaria. Por favor, usa el número del pedido
+                            como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en
+                            nuestra cuenta.
+                          </div>
+                          <button
+                            className={'flex justify-between items-center pt-4 ' + styles.finishButton}
+                            onClick={handleFinishBilling}
+                          >
+                            <p className={styles.finishButtonLabel}>Finalizar</p>
+                          </button>
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div className={'pt-3.5'}>
+                  <Tabs
+                    selectedIndex={tabIndex}
+                    onSelect={index => setTabIndex(index)}
+                    className={styles.tabs}
+                    selectedTabClassName={styles.selectedTab}
+                  >
+                    <TabList className={styles.tabsList}>
+                      <Tab onClick={() => onClickTab(0)}>01 INFORMACIÓN</Tab>
+                      {/*<Tab onClick={() => onClickTab(1)}>02 DIRECCIONES FACTURACIÓN</Tab>*/}
+                      <Tab onClick={() => onClickTab(1)}>02 MÉTODO DE PAGO</Tab>
+                    </TabList>
+                    <TabPanel>
+                      <div className={'p-4 pt-16'}>
+                        <div className={'flex justify-between gap-8'}>
+                          <div className={'w-full'}>
+                            <div className={styles.tabTitle}>Información general</div>
+                            <div className={'w-full flex justify-between items-center pt-10'}>
+                              {/* <div className={'flex flex-wrap justify-start items-center'}>
+                            <PurchaseAvatar
+                              avatar={personalInfo.avatar || ''}
+                              handleChangeAvatar={handleChangeAvatar}
+                            />
+                            <div className={'pl-5'}>
+                              <div className={styles.profileName}>
+                                {personalInfo.name + ' ' + personalInfo.surname}
+                              </div>
+                              <div className={styles.profileCounry}>
+                                {personalInfo.town
+                                  ? personalInfo.town + ', ' + personalInfo.country
+                                  : personalInfo.country}
                               </div>
                             </div>
-                            <div className="flex flex-wrap">
-                              <CommonButton label={'Descartar'} handleClick={handleDiscard} type={'outline'} />
-                              <div className="ml-5">
-                                <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
-                              </div>
-                            </div>*/}
+                          </div>
+                          <div className="flex flex-wrap">
+                            <CommonButton label={'Descartar'} handleClick={handleDiscard} type={'outline'} />
+                            <div className="ml-5">
+                              <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
+                            </div>
+                          </div>*/}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className={'flex justify-between gap-8 pt-16'}>
-                        <div className={'w-3/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'name')}
-                            label={'Nombre'}
-                            placeholder={''}
-                            type={'text'}
-                            value={personalInfo.name}
-                          />
+                        <div className={'flex justify-between gap-8 pt-16'}>
+                          <div className={'w-3/5'}>
+                            <CommonText
+                              handleChange={e => handleChangeInfo(e, 'name')}
+                              label={'Nombre'}
+                              placeholder={''}
+                              type={'text'}
+                              value={personalInfo.name}
+                            />
+                          </div>
+                          {/*<div className={'w-2/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'password')}
+                          label={'Contraseña'}
+                          placeholder={''}
+                          type={'password'}
+                          value={personalInfo.password}
+                        />
+                      </div>*/}
                         </div>
-                        {/*<div className={'w-2/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'password')}
-                            label={'Contraseña'}
-                            placeholder={''}
-                            type={'password'}
-                            value={personalInfo.password}
-                          />
-                        </div>*/}
-                      </div>
-                      <div className={'flex justify-between gap-8 pt-4'}>
-                        <div className={'w-3/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'surname')}
-                            label={'Apellidos'}
-                            placeholder={''}
-                            type={'text'}
-                            value={personalInfo.surname}
-                          />
+                        <div className={'flex justify-between gap-8 pt-4'}>
+                          <div className={'w-3/5'}>
+                            <CommonText
+                              handleChange={e => handleChangeInfo(e, 'surname')}
+                              label={'Apellidos'}
+                              placeholder={''}
+                              type={'text'}
+                              value={personalInfo.surname}
+                            />
+                          </div>
+                          {/*<div className={'w-2/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'meet')}
+                          label={'Como nos conoció…'}
+                          list={meetList}
+                          type={'select'}
+                          value={personalInfo.meet}
+                        />
+                      </div>*/}
                         </div>
-                        {/*<div className={'w-2/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'meet')}
-                            label={'Como nos conoció…'}
-                            list={meetList}
-                            type={'select'}
-                            value={personalInfo.meet}
-                          />
-                        </div>*/}
+                        {/* <div className={'flex justify-between gap-8 pt-4'}>
+                       <div className={'w-3/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'email')}
+                          label={'Email'}
+                          placeholder={''}
+                          type={'email'}
+                          value={personalInfo.email}
+                          disabled={true}
+                        />
                       </div>
-                      {/* <div className={'flex justify-between gap-8 pt-4'}>
-                         <div className={'w-3/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'email')}
-                            label={'Email'}
-                            placeholder={''}
-                            type={'email'}
-                            value={personalInfo.email}
-                            disabled={true}
-                          />
+                       <div className={'w-2/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'telephone')}
+                          label={'Teléfono'}
+                          placeholder={''}
+                          type={'tel'}
+                          value={personalInfo.telephone}
+                        />
+                      </div>
+                    </div> */}
+                        <div className={'flex justify-between gap-8 pt-4'}>
+                          {/*<div className={'w-3/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'country')}
+                          label={'País'}
+                          placeholder={''}
+                          type={'text'}
+                          value={personalInfo.country}
+                        />
+                      </div>*/}
+                          {/* <div className={'w-2/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'emergencyPhone')}
+                          label={'Teléfono emergencia'}
+                          placeholder={''}
+                          type={'tel'}
+                          value={personalInfo.emergencyPhone}
+                        />
+                      </div>*/}
                         </div>
-                         <div className={'w-2/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'telephone')}
-                            label={'Teléfono'}
-                            placeholder={''}
-                            type={'tel'}
-                            value={personalInfo.telephone}
-                          />
+                        <div className={'flex justify-between gap-8 pt-4'}>
+                          {/*<div className={'w-3/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'address')}
+                          label={'Dirección'}
+                          placeholder={''}
+                          type={'text'}
+                          value={personalInfo.address}
+                        />
+                      </div>*/}
+                          {/*<div className={'w-2/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'code')}
+                          label={'DNI'}
+                          placeholder={''}
+                          type={'text'}
+                          value={personalInfo.code}
+                        />
+                      </div>*/}
                         </div>
-                      </div> */}
-                      <div className={'flex justify-between gap-8 pt-4'}>
-                        {/*<div className={'w-3/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'country')}
-                            label={'País'}
-                            placeholder={''}
-                            type={'text'}
-                            value={personalInfo.country}
-                          />
-                        </div>*/}
-                        {/* <div className={'w-2/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'emergencyPhone')}
-                            label={'Teléfono emergencia'}
-                            placeholder={''}
-                            type={'tel'}
-                            value={personalInfo.emergencyPhone}
-                          />
-                        </div>*/}
+                        <div className={'flex justify-between gap-8 pt-4'}>
+                          {/*<div className={'w-3/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'town')}
+                          label={'Provincia'}
+                          placeholder={''}
+                          type={'text'}
+                          value={personalInfo.town}
+                        />
+                      </div>*/}
+                          {/*<div className={'w-2/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'gender')}
+                          label={'Sexo'}
+                          list={genderList}
+                          type={'select'}
+                          value={personalInfo.gender}
+                        />
+                      </div>*/}
+                        </div>
+                        <div className={'flex justify-between gap-8 pt-4'}>
+                          {/*<div className={'w-3/5'}>
+                        <CommonText
+                          handleChange={e => handleChangeInfo(e, 'birthday')}
+                          label={'Fecha de nacimiento'}
+                          placeholder={''}
+                          type={'date'}
+                          value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
+                        />
+                      </div>*/}
+                          <div className={'w-2/5'}></div>
+                        </div>
+                        <div className={'w-full mt-20 ' + styles.divider} />
+                        <div className={'pt-24 flex justify-end'}>
+                          <CommonButton label={'CONTINUAR'} handleClick={() => handleContinue(1)} type={'continue'} />
+                        </div>
                       </div>
-                      <div className={'flex justify-between gap-8 pt-4'}>
-                        {/*<div className={'w-3/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'address')}
-                            label={'Dirección'}
-                            placeholder={''}
-                            type={'text'}
-                            value={personalInfo.address}
-                          />
-                        </div>*/}
-                        {/*<div className={'w-2/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'code')}
-                            label={'DNI'}
-                            placeholder={''}
-                            type={'text'}
-                            value={personalInfo.code}
-                          />
-                        </div>*/}
-                      </div>
-                      <div className={'flex justify-between gap-8 pt-4'}>
-                        {/*<div className={'w-3/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'town')}
-                            label={'Provincia'}
-                            placeholder={''}
-                            type={'text'}
-                            value={personalInfo.town}
-                          />
-                        </div>*/}
-                        {/*<div className={'w-2/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'gender')}
-                            label={'Sexo'}
-                            list={genderList}
-                            type={'select'}
-                            value={personalInfo.gender}
-                          />
-                        </div>*/}
-                      </div>
-                      <div className={'flex justify-between gap-8 pt-4'}>
-                        {/*<div className={'w-3/5'}>
-                          <CommonText
-                            handleChange={e => handleChangeInfo(e, 'birthday')}
-                            label={'Fecha de nacimiento'}
-                            placeholder={''}
-                            type={'date'}
-                            value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
-                          />
-                        </div>*/}
-                        <div className={'w-2/5'}></div>
-                      </div>
-                      <div className={'w-full mt-20 ' + styles.divider} />
-                      <div className={'pt-24 flex justify-end'}>
-                        <CommonButton label={'CONTINUAR'} handleClick={() => handleContinue(1)} type={'continue'} />
-                      </div>
-                    </div>
-                  </TabPanel>
+                    </TabPanel>
 
-                  <TabPanel>
-                    <div className={'p-4 pt-16'}>
-                      <div className={styles.tabTitle}>Método de pago</div>
-                      <div className={'pt-9'}>
-                        <Credit
-                          handleChangePaymentType={handleChangePaymentType}
-                          value={paymentType}
-                          handleChangeCardData={handleChangeCardData}
-                          redsys={redsys}
-                        />
+                    <TabPanel>
+                      <div className={'p-4 pt-16'}>
+                        <div className={styles.tabTitle}>Método de pago</div>
+                        <div className={'pt-9'}>
+                          <Credit
+                            handleChangePaymentType={handleChangePaymentType}
+                            value={paymentType}
+                            handleChangeCardData={handleChangeCardData}
+                            redsys={redsys}
+                          />
+                        </div>
+                        <div className={'pt-5'}>
+                          <Transfer handleChangePaymentType={handleChangePaymentType} value={paymentType} />
+                        </div>
                       </div>
-                      <div className={'pt-5'}>
-                        <Transfer handleChangePaymentType={handleChangePaymentType} value={paymentType} />
+                      <div className={'pt-24 flex justify-between items-center'}>
+                        <div>
+                          <PreviousButton
+                            handleChangePrevious={() => handleContinue(1)}
+                            label={'Volver a Direcciones facturación'}
+                          />
+                        </div>
+                        <CommonButton label={'TERMINAR PEDIDO'} handleClick={handleFinishBilling} type={'continue'} />
                       </div>
-                    </div>
-                    <div className={'pt-24 flex justify-between items-center'}>
-                      <div>
-                        <PreviousButton
-                          handleChangePrevious={() => handleContinue(1)}
-                          label={'Volver a Direcciones facturación'}
-                        />
-                      </div>
-                      <CommonButton label={'TERMINAR PEDIDO'} handleClick={handleFinishBilling} type={'continue'} />
-                    </div>
-                  </TabPanel>
-                </Tabs>
-              </div>
+                    </TabPanel>
+                  </Tabs>
+                </div>
+              )}
             </div>
             <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
               <ShoppingCart shoppingInfo={shoppingInfo} docData={selectedDoc} handleChangeFrame={() => {}} />

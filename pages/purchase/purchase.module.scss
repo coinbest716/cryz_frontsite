@@ -75,3 +75,83 @@
   letter-spacing: 0;
   line-height: 22px;
 }
+
+.directionLine {
+  height: 1px;
+  width: calc(100% - 64px);
+  background-color: #72918e;
+}
+
+.mobileTabTitle {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Montserrat;
+}
+
+.activeCard {
+  border-radius: 8px;
+  background-color: #72918e;
+  width: 160px;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: white;
+  flex-direction: column;
+}
+
+.inactiveCard {
+  border-radius: 8px;
+  border: 1px solid #72918e;
+  width: 160px;
+  height: 80px;
+  color: #72918e;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabel {
+  font-size: 12px;
+  color: #818E8E;
+  font-family: Montserrat; 
+}
+
+.formControl {
+  border-bottom: 1px solid #72918e;
+  border-radius: 3px;
+  background-color: #ffffff;
+  padding: 12px 4px;
+  color: #011632;
+  font-family: 'Avenir Next';
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 22px;
+  width: 100%;
+  outline: none;
+}
+
+.finishButton {
+  padding: 12px 46px;
+  border-radius: 28px;
+  border: 1px solid #72918e;
+  color: #72918e;
+  font-size: 12px;
+  font-family: Montserrat; 
+  margin: auto;
+  margin-top: 42px;
+}
+
+.activeTabIcon {
+  background-color: #72918e;
+}
+
+.inactiveTabIcon {
+  border: 1px solid #72918e;
+}
+
+.transferDetail {
+  font-size: 14px;
+  color: #72918e;
+}

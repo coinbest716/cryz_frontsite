@@ -3,6 +3,10 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import { useRouter } from 'next/router'
+
+// third party components
+import { isMobile } from 'react-device-detect'
+
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import AcademyCard from 'components/components/academy/AcademyCard'
@@ -33,7 +37,9 @@ const Academy = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  // variables
   const router = useRouter()
+  const [mobile, setMobile] = useState(false)
   // const [getAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
   //   graphql.queries.getAcademy
   // )
@@ -42,6 +48,10 @@ const Academy = () => {
   )
   const [cardData, setCardData] = useState([])
 
+  // handlers
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [isMobile])
   useEffect(() => {
     getAcademyWithPlazas()
   }, [getAcademyWithPlazas])
@@ -61,22 +71,22 @@ const Academy = () => {
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
         <div className={globalStyles.container}>
-          <div className={'flex justify-between pt-28'}>
+          <div className={'flex justify-between pt-7 lg:pt-28'}>
             <div>
               <div className={styles.topTitle}>Academy</div>
-              <div className={styles.topDash} />
+              <div className={styles.topDash + ' mt-2 mb-3'} />
             </div>
-            <div>
+            {!mobile && (
               <div className={'z-10'}>
                 <CircularMark />
               </div>
-            </div>
+            )}
           </div>
-          <div className={styles.cardTitle + ' mb-5'}>Destacados</div>
+          {!mobile && <div className={styles.cardTitle + ' mb-5'}>Destacados</div>}
           <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
             {cardData?.map((card, index) => (
-              <div className={'flex justify-center col-span-12 md:col-span-4'} key={index}>
-                <AcademyCard data={card} index={index} handleClickPayment={handleClickPayment} />
+              <div className={'flex justify-center col-span-6 md:col-span-4'} key={index}>
+                <AcademyCard data={card} index={index} handleClickPayment={handleClickPayment} mobile={mobile} />
               </div>
             ))}
           </div>

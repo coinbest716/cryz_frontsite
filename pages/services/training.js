@@ -139,10 +139,19 @@ const Training = () => {
   }
 
   return (
-    <div className={'z-10 ' + (mobile ? styles.m_container : styles.container)} onMouseMove={handleMouseMover}>
-      {!mobile && (
+    <div
+      className={'z-10 ' + (mobile ? styles.m_container : styles.container)}
+      onMouseMove={mobile ? () => {} : handleMouseMover}
+    >
+      {mobile ? (
+        <div></div>
+      ) : (
         <div className={'z-0 ' + styles.circleImageCover} id="shark">
-          <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
+          {activeImage === '' ? (
+            <div></div>
+          ) : (
+            <img src={activeImage} alt="" className={activeHover ? styles.animationImage : styles.circleImage} />
+          )}
         </div>
       )}
       <div className={'flex flex-wrap justify-center ' + (mobile ? ' pb-4' : ' pb-20')}>

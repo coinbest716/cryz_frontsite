@@ -1,0 +1,19 @@
+@import 'styles/variable.module.scss';
+
+.outlineButton {
+  height: 16px;
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 7px;
+  letter-spacing: 0.7px;
+  border: 1px solid $blue-gray-400-color;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: transparent;
+  color: $blue-gray-400-color;
+  &:hover {
+    background-color: $blue-gray-300-color;
+  }
+}

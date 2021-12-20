@@ -108,12 +108,13 @@ const Navbar = () => {
     await client.resetStore()
     await client.clearStore()
     await Auth.signOut()
+    localStorage.clear()
     router.push('/login')
-    if (!Boolean(localStorage.getItem('remember'))) {
-      localStorage.removeItem('email')
-      localStorage.removeItem('password')
-      localStorage.removeItem('patient_id')
-    }
+    // if (!Boolean(localStorage.getItem('remember'))) {
+    //   localStorage.removeItem('email')
+    //   localStorage.removeItem('password')
+    //   localStorage.removeItem('patient_id')
+    // }
   }
 
   const handleGotoRouter = link => {
@@ -169,16 +170,14 @@ const Navbar = () => {
               ))}
             </nav>
           </div>
-          <div className={'flex-shrink-0 flex p-4'} onClick={() => handleGotoRouter('/')}>
-            <Link href={'/'}>
-              <a
-                className={
-                  'flex items-center px-5 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100'
-                }
-              >
-                <Image src={logoutIcon} alt="" width={30} height={30} />
-              </a>
-            </Link>
+          <div className={'flex-shrink-0 flex p-4'} onClick={handleClickLogout}>
+            <div
+              className={
+                'flex items-center cursor-pointer px-5 py-3 my-2 rounded-md hover:bg-gray-100 focus:bg-gray-100 transition ease-in-out duration-100'
+              }
+            >
+              <Image src={logoutIcon} alt="" width={30} height={30} />
+            </div>
           </div>
         </div>
       </div>

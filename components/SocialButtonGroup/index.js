@@ -18,8 +18,8 @@ const SocialButtonGroup = props => {
   }, [setMobile])
 
   return (
-    <div className={'flex justify-between' + (mobile ? ' px-20' : '')}>
-      <div className={'mx-1'}>
+    <div className={'flex justify-center'}>
+      <div className={'mr-3'}>
         <a target="_blank" href={socialURL.instagram} rel="noopener noreferrer">
           <button className={'w-8 h-8 duration-200 hover:bg-gray-500 rounded-full flex justify-center items-center'}>
             <Image
@@ -31,7 +31,7 @@ const SocialButtonGroup = props => {
           </button>
         </a>
       </div>
-      <div className={'mx-1'}>
+      <div className={'ml-3'}>
         <a target="_blank" href={socialURL.facebook} rel="noopener noreferrer">
           <button className={'w-8 h-8 duration-200 hover:bg-gray-500 rounded-full flex justify-center items-center'}>
             <Image

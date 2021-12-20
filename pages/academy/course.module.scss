@@ -2,7 +2,12 @@
 
 .container {
   padding-top: 80px;
-  background: linear-gradient(90deg, #ffffff 68%, #f3f3e9 32%);
+  @media (max-width: 1023px) {
+    background: #f3f3f3;
+  }
+  @media (min-width: 1024px) {
+    background: linear-gradient(90deg, #ffffff 68%, #f3f3e9 32%);
+  }
   overflow: hidden;
   min-height: calc(100vh - 177px);
 }
