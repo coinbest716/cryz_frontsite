@@ -8,7 +8,7 @@ import ArrowRightPink from 'assets/images/arrow-right-pink.svg'
 import ArrowRightWhite from 'assets/images/arrow-right-white.svg'
 
 // styles
-import styles from 'components/components/MobileBuyCard.module.scss'
+import styles from './MobileBuyCard.module.scss'
 
 const MobileBuyCard = props => {
   const { data, index, handleClickBuy } = props
