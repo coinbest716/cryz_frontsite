@@ -35,7 +35,6 @@ const MobileDoubleClasslandCarousel = props => {
     for (var i = 0; i < arr.length; i += size) {
       arrayOfArrays.push(arr.slice(i, i + size))
     }
-    console.log(coTeam, arrayOfArrays)
     setSliderData(arrayOfArrays)
   }, [coTeam])
 
@@ -48,7 +47,7 @@ const MobileDoubleClasslandCarousel = props => {
         stopOnHover={true}
         showStatus={false}
         showIndicators={false}
-        infiniteLoop={false}
+        infiniteLoop={true}
         centerMode={true}
         centerSlidePercentage={80}
         renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
