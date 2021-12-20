@@ -156,8 +156,12 @@ const Login = () => {
 
   return (
     <div className={'relative'}>
-      <div className={'w-full h-screen flex grid grid-cols-12'}>
-        <div className={'w-full col-span-6 flex flex-wrap justify-center items-center ' + styles.whiteArea}>
+      <div className={'w-full h-screen grid grid-cols-12'}>
+        <div
+          className={
+            'col-span-12 lg:col-span-6 md:col-span-6 flex flex-wrap justify-center items-center ' + styles.whiteArea
+          }
+        >
           <div className={styles.whiteAreaContent}>
             <div styles={'w-full'}>
               <Image src={LoginImage} alt="" width={484} height={416} />
@@ -169,7 +173,12 @@ const Login = () => {
           </div>
         </div>
         {authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
-          <div className={'w-full col-span-6 flex flex-wrap justify-center items-center relative ' + styles.grayArea}>
+          <div
+            className={
+              'col-span-12 flex lg:col-span-6 md:col-span-6 flex-wrap justify-center items-center relative ' +
+              styles.grayArea
+            }
+          >
             <div className={styles.closeButton}>
               <button
                 className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
@@ -259,7 +268,12 @@ const Login = () => {
             </div>
           </div>
         ) : (
-          <div className={'w-full col-span-6 flex flex-wrap flex justify-center items-center ' + styles.grayArea}>
+          <div
+            className={
+              'w-full col-span-12 lg:col-span-6 md:col-span-6 flex flex-wrap flex justify-center items-center ' +
+              styles.grayArea
+            }
+          >
             <div>
               <div className={styles.updatePassword}>Actualiza contraseña</div>
               <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
