@@ -636,7 +636,7 @@ const Purchase = () => {
       <div className={styles.container}>
         <div className={globalStyles.container + ' pt-20'}>
           <div className={'grid grid-cols-12 gap-4 '}>
-            <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-20 px-5'}>
+            <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-20'}>
               {mobile ? (
                 <div>
                   {tabIndex === 0 ? (

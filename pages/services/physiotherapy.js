@@ -118,7 +118,7 @@ const Physiotherapy = () => {
 
   return (
     <div className={mobile ? styles.m_container : styles.container}>
-      <div className={'flex flex-wrap justify-center p-4 ' + (mobile ? ' pb-5' : ' pb-20')}>
+      <div className={'flex flex-wrap justify-center ' + (mobile ? ' pb-5' : ' pb-20')}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
             <BackButton />
