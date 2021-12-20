@@ -121,7 +121,7 @@ const Course = () => {
           {mainData && !mobile && (
             <div className={'grid grid-cols-12 gap-4'}>
               <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-                <div className={'pt-10 ' + styles.topTitle}>{mainData.name}</div>
+                <div className={'pt-32 ' + styles.topTitle}>{mainData.name}</div>
                 <div className={styles.duration + ' pt-7'}>
                   Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
                   {moment(mainData.end_date).format('MMMM YYYY')}
