@@ -179,12 +179,9 @@ const Login = () => {
               </div>
               <div className={'w-full text-center ' + styles.title}>LOG IN</div>
               {authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
-                <div className="flex justify-evenly items-center mt-4">
-                  <div className={'w-full text-center ' + styles.text}>¿No tienes una cuenta?</div>
-                  <div
-                    className={'w-full text-center font-bold ' + styles.text}
-                    onClick={() => router.push('/register')}
-                  >
+                <div className="flex justify-center items-center mt-4">
+                  <div className={styles.text}>¿No tienes una cuenta?</div>
+                  <div className={'font-bold ml-4 ' + styles.text} onClick={() => router.push('/register')}>
                     Regístrate
                   </div>
                 </div>
