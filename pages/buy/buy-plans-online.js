@@ -9,6 +9,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 import CircularMark from 'components/components/CircularMark'
 import BuyCard from 'components/components/BuyCard'
+import MobileBuyCard from 'components/components/MobileBuyCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -18,17 +19,23 @@ import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
-import * as gtag from "../../utils/gtag";
+import * as gtag from '../../utils/gtag'
+import { isMobile } from 'react-device-detect'
 
 const BuyPlansOnline = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -59,7 +66,7 @@ const BuyPlansOnline = () => {
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getCmsServiceSubjectByType, getFemHealthServiceSubjectByType])
+  }, [getCmsServiceSubjectByType, getFemHealthServiceSubjectByType, router.query])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubjectByType) {
@@ -69,20 +76,20 @@ const BuyPlansOnline = () => {
 
       for (let service of cmsSubjectData.getCmsServiceSubjectByType.services) {
         servicesViewed.push({
-          "id": service.id,
-          "name": service.name,
-          "list_name": service.web_name,
-          "brand": "Crys Dyaz & Co",
-          "quantity": 1,
-          "price": service.price
+          id: service.id,
+          name: service.name,
+          list_name: service.web_name,
+          brand: 'Crys Dyaz & Co',
+          quantity: 1,
+          price: service.price,
         })
       }
 
       gtag.event({
         action: 'view_item_list',
         params: {
-          "items": servicesViewed
-        }
+          items: servicesViewed,
+        },
       })
     }
   }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
@@ -99,21 +106,20 @@ const BuyPlansOnline = () => {
   }, [femHealthServiceSubjectLoading, femHealthServiceSubjectData, femHealthServiceSubjectError])
 
   const handleClickBuy = (service_id, description, price) => {
-
     gtag.event({
       action: 'select_content',
       params: {
-        "content_type": "product",
-        "items": [
+        content_type: 'product',
+        items: [
           {
-            "id": service_id,
-            "name": description,
-            "brand": "Crys Dyaz & Co",
-            "quantity": 1,
-            "price": price
-          }
-        ]
-      }
+            id: service_id,
+            name: description,
+            brand: 'Crys Dyaz & Co',
+            quantity: 1,
+            price: price,
+          },
+        ],
+      },
     })
 
     Auth.currentAuthenticatedUser()
@@ -131,30 +137,50 @@ const BuyPlansOnline = () => {
       })
   }
   return (
-    <div className={styles.container}>
+    <div className={mobile ? styles.m_container : styles.container}>
       <div className={globalStyles.container}>
-        <div className={styles.backButtonArea}>
+        <div className={mobile ? styles.m_backButtonArea : styles.backButtonArea}>
           <BackButton />
         </div>
-        <div className={'grid grid-cols-12 gap-4'}>
-          <div className={'col-span-6'}>
-            <div className={styles.title}>Bonos y Sesiones</div>
-            <div className={styles.divider} />
+        {mobile ? (
+          <div>
+            <div className={styles.m_title}>Bonos y Sesiones</div>
+            <div className={styles.m_divider} />
             <div className={globalStyles.tinyMCEClass}>
               <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: description }}></div>
             </div>
           </div>
-          <div className={'col-span-6 flex justify-end z-10'}>
-            <CircularMark />
-          </div>
-        </div>
-        <div className={'mt-5 mb-10 grid grid-cols-12 gap-6'}>
-          {sessionData.map((item, index) => (
-            <div className={'col-span-4'} key={index}>
-              <BuyCard data={item} index={index} handleClickBuy={handleClickBuy} />
+        ) : (
+          <div className={'grid grid-cols-12 gap-4'}>
+            <div className={'col-span-6'}>
+              <div className={styles.title}>Bonos y Sesiones</div>
+              <div className={styles.divider} />
+              <div className={globalStyles.tinyMCEClass}>
+                <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: description }}></div>
+              </div>
             </div>
-          ))}
-        </div>
+            <div className={'col-span-6 flex justify-end z-10'}>
+              <CircularMark />
+            </div>
+          </div>
+        )}
+        {mobile ? (
+          <div className={'mt-10 mb-6 grid grid-cols-12 gap-4'}>
+            {sessionData.map((item, index) => (
+              <div className={'col-span-6'} key={index}>
+                <MobileBuyCard data={item} index={index} handleClickBuy={handleClickBuy} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className={'mt-5 mb-10 grid grid-cols-12 gap-6'}>
+            {sessionData.map((item, index) => (
+              <div className={'col-span-4'} key={index}>
+                <BuyCard data={item} index={index} handleClickBuy={handleClickBuy} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -10,6 +10,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 import CircularMark from 'components/components/CircularMark'
 import MobileBuyCard from 'components/components/MobileBuyCard'
+import BuyCard from 'components/components/BuyCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -177,7 +178,7 @@ const BuyPerson = () => {
           <div className={'mt-5 mb-10 grid grid-cols-12 gap-6'}>
             {sessionData.map((item, index) => (
               <div className={'col-span-4'} key={index}>
-                <MobileBuyCard data={item} index={index} handleClickBuy={handleClickBuy} />
+                <BuyCard data={item} index={index} handleClickBuy={handleClickBuy} />
               </div>
             ))}
           </div>

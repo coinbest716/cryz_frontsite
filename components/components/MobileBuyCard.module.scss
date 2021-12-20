@@ -26,6 +26,8 @@
   letter-spacing: 1.2px;
   color: $blue-gray-400-color;
   margin-right: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .cardDescription {
@@ -36,6 +38,8 @@
   letter-spacing: 1px;
   color: #acb1b2;
   margin-top: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .arrowIcon {
   min-width: 20px;
@@ -59,4 +63,6 @@
   line-height: 22px;
   letter-spacing: 0.9px;
   color: $white-color;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
