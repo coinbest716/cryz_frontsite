@@ -136,9 +136,15 @@ const ResetPassword = () => {
                 />
                 <div className={'absolute right-3 cursor-pointer items-center flex'}>
                   {showPass === true ? (
-                    <Image src={EyeIcon} alt="" width={17} height={17} onClick={() => handleSetShowPass(false)} />
+                    <Image src={EyeGrayIcon} alt="" width={17} height={17} onClick={() => handleSetShowPass(false)} />
                   ) : (
-                    <Image src={EyeCrossIcon} alt="" width={17} height={17} onClick={() => handleSetShowPass(true)} />
+                    <Image
+                      src={EyeCrossGrayIcon}
+                      alt=""
+                      width={17}
+                      height={17}
+                      onClick={() => handleSetShowPass(true)}
+                    />
                   )}
                 </div>
               </div>
