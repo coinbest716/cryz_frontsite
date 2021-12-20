@@ -66,7 +66,7 @@ const BuyPlansOnline = () => {
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getCmsServiceSubjectByType, getFemHealthServiceSubjectByType, router.query])
+  }, [router.query])
 
   useEffect(() => {
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubjectByType) {
