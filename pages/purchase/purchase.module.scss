@@ -4,6 +4,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  min-height: calc(100vh - 150px);
 }
 
 .tabsList {
@@ -114,8 +115,8 @@
 
 .formLabel {
   font-size: 12px;
-  color: #818E8E;
-  font-family: Montserrat; 
+  color: #818e8e;
+  font-family: Montserrat;
 }
 
 .formControl {
@@ -138,9 +139,9 @@
   border: 1px solid #72918e;
   color: #72918e;
   font-size: 12px;
-  font-family: Montserrat; 
+  font-family: Montserrat;
   margin: auto;
-  margin-top: 42px;
+  margin-top: 32px;
 }
 
 .activeTabIcon {
