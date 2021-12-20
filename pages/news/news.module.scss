@@ -5,7 +5,8 @@
   display: flex;
   justify-content: center;
   background-color: #f3f3e9;
-  height: 100vh;
+  max-height: calc(100vh - 150px);
+  min-height: calc(100vh - 150px);
 }
 .topTitle {
   font-size: 54px;
