@@ -59,3 +59,18 @@
   letter-spacing: 0;
   line-height: 18px;
 }
+
+.mobileTitle {
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 18px;
+  color: $blue-gray-400-color;
+  margin-top: 20px;
+}
+
+.mobileDivider {
+  width: 24px;
+  height: 4px;
+  background-color: #E3BBAA;
+  margin-top: 8px;
+  margin-bottom: 28px;
+}
