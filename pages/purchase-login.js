@@ -17,21 +17,28 @@ import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/purchase-login.module.scss'
 
+import LoginImage from 'assets/images/login.png'
 import EyeCrossIcon from 'assets/images/eye-cross-gray.svg'
 import EyeIcon from 'assets/images/eye-gray.svg'
 
 import { Auth } from 'aws-amplify'
 import toast from 'react-hot-toast'
+import { isMobile } from 'react-device-detect'
 
 const PurchaseLogin = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
+
+  useEffect(() => {
+    setIsMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -269,70 +276,141 @@ const PurchaseLogin = () => {
       <div className={styles.container}>
         <div className={globalStyles.container + ' pt-20'}>
           <div className={'grid grid-cols-12 gap-4 '}>
-            {!authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
-              <div className={'col-span-12 md:col-span-8 sm:col-span-12 pt-32 pb-44'}>
-                <div className={'px-10'}>
-                  <div className={styles.title}>Regístrate para continuar con la compra</div>
-                </div>
-                <div className={'flex justify-center'}>
-                  <div className={'pt-12'} style={{ maxWidth: '300px', width: '100%' }}>
-                    <div className={'flex justify-start gap-4'}>
-                      <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'fill'} />
-                      <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'outline'} />
+            {authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
+              mobile ? (
+                <div className={'col-span-12 pt-24 pb-14'}>
+                  <div className={'w-full px-16'}>
+                    <Image src={LoginImage} alt="" width={484} height={416} />
+                  </div>
+                  <div className={styles.m_title + ' mt-2 px-5'}>Regístrate para continuar con la compra</div>
+                  <div className="flex justify-center items-center mt-4">
+                    <div className={styles.text}>¿No tienes una cuenta?</div>
+                    <div className={'font-bold ml-4 ' + styles.text} onClick={handleClickRegister}>
+                      Regístrate
                     </div>
-                    <div className={'pt-9'}>
-                      <input
-                        type="email"
-                        placeholder="Email"
-                        className={styles.input}
-                        value={email}
-                        onChange={handleChangeEmail}
-                      />
-                    </div>
-                    <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
-                      <input
-                        type={showPass === true ? 'text' : 'password'}
-                        placeholder="Contraseña"
-                        className={styles.input}
-                        value={password}
-                        onChange={handleChangePassword}
-                      />
-                      <div className={'absolute right-3 cursor-pointer flex items-center'}>
-                        {showPass === true ? (
-                          <Image src={EyeIcon} alt="" width={17} height={17} onClick={() => handleSetShowPass(false)} />
-                        ) : (
-                          <Image
-                            src={EyeCrossIcon}
-                            alt=""
-                            width={17}
-                            height={17}
-                            onClick={() => handleSetShowPass(true)}
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <div className={'flex justify-between items-center pt-6'}>
-                      <div className={'flex justify-between items-center'}>
+                  </div>
+                  <div className={'flex justify-center'}>
+                    <div className={'pt-8'} style={{ maxWidth: '300px', width: '100%' }}>
+                      <div className={'pt-4'}>
                         <input
-                          type="checkbox"
-                          style={{ width: 20, height: 20 }}
-                          onChange={handleSetRememberMe}
-                          checked={rememberMe}
+                          type="email"
+                          placeholder="Email"
+                          className={styles.m_input}
+                          value={email}
+                          onChange={handleChangeEmail}
                         />
-                        <p className={styles.remember} onChange={handleSetRememberMe}>
-                          &nbsp;&nbsp;Recuerdame
-                        </p>
                       </div>
-                      <div>
-                        <CommonButton handleClick={handleClickPurchaseLogin} label={'Entrar'} type={'fill'} />
+                      <div className={'w-full relative flex items-center mt-8 ' + styles.inputArea}>
+                        <input
+                          type={showPass === true ? 'text' : 'password'}
+                          placeholder="Contraseña"
+                          className={styles.m_input}
+                          value={password}
+                          onChange={handleChangePassword}
+                        />
+                        <div className={'absolute right-3 cursor-pointer flex items-center'}>
+                          {showPass === true ? (
+                            <Image
+                              src={EyeIcon}
+                              alt=""
+                              width={17}
+                              height={17}
+                              onClick={() => handleSetShowPass(false)}
+                            />
+                          ) : (
+                            <Image
+                              src={EyeCrossIcon}
+                              alt=""
+                              width={17}
+                              height={17}
+                              onClick={() => handleSetShowPass(true)}
+                            />
+                          )}
+                        </div>
+                      </div>
+                      <div className={'pt-2 flex justify-end'}>
+                        <Link href={'/forgot-password'} passHref>
+                          <p className={styles.forgetPassword}>Olvidaste contraseña</p>
+                        </Link>
+                      </div>
+                      <div className={'flex justify-center items-center mt-12'}>
+                        <button className={styles.m_enterButton} onClick={handleClickPurchaseLogin}>
+                          Entrar
+                        </button>
                       </div>
                     </div>
-                    <div className={'pt-2 flex justify-end'}>
-                      <Link href={'/forgot-password'} passHref>
-                        <p className={styles.forgetPassword}>Olvidaste contraseña</p>
-                      </Link>
-                    </div>
-                    {/* <div className={'flex justify-between items-center pt-10'}>
+                  </div>
+                </div>
+              ) : (
+                <div className={'col-span-12 md:col-span-8 sm:col-span-12 pt-32 pb-44'}>
+                  <div className={'px-10'}>
+                    <div className={styles.title}>Regístrate para continuar con la compra</div>
+                  </div>
+                  <div className={'flex justify-center'}>
+                    <div className={'pt-12'} style={{ maxWidth: '300px', width: '100%' }}>
+                      <div className={'flex justify-start gap-4'}>
+                        <CommonButton handleClick={handleClickLogin} label={'LOGIN'} type={'fill'} />
+                        <CommonButton handleClick={handleClickRegister} label={'REGISTRO'} type={'outline'} />
+                      </div>
+                      <div className={'pt-9'}>
+                        <input
+                          type="email"
+                          placeholder="Email"
+                          className={styles.input}
+                          value={email}
+                          onChange={handleChangeEmail}
+                        />
+                      </div>
+                      <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
+                        <input
+                          type={showPass === true ? 'text' : 'password'}
+                          placeholder="Contraseña"
+                          className={styles.input}
+                          value={password}
+                          onChange={handleChangePassword}
+                        />
+                        <div className={'absolute right-3 cursor-pointer flex items-center'}>
+                          {showPass === true ? (
+                            <Image
+                              src={EyeIcon}
+                              alt=""
+                              width={17}
+                              height={17}
+                              onClick={() => handleSetShowPass(false)}
+                            />
+                          ) : (
+                            <Image
+                              src={EyeCrossIcon}
+                              alt=""
+                              width={17}
+                              height={17}
+                              onClick={() => handleSetShowPass(true)}
+                            />
+                          )}
+                        </div>
+                      </div>
+                      <div className={'flex justify-between items-center pt-6'}>
+                        <div className={'flex justify-between items-center'}>
+                          <input
+                            type="checkbox"
+                            style={{ width: 20, height: 20 }}
+                            onChange={handleSetRememberMe}
+                            checked={rememberMe}
+                          />
+                          <p className={styles.remember} onChange={handleSetRememberMe}>
+                            &nbsp;&nbsp;Recuerdame
+                          </p>
+                        </div>
+                        <div>
+                          <CommonButton handleClick={handleClickPurchaseLogin} label={'Entrar'} type={'fill'} />
+                        </div>
+                      </div>
+                      <div className={'pt-2 flex justify-end'}>
+                        <Link href={'/forgot-password'} passHref>
+                          <p className={styles.forgetPassword}>Olvidaste contraseña</p>
+                        </Link>
+                      </div>
+                      {/* <div className={'flex justify-between items-center pt-10'}>
                       <div className={styles.divider} />
                       <div className={styles.remember}>or</div>
                       <div className={styles.divider} />
@@ -343,6 +421,43 @@ const PurchaseLogin = () => {
                     <div className={'flex justify-between items-center pt-5'}>
                       <CommonButton handleClick={handleClickGoogle} label={'LOGIN CON GOOGLE'} type={'google'} />
                     </div> */}
+                    </div>
+                  </div>
+                </div>
+              )
+            ) : mobile ? (
+              <div className={'col-span-12 pt-24 pb-14 px-10'}>
+                <div className={'w-full px-6'}>
+                  <Image src={LoginImage} alt="" width={484} height={416} />
+                </div>
+                <div>
+                  <div className={styles.m_title}>Actualiza contraseña</div>
+                  <div className={'w-full relative flex items-center mt-14 ' + styles.inputArea}>
+                    <input
+                      type={showPass === true ? 'text' : 'password'}
+                      placeholder="Actualiza contraseña"
+                      className={styles.m_input}
+                      value={password}
+                      onChange={handleChangePassword}
+                    />
+                    <div className={'absolute right-3 cursor-pointer flex items-center'}>
+                      {showPass === true ? (
+                        <Image src={EyeIcon} alt="" width={17} height={17} onClick={() => handleSetShowPass(false)} />
+                      ) : (
+                        <Image
+                          src={EyeCrossIcon}
+                          alt=""
+                          width={17}
+                          height={17}
+                          onClick={() => handleSetShowPass(true)}
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <div className={'mt-10 flex justify-center'}>
+                    <button className={styles.m_enterButton} onClick={handleUpdatePassword}>
+                      Entrar
+                    </button>
                   </div>
                 </div>
               </div>
@@ -391,9 +506,13 @@ const PurchaseLogin = () => {
                 </div>
               </div>
             )}
-            <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
-              <ShoppingCart shoppingInfo={shoppingInfo} />
-            </div>
+            {mobile ? (
+              <></>
+            ) : (
+              <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
+                <ShoppingCart shoppingInfo={shoppingInfo} />
+              </div>
+            )}
           </div>
         </div>
       </div>
