@@ -22,9 +22,12 @@ const AcademyCard = props => {
             <Image src={data?.images[0]?.path || ''} alt="" width={365} height={253} className={styles.cardImage} />
           )}
         </div>
-        <div className={styles.cardTitle}>{data?.name.slice(0, 30)}</div>
+        <div className={styles.cardTitle}>{data?.name.slice(0, 30) + (data?.name.length > 30 ? '...' : '')}</div>
         <div className={globalStyles.tinyMCEClass}>
-          <div className={styles.cardName}>{data.description.replace(/(<([^>]+)>)/gi, '').slice(0, 50)}</div>
+          <div className={styles.cardName}>
+            {data.description.replace(/(<([^>]+)>)/gi, '').slice(0, 50) +
+              (data.description.replace(/(<([^>]+)>)/gi, '').length > 50 ? '...' : '')}
+          </div>
         </div>
         <div className={styles.cardName}>{data?.category}</div>
         {mobile && (

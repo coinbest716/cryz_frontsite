@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 
 // next components
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 // third party components
+import { useDispatch } from 'react-redux'
 import toast from 'react-hot-toast'
+import { isMobile } from 'react-device-detect'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -28,9 +29,16 @@ import 'moment/locale/es'
 moment.locale('es')
 
 const Course = () => {
+  // variables
   const router = useRouter()
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setMobile] = useState(false)
+
+  // handlers
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     setIsMounted(true)
@@ -48,7 +56,7 @@ const Course = () => {
   const [getAcademyWithPlazasById, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
     graphql.queries.getAcademyWithPlazasById
   )
-  const [mainData, setMainData] = useState(null)
+  const [mainData, setMainData] = useState('')
   const [feature, setFeature] = useState([])
 
   // handlers
@@ -77,13 +85,21 @@ const Course = () => {
   }, [courseLoading, courseData, courseError])
 
   useEffect(() => {
-    getAcademyWithPlazasById({ variables: { id: Number(router.asPath.split('/')[2]) } })
-  }, [getAcademyWithPlazasById, router.asPath])
+    if (router.query.id !== undefined) {
+      getAcademyWithPlazasById({ variables: { id: Number(router.query.id) } })
+    }
+  }, [getAcademyWithPlazasById, router.query])
 
   const handleClickPayment = () => {
     router.push({
       pathname: '/purchase',
-      query: { service_id: mainData.list[0].id, tab: 0, image: mainData.images[0].path, description: mainData.list[0].description, price: mainData.list[0].price },
+      query: {
+        service_id: mainData.list[0].id,
+        tab: 0,
+        image: mainData.images[0].path,
+        description: mainData.list[0].description,
+        price: mainData.list[0].price,
+      },
     })
   }
   const handleClickDownlodPDF = () => {
@@ -92,12 +108,17 @@ const Course = () => {
 
   return (
     <div className={styles.container}>
-      <div className={'flex flex-wrap justify-center pb-20'}>
-        <div className={globalStyles.container}>
-          <div className={'mt-9'}>
+      <div className={'flex flex-wrap justify-center'}>
+        {mobile && mainData !== '' && (
+          <div>
+            <CarouselAcademy sliderData={mainData.images} />
+          </div>
+        )}
+        <div className={globalStyles.container + ' z-10'}>
+          <div className={'absolute top-24'}>
             <BackButton />
           </div>
-          {mainData && (
+          {mainData && !mobile && (
             <div className={'grid grid-cols-12 gap-4'}>
               <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
                 <div className={'pt-10 ' + styles.topTitle}>{mainData.name}</div>
@@ -105,14 +126,15 @@ const Course = () => {
                   Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
                   {moment(mainData.end_date).format('MMMM YYYY')}
                 </div>
-                <div className={'mt-6'} style={{ width: '326px' }}>
-                  <ArrowButton
-                    plazas={mainData.plazas}
-                    label={mainData.price + ' €'}
-                    onClick={mainData.plazas ? handleClickPayment : null}
-                  />
-                </div>
-
+                {mainData.plazas && (
+                  <div className={'mt-6'} style={{ width: '326px' }}>
+                    <ArrowButton
+                      plazas={mainData.plazas}
+                      label={mainData.price + ' €'}
+                      onClick={mainData.plazas ? handleClickPayment : null}
+                    />
+                  </div>
+                )}
                 <div className={globalStyles.tinyMCEClass}>
                   <div
                     className={styles.topDescription + ' mt-8 tinymce-class'}
@@ -137,10 +159,44 @@ const Course = () => {
                       <Image src={mainData.images[0].path} alt="" width={500} height={350} />
                     </div>
                   )}
-                  {/* <div className={'pt-10'} style={{ width: '500px' }}>
-                    <CarouselAcademy sliderData={mainData.images} />
-                    <Image src={item.path} alt="" width={500} height={350} className={styles.slideImage} />
-                  </div> */}
+                </div>
+              </div>
+            </div>
+          )}
+          {mainData && mobile && (
+            <div className={'grid grid-cols-12 gap-4 mx-2 p-4 pb-6 -mt-10 z-10 bg-white'}>
+              <div className={'col-span-12'}>
+                <div className={styles.topTitle}>{mainData.name}</div>
+                <div className={styles.duration + ' pt-7'}>
+                  Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
+                  {moment(mainData.end_date).format('MMMM YYYY')}
+                </div>
+                {mainData.plazas && (
+                  <div className={'mt-6'} style={{ width: '326px' }}>
+                    <ArrowButton
+                      plazas={mainData.plazas}
+                      label={mainData.price + ' €'}
+                      onClick={mainData.plazas ? handleClickPayment : null}
+                    />
+                  </div>
+                )}
+                <div className={globalStyles.tinyMCEClass}>
+                  <div
+                    className={styles.topDescription + ' mt-8 tinymce-class'}
+                    dangerouslySetInnerHTML={{ __html: mainData.description }}
+                  ></div>
+                </div>
+              </div>
+              <div className={'col-span-12 flex flex-wrap justify-center'}>
+                <div className={'w-full flex justify-between pt-10'}>
+                  {feature.map((item, index) => (
+                    <div key={index}>
+                      <Feature data={item} />
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-11">
+                  <DownloadPDF onClick={handleClickDownlodPDF} url={mainData.doc} />
                 </div>
               </div>
             </div>

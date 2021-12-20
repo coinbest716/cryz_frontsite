@@ -9,11 +9,26 @@
   margin-top: 180px;
 }
 
+.mobileTitle {
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 18px;
+  color: $blue-gray-400-color;
+  margin-top: 100px;
+}
+
 .divider {
   width: 40px;
   height: 4px;
   background-color: $blue-gray-400-color;
-  margin-top: 16px;
+  margin-top: 8px;
+  margin-bottom: 28px;
+}
+
+.mobileDivider {
+  width: 24px;
+  height: 4px;
+  background-color: #E3BBAA;
+  margin-top: 8px;
   margin-bottom: 28px;
 }
 
@@ -25,4 +40,14 @@
   color: $gray-500-color;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+}
+
+.link {
+  word-break: break-word;
+}
+
+.mobileContent {
+  height: calc(100vh - 318px);
+  overflow: scroll;
 }
