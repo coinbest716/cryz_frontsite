@@ -10,8 +10,8 @@ import { Carousel } from 'react-responsive-carousel'
 // images and icons
 import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
-// import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
-// import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
+import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
+import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 
 // styles
 import styles from './CarouselTeam.module.scss'
@@ -33,7 +33,7 @@ const CarouselTeam = props => {
       renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
         hasPrev ? (
           <button onClick={clickHandler} className={styles.previousButton}>
-            <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
+            <Image src={previousButtonPinkIcon} alt="" width={20} height={15} />
           </button>
         ) : (
           <button onClick={clickHandler} className={styles.previousButton}>
@@ -44,7 +44,7 @@ const CarouselTeam = props => {
       renderArrowNext={(clickHandler, hasNext, labelNext) =>
         hasNext ? (
           <button onClick={clickHandler} className={styles.nextButton}>
-            <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
+            <Image onClick={clickHandler} src={nextButtonPinkIcon} alt="" width={20} height={15} />
           </button>
         ) : (
           <button onClick={clickHandler} className={styles.nextButton}>
