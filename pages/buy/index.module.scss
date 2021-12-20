@@ -7,16 +7,33 @@
   padding-top: 80px;
   min-height: calc(100vh - 177px);
 }
-
+.m_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 16px;
+  padding-top: 80px;
+  min-height: calc(100vh - 177px);
+}
 .backButtonArea {
   padding-top: 40px;
   padding-bottom: 40px;
 }
-
+.m_backButtonArea {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 .title {
   font-family: DrukWideCyWeb-Bold;
   font-size: 28px;
   line-height: 32px;
+  letter-spacing: 0px;
+  color: $blue-gray-300-color;
+}
+.m_title {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 23px;
+  // line-height: 32px;
   letter-spacing: 0px;
   color: $blue-gray-300-color;
 }
@@ -27,4 +44,11 @@
   background-color: $blue-gray-300-color;
   margin-top: 22px;
   margin-bottom: 37px;
+}
+.m_divider {
+  width: 30px;
+  height: 4px;
+  background-color: $blue-gray-300-color;
+  margin-top: 8px;
+  margin-bottom: 20px;
 }
