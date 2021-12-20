@@ -21,15 +21,3 @@ query GetAcademyWithPlazas {
 query GetAcademyWithPlazasById($id: Int) {
   getAcademyWithPlazasById(id: $id)
 }
-
-query GetAcademyWithPlazasById($id: Int) {
-  getAcademyWithPlazasById(id: $id)
-}
-
-query GetAcademyWithPlazasById($id: Int) {
-  getAcademyWithPlazasById(id: $id)
-}
-
-query GetAcademyWithPlazasById($id: Int) {
-  getAcademyWithPlazasById(id: $id)
-}
