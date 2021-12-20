@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -20,6 +21,7 @@ const Custom404 = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const [mobile, setMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
@@ -33,24 +35,48 @@ const Custom404 = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  useEffect(() => {
+    setMobile(isMobile)
+  }, [setMobile])
+
   return (
     <div className={'w-full flex justify-center'}>
       <div className={globalStyles.container}>
-        <div className={styles.container}>
-          <div className={styles.title}>ERROR 404</div>
-          <div className={styles.divider} />
-          <div className={'flex justify-center mb-56'}>
-            <Image src={ErrorImage} width={388} height={321} alt="" />
-            <div className={'block ' + styles.textArea}>
-              <div className={styles.subTitle}>NOS HEMOS CAIDO</div>
-              <div className={styles.text}>
-                Ha sido un imprevisto, pero estamos
-                <br />
-                trabajando para solucionarlo.
+        {mobile ? (
+          <div className={styles.mobileContainer}>
+            <div className={styles.mobileTitle}>ERROR 404</div>
+            <div className={styles.mobileDivider} />
+            <div className={'flex flex-col justify-center mb-16'}>
+              <div className={styles.mobileImageContainer}>
+                <Image src={ErrorImage} width={240} height={190} alt="" />
+              </div>
+              <div className={'block ' + styles.mobileTextArea}>
+                <div className={styles.mobileSubTitle}>NOS HEMOS CAIDO</div>
+                <div className={styles.mobileText}>
+                  Ha sido un imprevisto, pero estamos
+                  <br />
+                  trabajando para solucionarlo.
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className={styles.container}>
+            <div className={styles.title}>ERROR 404</div>
+            <div className={styles.divider} />
+            <div className={'flex justify-center mb-56'}>
+              <Image src={ErrorImage} width={388} height={321} alt="" />
+              <div className={'block ' + styles.textArea}>
+                <div className={styles.subTitle}>NOS HEMOS CAIDO</div>
+                <div className={styles.text}>
+                  Ha sido un imprevisto, pero estamos
+                  <br />
+                  trabajando para solucionarlo.
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

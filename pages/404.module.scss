@@ -40,3 +40,48 @@
   color: $blue-gray-400-color;
   margin-top: 15px;
 }
+
+.mobileContainer {
+  padding-top: 100px;
+}
+
+.mobileTitle {
+  font-size: 18px;
+  font-family: DrukWideCyWeb-Bold;
+  color: #72918e;
+}
+
+.mobileDivider {
+  width: 24px;
+  height: 4px;
+  background-color: #E3BBAA;
+  margin-top: 8px;
+  margin-bottom: 44px;
+}
+
+.mobileImageContainer {
+  width: 240px;
+  margin: auto;
+}
+
+.mobileTextArea {
+  margin: auto;
+  margin-top: 67px;
+}
+
+.mobileSubTitle {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 16px;
+  line-height: 25px;
+  letter-spacing: 0px;
+  color: #d74f58;
+}
+
+.mobileText {
+  font-family: Montserrat;
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: 0.8px;
+  color: $blue-gray-400-color;
+  margin-top: 15px;
+}
