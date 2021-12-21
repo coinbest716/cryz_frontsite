@@ -67,7 +67,6 @@ const Contact = () => {
   const [emailTwo, setEmailTwo] = useState('')
   const [phoneOne, setPhoneOne] = useState('')
   const [phoneTwo, setPhoneTwo] = useState('')
-  const [showContact, setShowContact] = useState(false)
 
   const [getContactInfo, { data: contactData, loading: contactLoading, error: contactError }] = useLazyQuery(
     graphql.queries.getContactInfo
@@ -90,10 +89,6 @@ const Contact = () => {
 
   const handleClickWhatsapp = () => {
     console.log('handleClickWhatsapp')
-  }
-
-  const showContactView = show => {
-    setShowContact(show)
   }
 
   return (
@@ -122,7 +117,7 @@ const Contact = () => {
             marginTop: mobile ? '20px' : '10px',
           }}
         >
-          <MapContainer isMobile={mobile} showContactView={showContactView} locations={locations} />
+          <MapContainer isMobile={mobile} locations={locations} />
           <div
             style={{
               position: 'absolute',
@@ -131,7 +126,7 @@ const Contact = () => {
               bottom: '0px',
             }}
           >
-            {mobile && showContact && (
+            {mobile && (
               <div className={globalStyles.container}>
                 <div className={'grid grid-cols-12 text-center px-4 pt-5 pb-2'}>
                   <div

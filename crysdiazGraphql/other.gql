@@ -1,0 +1,3 @@
+mutation SendCV($email: String!, $firstName: String!, $lastName: String!, $body: String!, $phone: String!, $attachment: Upload) {
+    sendCV(email: $email, firstName: $firstName, lastName: $lastName, body: $body, phone: $phone, attachment: $attachment)
+}

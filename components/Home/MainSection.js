@@ -93,7 +93,7 @@ const MainSection = props => {
               axis="vertical"
               dynamicHeight={true}
             >
-              {sliderData &&
+              {sliderData.length !== 0 &&
                 sliderData.map((item, index) => (
                   <div key={index}>
                     {index % 2 === 0 ? (
@@ -196,7 +196,7 @@ const MainSection = props => {
               centerSlidePercentage={80}
               interval={5000}
             >
-              {sliderData &&
+              {sliderData.length !== 0 &&
                 sliderData.map((item, index) =>
                   item.type === 'image' ? (
                     <div className={styles.mobileImageArea} key={index}>
