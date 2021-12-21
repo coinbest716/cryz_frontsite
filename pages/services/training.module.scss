@@ -15,10 +15,11 @@
   font-family: DrukWideCyWeb-Bold;
   font-size: 35px;
   letter-spacing: 0px;
+  display: block;
   background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
   background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-grid;
+  -webkit-background-clip: text;
+  color: transparent;
   padding-top: 40px;
   padding-bottom: 16px;
 }
@@ -26,10 +27,11 @@
   font-family: DrukWideCyWeb-Bold;
   font-size: 25px;
   letter-spacing: 0px;
+  display: block;
   background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
   background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-grid;
+  -webkit-background-clip: text;
+  color: transparent;
   padding-top: 20px;
   padding-bottom: 8px;
 }
