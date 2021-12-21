@@ -5,6 +5,13 @@ import { isMobile } from 'react-device-detect'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
+// third party components
+import client from 'utils/apolloclient'
+import { Auth } from 'aws-amplify'
+
+// redux
+import { useDispatch } from 'react-redux'
+
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
 
@@ -83,6 +90,8 @@ const Menu = () => {
   const [visibility, setVisibility] = useState()
   const router = useRouter()
 
+  const dispatch = useDispatch()
+
   const academy = '/images/menu/academy.jpg'
   const news = '/images/menu/news.jpg'
   const team = '/images/menu/team.png'
@@ -99,6 +108,15 @@ const Menu = () => {
   const handleGotoLink = link => {
     setVisibility(false)
     router.push(link)
+  }
+
+  const handleClickLogout = async () => {
+    dispatch({ type: 'set', isLoading: true })
+    await client.resetStore()
+    await client.clearStore()
+    await Auth.signOut()
+    localStorage.clear()
+    router.push('/')
   }
 
   const handleMouseMover = event => {
@@ -159,7 +177,7 @@ const Menu = () => {
                 {menuItem.label}
               </div>
             ))}
-            <div className="flex items-center text-white pt-4 pb-10" onClick={() => handleGotoLink('login')}>
+            <div className="flex items-center text-white pt-4" onClick={handleClickLogout}>
               <div style={{ width: '32px', height: '32px' }}>
                 <Image src={off} alt={''} width={32} height={32} />
               </div>
