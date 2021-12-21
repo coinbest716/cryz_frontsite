@@ -30,7 +30,7 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const [userConfirmed, setUserConfirmed] = useState(true)
+  const [userConfirmed, setUserConfirmed] = useState(null)
   const [verifyCode, setVerifyCode] = useState('')
 
   const [showPass, setShowPass] = useState(false)
