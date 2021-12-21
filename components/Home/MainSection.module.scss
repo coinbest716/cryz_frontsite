@@ -44,7 +44,6 @@
 .bottomToTop {
   animation: bottomToTop ease 2s;
   position: absolute;
-  top: calc(50% - 80px);
   color: $gray-800-color;
   font-style: italic;
   font-family: Roboto;
@@ -52,20 +51,27 @@
   @media (max-width: 639px) {
     font-size: 36px;
     left: 10px;
+    line-height: 36px;
+    top: calc(50% - 30px);
   }
   @media (min-width: 640px) {
     font-size: 40px;
     left: 10px;
+    line-height: 40px;
+    top: calc(50% - 34px);
   }
   @media (min-width: 768px) {
     font-size: 50px;
     left: 10px;
+    line-height: 50px;
+    top: calc(50% - 44px);
   }
   @media (min-width: 1025px) {
     font-size: 80px;
     left: 67px;
+    line-height: 80px;
+    top: calc(50% - 80px);
   }
-  line-height: 80px;
   letter-spacing: 0px;
 }
 @keyframes bottomToTop {
