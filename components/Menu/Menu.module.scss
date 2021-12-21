@@ -74,7 +74,7 @@
   animation-duration: 0.8s;
   animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   animation-direction: alternate;
-  overflow: hidden;
+  overflow: scroll;
   display: flex;
   justify-content: flex-start;
 }

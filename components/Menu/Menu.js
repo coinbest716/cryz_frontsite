@@ -159,7 +159,7 @@ const Menu = () => {
                 {menuItem.label}
               </div>
             ))}
-            <div className="flex items-center text-white pt-4" onClick={() => handleGotoLink('login')}>
+            <div className="flex items-center text-white pt-4 pb-10" onClick={() => handleGotoLink('login')}>
               <div style={{ width: '32px', height: '32px' }}>
                 <Image src={off} alt={''} width={32} height={32} />
               </div>
