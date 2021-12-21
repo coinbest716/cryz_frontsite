@@ -38,7 +38,7 @@ import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
 import moment from 'moment'
-import * as gtag from "../../utils/gtag";
+import * as gtag from '../../utils/gtag'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -238,18 +238,18 @@ const Purchase = () => {
     gtag.event({
       action: 'begin_checkout',
       params: {
-        currency: "EUR",
+        currency: 'EUR',
         value: shoppingInfo.price,
         items: [
           {
             item_id: router.query.service_id,
             item_name: shoppingInfo.description,
-            currency: "EUR",
+            currency: 'EUR',
             price: shoppingInfo.price,
-            quantity: 1
-          }
-        ]
-      }
+            quantity: 1,
+          },
+        ],
+      },
     })
     Auth.currentAuthenticatedUser()
       .then(() => {
@@ -372,7 +372,6 @@ const Purchase = () => {
   }
 
   const handleSave = () => {
-    console.log('personalInfo')
     let emptyField = false
     personalKey.map(key => {
       if (personalInfo[key] === '') {
@@ -421,12 +420,17 @@ const Purchase = () => {
       })
   }
   const handleContinue = tabIndex => {
-    let query = { tab: tabIndex }
-    if (router.query.service_id) {
-      query = { ...query, service_id: router.query.service_id }
+    try {
+      let query = { tab: tabIndex }
+      if (router.query.service_id) {
+        query = { ...query, service_id: router.query.service_id }
+      }
+      handleSave()
+      router.push({ pathname: '/purchase', query: query }, undefined, { shallow: true })
+    } catch (err) {
+      toast.error(err.message)
+      return
     }
-    // handleSave()
-    router.push({ pathname: '/purchase', query: query }, undefined, { shallow: true })
   }
 
   const handleChangeInfo = (event, key) => {
@@ -599,6 +603,10 @@ const Purchase = () => {
   const handleAcceptDiscount = () => {}
 
   const onClickTab = tabType => {
+    if (personalInfo.id === -1 && tabType === 1) {
+      toast.error('You should input data!')
+      return
+    }
     let query = { tab: tabType }
     if (router.query.service_id) {
       query = {
