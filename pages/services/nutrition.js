@@ -160,7 +160,7 @@ const Nutrition = () => {
                 </div>
               </div>
             </div>
-            {mobile && (
+            {viewport === 'mobile' && (
               <div className={'col-span-12'}>
                 {personalButton && (
                   <div className={'w-2/3 py-2'}>

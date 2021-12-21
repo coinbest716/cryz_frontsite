@@ -31,32 +31,6 @@ const DisciplineSection = props => {
   // variables
   const { viewport } = props
   const router = useRouter()
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   const [disciplineList, setDisciplineList] = useState([])
   const [sliderData, setSliderData] = useState([])
   const [getDisciplineList, { data: disciplineListData, loading: disciplineListLoading, error: disciplineListError }] =

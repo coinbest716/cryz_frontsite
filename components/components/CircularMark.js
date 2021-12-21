@@ -5,7 +5,7 @@ import CircularMarkIcon from 'assets/images/contact-mark.svg'
 import router from 'next/router'
 
 const CircularMark = props => {
-  const { mobile } = props
+  const { viewport } = props
   const handleGotoContact = () => {
     router.push('/contact')
   }
@@ -14,8 +14,8 @@ const CircularMark = props => {
       <Image
         src={CircularMarkIcon}
         alt=""
-        width={mobile ? 100 : 173}
-        height={mobile ? 100 : 173}
+        width={viewport === 'mobile' ? 100 : 173}
+        height={viewport === 'mobile' ? 100 : 173}
         opacity={0.72}
         className={'cursor-pointer ' + styles.animationMark}
         onClick={() => handleGotoContact()}

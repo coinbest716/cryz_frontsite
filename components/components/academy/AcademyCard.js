@@ -12,7 +12,7 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './AcademyCard.module.scss'
 
 const AcademyCard = props => {
-  const { data, handleClickPayment, mobile } = props
+  const { data, handleClickPayment, viewport } = props
 
   return (
     <div>
@@ -30,7 +30,7 @@ const AcademyCard = props => {
           </div>
         </div>
         <div className={styles.cardName}>{data?.category}</div>
-        {mobile && (
+        {viewport === 'mobile' && (
           <div className={'mt-2 mb-4 mx-4'}>
             <ArrowOutlineButton
               plazas={data.plazas}
