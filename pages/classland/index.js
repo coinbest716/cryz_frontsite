@@ -25,22 +25,16 @@ import topImage from 'public/images/classland-top-image.svg'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import { isMobile } from 'react-device-detect'
 
 const Classland = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -85,8 +79,31 @@ const Classland = () => {
   ] = useLazyQuery(graphql.queries.getClasslandCategory)
   const [getClasslandFaqs, { data: classlandFaqData, loading: classlandFaqLoading, error: classlandFaqError }] =
     useLazyQuery(graphql.queries.getClasslandFaqs)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   useEffect(() => {
     getClasslandMain()
@@ -131,7 +148,7 @@ const Classland = () => {
 
   return (
     <div className={'flex flex-wrap justify-center'}>
-      {mobile ? (
+      {viewport === 'mobile' ? (
         <div className={styles.m_container}>
           <div className={globalStyles.container}>
             <div className={styles.topSection}>
@@ -143,7 +160,7 @@ const Classland = () => {
                 <Image src={topImage} alt="" width={200} height={231} className={styles.topImage} />
               </div>
               <div className={'absolute bottom-3 right-2'}>
-                <FaqButton onClick={executeScroll} mobile={mobile} />
+                <FaqButton onClick={executeScroll} viewport={viewport} />
               </div>
             </div>
           </div>
@@ -184,7 +201,7 @@ const Classland = () => {
         </div>
       )}
       <div className={'w-full px-4'}>
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div className={styles.middleSection}>
             <div className={styles.m_fullPass}>Full Pass</div>
             {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} /> : <></>}
@@ -202,7 +219,7 @@ const Classland = () => {
           </div>
         )}
         <div className={styles.m_buttonGroup}>
-          {mobile ? (
+          {viewport === 'mobile' ? (
             <select
               name="select"
               onChange={handleClickSelectFilter}
@@ -228,7 +245,7 @@ const Classland = () => {
             ))
           )}
         </div>
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div className={styles.m_cardSection}>
             {cardData.length !== 0 ? <MobileDoubleClasslandCarousel coTeam={cardData} /> : <></>}
           </div>
@@ -247,7 +264,7 @@ const Classland = () => {
             </div>
           </div>
         )}
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div>
             <div className={'my-6 ' + styles.m_divider} />
             <div className="mb-5">
@@ -256,7 +273,7 @@ const Classland = () => {
               </div>
               {faqData?.map((data, index) => (
                 <div style={{ padding: '7px 0px' }} key={index}>
-                  <Accordian title={data.name} description={data.description} mobile={mobile} />
+                  <Accordian title={data.name} description={data.description} viewport={viewport} />
                 </div>
               ))}
             </div>

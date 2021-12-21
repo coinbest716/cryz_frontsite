@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -15,7 +14,6 @@ const Cookies = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
@@ -29,16 +27,38 @@ const Cookies = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
+  // variables
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
   return (
     <div className={'flex justify-center'}>
       <div className={globalStyles.container}>
-        <div className={mobile ? styles.mobileTitle : styles.title}>Política de cookies</div>
-        <div className={mobile ? styles.mobileDivider : styles.divider} />
-        <div className={mobile && styles.mobileContent}>
+        <div className={viewport === 'mobile' ? styles.mobileTitle : styles.title}>Política de cookies</div>
+        <div className={viewport === 'mobile' ? styles.mobileDivider : styles.divider} />
+        <div className={viewport === 'mobile' && styles.mobileContent}>
           {/* paragraph */}
           <div className={styles.text}>Crody Salud S.L. informa acerca del uso de las cookies en su página web:</div>
           {/* paragraph */}

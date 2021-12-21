@@ -23,9 +23,9 @@ import toast from 'react-hot-toast'
 
 import { Auth } from 'aws-amplify'
 import ReactLoading from 'react-loading'
-import { isMobile } from 'react-device-detect'
 
 const Login = () => {
+  // variables
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [authUser, setAuthUser] = useState(null)
   const [authChallenge, setAuthChallenge] = useState('')
@@ -36,7 +36,31 @@ const Login = () => {
 
   const [showPass, setShowPass] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   useEffect(() => {
     setProgressStatus(true)
@@ -61,10 +85,6 @@ const Login = () => {
       router.push('/dashboard')
     }
   }, [isAuthenticated])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   const handleChangeEmail = event => {
     setEmail(event.target.value)
@@ -165,7 +185,7 @@ const Login = () => {
   return (
     <div className={'relative'}>
       <div className={'w-full h-screen grid grid-cols-12'}>
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div className={'col-span-12 pt-20 flex justify-center items-center ' + styles.whiteArea}>
             <div className={styles.whiteAreaContent}>
               <div className={'px-16 pb-2'}>
@@ -202,7 +222,7 @@ const Login = () => {
           </div>
         )}
         {authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
-          mobile ? (
+          viewport === 'mobile' ? (
             <div
               className={
                 'col-span-12 flex lg:col-span-6 md:col-span-6 flex-wrap justify-center items-center relative ' +
@@ -371,7 +391,7 @@ const Login = () => {
               </div>
             </div>
           )
-        ) : mobile ? (
+        ) : viewport === 'mobile' ? (
           <div
             className={
               'w-full col-span-12 lg:col-span-6 md:col-span-6 flex flex-wrap flex justify-center items-center ' +
