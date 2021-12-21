@@ -18,10 +18,11 @@
     font-size: 35px;
   }
   letter-spacing: 0px;
+  display: block;
   background: linear-gradient(237.31deg, #818e8e 0%, #b8c2c2 100%);
   background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-grid;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 .topDash {
   @media (max-width: 1023px) {

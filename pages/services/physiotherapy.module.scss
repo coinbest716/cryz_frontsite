@@ -14,19 +14,21 @@
   font-family: DrukWideCyWeb-Bold;
   font-size: 35px;
   letter-spacing: 0px;
+  display: block;
   background: linear-gradient(28.07deg, rgba(211, 216, 189, 0.8) 0%, #c3c7b0 100%);
   background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-grid;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 .m_topTitle {
   font-family: DrukWideCyWeb-Bold;
   font-size: 25px;
   letter-spacing: 0px;
+  display: block;
   background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
   background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-grid;
+  -webkit-background-clip: text;
+  color: transparent;
   padding-top: 20px;
   padding-bottom: 8px;
 }
