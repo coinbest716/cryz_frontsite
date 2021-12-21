@@ -282,8 +282,8 @@ const PurchaseLogin = () => {
                   <div className={'w-full px-16'}>
                     <Image src={LoginImage} alt="" width={484} height={416} />
                   </div>
-                  <div className={styles.m_title + ' mt-5 px-5'}>Login para continuar con la compra</div>
-                  <div className="flex justify-center items-center mt-4">
+                  <div className={styles.m_title + ' mt-7 px-5'}>Login para continuar con la compra</div>
+                  <div className="flex justify-center items-center mt-5">
                     <div className={styles.text}>¿No tienes una cuenta?</div>
                     <div className={'font-bold ml-4 ' + styles.text} onClick={handleClickRegister}>
                       Regístrate
