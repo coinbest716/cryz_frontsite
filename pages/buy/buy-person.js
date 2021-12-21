@@ -169,7 +169,7 @@ const BuyPerson = () => {
         {mobile ? (
           <div className={'mt-10 mb-6 grid grid-cols-12 gap-4'}>
             {sessionData.map((item, index) => (
-              <div className={'col-span-6'} key={index}>
+              <div className={'col-span-12'} key={index}>
                 <MobileBuyCard data={item} index={index} handleClickBuy={handleClickBuy} />
               </div>
             ))}
