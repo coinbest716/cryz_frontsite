@@ -53,7 +53,7 @@ const PurchaseLogin = () => {
   const [authUser, setAuthUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [authChallenge, setAuthChallenge] = useState('')
-  const [rememberMe, setRememberMe] = useState(false)
+  const [rememberMe, setRememberMe] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPass, setShowPass] = useState(false)
