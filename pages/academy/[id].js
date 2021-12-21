@@ -77,7 +77,7 @@ const Course = () => {
           id: 1,
           path: '/images/time.svg',
           bgColor: '#E3BBAA',
-          topLabel: 'Tiempo',
+          topLabel: 'Horas',
           lowLabel: temp.duration || 0 + 'h',
         },
       ])
