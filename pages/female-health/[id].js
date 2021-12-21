@@ -218,64 +218,70 @@ const Menopause = () => {
       {/* Button group part */}
       {!mobile ? (
         <div className={'w-full ' + (mobile ? '' : 'pt-32')}>
-          <div className={'grid grid-cols-12 gap-0'}>
+          <div className={'w-full flex'}>
             {femHealthService.stream_button ? (
-              <OutlineButton
-                title="Compra 1 to 1 en streaming"
-                link="/buy/buy-one-to-one"
-                onClick={link =>
-                  router.push({
-                    pathname: link,
-                    query: {
-                      discipline_id: femHealthService.discipline_id,
-                      service_type: 'streaming',
-                      type: 'femHealth',
-                      image:
-                        femHealthService?.carousel_image.length > 0 ? femHealthService?.carousel_image[0].path : '',
-                    },
-                  })
-                }
-              />
+              <div className={'w-1/3'}>
+                <OutlineButton
+                  title="Compra 1 to 1 en streaming"
+                  link="/buy/buy-one-to-one"
+                  onClick={link =>
+                    router.push({
+                      pathname: link,
+                      query: {
+                        discipline_id: femHealthService.discipline_id,
+                        service_type: 'streaming',
+                        type: 'femHealth',
+                        image:
+                          femHealthService?.carousel_image.length > 0 ? femHealthService?.carousel_image[0].path : '',
+                      },
+                    })
+                  }
+                />
+              </div>
             ) : (
               <></>
             )}
             {femHealthService.personal_button ? (
-              <OutlineButton
-                title="Compra presenciales"
-                link="/buy/buy-person"
-                onClick={link =>
-                  router.push({
-                    pathname: link,
-                    query: {
-                      discipline_id: femHealthService.discipline_id,
-                      service_type: 'personal',
-                      type: 'femHealth',
-                      image:
-                        femHealthService?.carousel_image.length > 0 ? femHealthService?.carousel_image[0].path : '',
-                    },
-                  })
-                }
-              />
+              <div className={'w-1/3'}>
+                <OutlineButton
+                  title="Compra presenciales"
+                  link="/buy/buy-person"
+                  onClick={link =>
+                    router.push({
+                      pathname: link,
+                      query: {
+                        discipline_id: femHealthService.discipline_id,
+                        service_type: 'personal',
+                        type: 'femHealth',
+                        image:
+                          femHealthService?.carousel_image.length > 0 ? femHealthService?.carousel_image[0].path : '',
+                      },
+                    })
+                  }
+                />
+              </div>
             ) : (
               <></>
             )}
             {femHealthService.online_button ? (
-              <OutlineButton
-                title="Compra planes online"
-                link="/buy/buy-plans-online"
-                onClick={link =>
-                  router.push({
-                    pathname: link,
-                    query: {
-                      discipline_id: femHealthService.discipline_id,
-                      service_type: 'online',
-                      type: 'femHealth',
-                      image:
-                        femHealthService?.carousel_image.length > 0 ? femHealthService?.carousel_image[0].path : '',
-                    },
-                  })
-                }
-              />
+              <div className={'w-1/3'}>
+                <OutlineButton
+                  title="Compra planes online"
+                  link="/buy/buy-plans-online"
+                  onClick={link =>
+                    router.push({
+                      pathname: link,
+                      query: {
+                        discipline_id: femHealthService.discipline_id,
+                        service_type: 'online',
+                        type: 'femHealth',
+                        image:
+                          femHealthService?.carousel_image.length > 0 ? femHealthService?.carousel_image[0].path : '',
+                      },
+                    })
+                  }
+                />
+              </div>
             ) : (
               <></>
             )}
