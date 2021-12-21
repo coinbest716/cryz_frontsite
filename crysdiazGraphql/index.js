@@ -58,6 +58,8 @@ import { GetOnlinePlanByDashboard, GetVideoMaterial, GetAvailablePlanDates } fro
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
 
+import { SendCV } from './other.gql'
+
 export default {
   queries: {
     // home part
@@ -145,5 +147,6 @@ export default {
 
     // shopping part
     CancelOnlinePlanSubscriptionByDashboard: CancelOnlinePlanSubscriptionByDashboard,
+    SendCV: SendCV,
   },
 }

@@ -19,6 +19,7 @@ import ConfirmImage from 'assets/images/confirm_code.png'
 
 import toast from 'react-hot-toast'
 import ReactLoading from 'react-loading'
+import * as gtag from '../../utils/gtag'
 import { isMobile } from 'react-device-detect'
 
 const Register = () => {
@@ -103,6 +104,10 @@ const Register = () => {
       password: password,
     })
       .then(response => {
+        gtag.event({
+          action: 'sign_up',
+          params: {},
+        })
         console.log(response)
         setProgressStatus(false)
         setUserConfirmed(response.userConfirmed)

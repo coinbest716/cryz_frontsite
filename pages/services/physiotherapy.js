@@ -184,7 +184,7 @@ const Physiotherapy = () => {
           {personalButton && (
             <div className={'w-1/3'}>
               <ArrowButton
-                label={'Compra person'}
+                label={'Compra presencial'}
                 onClick={handleClickBuyPersion}
                 type={'physiotherapy'}
                 mobile={mobile}

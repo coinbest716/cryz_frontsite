@@ -25,6 +25,7 @@ import { isMobile } from 'react-device-detect'
 
 // json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
+import * as gtag from "../utils/gtag";
 
 const Register = () => {
   // loading part ###########################
@@ -135,6 +136,10 @@ const Register = () => {
   }
 
   const handleClickPurchaseRegister = async () => {
+    gtag.event({
+      action: 'sign_up',
+      params: {}
+    })
     if (password !== confirmPassword) {
       toast.error('Please confirm the password!')
       return

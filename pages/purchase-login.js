@@ -23,6 +23,7 @@ import EyeIcon from 'assets/images/eye-gray.svg'
 
 import { Auth } from 'aws-amplify'
 import toast from 'react-hot-toast'
+import * as gtag from '../utils/gtag'
 import { isMobile } from 'react-device-detect'
 
 const PurchaseLogin = () => {
@@ -207,6 +208,10 @@ const PurchaseLogin = () => {
     dispatch({ type: 'set', isLoading: true })
     await Auth.signIn(email, password)
       .then(response => {
+        gtag.event({
+          action: 'login',
+          params: {},
+        })
         setAuthUser(response)
         setAuthChallenge(response.challengeName)
         if (rememberMe) {

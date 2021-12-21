@@ -23,6 +23,7 @@ import toast from 'react-hot-toast'
 
 import { Auth } from 'aws-amplify'
 import ReactLoading from 'react-loading'
+import * as gtag from '../../utils/gtag'
 import { isMobile } from 'react-device-detect'
 
 const Login = () => {
@@ -89,6 +90,11 @@ const Login = () => {
     }
     await Auth.signIn(email, password)
       .then(response => {
+        gtag.event({
+          action: 'login',
+          params: {},
+        })
+
         console.log(response)
         setProgressStatus(false)
         setAuthUser(response)
