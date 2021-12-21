@@ -499,7 +499,7 @@ const Profile = () => {
           <div className={styles.modalTitle}>¿Estas seguro que deseas borrar tu cuenta?</div>
           <div className={'mt-2 ' + styles.modalDescription}>
             Recuerda que no hay vuelta atrás para esto, tus datos e historial no se guardarán
-            <br /> en el caso que quieras remotar los servicios.
+            <br /> en el caso que quieras retomar los servicios.
           </div>
           <div className={'flex justify-end mt-5'}>
             <div className={'cursor-pointer ' + styles.modalButton} onClick={closeModal}>
