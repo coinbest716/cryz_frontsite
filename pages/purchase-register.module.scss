@@ -6,6 +6,10 @@
   justify-content: center;
   min-height: calc(100vh - 177px);
 }
+.rootContainer {
+  padding-right: 0px;
+  padding-left: 0px;
+}
 .title {
   color: #7a908e;
   font-family: Montserrat;
@@ -13,6 +17,33 @@
   font-weight: bold;
   letter-spacing: -0.42px;
   line-height: 32px;
+  text-align: center;
+}
+.m_title {
+  color: #7a908e;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: -0.42px;
+  text-align: center;
+}
+.confirmAreaContent {
+  background-color: #f6f7f9;
+}
+.text {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: -0.22px;
+  line-height: 20px;
+  margin-top: 12px;
+}
+.verifyString {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 34px;
   text-align: center;
 }
 .input {
@@ -26,6 +57,17 @@
   padding: 19px 18px;
   width: 100%;
 }
+.m_input {
+  border: 1px solid #7a908e;
+  border-radius: 4px;
+  color: #7a908e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 15px;
+  padding: 15px 18px;
+  width: 100%;
+}
 .inputArea {
   width: 100%;
   height: 52px;
@@ -34,4 +76,16 @@
   color: $white-color;
   font-family: Montserrat;
   font-size: 16px;
+}
+.m_enterButton {
+  border-radius: 40px;
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+  border: 1px solid gray;
+  padding: 11px 56px;
 }
