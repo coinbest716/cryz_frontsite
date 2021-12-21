@@ -21,7 +21,6 @@ import ConfirmImage from 'assets/images/confirm_code.png'
 import EyeCrossIcon from 'assets/images/eye-cross-gray.svg'
 import EyeIcon from 'assets/images/eye-gray.svg'
 import toast from 'react-hot-toast'
-import { isMobile } from 'react-device-detect'
 
 // json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
@@ -30,16 +29,11 @@ const Register = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -65,7 +59,32 @@ const Register = () => {
     description: '',
     price: '',
   })
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
   // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
   useEffect(() => {
     setCartData(shoppingCartData)
   }, [])
@@ -221,7 +240,7 @@ const Register = () => {
         <div className={'pt-20 ' + globalStyles.container + styles.rootContainer}>
           <div className={'grid grid-cols-12 gap-4 h-full'}>
             {userConfirmed === null ? (
-              mobile ? (
+              viewport === 'mobile' ? (
                 <div className={'col-span-12 flex justify-center items-center pt-10 pb-9'}>
                   <div>
                     <div className={'flex justify-center px-24 py-6'}>
@@ -395,7 +414,7 @@ const Register = () => {
                   </div>
                 </div>
               )
-            ) : mobile ? (
+            ) : viewport === 'mobile' ? (
               <div className={'col-span-12'}>
                 <div>
                   <div className={styles.confirmAreaContent}>
@@ -453,7 +472,7 @@ const Register = () => {
                 </div>
               </div>
             )}
-            {mobile ? (
+            {viewport === 'mobile' ? (
               <></>
             ) : (
               <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>

@@ -4,9 +4,6 @@ import { useDispatch } from 'react-redux'
 // next components
 import { useRouter } from 'next/router'
 
-// third party components
-import { isMobile } from 'react-device-detect'
-
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import AcademyCard from 'components/components/academy/AcademyCard'
@@ -39,7 +36,8 @@ const Academy = () => {
 
   // variables
   const router = useRouter()
-  const [mobile, setMobile] = useState(false)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
   // const [getAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
   //   graphql.queries.getAcademy
   // )
@@ -50,8 +48,27 @@ const Academy = () => {
 
   // handlers
   useEffect(() => {
-    setMobile(isMobile)
-  }, [isMobile])
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
   useEffect(() => {
     getAcademyWithPlazas()
   }, [getAcademyWithPlazas])
@@ -76,17 +93,17 @@ const Academy = () => {
               <div className={styles.topTitle}>Academy</div>
               <div className={styles.topDash + ' mt-2 mb-3'} />
             </div>
-            {!mobile && (
+            {viewport !== 'mobile' && (
               <div className={'z-10'}>
                 <CircularMark />
               </div>
             )}
           </div>
-          {!mobile && <div className={styles.cardTitle + ' mb-5'}>Destacados</div>}
+          {viewport !== 'mobile' && <div className={styles.cardTitle + ' mb-5'}>Destacados</div>}
           <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
             {cardData?.map((card, index) => (
               <div className={'flex justify-center col-span-6 md:col-span-4'} key={index}>
-                <AcademyCard data={card} index={index} handleClickPayment={handleClickPayment} mobile={mobile} />
+                <AcademyCard data={card} index={index} handleClickPayment={handleClickPayment} viewport={viewport} />
               </div>
             ))}
           </div>

@@ -7,7 +7,6 @@ import Image from 'next/image'
 // third party components
 import { useDispatch } from 'react-redux'
 import toast from 'react-hot-toast'
-import { isMobile } from 'react-device-detect'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -33,12 +32,6 @@ const Course = () => {
   const router = useRouter()
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setMobile] = useState(false)
-
-  // handlers
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     setIsMounted(true)
@@ -51,6 +44,31 @@ const Course = () => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
+
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   // variables
   const [getAcademyWithPlazasById, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
@@ -109,7 +127,7 @@ const Course = () => {
   return (
     <div className={styles.container}>
       <div className={'flex flex-wrap justify-center'}>
-        {mobile && mainData !== '' && (
+        {viewport === 'mobile' && mainData !== '' && (
           <div>
             <CarouselAcademy sliderData={mainData.images} />
           </div>
@@ -118,7 +136,7 @@ const Course = () => {
           <div className={'absolute top-24'}>
             <BackButton />
           </div>
-          {mainData && !mobile && (
+          {mainData && viewport !== 'mobile' && (
             <div className={'grid grid-cols-12 gap-4'}>
               <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
                 <div className={'pt-32 ' + styles.topTitle}>{mainData.name}</div>
@@ -163,7 +181,7 @@ const Course = () => {
               </div>
             </div>
           )}
-          {mainData && mobile && (
+          {mainData && viewport === 'mobile' && (
             <div className={'grid grid-cols-12 gap-4 mx-2 p-4 pb-6 -mt-10 z-10 bg-white'}>
               <div className={'col-span-12'}>
                 <div className={styles.topTitle}>{mainData.name}</div>
