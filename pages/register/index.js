@@ -30,7 +30,7 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const [userConfirmed, setUserConfirmed] = useState(null)
+  const [userConfirmed, setUserConfirmed] = useState(true)
   const [verifyCode, setVerifyCode] = useState('')
 
   const [showPass, setShowPass] = useState(false)
@@ -130,18 +130,18 @@ const Register = () => {
       <div className={'w-full h-screen grid grid-cols-12'}>
         {mobile ? (
           userConfirmed ? (
-            <div className={'col-span-12 px-20 pt-5 flex justify-center items-center ' + styles.confirmAreaContent}>
+            <div className={'col-span-12 pt-1 flex justify-center items-center ' + styles.confirmAreaContent}>
               <div className={styles.whiteAreaContent + ' text-center'}>
-                <div styles={'w-full flex justify-center '}>
+                <div className={'px-24 flex justify-center '}>
                   <Image src={ConfirmImage} alt="" width={342} height={345} />
                 </div>
                 <div className={styles.verifyString}>Verifica tu código</div>
               </div>
             </div>
           ) : (
-            <div className={'col-span-12 px-20 pt-24 flex justify-center items-center ' + styles.whiteArea}>
+            <div className={'col-span-12 pt-20 pb-2 flex justify-center items-center ' + styles.whiteArea}>
               <div className={styles.whiteAreaContent + ' text-center'}>
-                <div styles={'w-full flex justify-center '}>
+                <div className={'px-20 flex justify-center '}>
                   <Image src={RegisterImage} alt="" width={342} height={415} />
                 </div>
               </div>
@@ -175,7 +175,7 @@ const Register = () => {
             {!userConfirmed && (
               <div>
                 <div className={'w-full text-center ' + styles.title}>REGISTRO</div>
-                <div className="w-full flex justify-center items-center mt-4">
+                <div className="w-full flex justify-center items-center mt-5">
                   <div className={styles.text}>¿Ya tienes una cuenta?</div>
                   <div className={'font-bold ml-4 ' + styles.text} onClick={() => router.push('/login')}>
                     Log in
@@ -186,7 +186,7 @@ const Register = () => {
             {userConfirmed === null ? (
               <div className={styles.grayAreaContent}>
                 {/* email input */}
-                <div className={'w-full mt-11 ' + styles.inputArea}>
+                <div className={'w-full mt-9 ' + styles.inputArea}>
                   <input
                     type="text"
                     placeholder="Email"
@@ -197,7 +197,7 @@ const Register = () => {
                   />
                 </div>
                 {/* password input */}
-                <div className={'w-full relative flex items-center mt-6 ' + styles.inputArea}>
+                <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
                   <input
                     type={showPass === true ? 'text' : 'password'}
                     autoComplete="new-password"
@@ -223,7 +223,7 @@ const Register = () => {
                   </div>
                 </div>
                 {/* repeat password input */}
-                <div className={'w-full relative flex items-center mt-6 ' + styles.inputArea}>
+                <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>
                   <input
                     type={showRepeatPass === true ? 'text' : 'password'}
                     autoComplete="new-password"
@@ -255,7 +255,7 @@ const Register = () => {
                   </div>
                 </div>
                 {/* login button part */}
-                <div className={'mt-11 mb-20 flex justify-center items-center'}>
+                <div className={'mt-9 mb-16 flex justify-center items-center'}>
                   <div>
                     <button className={styles.m_enterButton} onClick={handleClickRegister} disabled={progressStatus}>
                       Entrar
@@ -297,7 +297,7 @@ const Register = () => {
                       )}
                     </div>
                   </div>
-                  <div className={'mt-10 flex justify-center'}>
+                  <div className={'mt-32 flex justify-center'}>
                     <button className={styles.m_enterButton} onClick={handleVerifyCode}>
                       Entrar
                     </button>
