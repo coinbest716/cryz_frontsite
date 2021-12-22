@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -21,7 +20,6 @@ const Custom404 = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
@@ -35,14 +33,36 @@ const Custom404 = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
+  // variables
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
   return (
     <div className={'w-full flex justify-center'}>
       <div className={globalStyles.container}>
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div className={styles.mobileContainer}>
             <div className={styles.mobileTitle}>ERROR 404</div>
             <div className={styles.mobileDivider} />

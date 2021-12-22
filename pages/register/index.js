@@ -19,23 +19,43 @@ import ConfirmImage from 'assets/images/confirm_code.png'
 
 import toast from 'react-hot-toast'
 import ReactLoading from 'react-loading'
-import * as gtag from '../../utils/gtag'
-import { isMobile } from 'react-device-detect'
 
 const Register = () => {
+  // variables
   const router = useRouter()
-
   const [progressStatus, setProgressStatus] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-
-  const [userConfirmed, setUserConfirmed] = useState(null)
+  const [userConfirmed, setUserConfirmed] = useState(true)
   const [verifyCode, setVerifyCode] = useState('')
-
   const [showPass, setShowPass] = useState(false)
   const [showRepeatPass, setShowRepeatPass] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   useEffect(() => {
     if (router.query.userConfirmed) {
@@ -44,10 +64,6 @@ const Register = () => {
       setPassword(localStorage.getItem('password'))
     }
   }, [router.query])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   const handleSetShowPass = bool => {
     setShowPass(bool)
@@ -128,7 +144,7 @@ const Register = () => {
   return (
     <div className={'relative'}>
       <div className={'w-full h-screen grid grid-cols-12'}>
-        {mobile ? (
+        {viewport === 'mobile' ? (
           userConfirmed ? (
             <div className={'col-span-12 pt-1 flex justify-center items-center ' + styles.confirmAreaContent}>
               <div className={styles.whiteAreaContent + ' text-center'}>
@@ -165,7 +181,7 @@ const Register = () => {
             </div>
           </div>
         )}
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div
             className={
               'w-full col-span-12 lg:col-span-6 md:col-span-6 flex flex-wrap justify-center items-center relative ' +

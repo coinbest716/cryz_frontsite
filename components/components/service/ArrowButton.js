@@ -5,11 +5,11 @@ import ArrowRightUpGray from 'assets/images/arrow-right-up.svg'
 import BrownRightUpIcon from 'public/images/brown-arrow-right-up.svg'
 
 const ArrowButton = props => {
-  const { label, onClick, type, mobile } = props
+  const { label, onClick, type, viewport } = props
 
   return (
     <div>
-      {mobile ? (
+      {viewport === 'mobile' ? (
         <button
           className={styles.m_workWithUsButton + ' p-1 flex justify-around items-center w-full'}
           onClick={onClick}

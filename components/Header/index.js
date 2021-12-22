@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -39,16 +38,35 @@ const Header = props => {
   const [cartData, setCartData] = useState([])
   const [menus, setMenus] = useState([])
   const [showCart, setShowCart] = useState(true)
-  const [mobile, setMobile] = useState(null)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
   useEffect(() => {
-    getDisciplineList()
-  }, [getDisciplineList])
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
 
   useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
+  useEffect(() => {
+    getDisciplineList()
+  }, [getDisciplineList])
 
   useEffect(() => {
     if (!disciplineListError && disciplineListData && disciplineListData.getDisciplineList) {
@@ -215,7 +233,7 @@ const Header = props => {
       <div className={'flex'}>
         <ul className={'flex flex-row list-none items-center justify-end mr-24'}>
           {/* text menu part */}
-          {!mobile &&
+          {viewport !== 'mobile' &&
             menus &&
             menus.map((menu, key) => {
               return (

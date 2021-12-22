@@ -3,11 +3,11 @@ import nextButtonPinkIcon from 'public/images/faq-arrow-right.svg'
 import styles from 'components/components/FaqButton.module.scss'
 
 const FaqButton = props => {
-  const { onClick, mobile } = props
+  const { onClick, viewport } = props
 
   return (
     <div>
-      {mobile ? (
+      {viewport === 'mobile' ? (
         <div className={styles.faqButton}>
           <button className={styles.m_nextButton} onClick={onClick}>
             <span className={styles.faqString}>FAQ</span>

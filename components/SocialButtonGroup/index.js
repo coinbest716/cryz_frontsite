@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import Image from 'next/image'
-import { isMobile } from 'react-device-detect'
 
 // images
 import InstagramIcon from 'assets/images/instagram.svg'
@@ -10,12 +9,8 @@ import InstagramGrayIcon from 'assets/images/instagram-gray.svg'
 import FacebookGrayIcon from 'assets/images/facebook-gray.svg'
 
 const SocialButtonGroup = props => {
+  // variables
   const { color, socialURL } = props
-  const [mobile, setMobile] = useState(null)
-
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
 
   return (
     <div className={'flex justify-center'}>

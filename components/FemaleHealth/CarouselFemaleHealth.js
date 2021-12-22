@@ -16,7 +16,7 @@ import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
 import styles from './CarouselFemaleHealth.module.scss'
 
 const CarouselFemaleHealth = props => {
-  const { sliderData, mobile } = props
+  const { sliderData, viewport } = props
 
   const [data, setData] = useState([])
 
@@ -32,7 +32,7 @@ const CarouselFemaleHealth = props => {
   return (
     <div className={'relative w-full h-full'}>
       <div className={'w-full h-full femaleCarousel flex'}>
-        {mobile ? <></> : <div className={'absolute top-0 left-0 h-full w-1/12 z-10 bg-white'}></div>}
+        {viewport === 'mobile' ? <></> : <div className={'absolute top-0 left-0 h-full w-1/12 z-10 bg-white'}></div>}
         <div className="w-full ">
           {data.length !== 0 ? (
             <Carousel
@@ -44,7 +44,7 @@ const CarouselFemaleHealth = props => {
               showIndicators={true}
               infiniteLoop={true}
               centerMode={true}
-              centerSlidePercentage={mobile ? 100 : 84}
+              centerSlidePercentage={viewport === 'mobile' ? 100 : 84}
               interval={2500}
               renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
                 hasPrev ? (
