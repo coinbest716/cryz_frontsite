@@ -23,6 +23,7 @@ import toast from 'react-hot-toast'
 
 import { Auth } from 'aws-amplify'
 import ReactLoading from 'react-loading'
+import * as gtag from '../../utils/gtag'
 
 import * as gtag from '../../utils/gtag'
 
@@ -39,7 +40,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
 
   const [showPass, setShowPass] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
+  const [rememberMe, setRememberMe] = useState(true)
   const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers

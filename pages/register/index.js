@@ -19,6 +19,7 @@ import ConfirmImage from 'assets/images/confirm_code.png'
 
 import toast from 'react-hot-toast'
 import ReactLoading from 'react-loading'
+import * as gtag from '../../utils/gtag'
 
 import * as gtag from '../../utils/gtag'
 
@@ -29,7 +30,7 @@ const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [userConfirmed, setUserConfirmed] = useState(true)
+  const [userConfirmed, setUserConfirmed] = useState(null)
   const [verifyCode, setVerifyCode] = useState('')
   const [showPass, setShowPass] = useState(false)
   const [showRepeatPass, setShowRepeatPass] = useState(false)
