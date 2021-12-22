@@ -24,6 +24,10 @@ import toast from 'react-hot-toast'
 import { Auth } from 'aws-amplify'
 import ReactLoading from 'react-loading'
 
+import * as gtag from '../../utils/gtag'
+
+import * as Sentry from '@sentry/nextjs'
+
 const Login = () => {
   // variables
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -114,7 +118,9 @@ const Login = () => {
           params: {},
         })
 
-        console.log(response)
+        Sentry.setUser({ email: email })
+
+        //console.log(response)
         setProgressStatus(false)
         setAuthUser(response)
         setAuthChallenge(response.challengeName)

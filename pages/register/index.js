@@ -20,6 +20,8 @@ import ConfirmImage from 'assets/images/confirm_code.png'
 import toast from 'react-hot-toast'
 import ReactLoading from 'react-loading'
 
+import * as gtag from '../../utils/gtag'
+
 const Register = () => {
   // variables
   const router = useRouter()
