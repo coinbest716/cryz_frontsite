@@ -129,7 +129,7 @@ const Services = () => {
   }
 
   return (
-    <div className={'flex flex-wrap justify-center'}>
+    <div className={'flex flex-wrap justify-center ' + styles.serviceContainer}>
       <div className={globalStyles.container}>
         <div className={viewport === 'mobile' ? styles.m_container : styles.container}>
           <div className={'grid grid-cols-12 gap-4'}>
@@ -145,13 +145,13 @@ const Services = () => {
                 ></div>
               </div>
             </div>
-            <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
+            {/* <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
               {viewport === 'mobile' && (
                 <div className={'z-10 ' + styles.circularMark}>
                   <CircularMark />
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
           {viewport === 'mobile' ? (
             <div className={'w-full mt-5 overflow-hidden'}>
