@@ -275,7 +275,17 @@ const Purchase = () => {
         setIsAuthenticated(true)
       })
       .catch(() => {
-        router.push('/purchase-login')
+        router.push({
+          pathname: '/purchase-login',
+          query: {
+            service_id: router.query.service_id,
+            tab: 0,
+            image: router.query.image,
+            description: router.query.description,
+            price: router.query.price,
+          },
+        })
+        //router.push('/purchase-login')
         setIsAuthenticated(false)
       })
   }, [])
