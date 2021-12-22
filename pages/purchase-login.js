@@ -25,7 +25,7 @@ import { Auth } from 'aws-amplify'
 import toast from 'react-hot-toast'
 
 import * as Sentry from '@sentry/nextjs'
-import * as gtag from '../../utils/gtag'
+import * as gtag from '../utils/gtag'
 
 const PurchaseLogin = () => {
   // loading part ###########################
