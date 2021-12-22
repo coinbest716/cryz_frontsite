@@ -23,7 +23,6 @@ import EyeIcon from 'assets/images/eye-gray.svg'
 
 import { Auth } from 'aws-amplify'
 import toast from 'react-hot-toast'
-import * as gtag from '../../utils/gtag'
 
 import * as Sentry from '@sentry/nextjs'
 import * as gtag from '../utils/gtag'

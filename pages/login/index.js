@@ -25,8 +25,6 @@ import { Auth } from 'aws-amplify'
 import ReactLoading from 'react-loading'
 import * as gtag from '../../utils/gtag'
 
-import * as gtag from '../../utils/gtag'
-
 import * as Sentry from '@sentry/nextjs'
 
 const Login = () => {
