@@ -84,7 +84,7 @@ const MainSection = props => {
             alt=""
             layout="fill"
             objectFit="cover"
-            objectPosition="200px 0px"
+            objectPosition={'-200px 0px'}
           />
         ) : (
           <></>
