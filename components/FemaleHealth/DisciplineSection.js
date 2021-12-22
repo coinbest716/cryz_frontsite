@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 // third party components
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
-import { isMobile } from 'react-device-detect'
 
 // images
 import ArrowRightGrayIcon from 'assets/images/arrow-right-black.svg'
@@ -32,13 +31,6 @@ const DisciplineSection = props => {
   // variables
   const { viewport } = props
   const router = useRouter()
-  const [mobile, setMobile] = useState(false)
-
-  // handlers
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [isMobile])
-
   const [disciplineList, setDisciplineList] = useState([])
   const [sliderData, setSliderData] = useState([])
   const [getDisciplineList, { data: disciplineListData, loading: disciplineListLoading, error: disciplineListError }] =
@@ -206,7 +198,7 @@ const DisciplineSection = props => {
     router.push('/female-health/' + id)
   }
 
-  return !mobile ? (
+  return viewport !== 'mobile' ? (
     <div className={globalStyles.container}>
       <div className={styles.container}>
         <div className={styles.title}>Disciplinas</div>

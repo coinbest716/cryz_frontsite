@@ -23,21 +23,15 @@ import ArrowRightUpGrayIcon from 'public/images/arrow-right-up.svg'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-import { isMobile } from 'react-device-detect'
-
 const Services = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
+
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -62,8 +56,32 @@ const Services = () => {
   const placeholder1 = '/images/placeholder1.png'
   const placeholder2 = '/images/placeholder2.png'
   const placeholder3 = '/images/placeholder3.png'
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
   useEffect(() => {
     getCmsServiceDisciplineList()
     getCmsService()
@@ -113,27 +131,29 @@ const Services = () => {
   return (
     <div className={'flex flex-wrap justify-center'}>
       <div className={globalStyles.container}>
-        <div className={mobile ? styles.m_container : styles.container}>
+        <div className={viewport === 'mobile' ? styles.m_container : styles.container}>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
-              <div className={mobile ? styles.m_topTitle : styles.topTitle}>{title}</div>
+              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
               <div className={globalStyles.tinyMCEClass}>
                 <div
-                  className={styles.topDescription + ' tinymce-class' + (mobile ? ' mt-4 mb-1' : ' mt-11 mb-5')}
+                  className={
+                    styles.topDescription + ' tinymce-class' + (viewport === 'mobile' ? ' mt-4 mb-1' : ' mt-11 mb-5')
+                  }
                   dangerouslySetInnerHTML={{ __html: description }}
                 ></div>
               </div>
             </div>
             <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
-              {!mobile && (
+              {viewport === 'mobile' && (
                 <div className={'z-10 ' + styles.circularMark}>
                   <CircularMark />
                 </div>
               )}
             </div>
           </div>
-          {mobile ? (
+          {viewport === 'mobile' ? (
             <div className={'w-full mt-5 overflow-hidden'}>
               <div className="flex">
                 <div

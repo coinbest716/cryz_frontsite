@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -15,7 +14,6 @@ const PrivacyPolicy = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
@@ -29,16 +27,39 @@ const PrivacyPolicy = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  // variables
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
   useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   return (
     <div className={'flex justify-center'}>
       <div className={globalStyles.container}>
-        <div className={mobile ? styles.mobileTitle : styles.title}>Politica privacidad</div>
-        <div className={mobile ? styles.mobileDivider : styles.divider} />
-        <div className={mobile && styles.mobileContent}>
+        <div className={viewport === 'mobile' ? styles.mobileTitle : styles.title}>Politica privacidad</div>
+        <div className={viewport === 'mobile' ? styles.mobileDivider : styles.divider} />
+        <div className={viewport === 'mobile' && styles.mobileContent}>
           <div className={styles.text}>Protección de datos de carácter personal según el RGPD</div>
           <br />
           <div className={styles.text}>

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import router from 'next/router'
-import { isMobile } from 'react-device-detect'
 
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
@@ -21,11 +20,32 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/Footer/Footer.module.scss'
 
 const Footer = () => {
-  const [mobile, setMobile] = useState(null)
+  // variables
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
 
   useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   const handleClickWhatsapp = () => {
     console.log('handleClickWhatsapp')
@@ -35,13 +55,13 @@ const Footer = () => {
     <div
       className={
         'w-full flex flex-wrap justify-center items-center' +
-        (mobile ? ' ' : ' divide-y divide-gray-400 ') +
+        (viewport === 'mobile' ? ' ' : ' divide-y divide-gray-400 ') +
         styles.footerArea
       }
     >
       <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + (mobile ? ' ' : ' pb-7')}>
-          {mobile ? (
+        <div className={globalStyles.container + (viewport === 'mobile' ? ' ' : ' pb-7')}>
+          {viewport === 'mobile' ? (
             <div className={'w-full justify-center'}>
               <SocialButtonGroup color="white" socialURL={SocialURLData[0]} />
             </div>
@@ -65,7 +85,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + (mobile ? ' pt-4' : ' pt-7')}>
+        <div className={globalStyles.container + (viewport === 'mobile' ? ' pt-4' : ' pt-7')}>
           <div className={'w-full flex flex-wrap justify-between items-center ' + styles.text}>
             <div className={'flex flex-wrap justify-between'} style={{ width: '500px' }}>
               <Link href={'/docs/terms'} passHref>
@@ -88,11 +108,11 @@ const Footer = () => {
                 <p>Venta</p>
               </Link>
             </div>
-            {!mobile && <div className={styles.text}>CrysDyaz&Co © Todos los derechos reservados</div>}
+            {viewport !== 'mobile' && <div className={styles.text}>CrysDyaz&Co © Todos los derechos reservados</div>}
           </div>
         </div>
       </div>
-      {mobile && (
+      {viewport === 'mobile' && (
         <div style={{ position: 'relative', width: '100%', height: '42px', background: '#fff', marginTop: '24px' }}>
           <div className={'cursor-pointer'} style={{ position: 'absolute', right: '10px', bottom: '0px' }}>
             <Image src={whatsapp} alt="" width={53} height={53} onClick={handleClickWhatsapp} />
