@@ -98,7 +98,7 @@ const Home = props => {
 
   return (
     <div className={styles.container}>
-      <MainSection mainImage={mainImage} featuredServices={featuredServices} />
+      {featuredServices !== '' && <MainSection mainImage={mainImage} featuredServices={featuredServices} />}
       <div id="team" className={'w-full h-10'} />
       <TeamSection team={team} />
       {coTeam !== '' ? <COSection coTeam={coTeam} /> : <></>}
