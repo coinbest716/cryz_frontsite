@@ -236,7 +236,7 @@ const Menopause = () => {
         )}
       </div>
       {/* Button group part */}
-      {!viewport === 'mobile' ? (
+      {viewport !== 'mobile' ? (
         <div className={'w-full ' + (viewport === 'mobile' ? '' : 'pt-32')}>
           <div className={'w-full flex'}>
             {femHealthService.stream_button ? (
