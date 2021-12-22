@@ -84,7 +84,7 @@ const MainSection = props => {
             alt=""
             layout="fill"
             objectFit="cover"
-            objectPosition="-200px 0px"
+            objectPosition="0px -129px"
           />
         ) : (
           <></>
@@ -120,7 +120,7 @@ const MainSection = props => {
                         {/* {item.type === 'image' ? ( */}
                         <div className={styles.imageArea}>
                           <Image
-                            src={item.image !== null ? item.image : MainImage}
+                            src={item.image !== undefined ? item.image : MainImage}
                             alt=""
                             width={345}
                             height={194}
@@ -170,7 +170,7 @@ const MainSection = props => {
                         {/* {item.type === 'image' ? ( */}
                         <div className={styles.imageArea + ' mb-5'}>
                           <Image
-                            src={item.image !== null ? item.image : MainImage}
+                            src={item.image !== undefined ? item.image : MainImage}
                             alt=""
                             width={345}
                             height={194}
@@ -220,7 +220,7 @@ const MainSection = props => {
                   item.type === 'image' ? (
                     <div className={styles.mobileImageArea} key={index}>
                       <Image
-                        src={item.image !== null ? item.image : MainImage}
+                        src={item.image !== undefined ? item.image : MainImage}
                         alt=""
                         width={219}
                         height={136}
