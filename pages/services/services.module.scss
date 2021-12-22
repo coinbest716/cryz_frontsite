@@ -1,5 +1,8 @@
 @import 'styles/variable.module.scss';
 
+.serviceContainer {
+  min-height: calc(100vh - 177px);
+}
 .container {
   padding-top: 80px;
   padding-bottom: 119px;
