@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 // third party components
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
-import { isMobile } from 'react-device-detect'
 
 // custom component
 import CircularMark from 'components/components/CircularMark'
@@ -23,18 +22,38 @@ const MainSection = props => {
   // variables
   const { data } = props
   const router = useRouter()
-  const [mobile, setMobile] = useState(false)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
   const [carouselData, setCarouselData] = useState([])
 
   // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
   useEffect(() => {
     if (data.images.length !== 0) {
       setCarouselData(data.images)
     }
   }, [data])
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [isMobile])
 
   const handleGotoDiscipline = () => {
     const sectionPosition = document.getElementById('discipline').offsetTop
@@ -46,7 +65,7 @@ const MainSection = props => {
       router.push('/female-health#discipline')
     }, 500)
   }
-  return !mobile ? (
+  return viewport !== 'mobile' ? (
     <div className={'w-full p-0'}>
       <div className={'relative w-full p-0 m-0 h-screen flex flex-wrap justify-center ' + styles.container}>
         {/* carousel part */}

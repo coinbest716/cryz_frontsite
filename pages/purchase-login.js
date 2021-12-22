@@ -23,23 +23,16 @@ import EyeIcon from 'assets/images/eye-gray.svg'
 
 import { Auth } from 'aws-amplify'
 import toast from 'react-hot-toast'
-import * as gtag from '../utils/gtag'
-import { isMobile } from 'react-device-detect'
 
 const PurchaseLogin = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -64,6 +57,31 @@ const PurchaseLogin = () => {
     description: '',
     price: '',
   })
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   // handlers
   useEffect(() => {
@@ -282,7 +300,7 @@ const PurchaseLogin = () => {
         <div className={globalStyles.container + ' pt-20'}>
           <div className={'grid grid-cols-12 gap-4 '}>
             {authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
-              mobile ? (
+              viewport === 'mobile' ? (
                 <div className={'col-span-12 pt-20 pb-14'}>
                   <div className={'w-full px-16'}>
                     <Image src={LoginImage} alt="" width={484} height={416} />
@@ -430,7 +448,7 @@ const PurchaseLogin = () => {
                   </div>
                 </div>
               )
-            ) : mobile ? (
+            ) : viewport === 'mobile' ? (
               <div className={'col-span-12 pt-24 pb-14 px-10'}>
                 <div className={'w-full px-6'}>
                   <Image src={LoginImage} alt="" width={484} height={416} />
@@ -511,7 +529,7 @@ const PurchaseLogin = () => {
                 </div>
               </div>
             )}
-            {mobile ? (
+            {viewport === 'mobile' ? (
               <></>
             ) : (
               <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>

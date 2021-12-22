@@ -8,7 +8,7 @@ import { Carousel } from 'react-responsive-carousel'
 import Image from 'next/image'
 
 const CarouselService = props => {
-  const { sliderData, mobile } = props
+  const { sliderData, viewport } = props
   if (sliderData.length > 5) {
     sliderData.splice(5, sliderData.length - 1)
   }
@@ -49,7 +49,7 @@ const CarouselService = props => {
       }
     >
       {sliderData?.map((item, index) =>
-        mobile ? (
+        viewport === 'mobile' ? (
           <div key={index} style={{ height: '250px' }}>
             <Image src={item.path} alt="" width={200} height={200} className={styles.slideImage} />
           </div>

@@ -3,10 +3,10 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 import googleMapStyles from 'assets/data/GoogleMapStylesData.json'
 
 const MapContainer = props => {
-  const { isMobile, locations } = props
+  const { viewport, locations } = props
 
   const mapStyles = {
-    height: isMobile ? '360px' : '431px',
+    height: viewport === 'mobile' ? '360px' : '431px',
     width: '100%',
   }
 

@@ -19,22 +19,16 @@ import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import { Auth } from 'aws-amplify'
 import * as gtag from '../../utils/gtag'
-import { isMobile } from 'react-device-detect'
 
 const BuyOneToOne = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -53,6 +47,31 @@ const BuyOneToOne = () => {
     getFemHealthServiceSubjectByType,
     { data: femHealthServiceSubjectData, loading: femHealthServiceSubjectLoading, error: femHealthServiceSubjectError },
   ] = useLazyQuery(graphql.queries.getFemHealthServiceSubjectByType)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   useEffect(() => {
     if (router.query.type === 'service') {
@@ -135,12 +154,12 @@ const BuyOneToOne = () => {
       })
   }
   return (
-    <div className={mobile ? styles.m_container : styles.container}>
+    <div className={viewport === 'mobile' ? styles.m_container : styles.container}>
       <div className={globalStyles.container}>
-        <div className={mobile ? styles.m_backButtonArea : styles.backButtonArea}>
+        <div className={viewport === 'mobile' ? styles.m_backButtonArea : styles.backButtonArea}>
           <BackButton />
         </div>
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div>
             <div className={styles.m_title}>Bonos y Sesiones</div>
             <div className={styles.m_divider} />
@@ -162,7 +181,7 @@ const BuyOneToOne = () => {
             </div>
           </div>
         )}
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div className={'mt-10 mb-6 grid grid-cols-12 gap-4'}>
             {sessionData.map((item, index) => (
               <div className={'col-span-12'} key={index}>

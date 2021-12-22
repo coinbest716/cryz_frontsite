@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -49,7 +48,6 @@ const Purchase = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setMobile] = useState(null)
 
   const listGrey = '/images/list-grey.svg'
   const listWhite = '/images/list-white.svg'
@@ -61,10 +59,6 @@ const Purchase = () => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -217,6 +211,31 @@ const Purchase = () => {
   const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('card')
   const [cardInfo, setCardInfo] = useState({ number: '', name: '', expiry: '', cvc: '' })
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   // handlers
   useEffect(() => {
@@ -645,7 +664,7 @@ const Purchase = () => {
         <div className={globalStyles.container + ' pt-20'}>
           <div className={'grid grid-cols-12 gap-4 '}>
             <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-8'}>
-              {mobile ? (
+              {viewport === 'mobile' ? (
                 <div>
                   {tabIndex === 0 ? (
                     <>

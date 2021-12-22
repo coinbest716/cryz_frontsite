@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -15,7 +14,6 @@ const Legal = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
@@ -29,16 +27,39 @@ const Legal = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  // variables
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
   useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   return (
     <div className={'flex justify-center'}>
       <div className={globalStyles.container}>
-        <div className={mobile ? styles.mobileTitle : styles.title}>Aviso legal</div>
-        <div className={mobile ? styles.mobileDivider : styles.divider} />
-        <div className={mobile && styles.mobileContent}>
+        <div className={viewport === 'mobile' ? styles.mobileTitle : styles.title}>Aviso legal</div>
+        <div className={viewport === 'mobile' ? styles.mobileDivider : styles.divider} />
+        <div className={viewport === 'mobile' && styles.mobileContent}>
           <div className={styles.text}>
             En cumplimiento con el deber de información recogido en artículo 10 de la Ley 34/2002, de 11 de julio, de
             Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSICE), el propietario de la web ,

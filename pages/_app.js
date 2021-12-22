@@ -12,7 +12,6 @@ import awsconfig from 'utils/aws-exports'
 
 // third party components
 import { Toaster } from 'react-hot-toast'
-import { isMobile } from 'react-device-detect'
 
 // graphql components
 import { ApolloProvider } from '@apollo/client'
@@ -35,7 +34,6 @@ Amplify.configure({ ...awsconfig, ssr: true })
 Auth.configure(awsconfig)
 
 const MyApp = ({ Component, pageProps }) => {
-  const [mobile, setMobile] = useState(false)
   const MainImage = '/images/main-mobile.png'
   const router = useRouter()
   const getLayout = Component.getLayout || (page => page)
@@ -49,10 +47,6 @@ const MyApp = ({ Component, pageProps }) => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.events])
-
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [isMobile])
 
   const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
   useEffect(() => {
@@ -114,9 +108,9 @@ const MyApp = ({ Component, pageProps }) => {
       <ApolloProvider client={client}>
         <Script src="https://js.stripe.com/v2/"></Script>
         <Script id="stripe-js" src="https://js.stripe.com/v3/" async></Script>
-        {mobile === false ? (
+        {viewport !== 'mobile' ? (
           <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
-        ) : process.env.NEXT_PUBLIC_MOBILE_VIEW === 'true' && mobile === true ? (
+        ) : process.env.NEXT_PUBLIC_MOBILE_VIEW === 'true' && viewport === 'mobile' ? (
           <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
         ) : (
           <div className={'w-full flex flex-wrap'}>

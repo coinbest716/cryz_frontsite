@@ -18,22 +18,16 @@ import styles from './training.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import { isMobile } from 'react-device-detect'
 
 const Training = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -57,7 +51,32 @@ const Training = () => {
   const [activeImage, setActiveImage] = useState('')
   const [activeHover, setActiveHover] = useState(false)
 
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
   // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
   useEffect(() => {
     getCmsServiceSubject({
       variables: {
@@ -140,10 +159,10 @@ const Training = () => {
 
   return (
     <div
-      className={'z-10 ' + (mobile ? styles.m_container : styles.container)}
-      onMouseMove={mobile ? () => {} : handleMouseMover}
+      className={'z-10 ' + (viewport === 'mobile' ? styles.m_container : styles.container)}
+      onMouseMove={viewport === 'mobile' ? () => {} : handleMouseMover}
     >
-      {mobile ? (
+      {viewport === 'mobile' ? (
         <div></div>
       ) : (
         <div className={'z-0 ' + styles.circleImageCover} id="shark">
@@ -154,23 +173,25 @@ const Training = () => {
           )}
         </div>
       )}
-      <div className={'flex flex-wrap justify-center ' + (mobile ? ' pb-4' : ' pb-20')}>
+      <div className={'flex flex-wrap justify-center ' + (viewport === 'mobile' ? ' pb-4' : ' pb-20')}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
             <BackButton />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-              <div className={mobile ? styles.m_topTitle : styles.topTitle}>{title}</div>
+              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
               <div className={globalStyles.tinyMCEClass}>
                 <div
-                  className={styles.topDescription + ' tinymce-class' + (mobile ? ' mt-5' : ' mt-10 pb-20')}
+                  className={
+                    styles.topDescription + ' tinymce-class' + (viewport === 'mobile' ? ' mt-5' : ' mt-10 pb-20')
+                  }
                   dangerouslySetInnerHTML={{ __html: description }}
                 ></div>
               </div>
             </div>
-            {mobile ? (
+            {viewport === 'mobile' ? (
               <div className={'col-span-12 '}>
                 <div className={'w-2/3 py-2'}>
                   <ServiceButton label={'Compra Presenciales'} onClick={() => handleClick('type1')} />
@@ -190,14 +211,14 @@ const Training = () => {
                   />
                 </div>
                 <div className={styles.m_carouselSection}>
-                  <CarouselService sliderData={sliderData} mobile={mobile} />
+                  <CarouselService sliderData={sliderData} viewport={viewport} />
                 </div>
               </div>
             ) : (
               <div className={'col-span-12 md:col-span-1 sm:col-span-12'} />
             )}
             <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative'}>
-              {mobile ? (
+              {viewport === 'mobile' ? (
                 <div></div>
               ) : (
                 <div className={'flex h-full'}>

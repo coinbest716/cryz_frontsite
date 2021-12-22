@@ -12,7 +12,6 @@ import EyeCrossIcon from 'assets/images/eye-cross.svg'
 import EyeIcon from 'assets/images/eye.svg'
 import EyeCrossGrayIcon from 'assets/images/eye-cross-gray.svg'
 import EyeGrayIcon from 'assets/images/eye-gray.svg'
-import { isMobile } from 'react-device-detect'
 
 import { Auth } from 'aws-amplify'
 
@@ -25,15 +24,36 @@ const ResetPassword = () => {
   const [verifyCode, setVerifyCode] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [mobile, setIsMobile] = useState(null)
+  // variables
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   useEffect(() => {
     setEmail(localStorage.getItem('email'))
   }, [])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   const handleSetShowPass = bool => {
     setShowPass(bool)
@@ -76,7 +96,7 @@ const ResetPassword = () => {
   return (
     <div className={'relative'}>
       <div className={'w-full h-screen flex grid grid-cols-12'}>
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <></>
         ) : (
           <div
@@ -95,7 +115,7 @@ const ResetPassword = () => {
             </div>
           </div>
         )}
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div
             className={
               'w-full p-10 col-span-12 lg:col-span-6 md:col-span-6 flex-wrap justify-center items-center relative ' +
