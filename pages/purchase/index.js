@@ -632,8 +632,13 @@ const Purchase = () => {
   const handleAcceptDiscount = () => {}
 
   const onClickTab = tabType => {
-    if (personalInfo.id === -1 && tabType === 1) {
-      toast.error('You should input data!')
+    if (personalInfo.surname !== '' && personalInfo.name !== '') {
+      if (personalInfo.id === -1 && tabType === 1) {
+        toast.error('Please click continue button!')
+        return
+      }
+    } else {
+      toast.error('Please input data!')
       return
     }
     let query = { tab: tabType }

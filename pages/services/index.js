@@ -129,7 +129,7 @@ const Services = () => {
   }
 
   return (
-    <div className={'flex flex-wrap justify-center'}>
+    <div className={'flex flex-wrap justify-center ' + styles.serviceContainer}>
       <div className={globalStyles.container}>
         <div className={viewport === 'mobile' ? styles.m_container : styles.container}>
           <div className={'grid grid-cols-12 gap-4'}>
