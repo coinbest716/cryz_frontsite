@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from 'react'
+import React, { createRef, useEffect, useState, useReducer } from 'react'
 import { useRouter } from 'next/router'
 
 // redux
