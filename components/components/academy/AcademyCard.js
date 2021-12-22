@@ -14,6 +14,19 @@ import styles from './AcademyCard.module.scss'
 const AcademyCard = props => {
   const { data, handleClickPayment, viewport } = props
 
+  let title = ''
+  let body = ''
+
+  if (viewport === 'mobile') {
+    title = data?.name
+    body =
+      data.description.replace(/(<([^>]+)>)/gi, '').slice(0, 100) +
+      (data.description.replace(/(<([^>]+)>)/gi, '').length > 100 ? '...' : '')
+  } else {
+    title = data?.name
+    body = data.description
+  }
+
   return (
     <div>
       <div className={styles.singleCard}>
@@ -22,12 +35,9 @@ const AcademyCard = props => {
             <Image src={data?.images[0]?.path || ''} alt="" width={365} height={253} className={styles.cardImage} />
           )}
         </div>
-        <div className={styles.cardTitle}>{data?.name.slice(0, 30) + (data?.name.length > 30 ? '...' : '')}</div>
+        <div className={styles.cardTitle}>{title}</div>
         <div className={globalStyles.tinyMCEClass}>
-          <div className={styles.cardName}>
-            {data.description.replace(/(<([^>]+)>)/gi, '').slice(0, 50) +
-              (data.description.replace(/(<([^>]+)>)/gi, '').length > 50 ? '...' : '')}
-          </div>
+          <div className={styles.cardName} dangerouslySetInnerHTML={{ __html: body }} />
         </div>
         <div className={styles.cardName}>{data?.category}</div>
         {viewport === 'mobile' && (
