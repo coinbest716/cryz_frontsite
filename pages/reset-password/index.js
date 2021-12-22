@@ -214,7 +214,7 @@ const ResetPassword = () => {
         ) : (
           <div
             className={
-              'w-full col-span-12 lg:col-span-6 md:col-span-6 flex-wrap justify-center items-center relative ' +
+              'w-full col-span-12 lg:col-span-6 md:col-span-6 flex flex-wrap justify-center items-center relative ' +
               styles.grayArea
             }
           >
