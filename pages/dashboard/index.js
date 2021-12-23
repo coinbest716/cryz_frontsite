@@ -596,32 +596,7 @@ const Dashboard = () => {
 export default Dashboard
 
 Dashboard.getLayout = function getLayout(page) {
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-  return viewport === 'mobile' ? (
+  return page.props.viewport === 'mobile' ? (
     <MobileDashboardLayout title="Dashboard">{page}</MobileDashboardLayout>
   ) : (
     <SecondaryLayout>{page}</SecondaryLayout>
