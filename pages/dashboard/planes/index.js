@@ -182,21 +182,21 @@ const Planes = () => {
           path: '/images/time.svg',
           bgColor: '#F5DEC2',
           topLabel: 'Tiempo',
-          lowLabel: selectedVideo.time + 'min',
+          lowLabel: selectedVideo.time + ' min',
         },
         {
           id: 2,
           path: '/images/time.svg',
           bgColor: '#E3BBAA',
           topLabel: 'Descanso',
-          lowLabel: selectedVideo.break + 'seg',
+          lowLabel: selectedVideo.break + ' seg',
         },
         {
           id: 3,
           path: '/images/star.svg',
           bgColor: '#F5DEC2',
           topLabel: 'Peso',
-          lowLabel: selectedVideo.weight + 'kg',
+          lowLabel: selectedVideo.weight + ' kg',
         },
       ])
       getVideoMaterial({
