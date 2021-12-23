@@ -34,6 +34,7 @@ const Home = props => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const [mainImage, setMainImage] = useState('')
   const [featuredServices, setFeaturedServices] = useState('')
   const [team, setTeam] = useState('')
@@ -98,10 +99,12 @@ const Home = props => {
 
   return (
     <div className={styles.container}>
-      {featuredServices !== '' && <MainSection mainImage={mainImage} featuredServices={featuredServices} />}
+      {featuredServices !== '' && (
+        <MainSection mainImage={mainImage} featuredServices={featuredServices} viewport={viewport} />
+      )}
       <div id="team" className={'w-full h-10'} />
-      <TeamSection team={team} />
-      {coTeam !== '' ? <COSection coTeam={coTeam} /> : <></>}
+      <TeamSection team={team} viewport={viewport} />
+      {coTeam !== '' ? <COSection coTeam={coTeam} viewport={viewport} /> : <></>}
     </div>
   )
 }

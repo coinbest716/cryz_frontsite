@@ -23,7 +23,7 @@ import { useRouter } from 'next/router'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Menopause = () => {
+const Menopause = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -41,6 +41,7 @@ const Menopause = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const router = useRouter()
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
   const [disciplineID, setDisciplineID] = useState(null)
@@ -51,32 +52,8 @@ const Menopause = () => {
     getFemHealthService,
     { data: femHealthServiceData, loading: femHealthServiceLoading, error: femHealthServiceError },
   ] = useLazyQuery(graphql.queries.getFemHealthService)
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     dispatch({ type: 'set', isLoading: false })
     setDisciplineID(Number(router.asPath.split('/')[2]))
@@ -219,7 +196,7 @@ const Menopause = () => {
                 <></>
               ) : (
                 <div className={'absolute top-10 z-10'}>
-                  <CircularMark />
+                  <CircularMark viewport={viewport} />
                 </div>
               )}
               <div className={viewport === 'mobile' ? 'w-full mt-3 pb-7' : 'w-full mt-20 pb-20'}>

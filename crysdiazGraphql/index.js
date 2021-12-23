@@ -53,7 +53,12 @@ import {
 } from './dashboard/message.gql'
 
 // plans online part
-import { GetOnlinePlanByDashboard, GetVideoMaterial, GetAvailablePlanDates } from './dashboard/plans-online.gql'
+import {
+  GetOnlinePlanByDashboard,
+  GetVideoLinkById,
+  GetVideoMaterial,
+  GetAvailablePlanDates,
+} from './dashboard/plans-online.gql'
 
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
@@ -126,6 +131,7 @@ export default {
 
     // plans online part
     getOnlinePlanByDashboard: GetOnlinePlanByDashboard,
+    getVideoLinkById: GetVideoLinkById,
     getVideoMaterial: GetVideoMaterial,
     getAvailablePlanDates: GetAvailablePlanDates,
 

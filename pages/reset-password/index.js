@@ -15,7 +15,9 @@ import EyeGrayIcon from 'assets/images/eye-gray.svg'
 
 import { Auth } from 'aws-amplify'
 
-const ResetPassword = () => {
+const ResetPassword = props => {
+  // variables
+  const { viewport } = props
   const [progressStatus, setProgressStatus] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const [showRepeatPass, setShowRepeatPass] = useState(false)
@@ -24,33 +26,8 @@ const ResetPassword = () => {
   const [verifyCode, setVerifyCode] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     setEmail(localStorage.getItem('email'))
   }, [])

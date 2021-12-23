@@ -19,9 +19,10 @@ const ContactLayout = ({ children }) => {
         changeColorOnScroll={{
           height: 100,
         }}
+        viewport={children.props.viewport}
       />
       <main>{children}</main>
-      <ContactFooter />
+      <ContactFooter viewport={children.props.viewport} />
       {isLoading && (
         <div className={globalStyles.loadingArea}>
           <div className={globalStyles.loading}>

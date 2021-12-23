@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,33 +18,9 @@ import SocialURLData from 'assets/data/SocialURLData'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/ContactFooter/ContactFooter.module.scss'
 
-const ContactFooter = () => {
+const ContactFooter = props => {
   // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
+  const { viewport } = props
 
   return (
     <div
@@ -89,32 +65,31 @@ const ContactFooter = () => {
       </div>
 
       <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + (viewport === 'mobile' ? ' ' : ' pt-7')}>
-          <div
-            className={'w-full flex items-center' + (viewport === 'mobile' ? ' justify-center' : ' justify-between')}
-          >
+        <div className={globalStyles.container + ' flex justify-center ' + (viewport === 'mobile' ? ' ' : ' pt-7')}>
+          <div className={'flex items-center' + (viewport === 'mobile' ? ' justify-center' : ' justify-between')}>
             <div className={styles.text}>
-              <Link href={'/docs/terms'} passHref>
-                <p>Terminos y Condiciones</p>
-              </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/docs/privacy-policy'} passHref>
-                <p>Politica Privacidad</p>
-              </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/docs/legal'} passHref>
-                <p>Legal</p>
-              </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/docs/cookies'} passHref>
-                <p>Cookies</p>
-              </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/docs/sale'} passHref>
-                <p>Venta</p>
-              </Link>
+              <div className={'flex flex-wrap justify-between'} style={{ width: '500px' }}>
+                <Link href={'/docs/terms'} passHref>
+                  <p>Terminos y Condiciones</p>
+                </Link>
+                |
+                <Link href={'/docs/privacy-policy'} passHref>
+                  <p>Politica Privacidad</p>
+                </Link>
+                |
+                <Link href={'/docs/legal'} passHref>
+                  <p>Legal</p>
+                </Link>
+                |
+                <Link href={'/docs/cookies'} passHref>
+                  <p>Cookies</p>
+                </Link>
+                |
+                <Link href={'/docs/sale'} passHref>
+                  <p>Venta</p>
+                </Link>
+              </div>
             </div>
-
             {viewport !== 'mobile' && <div className={styles.text}>CrysDyaz&Co © Todos los derechos reservados</div>}
           </div>
         </div>

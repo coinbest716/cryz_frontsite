@@ -19,9 +19,10 @@ const PrimaryLayout = ({ children }) => {
         changeColorOnScroll={{
           height: 1,
         }}
+        viewport={children.props.viewport}
       />
       <main>{children}</main>
-      <Footer />
+      <Footer viewport={children.props.viewport} />
       {isLoading && (
         <div className={globalStyles.loadingArea}>
           <div className={globalStyles.loading}>

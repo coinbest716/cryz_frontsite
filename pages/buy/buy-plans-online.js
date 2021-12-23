@@ -21,7 +21,7 @@ import graphql from 'crysdiazGraphql'
 import { Auth } from 'aws-amplify'
 import * as gtag from '../../utils/gtag'
 
-const BuyPlansOnline = () => {
+const BuyPlansOnline = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -39,7 +39,7 @@ const BuyPlansOnline = () => {
   // loading part end #######################
 
   // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+  const { viewport } = props
 
   const router = useRouter()
   const [description, setDescription] = useState('')
@@ -52,30 +52,8 @@ const BuyPlansOnline = () => {
     getFemHealthServiceSubjectByType,
     { data: femHealthServiceSubjectData, loading: femHealthServiceSubjectLoading, error: femHealthServiceSubjectError },
   ] = useLazyQuery(graphql.queries.getFemHealthServiceSubjectByType)
+
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     if (router.query.type === 'service') {
       getCmsServiceSubjectByType({
@@ -181,7 +159,7 @@ const BuyPlansOnline = () => {
               </div>
             </div>
             <div className={'col-span-6 flex justify-end z-10'}>
-              <CircularMark />
+              <CircularMark viewport={viewport} />
             </div>
           </div>
         )}

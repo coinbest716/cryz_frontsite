@@ -27,9 +27,8 @@ import moment from 'moment'
 import 'moment/locale/es'
 moment.locale('es')
 
-const Course = () => {
-  // variables
-  const router = useRouter()
+const Course = props => {
+  // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
 
@@ -45,32 +44,9 @@ const Course = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   // variables
+  const { viewport } = props
+  const router = useRouter()
   const [getAcademyWithPlazasById, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
     graphql.queries.getAcademyWithPlazasById
   )
@@ -150,6 +126,7 @@ const Course = () => {
                       plazas={mainData.plazas}
                       label={mainData.price + ' €'}
                       onClick={mainData.plazas ? handleClickPayment : null}
+                      viewport={viewport}
                     />
                   </div>
                 )}
@@ -195,6 +172,7 @@ const Course = () => {
                       plazas={mainData.plazas}
                       label={mainData.price + ' €'}
                       onClick={mainData.plazas ? handleClickPayment : null}
+                      viewport={viewport}
                     />
                   </div>
                 )}

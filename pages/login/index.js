@@ -27,8 +27,9 @@ import * as gtag from '../../utils/gtag'
 
 import * as Sentry from '@sentry/nextjs'
 
-const Login = () => {
+const Login = props => {
   // variables
+  const { viewport } = props
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [authUser, setAuthUser] = useState(null)
   const [authChallenge, setAuthChallenge] = useState('')
@@ -39,32 +40,8 @@ const Login = () => {
 
   const [showPass, setShowPass] = useState(false)
   const [rememberMe, setRememberMe] = useState(true)
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     setProgressStatus(true)
     Auth.currentAuthenticatedUser()

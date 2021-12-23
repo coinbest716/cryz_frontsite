@@ -22,8 +22,9 @@ import ReactLoading from 'react-loading'
 
 import * as gtag from '../../utils/gtag'
 
-const Register = () => {
+const Register = props => {
   // variables
+  const { viewport } = props
   const router = useRouter()
   const [progressStatus, setProgressStatus] = useState(false)
   const [email, setEmail] = useState('')
@@ -33,32 +34,8 @@ const Register = () => {
   const [verifyCode, setVerifyCode] = useState('')
   const [showPass, setShowPass] = useState(false)
   const [showRepeatPass, setShowRepeatPass] = useState(false)
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     if (router.query.userConfirmed) {
       setUserConfirmed(Boolean(router.query.userConfirmed))

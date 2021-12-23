@@ -22,6 +22,7 @@ import BillingDoc from 'components/components/purchase/BillingDoc'
 import PreviousButton from 'components/components/purchase/PreviousButton'
 import Credit from 'components/components/purchase/Credit'
 import Transfer from 'components/components/purchase/Transfer'
+import GiftCard from 'components/components/purchase/GiftCard'
 import ShoppingCart from 'components/components/purchaseLogin/ShoppingCart'
 import { formatCreditCardNumber, formatCVC, formatExpirationDate } from 'components/components/purchase/utils'
 
@@ -44,16 +45,10 @@ const Tabs = dynamic(
   { ssr: false }
 ) // disable ssr
 
-const Purchase = () => {
+const Purchase = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-
-  const listGrey = '/images/list-grey.svg'
-  const listWhite = '/images/list-white.svg'
-  const docGrey = '/images/doc-grey.svg'
-  const docWhite = '/images/doc-white.svg'
-  const logoRedSys = '/images/logo-redsys.svg'
 
   useEffect(() => {
     setIsMounted(true)
@@ -68,6 +63,12 @@ const Purchase = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
+  const listGrey = '/images/list-grey.svg'
+  const listWhite = '/images/list-white.svg'
+  const docGrey = '/images/doc-grey.svg'
+  const docWhite = '/images/doc-white.svg'
+  const logoRedSys = '/images/logo-redsys.svg'
   const [Checkout] = useMutation(graphql.mutations.Checkout)
   const [getPatientIdByDashboard, { data: patientData, loading: patientLoading, error: patientError }] = useLazyQuery(
     graphql.queries.getPatientIdByDashboard
@@ -210,32 +211,8 @@ const Purchase = () => {
 
   const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('card')
+  const [isGiftCard, setIsGiftCard] = useState(false)
   const [cardInfo, setCardInfo] = useState({ number: '', name: '', expiry: '', cvc: '' })
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
 
   // handlers
   useEffect(() => {
@@ -526,6 +503,11 @@ const Purchase = () => {
   const handleChangePaymentType = event => {
     setPaymentType(event.target.name)
   }
+
+  const handleSelectGiftCard = event => {
+    setIsGiftCard(!isGiftCard)
+  }
+
   const handleChangeCardData = (name, value) => {
     setCardInfo({ ...cardInfo, [name]: value })
   }
@@ -571,6 +553,7 @@ const Purchase = () => {
                 serviceId: Number(router.query.service_id),
                 ccToken: res.id,
                 paymentType: paymentType,
+                isGift: isGiftCard,
               },
             })
               .then(response => {
@@ -606,6 +589,7 @@ const Purchase = () => {
             serviceId: Number(router.query.service_id),
             ccToken: 'none',
             paymentType: paymentType,
+            isGift: isGiftCard,
           },
         })
           .then(response => {
@@ -1024,6 +1008,13 @@ const Purchase = () => {
                     </TabPanel>
 
                     <TabPanel>
+                      <div className={'p-4 pt-16'}>
+                        <div className={styles.tabTitle}>¿Es para regalo?</div>
+                        <div className={'pt-5'}>
+                          <GiftCard handleSelectGiftCard={handleSelectGiftCard} value={isGiftCard} />
+                        </div>
+                      </div>
+
                       <div className={'p-4 pt-16'}>
                         <div className={styles.tabTitle}>Método de pago</div>
                         <div className={'pt-9'}>

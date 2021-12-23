@@ -20,34 +20,10 @@ import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
   // varaibles
-  const { mainImage, featuredServices } = props
+  const { mainImage, featuredServices, viewport } = props
   const [sliderData, setSliderData] = useState([])
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     if (viewport === 'mobile') {
       let array = []
@@ -69,9 +45,26 @@ const MainSection = props => {
           }
           tempArray.push(textObject)
         })
+        tempArray.unshift({
+          type: 'text',
+          title: '¡Regala salud y bienestar!',
+          text: 'Sorprende a tus seres queridos regalándoles uno de nuestros servicios de CrysDyaz&Co',
+          detail: 'Sorprende a tus seres queridos regalándoles uno de nuestros servicios de CrysDyaz&Co',
+          url: '/services',
+        })
         setSliderData(tempArray)
       }
     } else {
+      featuredServices.unshift({
+        active: true,
+        detail: '',
+        id: 0,
+        image: 'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/4.png',
+        subject: '',
+        text: 'Sorprende a tus seres queridos regalándoles uno de nuestros servicios de CrysDyaz&Co',
+        title: '¡Regala salud y bienestar!',
+        url: '/services',
+      })
       setSliderData(featuredServices)
     }
   }, [viewport, featuredServices])

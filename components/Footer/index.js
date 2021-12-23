@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 // next components
 import Image from 'next/image'
@@ -19,34 +19,11 @@ import SocialURLData from 'assets/data/SocialURLData'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'components/Footer/Footer.module.scss'
 
-const Footer = () => {
+const Footer = props => {
   // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+  const { viewport } = props
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   const handleClickWhatsapp = () => {
     console.log('handleClickWhatsapp')
   }
@@ -85,25 +62,25 @@ const Footer = () => {
         </div>
       </div>
       <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + (viewport === 'mobile' ? ' pt-4' : ' pt-7')}>
-          <div className={'w-full flex flex-wrap justify-between items-center ' + styles.text}>
+        <div className={globalStyles.container + ' flex justify-center ' + (viewport === 'mobile' ? ' pt-4' : ' pt-7')}>
+          <div className={'flex flex-wrap justify-between items-center ' + styles.text}>
             <div className={'flex flex-wrap justify-between'} style={{ width: '500px' }}>
               <Link href={'/docs/terms'} passHref>
                 <p>Terminos y Condiciones</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/privacy-policy'} passHref>
                 <p>Politica Privacidad</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/legal'} passHref>
                 <p>Legal</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/cookies'} passHref>
                 <p>Cookies</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/sale'} passHref>
                 <p>Venta</p>
               </Link>

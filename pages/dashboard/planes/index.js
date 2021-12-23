@@ -62,6 +62,7 @@ const Planes = () => {
   const [patientID, setPatientID] = useState(-1)
   const [plansOnlineData, setPlansOnlineData] = useState({})
   const [selectedVideo, setSelectedVideo] = useState({})
+  const [selectedVideoLink, setSelectedVideoLink] = useState('')
   const [materialData, setMaterialData] = useState([])
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
@@ -73,6 +74,9 @@ const Planes = () => {
   )
   const [getOnlinePlanByDashboard, { data: onlinePlanData, loading: onlinePlanLoading, error: onlinePlanError }] =
     useLazyQuery(graphql.queries.getOnlinePlanByDashboard)
+  const [getVideoLinkById, { data: videoLinkData, loading: videoLinkLoading, error: videoLinkError }] = useLazyQuery(
+    graphql.queries.getVideoLinkById
+  )
   const [getVideoMaterial, { data: videoMaterialData, loading: videoMaterailLoading, error: videoMaterialError }] =
     useLazyQuery(graphql.queries.getVideoMaterial)
 
@@ -151,6 +155,26 @@ const Planes = () => {
   }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
 
   useEffect(() => {
+    if (JSON.stringify(selectedVideo) !== JSON.stringify({})) {
+      if (selectedVideo.link === null || selectedVideo.link === undefined || selectedVideo === '') {
+        getVideoLinkById({
+          variables: {
+            video_id: selectedVideo.id,
+          },
+        })
+      } else {
+        setSelectedVideoLink(selectedVideo.link)
+      }
+    }
+  }, [selectedVideo])
+
+  useEffect(() => {
+    if (!videoLinkError && videoLinkData && videoLinkData.getVideoLinkById) {
+      setSelectedVideoLink(videoLinkData.getVideoLinkById)
+    }
+  }, [videoLinkLoading, videoLinkData, videoLinkError])
+
+  useEffect(() => {
     if (!availablePlanDatesError && availablePlanDatesData && availablePlanDatesData.getAvailablePlanDates) {
       const _markDate = []
       availablePlanDatesData.getAvailablePlanDates.map(item => {
@@ -172,10 +196,13 @@ const Planes = () => {
           topLabel: 'Nivel',
           lowLabel: selectedVideo.effort_level,
         },
-        { id: 1, path: '/images/type.svg', 
-          bgColor: '#DFDBD5', 
-          topLabel: 'Repetición', 
-          lowLabel: selectedVideo.repetitions },
+        {
+          id: 1,
+          path: '/images/type.svg',
+          bgColor: '#DFDBD5',
+          topLabel: 'Repetición',
+          lowLabel: selectedVideo.repetitions,
+        },
 
         {
           id: 4,
@@ -284,9 +311,9 @@ const Planes = () => {
                 <div className={styles.chapterTitle}>{plansOnlineData.name}</div>
               </div>
               <div className={'pt-6'}>
-                {JSON.stringify(selectedVideo) !== JSON.stringify({}) ? (
+                {selectedVideoLink !== '' ? (
                   <ReactPlayer
-                    url={selectedVideo.link}
+                    url={selectedVideoLink}
                     width="100%"
                     height="100%"
                     className={styles.reactPlayer}

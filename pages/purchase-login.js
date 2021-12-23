@@ -27,7 +27,7 @@ import toast from 'react-hot-toast'
 import * as Sentry from '@sentry/nextjs'
 import * as gtag from '../utils/gtag'
 
-const PurchaseLogin = () => {
+const PurchaseLogin = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -45,6 +45,7 @@ const PurchaseLogin = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const router = useRouter()
   const [authUser, setAuthUser] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -60,31 +61,6 @@ const PurchaseLogin = () => {
     description: '',
     price: '',
   })
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
 
   // handlers
   useEffect(() => {
