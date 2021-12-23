@@ -16,7 +16,7 @@ const MobileDashboardLayout = ({ title, children }) => {
   return (
     <>
       <MobileDashboardHeader title={title} />
-      <main>{children}</main>
+      <main style={{ marginTop: '56px' }}>{children}</main>
       <MobileDashboardFooter />
       {isLoading && (
         <div className={globalStyles.loadingArea}>

@@ -15,6 +15,7 @@ import router from 'next/router'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import Chip from 'components/components/Chip'
 
@@ -180,7 +181,8 @@ const Shopping = () => {
         detail.item_web_name +
         '&price=' +
         detail.price +
-        '&service_id=' + detail.item_id
+        '&service_id=' +
+        detail.item_id
     )
   }
 
@@ -345,5 +347,9 @@ const Shopping = () => {
 export default Shopping
 
 Shopping.getLayout = function getLayout(page) {
-  return <SecondaryLayout>{page}</SecondaryLayout>
+  return page.props.viewport === 'mobile' ? (
+    <MobileDashboardLayout title="Compras">{page}</MobileDashboardLayout>
+  ) : (
+    <SecondaryLayout>{page}</SecondaryLayout>
+  )
 }
