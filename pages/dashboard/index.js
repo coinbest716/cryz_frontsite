@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import ProgressBar from 'components/components/dashboard/ProgressBar'
 import NewMessageBox from 'components/components/dashboard/NewMessageBox'
@@ -167,8 +168,32 @@ const Dashboard = () => {
   const [status, setStatus] = useState(0)
   const [showQuestionnaire, setShowQuestionnaire] = useState(false)
   const [count, setCount] = useState(0)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
   useEffect(() => {
     getPatientByEmail({
       variables: {
@@ -571,5 +596,34 @@ const Dashboard = () => {
 export default Dashboard
 
 Dashboard.getLayout = function getLayout(page) {
-  return <SecondaryLayout>{page}</SecondaryLayout>
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+  return viewport === 'mobile' ? (
+    <MobileDashboardLayout title="Dashboard">{page}</MobileDashboardLayout>
+  ) : (
+    <SecondaryLayout>{page}</SecondaryLayout>
+  )
 }
