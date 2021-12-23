@@ -68,19 +68,19 @@ const Footer = props => {
               <Link href={'/docs/terms'} passHref>
                 <p>Terminos y Condiciones</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/privacy-policy'} passHref>
                 <p>Politica Privacidad</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/legal'} passHref>
                 <p>Legal</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/cookies'} passHref>
                 <p>Cookies</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/sale'} passHref>
                 <p>Venta</p>
               </Link>

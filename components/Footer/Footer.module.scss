@@ -2,10 +2,10 @@
 
 .footerArea {
   background-color: $gray-600-color;
-  @media (max-width: 576px) {
+  @media (max-width: 1023px) {
     padding-top: 20px;
   }
-  @media (min-width: 577px) {
+  @media (min-width: 1024px) {
     padding-top: 31px;
     padding-bottom: 31px;
   }
