@@ -16,7 +16,7 @@ import styles from 'pages/news/news.module.scss'
 // images
 import news from 'public/images/news.svg'
 
-const News = () => {
+const News = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -34,31 +34,7 @@ const News = () => {
   // loading part end #######################
 
   // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
+  const { viewport } = props
 
   return (
     <div className={'flex flex-wrap justify-center'}>

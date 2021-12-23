@@ -27,6 +27,7 @@ import graphql from 'crysdiazGraphql'
 
 const Header = props => {
   // variables
+  const { viewport } = props
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -38,32 +39,8 @@ const Header = props => {
   const [cartData, setCartData] = useState([])
   const [menus, setMenus] = useState([])
   const [showCart, setShowCart] = useState(true)
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     getDisciplineList()
   }, [getDisciplineList])
@@ -394,7 +371,7 @@ const Header = props => {
             </button>
           </li>
         </ul>
-        <Menu />
+        <Menu viewport={viewport} />
       </div>
       {openCart && (
         <div className={'absolute top-20 right-20'} onMouseLeave={handleBack}>

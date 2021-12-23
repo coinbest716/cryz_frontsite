@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 // import Profile from 'components/components/dashboard/Profile'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
@@ -328,5 +329,9 @@ const Billing = () => {
 export default Billing
 
 Billing.getLayout = function getLayout(page) {
-  return <SecondaryLayout>{page}</SecondaryLayout>
+  return page.props.viewport === 'mobile' ? (
+    <MobileDashboardLayout title="Direcciones de facturación">{page}</MobileDashboardLayout>
+  ) : (
+    <SecondaryLayout>{page}</SecondaryLayout>
+  )
 }

@@ -29,7 +29,7 @@ const text_styles = {
 
 const VideoChat = props => {
   // const { sessionId } = useParams()
-  const { sessionId } = props
+  const { sessionId, viewport } = props
   const handle = useFullScreenHandle()
 
   const [participants, setParticipants] = useState([])
@@ -46,38 +46,12 @@ const VideoChat = props => {
   const [videoHeight, setVideoHeight] = useState(640)
   const [bgColor, setBGColor] = useState('#708393')
   // const [alert, setAlert] = useState({ type: '', active: false, message: '' })
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
   const defaultWidth = 1138
   const defaultHeight = 640
-
   const screenWidth = window.screen.width
   const screenHeight = window.screen.height
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     if (sessionId > 0) {
       initTwilioConnet(`Crysdyaz_${sessionId}`, localStorage.getItem('email'))
@@ -194,7 +168,7 @@ const VideoChat = props => {
   }
 
   const remoteParticipants = participants.map(participant => (
-    <Participant key={participant.sid} participant={participant} />
+    <Participant key={participant.sid} participant={participant} viewport={viewport} />
   ))
 
   const controlMic = () => {

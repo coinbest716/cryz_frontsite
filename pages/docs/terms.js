@@ -10,7 +10,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/docs/index.module.scss'
 
-const TermsAndConditions = () => {
+const TermsAndConditions = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -28,31 +28,7 @@ const TermsAndConditions = () => {
   // loading part end #######################
 
   // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
+  const { viewport } = props
 
   return (
     <div className={'flex justify-center'}>

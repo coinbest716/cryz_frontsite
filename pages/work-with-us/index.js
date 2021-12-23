@@ -23,7 +23,7 @@ const formReducer = (state, event) => {
   }
 }
 
-const WorkWithUs = () => {
+const WorkWithUs = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -45,33 +45,10 @@ const WorkWithUs = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const fileRef = createRef()
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   const handleAttachFile = event => {
     console.log(event.target.files[0])
   }

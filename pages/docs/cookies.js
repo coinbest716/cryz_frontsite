@@ -10,7 +10,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/docs/index.module.scss'
 
-const Cookies = () => {
+const Cookies = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -28,31 +28,8 @@ const Cookies = () => {
   // loading part end #######################
 
   // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+  const { viewport } = props
 
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
   return (
     <div className={'flex justify-center'}>
       <div className={globalStyles.container}>

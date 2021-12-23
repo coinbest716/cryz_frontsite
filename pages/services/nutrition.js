@@ -22,7 +22,7 @@ import styles from './nutrition.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Nutrition = () => {
+const Nutrition = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -40,6 +40,7 @@ const Nutrition = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const router = useRouter()
   const [getCmsServiceSubject, { data: cmsSubjectData, loading: cmsSubjectLoading, error: cmsSubjectError }] =
     useLazyQuery(graphql.queries.getCmsServiceSubject)
@@ -51,32 +52,8 @@ const Nutrition = () => {
 
   const [sliderData, setSliderData] = useState([])
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     getCmsServiceSubject({
       variables: {
@@ -187,7 +164,7 @@ const Nutrition = () => {
             >
               {viewport !== 'mobile' && (
                 <div className={'absolute top-10 z-10'}>
-                  <CircularMark />
+                  <CircularMark viewport={viewport} />
                 </div>
               )}
               <div className={viewport === 'mobile' ? styles.m_carouselSection : styles.carouselSection}>
@@ -201,17 +178,32 @@ const Nutrition = () => {
         <div className={'flex justify-start'}>
           {personalButton && (
             <div className={'w-1/3'}>
-              <ArrowButton label={'Compra presencial'} onClick={handleClickBuyPersion} type={'nutrition'} />
+              <ArrowButton
+                label={'Compra presencial'}
+                onClick={handleClickBuyPersion}
+                type={'nutrition'}
+                viewport={viewport}
+              />
             </div>
           )}
           {onlineButton && (
             <div className={'w-1/3'}>
-              <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} type={'nutrition'} />
+              <ArrowButton
+                label={'Compra planes online'}
+                onClick={handleClickBuyPlan}
+                type={'nutrition'}
+                viewport={viewport}
+              />
             </div>
           )}
           {streamButton && (
             <div className={'w-1/3'}>
-              <ArrowButton label={'Compra 1 to 1 en streaming'} onClick={handleClickBuyStreaming} type={'nutrition'} />
+              <ArrowButton
+                label={'Compra 1 to 1 en streaming'}
+                onClick={handleClickBuyStreaming}
+                type={'nutrition'}
+                viewport={viewport}
+              />
             </div>
           )}
         </div>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import styles from './nutrition.module.scss'
 
 const Nutrition = () => {
@@ -32,5 +33,9 @@ const Nutrition = () => {
 export default Nutrition
 
 Nutrition.getLayout = function getLayout(page) {
-  return <SecondaryLayout>{page}</SecondaryLayout>
+  return page.props.viewport === 'mobile' ? (
+    <MobileDashboardLayout title="Nutrition">{page}</MobileDashboardLayout>
+  ) : (
+    <SecondaryLayout>{page}</SecondaryLayout>
+  )
 }

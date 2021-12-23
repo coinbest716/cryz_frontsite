@@ -85,8 +85,9 @@ const BurgerIcon = ({ visibilty, setVisibility, router }) => {
   )
 }
 
-const Menu = () => {
+const Menu = props => {
   // variables
+  const { viewport } = props
   const [visibility, setVisibility] = useState()
   const router = useRouter()
 
@@ -99,32 +100,8 @@ const Menu = () => {
 
   const [activeImage, setActiveImage] = useState('')
   const [activeHover, setActiveHover] = useState(false)
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   const handleGotoLink = link => {
     setVisibility(false)
     router.push(link)

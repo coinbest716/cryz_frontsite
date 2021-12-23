@@ -17,7 +17,7 @@ import styles from './academy.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Academy = () => {
+const Academy = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -35,8 +35,8 @@ const Academy = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const router = useRouter()
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // const [getAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
   //   graphql.queries.getAcademy
@@ -47,28 +47,6 @@ const Academy = () => {
   const [cardData, setCardData] = useState([])
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
   useEffect(() => {
     getAcademyWithPlazas()
   }, [getAcademyWithPlazas])
@@ -95,7 +73,7 @@ const Academy = () => {
             </div>
             {viewport !== 'mobile' && (
               <div className={'z-10'}>
-                <CircularMark />
+                <CircularMark viewport={viewport} />
               </div>
             )}
           </div>
