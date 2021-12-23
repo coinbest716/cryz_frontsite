@@ -11,6 +11,7 @@ import { Auth } from 'aws-amplify'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 // import Profile from 'components/components/dashboard/Profile'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import MessageCard01 from 'components/components/dashboard/message/MessageCard01'
@@ -355,5 +356,9 @@ const Message = () => {
 export default Message
 
 Message.getLayout = function getLayout(page) {
-  return <SecondaryLayout>{page}</SecondaryLayout>
+  return page.props.viewport === 'mobile' ? (
+    <MobileDashboardLayout title="Mensajes">{page}</MobileDashboardLayout>
+  ) : (
+    <SecondaryLayout>{page}</SecondaryLayout>
+  )
 }
