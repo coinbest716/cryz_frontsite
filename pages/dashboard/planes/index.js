@@ -171,13 +171,24 @@ const Planes = () => {
           topLabel: 'Nivel',
           lowLabel: selectedVideo.effort_level,
         },
-        { id: 1, path: '/images/type.svg', bgColor: '#DFDBD5', topLabel: 'Tandas', lowLabel: selectedVideo.time },
+        { id: 1, path: '/images/type.svg', 
+          bgColor: '#DFDBD5', 
+          topLabel: 'Repetición', 
+          lowLabel: selectedVideo.repetitions },
+
+        {
+          id: 4,
+          path: '/images/time.svg',
+          bgColor: '#F5DEC2',
+          topLabel: 'Tiempo',
+          lowLabel: selectedVideo.time + 'min',
+        },
         {
           id: 2,
           path: '/images/time.svg',
           bgColor: '#E3BBAA',
           topLabel: 'Descanso',
-          lowLabel: selectedVideo.break !== 0 ? selectedVideo.break : selectedVideo.repetitions + 'seg',
+          lowLabel: selectedVideo.break + 'seg',
         },
         {
           id: 3,
@@ -290,7 +301,7 @@ const Planes = () => {
 
               <div className={'flex flex-wrap justify-between pt-12 gap-4'}>
                 <div className={styles.blockSection + ' flex flex-wrap justify-between items-center px-5 py-5'}>
-                  <div className={styles.blackName + ' py-2 pr-4'}>Información del bloque</div>
+                  <div className={styles.blackName + ' py-2 pr-4'}>Información del video</div>
                   <div className={'flex justify-end flex-1'}>
                     {feature.map((item, index) => (
                       <div key={index} className={'pl-4 lg:px-5'}>
