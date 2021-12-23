@@ -408,7 +408,7 @@ const Planes = () => {
                           <Material
                             item={video}
                             selectedVideo={selectedVideo}
-                            type={'green'}
+                            /*type={'green'}*/
                             onClick={data => setSelectedVideo(data)}
                           />
                         </div>
