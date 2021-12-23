@@ -20,34 +20,10 @@ import styles from 'components/Home/MainSection.module.scss'
 
 const MainSection = props => {
   // varaibles
-  const { mainImage, featuredServices } = props
+  const { mainImage, featuredServices, viewport } = props
   const [sliderData, setSliderData] = useState([])
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     if (viewport === 'mobile') {
       let array = []

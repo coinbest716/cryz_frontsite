@@ -26,7 +26,7 @@ import topImage from 'public/images/classland-top-image.svg'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Classland = () => {
+const Classland = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -44,6 +44,7 @@ const Classland = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const faqRef = useRef(null)
   const [main, setMain] = useState({})
   const [sliderData, setSliderData] = useState([])
@@ -79,32 +80,8 @@ const Classland = () => {
   ] = useLazyQuery(graphql.queries.getClasslandCategory)
   const [getClasslandFaqs, { data: classlandFaqData, loading: classlandFaqLoading, error: classlandFaqError }] =
     useLazyQuery(graphql.queries.getClasslandFaqs)
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     getClasslandMain()
     getClasslandCategory({ variables: { category: 'ALL' } })
@@ -187,10 +164,10 @@ const Classland = () => {
                     </div>
                     <div>
                       <div className={'z-10'}>
-                        <CircularMark />
+                        <CircularMark viewport={viewport} />
                       </div>
                       <div className={'mt-6'}>
-                        <FaqButton onClick={executeScroll} />
+                        <FaqButton onClick={executeScroll} viewport={viewport} />
                       </div>
                     </div>
                   </div>
@@ -287,7 +264,7 @@ const Classland = () => {
               </div>
               {faqData?.map((data, index) => (
                 <div style={{ padding: '7px 0px' }} key={index}>
-                  <Accordian title={data.name} description={data.description} />
+                  <Accordian title={data.name} description={data.description} viewport={viewport} />
                 </div>
               ))}
             </div>

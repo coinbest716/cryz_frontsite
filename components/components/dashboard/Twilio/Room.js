@@ -3,7 +3,7 @@ import Participant from './Participant'
 // import PropTypes from 'prop-types'
 
 const Room = props => {
-  const { roomName, room, handleLogout } = props
+  const { roomName, room, handleLogout, viewport } = props
   const [participants, setParticipants] = useState([])
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Room = props => {
   }, [room])
 
   const remoteParticipants = participants.map(participant => (
-    <Participant key={participant.sid} participant={participant} />
+    <Participant key={participant.sid} participant={participant} viewport={viewport} />
   ))
 
   return (
@@ -35,7 +35,11 @@ const Room = props => {
         Log out
       </button> */}
       <div className="app-twilio-chat-local-participant">
-        {room ? <Participant key={room.localParticipant.sid} participant={room.localParticipant} /> : ''}
+        {room ? (
+          <Participant key={room.localParticipant.sid} participant={room.localParticipant} viewport={viewport} />
+        ) : (
+          ''
+        )}
       </div>
       <h4>Remote Participants</h4>
       <div className="app-twilio-chat-remote-participants">{remoteParticipants}</div>

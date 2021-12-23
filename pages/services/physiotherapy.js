@@ -22,7 +22,7 @@ import styles from './physiotherapy.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Physiotherapy = () => {
+const Physiotherapy = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -40,6 +40,7 @@ const Physiotherapy = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const router = useRouter()
   const [getCmsServiceSubject, { data: cmsSubjectData, loading: cmsSubjectLoading, error: cmsSubjectError }] =
     useLazyQuery(graphql.queries.getCmsServiceSubject)
@@ -51,32 +52,8 @@ const Physiotherapy = () => {
   const [streamButton, setStreamButton] = useState(false)
   const [sliderData, setSliderData] = useState([])
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     getCmsServiceSubject({
       variables: {
@@ -187,7 +164,7 @@ const Physiotherapy = () => {
             >
               {viewport !== 'mobile' && (
                 <div className={'absolute top-10 z-10'}>
-                  <CircularMark />
+                  <CircularMark viewport={viewport} />
                 </div>
               )}
               <div className={viewport === 'mobile' ? styles.m_carouselSection : styles.carouselSection}>
@@ -211,7 +188,12 @@ const Physiotherapy = () => {
           )}
           {onlineButton && (
             <div className={'w-1/3'}>
-              <ArrowButton label={'Compra planes online'} onClick={handleClickBuyPlan} type={'physiotherapy'} />
+              <ArrowButton
+                label={'Compra planes online'}
+                onClick={handleClickBuyPlan}
+                type={'physiotherapy'}
+                viewport={viewport}
+              />
             </div>
           )}
           {streamButton && (
@@ -220,6 +202,7 @@ const Physiotherapy = () => {
                 label={'Compra 1 to 1 en streaming'}
                 onClick={handleClickBuyStreaming}
                 type={'physiotherapy'}
+                viewport={viewport}
               />
             </div>
           )}

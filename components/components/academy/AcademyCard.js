@@ -52,7 +52,12 @@ const AcademyCard = props => {
       </div>
       {viewport !== 'mobile' && (
         <div className={'mt-2'}>
-          <ArrowButton plazas={data.plazas} label={data.price + ' €'} onClick={() => handleClickPayment(data)} />
+          <ArrowButton
+            plazas={data.plazas}
+            label={data.price + ' €'}
+            onClick={() => handleClickPayment(data)}
+            viewport={viewport}
+          />
         </div>
       )}
     </div>
