@@ -21,22 +21,16 @@ import styles from './nutrition.module.scss'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import { isMobile } from 'react-device-detect'
 
 const Nutrition = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -57,8 +51,32 @@ const Nutrition = () => {
 
   const [sliderData, setSliderData] = useState([])
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
   useEffect(() => {
     getCmsServiceSubject({
       variables: {
@@ -117,7 +135,7 @@ const Nutrition = () => {
   }
 
   return (
-    <div className={mobile ? styles.m_container : styles.container}>
+    <div className={viewport === 'mobile' ? styles.m_container : styles.container}>
       <div className={'flex flex-wrap justify-center pb-20'}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
@@ -125,9 +143,9 @@ const Nutrition = () => {
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={mobile ? styles.m_topTitle : styles.topTitle}>{title}</div>
+              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>{title}</div>
               <div className={styles.topDash} />
-              <div className={styles.topDescription + (mobile ? ' mt-5' : ' mt-10 pb-20')}>
+              <div className={styles.topDescription + (viewport === 'mobile' ? ' mt-5' : ' mt-10 pb-20')}>
                 <div
                   className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}
                 >
@@ -142,7 +160,7 @@ const Nutrition = () => {
                 </div>
               </div>
             </div>
-            {mobile && (
+            {viewport === 'mobile' && (
               <div className={'col-span-12'}>
                 {personalButton && (
                   <div className={'w-2/3 py-2'}>
@@ -163,22 +181,23 @@ const Nutrition = () => {
             )}
             <div
               className={
-                'col-span-12 md:col-span-7 sm:col-span-12 relative flex' + (mobile ? ' justify-center' : ' justify-end')
+                'col-span-12 md:col-span-7 sm:col-span-12 relative flex' +
+                (viewport === 'mobile' ? ' justify-center' : ' justify-end')
               }
             >
-              {!mobile && (
+              {viewport !== 'mobile' && (
                 <div className={'absolute top-10 z-10'}>
                   <CircularMark />
                 </div>
               )}
-              <div className={mobile ? styles.m_carouselSection : styles.carouselSection}>
-                <CarouselService sliderData={sliderData} mobile={mobile} />
+              <div className={viewport === 'mobile' ? styles.m_carouselSection : styles.carouselSection}>
+                <CarouselService sliderData={sliderData} viewport={viewport} />
               </div>
             </div>
           </div>
         </div>
       </div>
-      {!mobile && (
+      {viewport !== 'mobile' && (
         <div className={'flex justify-start'}>
           {personalButton && (
             <div className={'w-1/3'}>

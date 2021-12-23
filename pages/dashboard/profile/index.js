@@ -9,6 +9,7 @@ import Image from 'next/image'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 // import Profile from 'components/components/dashboard/Profile'
 import Personal from 'components/components/dashboard/Personal'
@@ -573,5 +574,9 @@ const Profile = () => {
 export default Profile
 
 Profile.getLayout = function getLayout(page) {
-  return <SecondaryLayout>{page}</SecondaryLayout>
+  return page.props.viewport === 'mobile' ? (
+    <MobileDashboardLayout title="Perfil">{page}</MobileDashboardLayout>
+  ) : (
+    <SecondaryLayout>{page}</SecondaryLayout>
+  )
 }

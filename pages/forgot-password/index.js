@@ -19,22 +19,16 @@ import CloseIcon from 'assets/images/close.svg'
 import KeyImage from 'assets/images/key.png'
 import toast from 'react-hot-toast'
 import ReactLoading from 'react-loading'
-import { isMobile } from 'react-device-detect'
 
 const ForgotPassword = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setIsMobile] = useState(null)
 
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setIsMobile(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -46,8 +40,32 @@ const ForgotPassword = () => {
   // variables
   const [progressStatus, setProgressStatus] = useState(false)
   const [userEmail, setUserEmail] = useState('')
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
   const handleForgotPassword = async () => {
     setProgressStatus(true)
     await Auth.forgotPassword(userEmail)
@@ -78,7 +96,7 @@ const ForgotPassword = () => {
   return (
     <div className={'relative'}>
       <div className={'w-full h-screen flex grid grid-cols-12'}>
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <></>
         ) : (
           <div
@@ -98,7 +116,7 @@ const ForgotPassword = () => {
             </div>
           </div>
         )}
-        {mobile ? (
+        {viewport === 'mobile' ? (
           <div
             className={
               'w-full col-span-12 lg:col-span-6 md:col-span-6 flex flex-wrap justify-center items-center relative ' +

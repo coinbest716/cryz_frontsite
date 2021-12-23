@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -38,7 +37,7 @@ import graphql from 'crysdiazGraphql'
 
 import { Auth } from 'aws-amplify'
 import moment from 'moment'
-import * as gtag from "../../utils/gtag";
+import * as gtag from '../../utils/gtag'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -49,7 +48,6 @@ const Purchase = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setMobile] = useState(null)
 
   const listGrey = '/images/list-grey.svg'
   const listWhite = '/images/list-white.svg'
@@ -61,10 +59,6 @@ const Purchase = () => {
     setIsMounted(true)
     return () => setIsMounted(false)
   }, [])
-
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
 
   useEffect(() => {
     if (isMounted === true) {
@@ -217,6 +211,31 @@ const Purchase = () => {
   const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('card')
   const [cardInfo, setCardInfo] = useState({ number: '', name: '', expiry: '', cvc: '' })
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+
+  // handlers
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   // handlers
   useEffect(() => {
@@ -238,25 +257,35 @@ const Purchase = () => {
     gtag.event({
       action: 'begin_checkout',
       params: {
-        currency: "EUR",
+        currency: 'EUR',
         value: shoppingInfo.price,
         items: [
           {
             item_id: router.query.service_id,
             item_name: shoppingInfo.description,
-            currency: "EUR",
+            currency: 'EUR',
             price: shoppingInfo.price,
-            quantity: 1
-          }
-        ]
-      }
+            quantity: 1,
+          },
+        ],
+      },
     })
     Auth.currentAuthenticatedUser()
       .then(() => {
         setIsAuthenticated(true)
       })
       .catch(() => {
-        router.push('/purchase-login')
+        router.push({
+          pathname: '/purchase-login',
+          query: {
+            service_id: router.query.service_id,
+            tab: 0,
+            image: router.query.image,
+            description: router.query.description,
+            price: router.query.price,
+          },
+        })
+        //router.push('/purchase-login')
         setIsAuthenticated(false)
       })
   }, [])
@@ -372,7 +401,6 @@ const Purchase = () => {
   }
 
   const handleSave = () => {
-    console.log('personalInfo')
     let emptyField = false
     personalKey.map(key => {
       if (personalInfo[key] === '') {
@@ -421,12 +449,17 @@ const Purchase = () => {
       })
   }
   const handleContinue = tabIndex => {
-    let query = { tab: tabIndex }
-    if (router.query.service_id) {
-      query = { ...query, service_id: router.query.service_id }
+    try {
+      let query = { tab: tabIndex }
+      if (router.query.service_id) {
+        query = { ...query, service_id: router.query.service_id }
+      }
+      handleSave()
+      router.push({ pathname: '/purchase', query: query }, undefined, { shallow: true })
+    } catch (err) {
+      toast.error(err.message)
+      return
     }
-    // handleSave()
-    router.push({ pathname: '/purchase', query: query }, undefined, { shallow: true })
   }
 
   const handleChangeInfo = (event, key) => {
@@ -599,6 +632,15 @@ const Purchase = () => {
   const handleAcceptDiscount = () => {}
 
   const onClickTab = tabType => {
+    if (personalInfo.surname !== '' && personalInfo.name !== '') {
+      if (personalInfo.id === -1 && tabType === 1) {
+        toast.error('Please click continue button!')
+        return
+      }
+    } else {
+      toast.error('Please input data!')
+      return
+    }
     let query = { tab: tabType }
     if (router.query.service_id) {
       query = {
@@ -637,7 +679,7 @@ const Purchase = () => {
         <div className={globalStyles.container + ' pt-20'}>
           <div className={'grid grid-cols-12 gap-4 '}>
             <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-8'}>
-              {mobile ? (
+              {viewport === 'mobile' ? (
                 <div>
                   {tabIndex === 0 ? (
                     <>

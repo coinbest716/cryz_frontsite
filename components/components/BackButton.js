@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 // third party components
-import { isMobile } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
 
 // next components
@@ -25,20 +24,39 @@ const BackButton = () => {
   }
 
   // variables
-  const [mobile, setMobile] = useState(false)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
   useEffect(() => {
-    setMobile(isMobile)
-  }, [isMobile])
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   return (
     <button
       className={'flex justify-between items-center hover:bg-gray-300 pr-2 py-1 z-10'}
       onClick={() => handleGotoBack()}
     >
-      <Image src={mobile ? backBlackIcon : backGrayIcon} alt="" width={20} height={15} />
-      <p className={styles.back + ' z-10'}>{mobile ? '' : 'Volver'}</p>
+      <Image src={viewport === 'mobile' ? backBlackIcon : backGrayIcon} alt="" width={20} height={15} />
+      <p className={styles.back + ' z-10'}>{viewport === 'mobile' ? '' : 'Volver'}</p>
     </button>
   )
 }

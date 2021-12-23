@@ -11,6 +11,7 @@ import ReactPlayer from 'react-player'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import VideoChat from 'components/components/dashboard/Twilio/VideoChat'
 // import Profile from 'components/components/dashboard/Profile'
@@ -89,5 +90,9 @@ const LiveStreaming = () => {
 export default LiveStreaming
 
 LiveStreaming.getLayout = function getLayout(page) {
-  return <SecondaryLayout>{page}</SecondaryLayout>
+  return page.props.viewport === 'mobile' ? (
+    <MobileDashboardLayout title="1 to 1 Streaming">{page}</MobileDashboardLayout>
+  ) : (
+    <SecondaryLayout>{page}</SecondaryLayout>
+  )
 }

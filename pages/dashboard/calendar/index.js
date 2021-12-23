@@ -18,6 +18,7 @@ const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 // import Profile from 'components/components/dashboard/Profile'
@@ -221,5 +222,9 @@ const Calendar = () => {
 export default Calendar
 
 Calendar.getLayout = function getLayout(page) {
-  return <SecondaryLayout>{page}</SecondaryLayout>
+  return page.props.viewport === 'mobile' ? (
+    <MobileDashboardLayout title="Calendario">{page}</MobileDashboardLayout>
+  ) : (
+    <SecondaryLayout>{page}</SecondaryLayout>
+  )
 }

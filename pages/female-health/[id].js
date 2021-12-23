@@ -3,9 +3,6 @@ import React, { useEffect, useState } from 'react'
 // redux
 import { useDispatch } from 'react-redux'
 
-// third party components
-import { isMobile } from 'react-device-detect'
-
 // custom component
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
@@ -45,7 +42,6 @@ const Menopause = () => {
 
   // variables
   const router = useRouter()
-  const [mobile, setMobile] = useState(false)
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
   const [disciplineID, setDisciplineID] = useState(null)
 
@@ -55,11 +51,31 @@ const Menopause = () => {
     getFemHealthService,
     { data: femHealthServiceData, loading: femHealthServiceLoading, error: femHealthServiceError },
   ] = useLazyQuery(graphql.queries.getFemHealthService)
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
   useEffect(() => {
-    setMobile(isMobile)
-  }, [isMobile])
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
 
   useEffect(() => {
     dispatch({ type: 'set', isLoading: false })
@@ -97,7 +113,7 @@ const Menopause = () => {
         </div>
         {JSON.stringify(femHealthService) !== JSON.stringify({}) ? (
           <div className={'grid grid-cols-12 gap-4'} style={{ minHeight: '634px' }}>
-            <div className={mobile ? 'col-span-12 block' : 'col-span-5 block'}>
+            <div className={viewport === 'mobile' ? 'col-span-12 block' : 'col-span-5 block'}>
               <div className={styles.strokeTitle}>{femHealthService.title_one}</div>
               <div className={styles.pinkTitle}>{femHealthService.title_two}</div>
               <div className={styles.divider} />
@@ -113,7 +129,7 @@ const Menopause = () => {
               </div>
             </div>
             {/* buy button part start */}
-            {mobile ? (
+            {viewport === 'mobile' ? (
               <div className={'col-span-12'}>
                 {femHealthService.stream_button ? (
                   <div className="my-1">
@@ -193,18 +209,22 @@ const Menopause = () => {
             )}
             {/* buy button part end */}
             <div
-              className={mobile ? 'col-span-12 relative flex justify-center' : 'col-span-7 relative flex justify-end'}
+              className={
+                viewport === 'mobile'
+                  ? 'col-span-12 relative flex justify-center'
+                  : 'col-span-7 relative flex justify-end'
+              }
             >
-              {mobile ? (
+              {viewport === 'mobile' ? (
                 <></>
               ) : (
                 <div className={'absolute top-10 z-10'}>
                   <CircularMark />
                 </div>
               )}
-              <div className={mobile ? 'w-full mt-3 pb-7' : 'w-full mt-20 pb-20'}>
+              <div className={viewport === 'mobile' ? 'w-full mt-3 pb-7' : 'w-full mt-20 pb-20'}>
                 {femHealthService?.carousel_image !== undefined ? (
-                  <CarouselFemaleHealth sliderData={femHealthService?.carousel_image} mobile={mobile} />
+                  <CarouselFemaleHealth sliderData={femHealthService?.carousel_image} viewport={viewport} />
                 ) : (
                   <></>
                 )}
@@ -216,8 +236,8 @@ const Menopause = () => {
         )}
       </div>
       {/* Button group part */}
-      {!mobile ? (
-        <div className={'w-full ' + (mobile ? '' : 'pt-32')}>
+      {viewport !== 'mobile' ? (
+        <div className={'w-full ' + (viewport === 'mobile' ? '' : 'pt-32')}>
           <div className={'w-full flex'}>
             {femHealthService.stream_button ? (
               <div className={'w-1/3'}>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { isMobile } from 'react-device-detect'
 
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
@@ -34,11 +33,6 @@ const Contact = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [mobile, setMobile] = useState(null)
-
-  useEffect(() => {
-    setMobile(isMobile)
-  }, [setMobile])
 
   useEffect(() => {
     setIsMounted(true)
@@ -53,6 +47,7 @@ const Contact = () => {
   // loading part end #######################
 
   // variables
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
   const locations = [
     {
       name: 'Crys Dyaz & Co',
@@ -74,6 +69,28 @@ const Contact = () => {
 
   // handlers
   useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
+  useEffect(() => {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+  useEffect(() => {
     getContactInfo()
   }, [getContactInfo])
 
@@ -94,16 +111,16 @@ const Contact = () => {
   return (
     <div className={'flex flex-wrap justify-center pt-20'}>
       <div className={globalStyles.container}>
-        <div className={'flex justify-between' + (mobile ? ' pt-4' : ' pt-24')}>
+        <div className={'flex justify-between' + (viewport === 'mobile' ? ' pt-4' : ' pt-24')}>
           <div className={'px-4'}>
             <div className={styles.topTitle}>Contacto</div>
             <div className={styles.topDash} />
-            <div className={styles.topDescription + (mobile ? ' pt-4' : ' pt-9')}>
+            <div className={styles.topDescription + (viewport === 'mobile' ? ' pt-4' : ' pt-9')}>
               ¡HOY ES EL DIA, <br />
               AHORA EL MOMENTO!
             </div>
           </div>
-          {!mobile && (
+          {viewport !== 'mobile' && (
             <div className={'z-10'}>
               <CircularMark />
             </div>
@@ -112,12 +129,12 @@ const Contact = () => {
         <div
           style={{
             position: 'relative',
-            height: mobile ? '380px' : '433px',
+            height: viewport === 'mobile' ? '380px' : '433px',
             width: '100%',
-            marginTop: mobile ? '20px' : '10px',
+            marginTop: viewport === 'mobile' ? '20px' : '10px',
           }}
         >
-          <MapContainer isMobile={mobile} locations={locations} />
+          <MapContainer viewport={viewport} locations={locations} />
           <div
             style={{
               position: 'absolute',
@@ -126,7 +143,7 @@ const Contact = () => {
               bottom: '0px',
             }}
           >
-            {mobile && (
+            {viewport === 'mobile' && (
               <div className={globalStyles.container}>
                 <div className={'grid grid-cols-12 text-center px-4 pt-5 pb-2'}>
                   <div
@@ -180,7 +197,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      {mobile ? (
+      {viewport === 'mobile' ? (
         <div className={'cursor-pointer'} style={{ position: 'fixed', zIndex: 999, right: '10px', bottom: '0px' }}>
           <Image src={whatsapp} alt="" width={53} height={53} onClick={handleClickWhatsapp} />
         </div>

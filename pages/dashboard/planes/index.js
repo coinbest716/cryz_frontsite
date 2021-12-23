@@ -16,6 +16,7 @@ import moment from 'moment'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
+import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import Material from 'components/components/dashboard/Material'
 import Feature from 'components/components/academy/Feature'
@@ -421,5 +422,9 @@ const Planes = () => {
 export default Planes
 
 Planes.getLayout = function getLayout(page) {
-  return <SecondaryLayout>{page}</SecondaryLayout>
+  return page.props.viewport === 'mobile' ? (
+    <MobileDashboardLayout title="Planes online">{page}</MobileDashboardLayout>
+  ) : (
+    <SecondaryLayout>{page}</SecondaryLayout>
+  )
 }

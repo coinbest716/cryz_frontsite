@@ -8,7 +8,6 @@ import router from 'next/router'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import ReactPlayer from 'react-player'
-import { isMobile } from 'react-device-detect'
 
 // images
 import MainImage from 'assets/images/main.png'
@@ -22,15 +21,35 @@ import styles from 'components/Home/MainSection.module.scss'
 const MainSection = props => {
   // varaibles
   const { mainImage, featuredServices } = props
-  const [mobile, setMobile] = useState(false)
   const [sliderData, setSliderData] = useState([])
+  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
   useEffect(() => {
-    setMobile(isMobile)
-  }, [isMobile])
+    if (window.innerWidth > 1024) {
+      setViewport('desktop')
+    } else if (window.innerWidth === 1024) {
+      setViewport('ipad')
+    } else {
+      setViewport('mobile')
+    }
+  }, [])
+
   useEffect(() => {
-    if (mobile) {
+    const resizeFunction = () => {
+      if (window.innerWidth > 1024) {
+        setViewport('desktop')
+      } else if (window.innerWidth === 1024) {
+        setViewport('ipad')
+      } else {
+        setViewport('mobile')
+      }
+    }
+    window.addEventListener('resize', resizeFunction)
+  }, [])
+
+  useEffect(() => {
+    if (viewport === 'mobile') {
       let array = []
       array = featuredServices
       let tempArray = []
@@ -55,17 +74,17 @@ const MainSection = props => {
     } else {
       setSliderData(featuredServices)
     }
-  }, [mobile, featuredServices])
+  }, [viewport, featuredServices])
   return (
     <div className={'w-full p-0 relative'}>
       <div className={'relative w-full p-0 m-0 h-screen -z-10'}>
         {mainImage !== '' ? (
           <Image
-            src={mainImage.path ? mainImage.path : mobile ? MainMobileImage : MainImage}
+            src={mainImage.path ? mainImage.path : viewport === 'mobile' ? MainMobileImage : MainImage}
             alt=""
             layout="fill"
             objectFit="cover"
-            objectPosition="-200px 0px"
+            objectPosition={'-200px 0px'}
           />
         ) : (
           <></>
@@ -77,7 +96,7 @@ const MainSection = props => {
       <div id="bottomToTop" className={styles.bottomToTop}>
         {mainImage.text_one}
       </div>
-      {!mobile ? (
+      {viewport !== 'mobile' ? (
         <div className={'absolute flex justify-end top-0 right-0 p-0 m-0 h-screen ' + styles.mainRightArea}>
           <div className={'absolute top-0 left-0 h-screen -z-10 w-full ' + styles.mainCarouselOpacityArea} />
           <div className={'mainCarouselArea'}>
@@ -101,7 +120,7 @@ const MainSection = props => {
                         {/* {item.type === 'image' ? ( */}
                         <div className={styles.imageArea}>
                           <Image
-                            src={item.image !== null ? item.image : MainImage}
+                            src={item.image !== undefined ? item.image : MainImage}
                             alt=""
                             width={345}
                             height={194}
@@ -151,7 +170,7 @@ const MainSection = props => {
                         {/* {item.type === 'image' ? ( */}
                         <div className={styles.imageArea + ' mb-5'}>
                           <Image
-                            src={item.image !== null ? item.image : MainImage}
+                            src={item.image !== undefined ? item.image : MainImage}
                             alt=""
                             width={345}
                             height={194}
@@ -201,7 +220,7 @@ const MainSection = props => {
                   item.type === 'image' ? (
                     <div className={styles.mobileImageArea} key={index}>
                       <Image
-                        src={item.image !== null ? item.image : MainImage}
+                        src={item.image !== undefined ? item.image : MainImage}
                         alt=""
                         width={219}
                         height={136}
