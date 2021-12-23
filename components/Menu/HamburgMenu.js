@@ -14,9 +14,30 @@ import { useDispatch } from 'react-redux'
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
 
-// images
+// images and icons
 import CandyboxGrayIcon from 'assets/images/candybox-gray.svg'
 import CloseGrayIcon from 'assets/images/close-gray.svg'
+
+import resizeIcon from 'public/images/resize.svg'
+import homeIcon from 'public/images/home.svg'
+import dashboardIcon from 'public/images/dashboard.svg'
+import shoppingIcon from 'public/images/shopping.svg'
+import messageIcon from 'public/images/message.svg'
+import profileIcon from 'public/images/profile.svg'
+import billingIcon from 'public/images/billing.svg'
+import calendarIcon from 'public/images/calendar.svg'
+import nutritionIcon from 'public/images/nutrition.svg'
+import plansIcon from 'public/images/plans.svg'
+import logoutIcon from 'public/images/off.svg'
+import homeBlackIcon from 'public/images/home_black.svg'
+import dashboardBlackIcon from 'public/images/dashboard_black.svg'
+import shoppingBlackIcon from 'public/images/shopping_black.svg'
+import messageBlackIcon from 'public/images/message_black.svg'
+import profileBlackIcon from 'public/images/profile_black.svg'
+import billingBlackIcon from 'public/images/billing_black.svg'
+import calendarBlackIcon from 'public/images/calendar_black.svg'
+import nutritionBlackIcon from 'public/images/nutrition_black.svg'
+import plansBlackIcon from 'public/images/plans_black.svg'
 
 // json data
 import SocialURLData from 'assets/data/SocialURLData'
@@ -27,49 +48,58 @@ import styles from 'components/Menu/HamburgMenu.module.scss'
 
 const menuList = [
   {
-    num: '01',
-    label: 'Home',
-    nav: '/',
+    href: '/',
+    icon: homeIcon,
+    iconBlack: homeBlackIcon,
+    title: 'Home',
   },
   {
-    num: '02',
-    label: 'Equipo',
-    nav: '/#team',
+    href: '/dashboard',
+    icon: dashboardIcon,
+    iconBlack: dashboardBlackIcon,
+    title: 'Dashboard',
   },
   {
-    num: '03',
-    label: 'Salud Fem',
-    nav: '/female-health',
+    href: '/dashboard/shopping',
+    icon: shoppingIcon,
+    iconBlack: shoppingBlackIcon,
+    title: 'Compras',
   },
   {
-    num: '04',
-    label: 'Servicios',
-    nav: '/services',
+    href: '/dashboard/message',
+    icon: messageIcon,
+    iconBlack: messageBlackIcon,
+    title: 'Mensajes',
   },
   {
-    num: '05',
-    label: 'Contacto',
-    nav: '/contact',
+    href: '/dashboard/profile',
+    icon: profileIcon,
+    iconBlack: profileBlackIcon,
+    title: 'Perfil',
+  },
+  {
+    href: '/dashboard/billing',
+    icon: billingIcon,
+    iconBlack: billingBlackIcon,
+    title: 'Facturación',
+  },
+  {
+    href: '/dashboard/calendar',
+    icon: calendarIcon,
+    iconBlack: calendarBlackIcon,
+    title: 'Calendario',
   },
   // {
-  //   num: '05',
-  //   label: 'Tienda',
-  //   nav: '/tienda',
+  //   href: '/dashboard/nutrition',
+  //   icon: nutritionIcon,
+  //   iconBlack: nutritionBlackIcon,
+  //   title: 'Nutrición',
   // },
   {
-    num: '06',
-    label: 'Classland',
-    nav: '/classland',
-  },
-  {
-    num: '07',
-    label: 'News',
-    nav: '/news',
-  },
-  {
-    num: '08',
-    label: 'Academy',
-    nav: '/academy',
+    href: '/dashboard/planes',
+    icon: plansIcon,
+    iconBlack: plansBlackIcon,
+    title: 'Planes online',
   },
 ]
 
@@ -111,24 +141,30 @@ const Menu = () => {
     <div className="relative">
       <BurgerIcon visibilty={visibility} setVisibility={setVisibility} router={router} />
 
-      <div className={visibility === true ? styles.menuOpen : visibility === false ? styles.menuClose : styles.menu}>
-        <div className={styles.menuContainer}>
-          {menuList.map(menuItem => (
-            <div
-              key={menuItem.label}
-              className={`mb-6 ml-1 text-lg flex items-center ${router.asPath === menuItem.nav && 'font-black'}`}
-              onClick={() => handleGotoLink(menuItem.nav)}
-            >
-              <span className={styles.menuNumber}>{menuItem.num}</span>
-              {menuItem.label}
-            </div>
-          ))}
-          <div className="flex items-center pt-4" onClick={handleClickLogout}>
-            <div style={{ width: '32px', height: '32px' }}>
-              <Image src={off} alt={''} width={32} height={32} />
-            </div>
-            <span>Logout</span>
+      <div className={visibility === true ? styles.menuOpen : styles.menuClose}>
+        {menuList.map(menuItem => (
+          <div
+            key={menuItem.title}
+            className={`my-3 ml-1 flex items-center ${router.asPath === menuItem.href && 'font-black'}`}
+            onClick={() => handleGotoLink(menuItem.href)}
+          >
+            {router.pathname.split('/')[2] === menuItem.href.split('/')[2] && menuItem.href !== '/' ? (
+              <a className={'flex items-center m-2'}>
+                <Image src={menuItem.iconBlack} alt="" width={21} height={21} />
+              </a>
+            ) : (
+              <a className={'flex items-center m-2'}>
+                <Image src={menuItem.icon} alt="" width={21} height={21} />
+              </a>
+            )}
+            {menuItem.title}
           </div>
+        ))}
+        <div className="my-3 flex items-center pt-2" onClick={handleClickLogout}>
+          <a className={'flex items-center m-2 mr-0'}>
+            <Image src={logoutIcon} alt={''} width={32} height={32} />
+          </a>
+          <span>Logout</span>
         </div>
       </div>
     </div>
