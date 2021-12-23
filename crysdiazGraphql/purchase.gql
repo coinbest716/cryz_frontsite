@@ -1,5 +1,5 @@
-mutation Checkout($serviceId: Int, $ccToken: String, $paymentType: String) {
-  Checkout(service_id: $serviceId, cc_token: $ccToken, payment_type: $paymentType) {
+mutation Checkout($serviceId: Int, $ccToken: String, $paymentType: String, $isGift: Boolean) {
+  Checkout(service_id: $serviceId, cc_token: $ccToken, payment_type: $paymentType, is_gift: $isGift) {
     id
     patient_id
     item_kind
