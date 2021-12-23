@@ -23,7 +23,7 @@ import ArrowRightUpGrayIcon from 'public/images/arrow-right-up.svg'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Services = () => {
+const Services = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -41,6 +41,7 @@ const Services = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const router = useRouter()
   const [mainService, setMainService] = useState([])
   const [title, setTitle] = useState('')
@@ -56,32 +57,8 @@ const Services = () => {
   const placeholder1 = '/images/placeholder1.png'
   const placeholder2 = '/images/placeholder2.png'
   const placeholder3 = '/images/placeholder3.png'
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     getCmsServiceDisciplineList()
     getCmsService()
@@ -148,7 +125,7 @@ const Services = () => {
             {viewport !== 'mobile' ? (
               <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
                 <div className={'z-10 ' + styles.circularMark}>
-                  <CircularMark />
+                  <CircularMark viewport={viewport} />
                 </div>
               </div>
             ) : (

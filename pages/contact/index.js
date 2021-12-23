@@ -29,7 +29,7 @@ import whatsapp from 'public/images/whatsapp.svg'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Contact = () => {
+const Contact = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -47,7 +47,7 @@ const Contact = () => {
   // loading part end #######################
 
   // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+  const { viewport } = props
   const locations = [
     {
       name: 'Crys Dyaz & Co',
@@ -68,28 +68,6 @@ const Contact = () => {
   )
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
   useEffect(() => {
     getContactInfo()
   }, [getContactInfo])
@@ -122,7 +100,7 @@ const Contact = () => {
           </div>
           {viewport !== 'mobile' && (
             <div className={'z-10'}>
-              <CircularMark />
+              <CircularMark viewport={viewport} />
             </div>
           )}
         </div>

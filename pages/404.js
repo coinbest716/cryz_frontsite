@@ -16,7 +16,7 @@ import styles from 'pages/404.module.scss'
 // images
 import ErrorImage from 'assets/images/error.png'
 
-const Custom404 = () => {
+const Custom404 = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -34,31 +34,8 @@ const Custom404 = () => {
   // loading part end #######################
 
   // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
+  const { viewport } = props
 
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
   return (
     <div className={'w-full flex justify-center'}>
       <div className={globalStyles.container}>

@@ -36,7 +36,8 @@ import graphql from 'crysdiazGraphql'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
-const Dashboard = () => {
+const Dashboard = props => {
+  const { viewport } = props
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -168,32 +169,8 @@ const Dashboard = () => {
   const [status, setStatus] = useState(0)
   const [showQuestionnaire, setShowQuestionnaire] = useState(false)
   const [count, setCount] = useState(0)
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     getPatientByEmail({
       variables: {

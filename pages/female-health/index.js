@@ -52,7 +52,7 @@ const FemaleHealth = props => {
 
   return (
     <div className={styles.container}>
-      {JSON.stringify(femHealth) !== '{}' ? <MainSection data={femHealth} /> : <></>}
+      {JSON.stringify(femHealth) !== '{}' ? <MainSection data={femHealth} viewport={viewport} /> : <></>}
       <div id="discipline" className={'w-full flex justify-center'}>
         <DisciplineSection viewport={viewport} />
       </div>

@@ -58,7 +58,7 @@ const LiveStreaming = () => {
           <div className={styles.title}>1 to 1 Streaming</div>
           <div className={'pt-14'}>
             {/* <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} /> */}
-            <VideoChat sessionId={event.id} />
+            <VideoChat sessionId={event.id} viewport={viewport} />
           </div>
         </div>
         <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>

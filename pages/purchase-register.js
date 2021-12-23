@@ -24,9 +24,9 @@ import toast from 'react-hot-toast'
 
 // json data
 import shoppingCartData from 'assets/data/ShoppingCartData'
-import * as gtag from "../utils/gtag";
+import * as gtag from '../utils/gtag'
 
-const Register = () => {
+const Register = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -44,6 +44,7 @@ const Register = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const router = useRouter()
   const [cartData, setCartData] = useState([])
   const [email, setEmail] = useState('')
@@ -60,32 +61,8 @@ const Register = () => {
     description: '',
     price: '',
   })
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     setCartData(shoppingCartData)
   }, [])
@@ -157,7 +134,7 @@ const Register = () => {
   const handleClickPurchaseRegister = async () => {
     gtag.event({
       action: 'sign_up',
-      params: {}
+      params: {},
     })
     if (password !== confirmPassword) {
       toast.error('Please confirm the password!')

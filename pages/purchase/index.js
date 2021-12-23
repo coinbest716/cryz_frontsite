@@ -44,16 +44,10 @@ const Tabs = dynamic(
   { ssr: false }
 ) // disable ssr
 
-const Purchase = () => {
+const Purchase = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-
-  const listGrey = '/images/list-grey.svg'
-  const listWhite = '/images/list-white.svg'
-  const docGrey = '/images/doc-grey.svg'
-  const docWhite = '/images/doc-white.svg'
-  const logoRedSys = '/images/logo-redsys.svg'
 
   useEffect(() => {
     setIsMounted(true)
@@ -68,6 +62,12 @@ const Purchase = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
+  const listGrey = '/images/list-grey.svg'
+  const listWhite = '/images/list-white.svg'
+  const docGrey = '/images/doc-grey.svg'
+  const docWhite = '/images/doc-white.svg'
+  const logoRedSys = '/images/logo-redsys.svg'
   const [Checkout] = useMutation(graphql.mutations.Checkout)
   const [getPatientIdByDashboard, { data: patientData, loading: patientLoading, error: patientError }] = useLazyQuery(
     graphql.queries.getPatientIdByDashboard
@@ -211,31 +211,6 @@ const Purchase = () => {
   const [redsys, setRedsys] = useState(false)
   const [paymentType, setPaymentType] = useState('card')
   const [cardInfo, setCardInfo] = useState({ number: '', name: '', expiry: '', cvc: '' })
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
 
   // handlers
   useEffect(() => {

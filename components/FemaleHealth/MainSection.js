@@ -20,35 +20,11 @@ import styles from 'components/FemaleHealth/MainSection.module.scss'
 
 const MainSection = props => {
   // variables
-  const { data } = props
+  const { data, viewport } = props
   const router = useRouter()
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
   const [carouselData, setCarouselData] = useState([])
 
   // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
-
   useEffect(() => {
     if (data.images.length !== 0) {
       setCarouselData(data.images)
@@ -120,7 +96,7 @@ const MainSection = props => {
               </div>
             </div>
             <div className={'col-span-7 flex justify-end z-10'}>
-              <CircularMark />
+              <CircularMark viewport={viewport} />
             </div>
           </div>
         </div>
