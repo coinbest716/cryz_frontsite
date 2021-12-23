@@ -65,32 +65,31 @@ const ContactFooter = props => {
       </div>
 
       <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + (viewport === 'mobile' ? ' ' : ' pt-7')}>
-          <div
-            className={'w-full flex items-center' + (viewport === 'mobile' ? ' justify-center' : ' justify-between')}
-          >
+        <div className={globalStyles.container + ' flex justify-center ' + (viewport === 'mobile' ? ' ' : ' pt-7')}>
+          <div className={'flex items-center' + (viewport === 'mobile' ? ' justify-center' : ' justify-between')}>
             <div className={styles.text}>
-              <Link href={'/docs/terms'} passHref>
-                <p>Terminos y Condiciones</p>
-              </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/docs/privacy-policy'} passHref>
-                <p>Politica Privacidad</p>
-              </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/docs/legal'} passHref>
-                <p>Legal</p>
-              </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/docs/cookies'} passHref>
-                <p>Cookies</p>
-              </Link>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-              <Link href={'/docs/sale'} passHref>
-                <p>Venta</p>
-              </Link>
+              <div className={'flex flex-wrap justify-between'} style={{ width: '500px' }}>
+                <Link href={'/docs/terms'} passHref>
+                  <p>Terminos y Condiciones</p>
+                </Link>
+                |
+                <Link href={'/docs/privacy-policy'} passHref>
+                  <p>Politica Privacidad</p>
+                </Link>
+                |
+                <Link href={'/docs/legal'} passHref>
+                  <p>Legal</p>
+                </Link>
+                |
+                <Link href={'/docs/cookies'} passHref>
+                  <p>Cookies</p>
+                </Link>
+                |
+                <Link href={'/docs/sale'} passHref>
+                  <p>Venta</p>
+                </Link>
+              </div>
             </div>
-
             {viewport !== 'mobile' && <div className={styles.text}>CrysDyaz&Co © Todos los derechos reservados</div>}
           </div>
         </div>

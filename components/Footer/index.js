@@ -62,25 +62,25 @@ const Footer = props => {
         </div>
       </div>
       <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + (viewport === 'mobile' ? ' pt-4' : ' pt-7')}>
-          <div className={'w-full flex flex-wrap justify-between items-center ' + styles.text}>
+        <div className={globalStyles.container + ' flex justify-center ' + (viewport === 'mobile' ? ' pt-4' : ' pt-7')}>
+          <div className={'flex flex-wrap justify-between items-center ' + styles.text}>
             <div className={'flex flex-wrap justify-between'} style={{ width: '500px' }}>
               <Link href={'/docs/terms'} passHref>
                 <p>Terminos y Condiciones</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/privacy-policy'} passHref>
                 <p>Politica Privacidad</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/legal'} passHref>
                 <p>Legal</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/cookies'} passHref>
                 <p>Cookies</p>
               </Link>
-              &nbsp;|&nbsp;
+              |
               <Link href={'/docs/sale'} passHref>
                 <p>Venta</p>
               </Link>
