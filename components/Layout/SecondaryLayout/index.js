@@ -21,11 +21,13 @@ const SecondaryLayout = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser()
+    const ac = new AbortController()
+    Promise.all(Auth.currentAuthenticatedUser())
       .then(() => {
         setIsAuthenticated(true)
       })
       .catch(() => {
+        ac.abort()
         router.push('/')
         setIsAuthenticated(false)
       })
