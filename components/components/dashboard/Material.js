@@ -27,7 +27,9 @@ const Material = props => {
         {type === 'gray' && <Image src={grayCheckIcon} alt="" width={15} height={12} />}
         {type === 'green' && <Image src={greenCheckIcon} alt="" width={15} height={12} />}
       </div>
-      <ReactPlayer url={item.link} width="56px" height="56px" className={styles.reactPlayer} controls={false} />
+      <div className="w-16 h-16 flex justify-center items-center">
+        <ReactPlayer url={item.link} width="56px" height="56px" className={styles.reactPlayer} controls={false} />
+      </div>
       <div className={'pl-4 flex flex-col justify-around'}>
         <div className={styles.label}>{item?.name}</div>
         <div className={styles.description}>{item?.description}</div>
