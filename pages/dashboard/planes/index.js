@@ -156,11 +156,15 @@ const Planes = () => {
 
   useEffect(() => {
     if (JSON.stringify(selectedVideo) !== JSON.stringify({})) {
-      getVideoLinkById({
-        variables: {
-          video_id: selectedVideo.id,
-        },
-      })
+      if (selectedVideo.link === null || selectedVideo.link === undefined || selectedVideo === '') {
+        getVideoLinkById({
+          variables: {
+            video_id: selectedVideo.id,
+          },
+        })
+      } else {
+        setSelectedVideoLink(selectedVideo.link)
+      }
     }
   }, [selectedVideo])
 
