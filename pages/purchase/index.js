@@ -727,6 +727,10 @@ const Purchase = props => {
                           <Image src={docWhite} alt={''} width={16} height={16} />
                         </button>
                       </div>
+                      <div className={styles.mobileTabTitle + ' pt-3.5'}>¿Es para regalo?</div>
+                      <div className={'pt-5'}>
+                        <GiftCard handleSelectGiftCard={handleSelectGiftCard} value={isGiftCard} />
+                      </div>
                       <div className={styles.mobileTabTitle + ' pt-3.5'}>Datos de pago</div>
                       <div className={'flex justify-between pt-3.5'}>
                         <div
