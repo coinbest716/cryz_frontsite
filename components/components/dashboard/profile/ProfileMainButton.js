@@ -10,11 +10,11 @@ import logoutIcon from 'public/images/off.svg'
 import styles from './ProfileMainButton.module.scss'
 
 const ProfileMainButton = props => {
-  const { type, label, onClick } = props
+  const { type, label, handleClickMainButton } = props
   return (
     <div>
       {type === 'logout' ? (
-        <div onClick={onClick} className={styles.logout + ' flex justify-center items-center'}>
+        <div onClick={handleClickMainButton} className={styles.logout + ' flex justify-center items-center'}>
           <div className="flex items-center">
             <Image src={logoutIcon} alt="" width={24} height={24} />
           </div>
@@ -24,7 +24,7 @@ const ProfileMainButton = props => {
         <></>
       )}
       {type === 'deleteAccount' ? (
-        <div onClick={onClick} className={styles.deleteButton + ' flex justify-center items-center'}>
+        <div onClick={handleClickMainButton} className={styles.deleteButton + ' flex justify-center items-center'}>
           <div className={styles.deleteLabel}>{label}</div>
         </div>
       ) : (
