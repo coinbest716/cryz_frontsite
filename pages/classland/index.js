@@ -181,7 +181,7 @@ const Classland = props => {
         {viewport === 'mobile' ? (
           <div className={styles.middleSection}>
             <div className={styles.m_fullPass}>Full Pass</div>
-            {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} /> : <></>}
+            {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
             <div className={globalStyles.tinyMCEClass}>
               <div
                 className={styles.topDescription + ' tinymce-class mt-4'}
@@ -192,7 +192,7 @@ const Classland = props => {
         ) : (
           <div className={styles.middleSection}>
             <div className={styles.fullPass}>Full Pass</div>
-            {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} /> : <></>}
+            {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
           </div>
         )}
         <div className={styles.m_buttonGroup}>
