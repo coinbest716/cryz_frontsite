@@ -363,10 +363,10 @@ const Dashboard = props => {
           <div className={'flex justify-between items-center'}>
             <div>
               <div className={styles.highBoldLabel}>Dashboard</div>
-              {message.length ? <div className={'pt-2 ' + styles.today}>{today}</div> : <></>}
+              {message.length !== 0 ? <div className={'pt-2 ' + styles.today}>{today}</div> : <></>}
             </div>
             <div>
-              {message.length ? (
+              {message.length !== 0 ? (
                 <DashboardButton
                   handleClick={() => handleClickRedirect('startClass')}
                   label={'Comenzar clase'}
@@ -423,7 +423,7 @@ const Dashboard = props => {
               />
             </div>
           </div>
-          {message.length ? (
+          {message.length !== 0 ? (
             <div className={'mt-7 px-9 py-7 flex justify-between ' + styles.welcomeSection}>
               <div>
                 <div className={styles.remember}>Recuerda!!</div>
@@ -541,7 +541,7 @@ const Dashboard = props => {
               </div>
               <div className={'pt-20'}>
                 <div className={styles.highBoldLabel}>Mensajes</div>
-                {message.length ? (
+                {message.length !== 0 ? (
                   <div>
                     <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
                     <div className={'pt-6'}>
