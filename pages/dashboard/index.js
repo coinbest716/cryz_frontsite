@@ -247,6 +247,8 @@ const Dashboard = props => {
   useEffect(() => {
     if (!messageListError && messageListData && messageListData.getPatientMessageById) {
       const data = messageListData.getPatientMessageById
+      console.log(data)
+      alert(data.length)
       setMessage(data)
     }
   }, [messageListLoading, messageListData, messageListError])
