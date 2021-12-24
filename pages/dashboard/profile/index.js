@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react'
 // redux
 import { useDispatch } from 'react-redux'
 
+import client from 'utils/apolloclient'
+import { Auth } from 'aws-amplify'
+
 // next components
 import { useRouter } from 'next/router'
 import Image from 'next/image'
@@ -41,6 +44,7 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    width: '90%',
   },
   overlay: {
     background: 'rgba(0, 0, 0, 0.6)',
@@ -497,14 +501,50 @@ const Profile = props => {
   const handleClickProfileItem = type => {
     console.log(type)
   }
-  const handleClickMainButton = type => {
-    console.log(type)
+  const handleClickMainButton = async type => {
+    if (type === 'logout') {
+      dispatch({ type: 'set', isLoading: true })
+      await client.resetStore()
+      await client.clearStore()
+      await Auth.signOut()
+      localStorage.clear()
+      router.push('/')
+    }
+    if (type === 'deleteAccount') {
+      console.log('!!!!!!!!!!!!!')
+      openModal()
+    }
   }
 
   return (
-    <>
+    <div id="main">
+      <Modal
+        isOpen={modalIsOpen}
+        // onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+      >
+        <div className="p-2 w-auto">
+          <div className="mb-2 flex justify-end cursor-pointer" onClick={closeModal}>
+            <Image src={CloseIcon} alt={''} width={16} height={16} />
+          </div>
+          <div className={styles.modalTitle}>¿Estas seguro que deseas borrar tu cuenta?</div>
+          <div className={'mt-2 ' + styles.modalDescription}>
+            Recuerda que no hay vuelta atrás para esto, tus datos e historial no se guardarán
+            <br /> en el caso que quieras retomar los servicios.
+          </div>
+          <div className={'flex justify-end mt-5'}>
+            <div className={'cursor-pointer ' + styles.modalButton} onClick={closeModal}>
+              Descartar
+            </div>
+            <div className={'cursor-pointer ml-3 ' + styles.modalButton} onClick={handleDeleteAccount}>
+              Suprimir cuenta
+            </div>
+          </div>
+        </div>
+      </Modal>
       {viewport === 'mobile' ? (
-        <div id="main" className={styles.mobileContainer}>
+        <div className={styles.mobileContainer}>
           <div className={'flex justify-start items-center mb-10'}>
             <PurchaseAvatar avatar={personalInfo.avatar || ''} handleChangeAvatar={handleChangeAvatar} />
             <div className={'pl-5'}>
@@ -539,38 +579,13 @@ const Profile = props => {
           <div className="mt-6">
             <ProfileMainButton
               label="Borrar cuenta"
-              onClick={() => handleClickMainButton('logout')}
+              onClick={() => handleClickMainButton('deleteAccount')}
               type="deleteAccount"
             />
           </div>
         </div>
       ) : (
-        <div className={'relative pt-10 pb-24 px-24 ' + styles.container} id="main">
-          <Modal
-            isOpen={modalIsOpen}
-            // onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal}
-            style={customStyles}
-          >
-            <div className="p-2 w-auto">
-              <div className="mb-2 flex justify-end cursor-pointer" onClick={closeModal}>
-                <Image src={CloseIcon} alt={''} width={16} height={16} />
-              </div>
-              <div className={styles.modalTitle}>¿Estas seguro que deseas borrar tu cuenta?</div>
-              <div className={'mt-2 ' + styles.modalDescription}>
-                Recuerda que no hay vuelta atrás para esto, tus datos e historial no se guardarán
-                <br /> en el caso que quieras retomar los servicios.
-              </div>
-              <div className={'flex justify-end mt-5'}>
-                <div className={'cursor-pointer ' + styles.modalButton} onClick={closeModal}>
-                  Descartar
-                </div>
-                <div className={'cursor-pointer ml-3 ' + styles.modalButton} onClick={handleDeleteAccount}>
-                  Suprimir cuenta
-                </div>
-              </div>
-            </div>
-          </Modal>
+        <div className={'relative pt-10 pb-24 px-24 ' + styles.container}>
           <div className={'flex justify-between'}>
             <div>
               <div className={styles.highBoldLabel}>Perfil</div>
@@ -629,7 +644,7 @@ const Profile = props => {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
 export default Profile
