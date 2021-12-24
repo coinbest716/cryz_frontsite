@@ -235,21 +235,31 @@ const Dashboard = props => {
   useEffect(() => {
     if (!weekDaySessionsError && weekDaySessionsData && weekDaySessionsData.getWeekDaySessionsByDashboard) {
       const data = weekDaySessionsData.getWeekDaySessionsByDashboard
+      let array = []
       try {
-        setEventMins(data.at(-1))
+        if (data.length === 8) {
+          setEventMins(data.at(-1))
+          array = [
+            {
+              name: 'Actividad semanal',
+              data: data.slice(0, -1),
+            },
+          ]
+        } else {
+          setEventMins(0)
+          array = [
+            {
+              name: 'Actividad semanal',
+              data: [0, 0, 0, 0, 0, 0, 0],
+            },
+          ]
+        }
       } catch (error) {
         Sentry.setContext('character', {
           data: data,
         })
         Sentry.captureException(error)
       }
-
-      let array = [
-        {
-          name: 'Actividad semanal',
-          data: data.slice(0, -1),
-        },
-      ]
       setChartOptions(chartOptions => ({ ...chartOptions, series: array }))
     }
   }, [weekDaySessionsLoading, weekDaySessionsData, weekDaySessionsError])
@@ -257,8 +267,6 @@ const Dashboard = props => {
   useEffect(() => {
     if (!messageListError && messageListData && messageListData.getPatientMessageById) {
       const data = messageListData.getPatientMessageById
-      console.log(data)
-      //alert(data.length)
       setMessage(data)
     }
   }, [messageListLoading, messageListData, messageListError])
