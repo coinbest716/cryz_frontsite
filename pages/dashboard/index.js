@@ -33,6 +33,8 @@ import noPendingIcon from 'public/images/no-pending.svg'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
+import * as Sentry from '@sentry/nextjs'
+
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
@@ -233,9 +235,15 @@ const Dashboard = props => {
   useEffect(() => {
     if (!weekDaySessionsError && weekDaySessionsData && weekDaySessionsData.getWeekDaySessionsByDashboard) {
       const data = weekDaySessionsData.getWeekDaySessionsByDashboard
-      if (data.length > 0) {
+      try {
         setEventMins(data.at(-1))
+      } catch (error) {
+        Sentry.setContext('character', {
+          data: data,
+        })
+        Sentry.captureException(error)
       }
+
       let array = [
         {
           name: 'Actividad semanal',
