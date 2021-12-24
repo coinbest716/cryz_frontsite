@@ -1,0 +1,41 @@
+@import 'styles/variable.module.scss';
+
+.input {
+  background-color: #f5f6fa;
+  padding: 12px 4px;
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.23px;
+  line-height: 15px;
+  border: none;
+  border-bottom: 1px solid #7d8f8e;
+  outline: none;
+}
+.label {
+  color: #c4c4c4;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.26px;
+  line-height: 18px;
+}
+.select {
+  width: 100%;
+  background-color: #f5f6fa;
+  padding: 12px 4px;
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.23px;
+  line-height: 35px;
+  border: none;
+  border-bottom: 1px solid #7d8f8e;
+  outline: none;
+}
+
+.option {
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 14px;
+}

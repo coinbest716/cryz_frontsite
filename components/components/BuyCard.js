@@ -13,7 +13,7 @@ import styles from 'components/components/BuyCard.module.scss'
 const BuyCard = props => {
   const { data, index, handleClickBuy } = props
 
-    console.log(data)
+  console.log(data)
   return (
     <div className={'block'}>
       <div
@@ -36,10 +36,20 @@ const BuyCard = props => {
         <div className={styles.cardDescription}>{data.description}</div>
       </div>
 
-      <button  disabled={(data.plazas_used >= data.plazas && data.plazas !== 0)}  className={styles.button} onClick={() => handleClickBuy(data.id, data.web_name, data.price)}>
+      <button
+        disabled={data.plazas_used >= data.plazas && data.plazas !== 0}
+        className={styles.button}
+        onClick={() => handleClickBuy(data.id, data.web_name, data.price)}
+      >
         <div className={'flex justify-start'}>
           <div className={styles.buttonText}>
-              {(data.plazas_used >= data.plazas && data.plazas !== 0) ? `Plazas agotadas`  : <>Comprar por  <b>{data.price} €</b></>}
+            {data.plazas_used >= data.plazas && data.plazas !== 0 ? (
+              `Plazas agotadas`
+            ) : (
+              <>
+                Comprar por <b>{data.price} €</b>
+              </>
+            )}
           </div>
         </div>
         <Image src={ArrowRightWhite} alt="" width={26} height={20} />

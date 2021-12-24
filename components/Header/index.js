@@ -39,6 +39,7 @@ const Header = props => {
   const [cartData, setCartData] = useState([])
   const [menus, setMenus] = useState([])
   const [showCart, setShowCart] = useState(true)
+  const [showLogin, setShowLogin] = useState(true)
 
   // handlers
   useEffect(() => {
@@ -97,6 +98,12 @@ const Header = props => {
 
   useEffect(() => {
     setCartData(shoppingCartData)
+
+    if (viewport === 'mobile') {
+      if (process.env.NEXT_PUBLIC_MOBILE_DASHBOARD === 'false') {
+        setShowLogin(false)
+      }
+    }
   }, [])
 
   useEffect(() => {
@@ -359,17 +366,19 @@ const Header = props => {
                 </li>
               )
             })}
-          <li
-            className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}
-            onClick={() => handleGotoRouter('login')}
-          >
-            <button
-              className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
-              onClick={() => router.push('/login')}
+          {showLogin && (
+            <li
+              className={'flex justify-center items-center xl:ml-16 ' + styles.iconMenuItem}
+              onClick={() => handleGotoRouter('login')}
             >
-              <Image src={AccountIcon} alt="" width={22} height={20} />
-            </button>
-          </li>
+              <button
+                className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
+                onClick={() => router.push('/login')}
+              >
+                <Image src={AccountIcon} alt="" width={22} height={20} />
+              </button>
+            </li>
+          )}
         </ul>
         <Menu viewport={viewport} />
       </div>

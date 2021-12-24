@@ -161,14 +161,9 @@ const Register = props => {
           </div>
         )}
         {viewport === 'mobile' ? (
-          <div
-            className={
-              'w-full col-span-12 lg:col-span-6 md:col-span-6 flex flex-wrap justify-center items-center relative ' +
-              styles.whiteArea
-            }
-          >
+          <div className={'w-full col-span-12 flex flex-wrap justify-center items-center relative ' + styles.whiteArea}>
             {!userConfirmed && (
-              <div>
+              <div className="w-full">
                 <div className={'w-full text-center ' + styles.title}>REGISTRO</div>
                 <div className="w-full flex justify-center items-center mt-5">
                   <div className={styles.text}>¿Ya tienes una cuenta?</div>
@@ -232,7 +227,7 @@ const Register = props => {
                   <div className={'absolute right-3 cursor-pointer'}>
                     {showRepeatPass === true ? (
                       <Image
-                        src={EyeIcon}
+                        src={EyeGrayIcon}
                         alt=""
                         width={17}
                         height={17}
@@ -240,7 +235,7 @@ const Register = props => {
                       />
                     ) : (
                       <Image
-                        src={EyeCrossIcon}
+                        src={EyeCrossGrayIcon}
                         alt=""
                         width={17}
                         height={17}

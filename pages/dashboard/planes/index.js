@@ -62,6 +62,7 @@ const Planes = () => {
   const [patientID, setPatientID] = useState(-1)
   const [plansOnlineData, setPlansOnlineData] = useState({})
   const [selectedVideo, setSelectedVideo] = useState({})
+  const [selectedVideoLink, setSelectedVideoLink] = useState('')
   const [materialData, setMaterialData] = useState([])
   const [feature, setFeature] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
@@ -73,6 +74,9 @@ const Planes = () => {
   )
   const [getOnlinePlanByDashboard, { data: onlinePlanData, loading: onlinePlanLoading, error: onlinePlanError }] =
     useLazyQuery(graphql.queries.getOnlinePlanByDashboard)
+  const [getVideoLinkById, { data: videoLinkData, loading: videoLinkLoading, error: videoLinkError }] = useLazyQuery(
+    graphql.queries.getVideoLinkById
+  )
   const [getVideoMaterial, { data: videoMaterialData, loading: videoMaterailLoading, error: videoMaterialError }] =
     useLazyQuery(graphql.queries.getVideoMaterial)
 
@@ -151,6 +155,26 @@ const Planes = () => {
   }, [onlinePlanLoading, onlinePlanData, onlinePlanError])
 
   useEffect(() => {
+    if (JSON.stringify(selectedVideo) !== JSON.stringify({})) {
+      if (selectedVideo.link === null || selectedVideo.link === undefined || selectedVideo === '') {
+        getVideoLinkById({
+          variables: {
+            video_id: selectedVideo.id,
+          },
+        })
+      } else {
+        setSelectedVideoLink(selectedVideo.link)
+      }
+    }
+  }, [selectedVideo])
+
+  useEffect(() => {
+    if (!videoLinkError && videoLinkData && videoLinkData.getVideoLinkById) {
+      setSelectedVideoLink(videoLinkData.getVideoLinkById)
+    }
+  }, [videoLinkLoading, videoLinkData, videoLinkError])
+
+  useEffect(() => {
     if (!availablePlanDatesError && availablePlanDatesData && availablePlanDatesData.getAvailablePlanDates) {
       const _markDate = []
       availablePlanDatesData.getAvailablePlanDates.map(item => {
@@ -172,31 +196,34 @@ const Planes = () => {
           topLabel: 'Nivel',
           lowLabel: selectedVideo.effort_level,
         },
-        { id: 1, path: '/images/type.svg', 
-          bgColor: '#DFDBD5', 
-          topLabel: 'Repetición', 
-          lowLabel: selectedVideo.repetitions },
+        {
+          id: 1,
+          path: '/images/type.svg',
+          bgColor: '#DFDBD5',
+          topLabel: 'Repetición',
+          lowLabel: selectedVideo.repetitions,
+        },
 
         {
           id: 4,
           path: '/images/time.svg',
           bgColor: '#F5DEC2',
           topLabel: 'Tiempo',
-          lowLabel: selectedVideo.time + 'min',
+          lowLabel: selectedVideo.time + ' min',
         },
         {
           id: 2,
           path: '/images/time.svg',
           bgColor: '#E3BBAA',
           topLabel: 'Descanso',
-          lowLabel: selectedVideo.break + 'seg',
+          lowLabel: selectedVideo.break + ' seg',
         },
         {
           id: 3,
           path: '/images/star.svg',
           bgColor: '#F5DEC2',
           topLabel: 'Peso',
-          lowLabel: selectedVideo.weight + 'kg',
+          lowLabel: selectedVideo.weight + ' kg',
         },
       ])
       getVideoMaterial({
@@ -284,9 +311,9 @@ const Planes = () => {
                 <div className={styles.chapterTitle}>{plansOnlineData.name}</div>
               </div>
               <div className={'pt-6'}>
-                {JSON.stringify(selectedVideo) !== JSON.stringify({}) ? (
+                {selectedVideoLink !== '' ? (
                   <ReactPlayer
-                    url={selectedVideo.link}
+                    url={selectedVideoLink}
                     width="100%"
                     height="100%"
                     className={styles.reactPlayer}
@@ -381,7 +408,7 @@ const Planes = () => {
                           <Material
                             item={video}
                             selectedVideo={selectedVideo}
-                            type={'green'}
+                            /*type={'green'}*/
                             onClick={data => setSelectedVideo(data)}
                           />
                         </div>
@@ -395,13 +422,31 @@ const Planes = () => {
         </div>
       ) : (
         <div className={styles.imageContainer}>
-          <div className={styles.title + ' mt-48'}>
-            ESTAMOS PREPARANDO TU PLAN ONLINE PERSONALIZADO
-            <br />
-            EN BREVE ESTARÁ LISTO
-          </div>
-          <div className={'mt-14'}>
+
+<div className={''}>
             <Image src={PlansImage} width={274} height={226} />
+          </div>
+          <div className={styles.title + ' mt-20'}>
+            ESTAMOS PREPARANDO TU PLAN ONLINE PERSONALIZADO
+          </div>
+          <div className={'flex justify-center planonline_text'}>
+            <div className={globalStyles.container}>
+                <div className={styles.planonline_text}>
+                  
+                <p className='mt-20'>Recuerda:</p>
+                <ol>
+                  <li><span className='font-bold'>1. Rellenar el cuestionario inicial.</span> 
+                  Encontrarás cómo acceder a él desde tu dashboard.</li>  
+                  <li><span className='font-bold'>2. Introduce tus <span className='font-bold'>datos antropométricos</span> en tu perfil.</span></li>
+                </ol>
+                <p className='mt-5' ></p>
+                  <p className='mt-5'>Una vez lo hayas cumplimentado, en un plazo de 48/72h laborables recibirás tu plan mensual.</p>
+
+                  <p className='mt-5'>El siguiente paso será fijar una videollamada a través de la web para resolver todas las posibles dudas que 
+                  te hayan surgido al revisarlo.</p>
+
+                </div>
+              </div>
           </div>
           {/* <div className={styles.subTitle}>
             PUEDES RENOVAR TU BONO

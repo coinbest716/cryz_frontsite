@@ -210,12 +210,7 @@ const Login = props => {
         )}
         {authChallenge !== 'NEW_PASSWORD_REQUIRED' ? (
           viewport === 'mobile' ? (
-            <div
-              className={
-                'col-span-12 flex lg:col-span-6 md:col-span-6 flex-wrap justify-center items-center relative ' +
-                styles.whiteArea
-              }
-            >
+            <div className={'col-span-12 flex flex-wrap justify-center items-center relative ' + styles.whiteArea}>
               <div className={styles.grayAreaContent}>
                 {/* email input */}
                 <div className={'w-full mt-6 ' + styles.inputArea}>
@@ -379,12 +374,7 @@ const Login = props => {
             </div>
           )
         ) : viewport === 'mobile' ? (
-          <div
-            className={
-              'w-full col-span-12 lg:col-span-6 md:col-span-6 flex flex-wrap flex justify-center items-center ' +
-              styles.whiteArea
-            }
-          >
+          <div className={'w-full col-span-12 flex flex-wrap flex justify-center items-center ' + styles.whiteArea}>
             <div>
               <div className={styles.m_updatePassword}>Actualiza contraseña</div>
               <div className={'w-full relative flex items-center mt-5 ' + styles.inputArea}>

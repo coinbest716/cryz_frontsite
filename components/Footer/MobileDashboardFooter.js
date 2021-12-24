@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 // next components
 import Image from 'next/image'
 import Link from 'next/link'
-import router from 'next/router'
-
-// custom components
-import SocialButtonGroup from 'components/SocialButtonGroup'
+import { useRouter } from 'next/router'
 
 // images
-import ArrowLeftIcon from 'assets/images/arrow-left.svg'
-import whatsapp from 'public/images/whatsapp.svg'
+import homeIcon from 'public/images/home.svg'
+import calendarIcon from 'public/images/calendar.svg'
+import dashboardIcon from 'public/images/dashboard.svg'
+import messageIcon from 'public/images/message.svg'
+import profileIcon from 'public/images/profile.svg'
+import homeBlackIcon from 'public/images/home_black.svg'
+import calendarBlackIcon from 'public/images/calendar_black.svg'
+import dashboardBlackIcon from 'public/images/dashboard_black.svg'
+import messageBlackIcon from 'public/images/message_black.svg'
+import profileBlackIcon from 'public/images/profile_black.svg'
 
 // json data
 import SocialURLData from 'assets/data/SocialURLData'
@@ -22,80 +27,59 @@ import styles from 'components/Footer/MobileDashboardFooter.module.scss'
 const Footer = props => {
   // variables
   const { viewport } = props
-
-  // handlers
-  const handleClickWhatsapp = () => {
-    console.log('handleClickWhatsapp')
-  }
+  const router = useRouter()
 
   return (
-    <div
-      className={
-        'w-full flex flex-wrap justify-center items-center' +
-        (viewport === 'mobile' ? ' ' : ' divide-y divide-gray-400 ') +
-        styles.footerArea
-      }
-    >
-      <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + (viewport === 'mobile' ? ' ' : ' pb-7')}>
-          {viewport === 'mobile' ? (
-            <div className={'w-full justify-center'}>
-              <SocialButtonGroup color="white" socialURL={SocialURLData[0]} />
-            </div>
+    <div className={styles.footerArea}>
+      <div className={'w-full flex justify-around items-center ' + styles.footerIconArea}>
+        <button onClick={() => router.push('/')}>
+          <Image src={homeIcon} alt="" width={18} height={20} />
+        </button>
+        <button onClick={() => router.push('/dashboard/calendar')}>
+          {router.pathname.split('/')[2] !== undefined && router.pathname.split('/')[2] === 'calendar' ? (
+            <a className={'flex items-center m-2'}>
+              <Image src={calendarBlackIcon} alt="" width={18} height={20} />
+            </a>
           ) : (
-            <div className={'w-full flex justify-between items-center'}>
-              <button
-                className={styles.workWithUsButton + ' flex justify-between'}
-                onClick={() => router.push('work-with-us')}
-              >
-                <p className={'mr-4'}>Trabaja con nosotros</p>
-                <Image src={ArrowLeftIcon} alt="" width={23} height={22} />
-              </button>
-              <Link href={'/'} passHref>
-                <button className={styles.logo}>
-                  <p className={styles.logo}>CRYS DYAZ & CO</p>
-                </button>
-              </Link>
-              <SocialButtonGroup color="white" socialURL={SocialURLData[0]} />
-            </div>
+            <a className={'flex items-center m-2'}>
+              <Image src={calendarIcon} alt="" width={18} height={20} />
+            </a>
           )}
-        </div>
+        </button>
+        <button onClick={() => router.push('/dashboard')}>
+          {router.pathname.split('/')[1] === 'dashboard' && router.pathname.split('/')[2] === undefined ? (
+            <a className={'flex items-center m-2'}>
+              <Image src={dashboardBlackIcon} alt="" width={18} height={20} />
+            </a>
+          ) : (
+            <a className={'flex items-center m-2'}>
+              <Image src={dashboardIcon} alt="" width={18} height={20} />
+            </a>
+          )}
+        </button>
+        <button onClick={() => router.push('/dashboard/message')}>
+          {router.pathname.split('/')[2] !== undefined && router.pathname.split('/')[2] === 'message' ? (
+            <a className={'flex items-center m-2'}>
+              <Image src={messageBlackIcon} alt="" width={18} height={20} />
+            </a>
+          ) : (
+            <a className={'flex items-center m-2'}>
+              <Image src={messageIcon} alt="" width={18} height={20} />
+            </a>
+          )}
+        </button>
+        <button onClick={() => router.push('/dashboard/profile')}>
+          {router.pathname.split('/')[2] !== undefined && router.pathname.split('/')[2].split('#')[0] === 'profile' ? (
+            <a className={'flex items-center m-2'}>
+              <Image src={profileBlackIcon} alt="" width={18} height={20} />
+            </a>
+          ) : (
+            <a className={'flex items-center m-2'}>
+              <Image src={profileIcon} alt="" width={18} height={20} />
+            </a>
+          )}
+        </button>
       </div>
-      <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + (viewport === 'mobile' ? ' pt-4' : ' pt-7')}>
-          <div className={'w-full flex flex-wrap justify-between items-center ' + styles.text}>
-            <div className={'flex flex-wrap justify-between'} style={{ width: '500px' }}>
-              <Link href={'/docs/terms'} passHref>
-                <p>Terminos y Condiciones</p>
-              </Link>
-              |
-              <Link href={'/docs/privacy-policy'} passHref>
-                <p>Politica Privacidad</p>
-              </Link>
-              |
-              <Link href={'/docs/legal'} passHref>
-                <p>Legal</p>
-              </Link>
-              |
-              <Link href={'/docs/cookies'} passHref>
-                <p>Cookies</p>
-              </Link>
-              |
-              <Link href={'/docs/sale'} passHref>
-                <p>Venta</p>
-              </Link>
-            </div>
-            {viewport !== 'mobile' && <div className={styles.text}>CrysDyaz&Co © Todos los derechos reservados</div>}
-          </div>
-        </div>
-      </div>
-      {viewport === 'mobile' && (
-        <div style={{ position: 'relative', width: '100%', height: '42px', background: '#fff', marginTop: '24px' }}>
-          <div className={'cursor-pointer'} style={{ position: 'absolute', right: '10px', bottom: '0px' }}>
-            <Image src={whatsapp} alt="" width={53} height={53} onClick={handleClickWhatsapp} />
-          </div>
-        </div>
-      )}
     </div>
   )
 }

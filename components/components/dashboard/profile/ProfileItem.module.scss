@@ -1,0 +1,36 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding: 14px 16px;
+  background-color: $white-color;
+  cursor: pointer;
+}
+
+.image {
+  color: #3b4859;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.26px;
+  line-height: 15px;
+}
+
+.name {
+  color: #333333;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+
+.itemTopRadius {
+  border-radius: 8px 8px 0px 0px;
+}
+
+.itemBottomRadius {
+  border-radius: 0px 0px 8px 8px;
+}
+.divider {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #f5f6fa;
+}
