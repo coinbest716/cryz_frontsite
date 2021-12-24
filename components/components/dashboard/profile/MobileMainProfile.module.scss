@@ -1,0 +1,24 @@
+@import 'styles/variable.module.scss';
+
+.mobileContainer {
+  width: 100%;
+  background-color: #f8f9fb;
+  min-height: calc(100vh - 114px);
+  padding: 20px;
+}
+.profileName {
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0.53px;
+  line-height: 29px;
+}
+.profileCounry {
+  color: #c4c4c4;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.26px;
+  line-height: 18px;
+}
