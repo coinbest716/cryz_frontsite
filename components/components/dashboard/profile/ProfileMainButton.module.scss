@@ -1,0 +1,19 @@
+@import 'styles/variable.module.scss';
+
+.logout {
+  padding: 9px 16px;
+  border: 1px solid #bd5b54;
+  border-radius: 32.5px;
+  cursor: pointer;
+}
+.logoutLabel {
+  color: #bd5b54;
+}
+.deleteButton {
+  padding: 9px 16px;
+  border: 1px solid #818e8e;
+  border-radius: 32.5px;
+}
+.deleteLabel {
+  color: #818e8e;
+}
