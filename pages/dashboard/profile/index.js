@@ -11,6 +11,9 @@ import Image from 'next/image'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
+import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
+import ProfileItem from 'components/components/dashboard/profile/ProfileItem'
+
 // import Profile from 'components/components/dashboard/Profile'
 import Personal from 'components/components/dashboard/Personal'
 import Health from 'components/components/dashboard/Health'
@@ -24,6 +27,10 @@ import graphql from 'crysdiazGraphql'
 import toast from 'react-hot-toast'
 import Modal from 'react-modal'
 import CloseIcon from 'public/images/close.svg'
+import ProfileIcon from 'public/images/profile_icon.svg'
+import ProfileAntro from 'public/images/profile_antro.svg'
+import ProfileBill from 'public/images/profile_bill.svg'
+import ProfileCompras from 'public/images/profile_compras.svg'
 
 const customStyles = {
   content: {
@@ -39,10 +46,11 @@ const customStyles = {
   },
 }
 
-const Profile = () => {
+const Profile = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const { viewport } = props
 
   useEffect(() => {
     setIsMounted(true)
@@ -486,89 +494,107 @@ const Profile = () => {
   }
 
   return (
-    <div className={'relative pt-10 pb-24 px-24 ' + styles.container} id="main">
-      <Modal
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
-        <div className="p-2 w-auto">
-          <div className="mb-2 flex justify-end cursor-pointer" onClick={closeModal}>
-            <Image src={CloseIcon} alt={''} width={16} height={16} />
-          </div>
-          <div className={styles.modalTitle}>¿Estas seguro que deseas borrar tu cuenta?</div>
-          <div className={'mt-2 ' + styles.modalDescription}>
-            Recuerda que no hay vuelta atrás para esto, tus datos e historial no se guardarán
-            <br /> en el caso que quieras retomar los servicios.
-          </div>
-          <div className={'flex justify-end mt-5'}>
-            <div className={'cursor-pointer ' + styles.modalButton} onClick={closeModal}>
-              Descartar
-            </div>
-            <div className={'cursor-pointer ml-3 ' + styles.modalButton} onClick={handleDeleteAccount}>
-              Suprimir cuenta
+    <>
+      {viewport === 'mobile' ? (
+        <div id="main" className={styles.mobileContainer}>
+          <div className={'flex justify-start items-center'}>
+            <PurchaseAvatar avatar={personalInfo.avatar || ''} handleChangeAvatar={handleChangeAvatar} />
+            <div className={'pl-5'}>
+              <div className={styles.profileName}>{personalInfo.name + ' ' + personalInfo.surname}</div>
+              <div className={styles.profileCounry}>
+                {shippingInfo.province ? shippingInfo.province + ', ' + shippingInfo.country : shippingInfo.country}
+              </div>
             </div>
           </div>
+          <ProfileItem image={ProfileIcon} title="data" index={0} />
+          <ProfileItem image={ProfileIcon} title="data" index={1} />
         </div>
-      </Modal>
-      <div className={'flex justify-between'}>
-        <div>
-          <div className={styles.highBoldLabel}>Perfil</div>
-          <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
+      ) : (
+        <div className={'relative pt-10 pb-24 px-24 ' + styles.container} id="main">
+          <Modal
+            isOpen={modalIsOpen}
+            // onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+          >
+            <div className="p-2 w-auto">
+              <div className="mb-2 flex justify-end cursor-pointer" onClick={closeModal}>
+                <Image src={CloseIcon} alt={''} width={16} height={16} />
+              </div>
+              <div className={styles.modalTitle}>¿Estas seguro que deseas borrar tu cuenta?</div>
+              <div className={'mt-2 ' + styles.modalDescription}>
+                Recuerda que no hay vuelta atrás para esto, tus datos e historial no se guardarán
+                <br /> en el caso que quieras retomar los servicios.
+              </div>
+              <div className={'flex justify-end mt-5'}>
+                <div className={'cursor-pointer ' + styles.modalButton} onClick={closeModal}>
+                  Descartar
+                </div>
+                <div className={'cursor-pointer ml-3 ' + styles.modalButton} onClick={handleDeleteAccount}>
+                  Suprimir cuenta
+                </div>
+              </div>
+            </div>
+          </Modal>
+          <div className={'flex justify-between'}>
+            <div>
+              <div className={styles.highBoldLabel}>Perfil</div>
+              <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
+            </div>
+            <div className={'flex justify-end items-center'}>
+              <NotificationButton />
+              {/* <Profile /> */}
+            </div>
+          </div>
+          <div className={'my-8 ' + styles.divider} />
+          <div className={'flex'}>
+            <div
+              className={'mr-10 ' + (activeTab.personal ? styles.activeTab : styles.deactiveTab)}
+              onClick={() => handleClickTab('personal')}
+            >
+              Personales
+            </div>
+            <div
+              className={activeTab.health || activeTab.graphic ? styles.activeTab : styles.deactiveTab}
+              onClick={() => handleClickTab('health')}
+            >
+              Antropométricos
+            </div>
+          </div>
+          <div className={'pt-7'}>
+            {activeTab.personal && (
+              <Personal
+                personalInfo={personalInfo}
+                shippingInfo={shippingInfo}
+                handleChangeAvatar={handleChangeAvatar}
+                handleSave={handleSavePersonal}
+                handleDiscard={handleDiscardPersonal}
+                handleChangePersonal={handleChangePersonal}
+                handleChangeShipping={handleChangeShipping}
+                handleDeleteAccount={openModal}
+              />
+            )}
+            {activeTab.health && (
+              <Health
+                healthInfo={healthInfo}
+                handleSave={handleSaveMeasure}
+                handleDiscard={handleDiscardMeasure}
+                handleClickTab={handleClickTab}
+                handleChangeHealth={handleChangeHealth}
+              />
+            )}
+            {activeTab.graphic && (
+              <Graphic
+                handleClickTab={handleClickTab}
+                graphicInfo={graphicInfo}
+                monthData={monthData}
+                currentMonthIndex={currentMonthIndex}
+              />
+            )}
+          </div>
         </div>
-        <div className={'flex justify-end items-center'}>
-          <NotificationButton />
-          {/* <Profile /> */}
-        </div>
-      </div>
-      <div className={'my-8 ' + styles.divider} />
-      <div className={'flex'}>
-        <div
-          className={'mr-10 ' + (activeTab.personal ? styles.activeTab : styles.deactiveTab)}
-          onClick={() => handleClickTab('personal')}
-        >
-          Personales
-        </div>
-        <div
-          className={activeTab.health || activeTab.graphic ? styles.activeTab : styles.deactiveTab}
-          onClick={() => handleClickTab('health')}
-        >
-          Antropométricos
-        </div>
-      </div>
-      <div className={'pt-7'}>
-        {activeTab.personal && (
-          <Personal
-            personalInfo={personalInfo}
-            shippingInfo={shippingInfo}
-            handleChangeAvatar={handleChangeAvatar}
-            handleSave={handleSavePersonal}
-            handleDiscard={handleDiscardPersonal}
-            handleChangePersonal={handleChangePersonal}
-            handleChangeShipping={handleChangeShipping}
-            handleDeleteAccount={openModal}
-          />
-        )}
-        {activeTab.health && (
-          <Health
-            healthInfo={healthInfo}
-            handleSave={handleSaveMeasure}
-            handleDiscard={handleDiscardMeasure}
-            handleClickTab={handleClickTab}
-            handleChangeHealth={handleChangeHealth}
-          />
-        )}
-        {activeTab.graphic && (
-          <Graphic
-            handleClickTab={handleClickTab}
-            graphicInfo={graphicInfo}
-            monthData={monthData}
-            currentMonthIndex={currentMonthIndex}
-          />
-        )}
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 export default Profile
