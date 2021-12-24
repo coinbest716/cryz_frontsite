@@ -557,25 +557,25 @@ const Profile = props => {
             image={ProfileIcon}
             title="Datos"
             index={0}
-            onClick={() => handleClickProfileItem('personal-data')}
+            handleClickProfileItem={() => handleClickProfileItem('personal-data')}
           />
           <ProfileItem
             image={ProfileAntro}
             title="Antropometría"
             index={1}
-            onClick={() => handleClickProfileItem('health')}
+            handleClickProfileItem={() => handleClickProfileItem('health')}
           />
           <ProfileItem
             image={ProfileCompras}
             title="Compras"
             index={2}
-            onClick={() => handleClickProfileItem('compras')}
+            handleClickProfileItem={() => handleClickProfileItem('compras')}
           />
           <ProfileItem
             image={ProfileBill}
             title="Direcciones facturación"
             index={3}
-            onClick={() => handleClickProfileItem('bill-address')}
+            handleClickProfileItem={() => handleClickProfileItem('bill-address')}
           />
           <div className="mt-16">
             <ProfileMainButton label="LogOut" onClick={() => handleClickMainButton('logout')} type="logout" />
@@ -583,7 +583,7 @@ const Profile = props => {
           <div className="mt-6">
             <ProfileMainButton
               label="Borrar cuenta"
-              onClick={() => handleClickMainButton('deleteAccount')}
+              handleClickMainButton={() => handleClickMainButton('deleteAccount')}
               type="deleteAccount"
             />
           </div>

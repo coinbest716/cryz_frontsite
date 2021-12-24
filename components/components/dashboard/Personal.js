@@ -100,7 +100,7 @@ const Personal = props => {
             <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'meet')}
-                label={'Como nos conoció…'}
+                label={'Cómo nos conoció…'}
                 placeholder={''}
                 type={'select'}
                 list={meetList}
