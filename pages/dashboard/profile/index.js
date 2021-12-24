@@ -493,11 +493,15 @@ const Profile = props => {
     setHealthInfo({ ...healthInfo, [key]: event.target.value })
   }
 
+  const handleClickProfileItem = type => {
+    console.log(type)
+  }
+
   return (
     <>
       {viewport === 'mobile' ? (
         <div id="main" className={styles.mobileContainer}>
-          <div className={'flex justify-start items-center'}>
+          <div className={'flex justify-start items-center mb-10'}>
             <PurchaseAvatar avatar={personalInfo.avatar || ''} handleChangeAvatar={handleChangeAvatar} />
             <div className={'pl-5'}>
               <div className={styles.profileName}>{personalInfo.name + ' ' + personalInfo.surname}</div>
@@ -506,8 +510,25 @@ const Profile = props => {
               </div>
             </div>
           </div>
-          <ProfileItem image={ProfileIcon} title="data" index={0} />
-          <ProfileItem image={ProfileIcon} title="data" index={1} />
+          <ProfileItem image={ProfileIcon} title="Datos" index={0} onClick={() => handleClickProfileItem('data')} />
+          <ProfileItem
+            image={ProfileAntro}
+            title="Antropometría"
+            index={1}
+            onClick={() => handleClickProfileItem('antro')}
+          />
+          <ProfileItem
+            image={ProfileCompras}
+            title="Compras"
+            index={2}
+            onClick={() => handleClickProfileItem('compras')}
+          />
+          <ProfileItem
+            image={ProfileBill}
+            title="Direcciones facturación"
+            index={3}
+            onClick={() => handleClickProfileItem('bill')}
+          />
         </div>
       ) : (
         <div className={'relative pt-10 pb-24 px-24 ' + styles.container} id="main">

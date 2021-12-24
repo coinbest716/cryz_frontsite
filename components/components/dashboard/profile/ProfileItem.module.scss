@@ -1,7 +1,7 @@
 @import 'styles/variable.module.scss';
 
 .container {
-  padding: 12px 16px;
+  padding: 14px 16px;
   background-color: $white-color;
   cursor: pointer;
 }
@@ -28,4 +28,9 @@
 
 .itemBottomRadius {
   border-radius: 0px 0px 8px 8px;
+}
+.divider {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #e4eaee;
 }
