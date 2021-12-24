@@ -95,9 +95,7 @@ const MessageInput = props => {
         </div>
 
         <div className={'w-full flex justify-end'}>
-          <button className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}>
-            <Image src={SmileIcon} alt={''} width={21} height={21} />
-          </button>
+          
           <button
             className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
             onClick={onClickAttachFile}

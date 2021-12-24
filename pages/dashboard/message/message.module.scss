@@ -54,14 +54,16 @@
   position: absolute;
   left: 26px;
   top: 77px;
-  border: 1px solid $blue-gray-400-color;
-  background-color: $white-color;
-  width: 192px;
+  border: 1px solid #818e8e;
+  background-color: #ffffff;
+  width: auto;
   height: auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px;
   z-index: 1000;
   cursor: pointer;
+  color: darkgray;
+  font-size: 14px;
+  font-family: Montserrat;
 }
 .dropMenuItemArea {
   padding-left: 10px;
