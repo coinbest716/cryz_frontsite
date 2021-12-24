@@ -3,7 +3,7 @@ import React from 'react'
 // next components
 import Image from 'next/image'
 import Link from 'next/link'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // images
 import homeIcon from 'public/images/home.svg'
@@ -27,6 +27,7 @@ import styles from 'components/Footer/MobileDashboardFooter.module.scss'
 const Footer = props => {
   // variables
   const { viewport } = props
+  const router = useRouter()
 
   return (
     <div className={styles.footerArea}>
