@@ -233,7 +233,9 @@ const Dashboard = props => {
   useEffect(() => {
     if (!weekDaySessionsError && weekDaySessionsData && weekDaySessionsData.getWeekDaySessionsByDashboard) {
       const data = weekDaySessionsData.getWeekDaySessionsByDashboard
-      setEventMins(data.at(-1))
+      if (data.length > 0) {
+        setEventMins(data.at(-1))
+      }
       let array = [
         {
           name: 'Actividad semanal',
@@ -248,7 +250,7 @@ const Dashboard = props => {
     if (!messageListError && messageListData && messageListData.getPatientMessageById) {
       const data = messageListData.getPatientMessageById
       console.log(data)
-      alert(data.length)
+      //alert(data.length)
       setMessage(data)
     }
   }, [messageListLoading, messageListData, messageListError])
