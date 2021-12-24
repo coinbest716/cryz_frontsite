@@ -498,8 +498,8 @@ const Profile = props => {
     setHealthInfo({ ...healthInfo, [key]: event.target.value })
   }
 
-  const handleClickProfileItem = type => {
-    console.log(type)
+  const handleClickProfileItem = path => {
+    router.push('/dashboard/profile/' + path)
   }
   const handleClickMainButton = async type => {
     if (type === 'logout') {
@@ -511,7 +511,6 @@ const Profile = props => {
       router.push('/')
     }
     if (type === 'deleteAccount') {
-      console.log('!!!!!!!!!!!!!')
       openModal()
     }
   }
@@ -554,12 +553,17 @@ const Profile = props => {
               </div>
             </div>
           </div>
-          <ProfileItem image={ProfileIcon} title="Datos" index={0} onClick={() => handleClickProfileItem('data')} />
+          <ProfileItem
+            image={ProfileIcon}
+            title="Datos"
+            index={0}
+            onClick={() => handleClickProfileItem('personal-data')}
+          />
           <ProfileItem
             image={ProfileAntro}
             title="Antropometría"
             index={1}
-            onClick={() => handleClickProfileItem('antro')}
+            onClick={() => handleClickProfileItem('health')}
           />
           <ProfileItem
             image={ProfileCompras}
@@ -571,7 +575,7 @@ const Profile = props => {
             image={ProfileBill}
             title="Direcciones facturación"
             index={3}
-            onClick={() => handleClickProfileItem('bill')}
+            onClick={() => handleClickProfileItem('bill-address')}
           />
           <div className="mt-16">
             <ProfileMainButton label="LogOut" onClick={() => handleClickMainButton('logout')} type="logout" />
