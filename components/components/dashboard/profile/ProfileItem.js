@@ -11,10 +11,11 @@ import RightGrayIcon from 'public/images/right_gray.svg'
 import styles from './ProfileItem.module.scss'
 
 const ProfileItem = props => {
-  const { image, title, index } = props
+  const { image, title, index, onClick } = props
   return (
     <div>
       <div
+        onClick={onClick}
         className={
           styles.container +
           ' flex items-center w-full ' +
@@ -23,8 +24,8 @@ const ProfileItem = props => {
           (index === 3 && styles.itemBottomRadius)
         }
       >
-        <div>
-          <Image src={image} alt="" width={16} height={16} />
+        <div className="flex items-center">
+          <Image src={image} alt="" width={20} height={20} />
         </div>
         <div className="flex justify-between items-center ml-4 w-full">
           <div className={styles.name}>{title}</div>

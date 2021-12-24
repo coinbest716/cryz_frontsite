@@ -13,6 +13,7 @@ import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
 import ProfileItem from 'components/components/dashboard/profile/ProfileItem'
+import ProfileMainButton from 'components/components/dashboard/profile/ProfileMainButton'
 
 // import Profile from 'components/components/dashboard/Profile'
 import Personal from 'components/components/dashboard/Personal'
@@ -496,6 +497,9 @@ const Profile = props => {
   const handleClickProfileItem = type => {
     console.log(type)
   }
+  const handleClickMainButton = type => {
+    console.log(type)
+  }
 
   return (
     <>
@@ -529,6 +533,16 @@ const Profile = props => {
             index={3}
             onClick={() => handleClickProfileItem('bill')}
           />
+          <div className="mt-16">
+            <ProfileMainButton label="LogOut" onClick={() => handleClickMainButton('logout')} type="logout" />
+          </div>
+          <div className="mt-6">
+            <ProfileMainButton
+              label="Borrar cuenta"
+              onClick={() => handleClickMainButton('logout')}
+              type="deleteAccount"
+            />
+          </div>
         </div>
       ) : (
         <div className={'relative pt-10 pb-24 px-24 ' + styles.container} id="main">
