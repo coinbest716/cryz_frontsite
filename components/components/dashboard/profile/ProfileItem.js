@@ -11,11 +11,11 @@ import RightGrayIcon from 'public/images/right_gray.svg'
 import styles from './ProfileItem.module.scss'
 
 const ProfileItem = props => {
-  const { image, title, index, onClick } = props
+  const { image, title, index, handleClickProfileItem } = props
   return (
     <div>
       <div
-        onClick={onClick}
+        onClick={handleClickProfileItem}
         className={
           styles.container +
           ' flex items-center w-full ' +
