@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react'
 // redux
 import { useDispatch } from 'react-redux'
 
+import client from 'utils/apolloclient'
+import { Auth } from 'aws-amplify'
+
 // next components
 import { useRouter } from 'next/router'
 import Image from 'next/image'
@@ -11,6 +14,10 @@ import Image from 'next/image'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
+import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
+import ProfileItem from 'components/components/dashboard/profile/ProfileItem'
+import ProfileMainButton from 'components/components/dashboard/profile/ProfileMainButton'
+
 // import Profile from 'components/components/dashboard/Profile'
 import Personal from 'components/components/dashboard/Personal'
 import Health from 'components/components/dashboard/Health'
@@ -24,6 +31,10 @@ import graphql from 'crysdiazGraphql'
 import toast from 'react-hot-toast'
 import Modal from 'react-modal'
 import CloseIcon from 'public/images/close.svg'
+import ProfileIcon from 'public/images/profile_icon.svg'
+import ProfileAntro from 'public/images/profile_antro.svg'
+import ProfileBill from 'public/images/profile_bill.svg'
+import ProfileCompras from 'public/images/profile_compras.svg'
 
 const customStyles = {
   content: {
@@ -33,16 +44,18 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    width: '90%',
   },
   overlay: {
     background: 'rgba(0, 0, 0, 0.6)',
   },
 }
 
-const Profile = () => {
+const Profile = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const { viewport } = props
 
   useEffect(() => {
     setIsMounted(true)
@@ -485,8 +498,25 @@ const Profile = () => {
     setHealthInfo({ ...healthInfo, [key]: event.target.value })
   }
 
+  const handleClickProfileItem = path => {
+    router.push('/dashboard/profile/' + path)
+  }
+  const handleClickMainButton = async type => {
+    if (type === 'logout') {
+      dispatch({ type: 'set', isLoading: true })
+      await client.resetStore()
+      await client.clearStore()
+      await Auth.signOut()
+      localStorage.clear()
+      router.push('/')
+    }
+    if (type === 'deleteAccount') {
+      openModal()
+    }
+  }
+
   return (
-    <div className={'relative pt-10 pb-24 px-24 ' + styles.container} id="main">
+    <div id="main">
       <Modal
         isOpen={modalIsOpen}
         // onAfterOpen={afterOpenModal}
@@ -512,62 +542,112 @@ const Profile = () => {
           </div>
         </div>
       </Modal>
-      <div className={'flex justify-between'}>
-        <div>
-          <div className={styles.highBoldLabel}>Perfil</div>
-          <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
-        </div>
-        <div className={'flex justify-end items-center'}>
-          <NotificationButton />
-          {/* <Profile /> */}
-        </div>
-      </div>
-      <div className={'my-8 ' + styles.divider} />
-      <div className={'flex'}>
-        <div
-          className={'mr-10 ' + (activeTab.personal ? styles.activeTab : styles.deactiveTab)}
-          onClick={() => handleClickTab('personal')}
-        >
-          Personales
-        </div>
-        <div
-          className={activeTab.health || activeTab.graphic ? styles.activeTab : styles.deactiveTab}
-          onClick={() => handleClickTab('health')}
-        >
-          Antropométricos
-        </div>
-      </div>
-      <div className={'pt-7'}>
-        {activeTab.personal && (
-          <Personal
-            personalInfo={personalInfo}
-            shippingInfo={shippingInfo}
-            handleChangeAvatar={handleChangeAvatar}
-            handleSave={handleSavePersonal}
-            handleDiscard={handleDiscardPersonal}
-            handleChangePersonal={handleChangePersonal}
-            handleChangeShipping={handleChangeShipping}
-            handleDeleteAccount={openModal}
+      {viewport === 'mobile' ? (
+        <div className={styles.mobileContainer}>
+          <div className={'flex justify-start items-center mb-10'}>
+            <PurchaseAvatar avatar={personalInfo.avatar || ''} handleChangeAvatar={handleChangeAvatar} />
+            <div className={'pl-5'}>
+              <div className={styles.profileName}>{personalInfo.name + ' ' + personalInfo.surname}</div>
+              <div className={styles.profileCounry}>
+                {shippingInfo.province ? shippingInfo.province + ', ' + shippingInfo.country : shippingInfo.country}
+              </div>
+            </div>
+          </div>
+          <ProfileItem
+            image={ProfileIcon}
+            title="Datos"
+            index={0}
+            onClick={() => handleClickProfileItem('personal-data')}
           />
-        )}
-        {activeTab.health && (
-          <Health
-            healthInfo={healthInfo}
-            handleSave={handleSaveMeasure}
-            handleDiscard={handleDiscardMeasure}
-            handleClickTab={handleClickTab}
-            handleChangeHealth={handleChangeHealth}
+          <ProfileItem
+            image={ProfileAntro}
+            title="Antropometría"
+            index={1}
+            onClick={() => handleClickProfileItem('health')}
           />
-        )}
-        {activeTab.graphic && (
-          <Graphic
-            handleClickTab={handleClickTab}
-            graphicInfo={graphicInfo}
-            monthData={monthData}
-            currentMonthIndex={currentMonthIndex}
+          <ProfileItem
+            image={ProfileCompras}
+            title="Compras"
+            index={2}
+            onClick={() => handleClickProfileItem('compras')}
           />
-        )}
-      </div>
+          <ProfileItem
+            image={ProfileBill}
+            title="Direcciones facturación"
+            index={3}
+            onClick={() => handleClickProfileItem('bill-address')}
+          />
+          <div className="mt-16">
+            <ProfileMainButton label="LogOut" onClick={() => handleClickMainButton('logout')} type="logout" />
+          </div>
+          <div className="mt-6">
+            <ProfileMainButton
+              label="Borrar cuenta"
+              onClick={() => handleClickMainButton('deleteAccount')}
+              type="deleteAccount"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className={'relative pt-10 pb-24 px-24 ' + styles.container}>
+          <div className={'flex justify-between'}>
+            <div>
+              <div className={styles.highBoldLabel}>Perfil</div>
+              <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
+            </div>
+            <div className={'flex justify-end items-center'}>
+              <NotificationButton />
+              {/* <Profile /> */}
+            </div>
+          </div>
+          <div className={'my-8 ' + styles.divider} />
+          <div className={'flex'}>
+            <div
+              className={'mr-10 ' + (activeTab.personal ? styles.activeTab : styles.deactiveTab)}
+              onClick={() => handleClickTab('personal')}
+            >
+              Personales
+            </div>
+            <div
+              className={activeTab.health || activeTab.graphic ? styles.activeTab : styles.deactiveTab}
+              onClick={() => handleClickTab('health')}
+            >
+              Antropométricos
+            </div>
+          </div>
+          <div className={'pt-7'}>
+            {activeTab.personal && (
+              <Personal
+                personalInfo={personalInfo}
+                shippingInfo={shippingInfo}
+                handleChangeAvatar={handleChangeAvatar}
+                handleSave={handleSavePersonal}
+                handleDiscard={handleDiscardPersonal}
+                handleChangePersonal={handleChangePersonal}
+                handleChangeShipping={handleChangeShipping}
+                handleDeleteAccount={openModal}
+              />
+            )}
+            {activeTab.health && (
+              <Health
+                healthInfo={healthInfo}
+                handleSave={handleSaveMeasure}
+                handleDiscard={handleDiscardMeasure}
+                handleClickTab={handleClickTab}
+                handleChangeHealth={handleChangeHealth}
+              />
+            )}
+            {activeTab.graphic && (
+              <Graphic
+                handleClickTab={handleClickTab}
+                graphicInfo={graphicInfo}
+                monthData={monthData}
+                currentMonthIndex={currentMonthIndex}
+              />
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
