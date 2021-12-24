@@ -3,9 +3,6 @@ import React from 'react'
 // next components
 import Image from 'next/image'
 
-// third party components
-import ReactPlayer from 'react-player'
-
 // styles
 import styles from './Material.module.scss'
 
