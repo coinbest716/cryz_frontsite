@@ -31,7 +31,7 @@ const Footer = props => {
 
   return (
     <div className={styles.footerArea}>
-      <div className={'w-full flex justify-around items-center ' + styles.footerIconArea}>
+      <div className={'flex justify-around items-center ' + styles.footerIconArea}>
         <button onClick={() => router.push('/')}>
           <Image src={homeIcon} alt="" width={18} height={20} />
         </button>
