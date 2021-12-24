@@ -28,7 +28,7 @@ const Material = props => {
         {type === 'green' && <Image src={greenCheckIcon} alt="" width={15} height={12} />}
       </div>
       <div className="w-16 h-16 flex justify-center items-center">
-        <Image src={item.link?.replace('.mp4', '.jpg')} width="56px" height="56px" alt={item?.name} />
+        {item.link && <Image src={item.link?.replace('.mp4', '.jpg')} width="33px" height="56px" alt={item?.name} />}
       </div>
       <div className={'pl-4 flex flex-col justify-around'}>
         <div className={styles.label}>{item?.name}</div>

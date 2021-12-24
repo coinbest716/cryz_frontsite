@@ -233,7 +233,7 @@ const Dashboard = props => {
   useEffect(() => {
     if (!weekDaySessionsError && weekDaySessionsData && weekDaySessionsData.getWeekDaySessionsByDashboard) {
       const data = weekDaySessionsData.getWeekDaySessionsByDashboard
-      setEventMins(data?.at(-1))
+      setEventMins(data.at(-1))
       let array = [
         {
           name: 'Actividad semanal',
