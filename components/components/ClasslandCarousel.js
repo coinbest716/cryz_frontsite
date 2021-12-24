@@ -17,7 +17,7 @@ import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import styles from './ClasslandCarousel.module.scss'
 
 const ClasslandCarousel = props => {
-  const { sliderData } = props
+  const { sliderData, url } = props
   return (
     <Carousel
       showArrows={true}
@@ -54,7 +54,7 @@ const ClasslandCarousel = props => {
       }
     >
       {sliderData?.map((item, index) => (
-        <div key={index}>
+        <div key={index} className="cursor-pointer" onClick={() => window.open(url, '_blank')}>
           <Image src={item.path} alt="" width={1165} height={415} className={styles.slideImage} />
         </div>
       ))}
