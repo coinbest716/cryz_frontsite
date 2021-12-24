@@ -42,7 +42,7 @@ const PersonalData = () => {
     avatar: '',
     name: '',
     surname: '',
-    email: localStorage.getItem('email') || '',
+    email: '',
     password: '',
     meet: 'INSTAGRAM',
     telephone: '',
