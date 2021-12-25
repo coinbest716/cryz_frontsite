@@ -24,8 +24,9 @@ const Footer = props => {
   const { viewport } = props
 
   // handlers
-  const handleClickWhatsapp = () => {
-    console.log('handleClickWhatsapp')
+  const handleClickWhatsapp = e => {
+    e.preventDefault()
+    router.push('https://api.whatsapp.com/send?phone=34650148244')
   }
 
   return (

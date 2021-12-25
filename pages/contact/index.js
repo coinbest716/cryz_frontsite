@@ -19,6 +19,8 @@ import MapContainer from 'components/components/contact/MapContainer'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from 'pages/contact/contact.module.scss'
 
+import { useRouter } from 'next/router'
+
 // images
 import phoneIcon from 'public/images/phone.svg'
 import emailIcon from 'public/images/email.svg'
@@ -33,6 +35,7 @@ const Contact = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     setIsMounted(true)
@@ -82,8 +85,9 @@ const Contact = props => {
     // eslint-disable-line react-hooks/exhaustive-deps
   }, [contactLoading, contactData, contactError])
 
-  const handleClickWhatsapp = () => {
-    console.log('handleClickWhatsapp')
+  const handleClickWhatsapp = e => {
+    e.preventDefault()
+    router.push('https://api.whatsapp.com/send?phone=34650148244')
   }
 
   return (

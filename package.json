@@ -26,6 +26,7 @@
     "apollo-upload-client": "^16.0.0",
     "aws-amplify": "^4.3.4",
     "graphql": "^16.0.1",
+    "jspdf": "^2.5.0",
     "moment": "^2.29.1",
     "next": "^12.0.7",
     "next-plugin-graphql": "^0.0.2",
