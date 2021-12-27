@@ -12,3 +12,105 @@
   letter-spacing: 0;
   line-height: 19px;
 }
+
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f5f6fa;
+  height: 100vh;
+}
+
+.yearArea {
+  margin-top: 57px;
+  margin-bottom: 21px;
+}
+
+.yearSelect {
+  width: 120px;
+  height: 40px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  // font style
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+
+// table part
+.tableHead {
+  border: 2px solid #ededed;
+  background-color: #ffffff;
+  height: 58px;
+  min-height: 58px;
+}
+.tableHeadArea {
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+.tableContentArea {
+  width: 100%;
+  padding: 8px 40px;
+  min-height: 110px;
+  display: flex;
+  justify-content: flex-start;
+}
+.tbody {
+  td div {
+    /* div will now take up full 200px of parent's height */
+    height: 100%;
+  }
+}
+.tableHeadTitle {
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 24px;
+}
+.tableCellText {
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  line-height: 36px;
+}
+
+.price {
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  line-height: 28px;
+}
+
+.payment {
+  opacity: 0.5;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 13px;
+  letter-spacing: 0.97px;
+  line-height: 24px;
+}
+
+.outlineButton {
+  width: 300px;
+  height: 70px;
+  background-color: transparent;
+  border: 1px solid #bd5b54;
+
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  color: #bd5b54;
+}
