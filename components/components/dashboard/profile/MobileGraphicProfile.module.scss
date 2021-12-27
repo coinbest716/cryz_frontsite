@@ -1,1 +1,44 @@
 @import 'styles/variable.module.scss';
+
+.header {
+  background-color: #818e8e;
+  box-shadow: 0 32px 44px 0 rgba(131, 146, 167, 0.2);
+}
+.backString {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.26px;
+}
+.saveButton {
+  border: 0.7px solid #ffffff;
+  border-radius: 6px;
+  background-color: #818e8e;
+  padding: 10px 9px 4px 12px;
+  width: fit-content;
+  cursor: pointer;
+}
+.title {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+.graphictitle {
+  color: #2a2c36;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.month {
+  color: #77838f;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 11px;
+  width: 40px;
+}
