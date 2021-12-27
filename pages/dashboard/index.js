@@ -77,6 +77,8 @@ const Dashboard = props => {
     getWeekDaySessionsByDashboard,
     { data: weekDaySessionsData, loading: weekDaySessionsLoading, error: weekDaySessionsError },
   ] = useLazyQuery(graphql.queries.getWeekDaySessionsByDashboard)
+  const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
+  const [events, setEvents] = useState([])
   const [profilePercentage, setProfilePercentage] = useState(0)
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
@@ -290,13 +292,50 @@ const Dashboard = props => {
   useEffect(() => {
     if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
       const sessionArr = sessionData.getSessionsByDashboard
+      const _events = []
       const _markDate = []
       sessionArr.map(item => {
+        const _eventItem = {
+          id: item.id,
+          title: item.purchase.item_web_name,
+          start: item.start_time,
+          end: item.end_time,
+          backgroundColor: item.location.color,
+          textColor: '#ffffff',
+          label: item.location.name,
+          streaming: item.stream_event,
+        }
         _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
+        _events.push(_eventItem)
       })
+      setEvents(_events)
       setMarkDate(_markDate)
     }
   }, [sessionLoading, sessionData, sessionError])
+
+  useEffect(() => {
+    setAvailableEvent()
+    let classInterval = setInterval(() => {
+      setAvailableEvent
+    }, 10000)
+    return () => {
+      clearInterval(classInterval)
+    }
+  }, [events])
+
+  const setAvailableEvent = () => {
+    const currentTime = moment(new Date())
+    events.map(item => {
+      const startTime = moment(item.start)
+      const endTime = moment(item.end)
+      const diffTime = startTime.diff(endTime, 'minutes')
+      if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
+        setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
+      } else {
+        setStreamingEvent({ id: -1, start: '', toggle: false })
+      }
+    })
+  }
 
   useEffect(() => {
     if (!paymentStatusError && paymentStatusData && paymentStatusData.getPaymentStatusForDashboard) {
@@ -335,7 +374,10 @@ const Dashboard = props => {
   const handleClickRedirect = (type, id) => {
     switch (type) {
       case 'startClass':
-        router.push('/dashboard/live-streaming')
+        router.push({
+          pathname: '/dashboard/live-streaming',
+          query: { id: streamingEvent.id },
+        })
         break
       case 'view':
         router.push(id)
@@ -396,7 +438,7 @@ const Dashboard = props => {
                 handleClick={() => handleClickRedirect('startClass')}
                 label={'Comenzar clase'}
                 type={'startClass'}
-                visible={message.length !== 0 ? true : false}
+                visiable={streamingEvent.toggle}
               />
             )}
           </div>
@@ -427,7 +469,7 @@ const Dashboard = props => {
                     handleClick={() => handleClickRedirect('startClass')}
                     label={'Comenzar clase'}
                     type={'startClass'}
-                    visible={message.length !== 0 ? true : false}
+                    visiable={streamingEvent.toggle}
                   />
                   <DashboardButton
                     handleClick={() => handleClickRedirect('message')}
