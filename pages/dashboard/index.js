@@ -323,9 +323,13 @@ const Dashboard = props => {
     }
   }
 
-  const handleClickRmember = () => {
-    console.log('handleClickRmember')
+  const handleClickQuestionnaire = () => {
+    document.body.style.overflow = 'hidden'
     setShowQuestionnaire(true)
+  }
+  const handleDisableQuestionnarie = () => {
+    document.body.style.overflow = 'auto'
+    setShowQuestionnaire(false)
   }
 
   const handleClickRedirect = (type, id) => {
@@ -464,7 +468,7 @@ const Dashboard = props => {
                   Tienes un cuestionario pendiente de completar…
                 </div>
               </div>
-              <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
+              <DashboardButton handleClick={() => handleClickQuestionnaire()} label={'Hacerlo'} type={'viewRed'} />
             </div>
           ) : (
             <></>
@@ -599,7 +603,7 @@ const Dashboard = props => {
           </div>
         </div>
       </div>
-      {showQuestionnaire && <Questionnaire onClick={() => setShowQuestionnaire(false)} />}
+      {showQuestionnaire && <Questionnaire onClick={() => handleDisableQuestionnarie()} viewport={viewport} />}
     </div>
   )
 }
