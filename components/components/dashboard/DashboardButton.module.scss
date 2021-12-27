@@ -2,13 +2,29 @@
 
 .outlineDisableButton {
   border: 1.12px solid #818e8e;
-  border-radius: 10px;
+  @media (max-width: 1023px) {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+  @media (min-width: 1024px) {
+    border-radius: 10px;
+  }
 }
 .outlineButton {
   border: 1.12px solid #e30018;
-  border-radius: 10px;
   &:hover {
     background-color: #e300171f;
+  }
+  @media (max-width: 1023px) {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+  @media (min-width: 1024px) {
+    border-radius: 10px;
   }
 }
 .outlineLabel {
@@ -26,6 +42,13 @@
   font-weight: bold;
   letter-spacing: 0;
   line-height: 15px;
+}
+.startClassButtonImage {
+  @media (max-width: 1023px) {
+    border-radius: 15px;
+  }
+  @media (min-width: 1024px) {
+  }
 }
 .welcomeSection {
   border-radius: 10px;
