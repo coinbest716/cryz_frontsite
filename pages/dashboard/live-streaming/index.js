@@ -54,7 +54,7 @@ const LiveStreaming = props => {
   }, [])
 
   return (
-    <div className={'h-fll pt-12 pl-14 pr-8 h-screen ' + styles.container}>
+    <div className={'pt-12 lg:pl-14 lg:pr-8 h-screen ' + styles.container}>
       <div className={'grid grid-cols-12 gap-6'}>
         <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-4'}>
           <div className={styles.title}>1 to 1 Streaming</div>
