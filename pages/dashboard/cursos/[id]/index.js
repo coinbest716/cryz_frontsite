@@ -78,7 +78,7 @@ const Curso = () => {
           {/* year select part */}
           <div className={styles.yearArea}></div>
           {/* table part */}
-          <div className={'inline-grid'}>{course?.description}</div>
+          <div className={'inline-grid'} dangerouslySetInnerHTML={{ __html: course?.description }} />
         </div>
       </div>
       {/* year select part */}
