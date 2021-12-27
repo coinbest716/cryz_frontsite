@@ -13,6 +13,7 @@ import styles from 'pages/female-health/FemaleHealth.module.scss'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { NextSeo } from 'next-seo'
 
 const FemaleHealth = props => {
   // loading part ###########################
@@ -51,12 +52,24 @@ const FemaleHealth = props => {
   }, [femHealthLoading, femHealthData, femHealthError])
 
   return (
-    <div className={styles.container}>
-      {JSON.stringify(femHealth) !== '{}' ? <MainSection data={femHealth} viewport={viewport} /> : <></>}
-      <div id="discipline" className={'w-full flex justify-center'}>
-        <DisciplineSection viewport={viewport} />
+    <>
+      <NextSeo
+        title="CrysDyaz&Co Salud Fem"
+        description="Fisioterapia, entrenamiento personal y mucho más"
+        openGraph={{
+          type: 'website',
+          locale: 'es_ES',
+          url: 'https://crysdyazandco.com/female-health',
+          site_name: 'CrysDyaz&Co',
+        }}
+      />
+      <div className={styles.container}>
+        {JSON.stringify(femHealth) !== '{}' ? <MainSection data={femHealth} viewport={viewport} /> : <></>}
+        <div id="discipline" className={'w-full flex justify-center'}>
+          <DisciplineSection viewport={viewport} />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 export default FemaleHealth
