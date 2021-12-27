@@ -23,7 +23,7 @@ import styles from './LiveStreaming.module.scss'
 import LiveStreamingData from 'assets/data/LiveStreamingData.json'
 import router from 'next/router'
 
-const LiveStreaming = () => {
+const LiveStreaming = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -40,6 +40,8 @@ const LiveStreaming = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  // variable
+  const { viewport } = props
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
   const [event, setEvent] = useState({ id: -1, start: '' })
   const [material, setMaterial] = useState([])
