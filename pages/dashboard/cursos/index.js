@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react'
-
+import Link from 'next/link'
 // third party components
-import toast from 'react-hot-toast'
-import { Auth } from 'aws-amplify'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-
-// redux
-import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
@@ -16,8 +11,6 @@ import router from 'next/router'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
-import Chip from 'components/components/Chip'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -25,18 +18,44 @@ import styles from './cursos.module.scss'
 
 // images
 import FileViewIcon from 'assets/images/file-view.svg'
-import DownloadIcon from 'assets/images/download.svg'
-import DownloadDisableIcon from 'assets/images/download-disable.svg'
-
-// json data
-import OrderStateData from 'assets/data/OrderStateData.json'
 
 // graphql
 import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { Auth } from 'aws-amplify'
+import toast from 'react-hot-toast'
+import moment from 'moment'
 
 const Cursos = () => {
-  // loading part ###########################
+  const [courses, setCourses] = useState([])
+
+  const [getCourses, { data: coursesData, loading: coursesLoading, error: coursesError }] = useLazyQuery(
+    graphql.queries.getCoursesDashboard
+  )
+
+  useEffect(() => {
+    if (courses.length === 0 && courses !== 'undefined') {
+      getCourses()
+    }
+  }, [courses, getCourses])
+
+  useEffect(() => {
+    if (!coursesError && coursesData) {
+      if (coursesData === null) {
+      } else {
+        setCourses(coursesData.getCoursesDashboard)
+      }
+    }
+  }, [coursesLoading, coursesData, coursesError])
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then(() => {})
+      .catch(error => {
+        toast.error(error.message)
+        router.push('/')
+      })
+  }, [])
 
   return (
     <div className={globalStyles.dashContainer}>
@@ -48,9 +67,7 @@ const Cursos = () => {
           {/* year select part */}
           <div className={styles.yearArea}></div>
           {/* table part */}
-          <div className={'inline-grid'}>
-            
-          </div>
+          <div className={'inline-grid'}></div>
         </div>
       </div>
       <div>
@@ -67,30 +84,21 @@ const Cursos = () => {
               </tr>
             </thead>
             <tbody className={'mt-4 ' + styles.tbody}>
-              <tr className={1 % 2 === 1 ? 'bg-white' : ''}>
-                <td className={'h-full relative'}>
-                  <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                    Curso básico de entrenamiento durante el embarazo
-                  </div>
-                </td>
-                <td className={'h-full relative'}>
-                  <div className={styles.tableContentArea}>
-                    <a href='http://localhost:3000/dashboard/cursos/index'><Image src={FileViewIcon} alt={''} width={29} height={29} /></a>
-                  </div>
-                </td>
-              </tr>
-              <tr className={1 % 2 === 1 ? '' : ''}>
-                <td className={'h-full relative'}>
-                  <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                  Curso de preparación física y corporal al parto
-                  </div>
-                </td>
-                <td className={'h-full relative'}>
-                  <div className={styles.tableContentArea}>
-                  <a href='http://localhost:3000/dashboard/cursos/id/index'><Image src={FileViewIcon} alt={''} width={29} height={29} /></a>
-                  </div>
-                </td>
-              </tr>
+              {courses &&
+                courses.map((course, index) => (
+                  <tr key={index} className={1 % 2 === 1 ? 'bg-white' : ''}>
+                    <td className={'h-full relative'}>
+                      <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{course.name}</div>
+                    </td>
+                    <td className={'h-full relative'}>
+                      <div className={styles.tableContentArea}>
+                        <Link href={`/dashboard/cursos/${course.id}`}>
+                          <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </PerfectScrollbar>

@@ -65,8 +65,15 @@ import { Checkout, CheckoutVerify } from './purchase.gql'
 
 import { SendCV } from './other.gql'
 
+// courses
+
+import { getCoursesDashboard, getCourseDashboard } from './dashboard/course.gql'
+
 export default {
   queries: {
+    // Course
+    getCoursesDashboard: getCoursesDashboard,
+    getCourseDashboard: getCourseDashboard,
     // home part
     getEquipo: GetEquipo,
     getFeaturedServices: GetFeaturedServices,
