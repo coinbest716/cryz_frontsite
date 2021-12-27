@@ -446,35 +446,39 @@ const Dashboard = props => {
           </div>
           <div className={'flex justify-between items-center mt-7 px-9 pt-0 lg:pt-7 pb-1 ' + styles.welcomeSection}>
             <div className={'w-full'}>
-              <div className={styles.highBoldLabel}>Actividad mensual</div>
+              <div className={styles.highBoldLabel}>{viewport === 'mobile' ? 'Porcentajes' : 'Actividad mensual'}</div>
               <div>
                 <Chart
                   chart={chartOptions.chart}
                   options={chartOptions?.options}
                   series={chartOptions?.series}
-                  type="area"
+                  type={viewport === 'mobile' ? 'bar' : 'area'}
                   height="200px"
                 />
               </div>
             </div>
-            <div className={'px-2 '}>
-              <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
-              <DashboardButton
-                handleClick={() => handleClickRedirect('hour')}
-                label={(eventMins / 60).toString().replace('.', ',')}
-                type={'hour'}
-              />
-            </div>
+            {viewport !== 'mobile' && (
+              <div className={'px-2 '}>
+                <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
+                <DashboardButton
+                  handleClick={() => handleClickRedirect('hour')}
+                  label={(eventMins / 60).toString().replace('.', ',')}
+                  type={'hour'}
+                />
+              </div>
+            )}
           </div>
           {message.length !== 0 ? (
-            <div className={'mt-7 px-9 py-7 flex justify-between ' + styles.welcomeSection}>
+            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:my-0 px-9 py-7 flex justify-between ' + styles.rememberSection}>
               <div>
                 <div className={styles.remember}>Recuerda!!</div>
                 <div className={'pt-2 ' + styles.rememberDescription}>
                   Tienes un cuestionario pendiente de completar…
                 </div>
               </div>
-              <DashboardButton handleClick={() => handleClickQuestionnaire()} label={'Hacerlo'} type={'viewRed'} />
+              <div>
+                <DashboardButton handleClick={() => handleClickQuestionnaire()} label={'Hacerlo'} type={'viewRed'} />
+              </div>
             </div>
           ) : (
             <></>

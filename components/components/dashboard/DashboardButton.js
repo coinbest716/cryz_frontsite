@@ -2,7 +2,7 @@ import React from 'react'
 
 // next components
 import Image from 'next/image'
-import chatIcon from 'public/images/message-white.svg'
+import chatIcon from 'assets/images/messages.svg'
 import plus from 'public/images/plus-gray.svg'
 import plusWhite from 'public/images/plus-white.svg'
 import minus from 'public/images/minus-gray.svg'
@@ -36,10 +36,10 @@ const DashboardButton = props => {
             className={'flex justify-between items-center px-4 py-2 ' + styles.outlineGrayButton}
             onClick={handleClick}
           >
-            <div className="w-4 h-4 flex justify-center">
-              <Image src={chatIcon} alt={''} width={15} height={15} />
+            <div className="w-6 h-6 flex justify-center">
+              <Image src={chatIcon} alt={''} width={24} height={25} />
             </div>
-            <p className={'pl-3 ' + styles.outlineGrayLabel}>{count} Nuevos Mensajes</p>
+            <p className={'pl-2 ' + styles.outlineGrayLabel}>{count} Nuevos Mensajes</p>
           </button>
         </div>
       )}

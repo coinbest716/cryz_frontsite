@@ -30,6 +30,20 @@
   background-color: #ffffff;
   box-shadow: 0 10px 30px 0 rgba(108, 117, 125, 0.02);
 }
+.rememberSection {
+  display: flex;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px 0 rgba(108, 117, 125, 0.02);
+  @media (max-width: 1023px) {
+    border: 1px solid #e30018;
+    border-radius: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  @media (min-width: 1024px) {
+    justify-content: space-between;
+  }
+}
 .welcomeLabel {
   color: #2a2c37;
   font-family: Montserrat;
@@ -60,6 +74,12 @@
   font-weight: bold;
   letter-spacing: 0;
   line-height: 19px;
+  @media (max-width: 1023px) {
+    display: flex;
+    justify-content: center;
+  }
+  @media (min-width: 1024px) {
+  }
 }
 .rememberDescription {
   color: #818e8e;
@@ -67,6 +87,14 @@
   font-size: 12px;
   letter-spacing: 0;
   line-height: 15px;
+  @media (max-width: 1023px) {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  @media (min-width: 1024px) {
+  }
 }
 .calendar {
   font-size: 13px;
