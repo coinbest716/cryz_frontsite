@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
-import Script from 'next/script'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
@@ -106,8 +105,6 @@ const MyApp = ({ Component, pageProps }) => {
         }}
       />
       <ApolloProvider client={client}>
-        <Script src="https://js.stripe.com/v2/"></Script>
-        <Script id="stripe-js" src="https://js.stripe.com/v3/" async></Script>
         {viewport !== 'mobile' ? (
           <Provider store={store}>{getLayout(<Component {...pageProps} viewport={viewport} />)}</Provider>
         ) : process.env.NEXT_PUBLIC_MOBILE_VIEW === 'true' && viewport === 'mobile' ? (

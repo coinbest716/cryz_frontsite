@@ -12,12 +12,13 @@ import Radio from 'components/components/Radio'
 
 // images and icons
 import CloseIcon from 'assets/images/close.svg'
+import CloseGrayIcon from 'assets/images/close-gray.svg'
 
 // styles
 import styles from './Questionnaire.module.scss'
 
 const Questionnaire = props => {
-  const { onClick } = props
+  const { onClick, viewport } = props
   return (
     <div className={styles.card}>
       <div className={styles.closeButton}>
@@ -25,7 +26,12 @@ const Questionnaire = props => {
           className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
           onClick={() => onClick()}
         >
-          <Image src={CloseIcon} alt="..." width={30} height={30} />
+          <Image
+            src={viewport === 'mobile' ? CloseGrayIcon : CloseIcon}
+            alt="..."
+            width={viewport === 'mobile' ? 16 : 30}
+            height={viewport === 'mobile' ? 16 : 30}
+          />
         </button>
       </div>
       <div className={styles.title}>Rellena el cuestionario</div>
@@ -70,7 +76,7 @@ const Questionnaire = props => {
           </div>
         </PerfectScrollbar>
       </div>
-      <div className="flex justify-center mt-24 mr-16">
+      <div className="flex justify-center mt-20 lg:mt-24 lg:mr-16">
         <button className={'flex justify-center items-center ' + styles.outlineButton} onClick={() => {}}>
           ENVIAR
         </button>

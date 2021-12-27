@@ -17,6 +17,7 @@ import styles from './academy.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
+import { NextSeo } from 'next-seo'
 const Academy = props => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -63,31 +64,44 @@ const Academy = props => {
   }
 
   return (
-    <div className={'flex flex-wrap justify-center'}>
-      <div className={styles.container}>
-        <div className={globalStyles.container}>
-          <div className={'flex justify-between pt-7 lg:pt-28'}>
-            <div>
-              <div className={styles.topTitle}>Academy</div>
-              <div className={styles.topDash + ' mt-2 mb-3'} />
+    <>
+      <NextSeo
+        title="CrysDyaz&Co Academy"
+        description="Fisioterapia, entrenamiento personal y mucho más"
+        openGraph={{
+          type: 'website',
+          locale: 'es_ES',
+          url: 'https://crysdyazandco.com/academy',
+          site_name: 'CrysDyaz&Co',
+        }}
+      />
+
+      <div className={'flex flex-wrap justify-center'}>
+        <div className={styles.container}>
+          <div className={globalStyles.container}>
+            <div className={'flex justify-between pt-7 lg:pt-28'}>
+              <div>
+                <div className={styles.topTitle}>Academy</div>
+                <div className={styles.topDash + ' mt-2 mb-3'} />
+              </div>
+              {viewport !== 'mobile' && (
+                <div className={'z-10'}>
+                  <CircularMark viewport={viewport} />
+                </div>
+              )}
             </div>
-            {viewport !== 'mobile' && (
-              <div className={'z-10'}>
-                <CircularMark viewport={viewport} />
-              </div>
-            )}
-          </div>
-          {viewport !== 'mobile' && <div className={styles.cardTitle + ' mb-5'}>Destacados</div>}
-          <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
-            {cardData?.map((card, index) => (
-              <div className={'flex justify-center col-span-6 md:col-span-4'} key={index}>
-                <AcademyCard data={card} index={index} handleClickPayment={handleClickPayment} viewport={viewport} />
-              </div>
-            ))}
+            {viewport !== 'mobile' && <div className={styles.cardTitle + ' mb-5'}>Destacados</div>}
+            <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
+              {cardData?.map((card, index) => (
+                <div className={'flex justify-center col-span-6 md:col-span-4'} key={index}>
+                  <AcademyCard data={card} index={index} handleClickPayment={handleClickPayment} viewport={viewport} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 export default Academy

@@ -65,7 +65,7 @@ const Planes = () => {
   const [selectedVideoLink, setSelectedVideoLink] = useState('')
   const [materialData, setMaterialData] = useState([])
   const [feature, setFeature] = useState([])
-  const [showCalendar, setShowCalendar] = useState(false)
+  const [showCalendar, setShowCalendar] = useState(true)
   const [date, setDate] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
   const [currentMonth, setCurrentMonth] = useState('')
@@ -285,7 +285,7 @@ const Planes = () => {
         }
       }
     }
-    setShowCalendar(false)
+    setShowCalendar(true)
   }
 
   const updateCalendarLabel = label => {
@@ -374,7 +374,7 @@ const Planes = () => {
             <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
               <div className={'rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative'}>
                 <div className={'flex justify-between items-center'}>
-                  <div className={styles.monthName}>{currentMonth}</div>
+                  <div className={styles.monthName}></div>
                   <div
                     className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}
                     onClick={handleClickMonth}
@@ -422,31 +422,36 @@ const Planes = () => {
         </div>
       ) : (
         <div className={styles.imageContainer}>
-
-<div className={''}>
+          <div className={''}>
             <Image src={PlansImage} width={274} height={226} />
           </div>
-          <div className={styles.title + ' mt-20'}>
-            ESTAMOS PREPARANDO TU PLAN ONLINE PERSONALIZADO
-          </div>
+          <div className={styles.title + ' mt-20'}>ESTAMOS PREPARANDO TU PLAN ONLINE PERSONALIZADO</div>
           <div className={'flex justify-center planonline_text'}>
             <div className={globalStyles.container}>
-                <div className={styles.planonline_text}>
-                  
-                <p className='mt-20'>Recuerda:</p>
+              <div className={styles.planonline_text}>
+                <p className="mt-20">Recuerda:</p>
                 <ol>
-                  <li><span className='font-bold'>1. Rellenar el cuestionario inicial.</span> 
-                  Encontrarás cómo acceder a él desde tu dashboard.</li>  
-                  <li><span className='font-bold'>2. Introduce tus <span className='font-bold'>datos antropométricos</span> en tu perfil.</span></li>
+                  <li>
+                    <span className="font-bold">1. Rellenar el cuestionario inicial.</span>
+                    Encontrarás cómo acceder a él desde tu dashboard.
+                  </li>
+                  <li>
+                    <span className="font-bold">
+                      2. Introduce tus <span className="font-bold">datos antropométricos</span> en tu perfil.
+                    </span>
+                  </li>
                 </ol>
-                <p className='mt-5' ></p>
-                  <p className='mt-5'>Una vez lo hayas cumplimentado, en un plazo de 48/72h laborables recibirás tu plan mensual.</p>
+                <p className="mt-5"></p>
+                <p className="mt-5">
+                  Una vez lo hayas cumplimentado, en un plazo de 48/72h laborables recibirás tu plan mensual.
+                </p>
 
-                  <p className='mt-5'>El siguiente paso será fijar una videollamada a través de la web para resolver todas las posibles dudas que 
-                  te hayan surgido al revisarlo.</p>
-
-                </div>
+                <p className="mt-5">
+                  El siguiente paso será fijar una videollamada a través de la web para resolver todas las posibles
+                  dudas que te hayan surgido al revisarlo.
+                </p>
               </div>
+            </div>
           </div>
           {/* <div className={styles.subTitle}>
             PUEDES RENOVAR TU BONO

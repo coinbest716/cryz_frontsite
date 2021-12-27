@@ -2,6 +2,7 @@ import React from 'react'
 
 // next components
 import Image from 'next/image'
+import chatIcon from 'assets/images/messages.svg'
 import plus from 'public/images/plus-gray.svg'
 import plusWhite from 'public/images/plus-white.svg'
 import minus from 'public/images/minus-gray.svg'
@@ -9,21 +10,40 @@ import minus from 'public/images/minus-gray.svg'
 import styles from './DashboardButton.module.scss'
 
 const DashboardButton = props => {
-  const { handleClick, label, type, visiable } = props
+  const { handleClick, label, type, visible, count } = props
   return (
     <>
-      {type === 'startClass' && visiable === true && (
-        <div>
+      {type === 'startClass' && visible === true && (
+        <div className="mr-7">
           <button
             className={'flex justify-between items-center px-4 py-2 ' + styles.outlineButton}
             onClick={handleClick}
           >
             <p className={'pr-3 ' + styles.outlineLabel}>{label}</p>
-            <Image src={'/images/start-class.svg'} alt={''} width={30} height={30} />
+            <Image
+              src={'/images/start-class.svg'}
+              alt={''}
+              width={30}
+              height={30}
+              className={styles.startClassButtonImage}
+            />
           </button>
         </div>
       )}
-      {type === 'startClass' && visiable === false && (
+      {type === 'message' && (
+        <div>
+          <button
+            className={'flex justify-between items-center px-4 py-2 ' + styles.outlineGrayButton}
+            onClick={handleClick}
+          >
+            <div className="w-6 h-6 flex justify-center">
+              <Image src={chatIcon} alt={''} width={24} height={25} />
+            </div>
+            <p className={'pl-2 ' + styles.outlineGrayLabel}>{count} Nuevos Mensajes</p>
+          </button>
+        </div>
+      )}
+      {type === 'startClass' && visible === false && (
         <div>
           <button className={'flex justify-between items-center px-4 py-2 ' + styles.outlineDisableButton}>
             <p className={'pr-3 ' + styles.outlineDisableLabel}>{label}</p>

@@ -25,6 +25,7 @@ import topImage from 'public/images/classland-top-image.svg'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { NextSeo } from 'next-seo'
 
 const Classland = props => {
   // loading part ###########################
@@ -124,154 +125,167 @@ const Classland = props => {
   }
 
   return (
-    <div className={'flex flex-wrap justify-center'}>
-      {viewport === 'mobile' ? (
-        <div className={styles.m_container}>
-          <div className={globalStyles.container}>
-            <div className={styles.topSection}>
-              <div className={styles.m_topTitle}>{main?.title}</div>
-              <div className={styles.topDash} />
-            </div>
-            <div className={styles.m_topRightSection}>
-              <div className={styles.topRightLetImage}>
-                <Image src={topImage} alt="" width={200} height={231} className={styles.topImage} />
-              </div>
-              <div className={'absolute bottom-3 right-2'}>
-                <FaqButton onClick={executeScroll} viewport={viewport} />
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className={styles.container}>
-          <div className={globalStyles.container + ' mt-20'}>
-            <div className={styles.topSection}>
-              <div className={'grid grid-cols-12 gap-4'}>
-                <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
-                  <div className={styles.topTitle}>{main?.title}</div>
-                  <div className={styles.topDash} />
-                  <div className={globalStyles.tinyMCEClass}>
-                    <div
-                      className={styles.topDescription + ' tinymce-class'}
-                      dangerouslySetInnerHTML={{ __html: main?.text }}
-                    ></div>
-                  </div>
-                </div>
-                <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
-                  <div className={styles.topRightSection}>
-                    <div className={styles.topRightLetImage}>
-                      <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
-                    </div>
-                    <div>
-                      <div className={'z-10'}>
-                        <CircularMark viewport={viewport} />
-                      </div>
-                      <div className={'mt-6'}>
-                        <FaqButton onClick={executeScroll} viewport={viewport} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      <div className={'w-full px-4'}>
+    <>
+      <NextSeo
+        title="CrysDyaz&Co Classland"
+        description="Fisioterapia, entrenamiento personal y mucho más"
+        openGraph={{
+          type: 'website',
+          locale: 'es_ES',
+          url: 'https://crysdyazandco.com/classland',
+          site_name: 'CrysDyaz&Co',
+        }}
+      />
+
+      <div className={'flex flex-wrap justify-center'}>
         {viewport === 'mobile' ? (
-          <div className={styles.middleSection}>
-            <div className={styles.m_fullPass}>Full Pass</div>
-            {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
-            <div className={globalStyles.tinyMCEClass}>
-              <div
-                className={styles.topDescription + ' tinymce-class mt-4'}
-                dangerouslySetInnerHTML={{ __html: main?.text }}
-              ></div>
+          <div className={styles.m_container}>
+            <div className={globalStyles.container}>
+              <div className={styles.topSection}>
+                <div className={styles.m_topTitle}>{main?.title}</div>
+                <div className={styles.topDash} />
+              </div>
+              <div className={styles.m_topRightSection}>
+                <div className={styles.topRightLetImage}>
+                  <Image src={topImage} alt="" width={200} height={231} className={styles.topImage} />
+                </div>
+                <div className={'absolute bottom-3 right-2'}>
+                  <FaqButton onClick={executeScroll} viewport={viewport} />
+                </div>
+              </div>
             </div>
           </div>
         ) : (
-          <div className={styles.middleSection}>
-            <div className={styles.fullPass}>Full Pass</div>
-            {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
+          <div className={styles.container}>
+            <div className={globalStyles.container + ' mt-20'}>
+              <div className={styles.topSection}>
+                <div className={'grid grid-cols-12 gap-4'}>
+                  <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
+                    <div className={styles.topTitle}>{main?.title}</div>
+                    <div className={styles.topDash} />
+                    <div className={globalStyles.tinyMCEClass}>
+                      <div
+                        className={styles.topDescription + ' tinymce-class'}
+                        dangerouslySetInnerHTML={{ __html: main?.text }}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className={'col-span-12 md:col-span-8 sm:col-span-12 '}>
+                    <div className={styles.topRightSection}>
+                      <div className={styles.topRightLetImage}>
+                        <Image src={topImage} alt="" width={435} height={471} className={styles.topImage} />
+                      </div>
+                      <div>
+                        <div className={'z-10'}>
+                          <CircularMark viewport={viewport} />
+                        </div>
+                        <div className={'mt-6'}>
+                          <FaqButton onClick={executeScroll} viewport={viewport} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
-        <div className={styles.m_buttonGroup}>
+        <div className={'w-full px-4'}>
           {viewport === 'mobile' ? (
-            <select
-              name="select"
-              onChange={handleClickSelectFilter}
-              value={filterValue}
-              className={'flex justify-end items-center ' + styles.select}
-            >
-              {filter.map((item, index) => (
-                <option key={index} value={item.id} className={styles.option}>
-                  {item.value}
-                </option>
-              ))}
-            </select>
-          ) : (
-            filter.map((item, index) => (
-              <div className={'mr-3'} key={index}>
-                <FilterButton
-                  active={index === filterKey}
-                  filter={item}
-                  onClick={() => handleClickFilter(index)}
-                  key={index}
-                />
+            <div className={styles.middleSection}>
+              <div className={styles.m_fullPass}>Full Pass</div>
+              {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
+              <div className={globalStyles.tinyMCEClass}>
+                <div
+                  className={styles.topDescription + ' tinymce-class mt-4'}
+                  dangerouslySetInnerHTML={{ __html: main?.text }}
+                ></div>
               </div>
-            ))
+            </div>
+          ) : (
+            <div className={styles.middleSection}>
+              <div className={styles.fullPass}>Full Pass</div>
+              {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
+            </div>
+          )}
+          <div className={styles.m_buttonGroup}>
+            {viewport === 'mobile' ? (
+              <select
+                name="select"
+                onChange={handleClickSelectFilter}
+                value={filterValue}
+                className={'flex justify-end items-center ' + styles.select}
+              >
+                {filter.map((item, index) => (
+                  <option key={index} value={item.id} className={styles.option}>
+                    {item.value}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              filter.map((item, index) => (
+                <div className={'mr-3'} key={index}>
+                  <FilterButton
+                    active={index === filterKey}
+                    filter={item}
+                    onClick={() => handleClickFilter(index)}
+                    key={index}
+                  />
+                </div>
+              ))
+            )}
+          </div>
+          {viewport === 'mobile' ? (
+            <div className={styles.m_cardSection}>
+              {cardData.length !== 0 ? <MobileDoubleClasslandCarousel coTeam={cardData} /> : <></>}
+            </div>
+          ) : (
+            <div className={styles.cardSection}>
+              <div className={'grid grid-cols-12 gap-8'}>
+                {cardData?.map((card, index) =>
+                  card.visible ? (
+                    <div className={'col-span-12 flex md:col-span-6 lg:col-span-4 ' + styles.cardAlign} key={index}>
+                      <ClassCard data={card} key={index} />
+                    </div>
+                  ) : (
+                    <div></div>
+                  )
+                )}
+              </div>
+            </div>
+          )}
+          {viewport === 'mobile' ? (
+            <div>
+              <div className={'my-6 ' + styles.m_divider} />
+              <div className="mb-5">
+                <div ref={faqRef} className={'mb-4 ' + styles.m_faqString}>
+                  FAQ
+                </div>
+                {faqData?.map((data, index) => (
+                  <div style={{ padding: '7px 0px' }} key={index}>
+                    <Accordian title={data.name} description={data.description} viewport={viewport} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className={styles.divider} />
+              <div style={{ marginBottom: '100px' }}>
+                <div ref={faqRef} className={styles.faqString}>
+                  FAQ
+                </div>
+                {faqData?.map((data, index) => (
+                  <div style={{ padding: '7px 0px' }} key={index}>
+                    <Accordian title={data.name} description={data.description} viewport={viewport} />
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
         </div>
-        {viewport === 'mobile' ? (
-          <div className={styles.m_cardSection}>
-            {cardData.length !== 0 ? <MobileDoubleClasslandCarousel coTeam={cardData} /> : <></>}
-          </div>
-        ) : (
-          <div className={styles.cardSection}>
-            <div className={'grid grid-cols-12 gap-8'}>
-              {cardData?.map((card, index) =>
-                card.visible ? (
-                  <div className={'col-span-12 flex md:col-span-6 lg:col-span-4 ' + styles.cardAlign} key={index}>
-                    <ClassCard data={card} key={index} />
-                  </div>
-                ) : (
-                  <div></div>
-                )
-              )}
-            </div>
-          </div>
-        )}
-        {viewport === 'mobile' ? (
-          <div>
-            <div className={'my-6 ' + styles.m_divider} />
-            <div className="mb-5">
-              <div ref={faqRef} className={'mb-4 ' + styles.m_faqString}>
-                FAQ
-              </div>
-              {faqData?.map((data, index) => (
-                <div style={{ padding: '7px 0px' }} key={index}>
-                  <Accordian title={data.name} description={data.description} viewport={viewport} />
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div className={styles.divider} />
-            <div style={{ marginBottom: '100px' }}>
-              <div ref={faqRef} className={styles.faqString}>
-                FAQ
-              </div>
-              {faqData?.map((data, index) => (
-                <div style={{ padding: '7px 0px' }} key={index}>
-                  <Accordian title={data.name} description={data.description} viewport={viewport} />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
-    </div>
+    </>
   )
 }
 export default Classland

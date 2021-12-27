@@ -77,6 +77,8 @@ const Dashboard = props => {
     getWeekDaySessionsByDashboard,
     { data: weekDaySessionsData, loading: weekDaySessionsLoading, error: weekDaySessionsError },
   ] = useLazyQuery(graphql.queries.getWeekDaySessionsByDashboard)
+  const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
+  const [events, setEvents] = useState([])
   const [profilePercentage, setProfilePercentage] = useState(0)
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
@@ -290,13 +292,50 @@ const Dashboard = props => {
   useEffect(() => {
     if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
       const sessionArr = sessionData.getSessionsByDashboard
+      const _events = []
       const _markDate = []
       sessionArr.map(item => {
+        const _eventItem = {
+          id: item.id,
+          title: item.purchase.item_web_name,
+          start: item.start_time,
+          end: item.end_time,
+          backgroundColor: item.location.color,
+          textColor: '#ffffff',
+          label: item.location.name,
+          streaming: item.stream_event,
+        }
         _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
+        _events.push(_eventItem)
       })
+      setEvents(_events)
       setMarkDate(_markDate)
     }
   }, [sessionLoading, sessionData, sessionError])
+
+  useEffect(() => {
+    setAvailableEvent()
+    let classInterval = setInterval(() => {
+      setAvailableEvent
+    }, 10000)
+    return () => {
+      clearInterval(classInterval)
+    }
+  }, [events])
+
+  const setAvailableEvent = () => {
+    const currentTime = moment(new Date())
+    events.map(item => {
+      const startTime = moment(item.start)
+      const endTime = moment(item.end)
+      const diffTime = startTime.diff(endTime, 'minutes')
+      if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
+        setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
+      } else {
+        setStreamingEvent({ id: -1, start: '', toggle: false })
+      }
+    })
+  }
 
   useEffect(() => {
     if (!paymentStatusError && paymentStatusData && paymentStatusData.getPaymentStatusForDashboard) {
@@ -323,15 +362,22 @@ const Dashboard = props => {
     }
   }
 
-  const handleClickRmember = () => {
-    console.log('handleClickRmember')
+  const handleClickQuestionnaire = () => {
+    document.body.style.overflow = 'hidden'
     setShowQuestionnaire(true)
+  }
+  const handleDisableQuestionnarie = () => {
+    document.body.style.overflow = 'auto'
+    setShowQuestionnaire(false)
   }
 
   const handleClickRedirect = (type, id) => {
     switch (type) {
       case 'startClass':
-        router.push('/dashboard/live-streaming')
+        router.push({
+          pathname: '/dashboard/live-streaming',
+          query: { id: streamingEvent.id },
+        })
         break
       case 'view':
         router.push(id)
@@ -379,32 +425,33 @@ const Dashboard = props => {
   return (
     <div className={'w-full ' + styles.container}>
       <div className={'grid grid-cols-12'}>
-        <div className={'col-span-12 md:col-span-8 sm:col-span-12 py-16 px-9'}>
+        <div className={'col-span-12 lg:col-span-8 pb-16 lg:py-16 px-0 lg:px-9'}>
           <div className={'flex justify-between items-center'}>
-            <div>
-              <div className={styles.highBoldLabel}>Dashboard</div>
-              {message.length !== 0 ? <div className={'pt-2 ' + styles.today}>{today}</div> : <></>}
-            </div>
-            <div>
-              {message.length !== 0 ? (
-                <DashboardButton
-                  handleClick={() => handleClickRedirect('startClass')}
-                  label={'Comenzar clase'}
-                  type={'startClass'}
-                />
-              ) : (
-                <></>
-              )}
-            </div>
+            {viewport !== 'mobile' && (
+              <div>
+                <div className={styles.highBoldLabel}>Dashboard</div>
+                <div className={'pt-2 ' + styles.today}>{today}</div>
+              </div>
+            )}
+            {false && viewport !== 'mobile' && (
+              <DashboardButton
+                handleClick={() => handleClickRedirect('startClass')}
+                label={'Comenzar clase'}
+                type={'startClass'}
+                visiable={streamingEvent.toggle}
+              />
+            )}
           </div>
           <div className={'flex justify-between items-center mt-7 pl-9 pr-12 ' + styles.welcomeSection}>
-            <div className={'py-4 pr-4'}>
+            <div className={'py-4'}>
               <div className={styles.welcomeLabel}>Bienvenido</div>
               <div className={styles.welcomeLabel}>
                 {personalInfo.name}&nbsp;{personalInfo.lastname}
               </div>
+              {viewport !== 'mobile' && (
+                <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[4].text}</div>
+              )}
               {/* <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[status].text}</div> */}
-              <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[4].text}</div>
               {/* <div className={'pt-4'}>
                 {status !== 3 && status !== 4 ? (
                   <DashboardButton
@@ -416,42 +463,64 @@ const Dashboard = props => {
                   <></>
                 )}
               </div> */}
+              {viewport === 'mobile' && (
+                <div className="pt-4 flex justify-start items-center">
+                  <DashboardButton
+                    handleClick={() => handleClickRedirect('startClass')}
+                    label={'Comenzar clase'}
+                    type={'startClass'}
+                    visiable={streamingEvent.toggle}
+                  />
+                  <DashboardButton
+                    handleClick={() => handleClickRedirect('message')}
+                    label={''}
+                    type={'message'}
+                    count={message.length}
+                  />
+                </div>
+              )}
             </div>
-            <div style={{ minWidth: '220px' }}>
-              <Image src={welcomeIcon} alt="" width={220} height={254} />
-            </div>
+            {viewport !== 'mobile' && (
+              <div style={{ minWidth: '220px' }}>
+                <Image src={welcomeIcon} alt="" width={220} height={254} />
+              </div>
+            )}
           </div>
-          <div className={'flex justify-between items-center mt-7 px-9 pt-7 pb-1 ' + styles.welcomeSection}>
+          <div className={'flex justify-between items-center mt-7 px-9 pt-0 lg:pt-7 pb-1 ' + styles.welcomeSection}>
             <div className={'w-full'}>
-              <div className={styles.highBoldLabel}>Actividad mensual</div>
+              <div className={styles.highBoldLabel}>{viewport === 'mobile' ? 'Porcentajes' : 'Actividad mensual'}</div>
               <div>
                 <Chart
                   chart={chartOptions.chart}
                   options={chartOptions?.options}
                   series={chartOptions?.series}
-                  type="area"
+                  type={viewport === 'mobile' ? 'bar' : 'area'}
                   height="200px"
                 />
               </div>
             </div>
-            <div className={'px-2 '}>
-              <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
-              <DashboardButton
-                handleClick={() => handleClickRedirect('hour')}
-                label={(eventMins / 60).toString().replace('.', ',')}
-                type={'hour'}
-              />
-            </div>
+            {viewport !== 'mobile' && (
+              <div className={'px-2 '}>
+                <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
+                <DashboardButton
+                  handleClick={() => handleClickRedirect('hour')}
+                  label={(eventMins / 60).toString().replace('.', ',')}
+                  type={'hour'}
+                />
+              </div>
+            )}
           </div>
-          {message.length !== 0 ? (
-            <div className={'mt-7 px-9 py-7 flex justify-between ' + styles.welcomeSection}>
+          {false && message.length !== 0 ? (
+            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:my-0 px-9 py-7 flex justify-between ' + styles.rememberSection}>
               <div>
                 <div className={styles.remember}>Recuerda!!</div>
                 <div className={'pt-2 ' + styles.rememberDescription}>
                   Tienes un cuestionario pendiente de completar…
                 </div>
               </div>
-              <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
+              <div>
+                <DashboardButton handleClick={() => handleClickQuestionnaire()} label={'Hacerlo'} type={'viewRed'} />
+              </div>
             </div>
           ) : (
             <></>
@@ -559,34 +628,36 @@ const Dashboard = props => {
                   </div>
                 </div>
               </div>
-              <div className={'pt-20'}>
-                <div className={styles.highBoldLabel}>Mensajes</div>
-                {message.length !== 0 ? (
-                  <div>
-                    <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
-                    <div className={'pt-6'}>
-                      {message.map((item, index) => (
-                        <div className={'py-2 flex justify-center'} key={index}>
-                          <NewMessageBox
-                            handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
-                            name={item.from_name}
-                            content={item.subject}
-                          />
-                        </div>
-                      ))}
+              {viewport !== 'mobile' && (
+                <div className={'pt-20'}>
+                  <div className={styles.highBoldLabel}>Mensajes</div>
+                  {message.length !== 0 ? (
+                    <div>
+                      <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
+                      <div className={'pt-6'}>
+                        {message.map((item, index) => (
+                          <div className={'py-2 flex justify-center'} key={index}>
+                            <NewMessageBox
+                              handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
+                              name={item.from_name}
+                              content={item.subject}
+                            />
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className={'pt-7 text-center'}>
-                    <Image src={noPendingIcon} alt="" width={268} height={294} />
-                  </div>
-                )}
-              </div>
+                  ) : (
+                    <div className={'pt-7 text-center'}>
+                      <Image src={noPendingIcon} alt="" width={268} height={294} />
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
-      {showQuestionnaire && <Questionnaire onClick={() => setShowQuestionnaire(false)} />}
+      {showQuestionnaire && <Questionnaire onClick={() => handleDisableQuestionnarie()} viewport={viewport} />}
     </div>
   )
 }

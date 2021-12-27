@@ -1,0 +1,14 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  background-color: #f5f6fa;
+}
+.highBoldLabel {
+  color: #2a2c36;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+}

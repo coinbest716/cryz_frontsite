@@ -23,7 +23,7 @@ import styles from './LiveStreaming.module.scss'
 import LiveStreamingData from 'assets/data/LiveStreamingData.json'
 import router from 'next/router'
 
-const LiveStreaming = () => {
+const LiveStreaming = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -40,6 +40,8 @@ const LiveStreaming = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  // variable
+  const { viewport } = props
   const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
   const [event, setEvent] = useState({ id: -1, start: '' })
   const [material, setMaterial] = useState([])
@@ -52,7 +54,7 @@ const LiveStreaming = () => {
   }, [])
 
   return (
-    <div className={'h-fll pt-12 pl-14 pr-8 h-screen ' + styles.container}>
+    <div className={'pt-12 lg:pl-14 lg:pr-8 h-screen ' + styles.container}>
       <div className={'grid grid-cols-12 gap-6'}>
         <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-4'}>
           <div className={styles.title}>1 to 1 Streaming</div>

@@ -129,7 +129,7 @@ const OrderDetail = () => {
           <></>
         )} */}
         <div>
-          <CommonButton label={'Comprar bono'} bgColor={'#818E8E'} handleClickButton={() => handleBuyAnotherButton()} />
+          <CommonButton label={'Volver a comprar'} bgColor={'#818E8E'} handleClickButton={() => handleBuyAnotherButton()} />
         </div>
       </div>
       {/* table part */}

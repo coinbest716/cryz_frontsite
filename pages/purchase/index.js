@@ -39,6 +39,8 @@ import graphql from 'crysdiazGraphql'
 import { Auth } from 'aws-amplify'
 import moment from 'moment'
 import * as gtag from '../../utils/gtag'
+import Script from 'next/script'
+import Head from 'next/head'
 
 const Tabs = dynamic(
   import('react-tabs').then(mod => mod.Tabs),
@@ -658,195 +660,202 @@ const Purchase = props => {
   }
 
   return isAuthenticated ? (
-    <div className={'flex flex-wrap justify-center'}>
-      <div className={styles.container}>
-        <div className={globalStyles.container + ' pt-20'}>
-          <div className={'grid grid-cols-12 gap-4 '}>
-            <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-8'}>
-              {viewport === 'mobile' ? (
-                <div>
-                  {tabIndex === 0 ? (
-                    <>
-                      <div className={'pt-3.5 flex items-center justify-between'}>
-                        <button
-                          className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.activeTabIcon}
-                        >
-                          <Image src={listWhite} alt={''} width={16} height={16} />
-                        </button>
-                        <div className={styles.directionLine} />
-                        <button
-                          className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.inactiveTabIcon}
-                          onClick={() => onClickTab(1)}
-                        >
-                          <Image src={docGrey} alt={''} width={16} height={16} />
-                        </button>
-                      </div>
-                      <div className={styles.mobileTabTitle + ' pt-3.5'}>Datos</div>
-                      <div className={'pt-4'}>
-                        <div className={styles.formLabel}>Nombre</div>
-                        <input
-                          type="text"
-                          name="name"
-                          placeholder=""
-                          onChange={e => handleChangeInfo(e, 'name')}
-                          className={styles.formControl}
-                          value={personalInfo.name}
-                        />
-                      </div>
-                      <div className={'pt-4'}>
-                        <div className={styles.formLabel}>Apellidos</div>
-                        <input
-                          type="text"
-                          name="surname"
-                          placeholder=""
-                          onChange={e => handleChangeInfo(e, 'surname')}
-                          className={styles.formControl}
-                          value={personalInfo.surname}
-                        />
-                      </div>
-                      <button
-                        className={'flex justify-between items-center pt-4 ' + styles.finishButton}
-                        onClick={() => handleContinue(1)}
-                      >
-                        <p className={styles.finishButtonLabel}>Siguiente paso</p>
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <div className={'pt-3.5 flex items-center justify-between'}>
-                        <button
-                          className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.inactiveTabIcon}
-                          onClick={() => onClickTab(0)}
-                        >
-                          <Image src={listGrey} alt={''} width={16} height={16} />
-                        </button>
-                        <div className={styles.directionLine} />
-                        <button
-                          className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.activeTabIcon}
-                        >
-                          <Image src={docWhite} alt={''} width={16} height={16} />
-                        </button>
-                      </div>
-                      <div className={styles.mobileTabTitle + ' pt-3.5'}>¿Es para regalo?</div>
-                      <div className={'pt-5'}>
-                        <GiftCard handleSelectGiftCard={handleSelectGiftCard} value={isGiftCard} />
-                      </div>
-                      <div className={styles.mobileTabTitle + ' pt-3.5'}>Datos de pago</div>
-                      <div className={'flex justify-between pt-3.5'}>
-                        <div
-                          className={
-                            paymentType === 'card' ? styles.activeCard + ' pt-2' : styles.inactiveCard + ' pt-2'
-                          }
-                          onClick={() => setPaymentType('card')}
-                        >
-                          <span className={styles.mobileTabTitle}>Tarjeta bancaria</span>
-                          <Image src={logoRedSys} alt={''} width={78} height={38} />
-                        </div>
-                        <div
-                          className={paymentType === 'transfer' ? styles.activeCard : styles.inactiveCard}
-                          onClick={() => setPaymentType('transfer')}
-                        >
-                          <span className={styles.mobileTabTitle + ' text-center'}>
-                            Transferencia <br />
-                            bancaria
-                          </span>
-                        </div>
-                      </div>
-                      {paymentType === 'card' ? (
-                        <div>
-                          <div className={'pt-4'}>
-                            <div className={styles.formLabel}>Numero de tarjeta</div>
-                            <input
-                              type="tel"
-                              name="number"
-                              placeholder="Card Number"
-                              pattern="[\d| ]{16,22}"
-                              required
-                              onChange={handleInputChange}
-                              className={styles.formControl}
-                            />
-                          </div>
-                          <div className={'pt-4'}>
-                            <div className={styles.formLabel}>Nombre completo</div>
-                            <input
-                              type="text"
-                              name="name"
-                              placeholder="Name on Card"
-                              pattern="[\d| ]{16,22}"
-                              required
-                              onChange={handleInputChange}
-                              className={styles.formControl}
-                            />
-                          </div>
-                          <div className={'pt-4'}>
-                            <div className={styles.formLabel}>Fecha expiración</div>
-                            <input
-                              type="tel"
-                              name="expiry"
-                              placeholder="MM/YY"
-                              pattern="\d\d/\d\d"
-                              required
-                              onChange={handleInputChange}
-                              className={styles.formControl}
-                            />
-                          </div>
-                          <div className={'pt-4'}>
-                            <div className={styles.formLabel}>CVV CODE</div>
-                            <input
-                              type="tel"
-                              name="cvc"
-                              placeholder="CVC"
-                              pattern="\d{3,4}"
-                              required
-                              onChange={handleInputChange}
-                              className={styles.formControl}
-                            />
-                          </div>
+    <>
+      <Script src="https://js.stripe.com/v2/" />
+      <Script id="stripe-js" src="https://js.stripe.com/v3/" async />
+      <div className={'flex flex-wrap justify-center'}>
+        <div className={styles.container}>
+          <div className={globalStyles.container + ' pt-20'}>
+            <div className={'grid grid-cols-12 gap-4 '}>
+              <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-5 pb-8'}>
+                {viewport === 'mobile' ? (
+                  <div>
+                    {tabIndex === 0 ? (
+                      <>
+                        <div className={'pt-3.5 flex items-center justify-between'}>
                           <button
-                            className={'flex justify-between items-center pt-2 ' + styles.finishButton}
-                            onClick={handleFinishBilling}
+                            className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.activeTabIcon}
                           >
-                            <p className={styles.finishButtonLabel}>Finalizar</p>
+                            <Image src={listWhite} alt={''} width={16} height={16} />
+                          </button>
+                          <div className={styles.directionLine} />
+                          <button
+                            className={
+                              'w-8 h-8 rounded-full flex justify-center items-center ' + styles.inactiveTabIcon
+                            }
+                            onClick={() => onClickTab(1)}
+                          >
+                            <Image src={docGrey} alt={''} width={16} height={16} />
                           </button>
                         </div>
-                      ) : (
-                        <>
-                          <div className={'text-center mt-16 ' + styles.transferDetail}>
-                            Realiza tu pago directamente en nuestra cuenta bancaria. Por favor, usa el número del pedido
-                            como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en
-                            nuestra cuenta.
-                          </div>
+                        <div className={styles.mobileTabTitle + ' pt-3.5'}>Datos</div>
+                        <div className={'pt-4'}>
+                          <div className={styles.formLabel}>Nombre</div>
+                          <input
+                            type="text"
+                            name="name"
+                            placeholder=""
+                            onChange={e => handleChangeInfo(e, 'name')}
+                            className={styles.formControl}
+                            value={personalInfo.name}
+                          />
+                        </div>
+                        <div className={'pt-4'}>
+                          <div className={styles.formLabel}>Apellidos</div>
+                          <input
+                            type="text"
+                            name="surname"
+                            placeholder=""
+                            onChange={e => handleChangeInfo(e, 'surname')}
+                            className={styles.formControl}
+                            value={personalInfo.surname}
+                          />
+                        </div>
+                        <button
+                          className={'flex justify-between items-center pt-4 ' + styles.finishButton}
+                          onClick={() => handleContinue(1)}
+                        >
+                          <p className={styles.finishButtonLabel}>Siguiente paso</p>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <div className={'pt-3.5 flex items-center justify-between'}>
                           <button
-                            className={'flex justify-between items-center pt-4 ' + styles.finishButton}
-                            onClick={handleFinishBilling}
+                            className={
+                              'w-8 h-8 rounded-full flex justify-center items-center ' + styles.inactiveTabIcon
+                            }
+                            onClick={() => onClickTab(0)}
                           >
-                            <p className={styles.finishButtonLabel}>Finalizar</p>
+                            <Image src={listGrey} alt={''} width={16} height={16} />
                           </button>
-                        </>
-                      )}
-                    </>
-                  )}
-                </div>
-              ) : (
-                <div className={'pt-3.5'}>
-                  <Tabs
-                    selectedIndex={tabIndex}
-                    onSelect={index => setTabIndex(index)}
-                    className={styles.tabs}
-                    selectedTabClassName={styles.selectedTab}
-                  >
-                    <TabList className={styles.tabsList}>
-                      <Tab onClick={() => onClickTab(0)}>01 INFORMACIÓN</Tab>
-                      {/*<Tab onClick={() => onClickTab(1)}>02 DIRECCIONES FACTURACIÓN</Tab>*/}
-                      <Tab onClick={() => onClickTab(1)}>02 MÉTODO DE PAGO</Tab>
-                    </TabList>
-                    <TabPanel>
-                      <div className={'p-4 pt-16'}>
-                        <div className={'flex justify-between gap-8'}>
-                          <div className={'w-full'}>
-                            <div className={styles.tabTitle}>Información general</div>
-                            <div className={'w-full flex justify-between items-center pt-10'}>
-                              {/* <div className={'flex flex-wrap justify-start items-center'}>
+                          <div className={styles.directionLine} />
+                          <button
+                            className={'w-8 h-8 rounded-full flex justify-center items-center ' + styles.activeTabIcon}
+                          >
+                            <Image src={docWhite} alt={''} width={16} height={16} />
+                          </button>
+                        </div>
+                        <div className={styles.mobileTabTitle + ' pt-3.5'}>¿Es para regalo?</div>
+                        <div className={'pt-5'}>
+                          <GiftCard handleSelectGiftCard={handleSelectGiftCard} value={isGiftCard} />
+                        </div>
+                        <div className={styles.mobileTabTitle + ' pt-3.5'}>Datos de pago</div>
+                        <div className={'flex justify-between pt-3.5'}>
+                          <div
+                            className={
+                              paymentType === 'card' ? styles.activeCard + ' pt-2' : styles.inactiveCard + ' pt-2'
+                            }
+                            onClick={() => setPaymentType('card')}
+                          >
+                            <span className={styles.mobileTabTitle}>Tarjeta bancaria</span>
+                            <Image src={logoRedSys} alt={''} width={78} height={38} />
+                          </div>
+                          <div
+                            className={paymentType === 'transfer' ? styles.activeCard : styles.inactiveCard}
+                            onClick={() => setPaymentType('transfer')}
+                          >
+                            <span className={styles.mobileTabTitle + ' text-center'}>
+                              Transferencia <br />
+                              bancaria
+                            </span>
+                          </div>
+                        </div>
+                        {paymentType === 'card' ? (
+                          <div>
+                            <div className={'pt-4'}>
+                              <div className={styles.formLabel}>Numero de tarjeta</div>
+                              <input
+                                type="tel"
+                                name="number"
+                                placeholder="Card Number"
+                                pattern="[\d| ]{16,22}"
+                                required
+                                onChange={handleInputChange}
+                                className={styles.formControl}
+                              />
+                            </div>
+                            <div className={'pt-4'}>
+                              <div className={styles.formLabel}>Nombre completo</div>
+                              <input
+                                type="text"
+                                name="name"
+                                placeholder="Name on Card"
+                                pattern="[\d| ]{16,22}"
+                                required
+                                onChange={handleInputChange}
+                                className={styles.formControl}
+                              />
+                            </div>
+                            <div className={'pt-4'}>
+                              <div className={styles.formLabel}>Fecha expiración</div>
+                              <input
+                                type="tel"
+                                name="expiry"
+                                placeholder="MM/YY"
+                                pattern="\d\d/\d\d"
+                                required
+                                onChange={handleInputChange}
+                                className={styles.formControl}
+                              />
+                            </div>
+                            <div className={'pt-4'}>
+                              <div className={styles.formLabel}>CVV CODE</div>
+                              <input
+                                type="tel"
+                                name="cvc"
+                                placeholder="CVC"
+                                pattern="\d{3,4}"
+                                required
+                                onChange={handleInputChange}
+                                className={styles.formControl}
+                              />
+                            </div>
+                            <button
+                              className={'flex justify-between items-center pt-2 ' + styles.finishButton}
+                              onClick={handleFinishBilling}
+                            >
+                              <p className={styles.finishButtonLabel}>Finalizar</p>
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <div className={'text-center mt-16 ' + styles.transferDetail}>
+                              Realiza tu pago directamente en nuestra cuenta bancaria. Por favor, usa el número del
+                              pedido como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el
+                              importe en nuestra cuenta.
+                            </div>
+                            <button
+                              className={'flex justify-between items-center pt-4 ' + styles.finishButton}
+                              onClick={handleFinishBilling}
+                            >
+                              <p className={styles.finishButtonLabel}>Finalizar</p>
+                            </button>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <div className={'pt-3.5'}>
+                    <Tabs
+                      selectedIndex={tabIndex}
+                      onSelect={index => setTabIndex(index)}
+                      className={styles.tabs}
+                      selectedTabClassName={styles.selectedTab}
+                    >
+                      <TabList className={styles.tabsList}>
+                        <Tab onClick={() => onClickTab(0)}>01 INFORMACIÓN</Tab>
+                        {/*<Tab onClick={() => onClickTab(1)}>02 DIRECCIONES FACTURACIÓN</Tab>*/}
+                        <Tab onClick={() => onClickTab(1)}>02 MÉTODO DE PAGO</Tab>
+                      </TabList>
+                      <TabPanel>
+                        <div className={'p-4 pt-16'}>
+                          <div className={'flex justify-between gap-8'}>
+                            <div className={'w-full'}>
+                              <div className={styles.tabTitle}>Información general</div>
+                              <div className={'w-full flex justify-between items-center pt-10'}>
+                                {/* <div className={'flex flex-wrap justify-start items-center'}>
                             <PurchaseAvatar
                               avatar={personalInfo.avatar || ''}
                               handleChangeAvatar={handleChangeAvatar}
@@ -868,20 +877,20 @@ const Purchase = props => {
                               <CommonButton label={'Aprobar cambios'} handleClick={handleSave} type={'fill'} />
                             </div>
                           </div>*/}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className={'flex justify-between gap-8 pt-16'}>
-                          <div className={'w-3/5'}>
-                            <CommonText
-                              handleChange={e => handleChangeInfo(e, 'name')}
-                              label={'Nombre'}
-                              placeholder={''}
-                              type={'text'}
-                              value={personalInfo.name}
-                            />
-                          </div>
-                          {/*<div className={'w-2/5'}>
+                          <div className={'flex justify-between gap-8 pt-16'}>
+                            <div className={'w-3/5'}>
+                              <CommonText
+                                handleChange={e => handleChangeInfo(e, 'name')}
+                                label={'Nombre'}
+                                placeholder={''}
+                                type={'text'}
+                                value={personalInfo.name}
+                              />
+                            </div>
+                            {/*<div className={'w-2/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'password')}
                           label={'Contraseña'}
@@ -890,18 +899,18 @@ const Purchase = props => {
                           value={personalInfo.password}
                         />
                       </div>*/}
-                        </div>
-                        <div className={'flex justify-between gap-8 pt-4'}>
-                          <div className={'w-3/5'}>
-                            <CommonText
-                              handleChange={e => handleChangeInfo(e, 'surname')}
-                              label={'Apellidos'}
-                              placeholder={''}
-                              type={'text'}
-                              value={personalInfo.surname}
-                            />
                           </div>
-                          {/*<div className={'w-2/5'}>
+                          <div className={'flex justify-between gap-8 pt-4'}>
+                            <div className={'w-3/5'}>
+                              <CommonText
+                                handleChange={e => handleChangeInfo(e, 'surname')}
+                                label={'Apellidos'}
+                                placeholder={''}
+                                type={'text'}
+                                value={personalInfo.surname}
+                              />
+                            </div>
+                            {/*<div className={'w-2/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'meet')}
                           label={'Como nos conoció…'}
@@ -910,8 +919,8 @@ const Purchase = props => {
                           value={personalInfo.meet}
                         />
                       </div>*/}
-                        </div>
-                        {/* <div className={'flex justify-between gap-8 pt-4'}>
+                          </div>
+                          {/* <div className={'flex justify-between gap-8 pt-4'}>
                        <div className={'w-3/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'email')}
@@ -932,8 +941,8 @@ const Purchase = props => {
                         />
                       </div>
                     </div> */}
-                        <div className={'flex justify-between gap-8 pt-4'}>
-                          {/*<div className={'w-3/5'}>
+                          <div className={'flex justify-between gap-8 pt-4'}>
+                            {/*<div className={'w-3/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'country')}
                           label={'País'}
@@ -942,7 +951,7 @@ const Purchase = props => {
                           value={personalInfo.country}
                         />
                       </div>*/}
-                          {/* <div className={'w-2/5'}>
+                            {/* <div className={'w-2/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'emergencyPhone')}
                           label={'Teléfono emergencia'}
@@ -951,9 +960,9 @@ const Purchase = props => {
                           value={personalInfo.emergencyPhone}
                         />
                       </div>*/}
-                        </div>
-                        <div className={'flex justify-between gap-8 pt-4'}>
-                          {/*<div className={'w-3/5'}>
+                          </div>
+                          <div className={'flex justify-between gap-8 pt-4'}>
+                            {/*<div className={'w-3/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'address')}
                           label={'Dirección'}
@@ -962,7 +971,7 @@ const Purchase = props => {
                           value={personalInfo.address}
                         />
                       </div>*/}
-                          {/*<div className={'w-2/5'}>
+                            {/*<div className={'w-2/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'code')}
                           label={'DNI'}
@@ -971,9 +980,9 @@ const Purchase = props => {
                           value={personalInfo.code}
                         />
                       </div>*/}
-                        </div>
-                        <div className={'flex justify-between gap-8 pt-4'}>
-                          {/*<div className={'w-3/5'}>
+                          </div>
+                          <div className={'flex justify-between gap-8 pt-4'}>
+                            {/*<div className={'w-3/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'town')}
                           label={'Provincia'}
@@ -982,7 +991,7 @@ const Purchase = props => {
                           value={personalInfo.town}
                         />
                       </div>*/}
-                          {/*<div className={'w-2/5'}>
+                            {/*<div className={'w-2/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'gender')}
                           label={'Sexo'}
@@ -991,9 +1000,9 @@ const Purchase = props => {
                           value={personalInfo.gender}
                         />
                       </div>*/}
-                        </div>
-                        <div className={'flex justify-between gap-8 pt-4'}>
-                          {/*<div className={'w-3/5'}>
+                          </div>
+                          <div className={'flex justify-between gap-8 pt-4'}>
+                            {/*<div className={'w-3/5'}>
                         <CommonText
                           handleChange={e => handleChangeInfo(e, 'birthday')}
                           label={'Fecha de nacimiento'}
@@ -1002,65 +1011,66 @@ const Purchase = props => {
                           value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
                         />
                       </div>*/}
-                          <div className={'w-2/5'}></div>
+                            <div className={'w-2/5'}></div>
+                          </div>
+                          <div className={'w-full mt-20 ' + styles.divider} />
+                          <div className={'pt-24 flex justify-end'}>
+                            <CommonButton label={'CONTINUAR'} handleClick={() => handleContinue(1)} type={'continue'} />
+                          </div>
                         </div>
-                        <div className={'w-full mt-20 ' + styles.divider} />
-                        <div className={'pt-24 flex justify-end'}>
-                          <CommonButton label={'CONTINUAR'} handleClick={() => handleContinue(1)} type={'continue'} />
-                        </div>
-                      </div>
-                    </TabPanel>
+                      </TabPanel>
 
-                    <TabPanel>
-                      <div className={'p-4 pt-16'}>
-                        <div className={styles.tabTitle}>¿Es para regalo?</div>
-                        <div className={'pt-5'}>
-                          <GiftCard handleSelectGiftCard={handleSelectGiftCard} value={isGiftCard} />
+                      <TabPanel>
+                        <div className={'p-4 pt-16'}>
+                          <div className={styles.tabTitle}>¿Es para regalo?</div>
+                          <div className={'pt-5'}>
+                            <GiftCard handleSelectGiftCard={handleSelectGiftCard} value={isGiftCard} />
+                          </div>
                         </div>
-                      </div>
 
-                      <div className={'p-4 pt-16'}>
-                        <div className={styles.tabTitle}>Método de pago</div>
-                        <div className={'pt-9'}>
-                          <Credit
-                            handleChangePaymentType={handleChangePaymentType}
-                            value={paymentType}
-                            handleChangeCardData={handleChangeCardData}
-                            redsys={redsys}
-                          />
+                        <div className={'p-4 pt-16'}>
+                          <div className={styles.tabTitle}>Método de pago</div>
+                          <div className={'pt-9'}>
+                            <Credit
+                              handleChangePaymentType={handleChangePaymentType}
+                              value={paymentType}
+                              handleChangeCardData={handleChangeCardData}
+                              redsys={redsys}
+                            />
+                          </div>
+                          <div className={'pt-5'}>
+                            <Transfer handleChangePaymentType={handleChangePaymentType} value={paymentType} />
+                          </div>
                         </div>
-                        <div className={'pt-5'}>
-                          <Transfer handleChangePaymentType={handleChangePaymentType} value={paymentType} />
+                        <div className={'pt-24 flex justify-between items-center'}>
+                          <div>
+                            <PreviousButton
+                              handleChangePrevious={() => handleContinue(1)}
+                              label={'Volver a Direcciones facturación'}
+                            />
+                          </div>
+                          <CommonButton label={'TERMINAR PEDIDO'} handleClick={handleFinishBilling} type={'continue'} />
                         </div>
-                      </div>
-                      <div className={'pt-24 flex justify-between items-center'}>
-                        <div>
-                          <PreviousButton
-                            handleChangePrevious={() => handleContinue(1)}
-                            label={'Volver a Direcciones facturación'}
-                          />
-                        </div>
-                        <CommonButton label={'TERMINAR PEDIDO'} handleClick={handleFinishBilling} type={'continue'} />
-                      </div>
-                    </TabPanel>
-                  </Tabs>
-                </div>
-              )}
-            </div>
-            {/* <div className={'col-span-12 md:col-span-3 sm:col-span-12'}> */}
-            {/* <ShoppingCart shoppingInfo={shoppingInfo} docData={selectedDoc} handleChangeFrame={() => {}} /> */}
-            {/* <ShoppingCart
+                      </TabPanel>
+                    </Tabs>
+                  </div>
+                )}
+              </div>
+              {/* <div className={'col-span-12 md:col-span-3 sm:col-span-12'}> */}
+              {/* <ShoppingCart shoppingInfo={shoppingInfo} docData={selectedDoc} handleChangeFrame={() => {}} /> */}
+              {/* <ShoppingCart
                 data={cartData}
                 handleRemoveCart={handleRemoveCart}
                 handleAcceptDiscount={handleAcceptDiscount}
                 tabIndex={tabIndex}
                 docData={selectedDoc}
               />*/}
-            {/* </div> */}
+              {/* </div> */}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   ) : (
     <></>
   )

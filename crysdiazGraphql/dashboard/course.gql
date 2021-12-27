@@ -1,0 +1,34 @@
+query getCoursesDashboard {
+    getCoursesDashboard {
+        id
+        name
+        description
+    }
+}
+
+query getCourseDashboard($getCourseId: Int!) {
+    getCourseDashboard(id: $getCourseId) {
+        id
+        name
+        description
+        lectures {
+            id
+            name
+            description
+            video
+            order
+        }
+    }
+
+}
+
+query GetCourseLectureDashboard($courseId: Int!, $lectureId: Int!) {
+    getCourseLectureDashboard(courseId: $courseId, lectureId: $lectureId) {
+        id
+        name
+        description
+        video
+        order
+    }
+}
+

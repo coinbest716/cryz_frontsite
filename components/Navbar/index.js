@@ -101,6 +101,12 @@ const Navbar = () => {
       iconBlack: plansBlackIcon,
       title: 'Planes online',
     },
+    {
+      href: '/dashboard/cursos',
+      icon: plansIcon,
+      iconBlack: plansBlackIcon,
+      title: 'Cursos',
+    },
   ]
 
   const handleClickLogout = async () => {

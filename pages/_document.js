@@ -9,13 +9,11 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <Fragment>
-            <script type="text/javascript" src="https://cdn.iubenda.com/cons/iubenda_cons.js" async />
-
-              {/* Global Site Tag (gtag.js) - Google Analytics */}
-              <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
-              <script
-                  dangerouslySetInnerHTML={{
-                      __html: `
+            {/* Global Site Tag (gtag.js) - Google Analytics */}
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -23,9 +21,8 @@ class MyDocument extends Document {
               page_path: window.location.pathname,
             });
           `,
-                  }}
-              />
-
+              }}
+            />
           </Fragment>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital@1&display=swap" rel="stylesheet" />
