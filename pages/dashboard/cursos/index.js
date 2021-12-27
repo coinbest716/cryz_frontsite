@@ -4,6 +4,7 @@ import Link from 'next/link'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
+import { useDispatch } from 'react-redux'
 // next components
 import Image from 'next/image'
 import router from 'next/router'
@@ -28,6 +29,21 @@ import moment from 'moment'
 
 const Cursos = () => {
   const [courses, setCourses] = useState([])
+  // loading part ###########################
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted, dispatch])
+  // loading part end #######################
 
   const [getCourses, { data: coursesData, loading: coursesLoading, error: coursesError }] = useLazyQuery(
     graphql.queries.getCoursesDashboard
@@ -110,7 +126,7 @@ export default Cursos
 
 Cursos.getLayout = function getLayout(page) {
   return page.props.viewport === 'mobile' ? (
-    <MobileDashboardLayout title="Compras">{page}</MobileDashboardLayout>
+    <MobileDashboardLayout title="Cursos">{page}</MobileDashboardLayout>
   ) : (
     <SecondaryLayout>{page}</SecondaryLayout>
   )

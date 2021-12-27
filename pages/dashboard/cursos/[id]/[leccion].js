@@ -42,6 +42,22 @@ const Lecture = () => {
   const { id } = router.query
   const { leccion } = router.query
 
+  // loading part ###########################
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted, dispatch])
+  // loading part end #######################
+
   const [getLecture, { data: lectureData, loading: lectureLoading, error: lectureError }] = useLazyQuery(
     graphql.queries.GetCourseLectureDashboard
   )

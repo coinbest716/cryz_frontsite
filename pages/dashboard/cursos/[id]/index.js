@@ -43,6 +43,22 @@ const Curso = () => {
   const router = useRouter()
   const { id } = router.query
 
+  // loading part ###########################
+  const dispatch = useDispatch()
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  useEffect(() => {
+    if (isMounted === true) {
+      dispatch({ type: 'set', isLoading: false })
+    }
+  }, [isMounted, dispatch])
+  // loading part end #######################
+
   const [getCourse, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
     graphql.queries.getCourseDashboard
   )
