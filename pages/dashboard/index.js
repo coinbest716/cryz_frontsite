@@ -469,7 +469,8 @@ const Dashboard = props => {
             )}
           </div>
           {message.length !== 0 ? (
-            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:my-0 px-9 py-7 flex justify-between ' + styles.rememberSection}>
+            {
+              /* <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:my-0 px-9 py-7 flex justify-between ' + styles.rememberSection}>
               <div>
                 <div className={styles.remember}>Recuerda!!</div>
                 <div className={'pt-2 ' + styles.rememberDescription}>
@@ -479,7 +480,8 @@ const Dashboard = props => {
               <div>
                 <DashboardButton handleClick={() => handleClickQuestionnaire()} label={'Hacerlo'} type={'viewRed'} />
               </div>
-            </div>
+            </div> */
+            }
           ) : (
             <></>
           )}
