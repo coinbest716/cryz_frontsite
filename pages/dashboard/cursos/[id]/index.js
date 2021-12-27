@@ -120,7 +120,7 @@ const Curso = () => {
                         </td>
                         <td>
                           <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                            <div className={'inline-grid'}>{lecture.description}</div>
+                            <div className={'inline-grid'} dangerouslySetInnerHTML={{ __html: lecture?.description }} />
                           </div>
                         </td>
                         <td className={'h-full relative'}>
