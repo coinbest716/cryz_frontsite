@@ -11,9 +11,9 @@ import Image from 'next/image'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 
 // styles
-import styles from './billAddress.module.scss'
+import styles from './MobileGraphicProfile.module.scss'
 
-const BillAddress = () => {
+const MobileGraphicProfile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -33,10 +33,6 @@ const BillAddress = () => {
   // variables
   const router = useRouter()
 
-  return <div>Bill Address</div>
+  return <div>MobileGraphicProfile</div>
 }
-export default BillAddress
-
-BillAddress.getLayout = function getLayout(page) {
-  return <MobileDashboardLayout title="Perfil">{page}</MobileDashboardLayout>
-}
+export default MobileGraphicProfile

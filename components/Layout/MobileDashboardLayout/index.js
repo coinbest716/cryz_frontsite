@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 
 // third party components
 import ReactLoading from 'react-loading'
@@ -12,11 +13,33 @@ import MobileDashboardFooter from 'components/Footer/MobileDashboardFooter'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 
 const MobileDashboardLayout = ({ title, children }) => {
+  const router = useRouter()
+  const [showHeader, setShowHeader] = useState(true)
   const isLoading = useSelector(state => state.isLoading)
+
+  useEffect(() => {
+    showHeaderBar()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.asPath])
+
+  useEffect(() => {
+    showHeaderBar()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const showHeaderBar = () => {
+    const currentState = router.asPath.split('#')
+    if (currentState[1] === 'health' || currentState[1] === 'graphic' || currentState[1] === 'personal') {
+      setShowHeader(false)
+    } else {
+      setShowHeader(true)
+    }
+  }
+
   return (
     <>
-      <MobileDashboardHeader title={title} />
-      <main style={{ marginTop: '56px' }}>{children}</main>
+      {showHeader ? <MobileDashboardHeader title={title} /> : <></>}
+      {showHeader ? <main style={{ marginTop: '56px' }}>{children}</main> : <main>{children}</main>}
       <MobileDashboardFooter />
       {isLoading && (
         <div className={globalStyles.loadingArea}>
