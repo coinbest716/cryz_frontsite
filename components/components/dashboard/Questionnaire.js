@@ -76,7 +76,7 @@ const Questionnaire = props => {
           </div>
         </PerfectScrollbar>
       </div>
-      <div className="flex justify-center mt-24 mr-16">
+      <div className="flex justify-center mt-20 lg:mt-24 lg:mr-16">
         <button className={'flex justify-center items-center ' + styles.outlineButton} onClick={() => {}}>
           ENVIAR
         </button>

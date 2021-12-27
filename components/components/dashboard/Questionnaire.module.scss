@@ -71,7 +71,12 @@
 }
 
 .scrollbarArea {
-  height: calc(100vh - 400px);
+  @media (max-width: 1023px) {
+    height: calc(100vh - 340px);
+  }
+  @media (min-width: 1024px) {
+    height: calc(100vh - 400px);
+  }
 }
 
 .subTitle {
@@ -119,11 +124,18 @@
   box-sizing: border-box;
   height: 54px;
   width: 230px;
-  border: 2px solid #ffffff;
-  border-radius: 3px;
+  @media (max-width: 1023px) {
+    border: 2px solid #818e8e;
+    color: #818e8e;
+    border-radius: 34px;
+  }
+  @media (min-width: 1024px) {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    border-radius: 3px;
+  }
   box-shadow: 0 2px 7px 0 rgba(120, 137, 149, 0.25);
 
-  color: #ffffff;
   font-family: Montserrat;
   font-size: 14px;
   font-weight: 600;
