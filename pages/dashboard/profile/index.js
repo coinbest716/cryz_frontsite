@@ -82,7 +82,7 @@ const Profile = props => {
 
   const [email, setEmail] = useState(localStorage.getItem('email'))
   const [profilePercentage, setProfilePercentage] = useState(0)
-  const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false })
+  const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false, main: true })
   const [uploadFile, setUploadFile] = useState(null)
   const date = new Date()
   const currentMonthIndex = date.getMonth()
@@ -222,10 +222,18 @@ const Profile = props => {
 
   useEffect(() => {
     const currentState = router.asPath.split('#')
-    if (currentState[1] === 'health') {
-      setActiveTab({ personal: false, health: true, graphic: false })
+    if (viewport === 'mobile') {
+      if (currentState[1] === 'health') {
+        setActiveTab({ personal: false, health: true, graphic: false, main: false })
+      } else {
+        router.push('/dashboard/profile#main', undefined, { shallow: true })
+      }
     } else {
-      router.push('/dashboard/profile#personal', undefined, { shallow: true })
+      if (currentState[1] === 'health') {
+        setActiveTab({ personal: false, health: true, graphic: false, main: true })
+      } else {
+        router.push('/dashboard/profile#personal', undefined, { shallow: true })
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -493,8 +501,14 @@ const Profile = props => {
   }
 
   const handleClickProfileItem = path => {
-    router.push('/dashboard/profile/' + path)
+    if (path === 'personal' || path === 'graphic') {
+      setActiveTab({ [path]: true })
+      router.push(`/dashboard/profile#${path}`, undefined, { shallow: true })
+    } else {
+      router.push('/dashboard/' + path)
+    }
   }
+
   const handleClickMainButton = async type => {
     if (type === 'logout') {
       dispatch({ type: 'set', isLoading: true })

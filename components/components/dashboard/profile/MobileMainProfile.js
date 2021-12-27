@@ -27,25 +27,25 @@ const MobileMainProfile = props => {
         image={ProfileIcon}
         title="Datos"
         index={0}
-        handleClickProfileItem={() => handleClickProfileItem('personal-data')}
+        handleClickProfileItem={() => handleClickProfileItem('personal')}
       />
       <ProfileItem
         image={ProfileAntro}
         title="Antropometría"
         index={1}
-        handleClickProfileItem={() => handleClickProfileItem('health')}
+        handleClickProfileItem={() => handleClickProfileItem('graphic')}
       />
       <ProfileItem
         image={ProfileCompras}
         title="Compras"
         index={2}
-        handleClickProfileItem={() => handleClickProfileItem('compras')}
+        handleClickProfileItem={() => handleClickProfileItem('shopping')}
       />
       <ProfileItem
         image={ProfileBill}
         title="Direcciones facturación"
         index={3}
-        handleClickProfileItem={() => handleClickProfileItem('bill-address')}
+        handleClickProfileItem={() => handleClickProfileItem('billing')}
       />
       <div className="mt-16">
         <ProfileMainButton label="LogOut" onClick={() => handleClickMainButton('logout')} type="logout" />
