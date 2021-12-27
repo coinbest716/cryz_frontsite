@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="19px" viewBox="0 0 18 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Chat</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="0,0" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Chat" transform="translate(0.000000, 1.000000)" stroke="#ffffff" stroke-width="1.20000005">
+            <g id="8">
+                <g id="Group" transform="translate(5.280008, 7.419998)">
+                    <line x1="-1.00135803e-05" y1="0" x2="4.77998972" y2="0" id="Vector" transform="translate(2.389990, 0.500000) scale(1, -1) rotate(-180.000000) translate(-2.389990, -0.500000) "></line>
+                    <line x1="1.99999952" y1="3.29000092" x2="7.28999949" y2="3.29000092" id="Vector" transform="translate(4.645000, 3.790001) scale(1, -1) rotate(-180.000000) translate(-4.645000, -3.790001) "></line>
+                </g>
+                <path d="M13.6200142,1.98999822 C10.7900143,0.0799982548 6.97001457,0.139998078 4.1900146,2.10999811 C0.350014687,4.82999814 -0.409985423,9.86999822 1.91001451,13.5099983 L0.830014527,16.1899986 C0.580014527,16.7999986 1.19001448,17.4099982 1.81001449,17.1699982 L4.49001431,16.0899982 C7.73001432,18.1599982 12.0900147,17.7799976 14.9300146,14.9399977 C18.6000147,11.2699976 18.1600142,5.04999816 13.6200142,1.98999822 Z" id="Vector" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>
