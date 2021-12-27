@@ -94,10 +94,12 @@ const Lecture = () => {
           {/* year select part */}
           <div className={styles.yearArea}></div>
           {/* table part */}
-          <div className={'inline-grid'} dangerouslySetInnerHTML={{ __html: lecture?.description }} />
+          <div className={globalStyles.textocurso} dangerouslySetInnerHTML={{ __html: lecture?.description }} />
         </div>
       </div>
-      <ReactPlayer url={lecture?.video} width="700px" controls={true} />
+      <div className={globalStyles.videocurso}>
+        <ReactPlayer url={lecture?.video} width="100%" controls={true} />
+      </div>
     </div>
   )
 }
