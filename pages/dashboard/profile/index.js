@@ -226,12 +226,7 @@ const Profile = props => {
   useEffect(() => {
     const currentState = router.asPath.split('#')
     if (viewport === 'mobile') {
-      if (currentState[1] === 'health') {
-        setActiveTab({ personal: false, health: true, graphic: false, main: false })
-      } else {
-        setActiveTab({ personal: false, health: false, graphic: false, main: true })
-        router.push('/dashboard/profile#main', undefined, { shallow: true })
-      }
+      setActivePage()
     } else {
       if (currentState[1] === 'health') {
         setActiveTab({ personal: false, health: true, graphic: false, main: true })
@@ -243,6 +238,11 @@ const Profile = props => {
   }, [])
 
   useEffect(() => {
+    setActivePage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.asPath])
+
+  const setActivePage = () => {
     const currentState = router.asPath.split('#')
     if (currentState[1] === 'health') {
       setActiveTab({ personal: false, health: true, graphic: false, main: false })
@@ -253,8 +253,7 @@ const Profile = props => {
     } else if (currentState[1] === 'main') {
       setActiveTab({ personal: false, health: false, graphic: false, main: true })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.asPath])
+  }
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -579,9 +578,23 @@ const Profile = props => {
               handleChangeAvatar={handleChangeAvatar}
             />
           )}
-          {activeTab.personal && <MobilePersonalProfile />}
+          {activeTab.personal && (
+            <MobilePersonalProfile
+              handleSavePersonal={handleSavePersonal}
+              personalInfo={personalInfo}
+              shippingInfo={shippingInfo}
+              handleChangePersonal={handleChangePersonal}
+              handleChangeShipping={handleChangeShipping}
+            />
+          )}
           {activeTab.health && <MobileHealthProfile />}
-          {activeTab.graphic && <MobileGraphicProfile />}
+          {activeTab.graphic && (
+            <MobileGraphicProfile
+              graphicInfo={graphicInfo}
+              monthData={monthData}
+              currentMonthIndex={currentMonthIndex}
+            />
+          )}
         </>
       ) : (
         <div className={'relative pt-10 pb-24 px-24 ' + styles.container}>
