@@ -323,8 +323,7 @@ const Dashboard = props => {
     }
   }
 
-  const handleClickRmember = () => {
-    console.log('handleClickRmember')
+  const handleClickQuestionnaire = () => {
     setShowQuestionnaire(true)
   }
 
@@ -464,7 +463,7 @@ const Dashboard = props => {
                   Tienes un cuestionario pendiente de completar…
                 </div>
               </div>
-              <DashboardButton handleClick={handleClickRmember} label={'Hacerlo'} type={'viewRed'} />
+              <DashboardButton handleClick={() => handleClickQuestionnaire()} label={'Hacerlo'} type={'viewRed'} />
             </div>
           ) : (
             <></>
@@ -599,7 +598,7 @@ const Dashboard = props => {
           </div>
         </div>
       </div>
-      {showQuestionnaire && <Questionnaire onClick={() => setShowQuestionnaire(false)} />}
+      {showQuestionnaire && <Questionnaire onClick={() => setShowQuestionnaire(false)} viewport={viewport} />}
     </div>
   )
 }
