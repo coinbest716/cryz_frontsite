@@ -401,7 +401,7 @@ const Dashboard = props => {
             )}
           </div>
           <div className={'flex justify-between items-center mt-7 pl-9 pr-12 ' + styles.welcomeSection}>
-            <div className={'py-4 pr-4'}>
+            <div className={'py-4'}>
               <div className={styles.welcomeLabel}>Bienvenido</div>
               <div className={styles.welcomeLabel}>
                 {personalInfo.name}&nbsp;{personalInfo.lastname}
@@ -422,12 +422,18 @@ const Dashboard = props => {
                 )}
               </div> */}
               {viewport === 'mobile' && (
-                <div className="pt-4">
+                <div className="pt-4 flex justify-start items-center">
                   <DashboardButton
                     handleClick={() => handleClickRedirect('startClass')}
                     label={'Comenzar clase'}
                     type={'startClass'}
                     visible={message.length !== 0 ? true : false}
+                  />
+                  <DashboardButton
+                    handleClick={() => handleClickRedirect('message')}
+                    label={''}
+                    type={'message'}
+                    count={message.length}
                   />
                 </div>
               )}
@@ -576,29 +582,31 @@ const Dashboard = props => {
                   </div>
                 </div>
               </div>
-              <div className={'pt-20'}>
-                <div className={styles.highBoldLabel}>Mensajes</div>
-                {message.length !== 0 ? (
-                  <div>
-                    <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
-                    <div className={'pt-6'}>
-                      {message.map((item, index) => (
-                        <div className={'py-2 flex justify-center'} key={index}>
-                          <NewMessageBox
-                            handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
-                            name={item.from_name}
-                            content={item.subject}
-                          />
-                        </div>
-                      ))}
+              {viewport !== 'mobile' && (
+                <div className={'pt-20'}>
+                  <div className={styles.highBoldLabel}>Mensajes</div>
+                  {message.length !== 0 ? (
+                    <div>
+                      <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
+                      <div className={'pt-6'}>
+                        {message.map((item, index) => (
+                          <div className={'py-2 flex justify-center'} key={index}>
+                            <NewMessageBox
+                              handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
+                              name={item.from_name}
+                              content={item.subject}
+                            />
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className={'pt-7 text-center'}>
-                    <Image src={noPendingIcon} alt="" width={268} height={294} />
-                  </div>
-                )}
-              </div>
+                  ) : (
+                    <div className={'pt-7 text-center'}>
+                      <Image src={noPendingIcon} alt="" width={268} height={294} />
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
