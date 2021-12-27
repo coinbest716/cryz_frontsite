@@ -391,7 +391,7 @@ const Dashboard = props => {
                 <div className={'pt-2 ' + styles.today}>{today}</div>
               </div>
             )}
-            {viewport !== 'mobile' && (
+            {false && viewport !== 'mobile' && (
               <DashboardButton
                 handleClick={() => handleClickRedirect('startClass')}
                 label={'Comenzar clase'}
