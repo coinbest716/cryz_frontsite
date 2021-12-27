@@ -1,8 +1,13 @@
 @import 'styles/variable.module.scss';
 
 .container {
-  background-color: #f5f6fa;
   height: 100%;
+  @media (max-width: 1023px) {
+    background-color: #ffffff;
+  }
+  @media (min-width: 1024px) {
+    background-color: #f5f6fa;
+  }
 }
 .highBoldLabel {
   color: #2a2c36;

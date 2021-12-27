@@ -9,21 +9,27 @@ import minus from 'public/images/minus-gray.svg'
 import styles from './DashboardButton.module.scss'
 
 const DashboardButton = props => {
-  const { handleClick, label, type, visiable } = props
+  const { handleClick, label, type, visible } = props
   return (
     <>
-      {type === 'startClass' && visiable === true && (
+      {type === 'startClass' && visible === true && (
         <div>
           <button
             className={'flex justify-between items-center px-4 py-2 ' + styles.outlineButton}
             onClick={handleClick}
           >
             <p className={'pr-3 ' + styles.outlineLabel}>{label}</p>
-            <Image src={'/images/start-class.svg'} alt={''} width={30} height={30} />
+            <Image
+              src={'/images/start-class.svg'}
+              alt={''}
+              width={30}
+              height={30}
+              className={styles.startClassButtonImage}
+            />
           </button>
         </div>
       )}
-      {type === 'startClass' && visiable === false && (
+      {type === 'startClass' && visible === false && (
         <div>
           <button className={'flex justify-between items-center px-4 py-2 ' + styles.outlineDisableButton}>
             <p className={'pr-3 ' + styles.outlineDisableLabel}>{label}</p>

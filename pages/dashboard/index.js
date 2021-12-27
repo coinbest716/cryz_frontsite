@@ -379,23 +379,22 @@ const Dashboard = props => {
   return (
     <div className={'w-full ' + styles.container}>
       <div className={'grid grid-cols-12'}>
-        <div className={'col-span-12 md:col-span-8 sm:col-span-12 py-16 px-9'}>
+        <div className={'col-span-12 lg:col-span-8 pb-16 lg:py-16 px-0 lg:px-9'}>
           <div className={'flex justify-between items-center'}>
-            <div>
-              <div className={styles.highBoldLabel}>Dashboard</div>
-              {message.length !== 0 ? <div className={'pt-2 ' + styles.today}>{today}</div> : <></>}
-            </div>
-            <div>
-              {message.length !== 0 ? (
-                <DashboardButton
-                  handleClick={() => handleClickRedirect('startClass')}
-                  label={'Comenzar clase'}
-                  type={'startClass'}
-                />
-              ) : (
-                <></>
-              )}
-            </div>
+            {viewport !== 'mobile' && (
+              <div>
+                <div className={styles.highBoldLabel}>Dashboard</div>
+                <div className={'pt-2 ' + styles.today}>{today}</div>
+              </div>
+            )}
+            {viewport !== 'mobile' && (
+              <DashboardButton
+                handleClick={() => handleClickRedirect('startClass')}
+                label={'Comenzar clase'}
+                type={'startClass'}
+                visible={message.length !== 0 ? true : false}
+              />
+            )}
           </div>
           <div className={'flex justify-between items-center mt-7 pl-9 pr-12 ' + styles.welcomeSection}>
             <div className={'py-4 pr-4'}>
@@ -403,8 +402,10 @@ const Dashboard = props => {
               <div className={styles.welcomeLabel}>
                 {personalInfo.name}&nbsp;{personalInfo.lastname}
               </div>
+              {viewport !== 'mobile' && (
+                <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[4].text}</div>
+              )}
               {/* <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[status].text}</div> */}
-              <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[4].text}</div>
               {/* <div className={'pt-4'}>
                 {status !== 3 && status !== 4 ? (
                   <DashboardButton
@@ -416,12 +417,24 @@ const Dashboard = props => {
                   <></>
                 )}
               </div> */}
+              {viewport === 'mobile' && (
+                <div className="pt-4">
+                  <DashboardButton
+                    handleClick={() => handleClickRedirect('startClass')}
+                    label={'Comenzar clase'}
+                    type={'startClass'}
+                    visible={message.length !== 0 ? true : false}
+                  />
+                </div>
+              )}
             </div>
-            <div style={{ minWidth: '220px' }}>
-              <Image src={welcomeIcon} alt="" width={220} height={254} />
-            </div>
+            {viewport !== 'mobile' && (
+              <div style={{ minWidth: '220px' }}>
+                <Image src={welcomeIcon} alt="" width={220} height={254} />
+              </div>
+            )}
           </div>
-          <div className={'flex justify-between items-center mt-7 px-9 pt-7 pb-1 ' + styles.welcomeSection}>
+          <div className={'flex justify-between items-center mt-7 px-9 pt-0 lg:pt-7 pb-1 ' + styles.welcomeSection}>
             <div className={'w-full'}>
               <div className={styles.highBoldLabel}>Actividad mensual</div>
               <div>
