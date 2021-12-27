@@ -75,7 +75,7 @@ const Cursos = () => {
                 </td>
                 <td className={'h-full relative'}>
                   <div className={styles.tableContentArea}>
-                    <a href='http://localhost:3000/dashboard/cursos/id/index'><Image src={FileViewIcon} alt={''} width={29} height={29} /></a>
+                    <a href='http://localhost:3000/dashboard/cursos/index'><Image src={FileViewIcon} alt={''} width={29} height={29} /></a>
                   </div>
                 </td>
               </tr>

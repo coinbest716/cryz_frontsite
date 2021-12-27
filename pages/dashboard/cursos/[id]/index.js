@@ -21,6 +21,7 @@ import Chip from 'components/components/Chip'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
+import styles from '../cursos.module.scss'
 
 // images
 import FileViewIcon from 'assets/images/file-view.svg'
@@ -72,10 +73,10 @@ const Cursos = () => {
                   <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>LECCIÓN</div>
                 </th>
                 <th>
-                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>DETALLE</div>
+                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PREPARA TU PELVIS DESDE EL EMBARAZO</div>
                 </th>
                 <th>
-                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>FECHA</div>
+                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>VIDEO</div>
                 </th>
               </tr>
             </thead>
@@ -118,7 +119,7 @@ const Cursos = () => {
                       styles.tableCellText
                     }
                   >
-                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                    <a href='id/index' target={'_blank'}><Image src={FileViewIcon} alt={''} width={29} height={29} /></a>
                   </div>
                 </td>
               </tr>
