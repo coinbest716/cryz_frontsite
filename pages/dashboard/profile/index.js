@@ -579,7 +579,15 @@ const Profile = props => {
               handleChangeAvatar={handleChangeAvatar}
             />
           )}
-          {activeTab.personal && <MobilePersonalProfile />}
+          {activeTab.personal && (
+            <MobilePersonalProfile
+              handleSavePersonal={handleSavePersonal}
+              personalInfo={personalInfo}
+              shippingInfo={shippingInfo}
+              handleChangePersonal={handleChangePersonal}
+              handleChangeShipping={handleChangeShipping}
+            />
+          )}
           {activeTab.health && <MobileHealthProfile />}
           {activeTab.graphic && <MobileGraphicProfile />}
         </>
