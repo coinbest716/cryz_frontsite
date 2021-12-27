@@ -42,84 +42,52 @@ const Cursos = () => {
     <div className={globalStyles.dashContainer}>
       {/* header part */}
       <div className={'w-full flex flex-wrap justify-between items-center'}>
-        <div className={globalStyles.dashTitle}>Curso básico de entrenamiento durante el embarazo</div>
+        <div className={globalStyles.dashTitle}>Cursos</div>
 
         <div className={styles.tableCellText}>
           {/* year select part */}
           <div className={styles.yearArea}></div>
           {/* table part */}
           <div className={'inline-grid'}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam felis ac odio fermentum scelerisque.
-            Vestibulum tempor pretium turpis, eu ullamcorper erat. Sed fermentum magna felis, in posuere nulla ornare a.
-            Etiam lobortis consequat libero eget rutrum. Fusce et pretium justo, et fringilla massa. Vestibulum molestie
-            sollicitudin leo et volutpat. Suspendisse elementum sodales dolor ac luctus. Fusce dignissim justo sem, ut
-            efficitur nibh sodales non. In feugiat mollis nunc, in cursus arcu tempus imperdiet. Cras mollis dui semper
-            sagittis tempor. Phasellus rhoncus, velit eu eleifend gravida, nulla mauris molestie tortor, et feugiat ex
-            turpis in lorem. Quisque imperdiet vulputate condimentum. Praesent laoreet tortor venenatis velit malesuada,
-            non fringilla mi pulvinar. Etiam ut mattis leo. Etiam commodo id felis eget faucibus. Class aptent taciti
-            sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            
           </div>
         </div>
       </div>
-      {/* year select part */}
-      <div className={styles.yearArea}></div>
-      {/* table part */}
       <div>
         <PerfectScrollbar>
           <table className={'w-full table-auto'}>
             <thead className={styles.tableHead}>
               <tr>
                 <th>
-                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>LECCIÓN</div>
-                </th>
-                <th>
                   <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>DETALLE</div>
                 </th>
                 <th>
-                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>FECHA</div>
+                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>VER</div>
                 </th>
               </tr>
             </thead>
             <tbody className={'mt-4 ' + styles.tbody}>
               <tr className={1 % 2 === 1 ? 'bg-white' : ''}>
                 <td className={'h-full relative'}>
-                  <div
-                    className={
-                      'absolute top-0 bottom-0 flex flex-col justify-around ' +
-                      styles.tableContentArea +
-                      ' ' +
-                      styles.tableCellText
-                    }
-                  >
-                    <div className={'flex items-start'}>1</div>
-                  </div>
-                </td>
-                <td>
                   <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                    <div className={'inline-grid'}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam felis ac odio fermentum
-                      scelerisque. Vestibulum tempor pretium turpis, eu ullamcorper erat. Sed fermentum magna felis, in
-                      posuere nulla ornare a. Etiam lobortis consequat libero eget rutrum. Fusce et pretium justo, et
-                      fringilla massa. Vestibulum molestie sollicitudin leo et volutpat. Suspendisse elementum sodales
-                      dolor ac luctus. Fusce dignissim justo sem, ut efficitur nibh sodales non. In feugiat mollis nunc,
-                      in cursus arcu tempus imperdiet. Cras mollis dui semper sagittis tempor. Phasellus rhoncus, velit
-                      eu eleifend gravida, nulla mauris molestie tortor, et feugiat ex turpis in lorem. Quisque
-                      imperdiet vulputate condimentum. Praesent laoreet tortor venenatis velit malesuada, non fringilla
-                      mi pulvinar. Etiam ut mattis leo. Etiam commodo id felis eget faucibus. Class aptent taciti
-                      sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                    </div>
+                    Curso básico de entrenamiento durante el embarazo
                   </div>
                 </td>
                 <td className={'h-full relative'}>
-                  <div
-                    className={
-                      'absolute top-0 bottom-0 flex flex-col justify-around ' +
-                      styles.tableContentArea +
-                      ' ' +
-                      styles.tableCellText
-                    }
-                  >
-                    <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                  <div className={styles.tableContentArea}>
+                    <a href='http://localhost:3000/dashboard/cursos/id/index'><Image src={FileViewIcon} alt={''} width={29} height={29} /></a>
+                  </div>
+                </td>
+              </tr>
+              <tr className={1 % 2 === 1 ? '' : ''}>
+                <td className={'h-full relative'}>
+                  <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                  Curso de preparación física y corporal al parto
+                  </div>
+                </td>
+                <td className={'h-full relative'}>
+                  <div className={styles.tableContentArea}>
+                  <a href='http://localhost:3000/dashboard/cursos/id/index'><Image src={FileViewIcon} alt={''} width={29} height={29} /></a>
                   </div>
                 </td>
               </tr>
