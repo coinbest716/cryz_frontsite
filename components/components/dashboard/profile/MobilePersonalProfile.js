@@ -14,9 +14,9 @@ import ProfileCommonText from 'components/components/dashboard/profile/ProfileCo
 import moment from 'moment'
 
 // styles
-import styles from './personalData.module.scss'
+import styles from './MobilePersonalProfile.module.scss'
 
-const PersonalData = () => {
+const MobilePersonalProfile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -236,8 +236,4 @@ const PersonalData = () => {
     </div>
   )
 }
-export default PersonalData
-
-PersonalData.getLayout = function getLayout(page) {
-  return <MobileDashboardLayout title="Perfil">{page}</MobileDashboardLayout>
-}
+export default MobilePersonalProfile
