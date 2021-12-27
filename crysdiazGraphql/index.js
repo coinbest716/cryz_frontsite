@@ -67,13 +67,15 @@ import { SendCV } from './other.gql'
 
 // courses
 
-import { getCoursesDashboard, getCourseDashboard } from './dashboard/course.gql'
+import { getCoursesDashboard, getCourseDashboard, GetCourseLectureDashboard } from './dashboard/course.gql'
 
 export default {
   queries: {
     // Course
     getCoursesDashboard: getCoursesDashboard,
     getCourseDashboard: getCourseDashboard,
+    GetCourseLectureDashboard: GetCourseLectureDashboard,
+
     // home part
     getEquipo: GetEquipo,
     getFeaturedServices: GetFeaturedServices,

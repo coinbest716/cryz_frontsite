@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-
+import { useRouter } from 'next/router'
 // third party components
 import toast from 'react-hot-toast'
 import { Auth } from 'aws-amplify'
+import ReactPlayer from 'react-player'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
@@ -21,7 +22,7 @@ import Chip from 'components/components/Chip'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from '../cursos.module.scss'
+import styles from './leccion.module.scss'
 
 // images
 import FileViewIcon from 'assets/images/file-view.svg'
@@ -35,41 +36,58 @@ import OrderStateData from 'assets/data/OrderStateData.json'
 import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Cursos = () => {
-  // loading part ###########################
+const Lecture = () => {
+  const [lecture, setLecture] = useState(null)
+  const router = useRouter()
+  const { id } = router.query
+  const { leccion } = router.query
+
+  const [getLecture, { data: lectureData, loading: lectureLoading, error: lectureError }] = useLazyQuery(
+    graphql.queries.GetCourseLectureDashboard
+  )
+
+  useEffect(() => {
+    console.log(lecture)
+    if (lecture === null && id && leccion) {
+      getLecture({
+        variables: {
+          courseId: Number(id),
+          lectureId: Number(leccion),
+        },
+      })
+    }
+  }, [lecture, getLecture, id, leccion])
+
+  useEffect(() => {
+    if (!lectureError && lectureData) {
+      if (lectureData === null) {
+      } else {
+        console.log(lectureData)
+        setLecture(lectureData.getCourseLectureDashboard)
+      }
+    }
+  }, [lectureLoading, lectureData, lectureError])
 
   return (
     <div className={globalStyles.dashContainer}>
       {/* header part */}
       <div className={'w-full flex flex-wrap justify-between items-center'}>
-        <div className={globalStyles.dashTitle}>PREPARA TU PELVIS DESDE EL EMBARAZO</div>
+        <div className={globalStyles.dashTitle}>{lecture?.name}</div>
 
         <div className={styles.tableCellText}>
           {/* year select part */}
           <div className={styles.yearArea}></div>
           {/* table part */}
-          <div className={'inline-grid'}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam felis ac odio fermentum scelerisque.
-            Vestibulum tempor pretium turpis, eu ullamcorper erat. Sed fermentum magna felis, in posuere nulla ornare a.
-            Etiam lobortis consequat libero eget rutrum. Fusce et pretium justo, et fringilla massa. Vestibulum molestie
-            sollicitudin leo et volutpat. Suspendisse elementum sodales dolor ac luctus. Fusce dignissim justo sem, ut
-            efficitur nibh sodales non. In feugiat mollis nunc, in cursus arcu tempus imperdiet. Cras mollis dui semper
-            sagittis tempor. Phasellus rhoncus, velit eu eleifend gravida, nulla mauris molestie tortor, et feugiat ex
-            turpis in lorem. Quisque imperdiet vulputate condimentum. Praesent laoreet tortor venenatis velit malesuada,
-            non fringilla mi pulvinar. Etiam ut mattis leo. Etiam commodo id felis eget faucibus. Class aptent taciti
-            sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-          </div>
+          <div className={'inline-grid'}>{lecture?.description}</div>
         </div>
       </div>
-      {/* year select part */}
-      <div className={styles.yearArea}></div>
-      {/* VIDEO PLAYER */}
+      <ReactPlayer url={lecture?.video} width="700px" controls={true} />
     </div>
   )
 }
-export default Cursos
+export default Lecture
 
-Cursos.getLayout = function getLayout(page) {
+Lecture.getLayout = function getLayout(page) {
   return page.props.viewport === 'mobile' ? (
     <MobileDashboardLayout title="Compras">{page}</MobileDashboardLayout>
   ) : (

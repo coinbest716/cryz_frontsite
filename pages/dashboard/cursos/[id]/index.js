@@ -38,7 +38,7 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import moment from 'moment'
 
-const Cursos = () => {
+const Curso = () => {
   const [course, setCourse] = useState([])
   const router = useRouter()
   const { id } = router.query
@@ -148,9 +148,9 @@ const Cursos = () => {
     </div>
   )
 }
-export default Cursos
+export default Curso
 
-Cursos.getLayout = function getLayout(page) {
+Curso.getLayout = function getLayout(page) {
   return page.props.viewport === 'mobile' ? (
     <MobileDashboardLayout title="Compras">{page}</MobileDashboardLayout>
   ) : (

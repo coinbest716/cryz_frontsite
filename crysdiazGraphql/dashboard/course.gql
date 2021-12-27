@@ -22,4 +22,13 @@ query getCourseDashboard($getCourseId: Int!) {
 
 }
 
+query GetCourseLectureDashboard($courseId: Int!, $lectureId: Int!) {
+    getCourseLectureDashboard(courseId: $courseId, lectureId: $lectureId) {
+        id
+        name
+        description
+        video
+        order
+    }
+}
 
