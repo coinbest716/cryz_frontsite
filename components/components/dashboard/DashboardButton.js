@@ -14,7 +14,7 @@ const DashboardButton = props => {
   return (
     <>
       {type === 'startClass' && visible === true && (
-        <div>
+        <div className="mr-7">
           <button
             className={'flex justify-between items-center px-4 py-2 ' + styles.outlineButton}
             onClick={handleClick}
@@ -31,7 +31,7 @@ const DashboardButton = props => {
         </div>
       )}
       {type === 'message' && (
-        <div className="ml-7">
+        <div>
           <button
             className={'flex justify-between items-center px-4 py-2 ' + styles.outlineGrayButton}
             onClick={handleClick}
