@@ -6,9 +6,8 @@ import { useDispatch } from 'react-redux'
 // next components
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-
-// custom components
-import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
+import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
+import measureEdit from 'public/images/measure-edit.svg'
 
 // styles
 import styles from './MobileGraphicProfile.module.scss'
@@ -33,6 +32,33 @@ const MobileGraphicProfile = () => {
   // variables
   const router = useRouter()
 
-  return <div>MobileGraphicProfile</div>
+  const handleClickBack = () => {
+    router.push('/dashboard/profile#main', undefined, { shallow: true })
+  }
+
+  const handleClickEdit = () => {
+    router.push('/dashboard/profile#health', undefined, { shallow: true })
+  }
+
+  return (
+    <>
+      <div className={styles.header + ' p-4'}>
+        <div
+          className="flex justify-start items-center w-fit cursor-pointer"
+          style={{ width: 'fit-content' }}
+          onClick={handleClickBack}
+        >
+          <Image src={ArrowLeftWhite} width={18} height={15} alt="" />
+          <div className={styles.backString + ' ml-2'}>Perfil</div>
+        </div>
+        <div className="flex justify-end">
+          <div className={styles.saveButton} onClick={handleClickEdit}>
+            <Image src={measureEdit} alt="" width={25} height={25} />
+          </div>
+        </div>
+        <div className={styles.title}>Datos antropométricos</div>
+      </div>
+    </>
+  )
 }
 export default MobileGraphicProfile
