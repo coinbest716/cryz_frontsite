@@ -2,6 +2,7 @@ import React from 'react'
 
 // next components
 import Image from 'next/image'
+import chatIcon from 'public/images/message-white.svg'
 import plus from 'public/images/plus-gray.svg'
 import plusWhite from 'public/images/plus-white.svg'
 import minus from 'public/images/minus-gray.svg'
@@ -9,7 +10,7 @@ import minus from 'public/images/minus-gray.svg'
 import styles from './DashboardButton.module.scss'
 
 const DashboardButton = props => {
-  const { handleClick, label, type, visible } = props
+  const { handleClick, label, type, visible, count } = props
   return (
     <>
       {type === 'startClass' && visible === true && (
@@ -26,6 +27,19 @@ const DashboardButton = props => {
               height={30}
               className={styles.startClassButtonImage}
             />
+          </button>
+        </div>
+      )}
+      {type === 'message' && (
+        <div className="ml-7">
+          <button
+            className={'flex justify-between items-center px-4 py-2 ' + styles.outlineGrayButton}
+            onClick={handleClick}
+          >
+            <div className="w-4 h-4 flex justify-center">
+              <Image src={chatIcon} alt={''} width={15} height={15} />
+            </div>
+            <p className={'pl-3 ' + styles.outlineGrayLabel}>{count} Nuevos Mensajes</p>
           </button>
         </div>
       )}

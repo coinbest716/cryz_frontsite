@@ -35,6 +35,23 @@
   letter-spacing: 0;
   line-height: 15px;
 }
+.outlineGrayButton {
+  background-color: #818e8e;
+  border-radius: 25px;
+}
+.outlineGrayLabel {
+  color: #ffffff;
+  font-family: Montserrat;
+  @media (max-width: 1023px) {
+    font-size: 10px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 12px;
+  }
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 15px;
+}
 .outlineDisableLabel {
   color: #818e8e;
   font-family: Montserrat;

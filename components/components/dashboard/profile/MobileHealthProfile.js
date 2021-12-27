@@ -11,9 +11,9 @@ import Image from 'next/image'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 
 // styles
-import styles from './health.module.scss'
+import styles from './MobileHealthProfile.module.scss'
 
-const Health = () => {
+const MobileHealthProfile = () => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -33,10 +33,6 @@ const Health = () => {
   // variables
   const router = useRouter()
 
-  return <div>Health</div>
+  return <div>MobileHealthProfile</div>
 }
-export default Health
-
-Health.getLayout = function getLayout(page) {
-  return <MobileDashboardLayout title="Perfil">{page}</MobileDashboardLayout>
-}
+export default MobileHealthProfile
