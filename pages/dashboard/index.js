@@ -324,7 +324,12 @@ const Dashboard = props => {
   }
 
   const handleClickQuestionnaire = () => {
+    document.body.style.overflow = 'hidden'
     setShowQuestionnaire(true)
+  }
+  const handleDisableQuestionnarie = () => {
+    document.body.style.overflow = 'auto'
+    setShowQuestionnaire(false)
   }
 
   const handleClickRedirect = (type, id) => {
@@ -598,7 +603,7 @@ const Dashboard = props => {
           </div>
         </div>
       </div>
-      {showQuestionnaire && <Questionnaire onClick={() => setShowQuestionnaire(false)} viewport={viewport} />}
+      {showQuestionnaire && <Questionnaire onClick={() => handleDisableQuestionnarie()} viewport={viewport} />}
     </div>
   )
 }
