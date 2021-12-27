@@ -588,7 +588,13 @@ const Profile = props => {
             />
           )}
           {activeTab.health && <MobileHealthProfile />}
-          {activeTab.graphic && <MobileGraphicProfile />}
+          {activeTab.graphic && (
+            <MobileGraphicProfile
+              graphicInfo={graphicInfo}
+              monthData={monthData}
+              currentMonthIndex={currentMonthIndex}
+            />
+          )}
         </>
       ) : (
         <div className={'relative pt-10 pb-24 px-24 ' + styles.container}>
