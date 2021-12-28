@@ -11,11 +11,13 @@ import NotificationButton from 'components/components/dashboard/NotificationButt
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import CommonText from 'components/components/purchase/CommonText'
 import CommonButton from 'components/components/purchase/CommonButton'
+import MobileBillCard from 'components/components/dashboard/billing/MobileBillCard'
 
 import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import toast from 'react-hot-toast'
 
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
 import plusWhite from 'public/images/plus-white.svg'
@@ -26,6 +28,7 @@ const Billing = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const router = useRouter()
   const { viewport } = props
 
   useEffect(() => {
@@ -67,6 +70,10 @@ const Billing = props => {
 
   // handlers
   useEffect(() => {
+    if (!localStorage.getItem('patient_id')) {
+      toast.error('Please complete profile!')
+      router.push('/dashboard/profile')
+    }
     getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
   }, [])
 
@@ -198,6 +205,16 @@ const Billing = props => {
   const handleClickBack = () => {
     router.push('/dashboard/profile#main', undefined, { shallow: true })
   }
+  const handleMobileEditAddress = bill_id => {
+    console.log(bill_id)
+    router.push({
+      pathname: '/dashboard/billing/bill-item',
+      query: { bill_id: bill_id },
+    })
+  }
+  const handleMobileDeleteAddress = bill_id => {
+    console.log(bill_id)
+  }
 
   return (
     <>
@@ -212,13 +229,27 @@ const Billing = props => {
               <Image src={ArrowLeftWhite} width={18} height={15} alt="" />
               <div className={styles.backString + ' ml-2'}>Perfil</div>
             </div>
-            <div className={'flex justify-end items-center ' + styles.saveButton} onClick={handleAddAddress}>
-              <div className={'cursor-pointer flex justify-center items-center mr-3 ' + styles.plusSection}>
-                <Image src={plusWhite} alt={''} width={10} height={10} />
+            <div className={'flex justify-end items-center '} onClick={handleAddAddress}>
+              <div className={styles.saveButton + ' flex items-center'}>
+                <div className={'cursor-pointer flex justify-center items-center mr-3 ' + styles.plusSection}>
+                  <Image src={plusWhite} alt={''} width={10} height={10} />
+                </div>
+                <div className={styles.saveLabel}>Añadir Dirección</div>
               </div>
-              <div>Añadir Dirección</div>
             </div>
             <div className={styles.title}>Direcciones de facturación</div>
+          </div>
+          <div className={styles.mobileContainer}>
+            {billDataList.map((item, index) => (
+              <div className="pb-4" key={index}>
+                <MobileBillCard
+                  item={item}
+                  index={index}
+                  handleMobileDeleteAddress={handleMobileDeleteAddress}
+                  handleMobileEditAddress={handleMobileEditAddress}
+                />
+              </div>
+            ))}
           </div>
         </div>
       ) : (

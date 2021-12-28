@@ -29,7 +29,7 @@ const MobileDashboardLayout = ({ title, children }) => {
 
   const showHeaderBar = () => {
     const currentState = router.asPath.split('#')
-    console.log(currentState)
+
     if (
       currentState[1] === 'health' ||
       currentState[1] === 'graphic' ||

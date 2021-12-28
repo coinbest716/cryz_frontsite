@@ -258,6 +258,7 @@ const Profile = props => {
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
       const data = personalData.getPatientByEmail
+      localStorage.setItem('patient_id', data.id)
       let _personalInfo = {
         ...personalInfo,
         id: data.id,

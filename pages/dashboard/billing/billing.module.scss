@@ -35,6 +35,7 @@
 .header {
   background-color: #818e8e;
   box-shadow: 0 32px 44px 0 rgba(131, 146, 167, 0.2);
+  height: 130px;
 }
 .backString {
   color: #ffffff;
@@ -47,14 +48,17 @@
   border-radius: 22px;
   background-color: #ffffff;
   box-shadow: 0 6px 10px 0 rgba(120, 144, 142, 0.15);
+  padding: 11px 20px;
+  width: fit-content;
+}
+.saveLabel {
   color: #7d8f8e;
   font-family: Montserrat;
   font-size: 10px;
   font-weight: bold;
   letter-spacing: 0;
+  line-height: 13px;
   text-align: center;
-  padding: 13px 25px;
-  width: fit-content;
 }
 .title {
   color: #ffffff;
@@ -63,10 +67,16 @@
   font-weight: 300;
   letter-spacing: 0;
   line-height: 30px;
+  margin-top: 8px;
 }
 .plusSection {
   background-color: #818e8e;
   width: 20px;
   height: 20px;
   border-radius: 20px;
+}
+.mobileContainer {
+  padding: 20px;
+  background-color: hsl(228, 33%, 97%);
+  min-height: calc(100vh - 130px);
 }

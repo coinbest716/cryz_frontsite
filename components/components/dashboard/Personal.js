@@ -56,6 +56,7 @@ const Personal = props => {
                 placeholder={''}
                 type={'password'}
                 value={personalInfo.password}
+                disabled={true}
               />
             </div>
             <div className={'py-2'}>

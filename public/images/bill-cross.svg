@@ -1,0 +1,21 @@
+<svg id="Group_5" data-name="Group 5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #949090;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <circle id="Oval" class="cls-1" cx="15" cy="15" r="15"/>
+  <g id="close" transform="translate(9 9)">
+    <path id="line" class="cls-2" d="M10.9,11.14,0,0" transform="translate(0.487 0.564)"/>
+    <path id="line-2" data-name="line" class="cls-2" d="M0,11.14,10.9,0" transform="translate(0.487 0.564)"/>
+  </g>
+</svg>
