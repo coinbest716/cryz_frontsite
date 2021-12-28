@@ -51,7 +51,7 @@ const LiveStreaming = props => {
       setEvent({ id: Number(router.query.id) })
     }
     setMaterial(LiveStreamingData)
-  }, [])
+  }, [router.query])
 
   return (
     <div className={'pt-12 lg:pl-14 lg:pr-8 h-screen ' + styles.container}>
