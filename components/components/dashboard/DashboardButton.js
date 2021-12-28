@@ -14,19 +14,21 @@ const DashboardButton = props => {
   return (
     <>
       {type === 'startClass' && visible === true && (
-        <div className="mr-7">
+        <div className="mr-4">
           <button
             className={'flex justify-between items-center px-4 py-2 ' + styles.outlineButton}
             onClick={handleClick}
           >
             <p className={'pr-3 ' + styles.outlineLabel}>{label}</p>
-            <Image
-              src={'/images/start-class.svg'}
-              alt={''}
-              width={30}
-              height={30}
-              className={styles.startClassButtonImage}
-            />
+            <div className="w-8 h-8 flex justify-center items-center">
+              <Image
+                src={'/images/start-class.svg'}
+                alt={''}
+                width={30}
+                height={30}
+                className={styles.startClassButtonImage}
+              />
+            </div>
           </button>
         </div>
       )}
@@ -43,14 +45,14 @@ const DashboardButton = props => {
           </button>
         </div>
       )}
-      {type === 'startClass' && visible === false && (
-        <div>
+      {/* {type === 'startClass' && visible === false && (
+        <div className="mr-4">
           <button className={'flex justify-between items-center px-4 py-2 ' + styles.outlineDisableButton}>
             <p className={'pr-3 ' + styles.outlineDisableLabel}>{label}</p>
             <Image src={'/images/start-class-gray.svg'} alt={''} width={30} height={30} />
           </button>
         </div>
-      )}
+      )} */}
       {type === 'view' && (
         <div>
           <button

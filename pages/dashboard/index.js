@@ -325,14 +325,18 @@ const Dashboard = props => {
 
   const setAvailableEvent = () => {
     const currentTime = moment(new Date())
+    let count = 0
     events.map(item => {
       const startTime = moment(item.start)
       const endTime = moment(item.end)
       const diffTime = startTime.diff(endTime, 'minutes')
       if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 30) {
         setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
+        count++
       } else {
-        setStreamingEvent({ id: -1, start: '', toggle: false })
+        if (count === 0) {
+          setStreamingEvent({ id: -1, start: '', toggle: false })
+        }
       }
     })
   }
@@ -433,7 +437,7 @@ const Dashboard = props => {
                 <div className={'pt-2 ' + styles.today}>{today}</div>
               </div>
             )}
-            {false && viewport !== 'mobile' && (
+            {viewport !== 'mobile' && (
               <DashboardButton
                 handleClick={() => handleClickRedirect('startClass')}
                 label={'Comenzar clase'}
@@ -510,7 +514,7 @@ const Dashboard = props => {
               </div>
             )}
           </div>
-          {false && message.length !== 0 ? (
+          {message.length !== 0 ? (
             <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:my-0 px-9 py-7 flex justify-between ' + styles.rememberSection}>
               <div>
                 <div className={styles.remember}>Recuerda!!</div>
