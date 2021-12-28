@@ -16,8 +16,8 @@ const Personal = props => {
     shippingInfo,
     handleChangeAvatar,
   } = props
-  const genderList = ['WOMAN', 'MAN']
-  const meetList = ['INSTAGRAM', 'FACEBOOK', 'PRENSA']
+  const genderList = ['Mujer', 'Hombre']
+  const meetList = ['Instagram', 'Facebook', 'Prensa', 'Un amigo', 'Otros']
 
   return (
     <div className={'w-full h-full'}>
@@ -49,16 +49,7 @@ const Personal = props => {
                 value={personalInfo.name}
               />
             </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'password')}
-                label={'Contraseña'}
-                placeholder={''}
-                type={'password'}
-                value={personalInfo.password}
-                disabled={true}
-              />
-            </div>
+            
             <div className={'py-2'}>
               <CommonText
                 handleChange={e => handleChangePersonal(e, 'code')}
@@ -84,6 +75,16 @@ const Personal = props => {
                 handleChange={e => handleChangePersonal(e, 'gender')}
                 type={'select'}
                 value={personalInfo.gender}
+              />
+            </div>
+
+            <div className={'py-2'}>
+              <CommonText
+                handleChange={e => handleChangePersonal(e, 'birthday')}
+                label={'Fecha nacimiento'}
+                placeholder={''}
+                type={'date'}
+                value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
               />
             </div>
           </div>
@@ -126,15 +127,6 @@ const Personal = props => {
                 placeholder={''}
                 type={'tel'}
                 value={personalInfo.emergencyPhone}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'birthday')}
-                label={'Fecha nacimiento'}
-                placeholder={''}
-                type={'date'}
-                value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
               />
             </div>
           </div>
