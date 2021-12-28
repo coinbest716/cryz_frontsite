@@ -205,6 +205,12 @@ const Billing = props => {
   const handleClickBack = () => {
     router.push('/dashboard/profile#main', undefined, { shallow: true })
   }
+  const handleMobileAddAddress = () => {
+    router.push({
+      pathname: '/dashboard/billing/bill-item',
+      query: { bill_id: -1 },
+    })
+  }
   const handleMobileEditAddress = bill_id => {
     console.log(bill_id)
     router.push({
@@ -229,7 +235,7 @@ const Billing = props => {
               <Image src={ArrowLeftWhite} width={18} height={15} alt="" />
               <div className={styles.backString + ' ml-2'}>Perfil</div>
             </div>
-            <div className={'flex justify-end items-center '} onClick={handleAddAddress}>
+            <div className={'flex justify-end items-center '} onClick={handleMobileAddAddress}>
               <div className={styles.saveButton + ' flex items-center'}>
                 <div className={'cursor-pointer flex justify-center items-center mr-3 ' + styles.plusSection}>
                   <Image src={plusWhite} alt={''} width={10} height={10} />

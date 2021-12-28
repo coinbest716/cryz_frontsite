@@ -23,10 +23,10 @@ const MobileBillCard = props => {
         <div className={styles.city}>{item.province}</div>
       </div>
       <div className="flex flex-col justify-between items-center">
-        <div className={styles.arrowLeft} onClick={() => handleMobileEditAddress(item.id)}>
+        <div onClick={() => handleMobileEditAddress(item.id)}>
           <Image src={RightGrayIcon} alt="" width={25} height={16} />
         </div>
-        <div className={styles.billCross} onClick={() => handleMobileDeleteAddress(item.id)}>
+        <div onClick={() => handleMobileDeleteAddress(item.id)}>
           <Image src={BillCross} alt="" width={30} height={30} />
         </div>
       </div>
