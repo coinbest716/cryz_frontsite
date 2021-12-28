@@ -316,7 +316,7 @@ const Dashboard = props => {
   useEffect(() => {
     setAvailableEvent()
     let classInterval = setInterval(() => {
-      setAvailableEvent
+      setAvailableEvent()
     }, 10000)
     return () => {
       clearInterval(classInterval)
@@ -329,7 +329,7 @@ const Dashboard = props => {
       const startTime = moment(item.start)
       const endTime = moment(item.end)
       const diffTime = startTime.diff(endTime, 'minutes')
-      if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 5) {
+      if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 30) {
         setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
       } else {
         setStreamingEvent({ id: -1, start: '', toggle: false })
@@ -438,7 +438,7 @@ const Dashboard = props => {
                 handleClick={() => handleClickRedirect('startClass')}
                 label={'Comenzar clase'}
                 type={'startClass'}
-                visiable={streamingEvent.toggle}
+                visible={streamingEvent.toggle}
               />
             )}
           </div>
@@ -469,7 +469,7 @@ const Dashboard = props => {
                     handleClick={() => handleClickRedirect('startClass')}
                     label={'Comenzar clase'}
                     type={'startClass'}
-                    visiable={streamingEvent.toggle}
+                    visible={streamingEvent.toggle}
                   />
                   <DashboardButton
                     handleClick={() => handleClickRedirect('message')}
