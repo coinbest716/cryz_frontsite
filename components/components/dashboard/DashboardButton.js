@@ -43,14 +43,14 @@ const DashboardButton = props => {
           </button>
         </div>
       )}
-      {type === 'startClass' && visible === false && (
+      {/* {type === 'startClass' && visible === false && (
         <div>
           <button className={'flex justify-between items-center px-4 py-2 ' + styles.outlineDisableButton}>
             <p className={'pr-3 ' + styles.outlineDisableLabel}>{label}</p>
             <Image src={'/images/start-class-gray.svg'} alt={''} width={30} height={30} />
           </button>
         </div>
-      )}
+      )} */}
       {type === 'view' && (
         <div>
           <button
