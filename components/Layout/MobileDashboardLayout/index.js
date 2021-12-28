@@ -29,7 +29,14 @@ const MobileDashboardLayout = ({ title, children }) => {
 
   const showHeaderBar = () => {
     const currentState = router.asPath.split('#')
-    if (currentState[1] === 'health' || currentState[1] === 'graphic' || currentState[1] === 'personal') {
+    const otherState = router.pathname.split('/')
+
+    if (
+      currentState[1] === 'health' ||
+      currentState[1] === 'graphic' ||
+      currentState[1] === 'personal' ||
+      otherState[2] === 'billing'
+    ) {
       setShowHeader(false)
     } else {
       setShowHeader(true)
