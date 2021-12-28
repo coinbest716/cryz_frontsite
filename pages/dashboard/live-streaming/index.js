@@ -12,7 +12,7 @@ import ReactPlayer from 'react-player'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
+// import NotificationButton from 'components/components/dashboard/NotificationButton'
 import VideoChat from 'components/components/dashboard/Twilio/VideoChat'
 // import Profile from 'components/components/dashboard/Profile'
 
@@ -42,7 +42,7 @@ const LiveStreaming = props => {
 
   // variable
   const { viewport } = props
-  const url = 'https://www.w3schools.com/html/mov_bbb.mp4'
+  const [room, setRoom] = useState('')
   const [event, setEvent] = useState({ id: -1, start: '' })
   const [material, setMaterial] = useState([])
 
@@ -53,21 +53,26 @@ const LiveStreaming = props => {
     setMaterial(LiveStreamingData)
   }, [router.query])
 
+  const handleOnChangeRoom = room => {
+    setRoom(room)
+  }
+
   return (
-    <div className={'pt-12 lg:pl-14 lg:pr-8 h-screen ' + styles.container}>
+    <div className={'pt-7 lg:pl-14 lg:pr-8 h-screen ' + styles.container}>
       <div className={'grid grid-cols-12 gap-6'}>
-        <div className={'col-span-12 md:col-span-9 sm:col-span-12 pt-4'}>
-          <div className={styles.title}>1 to 1 Streaming</div>
-          <div className={'pt-14'}>
+        <div className={'col-span-12 lg:col-span-9'}>
+          {viewport !== 'mobile' && <div className={styles.title}>1 to 1 Streaming</div>}
+          {viewport === 'mobile' && <div className={styles.title + ' px-4'}>{room !== '' && room.name}</div>}
+          <div className={'pt-4 lg:pt-14'}>
             {/* <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} /> */}
-            <VideoChat sessionId={event.id} viewport={viewport} />
+            <VideoChat sessionId={event.id} viewport={viewport} onChangeRoom={room => handleOnChangeRoom(room)} />
           </div>
         </div>
         <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
-          <div className={'flex justify-end items-center'}>
+          {/* <div className={'flex justify-end items-center'}>
             <NotificationButton />
-            {/* <Profile /> */}
-          </div>
+            <Profile />
+          </div> */}
           <div className={'rounded-xl bg-white py-8 px-8 pb-10 mt-10'}>
             <div className={styles.material}>Material necesario</div>
             <div className={'pt-7'}>

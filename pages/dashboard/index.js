@@ -429,7 +429,7 @@ const Dashboard = props => {
   return (
     <div className={'w-full ' + styles.container}>
       <div className={'grid grid-cols-12'}>
-        <div className={'col-span-12 lg:col-span-8 pb-16 lg:py-16 px-0 lg:px-9'}>
+        <div className={'col-span-12 lg:col-span-8 pb-16 py-4 lg:py-16 px-4 lg:px-9'}>
           <div className={'flex justify-between items-center'}>
             {viewport !== 'mobile' && (
               <div>
@@ -530,26 +530,28 @@ const Dashboard = props => {
             <></>
           )}
           <div className={'grid grid-cols-12 gap-7 '}>
-            <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
-              <div
-                className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
-                // onClick={() => handleClickRedirect('calendar')}
-              >
-                <Calendar
-                  className={styles.calendar}
-                  onChange={handleChangeDate}
-                  value={calendarValue}
-                  locale="es"
-                  tileClassName={({ date, view }) => {
-                    if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                      return 'highlight'
-                    }
-                  }}
-                  navigationLabel={({ label }) => updateCalendarLabel(label)}
-                ></Calendar>
+            {viewport !== 'mobile' && (
+              <div className={'col-span-12 md:col-span-6'}>
+                <div
+                  className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
+                  // onClick={() => handleClickRedirect('calendar')}
+                >
+                  <Calendar
+                    className={styles.calendar}
+                    onChange={handleChangeDate}
+                    value={calendarValue}
+                    locale="es"
+                    tileClassName={({ date, view }) => {
+                      if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                        return 'highlight'
+                      }
+                    }}
+                    navigationLabel={({ label }) => updateCalendarLabel(label)}
+                  ></Calendar>
+                </div>
               </div>
-            </div>
-            <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            )}
+            <div className={'col-span-12 md:col-span-6'}>
               <div
                 className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
                 onClick={() => handleClickRedirect('bonos')}
@@ -571,7 +573,7 @@ const Dashboard = props => {
             </div>
           </div>
         </div>
-        <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
+        <div className={'col-span-12 lg:col-span-4 py-4 lg:py-16 px-4 lg:px-9'}>
           <div className={'bg-white h-full px-9 py-10'}>
             <div>
               <div className={styles.highBoldLabel}>Perfil</div>
