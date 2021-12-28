@@ -33,9 +33,8 @@
   line-height: 30px;
 }
 .container {
-  padding: 20px;
   background-color: hsl(228, 33%, 97%);
-  min-height: 100vh;
+  min-height: calc(100vh - 130px);
 }
 .divider {
   box-sizing: border-box;
