@@ -200,7 +200,7 @@ const VideoChat = props => {
 
   return (
     <>
-      {fullScreenMode === false ? (
+      {viewport === 'mobile' ? (
         <>
           {room ? (
             <div
@@ -211,18 +211,12 @@ const VideoChat = props => {
                 background: '#000',
               }}
             >
-              <div
-                style={{
-                  width: screenWidth - 32,
-                  height: viewport === 'mobile' ? (screenWidth - 32) * 0.56 : screenHeight - 64,
-                }}
-              >
-                {viewport}
+              <div style={{ width: screenWidth - 32, height: screenHeight - 64 }}>
                 <SelfVideo
                   key={room.localParticipant.sid}
                   participant={room.localParticipant}
                   width={screenWidth - 32}
-                  height={viewport === 'mobile' ? (screenWidth - 32) * 0.56 : screenHeight - 64}
+                  height={screenHeight - 64}
                   cameraEnabled={cameraStatus}
                   audioEnabled={micStatus}
                 />
@@ -282,7 +276,6 @@ const VideoChat = props => {
                       fontWeight: '400',
                       color: '#FFF',
                       textAlign: 'center',
-                      cursor: 'pointer',
                     }}
                     onClick={() => handleLogout()}
                   >
