@@ -275,7 +275,7 @@ const Message = () => {
                   )
                 })
               ) : (
-                <></>
+                <div className={styles.dropMenuItemArea}>There is no trainer</div>
               )}
             </div>
           ) : (
