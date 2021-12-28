@@ -276,10 +276,7 @@ const Planes = () => {
       )
       const newArray = array.sort((a, b) => a - b)
       for (let i = 1; i < newArray.length; i++) {
-        if (value <= newArray[i - 1]) {
-          setDate(newArray[i - 1])
-          break
-        } else if (value > newArray[i - 1] && value < newArray[i]) {
+        if (value < newArray[i]) {
           setDate(newArray[i - 1])
           break
         }
