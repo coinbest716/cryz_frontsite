@@ -240,7 +240,7 @@ const Profile = props => {
   useEffect(() => {
     setActivePage()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.asPath])
+  }, [router.asPath, viewport])
 
   const setActivePage = () => {
     const currentState = router.asPath.split('#')
@@ -587,7 +587,13 @@ const Profile = props => {
               handleChangeShipping={handleChangeShipping}
             />
           )}
-          {activeTab.health && <MobileHealthProfile />}
+          {activeTab.health && (
+            <MobileHealthProfile
+              healthInfo={healthInfo}
+              handleSaveMeasure={handleSaveMeasure}
+              handleChangeHealth={handleChangeHealth}
+            />
+          )}
           {activeTab.graphic && (
             <MobileGraphicProfile
               graphicInfo={graphicInfo}
