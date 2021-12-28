@@ -48,7 +48,7 @@ const MobileMainProfile = props => {
         handleClickProfileItem={() => handleClickProfileItem('billing')}
       />
       <div className="mt-16">
-        <ProfileMainButton label="LogOut" onClick={() => handleClickMainButton('logout')} type="logout" />
+        <ProfileMainButton label="LogOut" handleClickMainButton={() => handleClickMainButton('logout')} type="logout" />
       </div>
       <div className="mt-6">
         <ProfileMainButton
