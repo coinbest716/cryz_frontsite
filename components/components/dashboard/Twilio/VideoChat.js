@@ -211,12 +211,12 @@ const VideoChat = props => {
                 background: '#000',
               }}
             >
-              <div style={{ width: screenWidth - 32, height: screenHeight - 64 }}>
+              <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
                 <SelfVideo
                   key={room.localParticipant.sid}
                   participant={room.localParticipant}
                   width={screenWidth - 32}
-                  height={screenHeight - 64}
+                  height={(screenWidth - 32) * 0.56}
                   cameraEnabled={cameraStatus}
                   audioEnabled={micStatus}
                 />
@@ -241,18 +241,22 @@ const VideoChat = props => {
                   width: '100%',
                   height: '90px',
                   background: '#708393',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingLeft: '20px',
+                  paddingRight: '20px',
                 }}
               >
-                <Image
-                  src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
-                  className="cursor-pointer"
-                  width={60}
-                  height={50}
-                  alt="Silence"
-                  onClick={() => controlMic()}
-                />
-
-                <div className="app-streaming-camera-button">
+                <div className="flex justify-start">
+                  <Image
+                    src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                    className="cursor-pointer"
+                    width={60}
+                    height={50}
+                    alt="Silence"
+                    onClick={() => controlMic()}
+                  />
                   <Image
                     src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
                     className="cursor-pointer"
@@ -266,9 +270,6 @@ const VideoChat = props => {
                 {showCloseBtn ? (
                   <div
                     style={{
-                      position: 'absolute',
-                      top: 12,
-                      right: 10,
                       width: '120px',
                       height: '40px',
                       background: '#F86C6B',
