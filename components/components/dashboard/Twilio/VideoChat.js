@@ -29,7 +29,7 @@ const text_styles = {
 
 const VideoChat = props => {
   // const { sessionId } = useParams()
-  const { sessionId, viewport } = props
+  const { sessionId, viewport, onChangeRoom } = props
   const handle = useFullScreenHandle()
 
   const [participants, setParticipants] = useState([])
@@ -100,6 +100,7 @@ const VideoChat = props => {
       room.on('participantConnected', participantConnected)
       room.on('participantDisconnected', participantDisconnected)
       room.participants.forEach(participantConnected)
+      onChangeRoom(room)
       return () => {
         room.off('participantConnected', participantConnected)
         room.off('participantDisconnected', participantDisconnected)
