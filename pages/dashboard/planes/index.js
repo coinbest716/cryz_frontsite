@@ -13,6 +13,8 @@ import 'react-calendar/dist/Calendar.css'
 import toast from 'react-hot-toast'
 import { Auth } from 'aws-amplify'
 import moment from 'moment'
+import 'react-perfect-scrollbar/dist/css/styles.css'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -413,23 +415,28 @@ const Planes = () => {
                     }}
                   />
                 </div>
-                {plansOnlineData?.routine?.sections?.map((item, index) => (
-                  <div key={index}>
-                    <div className={styles.videoMaterialTitle + ' pt-8'}>{item.name}</div>
-                    <div className={'pt-7'}>
-                      {item.videos.map((video, index) => (
-                        <div className={'py-2'} key={index}>
-                          <Material
-                            item={video}
-                            selectedVideo={selectedVideo}
-                            /*type={'green'}*/
-                            onClick={data => setSelectedVideo(data)}
-                          />
+                {/* sub video list */}
+                <div className={styles.subVideoArea + ' pt-4'}>
+                  <PerfectScrollbar>
+                    {plansOnlineData?.routine?.sections?.map((item, index) => (
+                      <div key={index} className="py-4">
+                        <div className={styles.videoMaterialTitle}>{item.name}</div>
+                        <div className={'pt-7'}>
+                          {item.videos.map((video, index) => (
+                            <div className={'py-2'} key={index}>
+                              <Material
+                                item={video}
+                                selectedVideo={selectedVideo}
+                                /*type={'green'}*/
+                                onClick={data => setSelectedVideo(data)}
+                              />
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+                      </div>
+                    ))}
+                  </PerfectScrollbar>
+                </div>
               </div>
             </div>
           </div>

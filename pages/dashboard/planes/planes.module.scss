@@ -62,8 +62,11 @@
 .reactPlayer {
   video {
     border-radius: 10px;
-    max-height: 600px;
+    max-height: 400px;
   }
+}
+.subVideoArea {
+  height: calc(100vh - 48px - 70px - 50px - 40px - 16px - 40px - 25px - 232px);
 }
 .videoMaterialTitle {
   color: #333333;
@@ -72,7 +75,7 @@
   font-weight: 600;
   letter-spacing: 0.5px;
   line-height: 15px;
-  padding: 15% 0px 0px 0px;
+  padding: 15px 0px 0px 0px;
 }
 .monthName {
   color: #333333;
@@ -145,7 +148,7 @@
   letter-spacing: 0.7px;
   color: $blue-gray-400-color;
 }
-.planonline_text{
+.planonline_text {
   color: #222222;
   font-family: Montserrat;
   font-size: 14px;
