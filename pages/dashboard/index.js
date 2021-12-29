@@ -531,7 +531,7 @@ const Dashboard = props => {
           )}
           <div className={'grid grid-cols-12 gap-7 '}>
             {viewport !== 'mobile' && (
-              <div className={'col-span-12 md:col-span-6'}>
+              <div className={'col-span-12 lg:col-span-6'}>
                 <div
                   className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
                   // onClick={() => handleClickRedirect('calendar')}
@@ -551,7 +551,7 @@ const Dashboard = props => {
                 </div>
               </div>
             )}
-            <div className={'col-span-12 md:col-span-6'}>
+            <div className={'col-span-12 lg:col-span-6'}>
               <div
                 className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
                 onClick={() => handleClickRedirect('bonos')}
@@ -662,6 +662,27 @@ const Dashboard = props => {
             </div>
           </div>
         </div>
+        {viewport === 'mobile' && (
+          <div className={'col-span-12 mb-40'}>
+            <div
+              className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
+              // onClick={() => handleClickRedirect('calendar')}
+            >
+              <Calendar
+                className={styles.calendar}
+                onChange={handleChangeDate}
+                value={calendarValue}
+                locale="es"
+                tileClassName={({ date, view }) => {
+                  if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                    return 'highlight'
+                  }
+                }}
+                navigationLabel={({ label }) => updateCalendarLabel(label)}
+              ></Calendar>
+            </div>
+          </div>
+        )}
       </div>
       {showQuestionnaire && <Questionnaire onClick={() => handleDisableQuestionnarie()} viewport={viewport} />}
     </div>
