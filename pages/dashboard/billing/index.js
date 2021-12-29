@@ -211,14 +211,30 @@ const Billing = props => {
   }
 
   const handleMobileEditAddress = bill_id => {
-    console.log(bill_id)
     router.push({
       pathname: '/dashboard/billing/bill-item',
       query: { bill_id: bill_id },
     })
   }
   const handleMobileDeleteAddress = bill_id => {
-    console.log(bill_id)
+    const variables = {
+      id: bill_id,
+    }
+    dispatch({ type: 'set', isLoading: true })
+    deletePatientBillByDashboard({
+      variables: variables,
+    })
+      .then(response => {
+        if (response.data.deletePatientBillByDashboard) {
+          toast.success('Successfully deleted bill information!')
+          getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+        }
+        dispatch({ type: 'set', isLoading: false })
+      })
+      .catch(error => {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(error.message)
+      })
   }
 
   return (

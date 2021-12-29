@@ -47,6 +47,8 @@ const BillItem = props => {
   const [getPatientBillByDashboardById, { data: billData, loading: billLoading, error: billError }] = useLazyQuery(
     graphql.queries.getPatientBillByDashboardById
   )
+  const [updatePatientBillByDashboard] = useMutation(graphql.mutations.updatePatientBillByDashboard)
+  const [createPatientBillByDashboard] = useMutation(graphql.mutations.createPatientBillByDashboard)
 
   useEffect(() => {
     if (router.query.bill_id > -1) {
@@ -111,7 +113,54 @@ const BillItem = props => {
   }
 
   const handleSaveBillAddress = () => {
-    console.log('handleSaveBillAddress')
+    if (billItem.name === '' || billItem.cif === '' || billItem.address === '' || billItem.province === '') {
+      toast.error('Please input data!')
+      return
+    }
+    dispatch({ type: 'set', isLoading: true })
+    const variables = {
+      patient_id: Number(localStorage.getItem('patient_id')),
+      type: 'bill',
+      title: billItem.addressAlias,
+      name: billItem.name + ' ' + billItem.surname,
+      cif: billItem.cif,
+      email: billItem.email,
+      mobile: '',
+      address: billItem.address,
+      province: billItem.province,
+      population: billItem.population,
+      postal_code: billItem.postalCode,
+      country: billItem.country,
+    }
+    if (billItem.id > -1) {
+      updatePatientBillByDashboard({
+        variables: { ...variables, id: billItem.id },
+      })
+        .then(response => {
+          if (response.data.updatePatientBillByDashboard) {
+            toast.success('Successfully save bill information!')
+          }
+          dispatch({ type: 'set', isLoading: false })
+        })
+        .catch(error => {
+          dispatch({ type: 'set', isLoading: false })
+          toast.error(error.message)
+        })
+    } else {
+      createPatientBillByDashboard({
+        variables: variables,
+      })
+        .then(response => {
+          if (response.data.createPatientBillByDashboard) {
+            toast.success('Successfully save bill information!')
+          }
+          dispatch({ type: 'set', isLoading: false })
+        })
+        .catch(error => {
+          dispatch({ type: 'set', isLoading: false })
+          toast.error(error.message)
+        })
+    }
   }
 
   const handleClickBack = () => {
