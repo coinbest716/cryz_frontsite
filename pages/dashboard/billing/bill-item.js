@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 // redux
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // custom components
-import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
-// import Profile from 'components/components/dashboard/Profile'
-import DashboardButton from 'components/components/dashboard/DashboardButton'
-import CommonText from 'components/components/purchase/CommonText'
-import CommonButton from 'components/components/purchase/CommonButton'
-import MobileBillCard from 'components/components/dashboard/billing/MobileBillCard'
+
 import ProfileCommonText from 'components/components/dashboard/profile/ProfileCommonText'
 
 import { useMutation, useLazyQuery } from '@apollo/client'
@@ -21,7 +15,7 @@ import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
-import plusWhite from 'public/images/plus-white.svg'
+
 // styles
 import styles from './bill-item.module.scss'
 
@@ -47,10 +41,7 @@ const BillItem = props => {
   const [getPatientBillByDashboardById, { data: billData, loading: billLoading, error: billError }] = useLazyQuery(
     graphql.queries.getPatientBillByDashboardById
   )
-  const [getPatientBillByDashboard, { data: billDataList, loading: billListLoading, error: billListError }] =
-    useLazyQuery(graphql.queries.getPatientBillByDashboard)
   const [updatePatientBillByDashboard] = useMutation(graphql.mutations.updatePatientBillByDashboard)
-  const [createPatientBillByDashboard] = useMutation(graphql.mutations.createPatientBillByDashboard)
 
   useEffect(() => {
     if (router.query.bill_id > -1) {
@@ -141,9 +132,9 @@ const BillItem = props => {
         .then(response => {
           if (response.data.updatePatientBillByDashboard) {
             const data = response.data.updatePatientBillByDashboard
-            toast.success('Successfully save bill information!')
+            toast.success('Successfully updated bill information!')
             getPatientBillByDashboardById({ variables: { bill_id: data.id } })
-            // getPatientBillByDashboard({ variables: { patient_id: data.patient_id } })
+            router.push('/dashboard/billing')
           }
           dispatch({ type: 'set', isLoading: false })
         })
@@ -152,28 +143,12 @@ const BillItem = props => {
           toast.error(error.message)
         })
     } else {
-      createPatientBillByDashboard({
-        variables: variables,
-      })
-        .then(response => {
-          if (response.data.createPatientBillByDashboard) {
-            const data = response.data.createPatientBillByDashboard
-            toast.success('Successfully save bill information!')
-            getPatientBillByDashboardById({ variables: { bill_id: data.id } })
-            // getPatientBillByDashboard({ variables: { patient_id: data.patient_id } })
-          }
-          dispatch({ type: 'set', isLoading: false })
-        })
-        .catch(error => {
-          dispatch({ type: 'set', isLoading: false })
-          toast.error(error.message)
-        })
+      router.push({ pathname: '/dashboard/billing', query: variables })
     }
   }
 
   const handleClickBack = () => {
-    // router.push('/dashboard/billing/')
-    router.push('/dashboard/billing', undefined, { shallow: true })
+    router.push('/dashboard/billing')
   }
 
   return (

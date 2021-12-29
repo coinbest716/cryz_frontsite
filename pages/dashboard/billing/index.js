@@ -75,6 +75,24 @@ const Billing = props => {
       router.push('/dashboard/profile')
     }
     getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+    if (router.query) {
+      const variables = { ...router.query, patient_id: Number(localStorage.getItem('patient_id')) }
+      createPatientBillByDashboard({
+        variables: variables,
+      })
+        .then(response => {
+          if (response.data.createPatientBillByDashboard) {
+            toast.success('Successfully save bill information!')
+            getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+            router.push('/dashboard/billing', undefined, { shallow: true })
+          }
+          dispatch({ type: 'set', isLoading: false })
+        })
+        .catch(error => {
+          dispatch({ type: 'set', isLoading: false })
+          toast.error(error.message)
+        })
+    }
   }, [])
 
   useEffect(() => {
