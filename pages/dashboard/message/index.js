@@ -36,7 +36,7 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import router from 'next/router'
 
-const Message = () => {
+const Message = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -54,6 +54,7 @@ const Message = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const [currentPatient, setCurrentPatient] = useState({})
   const today = useSelector(state => state.today)
   const [userList, setUserForMessage] = useState([])
@@ -157,25 +158,29 @@ const Message = () => {
   }, [subMessageListLoading, subMessageListData, subMessageListError])
 
   const handleSelectSubject = data => {
-    setNewMessageBool(false)
-    setSelectedSubject(data)
-    let object = {}
-    object.attachment = []
-    object.content = ''
-    object.from_email = currentPatient.email
-    object.from_id = currentPatient.id
-    object.from_name = currentPatient.name + ' ' + currentPatient.lastname
-    object.from_type = 'patient'
-    object.request_id = data.id
-    object.subject = data.subject
-    object.to_email = data.from_email
-    object.to_id = data.from_id
-    object.to_name = data.from_name
-    object.to_type = 'user'
-    setNewMessage(object)
-    getSubMessagesByDashboard({
-      variables: { message_id: data.id },
-    })
+    if (viewport !== 'mobile') {
+      setNewMessageBool(false)
+      setSelectedSubject(data)
+      let object = {}
+      object.attachment = []
+      object.content = ''
+      object.from_email = currentPatient.email
+      object.from_id = currentPatient.id
+      object.from_name = currentPatient.name + ' ' + currentPatient.lastname
+      object.from_type = 'patient'
+      object.request_id = data.id
+      object.subject = data.subject
+      object.to_email = data.from_email
+      object.to_id = data.from_id
+      object.to_name = data.from_name
+      object.to_type = 'user'
+      setNewMessage(object)
+      getSubMessagesByDashboard({
+        variables: { message_id: data.id },
+      })
+    } else {
+      console.log('You click subject in mobile view.')
+    }
   }
 
   const handleSelectUser = item => {
@@ -239,7 +244,7 @@ const Message = () => {
     }
   }, [scrollEl, subMessageList])
 
-  return (
+  return viewport !== 'mobile' ? (
     <div className={globalStyles.dashContainer}>
       {/* header part */}
       <div className={'w-full flex flex-wrap justify-between items-center'}>
@@ -258,9 +263,9 @@ const Message = () => {
           {/* professional area */}
           <div className={styles.professionalArea}>
             <ProfessionalCard
-              data={userList}
               dropdownButtonHover={dropdownButtonHover}
               onClickButton={bool => setDropdownButtonHover(bool)}
+              viewport={viewport}
             />
           </div>
           {/* dropdown menu part */}
@@ -349,6 +354,49 @@ const Message = () => {
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  ) : (
+    <div className={'w-full relative'}>
+      {/* professional area */}
+      <div>
+        <ProfessionalCard
+          dropdownButtonHover={dropdownButtonHover}
+          onClickButton={bool => setDropdownButtonHover(bool)}
+          viewport={viewport}
+        />
+      </div>
+      {/* dropdown menu part */}
+      {dropdownButtonHover ? (
+        <div className={styles.dropMenuArea} onClick={() => setDropdownButtonHover(false)}>
+          {userList.length !== 0 ? (
+            userList.map((item, index) => {
+              return (
+                <div key={index} className={styles.dropMenuItemArea} onClick={() => handleSelectUser(item)}>
+                  {item.name} {item.lastname}
+                </div>
+              )
+            })
+          ) : (
+            <div className={styles.dropMenuItemArea}>There is no trainer</div>
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
+      {/* message area */}
+      <div className={styles.subjectArea}>
+        <PerfectScrollbar>
+          {messageList.length !== 0 &&
+            messageList.map((item, index) => (
+              <SubjectCard
+                data={item}
+                key={index}
+                active={selectedSubject.id === item.id ? true : false}
+                onClick={() => handleSelectSubject(item)}
+              />
+            ))}
+        </PerfectScrollbar>
       </div>
     </div>
   )

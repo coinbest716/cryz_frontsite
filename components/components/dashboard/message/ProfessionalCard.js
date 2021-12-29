@@ -10,7 +10,7 @@ import TrashIcon from 'assets/images/trash.svg'
 import styles from './ProfessionalCard.module.scss'
 
 const ProfessionalCard = props => {
-  const { data, dropdownButtonHover, onClickButton } = props
+  const { dropdownButtonHover, onClickButton, viewport } = props
   const [hover, setHover] = useState(false)
   const onMouseOver = () => {
     setHover(true)
@@ -25,7 +25,7 @@ const ProfessionalCard = props => {
     setHover(!hover)
     onClickButton(true)
   }
-  return (
+  return viewport !== 'mobile' ? (
     <div className={styles.container}>
       <div
         className={dropdownButtonHover ? styles.newMessageButtonHover : styles.newMessageButton}
@@ -35,9 +35,27 @@ const ProfessionalCard = props => {
       >
         <div style={{ fontSize: '20px', marginTop: '-5px', marginRight: '5px' }}>+</div>Nuevo mensaje
       </div>
-      <div className={'grid justify-center items-center'}>
-        <Image src={TrashIcon} alt={''} width={31} height={31} />
+      {viewport !== 'mobile' && (
+        <div className={'grid justify-center items-center'}>
+          <Image src={TrashIcon} alt={''} width={31} height={31} />
+        </div>
+      )}
+    </div>
+  ) : (
+    <div className={styles.container}>
+      <div
+        className={dropdownButtonHover ? styles.mobileNewMessageButtonHover : styles.mobileNewMessageButton}
+        onMouseOver={() => onMouseOver(true)}
+        onMouseLeave={() => onMouseLeave(false)}
+        onClick={() => onClick(true)}
+      >
+        <div style={{ fontSize: '20px', marginTop: '-5px' }}>+</div>Nuevo mensaje
       </div>
+      {viewport !== 'mobile' && (
+        <div className={'grid justify-center items-center'}>
+          <Image src={TrashIcon} alt={''} width={31} height={31} />
+        </div>
+      )}
     </div>
   )
 }

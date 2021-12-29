@@ -43,3 +43,40 @@
   color: $white-color;
   background-color: $blue-gray-400-color;
 }
+
+.mobileNewMessageButton {
+  width: 153px;
+  height: 44px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 22px;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  color: $blue-gray-400-color;
+  &:hover {
+    color: $white-color;
+    background-color: $blue-gray-400-color;
+  }
+}
+
+.mobileNewMessageButtonHover {
+  width: 153px;
+  height: 44px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 22px;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  color: $white-color;
+  background-color: $blue-gray-400-color;
+}
