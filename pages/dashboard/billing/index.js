@@ -115,7 +115,6 @@ const Billing = props => {
   }
 
   const handleSaveAddress = index => {
-    console.log('handleSaveAddress', index)
     const data = billDataList[index]
     if (data.name === '' || data.cif === '') {
       toast.error('Please input data!')

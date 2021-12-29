@@ -47,12 +47,14 @@ const BillItem = props => {
   const [getPatientBillByDashboardById, { data: billData, loading: billLoading, error: billError }] = useLazyQuery(
     graphql.queries.getPatientBillByDashboardById
   )
+  const [getPatientBillByDashboard, { data: billDataList, loading: billListLoading, error: billListError }] =
+    useLazyQuery(graphql.queries.getPatientBillByDashboard)
   const [updatePatientBillByDashboard] = useMutation(graphql.mutations.updatePatientBillByDashboard)
   const [createPatientBillByDashboard] = useMutation(graphql.mutations.createPatientBillByDashboard)
 
   useEffect(() => {
     if (router.query.bill_id > -1) {
-      getPatientBillByDashboardById({ variables: { bill_id: router.query.bill_id } })
+      getPatientBillByDashboardById({ variables: { bill_id: Number(router.query.bill_id) } })
     }
   }, [])
 
@@ -138,7 +140,10 @@ const BillItem = props => {
       })
         .then(response => {
           if (response.data.updatePatientBillByDashboard) {
+            const data = response.data.updatePatientBillByDashboard
             toast.success('Successfully save bill information!')
+            getPatientBillByDashboardById({ variables: { bill_id: data.id } })
+            // getPatientBillByDashboard({ variables: { patient_id: data.patient_id } })
           }
           dispatch({ type: 'set', isLoading: false })
         })
@@ -152,7 +157,10 @@ const BillItem = props => {
       })
         .then(response => {
           if (response.data.createPatientBillByDashboard) {
+            const data = response.data.createPatientBillByDashboard
             toast.success('Successfully save bill information!')
+            getPatientBillByDashboardById({ variables: { bill_id: data.id } })
+            // getPatientBillByDashboard({ variables: { patient_id: data.patient_id } })
           }
           dispatch({ type: 'set', isLoading: false })
         })
@@ -164,7 +172,8 @@ const BillItem = props => {
   }
 
   const handleClickBack = () => {
-    router.push('/dashboard/billing/')
+    // router.push('/dashboard/billing/')
+    router.push('/dashboard/billing', undefined, { shallow: true })
   }
 
   return (
