@@ -158,25 +158,29 @@ const Message = props => {
   }, [subMessageListLoading, subMessageListData, subMessageListError])
 
   const handleSelectSubject = data => {
-    setNewMessageBool(false)
-    setSelectedSubject(data)
-    let object = {}
-    object.attachment = []
-    object.content = ''
-    object.from_email = currentPatient.email
-    object.from_id = currentPatient.id
-    object.from_name = currentPatient.name + ' ' + currentPatient.lastname
-    object.from_type = 'patient'
-    object.request_id = data.id
-    object.subject = data.subject
-    object.to_email = data.from_email
-    object.to_id = data.from_id
-    object.to_name = data.from_name
-    object.to_type = 'user'
-    setNewMessage(object)
-    getSubMessagesByDashboard({
-      variables: { message_id: data.id },
-    })
+    if (viewport !== 'mobile') {
+      setNewMessageBool(false)
+      setSelectedSubject(data)
+      let object = {}
+      object.attachment = []
+      object.content = ''
+      object.from_email = currentPatient.email
+      object.from_id = currentPatient.id
+      object.from_name = currentPatient.name + ' ' + currentPatient.lastname
+      object.from_type = 'patient'
+      object.request_id = data.id
+      object.subject = data.subject
+      object.to_email = data.from_email
+      object.to_id = data.from_id
+      object.to_name = data.from_name
+      object.to_type = 'user'
+      setNewMessage(object)
+      getSubMessagesByDashboard({
+        variables: { message_id: data.id },
+      })
+    } else {
+      console.log('You click subject in mobile view.')
+    }
   }
 
   const handleSelectUser = item => {
@@ -380,6 +384,20 @@ const Message = props => {
       ) : (
         <></>
       )}
+      {/* message area */}
+      <div className={styles.subjectArea}>
+        <PerfectScrollbar>
+          {messageList.length !== 0 &&
+            messageList.map((item, index) => (
+              <SubjectCard
+                data={item}
+                key={index}
+                active={selectedSubject.id === item.id ? true : false}
+                onClick={() => handleSelectSubject(item)}
+              />
+            ))}
+        </PerfectScrollbar>
+      </div>
     </div>
   )
 }
