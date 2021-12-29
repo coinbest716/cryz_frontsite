@@ -44,13 +44,13 @@ const BillItem = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  const [getPatientBillByDashboard, { data: billData, loading: billLoading, error: billError }] = useLazyQuery(
-    graphql.queries.getPatientBillByDashboard
+  const [getPatientBillByDashboardById, { data: billData, loading: billLoading, error: billError }] = useLazyQuery(
+    graphql.queries.getPatientBillByDashboardById
   )
 
   useEffect(() => {
     if (router.query.bill_id > -1) {
-      getPatientBillByDashboard({ variables: { bill_id: router.query.bill_id } })
+      getPatientBillByDashboardById({ variables: { bill_id: router.query.bill_id } })
     }
   }, [])
 
@@ -73,12 +73,20 @@ const BillItem = props => {
   useEffect(() => {
     if (viewport === 'desktop') {
       router.push('/dashboard/billing')
+    } else if (viewport === 'mobile') {
+      if (router.query.bill_id > -1) {
+        router.push({ pathname: '/dashboard/billing/bill-item', query: { bill_id: router.query.bill_id } }, undefined, {
+          shallow: true,
+        })
+      } else {
+        router.push('/dashboard/billing/bill-item')
+      }
     }
   }, [viewport])
 
   useEffect(() => {
-    if (!billError && billData && billData.getPatientBillByDashboard) {
-      const item = billData.getPatientBillByDashboard
+    if (!billError && billData && billData.getPatientBillByDashboardById) {
+      const item = billData.getPatientBillByDashboardById
       const _name = item.name.split(' ')
       const _billItem = {
         id: item.id,
