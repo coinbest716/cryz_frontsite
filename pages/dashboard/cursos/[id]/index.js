@@ -122,7 +122,7 @@ const Curso = () => {
                       </tr>
                     </thead>
                     <tbody key={`body-${index}`} className={'mt-4 ' + styles.tbody}>
-                      <tr className={1 % 2 === 1 ? 'bg-white' : ''} className={styles.h150}>
+                      <tr className={1 % 2 === 1 ? `bg-white ${styles.h150}` : `${styles.h150}`} >
                         <td className={'h-full relative'}>
                           <div
                             className={
