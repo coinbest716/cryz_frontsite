@@ -8,6 +8,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import toast from 'react-hot-toast'
 import { Auth } from 'aws-amplify'
+import moment from 'moment'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -198,6 +199,10 @@ const Message = props => {
     object.to_name = item.name + ' ' + item.lastname
     object.to_type = 'user'
     setNewMessage(object)
+    let obj = object
+    obj.create_date = moment(new Date()).format('YYYY-MM-DDTHH:mm:ssZ').split('+')[0]
+    let temp = messageList
+    setMessageList([obj].concat(temp))
     setSelectedSubject({})
     setNewMessageBool(true)
   }
