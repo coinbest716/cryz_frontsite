@@ -36,7 +36,7 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import router from 'next/router'
 
-const Message = () => {
+const Message = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -54,6 +54,7 @@ const Message = () => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const [currentPatient, setCurrentPatient] = useState({})
   const today = useSelector(state => state.today)
   const [userList, setUserForMessage] = useState([])
@@ -239,7 +240,7 @@ const Message = () => {
     }
   }, [scrollEl, subMessageList])
 
-  return (
+  return viewport !== 'mobile' ? (
     <div className={globalStyles.dashContainer}>
       {/* header part */}
       <div className={'w-full flex flex-wrap justify-between items-center'}>
@@ -258,9 +259,9 @@ const Message = () => {
           {/* professional area */}
           <div className={styles.professionalArea}>
             <ProfessionalCard
-              data={userList}
               dropdownButtonHover={dropdownButtonHover}
               onClickButton={bool => setDropdownButtonHover(bool)}
+              viewport={viewport}
             />
           </div>
           {/* dropdown menu part */}
@@ -350,6 +351,35 @@ const Message = () => {
           </div>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className={'w-full relative'}>
+      {/* professional area */}
+      <div>
+        <ProfessionalCard
+          dropdownButtonHover={dropdownButtonHover}
+          onClickButton={bool => setDropdownButtonHover(bool)}
+          viewport={viewport}
+        />
+      </div>
+      {/* dropdown menu part */}
+      {dropdownButtonHover ? (
+        <div className={styles.dropMenuArea} onClick={() => setDropdownButtonHover(false)}>
+          {userList.length !== 0 ? (
+            userList.map((item, index) => {
+              return (
+                <div key={index} className={styles.dropMenuItemArea} onClick={() => handleSelectUser(item)}>
+                  {item.name} {item.lastname}
+                </div>
+              )
+            })
+          ) : (
+            <div className={styles.dropMenuItemArea}>There is no trainer</div>
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }
