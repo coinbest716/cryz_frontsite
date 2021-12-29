@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
 // next components
-import Image from 'next/image'
+// import Image from 'next/image'
 
 // images
-import TrashIcon from 'assets/images/trash.svg'
+// import TrashIcon from 'assets/images/trash.svg'
 
 // styles
 import styles from './ProfessionalCard.module.scss'
@@ -35,11 +35,11 @@ const ProfessionalCard = props => {
       >
         <div style={{ fontSize: '20px', marginTop: '-5px', marginRight: '5px' }}>+</div>Nuevo mensaje
       </div>
-      {viewport !== 'mobile' && (
+      {/* {viewport !== 'mobile' && (
         <div className={'grid justify-center items-center'}>
           <Image src={TrashIcon} alt={''} width={31} height={31} />
         </div>
-      )}
+      )} */}
     </div>
   ) : (
     <div className={styles.container}>
@@ -51,11 +51,11 @@ const ProfessionalCard = props => {
       >
         <div style={{ fontSize: '20px', marginTop: '-5px' }}>+</div>Nuevo mensaje
       </div>
-      {viewport !== 'mobile' && (
+      {/* {viewport !== 'mobile' && (
         <div className={'grid justify-center items-center'}>
           <Image src={TrashIcon} alt={''} width={31} height={31} />
         </div>
-      )}
+      )} */}
     </div>
   )
 }
