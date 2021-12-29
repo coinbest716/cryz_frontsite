@@ -101,6 +101,7 @@ const Curso = () => {
       <div className={styles.yearArea}></div>
       {/* table part */}
       <div>
+        
         <PerfectScrollbar>
           <table className={'w-full table-auto'}>
             {course.lectures &&
@@ -121,7 +122,7 @@ const Curso = () => {
                       </tr>
                     </thead>
                     <tbody key={`body-${index}`} className={'mt-4 ' + styles.tbody}>
-                      <tr className={1 % 2 === 1 ? 'bg-white' : ''}>
+                      <tr className={1 % 2 === 1 ? 'bg-white' : ''} className={styles.h150}>
                         <td className={'h-full relative'}>
                           <div
                             className={
