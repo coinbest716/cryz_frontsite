@@ -205,12 +205,11 @@ const Billing = props => {
   const handleClickBack = () => {
     router.push('/dashboard/profile#main', undefined, { shallow: true })
   }
+
   const handleMobileAddAddress = () => {
-    router.push({
-      pathname: '/dashboard/billing/bill-item',
-      query: { bill_id: -1 },
-    })
+    router.push('/dashboard/billing/bill-item')
   }
+
   const handleMobileEditAddress = bill_id => {
     console.log(bill_id)
     router.push({

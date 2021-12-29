@@ -44,17 +44,15 @@ const BillItem = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  useEffect(() => {
-    if (router.query.bill_id > -1) {
-      console.log(router.query.bill_id)
-    }
-  }, [])
+  const [getPatientBillByDashboard, { data: billData, loading: billLoading, error: billError }] = useLazyQuery(
+    graphql.queries.getPatientBillByDashboard
+  )
 
   useEffect(() => {
-    if (viewport === 'desktop') {
-      router.push('/dashboard/billing')
+    if (router.query.bill_id > -1) {
+      getPatientBillByDashboard({ variables: { bill_id: router.query.bill_id } })
     }
-  }, [viewport])
+  }, [])
 
   // variables
   const [billItem, setBillItem] = useState({
@@ -71,6 +69,34 @@ const BillItem = props => {
     postalCode: '',
     collapse: false,
   })
+
+  useEffect(() => {
+    if (viewport === 'desktop') {
+      router.push('/dashboard/billing')
+    }
+  }, [viewport])
+
+  useEffect(() => {
+    if (!billError && billData && billData.getPatientBillByDashboard) {
+      const item = billData.getPatientBillByDashboard
+      const _name = item.name.split(' ')
+      const _billItem = {
+        id: item.id,
+        name: _name[0],
+        surname: _name[1],
+        cif: item.cif,
+        addressAlias: item.title,
+        email: item.email,
+        population: item.population,
+        address: item.address,
+        province: item.province,
+        country: item.country,
+        postalCode: item.postal_code,
+        collapse: true,
+      }
+      setBillItem(_billItem)
+    }
+  }, [billLoading, billData, billError])
 
   const handleChangeAddress = (event, key) => {
     setBillItem({ ...billItem, [key]: event.target.value })
