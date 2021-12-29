@@ -75,6 +75,24 @@ const Billing = props => {
       router.push('/dashboard/profile')
     }
     getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+    if (router.query) {
+      const variables = { ...router.query, patient_id: Number(localStorage.getItem('patient_id')) }
+      createPatientBillByDashboard({
+        variables: variables,
+      })
+        .then(response => {
+          if (response.data.createPatientBillByDashboard) {
+            toast.success('Successfully save bill information!')
+            getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+            router.push('/dashboard/billing', undefined, { shallow: true })
+          }
+          dispatch({ type: 'set', isLoading: false })
+        })
+        .catch(error => {
+          dispatch({ type: 'set', isLoading: false })
+          toast.error(error.message)
+        })
+    }
   }, [])
 
   useEffect(() => {
@@ -115,7 +133,6 @@ const Billing = props => {
   }
 
   const handleSaveAddress = index => {
-    console.log('handleSaveAddress', index)
     const data = billDataList[index]
     if (data.name === '' || data.cif === '') {
       toast.error('Please input data!')
@@ -205,21 +222,36 @@ const Billing = props => {
   const handleClickBack = () => {
     router.push('/dashboard/profile#main', undefined, { shallow: true })
   }
+
   const handleMobileAddAddress = () => {
-    router.push({
-      pathname: '/dashboard/billing/bill-item',
-      query: { bill_id: -1 },
-    })
+    router.push('/dashboard/billing/bill-item')
   }
+
   const handleMobileEditAddress = bill_id => {
-    console.log(bill_id)
     router.push({
       pathname: '/dashboard/billing/bill-item',
       query: { bill_id: bill_id },
     })
   }
   const handleMobileDeleteAddress = bill_id => {
-    console.log(bill_id)
+    const variables = {
+      id: bill_id,
+    }
+    dispatch({ type: 'set', isLoading: true })
+    deletePatientBillByDashboard({
+      variables: variables,
+    })
+      .then(response => {
+        if (response.data.deletePatientBillByDashboard) {
+          toast.success('Successfully deleted bill information!')
+          getPatientBillByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+        }
+        dispatch({ type: 'set', isLoading: false })
+      })
+      .catch(error => {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(error.message)
+      })
   }
 
   return (

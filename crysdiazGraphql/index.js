@@ -25,6 +25,7 @@ import {
 import { GetAcademy, GetAcademyById, GetAcademyWithPlazas, GetAcademyWithPlazasById } from './academy.gql'
 import {
   GetPatientBillByDashboard,
+  GetPatientBillByDashboardById,
   CreatePatientBillByDashboard,
   UpdatePatientBillByDashboard,
   DeletePatientBillByDashboard,
@@ -118,6 +119,7 @@ export default {
 
     // billing part
     getPatientBillByDashboard: GetPatientBillByDashboard,
+    getPatientBillByDashboardById: GetPatientBillByDashboardById,
 
     // dashboard part
     getSessionsByDashboard: GetSessionsByDashboard,

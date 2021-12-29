@@ -256,6 +256,8 @@ const Planes = () => {
             } else if (new Date() > newArray[i - 1] && new Date() < newArray[i]) {
               setDate(newArray[i - 1])
               break
+            } else {
+              setDate(newArray[i])
             }
           }
           setBool(true)
@@ -275,15 +277,27 @@ const Planes = () => {
         array.push(new Date(item.split('-')[2], item.split('-')[1] - 1, item.split('-')[0]))
       )
       const newArray = array.sort((a, b) => a - b)
-      for (let i = 1; i < newArray.length; i++) {
-        if (value < newArray[i - 1]) {
-          setDate(newArray[i - 1])
+      let temp = new Date()
+      for (let i = 0; i < newArray.length; i++) {
+        if (value.getTime() < newArray[i].getTime()) {
+          if (i === 0) {
+            temp = newArray[0]
+            break
+          } else {
+            temp = newArray[i - 1]
+          }
+        } else if (value.getTime() === newArray[i].getTime()) {
+          temp = newArray[i]
           break
-        } else if (value > newArray[i - 1] && value < newArray[i]) {
-          setDate(newArray[i - 1])
-          break
+        } else {
+          if (value.getTime() > newArray[i - 1]) {
+            temp = newArray[i]
+          } else {
+            temp = newArray[i - 1]
+          }
         }
       }
+      setDate(temp)
     }
     setShowCalendar(true)
   }

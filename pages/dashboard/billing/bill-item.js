@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 // redux
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 // custom components
-import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
-// import Profile from 'components/components/dashboard/Profile'
-import DashboardButton from 'components/components/dashboard/DashboardButton'
-import CommonText from 'components/components/purchase/CommonText'
-import CommonButton from 'components/components/purchase/CommonButton'
-import MobileBillCard from 'components/components/dashboard/billing/MobileBillCard'
+
 import ProfileCommonText from 'components/components/dashboard/profile/ProfileCommonText'
 
 import { useMutation, useLazyQuery } from '@apollo/client'
@@ -21,7 +15,7 @@ import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
-import plusWhite from 'public/images/plus-white.svg'
+
 // styles
 import styles from './bill-item.module.scss'
 
@@ -44,17 +38,16 @@ const BillItem = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  useEffect(() => {
-    if (router.query.bill_id > -1) {
-      console.log(router.query.bill_id)
-    }
-  }, [])
+  const [getPatientBillByDashboardById, { data: billData, loading: billLoading, error: billError }] = useLazyQuery(
+    graphql.queries.getPatientBillByDashboardById
+  )
+  const [updatePatientBillByDashboard] = useMutation(graphql.mutations.updatePatientBillByDashboard)
 
   useEffect(() => {
-    if (viewport === 'desktop') {
-      router.push('/dashboard/billing')
+    if (router.query.bill_id > -1) {
+      getPatientBillByDashboardById({ variables: { bill_id: Number(router.query.bill_id) } })
     }
-  }, [viewport])
+  }, [])
 
   // variables
   const [billItem, setBillItem] = useState({
@@ -72,16 +65,90 @@ const BillItem = props => {
     collapse: false,
   })
 
+  useEffect(() => {
+    if (viewport === 'desktop') {
+      router.push('/dashboard/billing')
+    } else if (viewport === 'mobile') {
+      if (router.query.bill_id > -1) {
+        router.push({ pathname: '/dashboard/billing/bill-item', query: { bill_id: router.query.bill_id } }, undefined, {
+          shallow: true,
+        })
+      } else {
+        router.push('/dashboard/billing/bill-item')
+      }
+    }
+  }, [viewport])
+
+  useEffect(() => {
+    if (!billError && billData && billData.getPatientBillByDashboardById) {
+      const item = billData.getPatientBillByDashboardById
+      const _name = item.name.split(' ')
+      const _billItem = {
+        id: item.id,
+        name: _name[0],
+        surname: _name[1],
+        cif: item.cif,
+        addressAlias: item.title,
+        email: item.email,
+        population: item.population,
+        address: item.address,
+        province: item.province,
+        country: item.country,
+        postalCode: item.postal_code,
+        collapse: true,
+      }
+      setBillItem(_billItem)
+    }
+  }, [billLoading, billData, billError])
+
   const handleChangeAddress = (event, key) => {
     setBillItem({ ...billItem, [key]: event.target.value })
   }
 
   const handleSaveBillAddress = () => {
-    console.log('handleSaveBillAddress')
+    if (billItem.name === '' || billItem.cif === '' || billItem.address === '' || billItem.province === '') {
+      toast.error('Please input data!')
+      return
+    }
+    dispatch({ type: 'set', isLoading: true })
+    const variables = {
+      patient_id: Number(localStorage.getItem('patient_id')),
+      type: 'bill',
+      title: billItem.addressAlias,
+      name: billItem.name + ' ' + billItem.surname,
+      cif: billItem.cif,
+      email: billItem.email,
+      mobile: '',
+      address: billItem.address,
+      province: billItem.province,
+      population: billItem.population,
+      postal_code: billItem.postalCode,
+      country: billItem.country,
+    }
+    if (billItem.id > -1) {
+      updatePatientBillByDashboard({
+        variables: { ...variables, id: billItem.id },
+      })
+        .then(response => {
+          if (response.data.updatePatientBillByDashboard) {
+            const data = response.data.updatePatientBillByDashboard
+            toast.success('Successfully updated bill information!')
+            getPatientBillByDashboardById({ variables: { bill_id: data.id } })
+            router.push('/dashboard/billing')
+          }
+          dispatch({ type: 'set', isLoading: false })
+        })
+        .catch(error => {
+          dispatch({ type: 'set', isLoading: false })
+          toast.error(error.message)
+        })
+    } else {
+      router.push({ pathname: '/dashboard/billing', query: variables })
+    }
   }
 
   const handleClickBack = () => {
-    router.push('/dashboard/billing/')
+    router.push('/dashboard/billing')
   }
 
   return (

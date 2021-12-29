@@ -65,10 +65,14 @@ const ContactFooter = props => {
       </div>
 
       <div className={'w-full flex flex-wrap justify-center items-center'}>
-        <div className={globalStyles.container + ' flex justify-center ' + (viewport === 'mobile' ? ' ' : ' pt-7')}>
-          <div className={'flex items-center' + (viewport === 'mobile' ? ' justify-center' : ' justify-between')}>
-            <div className={styles.text}>
-              <div className={'flex flex-wrap justify-between'} style={{ width: '500px' }}>
+        <div
+          className={globalStyles.container + ' w-full flex justify-center ' + (viewport === 'mobile' ? ' ' : ' pt-7')}
+        >
+          <div
+            className={'w-full flex items-center' + (viewport === 'mobile' ? ' justify-center' : ' justify-between')}
+          >
+            <div className={styles.text + ' w-full'}>
+              <div className={'w-full flex flex-wrap justify-between'} style={{ maxWidth: '500px' }}>
                 <Link href={'/docs/terms'} passHref>
                   <p>Terminos y Condiciones</p>
                 </Link>
