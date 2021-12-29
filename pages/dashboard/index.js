@@ -429,7 +429,7 @@ const Dashboard = props => {
   return (
     <div className={'w-full ' + styles.container}>
       <div className={'grid grid-cols-12'}>
-        <div className={'col-span-12 lg:col-span-8 pb-16 py-4 lg:py-16 px-4 lg:px-9'}>
+        <div className={'col-span-12 lg:col-span-8 pb-0 lg:pb-16 py-4 lg:py-16 px-4 lg:px-9'}>
           <div className={'flex justify-between items-center'}>
             {viewport !== 'mobile' && (
               <div>
@@ -666,9 +666,9 @@ const Dashboard = props => {
         )}
 
         {viewport === 'mobile' && (
-          <div className="col-span-12 lg:col-span-8 pb-16 py-4 lg:py-16 px-4 lg:px-9">
+          <div className="col-span-12 lg:col-span-8 py-4 lg:py-16 px-4 lg:px-9">
             <div className={'grid grid-cols-12'}>
-              <div className={'col-span-6 px-9 py-10 w-full flex flex-wrap justify-center'}>
+              <div className={'col-span-6 px-9 w-full flex flex-wrap justify-center'}>
                 <div className={styles.highBoldLabel + ' w-full flex justify-center items-center'}>Perfil</div>
                 <div className={'w-full pt-7 flex justify-center'}>
                   <div
@@ -686,7 +686,7 @@ const Dashboard = props => {
                   </div>
                 </div>
               </div>
-              <div className={'col-span-6 px-9 py-10'}>
+              <div className={'col-span-6 px-9'}>
                 <div
                   className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
                   onClick={() => handleClickRedirect('bonos')}
