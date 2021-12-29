@@ -358,6 +358,7 @@ const Message = props => {
     </div>
   ) : (
     <div className={'w-full relative'}>
+      {/* mobile view */}
       {/* professional area */}
       <div>
         <ProfessionalCard
