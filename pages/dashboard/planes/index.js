@@ -398,7 +398,6 @@ const Planes = () => {
                   </div>
                 </div>
                 <div className={'calendarWrapper'}>
-                  {date.toString()}
                   <Calendar
                     className={showCalendar ? '' : 'hidden'}
                     value={date}
