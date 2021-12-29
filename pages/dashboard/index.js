@@ -529,8 +529,8 @@ const Dashboard = props => {
           ) : (
             <></>
           )}
-          {viewport !== 'mobile' && (
-            <div className={'grid grid-cols-12 gap-7 '}>
+          <div className={'grid grid-cols-12 gap-7 '}>
+            {viewport !== 'mobile' && (
               <div className={'col-span-12 lg:col-span-6'}>
                 <div
                   className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
@@ -550,28 +550,28 @@ const Dashboard = props => {
                   ></Calendar>
                 </div>
               </div>
-              <div className={'col-span-12 lg:col-span-6'}>
-                <div
-                  className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
-                  onClick={() => handleClickRedirect('bonos')}
-                >
-                  <div className={'flex justify-between items-center'}>
-                    <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
-                    <div className={'text-center '}>
-                      <Image src={bonosIcon} alt="" width={50} height={50} />
+            )}
+            <div className={'col-span-12 lg:col-span-6'}>
+              <div
+                className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
+                onClick={() => handleClickRedirect('bonos')}
+              >
+                <div className={'flex justify-between items-center'}>
+                  <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
+                  <div className={'text-center '}>
+                    <Image src={bonosIcon} alt="" width={50} height={50} />
+                  </div>
+                </div>
+                <div>
+                  {purchaseData.map((item, index) => (
+                    <div className={'py-3 h-full pt-6'} key={index}>
+                      <ProgressBar data={item} />
                     </div>
-                  </div>
-                  <div>
-                    {purchaseData.map((item, index) => (
-                      <div className={'py-3 h-full pt-6'} key={index}>
-                        <ProgressBar data={item} />
-                      </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
         {viewport !== 'mobile' && (
           <div className={'col-span-12 lg:col-span-4 py-4 lg:py-16 px-4 lg:px-9'}>
@@ -665,7 +665,7 @@ const Dashboard = props => {
           </div>
         )}
 
-        {viewport === 'mobile' && (
+        {/* {viewport === 'mobile' && (
           <div className="col-span-12 lg:col-span-8 py-4 lg:py-16 px-4 lg:px-9">
             <div className={'grid grid-cols-12'}>
               <div className={'col-span-6 px-9 w-full flex flex-wrap justify-center'}>
@@ -708,7 +708,7 @@ const Dashboard = props => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
         {viewport === 'mobile' && (
           <div className={'col-span-12 mb-40'}>
             <div
