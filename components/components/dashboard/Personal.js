@@ -38,170 +38,158 @@ const Personal = props => {
           </div>
         </div>
         <div className={styles.divider + ' my-9'}></div>
-        <div className={'grid grid-cols-12 gap-12'}>
+        <div className={'grid grid-cols-12 gap-4'}>
           <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'name')}
-                label={'Nombre'}
-                placeholder={''}
-                type={'text'}
-                value={personalInfo.name}
-              />
-            </div>
-
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'code')}
-                label={'DNI'}
-                placeholder={''}
-                type={'text'}
-                value={personalInfo.code}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'telephone')}
-                label={'Teléfono'}
-                placeholder={''}
-                type={'tel'}
-                value={personalInfo.telephone}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                label={'Sexo'}
-                list={genderList}
-                handleChange={e => handleChangePersonal(e, 'gender')}
-                type={'select'}
-                value={personalInfo.gender}
-              />
-            </div>
-
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'birthday')}
-                label={'Fecha nacimiento'}
-                placeholder={''}
-                type={'date'}
-                value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
-              />
-            </div>
+            <CommonText
+              handleChange={e => handleChangePersonal(e, 'name')}
+              label={'Nombre'}
+              placeholder={''}
+              type={'text'}
+              value={personalInfo.name}
+            />
           </div>
           <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'surname')}
-                label={'Apellidos'}
-                placeholder={''}
-                type={'text'}
-                value={personalInfo.surname}
-              />
-            </div>
-
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'meet')}
-                label={'Cómo nos conoció…'}
-                placeholder={''}
-                type={'select'}
-                list={meetList}
-                value={personalInfo.meet}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'email')}
-                label={'Email'}
-                placeholder={''}
-                type={'email'}
-                value={personalInfo.email}
-                disabled={true}
-              />
-            </div>
-
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangePersonal(e, 'emergencyPhone')}
-                label={'Teléfono emergencia'}
-                placeholder={''}
-                type={'tel'}
-                value={personalInfo.emergencyPhone}
-              />
-            </div>
+            <CommonText
+              handleChange={e => handleChangePersonal(e, 'surname')}
+              label={'Apellidos'}
+              placeholder={''}
+              type={'text'}
+              value={personalInfo.surname}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangePersonal(e, 'code')}
+              label={'DNI'}
+              placeholder={''}
+              type={'text'}
+              value={personalInfo.code}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangePersonal(e, 'meet')}
+              label={'Cómo nos conoció…'}
+              placeholder={''}
+              type={'select'}
+              list={meetList}
+              value={personalInfo.meet}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangePersonal(e, 'telephone')}
+              label={'Teléfono'}
+              placeholder={''}
+              type={'tel'}
+              value={personalInfo.telephone}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangePersonal(e, 'email')}
+              label={'Email'}
+              placeholder={''}
+              type={'email'}
+              value={personalInfo.email}
+              disabled={true}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              label={'Sexo'}
+              list={genderList}
+              handleChange={e => handleChangePersonal(e, 'gender')}
+              type={'select'}
+              value={personalInfo.gender}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangePersonal(e, 'emergencyPhone')}
+              label={'Teléfono emergencia'}
+              placeholder={''}
+              type={'tel'}
+              value={personalInfo.emergencyPhone}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangePersonal(e, 'birthday')}
+              label={'Fecha nacimiento'}
+              placeholder={''}
+              type={'date'}
+              value={moment(personalInfo.birthday).format('YYYY-MM-DD')}
+            />
           </div>
         </div>
         <div className="flex justify-between items-center my-9">
           <div className={styles.shippingData}>DATOS DE ENVIO</div>
           <div className={styles.divider + ' my-9'}></div>
         </div>
-        <div className={'grid grid-cols-12 gap-12'}>
+        <div className={'grid grid-cols-12 gap-4'}>
           <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangeShipping(e, 'name')}
-                label={'Nombre'}
-                placeholder={''}
-                type={'text'}
-                value={shippingInfo.name}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangeShipping(e, 'address')}
-                label={'Dirección'}
-                placeholder={''}
-                type={'text'}
-                value={shippingInfo.address}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangeShipping(e, 'town')}
-                label={'Ciudad'}
-                placeholder={''}
-                type={'text'}
-                value={shippingInfo.town}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangeShipping(e, 'country')}
-                label={'País'}
-                placeholder={''}
-                type={'text'}
-                value={shippingInfo.country}
-              />
-            </div>
+            <CommonText
+              handleChange={e => handleChangeShipping(e, 'name')}
+              label={'Nombre'}
+              placeholder={''}
+              type={'text'}
+              value={shippingInfo.name}
+            />
           </div>
           <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangeShipping(e, 'aliasAddress')}
-                label={'Alias de la dirección ( ej. casa, trabajo…)'}
-                placeholder={''}
-                type={'text'}
-                value={shippingInfo.aliasAddress}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangeShipping(e, 'cp')}
-                label={'CP'}
-                placeholder={''}
-                type={'text'}
-                value={shippingInfo.cp}
-              />
-            </div>
-            <div className={'py-2'}>
-              <CommonText
-                handleChange={e => handleChangeShipping(e, 'province')}
-                label={'Provincia'}
-                placeholder={''}
-                type={'text'}
-                value={shippingInfo.province}
-              />
-            </div>
+            <CommonText
+              handleChange={e => handleChangeShipping(e, 'aliasAddress')}
+              label={'Alias de la dirección ( ej. casa, trabajo…)'}
+              placeholder={''}
+              type={'text'}
+              value={shippingInfo.aliasAddress}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangeShipping(e, 'address')}
+              label={'Dirección'}
+              placeholder={''}
+              type={'text'}
+              value={shippingInfo.address}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangeShipping(e, 'cp')}
+              label={'CP'}
+              placeholder={''}
+              type={'text'}
+              value={shippingInfo.cp}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangeShipping(e, 'town')}
+              label={'Ciudad'}
+              placeholder={''}
+              type={'text'}
+              value={shippingInfo.town}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangeShipping(e, 'province')}
+              label={'Provincia'}
+              placeholder={''}
+              type={'text'}
+              value={shippingInfo.province}
+            />
+          </div>
+          <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
+            <CommonText
+              handleChange={e => handleChangeShipping(e, 'country')}
+              label={'País'}
+              placeholder={''}
+              type={'text'}
+              value={shippingInfo.country}
+            />
           </div>
         </div>
       </div>
