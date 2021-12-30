@@ -61,7 +61,7 @@ const MobilePersonalProfile = props => {
         <div className={styles.title}>Datos</div>
       </div>
       <div className={'flex justify-center ' + styles.container}>
-        <div className="p-5 mb-28 w-full">
+        <div className="p-5 mb-32 mt-32">
           <div className={'pt-1 py-3'}>
             <ProfileCommonText
               handleChange={e => handleChangePersonal(e, 'name')}
