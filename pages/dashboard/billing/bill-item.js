@@ -168,7 +168,7 @@ const BillItem = props => {
         <div className={styles.title}>Editar información</div>
       </div>
       <div className={'flex justify-center ' + styles.container}>
-        <div className="p-5 mb-28 w-full">
+        <div className="p-5 mb-28 mt-32">
           <div className={'pt-2 py-3'}>
             <ProfileCommonText
               handleChange={e => handleChangeAddress(e, 'name')}
