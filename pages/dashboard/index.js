@@ -142,35 +142,30 @@ const Dashboard = props => {
   const [getPatientMessageById, { data: messageListData, loading: messageListLoading, error: messageListError }] =
     useLazyQuery(graphql.queries.getPatientMessageById)
 
-  const statusArray = [
-    {
-      id: 0,
+  const paymentStatuses = {
+    UNPAID: {
       text: 'Quizás nos estemos equivocando, pero parece que tienes un pago pendiente. Compruébalo pinchando a continuación en el botón',
       link: '/dashboard/shopping',
     },
-    {
-      id: 1,
+    VOUCHER_ALMOST_USED: {
       text: '¡Muy pronto vas a finalizar tu bono! Consulta tus sesiones y renuévalo pinchando a continuación en el botón',
       link: '/dashboard/shopping',
     },
-    {
-      id: 2,
+    WITHOUT_PURCHASE: {
       text: '¡Uiii! ¿Es posible que todavía no hayas probado ninguno de nuestros servicios? \n Anímate y consigue todos tus objetivos con el apoyo de nuestros especialistas \n ¡Hoy es el día, ahora el momento!',
       link: '/',
     },
-    {
-      id: 3,
+    DEFAULT: {
       text: '¡Hoy es un buen día! \n Sigue haciéndolo tan bien como hasta ahora, y ya verás cómo consigues todo lo que te propongas',
-      link: '/',
+      link: null,
     },
-    {
-      id: 4,
+    RELEASE: { // TODO: this still has no implementation in the API. It still needs clarification.
       text: 'Este es tu espacio personal desde el que podrás acceder a toda la información sobre pedidos, calendario de sesiones, tu evolución, planes online, clases en directo y otras novedades.',
-      link: '/',
-    },
-  ]
+      link: null,
+    }
+  }
 
-  const [status, setStatus] = useState(0)
+  const [paymentStatus, setPaymentStatus] = useState(paymentStatuses.DEFAULT)
   const [showQuestionnaire, setShowQuestionnaire] = useState(false)
   const [count, setCount] = useState(0)
 
@@ -343,8 +338,7 @@ const Dashboard = props => {
 
   useEffect(() => {
     if (!paymentStatusError && paymentStatusData && paymentStatusData.getPaymentStatusForDashboard) {
-      const data = paymentStatusData.getPaymentStatusForDashboard
-      setStatus(data - 1)
+      setPaymentStatus(paymentStatuses[paymentStatusData.getPaymentStatusForDashboard])
     }
   }, [paymentStatusLoading, paymentStatusData, paymentStatusError])
 
@@ -453,20 +447,17 @@ const Dashboard = props => {
                 {personalInfo.name}&nbsp;{personalInfo.lastname}
               </div>
               {viewport !== 'mobile' && (
-                <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[4].text}</div>
+                <div className={'pt-2 ' + styles.welcomeDescription} style={{ whiteSpace: 'pre' }}>{paymentStatus.text}</div>
               )}
-              {/* <div className={'pt-2 ' + styles.welcomeDescription}>{statusArray[status].text}</div> */}
-              {/* <div className={'pt-4'}>
-                {status !== 3 && status !== 4 ? (
+              {paymentStatus.link && (
+                <div className={'pt-4'}>
                   <DashboardButton
-                    handleClick={() => handleClickRedirect('view', statusArray[status].link)}
+                    handleClick={() => handleClickRedirect('view', paymentStatus.link)}
                     label={'Ver'}
                     type={'view'}
                   />
-                ) : (
-                  <></>
-                )}
-              </div> */}
+                </div>
+              )}
               {viewport === 'mobile' && (
                 <div className="pt-4 flex justify-start items-center">
                   <DashboardButton
@@ -534,7 +525,7 @@ const Dashboard = props => {
               <div className={'col-span-12 lg:col-span-6'}>
                 <div
                   className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
-                  // onClick={() => handleClickRedirect('calendar')}
+                // onClick={() => handleClickRedirect('calendar')}
                 >
                   <Calendar
                     className={styles.calendar}
@@ -713,7 +704,7 @@ const Dashboard = props => {
           <div className={'col-span-12 mb-40'}>
             <div
               className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
-              // onClick={() => handleClickRedirect('calendar')}
+            // onClick={() => handleClickRedirect('calendar')}
             >
               <Calendar
                 className={styles.calendar}
