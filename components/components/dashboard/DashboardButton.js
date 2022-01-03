@@ -88,8 +88,10 @@ const DashboardButton = props => {
       )}
       {type === 'editProfile' && (
         <button className={'flex justify-between items-center ' + styles.editButton} onClick={handleClick}>
-          <Image src={'/images/edit.svg'} alt={''} width={15} height={15} />
-          <p className={'pl-3 ' + styles.editLabel}>{label}</p>
+          <div className={'w-4 h-4'}>
+            <Image src={'/images/edit.svg'} alt={''} width={15} height={15} />
+          </div>
+          <p className={'ml-3 ' + styles.editLabel}>{label}</p>
         </button>
       )}
       {type === 'iconWeight' && (

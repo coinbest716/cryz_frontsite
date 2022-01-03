@@ -165,7 +165,7 @@ const MobileGraphicProfile = props => {
       plotOptions: {
         bar: {
           columnWidth: '30%',
-          borderRadius: 15,
+          borderRadius: 10,
           dataLabels: {
             position: 'top', // top, center, bottom
           },
@@ -221,7 +221,7 @@ const MobileGraphicProfile = props => {
         </div>
         <div className={styles.title}>Datos antropométricos</div>
       </div>
-      <div className="p-5 mb-28">
+      <div className="p-5 mb-28 mt-32">
         <div className={'py-2 ' + styles.graphictitle}>Perímetros</div>
         <Chart options={barChartOptions.options} series={perimeterSeries.series} type="bar" height="270px" />
         <div className={'pt-5 pb-2 ' + styles.graphictitle}>Porcentajes</div>

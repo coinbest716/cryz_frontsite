@@ -53,126 +53,128 @@ const MobileHealthProfile = props => {
         </div>
         <div className={styles.title}>Editar información</div>
       </div>
-      <div className={'p-5 mb-28 ' + styles.container}>
-        <div className="flex justify-between items-center mb-4">
-          <div className="w-1/2 mr-2">
-            <ProfileHealthItem
-              value={healthInfo.fatPercentage}
-              handleChange={e => handleChangeHealth(e, 'fatPercentage')}
-              label={'Porcentaje grasa'}
-            />
+      <div className={styles.container}>
+        <div className="p-5 mb-28 mt-32">
+          <div className="flex justify-between items-center mb-4">
+            <div className="w-1/2 mr-2">
+              <ProfileHealthItem
+                value={healthInfo.fatPercentage}
+                handleChange={e => handleChangeHealth(e, 'fatPercentage')}
+                label={'Porcentaje grasa'}
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <ProfileHealthItem
+                value={healthInfo.visceralFat}
+                handleChange={e => handleChangeHealth(e, 'visceralFat')}
+                label={'Grasa visceral'}
+              />
+            </div>
           </div>
-          <div className="w-1/2 ml-2">
-            <ProfileHealthItem
-              value={healthInfo.visceralFat}
-              handleChange={e => handleChangeHealth(e, 'visceralFat')}
-              label={'Grasa visceral'}
-            />
+          <div className="flex justify-between items-center mb-4">
+            <div className="w-1/2 mr-2">
+              <ProfileHealthItem
+                value={healthInfo.boneMass}
+                handleChange={e => handleChangeHealth(e, 'boneMass')}
+                label={'Ìndice Masa Òsea'}
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <ProfileHealthItem
+                value={healthInfo.bodyMass}
+                handleChange={e => handleChangeHealth(e, 'bodyMass')}
+                label={'Ìndice Masa Corporal'}
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <div className="w-1/2 mr-2">
-            <ProfileHealthItem
-              value={healthInfo.boneMass}
-              handleChange={e => handleChangeHealth(e, 'boneMass')}
-              label={'Ìndice Masa Òsea'}
-            />
+          <div className="flex justify-between items-center mb-4">
+            <div className="w-1/2 mr-2">
+              <ProfileHealthItem
+                value={healthInfo.waterPercentage}
+                handleChange={e => handleChangeHealth(e, 'waterPercentage')}
+                label={'Porcentaje agua'}
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <ProfileHealthItem
+                value={healthInfo.muscleMass}
+                handleChange={e => handleChangeHealth(e, 'muscleMass')}
+                label={'Índice Masa Muscular'}
+              />
+            </div>
           </div>
-          <div className="w-1/2 ml-2">
-            <ProfileHealthItem
-              value={healthInfo.bodyMass}
-              handleChange={e => handleChangeHealth(e, 'bodyMass')}
-              label={'Ìndice Masa Corporal'}
-            />
+          <div className="flex justify-between items-center mb-4">
+            <div className="w-1/2 mr-2">
+              <ProfileHealthItem
+                value={healthInfo.metabolicExpense}
+                handleChange={e => handleChangeHealth(e, 'metabolicExpense')}
+                label={'Gasto Metabólico'}
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <ProfileHealthItem
+                value={healthInfo.metabolicAge}
+                handleChange={e => handleChangeHealth(e, 'metabolicAge')}
+                label={'Edad Metabólica'}
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <div className="w-1/2 mr-2">
-            <ProfileHealthItem
-              value={healthInfo.waterPercentage}
-              handleChange={e => handleChangeHealth(e, 'waterPercentage')}
-              label={'Porcentaje agua'}
-            />
+          <div className="flex justify-between items-center mb-4">
+            <div className="w-1/2 mr-2">
+              <ProfileHealthItem
+                value={healthInfo.weight}
+                handleChange={e => handleChangeHealth(e, 'weight')}
+                label={'Peso(kg)'}
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <ProfileHealthItem
+                value={healthInfo.height}
+                handleChange={e => handleChangeHealth(e, 'height')}
+                label={'Altura'}
+              />
+            </div>
           </div>
-          <div className="w-1/2 ml-2">
-            <ProfileHealthItem
-              value={healthInfo.muscleMass}
-              handleChange={e => handleChangeHealth(e, 'muscleMass')}
-              label={'Índice Masa Muscular'}
-            />
+          <div className="flex justify-between items-center mb-4">
+            <div className="w-1/2 mr-2">
+              <ProfileHealthItem
+                value={healthInfo.waist}
+                handleChange={e => handleChangeHealth(e, 'waist')}
+                label={'Cintura'}
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <ProfileHealthItem
+                value={healthInfo.arm}
+                handleChange={e => handleChangeHealth(e, 'arm')}
+                label={'Brazo'}
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <div className="w-1/2 mr-2">
-            <ProfileHealthItem
-              value={healthInfo.metabolicExpense}
-              handleChange={e => handleChangeHealth(e, 'metabolicExpense')}
-              label={'Gasto Metabólico'}
-            />
+          <div className="flex justify-between items-center mb-4">
+            <div className="w-1/2 mr-2">
+              <ProfileHealthItem
+                value={healthInfo.hips}
+                handleChange={e => handleChangeHealth(e, 'hips')}
+                label={'Cadera'}
+              />
+            </div>
+            <div className="w-1/2 ml-2">
+              <ProfileHealthItem
+                value={healthInfo.thigh}
+                handleChange={e => handleChangeHealth(e, 'thigh')}
+                label={'Muslo'}
+              />
+            </div>
           </div>
-          <div className="w-1/2 ml-2">
-            <ProfileHealthItem
-              value={healthInfo.metabolicAge}
-              handleChange={e => handleChangeHealth(e, 'metabolicAge')}
-              label={'Edad Metabólica'}
-            />
-          </div>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <div className="w-1/2 mr-2">
-            <ProfileHealthItem
-              value={healthInfo.weight}
-              handleChange={e => handleChangeHealth(e, 'weight')}
-              label={'Peso(kg)'}
-            />
-          </div>
-          <div className="w-1/2 ml-2">
-            <ProfileHealthItem
-              value={healthInfo.height}
-              handleChange={e => handleChangeHealth(e, 'height')}
-              label={'Altura'}
-            />
-          </div>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <div className="w-1/2 mr-2">
-            <ProfileHealthItem
-              value={healthInfo.waist}
-              handleChange={e => handleChangeHealth(e, 'waist')}
-              label={'Cintura'}
-            />
-          </div>
-          <div className="w-1/2 ml-2">
-            <ProfileHealthItem
-              value={healthInfo.arm}
-              handleChange={e => handleChangeHealth(e, 'arm')}
-              label={'Brazo'}
-            />
-          </div>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <div className="w-1/2 mr-2">
-            <ProfileHealthItem
-              value={healthInfo.hips}
-              handleChange={e => handleChangeHealth(e, 'hips')}
-              label={'Cadera'}
-            />
-          </div>
-          <div className="w-1/2 ml-2">
-            <ProfileHealthItem
-              value={healthInfo.thigh}
-              handleChange={e => handleChangeHealth(e, 'thigh')}
-              label={'Muslo'}
-            />
-          </div>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <div className="w-1/2 mr-2">
-            <ProfileHealthItem
-              value={healthInfo.twin}
-              handleChange={e => handleChangeHealth(e, 'twin')}
-              label={'Gemelo'}
-            />
+          <div className="flex justify-between items-center mb-4">
+            <div className="w-1/2 mr-2">
+              <ProfileHealthItem
+                value={healthInfo.twin}
+                handleChange={e => handleChangeHealth(e, 'twin')}
+                label={'Gemelo'}
+              />
+            </div>
           </div>
         </div>
       </div>

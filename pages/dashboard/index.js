@@ -514,8 +514,8 @@ const Dashboard = props => {
               </div>
             )}
           </div>
-          {/* {message.length !== 0 ? (
-            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:my-0 px-9 py-7 flex justify-between ' + styles.rememberSection}>
+          {message.length !== 0 ? (
+            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:mt-7 px-9 py-7 flex justify-between ' + styles.rememberSection}>
               <div>
                 <div className={styles.remember}>Recuerda!!</div>
                 <div className={'pt-2 ' + styles.rememberDescription}>
@@ -528,7 +528,7 @@ const Dashboard = props => {
             </div>
           ) : (
             <></>
-          )} */}
+          )}
           <div className={'grid grid-cols-12 gap-7 '}>
             {viewport !== 'mobile' && (
               <div className={'col-span-12 lg:col-span-6'}>
@@ -579,23 +579,21 @@ const Dashboard = props => {
               <div>
                 <div className={styles.highBoldLabel}>Perfil</div>
                 <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
-                <div className={'p-8 text-center'}>
-                  <div className={'pt-7 flex justify-center'}>
-                    <div
-                      className={'flex justify-center items-center overflow-hidden p-1'}
-                      style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
-                    >
-                      <Image
-                        src={personalInfo.avatar || '/images/default-avatar.svg'}
-                        alt=""
-                        width={140}
-                        height={140}
-                        objectFit="cover"
-                        objectPosition="center"
-                      />
-                    </div>
+                <div className={'w-full flex justify-center flex-wrap py-8 text-center'}>
+                  <div
+                    className={'flex justify-center items-center overflow-hidden p-1'}
+                    style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
+                  >
+                    <Image
+                      src={personalInfo.avatar || '/images/default-avatar.svg'}
+                      alt=""
+                      width={140}
+                      height={140}
+                      objectFit="cover"
+                      objectPosition="center"
+                    />
                   </div>
-                  <div className={'pt-4 ' + styles.highBoldLabel}>
+                  <div className={'w-full pt-4 ' + styles.highBoldLabel}>
                     {personalInfo.name}&nbsp;{personalInfo.lastname}
                   </div>
                   <div className={'pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
