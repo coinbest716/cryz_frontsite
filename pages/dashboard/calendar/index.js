@@ -21,6 +21,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import DashboardButton from 'components/components/dashboard/DashboardButton'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
+import ClassItem from 'components/components/dashboard/calendar/ClassItem'
 // import Profile from 'components/components/dashboard/Profile'
 import CheckBoxImage from 'components/components/dashboard/CheckBoxImage'
 
@@ -177,6 +178,12 @@ const Calendar = props => {
                 }
               }}
             />
+          </div>
+          <div>
+            <div className={styles.nextClass + ' pt-8'}>Siguiente clase</div>
+            {events.map((event, index) => (
+              <ClassItem event={event} key={index} />
+            ))}
           </div>
         </div>
       ) : (
