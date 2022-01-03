@@ -144,23 +144,19 @@ const Dashboard = props => {
 
   const paymentStatuses = {
     UNPAID: {
-      text: 'Quizás nos estemos equivocando, pero parece que tienes un pago pendiente. Compruébalo pinchando a continuación en el botón',
+      text: () => 'Quizás nos estemos equivocando, pero parece que tienes un pago pendiente. Compruébalo pinchando a continuación en el botón',
       link: '/dashboard/shopping',
     },
     VOUCHER_ALMOST_USED: {
-      text: '¡Muy pronto vas a finalizar tu bono! Consulta tus sesiones y renuévalo pinchando a continuación en el botón',
+      text: (values) => `¡Muy pronto vas a finalizar tu bono! Solo te quedan ${values.item_sessions - values.item_used} de ${values.item_sessions} sesiones. Consulta tus sesiones y renuévalo pinchando a continuación en el botón`,
       link: '/dashboard/shopping',
     },
     WITHOUT_PURCHASE: {
-      text: '¡Uiii! ¿Es posible que todavía no hayas probado ninguno de nuestros servicios? \n Anímate y consigue todos tus objetivos con el apoyo de nuestros especialistas \n ¡Hoy es el día, ahora el momento!',
+      text: () => '¡Uiii! ¿Es posible que todavía no hayas probado ninguno de nuestros servicios? \n Anímate y consigue todos tus objetivos con el apoyo de nuestros especialistas \n ¡Hoy es el día, ahora el momento!',
       link: '/',
     },
     DEFAULT: {
-      text: '¡Hoy es un buen día! \n Sigue haciéndolo tan bien como hasta ahora, y ya verás cómo consigues todo lo que te propongas',
-      link: null,
-    },
-    RELEASE: { // TODO: this still has no implementation in the API. It still needs clarification.
-      text: 'Este es tu espacio personal desde el que podrás acceder a toda la información sobre pedidos, calendario de sesiones, tu evolución, planes online, clases en directo y otras novedades.',
+      text: () => '¡Hoy es un buen día! \n Sigue haciéndolo tan bien como hasta ahora, y ya verás cómo consigues todo lo que te propongas',
       link: null,
     }
   }
@@ -338,7 +334,7 @@ const Dashboard = props => {
 
   useEffect(() => {
     if (!paymentStatusError && paymentStatusData && paymentStatusData.getPaymentStatusForDashboard) {
-      setPaymentStatus(paymentStatuses[paymentStatusData.getPaymentStatusForDashboard])
+      setPaymentStatus(paymentStatusData.getPaymentStatusForDashboard.summary_type)
     }
   }, [paymentStatusLoading, paymentStatusData, paymentStatusError])
 
@@ -420,6 +416,13 @@ const Dashboard = props => {
     return label.charAt(0).toUpperCase() + label.slice(1)
   }
 
+  let paymentStatusText = paymentStatuses[paymentStatus]
+  if (paymentStatusData && paymentStatusData.getPaymentStatusForDashboard) {
+    const values = paymentStatusData.getPaymentStatusForDashboard.values
+    const template = paymentStatuses[paymentStatusData.getPaymentStatusForDashboard.summary_type]
+    paymentStatusText = template.text(values)
+  }
+
   return (
     <div className={'w-full ' + styles.container}>
       <div className={'grid grid-cols-12'}>
@@ -447,7 +450,7 @@ const Dashboard = props => {
                 {personalInfo.name}&nbsp;{personalInfo.lastname}
               </div>
               {viewport !== 'mobile' && (
-                <div className={'pt-2 ' + styles.welcomeDescription} style={{ whiteSpace: 'pre' }}>{paymentStatus.text}</div>
+                <div className={'pt-2 ' + styles.welcomeDescription} style={{ whiteSpace: 'pre' }}>{paymentStatusText}</div>
               )}
               {paymentStatus.link && (
                 <div className={'pt-4'}>
