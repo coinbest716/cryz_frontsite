@@ -24,11 +24,12 @@ import graphql from 'crysdiazGraphql'
 const Questionnaire = props => {
   // variables
   const { onClick, viewport } = props
+  const [questionnaireData, setQuestionnaireData] = useState([])
+
   const [
     getPendingQuestionnaireByDashboard,
     { data: pendingQuestionnaireData, loading: pendingQuestionnaireLoading, error: pendingQuestionnaireError },
   ] = useLazyQuery(graphql.queries.getPendingQuestionnaireByDashboard)
-  const [questionnaireData, setQuestionnaireData] = useState({})
 
   // handlers
   useEffect(() => {
@@ -41,9 +42,26 @@ const Questionnaire = props => {
       pendingQuestionnaireData &&
       pendingQuestionnaireData.getPendingQuestionnaireByDashboard
     ) {
-      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard)
+      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0].questionnaire)
     }
   }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
+
+  //
+  const handleChangeInput = (event, idx) => {
+    let array = questionnaireData
+    let tempArray = []
+    array.map((item, index) => {
+      if (index === idx) {
+        let object = JSON.parse(JSON.stringify(array[index]))
+        object.answer = event.target.value
+        tempArray.push(object)
+      } else {
+        tempArray.push(array[index])
+      }
+    })
+    console.log('array', tempArray)
+    setQuestionnaireData(tempArray)
+  }
 
   return (
     <div className={styles.card}>
@@ -63,6 +81,27 @@ const Questionnaire = props => {
       <div className={styles.title}>Rellena el cuestionario</div>
       <div className={styles.underline}></div>
       <div className={styles.scrollbarArea}>
+        <PerfectScrollbar>
+          {questionnaireData.length !== 0 &&
+            questionnaireData.map((item, index) => (
+              <div key={index}>
+                <div className={styles.subTitle}>{item.name}</div>
+                {item.type === 'text' && (
+                  <div className="ml-3">
+                    <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
+                    <div className="mt-5">
+                      <input
+                        placeholder="Padezco de…"
+                        className={styles.inputArea}
+                        value={item.answer}
+                        onChange={event => handleChangeInput(event, index)}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+        </PerfectScrollbar>
         <PerfectScrollbar>
           <div className={styles.subTitle}>Titulo de sección</div>
           <div className="ml-3">
