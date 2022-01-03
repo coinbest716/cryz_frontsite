@@ -23,82 +23,78 @@ const Health = props => {
         </div>
       </div>
       <div className={'w-full my-6 ' + styles.divider} />
-      <div className={'grid grid-cols-12 gap-4 px-10 gap-12'}>
-        <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
-          <div className={'py-2'}>
-            <CommonText
-              value={healthInfo.fatPercentage}
-              handleChange={e => handleChangeHealth(e, 'fatPercentage')}
-              label={'Porcentaje grasa'}
-              placeholder={''}
-              type={'text'}
-            />
-          </div>
-          <div className={'py-2'}>
-            <CommonText
-              value={healthInfo.visceralFat}
-              handleChange={e => handleChangeHealth(e, 'visceralFat')}
-              label={'Grasa visceral'}
-              placeholder={''}
-              type={'text'}
-            />
-          </div>
-          <div className={'py-2'}>
-            <CommonText
-              value={healthInfo.boneMass}
-              handleChange={e => handleChangeHealth(e, 'boneMass')}
-              label={'Ìndice Masa Òsea'}
-              placeholder={''}
-              type={'text'}
-            />
-          </div>
-          <div className={'py-2'}>
-            <CommonText
-              value={healthInfo.bodyMass}
-              handleChange={e => handleChangeHealth(e, 'bodyMass')}
-              label={'Ìndice Masa Corporal'}
-              placeholder={''}
-              type={'text'}
-            />
-          </div>
+      <div className={'grid grid-cols-12 px-10 gap-4'}>
+        <div className={'col-span-6 md:col-span-6 sm:col-span-12'}>
+          <CommonText
+            value={healthInfo.fatPercentage}
+            handleChange={e => handleChangeHealth(e, 'fatPercentage')}
+            label={'Porcentaje grasa'}
+            placeholder={''}
+            type={'text'}
+          />
         </div>
-        <div className={'col-span-12 md:col-span-6 sm:col-span-12'}>
-          <div className={'py-2'}>
-            <CommonText
-              value={healthInfo.waterPercentage}
-              handleChange={e => handleChangeHealth(e, 'waterPercentage')}
-              label={'Porcentaje agua'}
-              placeholder={''}
-              type={'text'}
-            />
-          </div>
-          <div className={'py-2'}>
-            <CommonText
-              value={healthInfo.muscleMass}
-              handleChange={e => handleChangeHealth(e, 'muscleMass')}
-              label={'Índice Masa Muscular'}
-              placeholder={''}
-              type={'text'}
-            />
-          </div>
-          <div className={'py-2'}>
-            <CommonText
-              value={healthInfo.metabolicExpense}
-              handleChange={e => handleChangeHealth(e, 'metabolicExpense')}
-              label={'Gasto Metabólico'}
-              placeholder={''}
-              type={'text'}
-            />
-          </div>
-          <div className={'py-2'}>
-            <CommonText
-              value={healthInfo.metabolicAge}
-              handleChange={e => handleChangeHealth(e, 'metabolicAge')}
-              label={'Edad Metabólica'}
-              placeholder={''}
-              type={'text'}
-            />
-          </div>
+        <div className={'col-span-6 md:col-span-6 sm:col-span-12'}>
+          <CommonText
+            value={healthInfo.waterPercentage}
+            handleChange={e => handleChangeHealth(e, 'waterPercentage')}
+            label={'Porcentaje agua'}
+            placeholder={''}
+            type={'text'}
+          />
+        </div>
+        <div className={'col-span-6 md:col-span-6 sm:col-span-12'}>
+          <CommonText
+            value={healthInfo.visceralFat}
+            handleChange={e => handleChangeHealth(e, 'visceralFat')}
+            label={'Grasa visceral'}
+            placeholder={''}
+            type={'text'}
+          />
+        </div>
+        <div className={'col-span-6 md:col-span-6 sm:col-span-12'}>
+          <CommonText
+            value={healthInfo.muscleMass}
+            handleChange={e => handleChangeHealth(e, 'muscleMass')}
+            label={'Índice Masa Muscular'}
+            placeholder={''}
+            type={'text'}
+          />
+        </div>
+        <div className={'col-span-6 md:col-span-6 sm:col-span-12'}>
+          <CommonText
+            value={healthInfo.boneMass}
+            handleChange={e => handleChangeHealth(e, 'boneMass')}
+            label={'Ìndice Masa Òsea'}
+            placeholder={''}
+            type={'text'}
+          />
+        </div>
+        <div className={'col-span-6 md:col-span-6 sm:col-span-12'}>
+          <CommonText
+            value={healthInfo.metabolicExpense}
+            handleChange={e => handleChangeHealth(e, 'metabolicExpense')}
+            label={'Gasto Metabólico'}
+            placeholder={''}
+            type={'text'}
+          />
+        </div>
+        <div className={'col-span-6 md:col-span-6 sm:col-span-12'}>
+          <CommonText
+            value={healthInfo.bodyMass}
+            handleChange={e => handleChangeHealth(e, 'bodyMass')}
+            label={'Ìndice Masa Corporal'}
+            placeholder={''}
+            type={'text'}
+          />
+        </div>
+        <div className={'col-span-6 md:col-span-6 sm:col-span-12'}>
+          <CommonText
+            value={healthInfo.metabolicAge}
+            handleChange={e => handleChangeHealth(e, 'metabolicAge')}
+            label={'Edad Metabólica'}
+            placeholder={''}
+            type={'text'}
+          />
         </div>
       </div>
       <div className={'grid grid-cols-12 gap-4 px-10 py-2'}>

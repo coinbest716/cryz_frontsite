@@ -250,7 +250,7 @@ const Profile = props => {
       setActiveTab({ personal: false, health: false, graphic: true, main: false })
     } else if (currentState[1] === 'personal') {
       setActiveTab({ personal: true, health: false, graphic: false, main: false })
-    } else if (currentState[1] === 'main') {
+    } else {
       setActiveTab({ personal: false, health: false, graphic: false, main: true })
     }
   }

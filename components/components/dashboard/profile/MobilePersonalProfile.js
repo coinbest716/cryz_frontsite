@@ -36,8 +36,9 @@ const MobilePersonalProfile = props => {
 
   // variables
   const router = useRouter()
-  const genderList = ['Mujer', 'Hombre']
-  const meetList = ['Instagram', 'Facebook', 'Prensa', 'Un amigo', 'Otros']
+
+  const genderList = ['WOMAN', 'MAN']
+  const meetList = ['INSTAGRAM', 'FACEBOOK', 'PRENSA']
 
   const handleClickBack = () => {
     router.push('/dashboard/profile#main', undefined, { shallow: true })
@@ -60,7 +61,7 @@ const MobilePersonalProfile = props => {
         <div className={styles.title}>Datos</div>
       </div>
       <div className={'flex justify-center ' + styles.container}>
-        <div className="p-5 mb-28 w-full">
+        <div className="p-5 mb-32 mt-32">
           <div className={'pt-1 py-3'}>
             <ProfileCommonText
               handleChange={e => handleChangePersonal(e, 'name')}
@@ -79,7 +80,7 @@ const MobilePersonalProfile = props => {
               value={personalInfo.surname}
             />
           </div>
-          
+
           <div className={'pt-1 py-3'}>
             <ProfileCommonText
               handleChange={e => handleChangePersonal(e, 'birthday')}

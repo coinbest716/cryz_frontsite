@@ -515,7 +515,7 @@ const Dashboard = props => {
             )}
           </div>
           {message.length !== 0 ? (
-            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:my-0 px-9 py-7 flex justify-between ' + styles.rememberSection}>
+            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:mt-7 px-9 py-7 flex justify-between ' + styles.rememberSection}>
               <div>
                 <div className={styles.remember}>Recuerda!!</div>
                 <div className={'pt-2 ' + styles.rememberDescription}>
@@ -529,8 +529,8 @@ const Dashboard = props => {
           ) : (
             <></>
           )}
-          {viewport !== 'mobile' && (
-            <div className={'grid grid-cols-12 gap-7 '}>
+          <div className={'grid grid-cols-12 gap-7 '}>
+            {viewport !== 'mobile' && (
               <div className={'col-span-12 lg:col-span-6'}>
                 <div
                   className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
@@ -550,28 +550,28 @@ const Dashboard = props => {
                   ></Calendar>
                 </div>
               </div>
-              <div className={'col-span-12 lg:col-span-6'}>
-                <div
-                  className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
-                  onClick={() => handleClickRedirect('bonos')}
-                >
-                  <div className={'flex justify-between items-center'}>
-                    <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
-                    <div className={'text-center '}>
-                      <Image src={bonosIcon} alt="" width={50} height={50} />
+            )}
+            <div className={'col-span-12 lg:col-span-6'}>
+              <div
+                className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
+                onClick={() => handleClickRedirect('bonos')}
+              >
+                <div className={'flex justify-between items-center'}>
+                  <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
+                  <div className={'text-center '}>
+                    <Image src={bonosIcon} alt="" width={50} height={50} />
+                  </div>
+                </div>
+                <div>
+                  {purchaseData.map((item, index) => (
+                    <div className={'py-3 h-full pt-6'} key={index}>
+                      <ProgressBar data={item} />
                     </div>
-                  </div>
-                  <div>
-                    {purchaseData.map((item, index) => (
-                      <div className={'py-3 h-full pt-6'} key={index}>
-                        <ProgressBar data={item} />
-                      </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
         {viewport !== 'mobile' && (
           <div className={'col-span-12 lg:col-span-4 py-4 lg:py-16 px-4 lg:px-9'}>
@@ -579,23 +579,21 @@ const Dashboard = props => {
               <div>
                 <div className={styles.highBoldLabel}>Perfil</div>
                 <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
-                <div className={'p-8 text-center'}>
-                  <div className={'pt-7 flex justify-center'}>
-                    <div
-                      className={'flex justify-center items-center overflow-hidden p-1'}
-                      style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
-                    >
-                      <Image
-                        src={personalInfo.avatar || '/images/default-avatar.svg'}
-                        alt=""
-                        width={140}
-                        height={140}
-                        objectFit="cover"
-                        objectPosition="center"
-                      />
-                    </div>
+                <div className={'w-full flex justify-center flex-wrap py-8 text-center'}>
+                  <div
+                    className={'flex justify-center items-center overflow-hidden p-1'}
+                    style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
+                  >
+                    <Image
+                      src={personalInfo.avatar || '/images/default-avatar.svg'}
+                      alt=""
+                      width={140}
+                      height={140}
+                      objectFit="cover"
+                      objectPosition="center"
+                    />
                   </div>
-                  <div className={'pt-4 ' + styles.highBoldLabel}>
+                  <div className={'w-full pt-4 ' + styles.highBoldLabel}>
                     {personalInfo.name}&nbsp;{personalInfo.lastname}
                   </div>
                   <div className={'pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
@@ -665,7 +663,7 @@ const Dashboard = props => {
           </div>
         )}
 
-        {viewport === 'mobile' && (
+        {/* {viewport === 'mobile' && (
           <div className="col-span-12 lg:col-span-8 py-4 lg:py-16 px-4 lg:px-9">
             <div className={'grid grid-cols-12'}>
               <div className={'col-span-6 px-9 w-full flex flex-wrap justify-center'}>
@@ -708,7 +706,7 @@ const Dashboard = props => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
         {viewport === 'mobile' && (
           <div className={'col-span-12 mb-40'}>
             <div

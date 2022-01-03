@@ -8,6 +8,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import toast from 'react-hot-toast'
 import { Auth } from 'aws-amplify'
+import moment from 'moment'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -198,6 +199,10 @@ const Message = props => {
     object.to_name = item.name + ' ' + item.lastname
     object.to_type = 'user'
     setNewMessage(object)
+    let obj = object
+    obj.create_date = moment(new Date()).format('YYYY-MM-DDTHH:mm:ssZ').split('+')[0]
+    let temp = messageList
+    setMessageList([obj].concat(temp))
     setSelectedSubject({})
     setNewMessageBool(true)
   }
@@ -208,33 +213,29 @@ const Message = props => {
 
   const handleSendMessage = (content, attachedFile) => {
     let object = newMessage
-    if (object.subject !== '') {
-      if (!newMessageBool) {
-        object.request_id = selectedSubject.id
-      } else {
-        object.request_id = 0
-      }
-      object.content = content
-      if (attachedFile !== '') {
-        object.attachment.push(attachedFile)
-      }
-      createMessageByDashboard({
-        variables: object,
-      })
-        .then(response => {
-          getPatientMessageById({
-            variables: { patient_id: currentPatient.id },
-          })
-          getSubMessagesByDashboard({
-            variables: { message_id: response.data.createMessageByDashboard.request_id },
-          })
-        })
-        .catch(error => {
-          toast.error(error.message)
-        })
+    if (!newMessageBool) {
+      object.request_id = selectedSubject.id
     } else {
-      toast.error('Please insert subject!')
+      object.request_id = 0
     }
+    object.content = content
+    if (attachedFile !== '') {
+      object.attachment.push(attachedFile)
+    }
+    createMessageByDashboard({
+      variables: object,
+    })
+      .then(response => {
+        getPatientMessageById({
+          variables: { patient_id: currentPatient.id },
+        })
+        getSubMessagesByDashboard({
+          variables: { message_id: response.data.createMessageByDashboard.request_id },
+        })
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
     setNewMessageBool(false)
   }
 
@@ -358,6 +359,7 @@ const Message = props => {
     </div>
   ) : (
     <div className={'w-full relative'}>
+      {/* mobile view */}
       {/* professional area */}
       <div>
         <ProfessionalCard

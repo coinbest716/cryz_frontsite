@@ -16,6 +16,7 @@ const SubjectCard = props => {
   let mm = String(today.getMonth() + 1).padStart(2, '0') //January is 0!
   let yyyy = today.getFullYear()
   today = yyyy + '-' + mm + '-' + dd
+  let create_date = new Date(new Date(data.create_date) - new Date(data.create_date).getTimezoneOffset() / 60)
 
   return (
     <div className={styles.container + ' ' + (active === true ? styles.active : '')} onClick={() => onClick(data)}>
@@ -42,13 +43,15 @@ const SubjectCard = props => {
         <div className={styles.text + ' block text-center'}>
           {today !== data.create_date.split('T')[0] ? (
             <div>
-              {data.create_date.split('T')[0]}
+              {create_date.getFullYear()}/{create_date.getMonth() + 1}/{create_date.getDate()}
               <br />
             </div>
           ) : (
             <></>
           )}
-          <div>{data.create_date.split('T')[1].split('.')[0]}</div>
+          <div>
+            {create_date.getHours()}:{create_date.getMinutes()}:{create_date.getSeconds()}
+          </div>
         </div>
         <div className={'mt-2 inline-grid'}>
           <Image src={CheckIcon} alt={''} width={26} height={26} />

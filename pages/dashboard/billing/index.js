@@ -277,7 +277,7 @@ const Billing = props => {
             </div>
             <div className={styles.title}>Direcciones de facturación</div>
           </div>
-          <div className={styles.mobileContainer}>
+          <div className={'mt-32 ' + styles.mobileContainer}>
             {billDataList.map((item, index) => (
               <div className="pb-4" key={index}>
                 <MobileBillCard
