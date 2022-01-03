@@ -141,7 +141,7 @@ const Questionnaire = props => {
                       MÚLTIPLES RESPUESTAS
                     </div>
                     {item.choices.map((elem, idx) => (
-                      <div className="mt-5">
+                      <div className="mt-5" key={idx}>
                         <Radio
                           name={'group' + index}
                           value={elem}
