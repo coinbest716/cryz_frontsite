@@ -20,6 +20,7 @@ import styles from './Questionnaire.module.scss'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { introspectionFromSchema } from 'graphql'
 
 const Questionnaire = props => {
   // variables
@@ -59,7 +60,21 @@ const Questionnaire = props => {
         tempArray.push(array[index])
       }
     })
-    console.log('array', tempArray)
+    setQuestionnaireData(tempArray)
+  }
+
+  const handleChangeRadio = (value, idx) => {
+    let array = questionnaireData
+    let tempArray = []
+    array.map((item, index) => {
+      if (index === idx) {
+        let object = JSON.parse(JSON.stringify(array[index]))
+        object.answer = value
+        tempArray.push(object)
+      } else {
+        tempArray.push(array[index])
+      }
+    })
     setQuestionnaireData(tempArray)
   }
 
@@ -85,7 +100,7 @@ const Questionnaire = props => {
           {questionnaireData.length !== 0 &&
             questionnaireData.map((item, index) => (
               <div key={index}>
-                <div className={styles.subTitle}>{item.name}</div>
+                <div className={'mt-5 ' + styles.subTitle}>{item.name}</div>
                 {item.type === 'text' && (
                   <div className="ml-3">
                     <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
@@ -99,46 +114,46 @@ const Questionnaire = props => {
                     </div>
                   </div>
                 )}
+                {item.type === 'bool' && (
+                  <div className="ml-3">
+                    <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
+                    <div className="mt-5">
+                      <Radio
+                        name={'group' + index}
+                        value={true}
+                        label={'Verdadera'}
+                        handleChangeType={() => handleChangeRadio(true, index)}
+                      />
+                    </div>
+                    <div className="mt-5">
+                      <Radio
+                        name={'group' + index}
+                        value={false}
+                        label={'Falsa'}
+                        handleChangeType={() => handleChangeRadio(false, index)}
+                      />
+                    </div>
+                  </div>
+                )}
+                {item.type === 'radio' && (
+                  <div className="ml-3">
+                    <div className={styles.text + ' mt-5'} style={{ marginTop: '21px' }}>
+                      MÚLTIPLES RESPUESTAS
+                    </div>
+                    {item.choices.map((elem, idx) => (
+                      <div className="mt-5">
+                        <Radio
+                          name={'group' + index}
+                          value={elem}
+                          label={elem}
+                          handleChangeType={() => handleChangeRadio(elem, index)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
-        </PerfectScrollbar>
-        <PerfectScrollbar>
-          <div className={styles.subTitle}>Titulo de sección</div>
-          <div className="ml-3">
-            <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
-            <div className="mt-5">
-              <Radio name={'group1'} value={'yes'} label={'Sí'} />
-            </div>
-            <div className="mt-5">
-              <input placeholder="Padezco de…" className={styles.inputArea} />
-            </div>
-            <div className="mt-5">
-              <Radio name={'group1'} value={'no'} label={'No'} />
-            </div>
-            <div className={styles.subTitle + ' mt-5'}>TEXT FIELD</div>
-            <div className="mt-5">
-              <input placeholder="00kg" className={styles.inputArea} />
-            </div>
-          </div>
-          <div className={styles.subTitle + ' mt-16'}>Titulo de sección</div>
-          <div className="ml-3">
-            <div className={styles.text + ' mt-5'} style={{ marginTop: '21px' }}>
-              MÚLTIPLES RESPUESTAS
-            </div>
-            <div className="mt-5">
-              <Radio name={'group2'} value={'yes'} label={'Sí'} />
-            </div>
-            <div className="mt-5">
-              <Radio name={'group2'} value={'no'} label={'No'} />
-            </div>
-            <div className="mt-5">
-              <Radio name={'group2'} value={'occasionally'} label={'Ocasionalmente'} />
-            </div>
-            <div className={styles.subTitle + ' mt-5'}>TEXT FIELD</div>
-            <div className="mt-5">
-              <input placeholder="00kg" className={styles.inputArea} />
-            </div>
-          </div>
         </PerfectScrollbar>
       </div>
       <div className="flex justify-center mt-20 lg:mt-24 lg:mr-16">
