@@ -69,7 +69,7 @@ const Footer = props => {
           }
         >
           <div className={'w-full flex flex-wrap justify-between items-center ' + styles.text}>
-            <div className={'w-full flex flex-wrap justify-between'} style={{ maxWidth: '500px' }}>
+            <div className={'w-full flex flex-wrap justify-between'} style={{ maxWidth: '688px' }}>
               <Link href={'/docs/terms'} passHref>
                 <p>Terminos y Condiciones</p>
               </Link>
