@@ -20,11 +20,11 @@ import styles from './Questionnaire.module.scss'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import { introspectionFromSchema } from 'graphql'
 
 const Questionnaire = props => {
   // variables
   const { onClick, viewport } = props
+  const [pendingQuestionnaire, setPendingQuestionnaire] = useState({})
   const [questionnaireData, setQuestionnaireData] = useState([])
 
   const [
@@ -43,6 +43,7 @@ const Questionnaire = props => {
       pendingQuestionnaireData &&
       pendingQuestionnaireData.getPendingQuestionnaireByDashboard
     ) {
+      setPendingQuestionnaire(pendingQuestionnaireData.getPendingQuestionnaireByDashboard)
       setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0].questionnaire)
     }
   }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
@@ -103,7 +104,7 @@ const Questionnaire = props => {
                 <div className={'mt-5 ' + styles.subTitle}>{item.name}</div>
                 {item.type === 'text' && (
                   <div className="ml-3">
-                    <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
+                    {/* <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div> */}
                     <div className="mt-5">
                       <input
                         placeholder="Padezco de…"
@@ -116,7 +117,7 @@ const Questionnaire = props => {
                 )}
                 {item.type === 'bool' && (
                   <div className="ml-3">
-                    <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
+                    {/* <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div> */}
                     <div className="mt-5">
                       <Radio
                         name={'group' + index}
@@ -137,9 +138,7 @@ const Questionnaire = props => {
                 )}
                 {item.type === 'radio' && (
                   <div className="ml-3">
-                    <div className={styles.text + ' mt-5'} style={{ marginTop: '21px' }}>
-                      MÚLTIPLES RESPUESTAS
-                    </div>
+                    {/* <div className={styles.text + ' mt-5'}>MÚLTIPLES RESPUESTAS</div> */}
                     {item.choices.map((elem, idx) => (
                       <div className="mt-5" key={idx}>
                         <Radio
@@ -150,6 +149,40 @@ const Questionnaire = props => {
                         />
                       </div>
                     ))}
+                  </div>
+                )}
+                {item.type === 'check' && (
+                  <div className="ml-3">
+                    {/* <div className={styles.text + ' mt-5'}>MÚLTIPLES RESPUESTAS</div> */}
+                    {item.choices.map((elem, idx) => (
+                      <div className="mt-5" key={idx}>
+                        <Radio
+                          name={'group' + index}
+                          value={elem}
+                          label={elem}
+                          handleChangeType={() => handleChangeRadio(elem, index)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {item.type === 'section' && (
+                  <div className="ml-3">
+                    <div className={styles.text + ' mt-5'}>{item.name}</div>
+                  </div>
+                )}
+                {item.type === 'number' && (
+                  <div className="ml-3">
+                    {/* <div className={styles.text + ' mt-5'}>UNA RESPUESTAS</div> */}
+                    <div className="mt-5">
+                      <input
+                        type="number"
+                        placeholder="Padezco de…"
+                        className={styles.inputArea}
+                        value={item.answer}
+                        onChange={event => handleChangeInput(event, index)}
+                      />
+                    </div>
                   </div>
                 )}
               </div>

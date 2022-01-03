@@ -18,3 +18,20 @@ query GetPendingQuestionnaireByDashboard {
     questionnaire
   }
 }
+
+mutation UpdateCompletedQuestionnaireByDashboard(
+  $updateCompletedQuestionnaireByDashboardId: Int!
+  $attachment: [Upload]
+  $questionnaire: JSON!
+) {
+  updateCompletedQuestionnaireByDashboard(
+    id: $updateCompletedQuestionnaireByDashboardId
+    attachment: $attachment
+    questionnaire: $questionnaire
+  ) {
+    id
+    name
+    specialties
+    questionnaire
+  }
+}
