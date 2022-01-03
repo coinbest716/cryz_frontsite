@@ -20,15 +20,17 @@ import styles from './Questionnaire.module.scss'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+import { introspectionFromSchema } from 'graphql'
 
 const Questionnaire = props => {
   // variables
   const { onClick, viewport } = props
+  const [questionnaireData, setQuestionnaireData] = useState([])
+
   const [
     getPendingQuestionnaireByDashboard,
     { data: pendingQuestionnaireData, loading: pendingQuestionnaireLoading, error: pendingQuestionnaireError },
   ] = useLazyQuery(graphql.queries.getPendingQuestionnaireByDashboard)
-  const [questionnaireData, setQuestionnaireData] = useState({})
 
   // handlers
   useEffect(() => {
@@ -41,9 +43,40 @@ const Questionnaire = props => {
       pendingQuestionnaireData &&
       pendingQuestionnaireData.getPendingQuestionnaireByDashboard
     ) {
-      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard)
+      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0].questionnaire)
     }
   }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
+
+  //
+  const handleChangeInput = (event, idx) => {
+    let array = questionnaireData
+    let tempArray = []
+    array.map((item, index) => {
+      if (index === idx) {
+        let object = JSON.parse(JSON.stringify(array[index]))
+        object.answer = event.target.value
+        tempArray.push(object)
+      } else {
+        tempArray.push(array[index])
+      }
+    })
+    setQuestionnaireData(tempArray)
+  }
+
+  const handleChangeRadio = (value, idx) => {
+    let array = questionnaireData
+    let tempArray = []
+    array.map((item, index) => {
+      if (index === idx) {
+        let object = JSON.parse(JSON.stringify(array[index]))
+        object.answer = value
+        tempArray.push(object)
+      } else {
+        tempArray.push(array[index])
+      }
+    })
+    setQuestionnaireData(tempArray)
+  }
 
   return (
     <div className={styles.card}>
@@ -64,42 +97,63 @@ const Questionnaire = props => {
       <div className={styles.underline}></div>
       <div className={styles.scrollbarArea}>
         <PerfectScrollbar>
-          <div className={styles.subTitle}>Titulo de sección</div>
-          <div className="ml-3">
-            <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
-            <div className="mt-5">
-              <Radio name={'group1'} value={'yes'} label={'Sí'} />
-            </div>
-            <div className="mt-5">
-              <input placeholder="Padezco de…" className={styles.inputArea} />
-            </div>
-            <div className="mt-5">
-              <Radio name={'group1'} value={'no'} label={'No'} />
-            </div>
-            <div className={styles.subTitle + ' mt-5'}>TEXT FIELD</div>
-            <div className="mt-5">
-              <input placeholder="00kg" className={styles.inputArea} />
-            </div>
-          </div>
-          <div className={styles.subTitle + ' mt-16'}>Titulo de sección</div>
-          <div className="ml-3">
-            <div className={styles.text + ' mt-5'} style={{ marginTop: '21px' }}>
-              MÚLTIPLES RESPUESTAS
-            </div>
-            <div className="mt-5">
-              <Radio name={'group2'} value={'yes'} label={'Sí'} />
-            </div>
-            <div className="mt-5">
-              <Radio name={'group2'} value={'no'} label={'No'} />
-            </div>
-            <div className="mt-5">
-              <Radio name={'group2'} value={'occasionally'} label={'Ocasionalmente'} />
-            </div>
-            <div className={styles.subTitle + ' mt-5'}>TEXT FIELD</div>
-            <div className="mt-5">
-              <input placeholder="00kg" className={styles.inputArea} />
-            </div>
-          </div>
+          {questionnaireData.length !== 0 &&
+            questionnaireData.map((item, index) => (
+              <div key={index}>
+                <div className={'mt-5 ' + styles.subTitle}>{item.name}</div>
+                {item.type === 'text' && (
+                  <div className="ml-3">
+                    <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
+                    <div className="mt-5">
+                      <input
+                        placeholder="Padezco de…"
+                        className={styles.inputArea}
+                        value={item.answer}
+                        onChange={event => handleChangeInput(event, index)}
+                      />
+                    </div>
+                  </div>
+                )}
+                {item.type === 'bool' && (
+                  <div className="ml-3">
+                    <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
+                    <div className="mt-5">
+                      <Radio
+                        name={'group' + index}
+                        value={true}
+                        label={'Verdadera'}
+                        handleChangeType={() => handleChangeRadio(true, index)}
+                      />
+                    </div>
+                    <div className="mt-5">
+                      <Radio
+                        name={'group' + index}
+                        value={false}
+                        label={'Falsa'}
+                        handleChangeType={() => handleChangeRadio(false, index)}
+                      />
+                    </div>
+                  </div>
+                )}
+                {item.type === 'radio' && (
+                  <div className="ml-3">
+                    <div className={styles.text + ' mt-5'} style={{ marginTop: '21px' }}>
+                      MÚLTIPLES RESPUESTAS
+                    </div>
+                    {item.choices.map((elem, idx) => (
+                      <div className="mt-5">
+                        <Radio
+                          name={'group' + index}
+                          value={elem}
+                          label={elem}
+                          handleChangeType={() => handleChangeRadio(elem, index)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
         </PerfectScrollbar>
       </div>
       <div className="flex justify-center mt-20 lg:mt-24 lg:mr-16">
