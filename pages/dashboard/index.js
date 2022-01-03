@@ -151,6 +151,10 @@ const Dashboard = props => {
       text: (values) => `¡Muy pronto vas a finalizar tu bono! Solo te quedan ${values.item_sessions - values.item_used} de ${values.item_sessions} sesiones. Consulta tus sesiones y renuévalo pinchando a continuación en el botón`,
       link: '/dashboard/shopping',
     },
+    SINGLE_SESSION_USED: {
+      text: () => `¡Vas por buen camino! \n Anímate a seguir cuidándote. Adquiere una nueva sesión y continúa con tu entrenamiento \n ¡Hoy es el día, ahora el momento!`,
+      link: '/dashboard/shopping',
+    },
     WITHOUT_PURCHASE: {
       text: () => '¡Uiii! ¿Es posible que todavía no hayas probado ninguno de nuestros servicios? \n Anímate y consigue todos tus objetivos con el apoyo de nuestros especialistas \n ¡Hoy es el día, ahora el momento!',
       link: '/',
