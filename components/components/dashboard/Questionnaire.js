@@ -103,7 +103,7 @@ const Questionnaire = props => {
                 <div className={'mt-5 ' + styles.subTitle}>{item.name}</div>
                 {item.type === 'text' && (
                   <div className="ml-3">
-                    <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
+                    {/* <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div> */}
                     <div className="mt-5">
                       <input
                         placeholder="Padezco de…"
@@ -116,7 +116,7 @@ const Questionnaire = props => {
                 )}
                 {item.type === 'bool' && (
                   <div className="ml-3">
-                    <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div>
+                    {/* <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div> */}
                     <div className="mt-5">
                       <Radio
                         name={'group' + index}
@@ -137,9 +137,7 @@ const Questionnaire = props => {
                 )}
                 {item.type === 'radio' && (
                   <div className="ml-3">
-                    <div className={styles.text + ' mt-5'} style={{ marginTop: '21px' }}>
-                      MÚLTIPLES RESPUESTAS
-                    </div>
+                    {/* <div className={styles.text + ' mt-5'}>MÚLTIPLES RESPUESTAS</div> */}
                     {item.choices.map((elem, idx) => (
                       <div className="mt-5" key={idx}>
                         <Radio
@@ -150,6 +148,20 @@ const Questionnaire = props => {
                         />
                       </div>
                     ))}
+                  </div>
+                )}
+                {item.type === 'number' && (
+                  <div className="ml-3">
+                    {/* <div className={styles.text + ' mt-5'}>UNA RESPUESTAS</div> */}
+                    <div className="mt-5">
+                      <input
+                        type="number"
+                        placeholder="Padezco de…"
+                        className={styles.inputArea}
+                        value={item.answer}
+                        onChange={event => handleChangeInput(event, index)}
+                      />
+                    </div>
                   </div>
                 )}
               </div>
