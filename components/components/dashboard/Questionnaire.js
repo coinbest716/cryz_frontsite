@@ -9,6 +9,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // custom components
 import Radio from 'components/components/Radio'
+import Checkbox from 'components/components/Checkbox'
 
 // images and icons
 import CloseIcon from 'assets/images/close.svg'
@@ -65,6 +66,22 @@ const Questionnaire = props => {
   }
 
   const handleChangeRadio = (value, idx) => {
+    let array = questionnaireData
+    let tempArray = []
+    array.map((item, index) => {
+      if (index === idx) {
+        let object = JSON.parse(JSON.stringify(array[index]))
+        object.answer = value
+        tempArray.push(object)
+      } else {
+        tempArray.push(array[index])
+      }
+    })
+    setQuestionnaireData(tempArray)
+  }
+
+  const handleChangeCheckbox = (event, value, idx) => {
+    console.log(event.target.checked)
     let array = questionnaireData
     let tempArray = []
     array.map((item, index) => {
@@ -156,11 +173,11 @@ const Questionnaire = props => {
                     {/* <div className={styles.text + ' mt-5'}>MÚLTIPLES RESPUESTAS</div> */}
                     {item.choices.map((elem, idx) => (
                       <div className="mt-5" key={idx}>
-                        <Radio
+                        <Checkbox
                           name={'group' + index}
                           value={elem}
                           label={elem}
-                          handleChangeType={() => handleChangeRadio(elem, index)}
+                          handleChangeCheckbox={event => handleChangeCheckbox(event, elem, index)}
                         />
                       </div>
                     ))}
