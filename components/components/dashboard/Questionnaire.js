@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // next components
 import Image from 'next/image'
@@ -17,8 +17,34 @@ import CloseGrayIcon from 'assets/images/close-gray.svg'
 // styles
 import styles from './Questionnaire.module.scss'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Questionnaire = props => {
+  // variables
   const { onClick, viewport } = props
+  const [
+    getPendingQuestionnaireByDashboard,
+    { data: pendingQuestionnaireData, loading: pendingQuestionnaireLoading, error: pendingQuestionnaireError },
+  ] = useLazyQuery(graphql.queries.getPendingQuestionnaireByDashboard)
+  const [questionnaireData, setQuestionnaireData] = useState({})
+
+  // handlers
+  useEffect(() => {
+    getPendingQuestionnaireByDashboard()
+  }, [getPendingQuestionnaireByDashboard])
+
+  useEffect(() => {
+    if (
+      !pendingQuestionnaireError &&
+      pendingQuestionnaireData &&
+      pendingQuestionnaireData.getPendingQuestionnaireByDashboard
+    ) {
+      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard)
+    }
+  }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
+
   return (
     <div className={styles.card}>
       <div className={styles.closeButton}>
