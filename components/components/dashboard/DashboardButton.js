@@ -11,6 +11,7 @@ import styles from './DashboardButton.module.scss'
 
 const DashboardButton = props => {
   const { handleClick, label, type, visible, count } = props
+
   return (
     <>
       {type === 'startClass' && visible === true && (

@@ -30,10 +30,11 @@ import styles from './calendar.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Calendar = () => {
+const Calendar = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const { viewport } = props
 
   useEffect(() => {
     setIsMounted(true)
@@ -153,47 +154,18 @@ const Calendar = () => {
     })
   }
   return (
-    <div className={'px-10 py-10 ' + styles.container}>
-      <div className={'grid grid-cols-12 gap-12'}>
-        <div className={'col-span-12 md:col-span-8 sm:col-span-12 flex justify-between'}>
-          <div className={styles.highBoldLabel}>Calendario</div>
-          <DashboardButton
-            handleClick={handleClickStartClass}
-            label={'Comenzar clase'}
-            type={'startClass'}
-            visiable={streamingEvent.toggle}
-          />
-        </div>
-        <div className={'col-span-12 md:col-span-4 sm:col-span-12 flex justify-between items-center'}>
-          <NotificationButton />
-          {/* <Profile /> */}
-        </div>
-      </div>
-      <div className={'grid grid-cols-12 gap-12 pt-8'}>
-        <div className={'col-span-12 md:col-span-8 sm:col-span-12 w-full'}>
-          <div className={'fullCalendarWrapper'}>
-            <FullCalendar
-              plugins={[dayGridPlugin, timeGridPlugin]} //[dayGridPlugin, timeGridPlugin, interactionPlugin]
-              headerToolbar={{
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay',
-              }}
-              initialView="timeGridWeek"
-              editable={true}
-              selectable={true}
-              selectMirror={true}
-              dayMaxEvents={true}
-              weekends={true}
-              events={events}
-              locale={esLocale}
-              ref={calendarComponentRef}
-              allDaySlot={false}
+    <>
+      {viewport === 'mobile' ? (
+        <div className={'p-2 ' + styles.mobileContainer}>
+          <div className="pt-10">
+            <DashboardButton
+              handleClick={handleClickStartClass}
+              label={'Comenzar clase'}
+              type={'startClass'}
+              visible={true}
             />
           </div>
-        </div>
-        <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
-          <div className={'calendarWrapper'}>
+          <div className={'calendarWrapper mt-5 bg-white rounded-xl '}>
             <MonthCalendar
               className={styles.calendar}
               onChange={handleChangeDate}
@@ -206,17 +178,74 @@ const Calendar = () => {
               }}
             />
           </div>
-          <div className={'mt-8 px-5 py-4 ' + styles.roomContainer}>
-            <div className={'pb-3 ' + styles.roomTitle}>Crys&Co Room</div>
-            {roomList.map((item, index) => (
-              <div className={'py-3'} key={index}>
-                <CheckBoxImage label={item.name} color={item.color} />
+        </div>
+      ) : (
+        <div className={'px-10 py-10 ' + styles.container}>
+          <div className={'grid grid-cols-12 gap-12'}>
+            <div className={'col-span-12 md:col-span-8 sm:col-span-12 flex justify-between'}>
+              <div className={styles.highBoldLabel}>Calendario</div>
+              <DashboardButton
+                handleClick={handleClickStartClass}
+                label={'Comenzar clase'}
+                type={'startClass'}
+                visible={streamingEvent.toggle}
+              />
+            </div>
+            <div className={'col-span-12 md:col-span-4 sm:col-span-12 flex justify-between items-center'}>
+              <NotificationButton />
+              {/* <Profile /> */}
+            </div>
+          </div>
+          <div className={'grid grid-cols-12 gap-12 pt-8'}>
+            <div className={'col-span-12 md:col-span-8 sm:col-span-12 w-full'}>
+              <div className={'fullCalendarWrapper'}>
+                <FullCalendar
+                  plugins={[dayGridPlugin, timeGridPlugin]} //[dayGridPlugin, timeGridPlugin, interactionPlugin]
+                  headerToolbar={{
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                  }}
+                  initialView="timeGridWeek"
+                  editable={true}
+                  selectable={true}
+                  selectMirror={true}
+                  dayMaxEvents={true}
+                  weekends={true}
+                  events={events}
+                  locale={esLocale}
+                  ref={calendarComponentRef}
+                  allDaySlot={false}
+                />
               </div>
-            ))}
+            </div>
+            <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
+              <div className={'calendarWrapper'}>
+                <MonthCalendar
+                  className={styles.calendar}
+                  onChange={handleChangeDate}
+                  value={calendarValue}
+                  locale="es-MX"
+                  tileClassName={({ date, view }) => {
+                    if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                      return 'highlight'
+                    }
+                  }}
+                />
+              </div>
+              <div className={'mt-8 px-5 py-4 ' + styles.roomContainer}>
+                <div className={'pb-3 ' + styles.roomTitle}>Crys&Co Room</div>
+                {roomList.map((item, index) => (
+                  <div className={'py-3'} key={index}>
+                    <CheckBoxImage label={item.name} color={item.color} />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 export default Calendar
