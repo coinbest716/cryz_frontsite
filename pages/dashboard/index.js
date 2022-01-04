@@ -255,9 +255,10 @@ const Dashboard = props => {
   useEffect(() => {
     if (!weekDaySessionsError && weekDaySessionsData && weekDaySessionsData.getWeekDaySessionsByDashboard) {
       const data = weekDaySessionsData.getWeekDaySessionsByDashboard
+      console.log('=============data', data)
       let array = []
       try {
-        if (data.length === 8) {
+        if (data !== undefined && data.length === 8) {
           setEventMins(data.at(-1))
           array = [
             {
