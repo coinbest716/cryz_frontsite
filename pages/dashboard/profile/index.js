@@ -83,7 +83,7 @@ const Profile = props => {
   const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
   const [updateAnthropometry] = useMutation(graphql.mutations.updateAnthropometry)
 
-  const [email, setEmail] = useState(localStorage.getItem('email'))
+  const [email, setEmail] = useState('')
   const [profilePercentage, setProfilePercentage] = useState(0)
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false, main: true })
   const [uploadFile, setUploadFile] = useState(null)
@@ -103,7 +103,7 @@ const Profile = props => {
     avatar: '',
     name: '',
     surname: '',
-    email: email || localStorage.getItem('email'),
+    email: email,
     password: '',
     meet: 'INSTAGRAM',
     telephone: '',
@@ -176,18 +176,20 @@ const Profile = props => {
 
   // handlers
   useEffect(() => {
+    const _email = localStorage.getItem('email')
+    setEmail(_email)
     getPatientByEmail({
       variables: {
-        email: email,
+        email: _email,
       },
     })
-    if (activeTab.health) {
-      if (personalInfo.id > 0) {
-        getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
-      }
-    } else if (activeTab.graphic) {
-      getAnthroDetailDataByDashboard({ variables: { patient_id: personalInfo.id } })
-    }
+    // if (activeTab.health) {
+    //   if (personalInfo.id > 0) {
+    //     getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
+    //   }
+    // } else if (activeTab.graphic) {
+    //   getAnthroDetailDataByDashboard({ variables: { patient_id: personalInfo.id } })
+    // }
   }, [])
 
   const getProfilePercentage = (_personalInfo, _shippingInfo) => {
@@ -226,23 +228,23 @@ const Profile = props => {
   useEffect(() => {
     const currentState = router.asPath.split('#')
     if (viewport === 'mobile') {
-      setActivePage()
+      setActivePageForMobile()
     } else {
-      if (currentState[1] === 'health') {
-        setActiveTab({ personal: false, health: true, graphic: false, main: true })
-      } else {
-        router.push('/dashboard/profile#personal', undefined, { shallow: true })
-      }
+      setActivePageForDesktop()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    setActivePage()
+    if (viewport === 'mobile') {
+      setActivePageForMobile()
+    } else {
+      setActivePageForDesktop()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath, viewport])
 
-  const setActivePage = () => {
+  const setActivePageForMobile = () => {
     const currentState = router.asPath.split('#')
     if (currentState[1] === 'health') {
       setActiveTab({ personal: false, health: true, graphic: false, main: false })
@@ -252,6 +254,17 @@ const Profile = props => {
       setActiveTab({ personal: true, health: false, graphic: false, main: false })
     } else {
       setActiveTab({ personal: false, health: false, graphic: false, main: true })
+    }
+  }
+
+  const setActivePageForDesktop = () => {
+    const currentState = router.asPath.split('#')
+    if (currentState[1] === 'health') {
+      setActiveTab({ personal: false, health: true, graphic: false, main: false })
+    } else if (currentState[1] === 'graphic') {
+      setActiveTab({ personal: false, health: false, graphic: true, main: false })
+    } else {
+      setActiveTab({ personal: true, health: false, graphic: false, main: false })
     }
   }
 
@@ -286,11 +299,11 @@ const Profile = props => {
       }
       setShippingInfo(_shippingInfo)
       getProfilePercentage(_personalInfo, _shippingInfo)
-      if (activeTab.health) {
-        getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
-      } else if (activeTab.graphic) {
-        getAnthroDetailDataByDashboard({ variables: { patient_id: data.id } })
-      }
+      getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
+      getAnthroDetailDataByDashboard({ variables: { patient_id: data.id } })
+      // if (activeTab.health) {
+      // } else if (activeTab.graphic) {
+      // }
     }
   }, [personalLoading, personalData, personalError])
 
