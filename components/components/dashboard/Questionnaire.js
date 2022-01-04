@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 // third party components
+import toast from 'react-hot-toast'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
@@ -19,7 +20,7 @@ import CloseGrayIcon from 'assets/images/close-gray.svg'
 import styles from './Questionnaire.module.scss'
 
 // graphql
-import { useLazyQuery } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 const Questionnaire = props => {
@@ -32,6 +33,10 @@ const Questionnaire = props => {
     { data: pendingQuestionnaireData, loading: pendingQuestionnaireLoading, error: pendingQuestionnaireError },
   ] = useLazyQuery(graphql.queries.getPendingQuestionnaireByDashboard)
 
+  const [UpdateCompletedQuestionnaireByDashboard] = useMutation(
+    graphql.mutations.updateCompletedQuestionnaireByDashboard
+  )
+
   // handlers
   useEffect(() => {
     getPendingQuestionnaireByDashboard()
@@ -43,7 +48,11 @@ const Questionnaire = props => {
       pendingQuestionnaireData &&
       pendingQuestionnaireData.getPendingQuestionnaireByDashboard
     ) {
-      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0])
+      if (pendingQuestionnaireData.getPendingQuestionnaireByDashboard.length !== 0) {
+        setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0])
+      } else {
+        setQuestionnaireData({})
+      }
     }
   }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
 
@@ -106,6 +115,26 @@ const Questionnaire = props => {
       }
     })
     setQuestionnaireData({ ...questionnaireData, questionnaire: tempArray })
+  }
+
+  const handleCompletedQuestionnaire = () => {
+    UpdateCompletedQuestionnaireByDashboard({
+      variables: {
+        id: questionnaireData.id,
+        attachment: null,
+        questionnaire: questionnaireData.questionnaire,
+      },
+    })
+      .then(response => {
+        if (response.data.updateCompletedQuestionnaireByDashboardId !== null) {
+          toast.success('successfully.')
+        } else {
+          toast.error('Unknown Error! Please contact our support team.')
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
   }
 
   return (
@@ -221,7 +250,10 @@ const Questionnaire = props => {
         </PerfectScrollbar>
       </div>
       <div className="flex justify-center mt-20 lg:mt-24 lg:mr-16">
-        <button className={'flex justify-center items-center ' + styles.outlineButton} onClick={() => {}}>
+        <button
+          className={'flex justify-center items-center ' + styles.outlineButton}
+          onClick={() => handleCompletedQuestionnaire()}
+        >
           ENVIAR
         </button>
       </div>
