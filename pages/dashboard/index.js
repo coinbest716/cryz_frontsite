@@ -620,7 +620,7 @@ const Dashboard = props => {
                     {personalInfo.name}&nbsp;{personalInfo.lastname}
                   </div>
                   <div className={'w-full pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
-                  <div className={'pt-6 flex justify-center'}>
+                  <div className={'w-full pt-6 flex justify-center'}>
                     <DashboardButton
                       handleClick={() => handleClickRedirect('editProfile')}
                       label={'Editar Perfil'}
