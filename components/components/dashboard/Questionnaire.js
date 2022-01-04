@@ -167,7 +167,7 @@ const Questionnaire = props => {
                     {/* <div className={styles.text + ' mt-5'}>UNA RESPUESTA</div> */}
                     <div className="mt-5">
                       <input
-                        placeholder="Padezco de…"
+                        placeholder=""
                         className={styles.inputArea}
                         value={item.answer}
                         onChange={event => handleChangeInput(event, index)}
@@ -241,7 +241,7 @@ const Questionnaire = props => {
                     <div className="mt-5">
                       <input
                         type="number"
-                        placeholder="Padezco de…"
+                        placeholder=""
                         className={styles.inputArea}
                         value={item.answer}
                         onChange={event => handleChangeInput(event, index)}
