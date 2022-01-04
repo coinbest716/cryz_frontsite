@@ -231,9 +231,7 @@ const Questionnaire = props => {
                   </div>
                 )}
                 {item.type === 'section' && (
-                  <div className="ml-3">
-                    <div className={styles.text + ' mt-5'}>{item.name}</div>
-                  </div>
+                  <div className="ml-3">{/* <div className={styles.text + ' mt-5'}>{item.name}</div> */}</div>
                 )}
                 {item.type === 'number' && (
                   <div className="ml-3">
