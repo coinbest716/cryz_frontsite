@@ -7,7 +7,7 @@ import Image from 'next/image'
 import styles from './MessageSelectCard.module.scss'
 
 // images
-import TrashIcon from 'assets/images/trash.svg'
+import TrashOutlineIcon from 'assets/images/trash-outline.svg'
 
 const MessageSelectCard = props => {
   const { data, onChangeSubject, newMessageBool } = props
@@ -47,7 +47,7 @@ const MessageSelectCard = props => {
         </div>
       </div>
       <div className={'grid justify-center items-center'}>
-        <Image src={TrashIcon} alt={''} width={31} height={31} />
+        <Image src={TrashOutlineIcon} alt={''} width={31} height={31} />
       </div>
     </div>
   )
