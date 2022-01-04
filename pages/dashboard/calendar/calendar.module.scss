@@ -5,6 +5,10 @@
   background-color: #f5f6fa;
   min-height: 100vh;
 }
+.mobileContainer {
+  background-color: #f5f6fa;
+  min-height: calc(100vh - 177px);
+}
 .highBoldLabel {
   color: #2a2c36;
   font-family: Montserrat;
@@ -38,5 +42,11 @@
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 500;
+  letter-spacing: 0;
+}
+.nextClass {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
   letter-spacing: 0;
 }

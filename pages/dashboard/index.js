@@ -77,6 +77,11 @@ const Dashboard = props => {
     getWeekDaySessionsByDashboard,
     { data: weekDaySessionsData, loading: weekDaySessionsLoading, error: weekDaySessionsError },
   ] = useLazyQuery(graphql.queries.getWeekDaySessionsByDashboard)
+  const [
+    getPendingQuestionnaireByDashboard,
+    { data: pendingQuestionnaireData, loading: pendingQuestionnaireLoading, error: pendingQuestionnaireError },
+  ] = useLazyQuery(graphql.queries.getPendingQuestionnaireByDashboard)
+  const [questionnaireData, setQuestionnaireData] = useState([])
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
   const [events, setEvents] = useState([])
   const [profilePercentage, setProfilePercentage] = useState(0)
@@ -182,6 +187,24 @@ const Dashboard = props => {
       },
     })
   }, [getPatientByEmail])
+
+  useEffect(() => {
+    getPendingQuestionnaireByDashboard()
+  }, [getPendingQuestionnaireByDashboard])
+
+  useEffect(() => {
+    if (
+      !pendingQuestionnaireError &&
+      pendingQuestionnaireData &&
+      pendingQuestionnaireData.getPendingQuestionnaireByDashboard
+    ) {
+      if (pendingQuestionnaireData.getPendingQuestionnaireByDashboard.length > 0) {
+        setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0].questionnaire)
+      } else {
+        setQuestionnaireData([])
+      }
+    }
+  }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -371,6 +394,7 @@ const Dashboard = props => {
     setShowQuestionnaire(true)
   }
   const handleDisableQuestionnarie = () => {
+    getPendingQuestionnaireByDashboard()
     document.body.style.overflow = 'auto'
     setShowQuestionnaire(false)
   }
@@ -514,8 +538,8 @@ const Dashboard = props => {
               </div>
             )}
           </div>
-          {/* {message.length !== 0 ? (
-            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:my-0 px-9 py-7 flex justify-between ' + styles.rememberSection}>
+          {questionnaireData.length !== 0 ? (
+            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:mt-7 px-9 py-7 flex justify-between ' + styles.rememberSection}>
               <div>
                 <div className={styles.remember}>Recuerda!!</div>
                 <div className={'pt-2 ' + styles.rememberDescription}>
@@ -528,7 +552,7 @@ const Dashboard = props => {
             </div>
           ) : (
             <></>
-          )} */}
+          )}
           <div className={'grid grid-cols-12 gap-7 '}>
             {viewport !== 'mobile' && (
               <div className={'col-span-12 lg:col-span-6'}>
@@ -579,27 +603,25 @@ const Dashboard = props => {
               <div>
                 <div className={styles.highBoldLabel}>Perfil</div>
                 <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
-                <div className={'p-8 text-center'}>
-                  <div className={'pt-7 flex justify-center'}>
-                    <div
-                      className={'flex justify-center items-center overflow-hidden p-1'}
-                      style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
-                    >
-                      <Image
-                        src={personalInfo.avatar || '/images/default-avatar.svg'}
-                        alt=""
-                        width={140}
-                        height={140}
-                        objectFit="cover"
-                        objectPosition="center"
-                      />
-                    </div>
+                <div className={'w-full flex justify-center flex-wrap py-8 text-center'}>
+                  <div
+                    className={'flex justify-center items-center overflow-hidden p-1'}
+                    style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
+                  >
+                    <Image
+                      src={personalInfo.avatar || '/images/default-avatar.svg'}
+                      alt=""
+                      width={140}
+                      height={140}
+                      objectFit="cover"
+                      objectPosition="center"
+                    />
                   </div>
-                  <div className={'pt-4 ' + styles.highBoldLabel}>
+                  <div className={'w-full pt-4 ' + styles.highBoldLabel}>
                     {personalInfo.name}&nbsp;{personalInfo.lastname}
                   </div>
-                  <div className={'pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
-                  <div className={'pt-6 flex justify-center'}>
+                  <div className={'w-full pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
+                  <div className={'w-full pt-6 flex justify-center'}>
                     <DashboardButton
                       handleClick={() => handleClickRedirect('editProfile')}
                       label={'Editar Perfil'}

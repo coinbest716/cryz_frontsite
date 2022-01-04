@@ -72,7 +72,7 @@ const ContactFooter = props => {
             className={'w-full flex items-center' + (viewport === 'mobile' ? ' justify-center' : ' justify-between')}
           >
             <div className={styles.text + ' w-full'}>
-              <div className={'w-full flex flex-wrap justify-between'} style={{ maxWidth: '500px' }}>
+              <div className={'w-full flex flex-wrap justify-between'} style={{ maxWidth: '688px' }}>
                 <Link href={'/docs/terms'} passHref>
                   <p>Terminos y Condiciones</p>
                 </Link>

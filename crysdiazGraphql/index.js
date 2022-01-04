@@ -36,6 +36,7 @@ import {
   GetWeekDaySessionsByDashboard,
   GetPaymentStatusForDashboard,
   GetPendingQuestionnaireByDashboard,
+  UpdateCompletedQuestionnaireByDashboard,
 } from './dashboard.gql'
 // shopping part
 import {
@@ -157,6 +158,9 @@ export default {
     createPatientBillByDashboard: CreatePatientBillByDashboard,
     updatePatientBillByDashboard: UpdatePatientBillByDashboard,
     deletePatientBillByDashboard: DeletePatientBillByDashboard,
+
+    // dashboard
+    updateCompletedQuestionnaireByDashboard: UpdateCompletedQuestionnaireByDashboard,
 
     // message part
     createMessageByDashboard: CreateMessageByDashboard,

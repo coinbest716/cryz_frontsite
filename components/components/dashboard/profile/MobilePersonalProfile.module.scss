@@ -3,6 +3,10 @@
 .header {
   background-color: #818e8e;
   box-shadow: 0 32px 44px 0 rgba(131, 146, 167, 0.2);
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top: 0px;
 }
 .backString {
   color: #ffffff;
@@ -39,7 +43,7 @@
 .divider {
   box-sizing: border-box;
   height: 1px;
-  width: 50%;
+  width: 100%;
   border: 1px solid #e4eaee;
 }
 .shippingData {
@@ -49,5 +53,5 @@
   font-weight: 500;
   letter-spacing: 0.26px;
   line-height: 18px;
-  width: 170px;
+  width: 230px;
 }

@@ -1,0 +1,24 @@
+@import 'styles/variable.module.scss';
+
+.eventItem {
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.04);
+}
+.eventMonth {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 18px;
+  text-align: center;
+  min-width: 64px;
+}
+.description {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 18px;
+  height: 64px;
+}

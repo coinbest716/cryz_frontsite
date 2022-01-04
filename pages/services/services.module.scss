@@ -10,6 +10,7 @@
 .m_container {
   padding-top: 40px;
   padding-bottom: 60px;
+  min-height: calc(100vh - 177px);
 }
 .topTitle {
   font-family: DrukWideCyWeb-Bold;
@@ -17,6 +18,7 @@
   letter-spacing: 0px;
   display: block;
   background: linear-gradient(20.89deg, #e2d2e2 0%, #b7a1b7 100%);
+  background-image: -webkit-linear-gradient(20.89deg, #e2d2e2 0%, #b7a1b7 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -29,6 +31,7 @@
   letter-spacing: 0px;
   display: block;
   background: linear-gradient(20.89deg, #e2d2e2 0%, #b7a1b7 100%);
+  background-image: -webkit-linear-gradient(20.89deg, #e2d2e2 0%, #b7a1b7 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -40,12 +43,18 @@
   height: 7px;
   background-color: #decede;
 }
+.m_topDash {
+  width: 16px;
+  height: 6px;
+  background-color: #decede;
+}
 .topDescription {
   color: $blue-gray-400-color;
   font-family: Montserrat;
   font-size: 14px;
   letter-spacing: 0.62px;
   text-align: justify;
+  font-weight: bold;
 }
 .circularMark {
   padding-top: 91px;

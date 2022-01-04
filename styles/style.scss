@@ -69,7 +69,12 @@
     min-width: 40px;
     color: #2a2c36;
     font-family: Montserrat;
-    font-size: 13px;
+    @media (max-width: 1023px) {
+      font-size: 20px;
+    }
+    @media (min-width: 1024px) {
+      font-size: 13px;
+    }
   }
   .react-calendar__navigation__prev2-button {
     display: none !important;

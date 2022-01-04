@@ -10,6 +10,20 @@ query GetPaymentStatusForDashboard($patient_id: Int) {
   getPaymentStatusForDashboard(patient_id: $patient_id)
 }
 
-query GetPendingQuestionnaireByDashboard($patient_id: Int) {
-  getPendingQuestionnaireByDashboard(patient_id: $patient_id)
+query GetPendingQuestionnaireByDashboard {
+  getPendingQuestionnaireByDashboard {
+    id
+    name
+    specialties
+    questionnaire
+  }
+}
+
+mutation UpdateCompletedQuestionnaireByDashboard($id: Int!, $attachment: [Upload], $questionnaire: JSON!) {
+  updateCompletedQuestionnaireByDashboard(id: $id, attachment: $attachment, questionnaire: $questionnaire) {
+    id
+    name
+    specialties
+    questionnaire
+  }
 }
