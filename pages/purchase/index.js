@@ -516,7 +516,6 @@ const Purchase = props => {
   const handleFinishBilling = () => {
     if (paymentType === '') {
       toast.error('You should select payment type!')
-      router.push('/purchase/order-failed')
       return
     } else if (paymentType === 'card') {
       if (!router.query.service_id) {
@@ -575,6 +574,7 @@ const Purchase = props => {
               })
               .catch(error => {
                 toast.error(error.message)
+                router.push('/purchase/order-failed')
                 dispatch({ type: 'set', isLoading: false })
               })
           }
