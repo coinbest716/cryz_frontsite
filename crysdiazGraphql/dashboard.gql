@@ -19,16 +19,8 @@ query GetPendingQuestionnaireByDashboard {
   }
 }
 
-mutation UpdateCompletedQuestionnaireByDashboard(
-  $updateCompletedQuestionnaireByDashboardId: Int!
-  $attachment: [Upload]
-  $questionnaire: JSON!
-) {
-  updateCompletedQuestionnaireByDashboard(
-    id: $updateCompletedQuestionnaireByDashboardId
-    attachment: $attachment
-    questionnaire: $questionnaire
-  ) {
+mutation UpdateCompletedQuestionnaireByDashboard($id: Int!, $attachment: [Upload], $questionnaire: JSON!) {
+  updateCompletedQuestionnaireByDashboard(id: $id, attachment: $attachment, questionnaire: $questionnaire) {
     id
     name
     specialties
