@@ -180,7 +180,7 @@ const Message = props => {
         variables: { message_id: data.id },
       })
     } else {
-      console.log('You click subject in mobile view.')
+      router.push('/dashboard/message/message-content')
     }
   }
 
