@@ -3,6 +3,7 @@
 .container {
   padding-top: 80px;
   background: linear-gradient(90deg, #ffffff 68%, #eee2d2 32%);
+  background-image: -webkit-linear-gradient(0deg, #ffffff 68%, #eee2d2 32%);
   overflow: hidden;
   min-height: calc(100vh - 177px);
 }
@@ -10,6 +11,7 @@
   padding-top: 80px;
   background: #f2e9dd;
   overflow: hidden;
+  min-height: calc(100vh - 230px);
 }
 .topTitle {
   font-family: DrukWideCyWeb-Bold;
@@ -17,6 +19,7 @@
   letter-spacing: 0px;
   display: block;
   background: linear-gradient(50.32deg, rgba(235, 225, 209, 0.78) 0%, #bda27b 100%);
+  background-image: -webkit-linear-gradient(50.32deg, rgba(235, 225, 209, 0.78) 0%, #bda27b 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -28,7 +31,8 @@
   font-size: 25px;
   letter-spacing: 0px;
   display: block;
-  background: linear-gradient(50.32deg, rgba(235, 225, 209, 0.78) 0%, #bda27b 100%);
+  background: linear-gradient(217.41deg, #bda27b 0%, rgba(211, 188, 154, 0.57) 100%);
+  background-image: -webkit-linear-gradient(217.41deg, #bda27b 0%, rgba(211, 188, 154, 0.57) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -39,6 +43,11 @@
   width: 42px;
   height: 7px;
   background-color: #eee3d3;
+}
+.m_topDash {
+  width: 16px;
+  height: 6px;
+  background-color: #d3bc9a;
 }
 .topDescription {
   color: #818e8e;
