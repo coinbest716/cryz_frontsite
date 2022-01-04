@@ -198,7 +198,11 @@ const Dashboard = props => {
       pendingQuestionnaireData &&
       pendingQuestionnaireData.getPendingQuestionnaireByDashboard
     ) {
-      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0].questionnaire)
+      if (pendingQuestionnaireData.getPendingQuestionnaireByDashboard.length > 0) {
+        setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0].questionnaire)
+      } else {
+        setQuestionnaireData([])
+      }
     }
   }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
 
