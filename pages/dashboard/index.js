@@ -77,6 +77,11 @@ const Dashboard = props => {
     getWeekDaySessionsByDashboard,
     { data: weekDaySessionsData, loading: weekDaySessionsLoading, error: weekDaySessionsError },
   ] = useLazyQuery(graphql.queries.getWeekDaySessionsByDashboard)
+  const [
+    getPendingQuestionnaireByDashboard,
+    { data: pendingQuestionnaireData, loading: pendingQuestionnaireLoading, error: pendingQuestionnaireError },
+  ] = useLazyQuery(graphql.queries.getPendingQuestionnaireByDashboard)
+  const [questionnaireData, setQuestionnaireData] = useState([])
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
   const [events, setEvents] = useState([])
   const [profilePercentage, setProfilePercentage] = useState(0)
@@ -182,6 +187,20 @@ const Dashboard = props => {
       },
     })
   }, [getPatientByEmail])
+
+  useEffect(() => {
+    getPendingQuestionnaireByDashboard()
+  }, [getPendingQuestionnaireByDashboard])
+
+  useEffect(() => {
+    if (
+      !pendingQuestionnaireError &&
+      pendingQuestionnaireData &&
+      pendingQuestionnaireData.getPendingQuestionnaireByDashboard
+    ) {
+      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0].questionnaire)
+    }
+  }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -514,7 +533,7 @@ const Dashboard = props => {
               </div>
             )}
           </div>
-          {message.length !== 0 ? (
+          {questionnaireData.length !== 0 ? (
             <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:mt-7 px-9 py-7 flex justify-between ' + styles.rememberSection}>
               <div>
                 <div className={styles.remember}>Recuerda!!</div>
