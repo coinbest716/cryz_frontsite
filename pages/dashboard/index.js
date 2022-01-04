@@ -394,6 +394,7 @@ const Dashboard = props => {
     setShowQuestionnaire(true)
   }
   const handleDisableQuestionnarie = () => {
+    getPendingQuestionnaireByDashboard()
     document.body.style.overflow = 'auto'
     setShowQuestionnaire(false)
   }

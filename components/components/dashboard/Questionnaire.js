@@ -127,7 +127,8 @@ const Questionnaire = props => {
     })
       .then(response => {
         if (response.data.updateCompletedQuestionnaireByDashboardId !== null) {
-          toast.success('successfully.')
+          toast.success('All questionnaires are submitted successfully.')
+          onClick()
         } else {
           toast.error('Unknown Error! Please contact our support team.')
         }
