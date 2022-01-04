@@ -9,6 +9,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // custom components
 import Radio from 'components/components/Radio'
+import Checkbox from 'components/components/Checkbox'
 
 // images and icons
 import CloseIcon from 'assets/images/close.svg'
@@ -24,8 +25,7 @@ import graphql from 'crysdiazGraphql'
 const Questionnaire = props => {
   // variables
   const { onClick, viewport } = props
-  const [pendingQuestionnaire, setPendingQuestionnaire] = useState({})
-  const [questionnaireData, setQuestionnaireData] = useState([])
+  const [questionnaireData, setQuestionnaireData] = useState({})
 
   const [
     getPendingQuestionnaireByDashboard,
@@ -43,14 +43,13 @@ const Questionnaire = props => {
       pendingQuestionnaireData &&
       pendingQuestionnaireData.getPendingQuestionnaireByDashboard
     ) {
-      setPendingQuestionnaire(pendingQuestionnaireData.getPendingQuestionnaireByDashboard)
-      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0].questionnaire)
+      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0])
     }
   }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
 
   //
   const handleChangeInput = (event, idx) => {
-    let array = questionnaireData
+    let array = questionnaireData.questionnaire
     let tempArray = []
     array.map((item, index) => {
       if (index === idx) {
@@ -61,11 +60,11 @@ const Questionnaire = props => {
         tempArray.push(array[index])
       }
     })
-    setQuestionnaireData(tempArray)
+    setQuestionnaireData({ ...questionnaireData, questionnaire: tempArray })
   }
 
   const handleChangeRadio = (value, idx) => {
-    let array = questionnaireData
+    let array = questionnaireData.questionnaire
     let tempArray = []
     array.map((item, index) => {
       if (index === idx) {
@@ -76,7 +75,22 @@ const Questionnaire = props => {
         tempArray.push(array[index])
       }
     })
-    setQuestionnaireData(tempArray)
+    setQuestionnaireData({ ...questionnaireData, questionnaire: tempArray })
+  }
+
+  const handleChangeCheckbox = (event, value, idx) => {
+    let array = questionnaireData.questionnaire
+    let tempArray = []
+    array.map((item, index) => {
+      if (index === idx) {
+        let object = JSON.parse(JSON.stringify(array[index]))
+        object.answer = value
+        tempArray.push(object)
+      } else {
+        tempArray.push(array[index])
+      }
+    })
+    setQuestionnaireData({ ...questionnaireData, questionnaire: tempArray })
   }
 
   return (
@@ -98,8 +112,9 @@ const Questionnaire = props => {
       <div className={styles.underline}></div>
       <div className={styles.scrollbarArea}>
         <PerfectScrollbar>
-          {questionnaireData.length !== 0 &&
-            questionnaireData.map((item, index) => (
+          {questionnaireData.questionnaire !== undefined &&
+            questionnaireData.questionnaire.length !== 0 &&
+            questionnaireData.questionnaire.map((item, index) => (
               <div key={index}>
                 <div className={'mt-5 ' + styles.subTitle}>{item.name}</div>
                 {item.type === 'text' && (
@@ -156,11 +171,11 @@ const Questionnaire = props => {
                     {/* <div className={styles.text + ' mt-5'}>MÚLTIPLES RESPUESTAS</div> */}
                     {item.choices.map((elem, idx) => (
                       <div className="mt-5" key={idx}>
-                        <Radio
+                        <Checkbox
                           name={'group' + index}
                           value={elem}
                           label={elem}
-                          handleChangeType={() => handleChangeRadio(elem, index)}
+                          handleChangeCheckbox={event => handleChangeCheckbox(event, elem, index)}
                         />
                       </div>
                     ))}
