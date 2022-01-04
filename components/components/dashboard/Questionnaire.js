@@ -84,7 +84,22 @@ const Questionnaire = props => {
     array.map((item, index) => {
       if (index === idx) {
         let object = JSON.parse(JSON.stringify(array[index]))
-        object.answer = value
+        let count = 0
+        if (event.target.checked === true) {
+          object.answer.map((elem, idx) => {
+            if (elem === value) {
+              count++
+            }
+          })
+          if (count === 0) {
+            object.answer.push(value)
+          }
+        } else {
+          let index = object.answer.indexOf(value)
+          if (index > -1) {
+            object.answer.splice(index, 1)
+          }
+        }
         tempArray.push(object)
       } else {
         tempArray.push(array[index])
@@ -175,6 +190,7 @@ const Questionnaire = props => {
                           name={'group' + index}
                           value={elem}
                           label={elem}
+                          answer={item.answer}
                           handleChangeCheckbox={event => handleChangeCheckbox(event, elem, index)}
                         />
                       </div>
