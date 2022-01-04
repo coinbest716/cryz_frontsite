@@ -25,8 +25,7 @@ import graphql from 'crysdiazGraphql'
 const Questionnaire = props => {
   // variables
   const { onClick, viewport } = props
-  const [pendingQuestionnaire, setPendingQuestionnaire] = useState({})
-  const [questionnaireData, setQuestionnaireData] = useState([])
+  const [questionnaireData, setQuestionnaireData] = useState({})
 
   const [
     getPendingQuestionnaireByDashboard,
@@ -44,14 +43,13 @@ const Questionnaire = props => {
       pendingQuestionnaireData &&
       pendingQuestionnaireData.getPendingQuestionnaireByDashboard
     ) {
-      setPendingQuestionnaire(pendingQuestionnaireData.getPendingQuestionnaireByDashboard)
-      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0].questionnaire)
+      setQuestionnaireData(pendingQuestionnaireData.getPendingQuestionnaireByDashboard[0])
     }
   }, [pendingQuestionnaireLoading, pendingQuestionnaireData, pendingQuestionnaireError])
 
   //
   const handleChangeInput = (event, idx) => {
-    let array = questionnaireData
+    let array = questionnaireData.questionnaire
     let tempArray = []
     array.map((item, index) => {
       if (index === idx) {
@@ -62,11 +60,11 @@ const Questionnaire = props => {
         tempArray.push(array[index])
       }
     })
-    setQuestionnaireData(tempArray)
+    setQuestionnaireData({ ...questionnaireData, questionnaire: tempArray })
   }
 
   const handleChangeRadio = (value, idx) => {
-    let array = questionnaireData
+    let array = questionnaireData.questionnaire
     let tempArray = []
     array.map((item, index) => {
       if (index === idx) {
@@ -77,12 +75,11 @@ const Questionnaire = props => {
         tempArray.push(array[index])
       }
     })
-    setQuestionnaireData(tempArray)
+    setQuestionnaireData({ ...questionnaireData, questionnaire: tempArray })
   }
 
   const handleChangeCheckbox = (event, value, idx) => {
-    console.log(event.target.checked)
-    let array = questionnaireData
+    let array = questionnaireData.questionnaire
     let tempArray = []
     array.map((item, index) => {
       if (index === idx) {
@@ -93,7 +90,7 @@ const Questionnaire = props => {
         tempArray.push(array[index])
       }
     })
-    setQuestionnaireData(tempArray)
+    setQuestionnaireData({ ...questionnaireData, questionnaire: tempArray })
   }
 
   return (
@@ -115,8 +112,9 @@ const Questionnaire = props => {
       <div className={styles.underline}></div>
       <div className={styles.scrollbarArea}>
         <PerfectScrollbar>
-          {questionnaireData.length !== 0 &&
-            questionnaireData.map((item, index) => (
+          {questionnaireData.questionnaire !== undefined &&
+            questionnaireData.questionnaire.length !== 0 &&
+            questionnaireData.questionnaire.map((item, index) => (
               <div key={index}>
                 <div className={'mt-5 ' + styles.subTitle}>{item.name}</div>
                 {item.type === 'text' && (
