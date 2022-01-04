@@ -182,6 +182,7 @@ const Questionnaire = props => {
                         name={'group' + index}
                         value={true}
                         label={'Verdadera'}
+                        answer={item.answer}
                         handleChangeType={() => handleChangeRadio(true, index)}
                       />
                     </div>
@@ -190,6 +191,7 @@ const Questionnaire = props => {
                         name={'group' + index}
                         value={false}
                         label={'Falsa'}
+                        answer={item.answer}
                         handleChangeType={() => handleChangeRadio(false, index)}
                       />
                     </div>
@@ -204,6 +206,7 @@ const Questionnaire = props => {
                           name={'group' + index}
                           value={elem}
                           label={elem}
+                          answer={item.answer}
                           handleChangeType={() => handleChangeRadio(elem, index)}
                         />
                       </div>
