@@ -157,16 +157,16 @@ const Calendar = props => {
   return (
     <>
       {viewport === 'mobile' ? (
-        <div className={'p-2 ' + styles.mobileContainer}>
-          <div className="pt-10">
+        <div className={'p-4 ' + styles.mobileContainer}>
+          <div className="mt-10 mb-5">
             <DashboardButton
               handleClick={handleClickStartClass}
               label={'Comenzar clase'}
               type={'startClass'}
-              visible={true}
+              visible={streamingEvent.toggle}
             />
           </div>
-          <div className={'calendarWrapper mt-5 bg-white rounded-xl '}>
+          <div className={'calendarWrapper bg-white rounded-xl '}>
             <MonthCalendar
               className={styles.calendar}
               onChange={handleChangeDate}
@@ -180,7 +180,7 @@ const Calendar = props => {
             />
           </div>
           <div>
-            <div className={styles.nextClass + ' pt-8'}>Siguiente clase</div>
+            <div className={styles.nextClass + ' mt-8 mb-2'}>Siguiente clase</div>
             {events.map((event, index) => (
               <ClassItem event={event} key={index} />
             ))}

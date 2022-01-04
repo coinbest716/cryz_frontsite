@@ -143,7 +143,7 @@ const Classland = props => {
             <div className={globalStyles.container}>
               <div className={styles.topSection}>
                 <div className={styles.m_topTitle}>{main?.title}</div>
-                <div className={styles.topDash} />
+                <div className={styles.m_topDash} />
               </div>
               <div className={styles.m_topRightSection}>
                 <div className={styles.topRightLetImage}>
