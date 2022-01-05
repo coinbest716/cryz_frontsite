@@ -4,12 +4,12 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from './MessageSelectCard.module.scss'
+import styles from './SelectedMessageCard.module.scss'
 
 // images
 import TrashOutlineIcon from 'assets/images/trash-outline.svg'
 
-const MessageSelectCard = props => {
+const SelectedMessageCard = props => {
   const { data, onChangeSubject, newMessageBool } = props
 
   const handleChangeSubject = event => {
@@ -53,4 +53,4 @@ const MessageSelectCard = props => {
   )
 }
 
-export default MessageSelectCard
+export default SelectedMessageCard
