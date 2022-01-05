@@ -91,6 +91,7 @@ const Message = props => {
   ] = useLazyQuery(graphql.queries.getSubMessagesByDashboard)
 
   const [createMessageByDashboard] = useMutation(graphql.mutations.createMessageByDashboard)
+  const [deleteMessageByDashboard] = useMutation(graphql.mutations.deleteMessageByDashboard)
 
   const [dropdownButtonHover, setDropdownButtonHover] = useState(false)
 
@@ -149,10 +150,12 @@ const Message = props => {
       // set all message list
       setMessageList(messageListData.getPatientMessageById)
       // select first message and get first message content
-      setSelectedSubject(messageListData.getPatientMessageById[0])
-      getSubMessagesByDashboard({
-        variables: { message_id: messageListData.getPatientMessageById[0].id },
-      })
+      if (messageListData.getPatientMessageById.length !== 0) {
+        setSelectedSubject(messageListData.getPatientMessageById[0])
+        getSubMessagesByDashboard({
+          variables: { message_id: messageListData.getPatientMessageById[0].id },
+        })
+      }
     }
   }, [messageListLoading, messageListData, messageListError])
 
@@ -220,6 +223,25 @@ const Message = props => {
 
   const handleChangeSubject = value => {
     setNewMessage(newMessage => ({ ...newMessage, subject: value }))
+  }
+
+  const handleRemoveMessage = id => {
+    let array = []
+    array.push(id)
+    deleteMessageByDashboard({
+      variables: { ids: array },
+    })
+      .then(response => {
+        if (response.data.deleteMessageByDashboard === true) {
+          toast.success('Selected message was deleted successfully!')
+          getPatientMessageById({
+            variables: { patient_id: currentPatient.id },
+          })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
   }
 
   const handleSendMessage = (content, attachedFile) => {
@@ -326,6 +348,7 @@ const Message = props => {
               data={newMessageBool ? newMessage : selectedSubject}
               newMessageBool={newMessageBool}
               onChangeSubject={value => handleChangeSubject(value)}
+              removeMessage={id => handleRemoveMessage(id)}
             />
           </div>
           {/* chat area */}
