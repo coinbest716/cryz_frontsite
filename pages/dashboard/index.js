@@ -479,7 +479,7 @@ const Dashboard = props => {
                 {personalInfo.name}&nbsp;{personalInfo.lastname}
               </div>
               {viewport !== 'mobile' && (
-                <div className={'pt-2 ' + styles.welcomeDescription} style={{ whiteSpace: 'pre' }}>{paymentStatusText}</div>
+                <div className={'pt-2 ' + styles.welcomeDescription}>{paymentStatusText}</div>
               )}
               {paymentStatus.link && (
                 <div className={'pt-4'}>
