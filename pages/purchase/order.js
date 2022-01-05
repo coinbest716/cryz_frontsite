@@ -93,7 +93,10 @@ const CreditSuccess = props => {
       {viewport === 'mobile' ? (
         <div className={'flex flex-wrap justify-center'}>
           <div className={styles.container}>
-            <div className="my-6">
+            <div className="px-24 py-6">
+              <Image src={successLogo} alt={''} width={320} height={320} />
+            </div>
+            <div className="my-4">
               <div className={styles.m_title}>GRACIAS, tu pedido ha sido recibido.</div>
               <div className={'pt-8'}>
                 <div className={'flex'}>
@@ -136,6 +139,16 @@ const CreditSuccess = props => {
                 </>
               )}
             </div>
+            <div className="flex justify-center items-center cursor-pointer py-5">
+              <div
+                className={styles.goButton}
+                onClick={() => {
+                  router.push('/')
+                }}
+              >
+                Salir
+              </div>
+            </div>
           </div>
         </div>
       ) : (
@@ -143,7 +156,7 @@ const CreditSuccess = props => {
           <div className={styles.container}>
             <div className={globalStyles.container + ' pt-20'}>
               <div className={'grid grid-cols-12 gap-4 '}>
-                <div className={'col-span-12 md:col-span-8 sm:col-span-12 p-5 pt-32 pb-44'}>
+                <div className={'col-span-12 md:col-span-8 sm:col-span-12 p-5 pb-14'}>
                   <div className={styles.title}>GRACIAS, tu pedido ha sido recibido.</div>
                   <div className={'pt-12'}>
                     <div className={'flex'}>
@@ -185,6 +198,16 @@ const CreditSuccess = props => {
                       </div>
                     </>
                   )}
+                  <div className="flex justify-start items-center cursor-pointer mt-10 mb-5">
+                    <div
+                      className={styles.goButton}
+                      onClick={() => {
+                        router.push('/')
+                      }}
+                    >
+                      Salir
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

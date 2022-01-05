@@ -21,6 +21,7 @@
   font-weight: bold;
   letter-spacing: -0.42px;
   line-height: 32px;
+  text-align: center;
 }
 .detail {
   color: #818e8e;
@@ -48,4 +49,14 @@
 .detailBank {
   border: 1px solid #7a908e;
   max-width: 540px;
+}
+.goButton {
+  border: 1px solid #7a908e;
+  padding: 10px 50px;
+  border-radius: 20px;
+  color: #8a94a6;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
 }
