@@ -1,0 +1,53 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+.m_container {
+  width: 100%;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 230px);
+}
+.creditSection {
+  max-width: 480px;
+}
+.title {
+  text-align: center;
+  color: #7a908e;
+  font-family: Montserrat;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: -0.42px;
+  line-height: 32px;
+}
+.m_title {
+  color: #7a908e;
+  font-family: Montserrat;
+  font-size: 21px;
+  font-weight: bold;
+  letter-spacing: -0.34px;
+  line-height: 25px;
+  text-align: center;
+}
+.orderNumber {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 24px;
+  text-align: center;
+}
+.m_orderNumber {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
+  padding: 0px 40px;
+}
