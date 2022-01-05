@@ -149,25 +149,32 @@ const Dashboard = props => {
 
   const paymentStatuses = {
     UNPAID: {
-      text: () => 'Quizás nos estemos equivocando, pero parece que tienes un pago pendiente. Compruébalo pinchando a continuación en el botón',
+      text: () =>
+        'Quizás nos estemos equivocando, pero parece que tienes un pago pendiente. Compruébalo pinchando a continuación en el botón',
       link: '/dashboard/shopping',
     },
     VOUCHER_ALMOST_USED: {
-      text: (values) => `¡Muy pronto vas a finalizar tu bono! Solo te quedan ${values.item_sessions - values.item_used} de ${values.item_sessions} sesiones. Consulta tus sesiones y renuévalo pinchando a continuación en el botón`,
+      text: values =>
+        `¡Muy pronto vas a finalizar tu bono! Solo te quedan ${values.item_sessions - values.item_used} de ${
+          values.item_sessions
+        } sesiones. Consulta tus sesiones y renuévalo pinchando a continuación en el botón`,
       link: '/dashboard/shopping',
     },
     SINGLE_SESSION_USED: {
-      text: () => `¡Vas por buen camino! \n Anímate a seguir cuidándote. Adquiere una nueva sesión y continúa con tu entrenamiento \n ¡Hoy es el día, ahora el momento!`,
+      text: () =>
+        `¡Vas por buen camino! \n Anímate a seguir cuidándote. Adquiere una nueva sesión y continúa con tu entrenamiento \n ¡Hoy es el día, ahora el momento!`,
       link: '/dashboard/shopping',
     },
     WITHOUT_PURCHASE: {
-      text: () => '¡Uiii! ¿Es posible que todavía no hayas probado ninguno de nuestros servicios? \n Anímate y consigue todos tus objetivos con el apoyo de nuestros especialistas \n ¡Hoy es el día, ahora el momento!',
+      text: () =>
+        '¡Uiii! ¿Es posible que todavía no hayas probado ninguno de nuestros servicios? \n Anímate y consigue todos tus objetivos con el apoyo de nuestros especialistas \n ¡Hoy es el día, ahora el momento!',
       link: '/',
     },
     DEFAULT: {
-      text: () => '¡Hoy es un buen día! \n Sigue haciéndolo tan bien como hasta ahora, y ya verás cómo consigues todo lo que te propongas',
+      text: () =>
+        '¡Hoy es un buen día! \n Sigue haciéndolo tan bien como hasta ahora, y ya verás cómo consigues todo lo que te propongas',
       link: null,
-    }
+    },
   }
 
   const [paymentStatus, setPaymentStatus] = useState(paymentStatuses.DEFAULT)
@@ -255,7 +262,6 @@ const Dashboard = props => {
   useEffect(() => {
     if (!weekDaySessionsError && weekDaySessionsData && weekDaySessionsData.getWeekDaySessionsByDashboard) {
       const data = weekDaySessionsData.getWeekDaySessionsByDashboard
-      console.log('=============data', data)
       let array = []
       try {
         if (data !== undefined && data.length === 8) {
@@ -479,9 +485,11 @@ const Dashboard = props => {
                 {personalInfo.name}&nbsp;{personalInfo.lastname}
               </div>
               {viewport !== 'mobile' && (
-                <div className={'pt-2 ' + styles.welcomeDescription} style={{ whiteSpace: 'pre' }}>{paymentStatusText}</div>
+                <div className={'pt-2 ' + styles.welcomeDescription} style={{ whiteSpace: 'pre' }}>
+                  {paymentStatusText}
+                </div>
               )}
-              {paymentStatus.link && (
+              {viewport !== 'mobile' && paymentStatus.link && (
                 <div className={'pt-4'}>
                   <DashboardButton
                     handleClick={() => handleClickRedirect('view', paymentStatus.link)}
@@ -557,7 +565,7 @@ const Dashboard = props => {
               <div className={'col-span-12 lg:col-span-6'}>
                 <div
                   className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
-                // onClick={() => handleClickRedirect('calendar')}
+                  // onClick={() => handleClickRedirect('calendar')}
                 >
                   <Calendar
                     className={styles.calendar}
@@ -734,7 +742,7 @@ const Dashboard = props => {
           <div className={'col-span-12 mb-40'}>
             <div
               className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
-            // onClick={() => handleClickRedirect('calendar')}
+              // onClick={() => handleClickRedirect('calendar')}
             >
               <Calendar
                 className={styles.calendar}
