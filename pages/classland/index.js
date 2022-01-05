@@ -289,9 +289,8 @@ const Classland = props => {
               </div>
             </div>
           ) : (
-            <div>
-              <div className={styles.divider} />
-              <div style={{ marginBottom: '100px' }}>
+            <div className={styles.faqsection}>
+              <div className={globalStyles.container}>
                 <div ref={faqRef} className={styles.faqString}>
                   FAQ
                 </div>
