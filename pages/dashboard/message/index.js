@@ -22,9 +22,9 @@ import MessageVideo02 from 'components/components/dashboard/message/MessageVideo
 import MessageDownload01 from 'components/components/dashboard/message/MessageDownload01'
 import MessageDownload02 from 'components/components/dashboard/message/MessageDownload02'
 import MessageInput from 'components/components/dashboard/message/MessageInput'
-import ProfessionalCard from 'components/components/dashboard/message/ProfessionalCard'
+import NewMessageButton from 'components/components/dashboard/message/NewMessageButton'
 import SubjectCard from 'components/components/dashboard/message/SubjectCard'
-import MessageSelectCard from 'components/components/dashboard/message/MessageSelectCard'
+import SelectedMessageCard from 'components/components/dashboard/message/SelectedMessageCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -277,7 +277,7 @@ const Message = props => {
         <div className={'w-full md:w-1/2 relative '}>
           {/* professional area */}
           <div className={styles.professionalArea}>
-            <ProfessionalCard
+            <NewMessageButton
               dropdownButtonHover={dropdownButtonHover}
               onClickButton={bool => {
                 setDropdownButtonHover(bool)
@@ -322,7 +322,7 @@ const Message = props => {
         <div className={'w-full md:w-1/2 '}>
           {/* message select card area */}
           <div className={styles.subjectTitleArea}>
-            <MessageSelectCard
+            <SelectedMessageCard
               data={newMessageBool ? newMessage : selectedSubject}
               newMessageBool={newMessageBool}
               onChangeSubject={value => handleChangeSubject(value)}
@@ -378,7 +378,7 @@ const Message = props => {
       {/* mobile view */}
       {/* professional area */}
       <div>
-        <ProfessionalCard
+        <NewMessageButton
           dropdownButtonHover={dropdownButtonHover}
           onClickButton={bool => setDropdownButtonHover(bool)}
           viewport={viewport}
