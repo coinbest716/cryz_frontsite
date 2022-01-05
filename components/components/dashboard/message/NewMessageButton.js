@@ -4,12 +4,12 @@ import React, { useState } from 'react'
 // import Image from 'next/image'
 
 // images
-// import TrashIcon from 'assets/images/trash.svg'
+// import TrashOutlineIcon from 'assets/images/trash-outline.svg'
 
 // styles
-import styles from './ProfessionalCard.module.scss'
+import styles from './NewMessageButton.module.scss'
 
-const ProfessionalCard = props => {
+const NewMessageButton = props => {
   const { dropdownButtonHover, onClickButton, viewport } = props
   const [hover, setHover] = useState(false)
   const onMouseOver = () => {
@@ -37,7 +37,7 @@ const ProfessionalCard = props => {
       </div>
       {/* {viewport !== 'mobile' && (
         <div className={'grid justify-center items-center'}>
-          <Image src={TrashIcon} alt={''} width={31} height={31} />
+          <Image src={TrashOutlineIcon} alt={''} width={31} height={31} />
         </div>
       )} */}
     </div>
@@ -53,11 +53,11 @@ const ProfessionalCard = props => {
       </div>
       {/* {viewport !== 'mobile' && (
         <div className={'grid justify-center items-center'}>
-          <Image src={TrashIcon} alt={''} width={31} height={31} />
+          <Image src={TrashOutlineIcon} alt={''} width={31} height={31} />
         </div>
       )} */}
     </div>
   )
 }
 
-export default ProfessionalCard
+export default NewMessageButton

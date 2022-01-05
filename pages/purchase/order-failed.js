@@ -11,7 +11,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './order-success.module.scss'
+import styles from './order-failed.module.scss'
 
 // images and icons
 import failedLogo from 'public/images/order-failed.png'

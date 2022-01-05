@@ -205,6 +205,13 @@ const Shopping = () => {
       })
   }
 
+  const download = (fileUrl, fileName) => {
+    var a = document.createElement('a')
+    a.href = fileUrl
+    a.setAttribute('download', fileName)
+    a.click()
+  }
+
   return (
     <div className={globalStyles.dashContainer}>
       {/* header part */}
@@ -313,13 +320,17 @@ const Shopping = () => {
                     </div>
                   </td>
                   <td>
-                    <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                      <Image
-                        src={item.sent_invoice ? DownloadIcon : DownloadDisableIcon}
-                        alt={''}
-                        width={18}
-                        height={22}
-                      />
+                    <div className={styles.tableContentArea + ' items-center'}>
+                      {item.download_url !== '' && (
+                        <button
+                          className={
+                            'w-10 h-10 duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'
+                          }
+                          onClick={() => download(item.download_url, 'invoice.pdf')}
+                        >
+                          <Image src={DownloadIcon} alt={''} width={18} height={22} />
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

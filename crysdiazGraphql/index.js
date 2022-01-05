@@ -52,6 +52,7 @@ import {
   GetPatientMessageById,
   GetSubMessagesByDashboard,
   CreateMessageByDashboard,
+  DeleteMessageByDashboard,
 } from './dashboard/message.gql'
 
 // plans online part
@@ -164,6 +165,9 @@ export default {
 
     // message part
     createMessageByDashboard: CreateMessageByDashboard,
+    deleteMessageByDashboard: DeleteMessageByDashboard,
+
+    // purchase
     Checkout: Checkout,
 
     // shopping part

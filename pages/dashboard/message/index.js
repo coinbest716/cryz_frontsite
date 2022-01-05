@@ -13,8 +13,6 @@ import moment from 'moment'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-// import Profile from 'components/components/dashboard/Profile'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
 import MessageCard01 from 'components/components/dashboard/message/MessageCard01'
 import MessageCard02 from 'components/components/dashboard/message/MessageCard02'
 import MessageImage01 from 'components/components/dashboard/message/MessageImage01'
@@ -24,9 +22,9 @@ import MessageVideo02 from 'components/components/dashboard/message/MessageVideo
 import MessageDownload01 from 'components/components/dashboard/message/MessageDownload01'
 import MessageDownload02 from 'components/components/dashboard/message/MessageDownload02'
 import MessageInput from 'components/components/dashboard/message/MessageInput'
-import ProfessionalCard from 'components/components/dashboard/message/ProfessionalCard'
+import NewMessageButton from 'components/components/dashboard/message/NewMessageButton'
 import SubjectCard from 'components/components/dashboard/message/SubjectCard'
-import MessageSelectCard from 'components/components/dashboard/message/MessageSelectCard'
+import SelectedMessageCard from 'components/components/dashboard/message/SelectedMessageCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -58,7 +56,7 @@ const Message = props => {
   const { viewport } = props
   const [currentPatient, setCurrentPatient] = useState({})
   const today = useSelector(state => state.today)
-  const [userList, setUserForMessage] = useState([])
+  const [userList, setUserList] = useState([])
   const [newMessage, setNewMessage] = useState({
     attachment: [],
     content: '',
@@ -93,6 +91,7 @@ const Message = props => {
   ] = useLazyQuery(graphql.queries.getSubMessagesByDashboard)
 
   const [createMessageByDashboard] = useMutation(graphql.mutations.createMessageByDashboard)
+  const [deleteMessageByDashboard] = useMutation(graphql.mutations.deleteMessageByDashboard)
 
   const [dropdownButtonHover, setDropdownButtonHover] = useState(false)
 
@@ -114,7 +113,7 @@ const Message = props => {
         toast.error(error.message)
         router.push('/')
       })
-  }, [getUserForMessage, getPatientByEmail])
+  }, [getPatientByEmail])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -142,13 +141,21 @@ const Message = props => {
 
   useEffect(() => {
     if (!userListError && userListData && userListData.getUserForMessage) {
-      setUserForMessage(userListData.getUserForMessage)
+      setUserList(userListData.getUserForMessage)
     }
   }, [userListLoading, userListData, userListError])
 
   useEffect(() => {
     if (!messageListError && messageListData && messageListData.getPatientMessageById) {
+      // set all message list
       setMessageList(messageListData.getPatientMessageById)
+      // select first message and get first message content
+      if (messageListData.getPatientMessageById.length !== 0) {
+        setSelectedSubject(messageListData.getPatientMessageById[0])
+        getSubMessagesByDashboard({
+          variables: { message_id: messageListData.getPatientMessageById[0].id },
+        })
+      }
     }
   }, [messageListLoading, messageListData, messageListError])
 
@@ -159,6 +166,13 @@ const Message = props => {
   }, [subMessageListLoading, subMessageListData, subMessageListError])
 
   const handleSelectSubject = data => {
+    let array = []
+    messageList.map((item, index) => {
+      if (item.id !== undefined) {
+        array.push(item)
+      }
+    })
+    setMessageList(array)
     if (viewport !== 'mobile') {
       setNewMessageBool(false)
       setSelectedSubject(data)
@@ -180,7 +194,7 @@ const Message = props => {
         variables: { message_id: data.id },
       })
     } else {
-      console.log('You click subject in mobile view.')
+      router.push('/dashboard/message/message-content')
     }
   }
 
@@ -209,6 +223,25 @@ const Message = props => {
 
   const handleChangeSubject = value => {
     setNewMessage(newMessage => ({ ...newMessage, subject: value }))
+  }
+
+  const handleRemoveMessage = id => {
+    let array = []
+    array.push(id)
+    deleteMessageByDashboard({
+      variables: { ids: array },
+    })
+      .then(response => {
+        if (response.data.deleteMessageByDashboard === true) {
+          toast.success('Selected message was deleted successfully!')
+          getPatientMessageById({
+            variables: { patient_id: currentPatient.id },
+          })
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
   }
 
   const handleSendMessage = (content, attachedFile) => {
@@ -246,16 +279,19 @@ const Message = props => {
   }, [scrollEl, subMessageList])
 
   return viewport !== 'mobile' ? (
-    <div className={globalStyles.dashContainer}>
+    <div
+      className={globalStyles.dashContainer}
+      onClick={() => {
+        if (dropdownButtonHover === true) {
+          setDropdownButtonHover(false)
+        }
+      }}
+    >
       {/* header part */}
       <div className={'w-full flex flex-wrap justify-between items-center'}>
         <div className={'block'}>
           <div className={globalStyles.dashTitle}>Mensajes</div>
           <div className={'mt-2 ' + globalStyles.dashDate}>{today}</div>
-        </div>
-        <div className={'flex justify-end'}>
-          <NotificationButton />
-          {/* <Profile /> */}
         </div>
       </div>
       {/* body part */}
@@ -263,9 +299,11 @@ const Message = props => {
         <div className={'w-full md:w-1/2 relative '}>
           {/* professional area */}
           <div className={styles.professionalArea}>
-            <ProfessionalCard
+            <NewMessageButton
               dropdownButtonHover={dropdownButtonHover}
-              onClickButton={bool => setDropdownButtonHover(bool)}
+              onClickButton={bool => {
+                setDropdownButtonHover(bool)
+              }}
               viewport={viewport}
             />
           </div>
@@ -306,10 +344,11 @@ const Message = props => {
         <div className={'w-full md:w-1/2 '}>
           {/* message select card area */}
           <div className={styles.subjectTitleArea}>
-            <MessageSelectCard
+            <SelectedMessageCard
               data={newMessageBool ? newMessage : selectedSubject}
               newMessageBool={newMessageBool}
               onChangeSubject={value => handleChangeSubject(value)}
+              removeMessage={id => handleRemoveMessage(id)}
             />
           </div>
           {/* chat area */}
@@ -362,7 +401,7 @@ const Message = props => {
       {/* mobile view */}
       {/* professional area */}
       <div>
-        <ProfessionalCard
+        <NewMessageButton
           dropdownButtonHover={dropdownButtonHover}
           onClickButton={bool => setDropdownButtonHover(bool)}
           viewport={viewport}

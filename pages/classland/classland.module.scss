@@ -87,6 +87,10 @@
 }
 .middleSection {
   padding-top: 100px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .fullPass {
   color: #7d8f8e;
@@ -110,12 +114,16 @@
 .m_buttonGroup {
   display: flex;
   margin-top: 25px;
-  justify-content: flex-end;
+  justify-content: center;
 }
 .cardSection {
+  display: flex;
+  justify-content: center;
   padding-top: 53px;
 }
 .m_cardSection {
+  display: flex;
+  justify-content: center;
   padding-top: 23px;
 }
 .cardAlign {
