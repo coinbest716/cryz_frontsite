@@ -12,7 +12,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './transfer-success.module.scss'
+import styles from './order-success.module.scss'
 
 // images and icons
 import successLogo from 'public/images/order-success.svg'
@@ -24,10 +24,11 @@ import ShoppingCart from '../../components/components/purchase/ShoppingCart'
 
 import * as gtag from '../../utils/gtag'
 
-const CreditSuccess = () => {
+const CreditSuccess = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const { viewport } = props
 
   useEffect(() => {
     setIsMounted(true)
@@ -47,7 +48,6 @@ const CreditSuccess = () => {
   const [orderInfo, setOrderInfo] = useState(null)
   useEffect(() => {
     if (router.query.payment_intent || router.query.subscription_intent || router.query.purchase_id) {
-
       checkoutVerify({
         variables: {
           intentId: decodeURIComponent(JSON.parse(`"${router.query.payment_intent}"`)),
@@ -65,72 +65,72 @@ const CreditSuccess = () => {
       gtag.event({
         action: 'purchase',
         params: {
-          "transaction_id": data.id,
-          "affiliation": "Crys Dyaz & Co",
-          "value": data.price,
-          "currency": "EUR",
-          "tax": (parseFloat(data.item_iva)) / 100.0 + 1,
-          "shipping": 0,
-          "items": [
+          transaction_id: data.id,
+          affiliation: 'Crys Dyaz & Co',
+          value: data.price,
+          currency: 'EUR',
+          tax: parseFloat(data.item_iva) / 100.0 + 1,
+          shipping: 0,
+          items: [
             {
-              "id": data.item_id,
-              "name": data.item_name,
-              "list_name": data.item_web_name,
-              "brand": "Crys Dyaz & Co",
-              "category": "Services",
-              "quantity": 1,
-              "price": data.price
+              id: data.item_id,
+              name: data.item_name,
+              list_name: data.item_web_name,
+              brand: 'Crys Dyaz & Co',
+              category: 'Services',
+              quantity: 1,
+              price: data.price,
             },
-          ]
-        }
+          ],
+        },
       })
       setOrderInfo(data)
     }
   }, [orderLoading, orderData, orderError])
 
   return (
-    <div className={'flex flex-wrap justify-center'}>
-      <div className={styles.container}>
-        <div className={globalStyles.container + ' pt-20'}>
-          <div className={'grid grid-cols-12 gap-4 '}>
-            <div className={'col-span-12 md:col-span-8 sm:col-span-12 p-5 pt-32 pb-44'}>
-              <div className={styles.title}>GRACIAS, tu pedido ha sido recibido.</div>
-              <div className={'pt-12'}>
+    <>
+      {viewport === 'mobile' ? (
+        <div className={'flex flex-wrap justify-center'}>
+          <div className={styles.container}>
+            <div className="my-6">
+              <div className={styles.m_title}>GRACIAS, tu pedido ha sido recibido.</div>
+              <div className={'pt-8'}>
                 <div className={'flex'}>
-                  <p className={'font-bold ' + styles.detail}>NÚMERO DE PEDIDO:</p>
+                  <p className={'font-bold ' + styles.m_detail}>NÚMERO DE PEDIDO:</p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;#{orderInfo?.id}</p>
                 </div>
                 <div className={'flex pt-3'}>
-                  <p className={'font-bold ' + styles.detail}>SERVICIO: </p>
+                  <p className={'font-bold ' + styles.m_detail}>SERVICIO: </p>
                   <p className={styles.detail}>&nbsp;&nbsp;&nbsp;{orderInfo?.item_name}</p>
                 </div>
                 <div className={'flex pt-3'}>
-                  <p className={'font-bold ' + styles.detail}>TOTAL:</p>
-                  <p className={styles.detail}>&nbsp;&nbsp;&nbsp;{orderInfo?.price}€</p>
+                  <p className={'font-bold ' + styles.m_detail}>TOTAL:</p>
+                  <p className={styles.m_detail}>&nbsp;&nbsp;&nbsp;{orderInfo?.price}€</p>
                 </div>
               </div>
-              <div className={'col-span-12 md:col-span-4 sm:col-span-12'}></div>
+
               {router.query.purchase_id && (
                 <>
-                  <div className={'pt-10 ' + styles.description}>
+                  <div className={'pt-8 ' + styles.description}>
                     Para agilizar tu pedido, puede hacernos llegar el justificante de la transferencia indicando el
                     número de pedido a la siguiente dirección de email: administracion@crysdyazandco.com
                     <br /> <br />
                     Una vez recibida la justificación, se pondrá su pedido en proceso
                   </div>
-                  <div className={'pt-10 font-bold ' + styles.detail}>Detalles bancarios</div>
+                  <div className={'pt-10 font-bold ' + styles.m_detail}>Detalles bancarios</div>
                   <div className={'mt-4 px-6 py-4 ' + styles.detailBank}>
                     <div className={'flex'}>
-                      <p className={'font-bold ' + styles.detail}>NOMBRE:</p>
-                      <p className={styles.detail}>&nbsp;&nbsp;&nbsp;CRODY SALUD</p>
+                      <p className={'font-bold ' + styles.m_detail}>NOMBRE:</p>
+                      <p className={styles.m_detail}>&nbsp;&nbsp;&nbsp;CRODY SALUD</p>
                     </div>
                     <div className={'flex pt-3'}>
-                      <p className={'font-bold ' + styles.detail}>BANCO:</p>
-                      <p className={styles.detail}>&nbsp;&nbsp;&nbsp;LA CAIXA</p>
+                      <p className={'font-bold ' + styles.m_detail}>BANCO:</p>
+                      <p className={styles.m_detail}>&nbsp;&nbsp;&nbsp;LA CAIXA</p>
                     </div>
                     <div className={'flex pt-3'}>
-                      <p className={'font-bold ' + styles.detail}>NºCUENTA: </p>
-                      <p className={styles.detail}>&nbsp;&nbsp;&nbsp;ES27 2100 9201 4202 0013 0103</p>
+                      <p className={'font-bold ' + styles.m_detail}>NºCUENTA: </p>
+                      <p className={styles.m_detail}>&nbsp;&nbsp;&nbsp;ES27 2100 9201 4202 0013 0103</p>
                     </div>
                   </div>
                 </>
@@ -138,8 +138,60 @@ const CreditSuccess = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className={'flex flex-wrap justify-center'}>
+          <div className={styles.container}>
+            <div className={globalStyles.container + ' pt-20'}>
+              <div className={'grid grid-cols-12 gap-4 '}>
+                <div className={'col-span-12 md:col-span-8 sm:col-span-12 p-5 pt-32 pb-44'}>
+                  <div className={styles.title}>GRACIAS, tu pedido ha sido recibido.</div>
+                  <div className={'pt-12'}>
+                    <div className={'flex'}>
+                      <p className={'font-bold ' + styles.detail}>NÚMERO DE PEDIDO:</p>
+                      <p className={styles.detail}>&nbsp;&nbsp;&nbsp;#{orderInfo?.id}</p>
+                    </div>
+                    <div className={'flex pt-3'}>
+                      <p className={'font-bold ' + styles.detail}>SERVICIO: </p>
+                      <p className={styles.detail}>&nbsp;&nbsp;&nbsp;{orderInfo?.item_name}</p>
+                    </div>
+                    <div className={'flex pt-3'}>
+                      <p className={'font-bold ' + styles.detail}>TOTAL:</p>
+                      <p className={styles.detail}>&nbsp;&nbsp;&nbsp;{orderInfo?.price}€</p>
+                    </div>
+                  </div>
+                  <div className={'col-span-12 md:col-span-4 sm:col-span-12'}></div>
+                  {router.query.purchase_id && (
+                    <>
+                      <div className={'pt-10 ' + styles.description}>
+                        Para agilizar tu pedido, puede hacernos llegar el justificante de la transferencia indicando el
+                        número de pedido a la siguiente dirección de email: administracion@crysdyazandco.com
+                        <br /> <br />
+                        Una vez recibida la justificación, se pondrá su pedido en proceso
+                      </div>
+                      <div className={'pt-10 font-bold ' + styles.detail}>Detalles bancarios</div>
+                      <div className={'mt-4 px-6 py-4 ' + styles.detailBank}>
+                        <div className={'flex'}>
+                          <p className={'font-bold ' + styles.detail}>NOMBRE:</p>
+                          <p className={styles.detail}>&nbsp;&nbsp;&nbsp;CRODY SALUD</p>
+                        </div>
+                        <div className={'flex pt-3'}>
+                          <p className={'font-bold ' + styles.detail}>BANCO:</p>
+                          <p className={styles.detail}>&nbsp;&nbsp;&nbsp;LA CAIXA</p>
+                        </div>
+                        <div className={'flex pt-3'}>
+                          <p className={'font-bold ' + styles.detail}>NºCUENTA: </p>
+                          <p className={styles.detail}>&nbsp;&nbsp;&nbsp;ES27 2100 9201 4202 0013 0103</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 export default CreditSuccess
