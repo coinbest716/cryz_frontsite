@@ -9,15 +9,15 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // custom components
-import MessageCard01 from 'components/components/dashboard/message/MessageCard01'
-import MessageCard02 from 'components/components/dashboard/message/MessageCard02'
-import MessageImage01 from 'components/components/dashboard/message/MessageImage01'
-import MessageImage02 from 'components/components/dashboard/message/MessageImage02'
-import MessageVideo01 from 'components/components/dashboard/message/MessageVideo01'
-import MessageVideo02 from 'components/components/dashboard/message/MessageVideo02'
-import MessageDownload01 from 'components/components/dashboard/message/MessageDownload01'
-import MessageDownload02 from 'components/components/dashboard/message/MessageDownload02'
-import MessageInput from 'components/components/dashboard/message/MessageInput'
+import MobileMessageCard01 from 'components/components/dashboard/message/MobileMessageCard01'
+import MobileMessageCard02 from 'components/components/dashboard/message/MobileMessageCard02'
+import MobileMessageImage01 from 'components/components/dashboard/message/MobileMessageImage01'
+import MobileMessageImage02 from 'components/components/dashboard/message/MobileMessageImage02'
+import MobileMessageVideo01 from 'components/components/dashboard/message/MobileMessageVideo01'
+import MobileMessageVideo02 from 'components/components/dashboard/message/MobileMessageVideo02'
+import MobileMessageDownload01 from 'components/components/dashboard/message/MobileMessageDownload01'
+import MobileMessageDownload02 from 'components/components/dashboard/message/MobileMessageDownload02'
+import MobileMessageInput from 'components/components/dashboard/message/MobileMessageInput'
 
 // images and icons
 import ArrowLeftBlackIcon from 'assets/images/arrow-left-black.svg'
@@ -85,6 +85,8 @@ const MessageContent = props => {
         </div>
       </div>
       <div className={styles.cardContainer}>
+        {/* subject part */}
+        <div className={styles.subjectArea}></div>
         {/* chat area */}
         <div className={styles.chatArea}>
           <PerfectScrollbar
@@ -99,35 +101,31 @@ const MessageContent = props => {
               {subMessageList.map((item, index) =>
                 item.to_type === 'user' ? (
                   item.content !== '' ? (
-                    <MessageCard01 key={index} message={item} />
+                    <MobileMessageCard01 key={index} message={item} />
                   ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'image' ? (
-                    <MessageImage01 key={index} message={item} />
+                    <MobileMessageImage01 key={index} message={item} />
                   ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'video' ? (
-                    <MessageVideo01 key={index} message={item} />
+                    <MobileMessageVideo01 key={index} message={item} />
                   ) : (
-                    item.attachment.length !== 0 && <MessageDownload01 key={index} message={item} />
+                    item.attachment.length !== 0 && <MobileMessageDownload01 key={index} message={item} />
                   )
                 ) : item.content !== '' ? (
-                  <MessageCard02 key={index} message={item} />
+                  <MobileMessageCard02 key={index} message={item} />
                 ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'image' ? (
-                  <MessageImage02 key={index} message={item} />
+                  <MobileMessageImage02 key={index} message={item} />
                 ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'video' ? (
-                  <MessageVideo02 key={index} message={item} />
+                  <MobileMessageVideo02 key={index} message={item} />
                 ) : (
-                  item.attachment.length !== 0 && <MessageDownload02 key={index} message={item} />
+                  item.attachment.length !== 0 && <MobileMessageDownload02 key={index} message={item} />
                 )
               )}
             </>
             {/* )} */}
           </PerfectScrollbar>
         </div>
-        {/* message input area */}
-        <div className={styles.messageSendArea}>
-          <div className={'my-5 mx-7 flex justify-end'}>
-            <MessageInput sendMessage={(content, attachedFile) => handleSendMessage(content, attachedFile)} />
-          </div>
-        </div>
       </div>
+      {/* message input area */}
+      <div className={styles.messageSendContainer}></div>
     </div>
   )
 }
