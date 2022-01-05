@@ -13,8 +13,6 @@ import moment from 'moment'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-// import Profile from 'components/components/dashboard/Profile'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
 import MessageCard01 from 'components/components/dashboard/message/MessageCard01'
 import MessageCard02 from 'components/components/dashboard/message/MessageCard02'
 import MessageImage01 from 'components/components/dashboard/message/MessageImage01'
@@ -58,7 +56,7 @@ const Message = props => {
   const { viewport } = props
   const [currentPatient, setCurrentPatient] = useState({})
   const today = useSelector(state => state.today)
-  const [userList, setUserForMessage] = useState([])
+  const [userList, setUserList] = useState([])
   const [newMessage, setNewMessage] = useState({
     attachment: [],
     content: '',
@@ -114,7 +112,7 @@ const Message = props => {
         toast.error(error.message)
         router.push('/')
       })
-  }, [getUserForMessage, getPatientByEmail])
+  }, [getPatientByEmail])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -142,13 +140,19 @@ const Message = props => {
 
   useEffect(() => {
     if (!userListError && userListData && userListData.getUserForMessage) {
-      setUserForMessage(userListData.getUserForMessage)
+      setUserList(userListData.getUserForMessage)
     }
   }, [userListLoading, userListData, userListError])
 
   useEffect(() => {
     if (!messageListError && messageListData && messageListData.getPatientMessageById) {
+      // set all message list
       setMessageList(messageListData.getPatientMessageById)
+      // select first message and get first message content
+      setSelectedSubject(messageListData.getPatientMessageById[0])
+      getSubMessagesByDashboard({
+        variables: { message_id: messageListData.getPatientMessageById[0].id },
+      })
     }
   }, [messageListLoading, messageListData, messageListError])
 
@@ -159,6 +163,13 @@ const Message = props => {
   }, [subMessageListLoading, subMessageListData, subMessageListError])
 
   const handleSelectSubject = data => {
+    let array = []
+    messageList.map((item, index) => {
+      if (item.id !== undefined) {
+        array.push(item)
+      }
+    })
+    setMessageList(array)
     if (viewport !== 'mobile') {
       setNewMessageBool(false)
       setSelectedSubject(data)
@@ -252,10 +263,6 @@ const Message = props => {
         <div className={'block'}>
           <div className={globalStyles.dashTitle}>Mensajes</div>
           <div className={'mt-2 ' + globalStyles.dashDate}>{today}</div>
-        </div>
-        <div className={'flex justify-end'}>
-          <NotificationButton />
-          {/* <Profile /> */}
         </div>
       </div>
       {/* body part */}
