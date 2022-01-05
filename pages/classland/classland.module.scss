@@ -87,7 +87,9 @@
 }
 .middleSection {
   padding-top: 100px;
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 .fullPass {
