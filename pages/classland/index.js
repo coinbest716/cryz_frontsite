@@ -193,22 +193,32 @@ const Classland = props => {
         <div className={'w-full px-4'}>
           {viewport === 'mobile' ? (
             <div className={styles.middleSection}>
-              <div className={globalStyles.container}>
+              <div className={globalStyles.container + ' w-full'}>
                 <div className={styles.m_fullPass}>Full Pass</div>
                 {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
               </div>
-              <div className={globalStyles.tinyMCEClass}>
-                <div
-                  className={styles.topDescription + ' tinymce-class mt-4'}
-                  dangerouslySetInnerHTML={{ __html: main?.text }}
-                ></div>
+              <div className={globalStyles.container + ' w-full'}>
+                <div className={globalStyles.tinyMCEClass}>
+                  <div
+                    className={styles.topDescription + ' tinymce-class mt-4'}
+                    dangerouslySetInnerHTML={{ __html: main?.text }}
+                  ></div>
+                </div>
               </div>
             </div>
           ) : (
             <div className={styles.middleSection}>
-              <div className={globalStyles.container}>
+              <div className={globalStyles.container + ' w-full'}>
                 <div className={styles.fullPass}>Full Pass</div>
                 {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
+              </div>
+              <div className={globalStyles.container + ' w-full'}>
+                <div className={globalStyles.tinyMCEClass}>
+                  <div
+                    className={styles.topDescription + ' tinymce-class mt-4'}
+                    dangerouslySetInnerHTML={{ __html: main?.text }}
+                  ></div>
+                </div>
               </div>
             </div>
           )}
