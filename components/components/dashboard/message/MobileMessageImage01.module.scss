@@ -1,0 +1,22 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 125px;
+  height: 101px;
+  opacity: 0.77;
+  border: solid 1px #cccccc !important;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+  object-fit: cover;
+}
+
+.download {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  &:hover {
+    opacity: 1;
+  }
+}
