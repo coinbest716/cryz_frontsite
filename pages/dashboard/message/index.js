@@ -114,7 +114,7 @@ const Message = props => {
         toast.error(error.message)
         router.push('/')
       })
-  }, [getUserForMessage, getPatientByEmail])
+  }, [getPatientByEmail])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -159,6 +159,13 @@ const Message = props => {
   }, [subMessageListLoading, subMessageListData, subMessageListError])
 
   const handleSelectSubject = data => {
+    let array = []
+    messageList.map((item, index) => {
+      if (item.id !== undefined) {
+        array.push(item)
+      }
+    })
+    setMessageList(array)
     if (viewport !== 'mobile') {
       setNewMessageBool(false)
       setSelectedSubject(data)
