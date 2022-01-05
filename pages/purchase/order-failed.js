@@ -11,7 +11,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './order-success.module.scss'
+import styles from './order-failed.module.scss'
 
 // images and icons
 import failedLogo from 'public/images/order-failed.png'
@@ -54,6 +54,16 @@ const CreditSuccess = props => {
                     <Image src={failedLogo} alt="" width={270} height={245} />
                   </div>
                   <div className={styles.m_orderNumber}>INTÉNTALO DE NUEVO O PONTE EN CONTACTO CON NOSOTROS</div>
+                  <div className="flex justify-center items-center cursor-pointer pt-10 pb-5">
+                    <div
+                      className={styles.goButton}
+                      onClick={() => {
+                        router.push('/')
+                      }}
+                    >
+                      Salir
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -71,6 +81,16 @@ const CreditSuccess = props => {
                   </div>
                   <div className={'pt-16 ' + styles.orderNumber}>
                     INTÉNTALO DE NUEVO O PONTE EN CONTACTO CON NOSOTROS
+                  </div>
+                  <div className="flex justify-center items-center cursor-pointer pt-14 pb-5">
+                    <div
+                      className={styles.goButton}
+                      onClick={() => {
+                        router.push('/')
+                      }}
+                    >
+                      Salir
+                    </div>
                   </div>
                 </div>
               </div>

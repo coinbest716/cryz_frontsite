@@ -211,7 +211,7 @@ const Planes = () => {
           path: '/images/time.svg',
           bgColor: '#F5DEC2',
           topLabel: 'Tiempo',
-          lowLabel: selectedVideo.time + ' min',
+          lowLabel: selectedVideo.time + ' seg',
         },
         {
           id: 2,

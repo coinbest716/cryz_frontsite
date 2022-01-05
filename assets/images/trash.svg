@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-  <g id="trash-2" transform="translate(11.5 10.5)">
-    <path d="M0 0.25L1 0.25L9 0.25" transform="translate(0 1.75)" id="Path" fill="none" fill-rule="evenodd" stroke="#818E8E" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M7 2L7 9C7 9.55228 6.55228 10 6 10L1 10C0.447715 10 0 9.55228 0 9L0 2M1.5 2L1.5 1C1.5 0.447715 1.94772 0 2.5 0L4.5 0C5.05228 0 5.5 0.447715 5.5 1L5.5 2" transform="translate(1 0)" id="Shape" fill="none" fill-rule="evenodd" stroke="#C4C4C4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M0.25 0L0.25 3" transform="translate(3.25 4.5)" id="Path" fill="none" fill-rule="evenodd" stroke="#C4C4C4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M0.25 0L0.25 3" transform="translate(5.25 4.5)" id="Path" fill="none" fill-rule="evenodd" stroke="#C4C4C4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+<svg width="10px" height="11px" viewBox="0 0 10 11" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="trash-2" transform="translate(0.5 0.5)">
+    <path d="M0 2L1 2L9 2" id="Path" fill="none" fill-rule="evenodd" stroke="#818E8E" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M8 2L8 9C8 9.55228 7.55228 10 7 10L2 10C1.44772 10 1 9.55228 1 9L1 2M2.5 2L2.5 1C2.5 0.447715 2.94772 0 3.5 0L5.5 0C6.05228 0 6.5 0.447715 6.5 1L6.5 2" id="Shape" fill="none" fill-rule="evenodd" stroke="#818E8E" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M3.5 4.5L3.5 7.5" id="Path" fill="none" fill-rule="evenodd" stroke="#818E8E" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M5.5 4.5L5.5 7.5" id="Path" fill="none" fill-rule="evenodd" stroke="#818E8E" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
   </g>
-  <path d="M0 0L30 0L30 30L0 30L0 0Z" transform="translate(0.5 0.5)" id="Rectangle" fill="none" fill-rule="evenodd" stroke="#C4C4C4" stroke-width="1" />
 </svg>

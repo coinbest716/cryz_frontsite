@@ -2,11 +2,22 @@
 
 .container {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+.m_container {
+  width: 100%;
   margin-top: 80px;
-  padding: 16px;
-  min-height: calc(100vh - 177px);
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 230px);
+}
+.creditSection {
+  max-width: 480px;
 }
 .title {
+  text-align: center;
   color: #7a908e;
   font-family: Montserrat;
   font-size: 26px;
@@ -17,38 +28,28 @@
 .m_title {
   color: #7a908e;
   font-family: Montserrat;
-  font-size: 20px;
+  font-size: 21px;
   font-weight: bold;
-  letter-spacing: -0.42px;
-  line-height: 32px;
+  letter-spacing: -0.34px;
+  line-height: 25px;
   text-align: center;
 }
-.detail {
+.orderNumber {
   color: #818e8e;
   font-family: Montserrat;
   font-size: 20px;
   letter-spacing: 0;
   line-height: 24px;
-  // text-align: center;
+  text-align: center;
 }
-.m_detail {
+.m_orderNumber {
   color: #818e8e;
-  font-family: Montserrat;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 24px;
-  // text-align: center;
-}
-.description {
-  color: #8a94a6;
   font-family: Montserrat;
   font-size: 14px;
   letter-spacing: 0;
   line-height: 18px;
-}
-.detailBank {
-  border: 1px solid #7a908e;
-  max-width: 540px;
+  text-align: center;
+  padding: 0px 40px;
 }
 .goButton {
   border: 1px solid #7a908e;

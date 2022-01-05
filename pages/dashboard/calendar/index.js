@@ -146,13 +146,15 @@ const Calendar = props => {
   }
   const handleChangeDate = value => {
     setCalendarValue(value)
-    const styleDate = moment(value).format('YYYY-MM-DD')
-    markDate.map(item => {
-      if (item === moment(value).format('DD-MM-YYYY')) {
-        let calendarApi = calendarComponentRef.current.getApi()
-        calendarApi.gotoDate(styleDate) // call a method on the Calendar object
-      }
-    })
+    if (viewport !== 'mobile') {
+      const styleDate = moment(value).format('YYYY-MM-DD')
+      markDate.map(item => {
+        if (item === moment(value).format('DD-MM-YYYY')) {
+          let calendarApi = calendarComponentRef.current.getApi()
+          calendarApi.gotoDate(styleDate) // call a method on the Calendar object
+        }
+      })
+    }
   }
   return (
     <>
