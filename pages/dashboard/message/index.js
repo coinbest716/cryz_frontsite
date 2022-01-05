@@ -194,7 +194,12 @@ const Message = props => {
         variables: { message_id: data.id },
       })
     } else {
-      router.push('/dashboard/message/message-content')
+      router.push({
+        pathname: '/dashboard/message/message-content',
+        query: {
+          message_id: data.id,
+        },
+      })
     }
   }
 
