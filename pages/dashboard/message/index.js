@@ -257,7 +257,14 @@ const Message = props => {
   }, [scrollEl, subMessageList])
 
   return viewport !== 'mobile' ? (
-    <div className={globalStyles.dashContainer}>
+    <div
+      className={globalStyles.dashContainer}
+      onClick={() => {
+        if (dropdownButtonHover === true) {
+          setDropdownButtonHover(false)
+        }
+      }}
+    >
       {/* header part */}
       <div className={'w-full flex flex-wrap justify-between items-center'}>
         <div className={'block'}>
@@ -272,7 +279,9 @@ const Message = props => {
           <div className={styles.professionalArea}>
             <ProfessionalCard
               dropdownButtonHover={dropdownButtonHover}
-              onClickButton={bool => setDropdownButtonHover(bool)}
+              onClickButton={bool => {
+                setDropdownButtonHover(bool)
+              }}
               viewport={viewport}
             />
           </div>
