@@ -193,8 +193,10 @@ const Classland = props => {
         <div className={'w-full px-4'}>
           {viewport === 'mobile' ? (
             <div className={styles.middleSection}>
-              <div className={styles.m_fullPass}>Full Pass</div>
-              {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
+              <div className={globalStyles.container}>
+                <div className={styles.m_fullPass}>Full Pass</div>
+                {sliderData.length !== 0 ? <MobileClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
+              </div>
               <div className={globalStyles.tinyMCEClass}>
                 <div
                   className={styles.topDescription + ' tinymce-class mt-4'}
@@ -204,53 +206,61 @@ const Classland = props => {
             </div>
           ) : (
             <div className={styles.middleSection}>
-              <div className={styles.fullPass}>Full Pass</div>
-              {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
+              <div className={globalStyles.container}>
+                <div className={styles.fullPass}>Full Pass</div>
+                {sliderData.length !== 0 ? <ClasslandCarousel sliderData={sliderData} url={main.url} /> : <></>}
+              </div>
             </div>
           )}
           <div className={styles.m_buttonGroup}>
-            {viewport === 'mobile' ? (
-              <select
-                name="select"
-                onChange={handleClickSelectFilter}
-                value={filterValue}
-                className={'flex justify-end items-center ' + styles.select}
-              >
-                {filter.map((item, index) => (
-                  <option key={index} value={item.id} className={styles.option}>
-                    {item.value}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              filter.map((item, index) => (
-                <div className={'mr-3'} key={index}>
-                  <FilterButton
-                    active={index === filterKey}
-                    filter={item}
-                    onClick={() => handleClickFilter(index)}
-                    key={index}
-                  />
-                </div>
-              ))
-            )}
+            <div className={globalStyles.container + ' flex'}>
+              {viewport === 'mobile' ? (
+                <select
+                  name="select"
+                  onChange={handleClickSelectFilter}
+                  value={filterValue}
+                  className={'flex justify-end items-center ' + styles.select}
+                >
+                  {filter.map((item, index) => (
+                    <option key={index} value={item.id} className={styles.option}>
+                      {item.value}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                filter.map((item, index) => (
+                  <div className={'mr-3'} key={index}>
+                    <FilterButton
+                      active={index === filterKey}
+                      filter={item}
+                      onClick={() => handleClickFilter(index)}
+                      key={index}
+                    />
+                  </div>
+                ))
+              )}
+            </div>
           </div>
           {viewport === 'mobile' ? (
             <div className={styles.m_cardSection}>
-              {cardData.length !== 0 ? <MobileDoubleClasslandCarousel coTeam={cardData} /> : <></>}
+              <div className={globalStyles.container}>
+                {cardData.length !== 0 ? <MobileDoubleClasslandCarousel coTeam={cardData} /> : <></>}
+              </div>
             </div>
           ) : (
             <div className={styles.cardSection}>
-              <div className={'grid grid-cols-12 gap-8'}>
-                {cardData?.map((card, index) =>
-                  card.visible ? (
-                    <div className={'col-span-12 flex md:col-span-6 lg:col-span-4 ' + styles.cardAlign} key={index}>
-                      <ClassCard data={card} key={index} />
-                    </div>
-                  ) : (
-                    <div></div>
-                  )
-                )}
+              <div className={globalStyles.container}>
+                <div className={'grid grid-cols-12 gap-8'}>
+                  {cardData?.map((card, index) =>
+                    card.visible ? (
+                      <div className={'col-span-12 flex md:col-span-6 lg:col-span-4 ' + styles.cardAlign} key={index}>
+                        <ClassCard data={card} key={index} />
+                      </div>
+                    ) : (
+                      <div></div>
+                    )
+                  )}
+                </div>
               </div>
             </div>
           )}
