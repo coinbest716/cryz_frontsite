@@ -7,9 +7,9 @@ import React, { useState } from 'react'
 // import TrashOutlineIcon from 'assets/images/trash-outline.svg'
 
 // styles
-import styles from './ProfessionalCard.module.scss'
+import styles from './NewMessageButton.module.scss'
 
-const ProfessionalCard = props => {
+const NewMessageButton = props => {
   const { dropdownButtonHover, onClickButton, viewport } = props
   const [hover, setHover] = useState(false)
   const onMouseOver = () => {
@@ -60,4 +60,4 @@ const ProfessionalCard = props => {
   )
 }
 
-export default ProfessionalCard
+export default NewMessageButton

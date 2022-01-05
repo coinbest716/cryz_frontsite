@@ -4,13 +4,13 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from './MessageSelectCard.module.scss'
+import styles from './SelectedMessageCard.module.scss'
 
 // images
 import TrashOutlineIcon from 'assets/images/trash-outline.svg'
 
-const MessageSelectCard = props => {
-  const { data, onChangeSubject, newMessageBool } = props
+const SelectedMessageCard = props => {
+  const { data, onChangeSubject, newMessageBool, removeMessage } = props
 
   const handleChangeSubject = event => {
     onChangeSubject(event.target.value)
@@ -46,11 +46,11 @@ const MessageSelectCard = props => {
           <div className={'mt-2 ' + styles.text}>{data.from_name}</div>
         </div>
       </div>
-      <div className={'grid justify-center items-center'}>
+      <div className={'grid justify-center items-center'} onClick={() => removeMessage(data.id)}>
         <Image src={TrashOutlineIcon} alt={''} width={31} height={31} />
       </div>
     </div>
   )
 }
 
-export default MessageSelectCard
+export default SelectedMessageCard
