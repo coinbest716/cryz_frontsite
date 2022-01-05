@@ -10,7 +10,7 @@ import styles from './SelectedMessageCard.module.scss'
 import TrashOutlineIcon from 'assets/images/trash-outline.svg'
 
 const SelectedMessageCard = props => {
-  const { data, onChangeSubject, newMessageBool } = props
+  const { data, onChangeSubject, newMessageBool, removeMessage } = props
 
   const handleChangeSubject = event => {
     onChangeSubject(event.target.value)
@@ -46,7 +46,7 @@ const SelectedMessageCard = props => {
           <div className={'mt-2 ' + styles.text}>{data.from_name}</div>
         </div>
       </div>
-      <div className={'grid justify-center items-center'}>
+      <div className={'grid justify-center items-center'} onClick={() => removeMessage(data.id)}>
         <Image src={TrashOutlineIcon} alt={''} width={31} height={31} />
       </div>
     </div>
