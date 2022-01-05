@@ -97,6 +97,6 @@ mutation CreateMessageByDashboard(
   }
 }
 
-mutation DeleteMessageByDashboard($id: [Int]) {
-  deleteMessageByDashboard(id: $id)
+mutation DeleteMessageByDashboard($ids: [Int]) {
+  deleteMessageByDashboard(ids: $ids)
 }
