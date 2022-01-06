@@ -55,7 +55,7 @@ const MessageContent = props => {
     { data: subMessageListData, loading: subMessageListLoading, error: subMessageListError },
   ] = useLazyQuery(graphql.queries.getSubMessagesByDashboard)
   const [subMessageList, setSubMessageList] = useState([])
-
+  const [createMessageByDashboard] = useMutation(graphql.mutations.createMessageByDashboard)
   const [deleteMessageByDashboard] = useMutation(graphql.mutations.deleteMessageByDashboard)
 
   const [scrollEl, setScrollEl] = useState()
@@ -104,6 +104,26 @@ const MessageContent = props => {
 
   const handleChangeSubject = event => {
     console.log('event', event)
+  }
+
+  const handleSendMessage = (content, attachedFile) => {
+    let object = newMessage
+    object.content = content
+    if (attachedFile !== '') {
+      object.attachment.push(attachedFile)
+    }
+    createMessageByDashboard({
+      variables: object,
+    })
+      .then(response => {
+        getSubMessagesByDashboard({
+          variables: { message_id: response.data.createMessageByDashboard.request_id },
+        })
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
+    setNewMessageBool(false)
   }
 
   return (
@@ -182,7 +202,9 @@ const MessageContent = props => {
         </div>
       </div>
       {/* message input area */}
-      <div className={styles.messageSendContainer}></div>
+      <div className={styles.messageSendContainer}>
+        <MobileMessageInput sendMessage={(content, attachedFile) => handleSendMessage(content, attachedFile)} />
+      </div>
     </div>
   )
 }
