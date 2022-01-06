@@ -240,7 +240,7 @@ const Shopping = props => {
           <div className="mt-36 mb-36 p-4">
             <div>
               {shoppingData.map((item, index) => (
-                <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} index={index} />
+                <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} index={index} key={index} />
               ))}
             </div>
             <div className="mt-6">
