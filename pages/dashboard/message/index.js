@@ -3,6 +3,9 @@ import React, { useEffect, useRef, useState } from 'react'
 // redux
 import { useDispatch, useSelector } from 'react-redux'
 
+// next components
+import router from 'next/router'
+
 // third party components
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -33,7 +36,6 @@ import styles from './message.module.scss'
 // graphql
 import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import router from 'next/router'
 
 const Message = props => {
   // loading part ###########################
