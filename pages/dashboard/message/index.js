@@ -175,37 +175,37 @@ const Message = props => {
       }
     })
     setMessageList(array)
+    setNewMessageBool(false)
+    setSelectedSubject(data)
+    let object = {}
+    object.attachment = []
+    object.content = ''
+    object.from_email = data.from_type === 'patient' ? data.from_email : data.to_email
+    object.from_id = data.from_type === 'patient' ? data.from_id : data.to_id
+    object.from_name = data.from_type === 'patient' ? data.from_name : data.to_name
+    object.from_type = 'patient'
+    object.request_id = data.id
+    object.subject = data.subject
+    object.to_email = data.from_type === 'patient' ? data.to_email : data.from_email
+    object.to_id = data.from_type === 'patient' ? data.to_id : data.from_id
+    object.to_name = data.from_type === 'patient' ? data.to_name : data.from_name
+    object.to_type = 'user'
+    setNewMessage(object)
     if (viewport !== 'mobile') {
-      setNewMessageBool(false)
-      setSelectedSubject(data)
-      let object = {}
-      object.attachment = []
-      object.content = ''
-      object.from_email = currentPatient.email
-      object.from_id = currentPatient.id
-      object.from_name = currentPatient.name + ' ' + currentPatient.lastname
-      object.from_type = 'patient'
-      object.request_id = data.id
-      object.subject = data.subject
-      object.to_email = data.from_email
-      object.to_id = data.from_id
-      object.to_name = data.from_name
-      object.to_type = 'user'
-      setNewMessage(object)
       getSubMessagesByDashboard({
         variables: { message_id: data.id },
       })
     } else {
+      object.new_message_bool = newMessageBool
+      object.message_id = data.id
       router.push({
         pathname: '/dashboard/message/message-content',
-        query: {
-          message_id: data.id,
-        },
+        query: object,
       })
     }
   }
 
-  const handleSelectUser = item => {
+  const handleSelectUser = data => {
     let object = {}
     object.attachment = []
     object.content = ''
@@ -215,9 +215,9 @@ const Message = props => {
     object.from_type = 'patient'
     object.request_id = 0
     object.subject = ''
-    object.to_email = item.email
-    object.to_id = item.id
-    object.to_name = item.name + ' ' + item.lastname
+    object.to_email = data.email
+    object.to_id = data.id
+    object.to_name = data.name + ' ' + data.lastname
     object.to_type = 'user'
     setNewMessage(object)
     let obj = object

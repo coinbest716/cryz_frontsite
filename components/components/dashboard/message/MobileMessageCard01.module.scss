@@ -1,37 +1,31 @@
 @import 'styles/variable.module.scss';
 
 .container {
-  position: relative;
-  max-width: 600px;
+  max-width: 80%;
+  min-height: 60px;
   width: auto;
-  margin-right: 9px;
   padding: 16px;
-  border-radius: 10px;
-  background-color: #c4c4c4;
-  display: inline-block;
-}
-
-.triangle {
-  position: absolute;
-  top: 0;
-  right: -9px;
-  width: 0;
-  height: 0;
-  border: 9px solid transparent;
-  border-bottom: 0;
-  border-top: 18px solid #c4c4c4;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background: linear-gradient(-21deg, #9eadad, #fffefe);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .content {
-  color: $white-color;
+  width: 100%;
+  color: #ffffff;
   font-family: Montserrat;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 17px;
+  line-height: 15px;
+  text-align: right;
 }
 
 .time {
+  width: 100%;
   color: $white-color;
   font-family: Montserrat;
   font-size: 12px;

@@ -35,6 +35,21 @@ import graphql from 'crysdiazGraphql'
 const MessageContent = props => {
   // variables
   const router = useRouter()
+  const [newMessage, setNewMessage] = useState({
+    attachment: [],
+    content: '',
+    from_email: '',
+    from_id: 0,
+    from_name: '',
+    from_type: 'patient',
+    request_id: 0,
+    subject: '',
+    to_email: '',
+    to_id: 0,
+    to_name: '',
+    to_type: 'user',
+  })
+  const [newMessageBool, setNewMessageBool] = useState(false)
   const [
     getSubMessagesByDashboard,
     { data: subMessageListData, loading: subMessageListLoading, error: subMessageListError },
@@ -50,6 +65,7 @@ const MessageContent = props => {
     router.push('/dashboard/message')
   }
   useEffect(() => {
+    setNewMessageBool(Boolean(router.query.new_message_bool))
     if (router.query.message_id) {
       getSubMessagesByDashboard({
         variables: { message_id: Number(router.query.message_id) },
@@ -86,8 +102,13 @@ const MessageContent = props => {
       })
   }
 
+  const handleChangeSubject = event => {
+    console.log('event', event)
+  }
+
   return (
     <div className={styles.container}>
+      {console.log(newMessageBool)}
       <div className={'w-full flex justify-between items-center ' + styles.headerContainer}>
         <div className={'flex cursor'} onClick={() => handleGoBack()}>
           <Image src={ArrowLeftBlackIcon} alt={''} width={14} height={14} />
@@ -106,7 +127,23 @@ const MessageContent = props => {
       </div>
       <div className={styles.cardContainer}>
         {/* subject part */}
-        <div className={styles.subjectArea}></div>
+        <div className={styles.subjectArea}>
+          <div className={styles.name}>{newMessageBool ? router.query.to_name : router.query.from_name}</div>
+          <div className={styles.subject}>
+            {router.query.subject !== '' ? (
+              router.query.subject
+            ) : (
+              <input
+                type="text"
+                autoComplete="new-password"
+                placeholder="Haz click aquí y escribe el título de tu mensaje"
+                className={'w-full h-full bg-transparent py-1 px-2 text-black ' + styles.input}
+                // value={data.subject}
+                onChange={event => handleChangeSubject(event)}
+              />
+            )}
+          </div>
+        </div>
         {/* chat area */}
         <div className={styles.chatArea}>
           <PerfectScrollbar
