@@ -19,6 +19,7 @@ import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import Chip from 'components/components/Chip'
 import ComprasItem from 'components/components/dashboard/compras/ComprasItem'
+import ComprasSubscriptionButton from 'components/components/dashboard/compras/ComprasSubscriptionButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -236,10 +237,21 @@ const Shopping = props => {
             </div>
             <div className={styles.title}>Compras</div>
           </div>
-          <div className="mt-44 mb-36">
-            {shoppingData.map((item, index) => (
-              <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} index={index} />
-            ))}
+          <div className="mt-44 mb-36 p-4">
+            <div>
+              {shoppingData.map((item, index) => (
+                <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} index={index} />
+              ))}
+            </div>
+            <div className="mt-6">
+              <ComprasSubscriptionButton title={'Anular Subcripción: '} description={'Plan online menopausia'} />
+            </div>
+            <div className="mt-6">
+              <ComprasSubscriptionButton
+                title={'Anular Subcripción: '}
+                description={'Plan mantenimiento online nutrición'}
+              />
+            </div>
           </div>
         </div>
       ) : (

@@ -1,31 +1,27 @@
 @import 'styles/variable.module.scss';
 
 .container {
-  padding: 18px 16px;
+  padding: 11px 26px;
+  border: 1px solid #bd5b54;
+  border-radius: 32.5px;
   background-color: $white-color;
-  cursor: pointer;
+  // cursor: pointer;
 }
 
-.number {
-  color: #8392a7;
+.title {
+  color: #bd5b54;
   font-family: Montserrat Light;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 22px;
-}
-
-.date {
-  color: #3b4859;
-  font-family: Montserrat;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0;
   line-height: 22px;
 }
 
-.divider {
-  box-sizing: border-box;
-  width: 100%;
-  border: 1px solid #f5f6fa;
+.description {
+  color: #bd5b54;
+  font-family: Montserrat Light;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 22px;
 }
