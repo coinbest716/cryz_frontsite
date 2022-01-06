@@ -139,9 +139,9 @@ const CreditSuccess = props => {
                 </>
               )}
             </div>
-            <div className="flex justify-center items-center cursor-pointer py-5">
+            <div className="flex justify-center items-center mt-10 mb-7">
               <div
-                className={styles.goButton}
+                className={styles.goButton + ' cursor-pointer'}
                 onClick={() => {
                   router.push('/')
                 }}
@@ -198,9 +198,9 @@ const CreditSuccess = props => {
                       </div>
                     </>
                   )}
-                  <div className="flex justify-start items-center cursor-pointer mt-10 mb-5">
+                  <div className="flex justify-start items-center mt-10 mb-5">
                     <div
-                      className={styles.goButton}
+                      className={styles.goButton + ' cursor-pointer'}
                       onClick={() => {
                         router.push('/')
                       }}

@@ -276,9 +276,9 @@ const Classland = props => {
           )}
           {viewport === 'mobile' ? (
             <div>
-              <div className={'my-6 ' + styles.m_divider} />
-              <div className="mb-5">
-                <div ref={faqRef} className={'mb-4 ' + styles.m_faqString}>
+              <div className={'mt-10 ' + styles.m_divider} />
+              <div>
+                <div ref={faqRef} className={'mb-4 pt-24 ' + styles.m_faqString}>
                   FAQ
                 </div>
                 {faqData?.map((data, index) => (

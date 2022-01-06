@@ -18,6 +18,8 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import Chip from 'components/components/Chip'
+import ComprasItem from 'components/components/dashboard/compras/ComprasItem'
+import ComprasSubscriptionButton from 'components/components/dashboard/compras/ComprasSubscriptionButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -27,6 +29,7 @@ import styles from './shopping.module.scss'
 import FileViewIcon from 'assets/images/file-view.svg'
 import DownloadIcon from 'assets/images/download.svg'
 import DownloadDisableIcon from 'assets/images/download-disable.svg'
+import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
 
 // json data
 import OrderStateData from 'assets/data/OrderStateData.json'
@@ -35,10 +38,11 @@ import OrderStateData from 'assets/data/OrderStateData.json'
 import { useLazyQuery, useMutation } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Shopping = () => {
+const Shopping = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
+  const { viewport } = props
 
   useEffect(() => {
     setIsMounted(true)
@@ -212,147 +216,187 @@ const Shopping = () => {
     a.click()
   }
 
+  const handleClickBack = () => {
+    router.push('/dashboard/profile#main', undefined, { shallow: true })
+  }
+
+  const handleClickComprasItem = index => {}
+
   return (
-    <div className={globalStyles.dashContainer}>
-      {/* header part */}
-      <div className={'w-full flex flex-wrap justify-between items-center'}>
-        <div className={globalStyles.dashTitle}>Compras</div>
-        <div className={'flex justify-end'}>
-          <NotificationButton />
-          {/* <Profile /> */}
-        </div>
-      </div>
-      {/* year select part */}
-      <div className={styles.yearArea}>
-        <select
-          name="select"
-          onChange={handleChange}
-          value={selectedYear}
-          className={'cursor-pointer flex justify-start items-center ' + styles.yearSelect}
-        >
-          {yearList.map((item, index) => (
-            <option key={index} value={item.value}>
-              {item.year}
-            </option>
-          ))}
-        </select>
-      </div>
-      {/* table part */}
-      <div
-        style={{
-          height: onlinePlanList.length !== 0 ? 'calc(100vh - 390px)' : 'calc(100vh - 312px)',
-          overflow: 'auto',
-        }}
-      >
-        <PerfectScrollbar>
-          <table className={'w-full table-auto'}>
-            <thead className={styles.tableHead}>
-              <tr>
-                <th>
-                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PEDIDO</div>
-                </th>
-                <th>
-                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>DETALLE</div>
-                </th>
-                <th>
-                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>FECHA</div>
-                </th>
-                <th>
-                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PRECIO</div>
-                </th>
-                <th>
-                  <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PDF</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody className={'mt-4 ' + styles.tbody}>
+    <>
+      {viewport === 'mobile' ? (
+        <div>
+          <div className={styles.header + ' p-4 flex flex-col justify-between'}>
+            <div
+              className="flex justify-start items-center w-fit cursor-pointer"
+              style={{ width: 'fit-content' }}
+              onClick={handleClickBack}
+            >
+              <Image src={ArrowLeftWhite} width={18} height={15} alt="" />
+              <div className={styles.backString + ' ml-2'}>Perfil</div>
+            </div>
+            <div className={styles.title}>Compras</div>
+          </div>
+          <div className="mt-36 mb-36 p-4">
+            <div>
               {shoppingData.map((item, index) => (
-                <tr key={index} className={index % 2 === 1 ? 'bg-white' : ''}>
-                  <td className={'h-full relative'}>
-                    <div
-                      className={
-                        'absolute top-0 bottom-0 flex flex-col justify-around ' +
-                        styles.tableContentArea +
-                        ' ' +
-                        styles.tableCellText
-                      }
-                    >
-                      <div className={'flex items-start'}>#{item.bill_number}</div>
-                      <div className={'flex items-end mb-2'}>
-                        <Chip
-                          data={
-                            item.status === 'PAID'
-                              ? OrderStateData[0]
-                              : item.status === 'UNPAID'
-                              ? OrderStateData[1]
-                              : OrderStateData[2]
-                          }
-                          onClick={() => {}}
-                        />
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                      <div className={'inline-grid'}>
-                        {item.purchases.map((detail, idx) => (
-                          <div
-                            key={idx}
-                            className={'flex cursor-pointer'}
-                            onClick={() => handleGotoOrderDetail(item, detail)}
-                          >
-                            <Image src={FileViewIcon} alt={''} width={29} height={29} />
-                            <div className={'ml-5'}>{detail.item_name}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.purchase_date}</div>
-                  </td>
-                  <td>
-                    <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
-                      <div className={'inline-grid'}>
-                        <span className={styles.price}>{item.price}€</span>
-                        <span className={styles.payment}>{item.status === 'PAID' ? item.purchase_type : ''}</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className={styles.tableContentArea + ' items-center'}>
-                      {item.download_url !== '' && (
-                        <button
-                          className={
-                            'w-10 h-10 duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'
-                          }
-                          onClick={() => download(item.download_url, 'invoice.pdf')}
-                        >
-                          <Image src={DownloadIcon} alt={''} width={18} height={22} />
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                </tr>
+                <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} index={index} />
               ))}
-            </tbody>
-          </table>
-        </PerfectScrollbar>
-      </div>
-      <div className={'w-full flex justify-end mt-6'}>
-        {onlinePlanList.map((item, index) => (
-          <button
-            key={index}
-            className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton}
-            onClick={() => handleCancelSubscription(item)}
+            </div>
+            <div className="mt-6">
+              <ComprasSubscriptionButton title={'Anular Subcripción: '} description={'Plan online menopausia'} />
+            </div>
+            <div className="mt-6">
+              <ComprasSubscriptionButton
+                title={'Anular Subcripción: '}
+                description={'Plan mantenimiento online nutrición'}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={globalStyles.dashContainer}>
+          {/* header part */}
+          <div className={'w-full flex flex-wrap justify-between items-center'}>
+            <div className={globalStyles.dashTitle}>Compras</div>
+            <div className={'flex justify-end'}>
+              <NotificationButton />
+              {/* <Profile /> */}
+            </div>
+          </div>
+          {/* year select part */}
+          <div className={styles.yearArea}>
+            <select
+              name="select"
+              onChange={handleChange}
+              value={selectedYear}
+              className={'cursor-pointer flex justify-start items-center ' + styles.yearSelect}
+            >
+              {yearList.map((item, index) => (
+                <option key={index} value={item.value}>
+                  {item.year}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* table part */}
+          <div
+            style={{
+              height: onlinePlanList.length !== 0 ? 'calc(100vh - 390px)' : 'calc(100vh - 312px)',
+              overflow: 'auto',
+            }}
           >
-            <p>
-              <strong>Anular subscripción: </strong> {item.item_name}
-            </p>
-          </button>
-        ))}
-      </div>
-    </div>
+            <PerfectScrollbar>
+              <table className={'w-full table-auto'}>
+                <thead className={styles.tableHead}>
+                  <tr>
+                    <th>
+                      <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PEDIDO</div>
+                    </th>
+                    <th>
+                      <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>DETALLE</div>
+                    </th>
+                    <th>
+                      <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>FECHA</div>
+                    </th>
+                    <th>
+                      <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PRECIO</div>
+                    </th>
+                    <th>
+                      <div className={styles.tableHeadArea + ' ' + styles.tableHeadTitle}>PDF</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className={'mt-4 ' + styles.tbody}>
+                  {shoppingData.map((item, index) => (
+                    <tr key={index} className={index % 2 === 1 ? 'bg-white' : ''}>
+                      <td className={'h-full relative'}>
+                        <div
+                          className={
+                            'absolute top-0 bottom-0 flex flex-col justify-around ' +
+                            styles.tableContentArea +
+                            ' ' +
+                            styles.tableCellText
+                          }
+                        >
+                          <div className={'flex items-start'}>#{item.bill_number}</div>
+                          <div className={'flex items-end mb-2'}>
+                            <Chip
+                              data={
+                                item.status === 'PAID'
+                                  ? OrderStateData[0]
+                                  : item.status === 'UNPAID'
+                                  ? OrderStateData[1]
+                                  : OrderStateData[2]
+                              }
+                              onClick={() => {}}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                          <div className={'inline-grid'}>
+                            {item.purchases.map((detail, idx) => (
+                              <div
+                                key={idx}
+                                className={'flex cursor-pointer'}
+                                onClick={() => handleGotoOrderDetail(item, detail)}
+                              >
+                                <Image src={FileViewIcon} alt={''} width={29} height={29} />
+                                <div className={'ml-5'}>{detail.item_name}</div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className={styles.tableContentArea + ' ' + styles.tableCellText}>{item.purchase_date}</div>
+                      </td>
+                      <td>
+                        <div className={styles.tableContentArea + ' ' + styles.tableCellText}>
+                          <div className={'inline-grid'}>
+                            <span className={styles.price}>{item.price}€</span>
+                            <span className={styles.payment}>{item.status === 'PAID' ? item.purchase_type : ''}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className={styles.tableContentArea + ' items-center'}>
+                          {item.download_url !== '' && (
+                            <button
+                              className={
+                                'w-10 h-10 duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'
+                              }
+                              onClick={() => download(item.download_url, 'invoice.pdf')}
+                            >
+                              <Image src={DownloadIcon} alt={''} width={18} height={22} />
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </PerfectScrollbar>
+          </div>
+          <div className={'w-full flex justify-end mt-6'}>
+            {onlinePlanList.map((item, index) => (
+              <button
+                key={index}
+                className={'bg-transparent flex items-center mx-3 px-4 ' + styles.outlineButton}
+                onClick={() => handleCancelSubscription(item)}
+              >
+                <p>
+                  <strong>Anular subscripción: </strong> {item.item_name}
+                </p>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 export default Shopping
