@@ -237,7 +237,7 @@ const Shopping = props => {
             </div>
             <div className={styles.title}>Compras</div>
           </div>
-          <div className="mt-44 mb-36 p-4">
+          <div className="mt-36 mb-36 p-4">
             <div>
               {shoppingData.map((item, index) => (
                 <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} index={index} />
