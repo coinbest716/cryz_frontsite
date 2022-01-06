@@ -1,0 +1,31 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding: 14px 16px;
+  background-color: $white-color;
+  cursor: pointer;
+}
+
+.number {
+  color: #8392a7;
+  font-family: Montserrat Light;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.date {
+  color: #3b4859;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.divider {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #f5f6fa;
+}

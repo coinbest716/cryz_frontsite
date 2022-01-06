@@ -18,6 +18,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import Chip from 'components/components/Chip'
+import ComprasItem from 'components/components/dashboard/compras/ComprasItem'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -218,6 +219,8 @@ const Shopping = props => {
     router.push('/dashboard/profile#main', undefined, { shallow: true })
   }
 
+  const handleClickComprasItem = index => {}
+
   return (
     <>
       {viewport === 'mobile' ? (
@@ -232,6 +235,11 @@ const Shopping = props => {
               <div className={styles.backString + ' ml-2'}>Perfil</div>
             </div>
             <div className={styles.title}>Compras</div>
+          </div>
+          <div className="mt-44 mb-36">
+            {shoppingData.map((item, index) => (
+              <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} index={index} />
+            ))}
           </div>
         </div>
       ) : (
