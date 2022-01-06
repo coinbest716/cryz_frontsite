@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 // third party components
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import toast from 'react-hot-toast'
 
 // custom components
 import MobileMessageCard01 from 'components/components/dashboard/message/MobileMessageCard01'
@@ -40,6 +41,8 @@ const MessageContent = props => {
   ] = useLazyQuery(graphql.queries.getSubMessagesByDashboard)
   const [subMessageList, setSubMessageList] = useState([])
 
+  const [deleteMessageByDashboard] = useMutation(graphql.mutations.deleteMessageByDashboard)
+
   const [scrollEl, setScrollEl] = useState()
 
   // handlers
@@ -66,6 +69,23 @@ const MessageContent = props => {
     }
   }, [scrollEl, subMessageList])
 
+  const handleRemoveMessage = () => {
+    let array = []
+    array.push(Number(router.query.message_id))
+    deleteMessageByDashboard({
+      variables: { ids: array },
+    })
+      .then(response => {
+        if (response.data.deleteMessageByDashboard === true) {
+          toast.success('Selected message was deleted successfully!')
+          router.push('/dashboard/message')
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
+  }
+
   return (
     <div className={styles.container}>
       <div className={'w-full flex justify-between items-center ' + styles.headerContainer}>
@@ -78,7 +98,7 @@ const MessageContent = props => {
             className={
               'w-8 h-8 duration-200 hover:bg-gray-200 border-2 border-gray-400 rounded-full flex justify-center items-center'
             }
-            onClick={id => handleRemoveMessage(id)}
+            onClick={() => handleRemoveMessage()}
           >
             <Image src={TrashIcon} alt={''} width={9} height={10} />
           </button>
