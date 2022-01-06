@@ -3,16 +3,13 @@ import React, { createRef, useState } from 'react'
 // next components
 import Image from 'next/image'
 
-// styles
-import styles from 'components/components/dashboard/message/MobileMessageInput.module.scss'
-
 // images
 import SendIcon from 'assets/images/send.svg'
-
 import CloseIcon from 'assets/images/close-gray.svg'
-import SmileIcon from 'assets/images/smile.svg'
 import AttachIcon from 'assets/images/attach.svg'
-import SendWhiteIcon from 'assets/images/send-white.svg'
+
+// styles
+import styles from 'components/components/dashboard/message/MobileMessageInput.module.scss'
 
 const MobileMessageInput = props => {
   const { sendMessage } = props
@@ -63,7 +60,7 @@ const MobileMessageInput = props => {
   return (
     <div className={styles.container}>
       {/* input part */}
-      <div className={'w-full flex bg-white'}>
+      <div className={'w-full flex bg-white justify-between'}>
         <div className={styles.inputArea}>
           <textarea
             type={'text'}
@@ -76,10 +73,25 @@ const MobileMessageInput = props => {
             onKeyPress={event => handleTextareaOnKeyPress(event)}
           />
         </div>
+        <div className={'flex justify-end items-center'}>
+          <button
+            className={'duration-200 hover:bg-gray-300 rounded-full w-8 h-8 flex justify-center items-center'}
+            onClick={onClickAttachFile}
+          >
+            <Image src={AttachIcon} alt={''} width={21} height={21} />
+          </button>
+          <input className={'hidden'} type="file" id="img_frontr" onChange={handleAttachFile} ref={fileRef} />
+          <button
+            className={'duration-200 hover:bg-gray-300 rounded-full w-8 h-8 flex justify-center items-center ml-2'}
+            onClick={() => handleSendMessage()}
+          >
+            <Image src={SendIcon} alt={''} width={21} height={21} />
+          </button>
+        </div>
       </div>
       {/* icon part */}
-      <div className={'w-full flex justify-between items-center mt-4'}>
-        {/* attached file part */}
+      {/* attached file part */}
+      {/* <div className={'w-full flex justify-between items-center'}>
         <div className={'w-full flex justify-start items-center'}>
           <div>{attachedFile.name}</div>
           {attachedFile.name !== undefined ? (
@@ -93,25 +105,7 @@ const MobileMessageInput = props => {
             <></>
           )}
         </div>
-
-        <div className={'w-full flex justify-end'}>
-          <button
-            className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
-            onClick={onClickAttachFile}
-          >
-            <Image src={AttachIcon} alt={''} width={21} height={21} />
-          </button>
-          <input className={'hidden'} type="file" id="img_frontr" onChange={handleAttachFile} ref={fileRef} />
-          <div className={'ml-4'}>
-            <button className={styles.enterButton} onClick={() => handleSendMessage()}>
-              <div className={'flex items-center mr-3'}>
-                <Image src={SendWhiteIcon} alt={''} width={16} height={16} />
-              </div>
-              Enviar
-            </button>
-          </div>
-        </div>
-      </div>
+      </div> */}
     </div>
   )
 }
