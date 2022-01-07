@@ -97,7 +97,6 @@
   letter-spacing: 0;
   line-height: 15px;
 }
-
 .label {
   color: #333333;
   font-family: Montserrat;
@@ -111,21 +110,6 @@
   font-size: 12px;
   letter-spacing: 0;
   line-height: 15px;
-}
-
-.imageContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-.title {
-  font-family: Montserrat;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 0.7px;
-  color: $blue-gray-400-color;
-  text-align: center;
 }
 .subTitle {
   display: inline;
@@ -147,11 +131,4 @@
   font-weight: 700;
   letter-spacing: 0.7px;
   color: $blue-gray-400-color;
-}
-.planonline_text {
-  color: #222222;
-  font-family: Montserrat;
-  font-size: 14px;
-  letter-spacing: 1.4px;
-  line-height: 36px;
 }
