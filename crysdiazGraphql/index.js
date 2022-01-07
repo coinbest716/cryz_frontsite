@@ -41,6 +41,7 @@ import {
 // shopping part
 import {
   GetServicePurchaseByDashboard,
+  GetPurchasesFromBillNumber,
   GetSessionsByIdFromDashboard,
   GetPurchasedOnlinePlanList,
   CancelOnlinePlanSubscriptionByDashboard,
@@ -133,6 +134,7 @@ export default {
 
     // shopping part
     getServicePurchaseByDashboard: GetServicePurchaseByDashboard,
+    getPurchasesFromBillNumber: GetPurchasesFromBillNumber,
     getSessionsByIdFromDashboard: GetSessionsByIdFromDashboard,
     getPurchasedOnlinePlanList: GetPurchasedOnlinePlanList,
 

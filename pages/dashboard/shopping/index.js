@@ -220,7 +220,14 @@ const Shopping = props => {
     router.push('/dashboard/profile#main', undefined, { shallow: true })
   }
 
-  const handleClickComprasItem = index => {}
+  const handleClickComprasItem = bill_number => {
+    router.push({
+      pathname: '/dashboard/shopping/order-item',
+      query: {
+        bill_number: bill_number,
+      },
+    })
+  }
 
   return (
     <>
@@ -240,7 +247,7 @@ const Shopping = props => {
           <div className="mt-36 mb-36 p-4">
             <div>
               {shoppingData.map((item, index) => (
-                <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} index={index} key={index} />
+                <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} key={index} />
               ))}
             </div>
             <div className="mt-6">

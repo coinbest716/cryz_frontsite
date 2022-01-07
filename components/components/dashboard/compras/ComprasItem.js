@@ -10,11 +10,11 @@ import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
 import styles from './ComprasItem.module.scss'
 
 const ComprasItem = props => {
-  const { data, index, handleClickComprasItem } = props
+  const { data, handleClickComprasItem } = props
   return (
     <div>
       <div
-        onClick={() => handleClickComprasItem(index)}
+        onClick={() => handleClickComprasItem(data.bill_number)}
         className={styles.container + ' flex justify-between items-center w-full '}
       >
         <div>

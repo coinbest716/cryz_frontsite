@@ -2,6 +2,10 @@ query GetServicePurchaseByDashboard($patient_id: Int, $year: Int) {
   getServicePurchaseByDashboard(patient_id: $patient_id, year: $year)
 }
 
+query GetPurchasesFromBillNumber($bill_number: Int) {
+  getPurchasesFromBillNumber(bill_number: $bill_number)
+}
+
 query GetSessionsByIdFromDashboard($patient_id: Int, $purchase_id: Int) {
   getSessionsByIdFromDashboard(patient_id: $patient_id, purchase_id: $purchase_id) {
     id
