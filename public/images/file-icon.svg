@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 28.754">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #79908e;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #79908e;
+      }
+    </style>
+  </defs>
+  <g id="file_icon" data-name="file icon" transform="translate(0.5 0.5)">
+    <rect id="base" class="cls-1" width="28" height="27.754" rx="2"/>
+    <path id="Fill_1" data-name="Fill 1" class="cls-2" d="M8.732,11.079H.349A.348.348,0,0,1,0,10.733V.347A.348.348,0,0,1,.349,0H6.286L9.08,2.77v7.962A.348.348,0,0,1,8.732,11.079ZM1.048.693A.348.348,0,0,0,.7,1.04v9a.348.348,0,0,0,.349.347H8.033a.348.348,0,0,0,.349-.347V3.462H5.588V.693Zm5.239.16V2.77H8.218Z" transform="translate(9.838 8.251)"/>
+  </g>
+</svg>
