@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 
 // next components
-// import Image from 'next/image'
+import Image from 'next/image'
 
 // images
+import AddIcon from 'assets/images/add.svg'
 // import TrashOutlineIcon from 'assets/images/trash-outline.svg'
 
 // styles
@@ -49,7 +50,8 @@ const NewMessageButton = props => {
         onMouseLeave={() => onMouseLeave(false)}
         onClick={() => onClick(true)}
       >
-        <div style={{ fontSize: '20px', marginTop: '-5px' }}>+</div>Nuevo mensaje
+        <Image src={AddIcon} alt={''} width={20} height={20} />
+        Nuevo mensaje
       </div>
       {/* {viewport !== 'mobile' && (
         <div className={'grid justify-center items-center'}>
