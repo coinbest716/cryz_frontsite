@@ -96,7 +96,7 @@ const Navbar = () => {
     //   title: 'Nutrición',
     // },
     {
-      href: '/dashboard/planes',
+      href: '/dashboard/plans',
       icon: plansIcon,
       iconBlack: plansBlackIcon,
       title: 'Planes online',

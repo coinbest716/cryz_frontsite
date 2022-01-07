@@ -27,7 +27,7 @@ import NoPlansOnlineDailog from 'components/components/dashboard/plans/NoPlansOn
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './planes.module.scss'
+import styles from './plans.module.scss'
 
 // images and icons
 import downIcon from 'public/images/down.svg'
@@ -41,7 +41,7 @@ import graphql from 'crysdiazGraphql'
 
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
-const Planes = props => {
+const Plans = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -448,9 +448,9 @@ const Planes = props => {
     <>mobile view</>
   )
 }
-export default Planes
+export default Plans
 
-Planes.getLayout = function getLayout(page) {
+Plans.getLayout = function getLayout(page) {
   return page.props.viewport === 'mobile' ? (
     <MobileDashboardLayout title="Planes online">{page}</MobileDashboardLayout>
   ) : (
