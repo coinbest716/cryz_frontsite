@@ -1,0 +1,23 @@
+@import 'styles/variable.module.scss';
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-family: Montserrat;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  color: $blue-gray-400-color;
+  text-align: center;
+}
+.planonline_text {
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  line-height: 36px;
+}
