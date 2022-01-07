@@ -66,6 +66,17 @@ const MessageContent = props => {
   }
   useEffect(() => {
     setNewMessageBool(Boolean(router.query.new_message_bool))
+    setNewMessage(newMessage => ({ ...newMessage, content: router.query.content }))
+    setNewMessage(newMessage => ({ ...newMessage, from_email: router.query.from_email }))
+    setNewMessage(newMessage => ({ ...newMessage, from_id: Number(router.query.from_id) }))
+    setNewMessage(newMessage => ({ ...newMessage, from_name: router.query.from_name }))
+    setNewMessage(newMessage => ({ ...newMessage, from_type: router.query.from_type }))
+    setNewMessage(newMessage => ({ ...newMessage, request_id: Number(router.query.request_id) }))
+    setNewMessage(newMessage => ({ ...newMessage, subject: router.query.subject }))
+    setNewMessage(newMessage => ({ ...newMessage, to_email: router.query.to_email }))
+    setNewMessage(newMessage => ({ ...newMessage, to_id: Number(router.query.to_id) }))
+    setNewMessage(newMessage => ({ ...newMessage, to_name: router.query.to_name }))
+    setNewMessage(newMessage => ({ ...newMessage, to_type: router.query.to_type }))
     if (router.query.message_id) {
       getSubMessagesByDashboard({
         variables: { message_id: Number(router.query.message_id) },
@@ -103,7 +114,7 @@ const MessageContent = props => {
   }
 
   const handleChangeSubject = event => {
-    console.log('event', event)
+    setNewMessage(newMessage => ({ ...newMessage, subject: event.target.value }))
   }
 
   const handleSendMessage = (content, attachedFile) => {
@@ -123,12 +134,10 @@ const MessageContent = props => {
       .catch(error => {
         toast.error(error.message)
       })
-    setNewMessageBool(false)
   }
 
   return (
     <div className={styles.container}>
-      {console.log(newMessageBool)}
       <div className={'w-full flex justify-between items-center ' + styles.headerContainer}>
         <div className={'flex cursor'} onClick={() => handleGoBack()}>
           <Image src={ArrowLeftBlackIcon} alt={''} width={14} height={14} />
@@ -158,7 +167,7 @@ const MessageContent = props => {
                 autoComplete="new-password"
                 placeholder="Haz click aquí y escribe el título de tu mensaje"
                 className={'w-full h-full bg-transparent py-1 px-2 text-black ' + styles.input}
-                // value={data.subject}
+                value={newMessage.subject}
                 onChange={event => handleChangeSubject(event)}
               />
             )}
@@ -171,9 +180,6 @@ const MessageContent = props => {
               setScrollEl(ref)
             }}
           >
-            {/* {newMessageBool ? (
-              <></>
-            ) : ( */}
             <>
               {subMessageList.map((item, index) =>
                 item.to_type === 'user' ? (
