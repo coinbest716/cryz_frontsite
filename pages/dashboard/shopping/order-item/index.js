@@ -47,17 +47,28 @@ const OrderItem = () => {
   // loading part end #######################
 
   // variables
+  const [purchaseInfo, setPurchaseInfo] = useState({})
   const [billNumber, setBillNumber] = useState(-1)
   const status = 'UNPAID'
-  const [
-    getSessionsByIdFromDashboard,
-    { data: orderDetailData, loading: orderDetailLoading, error: orderDetailError },
-  ] = useLazyQuery(graphql.queries.getSessionsByIdFromDashboard)
+  const [getPurchasesFromBillNumber, { data: orderDetailData, loading: orderDetailLoading, error: orderDetailError }] =
+    useLazyQuery(graphql.queries.getPurchasesFromBillNumber)
 
   // handlers
   useEffect(() => {
     setBillNumber(Number(router.query.bill_number))
+    getPurchasesFromBillNumber({
+      variables: {
+        bill_number: Number(router.query.bill_number),
+      },
+    })
   }, [router.query])
+
+  useEffect(() => {
+    if (!orderDetailError && orderDetailData && orderDetailData.getPurchasesFromBillNumber) {
+      setPurchaseInfo(orderDetailData.getPurchasesFromBillNumber)
+      console.log('!!!!!!!!!!!!!!!', orderDetailData.getPurchasesFromBillNumber)
+    }
+  }, [orderDetailLoading, orderDetailData, orderDetailError])
 
   const handleClickBack = () => {
     router.push('/dashboard/shopping', undefined, { shallow: true })
