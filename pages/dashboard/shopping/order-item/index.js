@@ -8,22 +8,19 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 // custom components
-import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-// import Profile from 'components/components/dashboard/Profile'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
-import CommonButton from 'components/components/dashboard/CommonButton'
 import Chip from 'components/components/Chip'
 
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
 import FileIcon from 'public/images/file-icon.svg'
+
 // styles
-import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './OrderItem.module.scss'
 
 // json data
 import OrderStateData from 'assets/data/OrderStateData.json'
 
+import moment from 'moment'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
@@ -66,7 +63,6 @@ const OrderItem = () => {
   useEffect(() => {
     if (!orderDetailError && orderDetailData && orderDetailData.getPurchasesFromBillNumber) {
       setPurchaseInfo(orderDetailData.getPurchasesFromBillNumber)
-      console.log('!!!!!!!!!!!!!!!', orderDetailData.getPurchasesFromBillNumber)
     }
   }, [orderDetailLoading, orderDetailData, orderDetailError])
 
@@ -87,24 +83,36 @@ const OrderItem = () => {
         </div>
         <div className={styles.title}>Pedido #{billNumber}</div>
       </div>
-      <div className="p-4 flex justify-center mt-40 mb-30">
-        <div>
-          <div className={styles.billNumber}>PEDIDO 3456</div>
-          <div className="flex justify-center">
+      <div className="p-4 flex justify-center mt-36 mb-30">
+        <div className="mt-8">
+          <div className={styles.billNumber}>PEDIDO {purchaseInfo.bill_number}</div>
+          <div className="flex justify-center mt-4">
             <Chip
-              data={status === 'PAID' ? OrderStateData[0] : status === 'UNPAID' ? OrderStateData[1] : OrderStateData[2]}
+              data={
+                purchaseInfo.status === 'PAID'
+                  ? OrderStateData[0]
+                  : status === 'UNPAID'
+                  ? OrderStateData[1]
+                  : OrderStateData[2]
+              }
               onClick={() => {}}
             />
           </div>
-          <div className={styles.date}>12 /11 /2021</div>
-          <div className="flex justify-center">
+          <div className={styles.date + ' mt-4'}>{moment(purchaseInfo.purchase_date).format('DD/MM/YYYY')}</div>
+          <div className={styles.price + ' mt-4'}>{purchaseInfo.price}€</div>
+          <div className="flex justify-center mt-10">
             <div className={styles.saveButton}>Descargar PDF</div>
           </div>
-          <div className="flex justify-center">
-            <Image src={FileIcon} width={28} height={28} alt="" />
+          <div className="mt-10">
+            {purchaseInfo.purchases.map((item, index) => (
+              <div key={index}>
+                <div className="flex justify-center mt-8">
+                  <Image src={FileIcon} width={28} height={28} alt="" />
+                </div>
+                <div className={styles.session}>{item.item_name}</div>
+              </div>
+            ))}
           </div>
-          <div className={styles.price}>129€</div>
-          <div className={styles.session}>10 sesiones entrenamiento Bono nutrición</div>
         </div>
       </div>
     </div>
