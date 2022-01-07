@@ -34,6 +34,7 @@ import graphql from 'crysdiazGraphql'
 
 const MessageContent = props => {
   // variables
+  const { viewport } = props
   const router = useRouter()
   const [newMessage, setNewMessage] = useState({
     attachment: [],
@@ -61,6 +62,12 @@ const MessageContent = props => {
   const [scrollEl, setScrollEl] = useState()
 
   // handlers
+  useEffect(() => {
+    if (viewport !== 'mobile') {
+      router.push('/dashboard/message')
+    }
+  }, [viewport])
+
   const handleGoBack = () => {
     router.push('/dashboard/message')
   }
