@@ -83,6 +83,24 @@ const OrderItem = props => {
     a.click()
   }
 
+  const handleGotoOrderDetail = (item, detail) => {
+    console.log(detail)
+    router.push(
+      '/dashboard/shopping/order-detail?bill_number=' +
+        billNumber +
+        '&purchase_id=' +
+        detail.id +
+        '&status=' +
+        detail.status +
+        '&title=' +
+        detail.item_web_name +
+        '&price=' +
+        detail.price +
+        '&service_id=' +
+        detail.item_id
+    )
+  }
+
   return (
     <div>
       <div className={styles.header + ' p-4 flex flex-col justify-between'}>
@@ -125,7 +143,13 @@ const OrderItem = props => {
             {purchaseInfo.purchases?.map((item, index) => (
               <div key={index}>
                 <div className="flex justify-center mt-8">
-                  <Image src={FileIcon} width={28} height={28} alt="" />
+                  <Image
+                    src={FileIcon}
+                    width={28}
+                    height={28}
+                    alt=""
+                    onClick={() => handleGotoOrderDetail(purchaseInfo, item)}
+                  />
                 </div>
                 <div className={styles.session}>{item.item_name}</div>
               </div>
