@@ -168,7 +168,7 @@ const Dashboard = props => {
     WITHOUT_PURCHASE: {
       text: () =>
         '¡Uiii! ¿Es posible que todavía no hayas probado ninguno de nuestros servicios? \n Anímate y consigue todos tus objetivos con el apoyo de nuestros especialistas \n ¡Hoy es el día, ahora el momento!',
-      link: '/',
+      link: '/services',
     },
     DEFAULT: {
       text: () =>
@@ -451,11 +451,13 @@ const Dashboard = props => {
     return label.charAt(0).toUpperCase() + label.slice(1)
   }
 
-  let paymentStatusText = paymentStatuses[paymentStatus]
+  let paymentStatusText = ""
+  let paymentStatusLink = null
   if (paymentStatusData && paymentStatusData.getPaymentStatusForDashboard) {
     const values = paymentStatusData.getPaymentStatusForDashboard.values
     const template = paymentStatuses[paymentStatusData.getPaymentStatusForDashboard.summary_type]
     paymentStatusText = template.text(values)
+    paymentStatusLink = template.link
   }
 
   return (
@@ -489,10 +491,10 @@ const Dashboard = props => {
                   {paymentStatusText}
                 </div>
               )}
-              {viewport !== 'mobile' && paymentStatus.link && (
+              {viewport !== 'mobile' && paymentStatusLink && (
                 <div className={'pt-4'}>
                   <DashboardButton
-                    handleClick={() => handleClickRedirect('view', paymentStatus.link)}
+                    handleClick={() => handleClickRedirect('view', paymentStatusLink)}
                     label={'Ver'}
                     type={'view'}
                   />
