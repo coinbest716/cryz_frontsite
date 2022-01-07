@@ -83,8 +83,7 @@ const OrderItem = props => {
     a.click()
   }
 
-  const handleGotoOrderDetail = (item, detail) => {
-    console.log(detail)
+  const handleGotoOrderDetail = detail => {
     router.push(
       '/dashboard/shopping/order-detail?bill_number=' +
         billNumber +
@@ -143,13 +142,7 @@ const OrderItem = props => {
             {purchaseInfo.purchases?.map((item, index) => (
               <div key={index}>
                 <div className="flex justify-center mt-8">
-                  <Image
-                    src={FileIcon}
-                    width={28}
-                    height={28}
-                    alt=""
-                    onClick={() => handleGotoOrderDetail(purchaseInfo, item)}
-                  />
+                  <Image src={FileIcon} width={28} height={28} alt="" onClick={() => handleGotoOrderDetail(item)} />
                 </div>
                 <div className={styles.session}>{item.item_name}</div>
               </div>
