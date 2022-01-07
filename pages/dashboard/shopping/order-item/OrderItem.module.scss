@@ -23,3 +23,52 @@
   font-size: 14px;
   letter-spacing: 0.26px;
 }
+.billNumber {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 20px;
+  text-align: center;
+}
+.date {
+  color: #3b4859;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 30px;
+  text-align: center;
+}
+.price {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 30px;
+  text-align: center;
+}
+.session {
+  color: #a0a0a0;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: 1px;
+  line-height: 76px;
+  text-align: center;
+}
+.saveButton {
+  border: 1px solid #979797;
+  border-radius: 22px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 10px 0 rgba(120, 144, 142, 0.15);
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0;
+  text-align: center;
+  padding: 13px 40px;
+  width: fit-content;
+}

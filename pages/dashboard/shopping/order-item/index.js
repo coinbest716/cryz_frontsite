@@ -16,12 +16,13 @@ import CommonButton from 'components/components/dashboard/CommonButton'
 import Chip from 'components/components/Chip'
 
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
+import FileIcon from 'public/images/file-icon.svg'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './OrderItem.module.scss'
 
 // json data
-import OrderDetailStateData from 'assets/data/OrderDetailStateData.json'
+import OrderStateData from 'assets/data/OrderStateData.json'
 
 // graphql
 import { useLazyQuery } from '@apollo/client'
@@ -47,7 +48,7 @@ const OrderItem = () => {
 
   // variables
   const [billNumber, setBillNumber] = useState(-1)
-
+  const status = 'UNPAID'
   const [
     getSessionsByIdFromDashboard,
     { data: orderDetailData, loading: orderDetailLoading, error: orderDetailError },
@@ -73,7 +74,27 @@ const OrderItem = () => {
           <Image src={ArrowLeftWhite} width={18} height={15} alt="" />
           <div className={styles.backString + ' ml-2'}>Compras</div>
         </div>
-        <div className={styles.title}>#{billNumber}</div>
+        <div className={styles.title}>Pedido #{billNumber}</div>
+      </div>
+      <div className="p-4 flex justify-center mt-40 mb-30">
+        <div>
+          <div className={styles.billNumber}>PEDIDO 3456</div>
+          <div className="flex justify-center">
+            <Chip
+              data={status === 'PAID' ? OrderStateData[0] : status === 'UNPAID' ? OrderStateData[1] : OrderStateData[2]}
+              onClick={() => {}}
+            />
+          </div>
+          <div className={styles.date}>12 /11 /2021</div>
+          <div className="flex justify-center">
+            <div className={styles.saveButton}>Descargar PDF</div>
+          </div>
+          <div className="flex justify-center">
+            <Image src={FileIcon} width={28} height={28} alt="" />
+          </div>
+          <div className={styles.price}>129€</div>
+          <div className={styles.session}>10 sesiones entrenamiento Bono nutrición</div>
+        </div>
       </div>
     </div>
   )
