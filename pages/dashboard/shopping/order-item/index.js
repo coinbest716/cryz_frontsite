@@ -25,7 +25,8 @@ import moment from 'moment'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const OrderItem = () => {
+const OrderItem = props => {
+  const { viewport } = props
   const router = useRouter()
   // loading part ###########################
   const dispatch = useDispatch()
@@ -46,7 +47,6 @@ const OrderItem = () => {
   // variables
   const [purchaseInfo, setPurchaseInfo] = useState({})
   const [billNumber, setBillNumber] = useState(-1)
-  const status = 'UNPAID'
   const [getPurchasesFromBillNumber, { data: orderDetailData, loading: orderDetailLoading, error: orderDetailError }] =
     useLazyQuery(graphql.queries.getPurchasesFromBillNumber)
 
@@ -61,6 +61,12 @@ const OrderItem = () => {
   }, [router.query])
 
   useEffect(() => {
+    if (Number(router.query.bill_number) && viewport !== 'mobile') {
+      router.push('/dashboard/shopping')
+    }
+  }, [viewport])
+
+  useEffect(() => {
     if (!orderDetailError && orderDetailData && orderDetailData.getPurchasesFromBillNumber) {
       setPurchaseInfo(orderDetailData.getPurchasesFromBillNumber)
     }
@@ -68,6 +74,13 @@ const OrderItem = () => {
 
   const handleClickBack = () => {
     router.push('/dashboard/shopping', undefined, { shallow: true })
+  }
+
+  const handleClickDownload = (fileUrl, fileName) => {
+    var a = document.createElement('a')
+    a.href = fileUrl
+    a.setAttribute('download', fileName)
+    a.click()
   }
 
   return (
@@ -85,13 +98,13 @@ const OrderItem = () => {
       </div>
       <div className="p-4 flex justify-center mt-36 mb-30">
         <div className="mt-8">
-          <div className={styles.billNumber}>PEDIDO {purchaseInfo.bill_number}</div>
+          <div className={styles.billNumber}>PEDIDO {billNumber}</div>
           <div className="flex justify-center mt-4">
             <Chip
               data={
                 purchaseInfo.status === 'PAID'
                   ? OrderStateData[0]
-                  : status === 'UNPAID'
+                  : purchaseInfo.status === 'UNPAID'
                   ? OrderStateData[1]
                   : OrderStateData[2]
               }
@@ -101,10 +114,15 @@ const OrderItem = () => {
           <div className={styles.date + ' mt-4'}>{moment(purchaseInfo.purchase_date).format('DD/MM/YYYY')}</div>
           <div className={styles.price + ' mt-4'}>{purchaseInfo.price}€</div>
           <div className="flex justify-center mt-10">
-            <div className={styles.saveButton}>Descargar PDF</div>
+            <div
+              className={styles.saveButton}
+              onClick={() => handleClickDownload(purchaseInfo.download_url, billNumber)}
+            >
+              Descargar PDF
+            </div>
           </div>
           <div className="mt-10">
-            {purchaseInfo.purchases.map((item, index) => (
+            {purchaseInfo.purchases?.map((item, index) => (
               <div key={index}>
                 <div className="flex justify-center mt-8">
                   <Image src={FileIcon} width={28} height={28} alt="" />
