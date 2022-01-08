@@ -63,6 +63,7 @@ const Plans = props => {
   const [bool, setBool] = useState(false)
   const [patientID, setPatientID] = useState(-1)
   const [plansOnlineData, setPlansOnlineData] = useState({})
+  const [selectedDetails, setSelectedDetails] = useState('')
   const [selectedVideo, setSelectedVideo] = useState({})
   const [selectedVideoLink, setSelectedVideoLink] = useState('')
   const [materialData, setMaterialData] = useState([])
@@ -146,6 +147,7 @@ const Plans = props => {
       if (JSON.stringify(onlinePlanData.getOnlinePlanByDashboard) !== JSON.stringify({})) {
         setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
         setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
+        setSelectedDetails(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].details)
       } else {
         setPlansOnlineData({})
         setSelectedVideo({})
@@ -363,7 +365,7 @@ const Plans = props => {
 
             <div className={styles.noteSection + ' mt-5 px-4 py-8 block lg:hidden'}>
               <div className={styles.notes}>Notas :</div>
-              <div className={styles.noteDescription}>{plansOnlineData?.routine?.sections[0]?.details}</div>
+              <div className={styles.noteDescription}>{selectedDetails}</div>
             </div>
 
             <div className={'w-full flex pt-7'}>
@@ -378,7 +380,7 @@ const Plans = props => {
               </div>
               <div className={'hidden lg:block px-4 py-8 ' + styles.noteSection}>
                 <div className={styles.notes}>Notas :</div>
-                <div className={styles.noteDescription}>{plansOnlineData?.routine?.sections[0]?.details}</div>
+                <div className={styles.noteDescription}>{selectedDetails}</div>
               </div>
               <div className={'flex justify-end lg:hidden'}>
                 <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
@@ -417,7 +419,13 @@ const Plans = props => {
               <div className={styles.subVideoArea + ' pt-4'}>
                 <PerfectScrollbar>
                   {plansOnlineData?.routine?.sections?.map((item, index) => (
-                    <div key={index} className="py-4">
+                    <div
+                      key={index}
+                      className="py-4"
+                      onClick={() => {
+                        setSelectedDetails(item.details)
+                      }}
+                    >
                       <div className={styles.videoMaterialTitle}>{item.name}</div>
                       <div className={'pt-7'}>
                         {item.videos.map((video, index) => (
