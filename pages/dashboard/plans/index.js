@@ -63,6 +63,7 @@ const Plans = props => {
   const [bool, setBool] = useState(false)
   const [patientID, setPatientID] = useState(-1)
   const [plansOnlineData, setPlansOnlineData] = useState({})
+  const [selectedDetails, setSelectedDetails] = useState('')
   const [selectedVideo, setSelectedVideo] = useState({})
   const [selectedVideoLink, setSelectedVideoLink] = useState('')
   const [materialData, setMaterialData] = useState([])
@@ -146,6 +147,7 @@ const Plans = props => {
       if (JSON.stringify(onlinePlanData.getOnlinePlanByDashboard) !== JSON.stringify({})) {
         setPlansOnlineData(onlinePlanData.getOnlinePlanByDashboard)
         setSelectedVideo(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].videos[0])
+        setSelectedDetails(onlinePlanData.getOnlinePlanByDashboard.routine.sections[0].details)
       } else {
         setPlansOnlineData({})
         setSelectedVideo({})
@@ -319,123 +321,127 @@ const Plans = props => {
         </div>
       </div>
       {JSON.stringify(plansOnlineData) !== JSON.stringify({}) ? (
-        <div>
-          <div className={'grid grid-cols-12 gap-8'}>
-            <div className={'col-span-12 md:col-span-9 sm:col-span-12'}>
-              <div className={'flex items-center'}>
-                <div className={styles.chapterTitle}>{plansOnlineData.name}</div>
-              </div>
-              <div className={'pt-6'}>
-                {selectedVideoLink !== '' ? (
-                  <ReactPlayer
-                    url={selectedVideoLink}
-                    width="100%"
-                    height="100%"
-                    className={styles.reactPlayer}
-                    controls={true}
-                    loop={true}
-                    muted={true}
-                    playing={true}
-                  />
-                ) : (
-                  <></>
-                )}
-              </div>
+        <div className={'w-full flex'}>
+          <div style={{ flex: 1 }}>
+            <div className={'flex items-center'}>
+              <div className={styles.chapterTitle}>{plansOnlineData.name}</div>
+            </div>
+            <div className={'pt-6'}>
+              {selectedVideoLink !== '' ? (
+                <ReactPlayer
+                  url={selectedVideoLink}
+                  width="100%"
+                  height="100%"
+                  className={styles.reactPlayer}
+                  controls={true}
+                  loop={true}
+                  muted={true}
+                  playing={true}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
 
-              <div className={'flex flex-wrap justify-between pt-12 gap-4'}>
-                <div className={styles.blockSection + ' flex flex-wrap justify-between items-center px-5 py-5'}>
-                  <div className={styles.blackName + ' py-2 pr-4'}>Información del video</div>
-                  <div className={'flex justify-end flex-1'}>
-                    {feature.map((item, index) => (
-                      <div key={index} className={'pl-4 lg:px-5'}>
-                        <Feature data={item} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                {JSON.stringify(plansOnlineData?.routine?.document[0]) !== JSON.stringify({}) ? (
-                  <div className={'hidden lg:flex'}>
-                    <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </div>
-
-              <div className={styles.noteSection + ' mt-5 px-4 py-8 block lg:hidden'}>
-                <div className={styles.notes}>Notas :</div>
-                <div className={styles.noteDescription}>{plansOnlineData?.routine?.sections[0]?.details}</div>
-              </div>
-
-              <div className={'w-full flex pt-7'}>
-                <div className={'mr-8 px-8 py-5 ' + styles.materialSection}>
-                  <div className={styles.materialTitle + ' pb-2'}>Material necesario</div>
-                  {materialData?.map((item, index) => (
-                    <div className={'py-2'} key={index}>
-                      <div className={styles.label}>{item.name}</div>
-                      <div className={styles.description}>{item.details}</div>
+            <div className={'flex flex-wrap justify-between pt-12'}>
+              <div className={styles.blockSection + ' flex flex-wrap justify-between items-center px-5 py-5'}>
+                <div className={styles.blackName + ' py-2 pr-4'}>Información del video</div>
+                <div className={'flex flex-wrap justify-between'}>
+                  {feature.map((item, index) => (
+                    <div key={index} className={'pl-4 lg:px-5'}>
+                      <Feature data={item} />
                     </div>
                   ))}
                 </div>
-                <div className={'hidden lg:block px-4 py-8 ' + styles.noteSection}>
-                  <div className={styles.notes}>Notas :</div>
-                  <div className={styles.noteDescription}>{plansOnlineData?.routine?.sections[0]?.details}</div>
-                </div>
-                <div className={'flex justify-end lg:hidden'}>
+              </div>
+              {JSON.stringify(plansOnlineData?.routine?.document[0]) !== JSON.stringify({}) ? (
+                <div className={'hidden lg:flex'}>
                   <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
                 </div>
+              ) : (
+                <></>
+              )}
+            </div>
+
+            <div className={styles.noteSection + ' mt-5 px-4 py-8 block lg:hidden'}>
+              <div className={styles.notes}>Notas :</div>
+              <div className={styles.noteDescription}>{selectedDetails}</div>
+            </div>
+
+            <div className={'w-full flex pt-7'}>
+              <div className={'mr-8 px-8 py-5 ' + styles.materialSection}>
+                <div className={styles.materialTitle + ' pb-2'}>Material necesario</div>
+                {materialData?.map((item, index) => (
+                  <div className={'py-2'} key={index}>
+                    <div className={styles.label}>{item.name}</div>
+                    <div className={styles.description}>{item.details}</div>
+                  </div>
+                ))}
+              </div>
+              <div className={'hidden lg:block px-4 py-8 ' + styles.noteSection}>
+                <div className={styles.notes}>Notas :</div>
+                <div className={styles.noteDescription}>{selectedDetails}</div>
+              </div>
+              <div className={'flex justify-end lg:hidden'}>
+                <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
               </div>
             </div>
-            <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
-              <div className={'rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative'}>
-                <div className={'flex justify-between items-center'}>
-                  <div className={styles.monthName}></div>
-                  <div
-                    className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}
-                    onClick={handleClickMonth}
-                  >
-                    <div className={styles.monthSelect + ' pr-3'}>Mes</div>
-                    <Image src={downIcon} alt="" width={7} height={7} />
-                  </div>
+          </div>
+          <div style={{ width: 300, marginLeft: 26 }}>
+            <div className={'rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative'}>
+              <div className={'flex justify-between items-center'}>
+                <div className={styles.monthName}></div>
+                <div
+                  className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}
+                  onClick={handleClickMonth}
+                >
+                  <div className={styles.monthSelect + ' pr-3'}>Mes</div>
+                  <Image src={downIcon} alt="" width={7} height={7} />
                 </div>
-                <div className={'calendarWrapper'}>
-                  <Calendar
-                    className={showCalendar ? '' : 'hidden'}
-                    value={date}
-                    onChange={handleChangeDate}
-                    showDoubleView={false}
-                    showNavigation={true}
-                    locale="es"
-                    navigationLabel={({ label }) => updateCalendarLabel(label)}
-                    tileClassName={({ date, view }) => {
-                      if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                        return 'highlight'
-                      }
-                    }}
-                  />
-                </div>
-                {/* sub video list */}
-                <div className={styles.subVideoArea + ' pt-4'}>
-                  <PerfectScrollbar>
-                    {plansOnlineData?.routine?.sections?.map((item, index) => (
-                      <div key={index} className="py-4">
-                        <div className={styles.videoMaterialTitle}>{item.name}</div>
-                        <div className={'pt-7'}>
-                          {item.videos.map((video, index) => (
-                            <div className={'py-2'} key={index}>
-                              <Material
-                                item={video}
-                                selectedVideo={selectedVideo}
-                                /*type={'green'}*/
-                                onClick={data => setSelectedVideo(data)}
-                              />
-                            </div>
-                          ))}
-                        </div>
+              </div>
+              <div className={'calendarWrapper'}>
+                <Calendar
+                  className={showCalendar ? '' : 'hidden'}
+                  value={date}
+                  onChange={handleChangeDate}
+                  showDoubleView={false}
+                  showNavigation={true}
+                  locale="es"
+                  navigationLabel={({ label }) => updateCalendarLabel(label)}
+                  tileClassName={({ date, view }) => {
+                    if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                      return 'highlight'
+                    }
+                  }}
+                />
+              </div>
+              {/* sub video list */}
+              <div className={styles.subVideoArea + ' pt-4'}>
+                <PerfectScrollbar>
+                  {plansOnlineData?.routine?.sections?.map((item, index) => (
+                    <div
+                      key={index}
+                      className="py-4"
+                      onClick={() => {
+                        setSelectedDetails(item.details)
+                      }}
+                    >
+                      <div className={styles.videoMaterialTitle}>{item.name}</div>
+                      <div className={'pt-7'}>
+                        {item.videos.map((video, index) => (
+                          <div className={'py-2'} key={index}>
+                            <Material
+                              item={video}
+                              selectedVideo={selectedVideo}
+                              /*type={'green'}*/
+                              onClick={data => setSelectedVideo(data)}
+                            />
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </PerfectScrollbar>
-                </div>
+                    </div>
+                  ))}
+                </PerfectScrollbar>
               </div>
             </div>
           </div>
