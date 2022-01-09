@@ -84,11 +84,7 @@ const BuyOneToOne = props => {
             <div className={styles.m_title}>Bonos y Sesiones</div>
             <div className={styles.m_divider} />
             <div className={globalStyles.tinyMCEClass}>
-              <div className={'tinymce-class'}>
-                <p>
-                Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
-                </p>
-              </div>
+              <div className={'tinymce-class'}>aqui va texto</div>
             </div>
           </div>
         ) : (
@@ -97,11 +93,7 @@ const BuyOneToOne = props => {
               <div className={styles.title}>Bonos y Sesiones</div>
               <div className={styles.divider} />
               <div className={globalStyles.tinyMCEClass}>
-                <div className={'tinymce-class'}>
-                <p>
-                Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
-                </p>
-                </div>
+                <div className={'tinymce-class'}>aqui va texto</div>
               </div>
             </div>
             <div className={'col-span-6 flex justify-end z-10'}>

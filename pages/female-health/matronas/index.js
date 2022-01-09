@@ -131,7 +131,7 @@ const Services = props => {
                     onClick={() => handleClick(1)}
                   >
                     <img
-                      src={'/images/baby_sueno.png' || placeholder1}
+                      src={mainService[0]?.image || placeholder1}
                       alt=""
                       style={{ width: '100%', height: '150px', opacity: 0.4 }}
                     />
@@ -147,7 +147,7 @@ const Services = props => {
                     onClick={() => handleClick(2)}
                   >
                     <img
-                      src={'/images/baby_fisio.png' || placeholder2}
+                      src={mainService[1]?.image || placeholder2}
                       alt=""
                       style={{ width: '100%', height: '150px', opacity: 0.4 }}
                     />
@@ -164,7 +164,7 @@ const Services = props => {
                     onClick={() => handleClick(3)}
                   >
                     <img
-                      src={'/images/baby_lactancia.png' || placeholder3}
+                      src={mainService[2]?.image || placeholder3}
                       alt=""
                       style={{ width: '100%', height: '150px', opacity: 0.4 }}
                     />
@@ -185,7 +185,7 @@ const Services = props => {
                   onClick={() => handleClick(1)}
                 >
                   <img
-                    src={contactType.type1 ?'/images/baby_sueno.png': placeholder1}
+                    src={contactType.type1 ?'/images/baby_lactancia.png': placeholder1}
                     alt=""
                     style={{ width: '100%', height: '288px', opacity: 0.4 }}
                   />
@@ -210,7 +210,7 @@ const Services = props => {
                   onClick={() => handleClick(2)}
                 >
                   <img
-                    src={contactType.type2 ? '/images/baby_fisio.png' : placeholder2}
+                    src={contactType.type2 ? mainService[1]?.image : placeholder2}
                     alt=""
                     style={{ width: '100%', height: '288px', opacity: 0.4 }}
                   />
@@ -234,7 +234,7 @@ const Services = props => {
                   onClick={() => handleClick(3)}
                 >
                   <img
-                    src={contactType.type3 ? '/images/baby_lactancia.png': placeholder3}
+                    src={contactType.type3 ? mainService[2]?.image : placeholder3}
                     alt=""
                     style={{ width: '100%', height: '288px', opacity: 0.4 }}
                   />
