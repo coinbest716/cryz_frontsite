@@ -1,0 +1,175 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding-top: 80px;
+  padding-bottom: 70px;
+  background: linear-gradient(319.36deg, #e9e7e9 0%, #cecbce 100%);
+  background-image: -webkit-linear-gradient(319.36deg, #e9e7e9 0%, #cecbce 100%);
+  overflow: hidden;
+  min-height: calc(100vh - 177px);
+}
+.m_container {
+  padding-top: 80px;
+  background: linear-gradient(319.36deg, #e9e7e9 0%, #cecbce 100%);
+  background-image: -webkit-linear-gradient(319.36deg, #e9e7e9 0%, #cecbce 100%);
+  overflow: hidden;
+  min-height: calc(100vh - 177px);
+}
+.topTitle {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 35px;
+  letter-spacing: 0px;
+  display: block;
+  background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
+  background-image: -webkit-linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  padding-top: 40px;
+  padding-bottom: 16px;
+}
+.m_topTitle {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 25px;
+  letter-spacing: 0px;
+  display: block;
+  background: linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
+  background-image: -webkit-linear-gradient(24.79deg, #b7c1c1 0%, #818e8e 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  padding-top: 20px;
+  padding-bottom: 8px;
+}
+.m_carouselSection {
+  width: 350px;
+  padding-top: 20px;
+}
+.topDash {
+  width: 42px;
+  height: 7px;
+  background-color: #b5bfbf;
+}
+.m_topDash {
+  width: 16px;
+  height: 6px;
+  background-color: #b5bfbf;
+}
+.topDescription {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 0.71px;
+  line-height: 32px;
+  text-align: justify;
+}
+.verticalBottom {
+  padding: 60vh 40px 0px 40px;
+}
+.sortStart {
+  display: flex;
+}
+.verticalText {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  cursor: pointer;
+  align-items: flex-end;
+  justify-content: flex-start;
+  display: flex;
+  white-space: pre;
+  bottom: 0%;
+  left: 25%;
+}
+.verticalText:hover .number {
+  color: white;
+  transition: 0.6s;
+}
+.verticalText:hover .typograph {
+  color: white;
+  transition: 0.6s;
+}
+.verticalText:hover .arrowIcon {
+  filter: brightness(0) invert(1);
+  transition: 0.4s;
+}
+.number {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  line-height: 58px;
+}
+.typograph {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  line-height: 58px;
+}
+.arrowIcon {
+  transform: rotate(90deg);
+}
+.circleImageCover {
+  position: relative;
+  transition: 0.6s;
+}
+.circleImage {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 400px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  animation-iteration-count: 1;
+  animation: circleImage 0.7s ease-in;
+}
+@keyframes circleImage {
+  0% {
+    transform: scale(1, 1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+}
+.animationImage {
+  animation: animationImage 0.7s ease-out;
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 400px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.9;
+}
+
+@keyframes animationImage {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.activeSection {
+  cursor: pointer;
+}
+.activeSection:hover {
+  .number {
+    color: white;
+    transition: 0.6s;
+  }
+  .typograph {
+    color: white;
+    transition: 0.6s;
+  }
+  .arrowIcon {
+    filter: brightness(0) invert(1);
+    transition: 0.4s;
+  }
+}
