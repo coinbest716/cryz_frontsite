@@ -344,7 +344,7 @@ const Plans = props => {
             </div>
 
             <div className={'flex flex-wrap justify-between pt-12'}>
-              <div className={styles.blockSection + ' flex flex-wrap justify-between items-center px-5 py-5'}>
+              <div className={styles.blockSection + ' mb-5 flex flex-wrap justify-between items-center px-5 py-5'}>
                 <div className={styles.blackName + ' py-2 pr-4'}>Información del video</div>
                 <div className={'flex flex-wrap justify-between'}>
                   {feature.map((item, index) => (
@@ -363,7 +363,7 @@ const Plans = props => {
               )}
             </div>
 
-            <div className={styles.noteSection + ' mt-5 px-4 py-8 block lg:hidden'}>
+            <div className={styles.noteSection + ' px-4 py-8 block lg:hidden'}>
               <div className={styles.notes}>Notas:</div>
               <div className={styles.noteDescription}>{selectedDetails}</div>
             </div>
