@@ -71,7 +71,6 @@ const Plans = props => {
   const [showCalendar, setShowCalendar] = useState(true)
   const [date, setDate] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
-  const [currentMonth, setCurrentMonth] = useState('')
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
   )
@@ -90,11 +89,6 @@ const Plans = props => {
 
   // mobile part
   const [activeTab, setActiveTab] = useState('material')
-
-  // handlers
-  useEffect(() => {
-    setCurrentMonth(MonthListData[new Date().getMonth()].month)
-  }, [])
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
@@ -511,7 +505,66 @@ const Plans = props => {
             Playlist
           </div>
         </div>
-        {activeTab === 'material' ? <div>Material necesario</div> : <div>Playlist</div>}
+        {activeTab === 'material' ? (
+          <div>Material necesario</div>
+        ) : (
+          <div className={'rounded-xl bg-white py-4 px-6 pb-10 mt-7 relative'}>
+            <div className={'flex justify-between items-center mb-2'}>
+              <div className={styles.monthName}>
+                {date.getDate()} {MonthListData[date.getMonth() + 1].month}
+              </div>
+              <div
+                className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}
+                onClick={handleClickMonth}
+              >
+                <div className={styles.monthSelect + ' pr-3'}>Mes</div>
+                <Image src={downIcon} alt="" width={7} height={7} />
+              </div>
+            </div>
+            <div className={'calendarWrapper'}>
+              <Calendar
+                className={showCalendar ? '' : 'hidden'}
+                value={date}
+                onChange={handleChangeDate}
+                showDoubleView={false}
+                showNavigation={true}
+                locale="es"
+                navigationLabel={({ label }) => updateCalendarLabel(label)}
+                tileClassName={({ date, view }) => {
+                  if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                    return 'highlight'
+                  }
+                }}
+              />
+            </div>
+            {/* sub video list */}
+            <div className={'pt-4'}>
+              {plansOnlineData?.routine?.sections?.map((item, index) => (
+                <div
+                  key={index}
+                  className="py-4"
+                  onClick={() => {
+                    setSelectedDetails(item.details)
+                  }}
+                >
+                  <div className={styles.videoMaterialTitle}>{item.name}</div>
+                  <div className={'pt-7'}>
+                    {item.videos.map((video, index) => (
+                      <div className={'py-2'} key={index}>
+                        <Material
+                          item={video}
+                          selectedVideo={selectedVideo}
+                          /*type={'green'}*/
+                          onClick={data => setSelectedVideo(data)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <div></div>
       </div>
     </div>
