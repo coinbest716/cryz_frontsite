@@ -266,7 +266,12 @@ const Header = props => {
                               <div key={idx}>
                                 <div className={styles.subDropdown}>
                                   <button className={styles.subDropbtn}>
-                                    <Link href={subMenu.link} passHref>
+                                    <Link
+                                      href={
+                                        subMenu.link === '/female-health/6' ? '/female-health/matronas' : subMenu.link
+                                      }
+                                      passHref
+                                    >
                                       <a
                                         className={
                                           styles.menuText +

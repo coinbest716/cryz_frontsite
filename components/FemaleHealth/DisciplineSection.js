@@ -195,7 +195,11 @@ const DisciplineSection = props => {
   }
 
   const handleClick = id => {
-    router.push('/female-health/' + id)
+    if (id === 6) {
+      router.push('/female-health/matronas')
+    } else {
+      router.push('/female-health/' + id)
+    }
   }
 
   return viewport !== 'mobile' ? (
@@ -297,7 +301,13 @@ const DisciplineSection = props => {
               <div key={index} className={'grid grid-cols-2 lg:grid-cols-3 gap-4'}>
                 {item.map((elem, idx) => (
                   <div key={idx}>
-                    <div onClick={() => router.push('/female-health/' + elem.id)}>
+                    <div
+                      onClick={() =>
+                        elem.id === 6
+                          ? router.push('/female-health/matronas')
+                          : router.push('/female-health/' + elem.id)
+                      }
+                    >
                       <div className={styles.card + ' relative'}>
                         <Image src={elem.image} alt="" width={173} height={173} layout="responsive" objectFit="cover" />
                         <div className={'absolute ' + styles.sliderTitle}>{elem.name}</div>
