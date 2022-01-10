@@ -18,7 +18,7 @@ import styles from 'pages/buy/index.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import { Auth } from 'aws-amplify'
-import * as gtag from '../../../../utils/gtag'
+import * as gtag from 'utils/gtag'
 
 const BuyOneToOne = props => {
   // loading part ###########################
@@ -136,7 +136,8 @@ const BuyOneToOne = props => {
             <div className={globalStyles.tinyMCEClass}>
               <div className={'tinymce-class'}>
                 <p>
-                Si estás dudando cuáles de estos planes de fisioterapia pediátrica se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
+                  Si estás dudando cuáles de estos planes de fisioterapia pediátrica se ajustan más a tus necesidades,
+                  ponte en contacto con nuestro equipo de especialistas para que te asesoren.
                 </p>
               </div>
             </div>
@@ -148,9 +149,10 @@ const BuyOneToOne = props => {
               <div className={styles.divider} />
               <div className={globalStyles.tinyMCEClass}>
                 <div className={'tinymce-class'}>
-                <p>
-                Si estás dudando cuáles de estos planes de fisioterapia pediátrica se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
-                </p>
+                  <p>
+                    Si estás dudando cuáles de estos planes de fisioterapia pediátrica se ajustan más a tus necesidades,
+                    ponte en contacto con nuestro equipo de especialistas para que te asesoren.
+                  </p>
                 </div>
               </div>
             </div>
