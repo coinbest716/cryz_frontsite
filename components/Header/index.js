@@ -53,7 +53,11 @@ const Header = props => {
         let object = {}
         if (item.id !== 8) {
           object.title = item.name
-          object.link = '/female-health/' + item.id
+          if (item.id === 6) {
+            object.link = '/female-health/matronas'
+          } else {
+            object.link = '/female-health/' + item.id
+          }
           let subMenu = []
           let temp = {}
           if (item.stream_button) {
@@ -73,6 +77,7 @@ const Header = props => {
         }
       })
       let menu = []
+      console.log(subMenus)
       menu.push({ title: 'Salud Fem', link: '/female-health', subMenus: subMenus })
       menu.push(
         {
