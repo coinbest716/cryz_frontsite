@@ -114,7 +114,7 @@ const Nutrition = props => {
 
                       <p>Consta de <strong>cuatro sesiones</strong> de 1h30’ de duración cada una, en ellas tratamos de que conozcas herramientas y recursos; y descubras todos los que ya tienes. Todo el contenido está basado en la <strong>fisiología y la salud,</strong> tú estás en el centro para poder cerrar el círculo. </p>
 
-
+                      <p> <a href='/images/Programa_5P_cerrando_el_circulo.pdf' target='_blank'> >> Descargar dossier</a></p>
                     </div>
                   </div>
                 </div>
