@@ -98,6 +98,7 @@ const OrderDetail = props => {
         tempArray.push(obj)
       })
       setOrderDetailList(tempArray)
+      console.log('##################', tempArray)
     }
   }, [orderDetailLoading, orderDetailData, orderDetailError])
 
@@ -142,7 +143,16 @@ const OrderDetail = props => {
               <ComprasButton title={'Pagar pedido pendiente'} type={'pending'} />
               <ComprasButton title={'Nuevo bono'} type={'new'} />
             </div>
-            <ComprasDetailItem />
+            <div className={styles.SessionHeader + ' flex  flex-wrap justify-between mt-4'}>
+              <div className={styles.SessionHeaderText}>SESIÓN</div>
+              <div className={styles.SessionHeaderText}>ENTRENADOR</div>
+              <div className={styles.SessionHeaderText}>FECHA</div>
+            </div>
+            {orderDetailList.map((item, index) => (
+              <div className="mt-1" key={index}>
+                <ComprasDetailItem item={item} />
+              </div>
+            ))}
           </div>
         </div>
       ) : (
