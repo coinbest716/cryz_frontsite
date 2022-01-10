@@ -506,7 +506,14 @@ const Plans = props => {
           </div>
         </div>
         {activeTab === 'material' ? (
-          <div>Material necesario</div>
+          <div className={'mt-7 '}>
+            {materialData?.map((item, index) => (
+              <div className={'py-2'} key={index}>
+                <div className={styles.label}>{item.name}</div>
+                <div className={styles.description}>{item.details}</div>
+              </div>
+            ))}
+          </div>
         ) : (
           <div className={'rounded-xl bg-white py-4 px-6 pb-10 mt-7 relative'}>
             <div className={'flex justify-between items-center mb-2'}>
