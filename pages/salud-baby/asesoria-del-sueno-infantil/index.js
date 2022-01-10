@@ -132,8 +132,13 @@ const Nutrition = props => {
                   <CircularMark viewport={viewport} />
                 </div>
               )}
-              <div className={viewport === 'mobile' ? styles.m_carouselSection : styles.carouselSection}>
-                <CarouselService sliderData={sliderData} viewport={viewport} />
+              <div className={viewport === 'mobile'}>
+                <div className={'w-full mt-20 pb-20'}>
+                  <img
+                    src={'/images/baby_sueno_1.png'} alt="Asesoría del sueño infantil"
+                    style={{ width: '100%', height: 'auto', opacity: 1 }}
+                  />
+                </div>
               </div>
             </div>
           </div>

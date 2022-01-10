@@ -103,7 +103,7 @@ const Nutrition = props => {
               <div className={viewport === 'mobile' ? styles.m_topDash : styles.topDash} />
               <div className={styles.topDescription + (viewport === 'mobile' ? ' mt-5' : ' mt-10 pb-20')}>
                 <div
-                  className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? '' : styles.expand)}
+                  
                 >
                   <div className={globalStyles.tinyMCEClass}>
                     <div className={'tinymce-class'}>
@@ -140,7 +140,11 @@ const Nutrition = props => {
                 </div>
               )}
               <div className={viewport === 'mobile' ? styles.m_carouselSection : styles.carouselSection}>
-                <CarouselService sliderData={sliderData} viewport={viewport} />
+                <img
+                      src={'/images/Matrona_pendientes_1.png'}
+                      alt=""
+                      style={{ width: '100%', height: 'auto', opacity: 1 }}
+                    />
               </div>
             </div>
           </div>

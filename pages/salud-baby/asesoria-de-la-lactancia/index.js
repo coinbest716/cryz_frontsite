@@ -140,7 +140,10 @@ const Nutrition = props => {
                 </div>
               )}
               <div className={viewport === 'mobile' ? styles.m_carouselSection : styles.carouselSection}>
-                <CarouselService sliderData={sliderData} viewport={viewport} />
+                <img
+                  src={'/images/baby_lactancia_1.png'} alt="Asesoría de la lactancia"
+                  style={{ width: '100%', height: 'auto', opacity: 1 }}
+                />
               </div>
             </div>
           </div>

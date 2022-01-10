@@ -96,6 +96,7 @@
       color: #818e8e;
       line-height: 28px;
       padding-bottom: 5px;
+      font-weight: 400;
     }
     p {
       font-family: 'Montserrat', sans-serif;
@@ -103,8 +104,11 @@
       color: #818e8e;
       line-height: 28px;
       padding-bottom: 10px;
-    }
-    .bold {
+      span{
+          font-weight: 600;
+        }
+      }
+  .bold {
       font-weight: 600;
     }
 
