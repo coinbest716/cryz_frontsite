@@ -41,7 +41,22 @@ const BuyOneToOne = props => {
   const { viewport } = props
   const router = useRouter()
   const [description, setDescription] = useState('')
-  const [sessionData, setSessionData] = useState([])
+  const sessionData = [
+    {
+      id: 120,
+      service_type: 'personal',
+      web_name: 'Puesta de pendientes ',
+      description: 'En el centro.',
+      price: '70',
+    }, 
+    {
+      id: 121,
+      service_type: 'personal',
+      web_name: 'Puesta de pendientes ',
+      description: 'A domicilio.',
+      price: '90',
+    },
+  ]
 
   const handleClickBuy = (service_id, description, price) => {
     gtag.event({

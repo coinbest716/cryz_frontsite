@@ -54,7 +54,7 @@ const Nutrition = props => {
 
   const handleClickBuyPersion = () => {
     router.push({
-      pathname: '/salud-baby/asesoria-de-la-lactancia/servicios/personal',
+      pathname: '/female-health/matronas/programa_5P/servicios/personal',
       query: {
         discipline_id: 3,
         service_type: 'personal',
@@ -65,7 +65,7 @@ const Nutrition = props => {
   }
   const handleClickBuyPlan = () => {
     router.push({
-      pathname: '/salud-baby/asesoria-de-la-lactancia/servicios/online',
+      pathname: '/female-health/matronas/programa_5P/servicios/online',
       query: {
         discipline_id: 3,
         service_type: 'online',
@@ -76,7 +76,7 @@ const Nutrition = props => {
   }
   const handleClickBuyStreaming = () => {
     router.push({
-      pathname: '/salud-baby/asesoria-de-la-lactancia/servicios/streaming',
+      pathname: '/female-health/matronas/programa_5P/servicios/streaming',
       query: {
         discipline_id: 3,
         service_type: 'streaming',

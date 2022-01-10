@@ -41,7 +41,64 @@ const BuyOneToOne = props => {
   const { viewport } = props
   const router = useRouter()
   const [description, setDescription] = useState('')
-  const [sessionData, setSessionData] = useState([])
+  const sessionData = [
+    {
+      id: 106,
+      service_type: 'personal',
+      web_name: '1 Sesión fisioterapia ',
+      description: 'En el centro ',
+      price: '55',
+    },
+    {
+      id: 108,
+      service_type: 'personal',
+      web_name: '2 Sesiones de lactancia ',
+      description: 'Sesión 1,30 h antes del parto + 1 hora después del parto en el centro',
+      price: '99',
+    },
+    {
+      id: 107,
+      service_type: 'personal',
+      web_name: '1 Sesión con matrona',
+      description: 'En el centro ',
+      price: '110',
+    },
+    {
+      id: 105,
+      service_type: 'personal',
+      web_name: 'Programa completo 5P',
+      description: 'En el centro. 4 sesiones con matrona y 1 sesión con la fisioterapeuta ',
+      price: '450',
+    },
+    {
+      id: 110,
+      service_type: 'personal',
+      web_name: '1 sesión fisioterapia ',
+      description: 'A domicilio ',
+      price: '75',
+    },
+    {
+      id: 111,
+      service_type: 'personal',
+      web_name: '1 sesión con matrona ',
+      description: 'A domicilio ',
+      price: '150',
+    },
+    {
+      id: 112,
+      service_type: 'personal',
+      web_name: '2 sesiones de lactancia ',
+      description: 'A domicilio. Sesión 1,30 h antes del parto + sesión 1 hora después del parto ',
+      price: '120',
+    },
+    {
+      id: 109,
+      service_type: 'personal',
+      web_name: 'Programa completo 5P',
+      description: 'A domicilio. 4 sesiones con matrona y 1 sesión con la fisioterapeuta ',
+      price: '555',
+    },
+  ]
 
   const handleClickBuy = (service_id, description, price) => {
     gtag.event({
@@ -84,7 +141,7 @@ const BuyOneToOne = props => {
             <div className={styles.m_title}>Bonos y Sesiones</div>
             <div className={styles.m_divider} />
             <div className={globalStyles.tinyMCEClass}>
-              <div className={'tinymce-class'}>aqui va texto</div>
+              <div className={'tinymce-class'}>Si estás dudando cuáles de estos planes de "Programa 5P: Cerrando el círculo" se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren.</div>
             </div>
           </div>
         ) : (
@@ -93,7 +150,7 @@ const BuyOneToOne = props => {
               <div className={styles.title}>Bonos y Sesiones</div>
               <div className={styles.divider} />
               <div className={globalStyles.tinyMCEClass}>
-                <div className={'tinymce-class'}>aqui va texto</div>
+                <div className={'tinymce-class'}>Si estás dudando cuáles de estos planes de "Programa 5P: Cerrando el círculo" se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren.</div>
               </div>
             </div>
             <div className={'col-span-6 flex justify-end z-10'}>

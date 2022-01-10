@@ -41,7 +41,15 @@ const BuyOneToOne = props => {
   const { viewport } = props
   const router = useRouter()
   const [description, setDescription] = useState('')
-  const [sessionData, setSessionData] = useState([])
+  const sessionData = [
+    {
+      id: 119,
+      service_type: 'streaming',
+      web_name: '1 sesión ',
+      description: 'Duración: 1,30h ',
+      price: '80',
+    },
+  ]
 
   const handleClickBuy = (service_id, description, price) => {
     gtag.event({
@@ -84,7 +92,7 @@ const BuyOneToOne = props => {
             <div className={styles.m_title}>Bonos y Sesiones</div>
             <div className={styles.m_divider} />
             <div className={globalStyles.tinyMCEClass}>
-              <div className={'tinymce-class'}>aqui va texto</div>
+              <div className={'tinymce-class'}>Si estás dudando cuáles de estos planes de "Visita postparto" se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren.</div>
             </div>
           </div>
         ) : (
@@ -93,7 +101,7 @@ const BuyOneToOne = props => {
               <div className={styles.title}>Bonos y Sesiones</div>
               <div className={styles.divider} />
               <div className={globalStyles.tinyMCEClass}>
-                <div className={'tinymce-class'}>aqui va texto</div>
+                <div className={'tinymce-class'}>Si estás dudando cuáles de estos planes de "Visita postparto" se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren.</div>
               </div>
             </div>
             <div className={'col-span-6 flex justify-end z-10'}>

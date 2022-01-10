@@ -43,32 +43,18 @@ const BuyOneToOne = props => {
   const [description, setDescription] = useState('')
   const sessionData = [
     {
-      id: 114,
-      service_type: 'streaming',
-      web_name: '1 sesión fisioterapia ',
-      description: '',
-      price: '40',
-    },
+      id: 117,
+      service_type: 'personal',
+      web_name: '1 sesión ',
+      description: 'En el centro. Duración:  1,30h ',
+      price: '100',
+    }, 
     {
-      id: 115,
-      service_type: 'streaming',
-      web_name: '1 sesión con matrona ',
-      description: '',
-      price: '90',
-    },
-    {
-      id: 116,
-      service_type: 'streaming',
-      web_name: '2 sesiones de lactancia ',
-      description: 'Sesión 1,30 h antes del parto + 1 hora después del parto en streaming',
-      price: '85,50',
-    },
-    {
-      id: 113,
-      service_type: 'streaming',
-      web_name: 'Programa completo 5P',
-      description: '4 sesiones con matrona y 1 sesión con la fisioterapeuta ',
-      price: '380',
+      id: 118,
+      service_type: 'personal',
+      web_name: '1 sesión ',
+      description: 'A domicilio. Duración:  1,30h',
+      price: '150',
     },
   ]
 
@@ -113,9 +99,7 @@ const BuyOneToOne = props => {
             <div className={styles.m_title}>Bonos y Sesiones</div>
             <div className={styles.m_divider} />
             <div className={globalStyles.tinyMCEClass}>
-              <div className={'tinymce-class'}>
-                Si estás dudando cuáles de estos planes de "Programa 5P: Cerrando el círculo" se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren.
-              </div>
+              <div className={'tinymce-class'}>Si estás dudando cuáles de estos planes de "Visita postparto" se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren.</div>
             </div>
           </div>
         ) : (
@@ -124,7 +108,7 @@ const BuyOneToOne = props => {
               <div className={styles.title}>Bonos y Sesiones</div>
               <div className={styles.divider} />
               <div className={globalStyles.tinyMCEClass}>
-                <div className={'tinymce-class'}>Si estás dudando cuáles de estos planes de "Programa 5P: Cerrando el círculo" se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren.</div>
+                <div className={'tinymce-class'}>Si estás dudando cuáles de estos planes de "Visita postparto" se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren.</div>
               </div>
             </div>
             <div className={'col-span-6 flex justify-end z-10'}>
