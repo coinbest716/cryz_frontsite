@@ -41,7 +41,16 @@ const BuyOneToOne = props => {
   const { viewport } = props
   const router = useRouter()
   const [description, setDescription] = useState('')
-  const [sessionData, setSessionData] = useState([])
+
+  const sessionData = [
+    {
+      id: 132,
+      service_type: 'personal',
+      web_name: '1 sesión ',
+      description: 'En el centro',
+      price: '85,50',
+    },
+  ]
 
   const handleClickBuy = (service_id, description, price) => {
     gtag.event({
@@ -86,7 +95,8 @@ const BuyOneToOne = props => {
             <div className={globalStyles.tinyMCEClass}>
               <div className={'tinymce-class'}>
                 <p>
-                  Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
+                  Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con
+                  nuestro equipo de especialistas para que te asesoren.
                 </p>
               </div>
             </div>
@@ -98,9 +108,10 @@ const BuyOneToOne = props => {
               <div className={styles.divider} />
               <div className={globalStyles.tinyMCEClass}>
                 <div className={'tinymce-class'}>
-                <p>
-                 Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
-                </p>
+                  <p>
+                    Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con
+                    nuestro equipo de especialistas para que te asesoren.
+                  </p>
                 </div>
               </div>
             </div>
