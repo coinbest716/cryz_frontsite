@@ -129,7 +129,7 @@ const Nutrition = props => {
                           >> Descargar dossier
                         </a>
                       </p>
-                      git
+                    
                     </div>
                   </div>
                 </div>
