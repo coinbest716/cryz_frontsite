@@ -15,6 +15,7 @@ import NotificationButton from 'components/components/dashboard/NotificationButt
 import CommonButton from 'components/components/dashboard/CommonButton'
 import Chip from 'components/components/Chip'
 import ComprasButton from 'components/components/dashboard/compras/ComprasButton'
+import ComprasDetailItem from 'components/components/dashboard/compras/ComprasDetailItem'
 
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
 // styles
@@ -141,6 +142,7 @@ const OrderDetail = props => {
               <ComprasButton title={'Pagar pedido pendiente'} type={'pending'} />
               <ComprasButton title={'Nuevo bono'} type={'new'} />
             </div>
+            <ComprasDetailItem />
           </div>
         </div>
       ) : (
