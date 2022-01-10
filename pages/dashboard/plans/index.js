@@ -23,7 +23,7 @@ import NotificationButton from 'components/components/dashboard/NotificationButt
 import Material from 'components/components/dashboard/Material'
 import Feature from 'components/components/academy/Feature'
 import DownloadPDF from 'components/components/academy/DownloadPDF'
-import NoPlansOnlineDailog from 'components/components/dashboard/plans/NoPlansOnlineDialog'
+import NoPlansOnlineDialog from 'components/components/dashboard/plans/NoPlansOnlineDialog'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -455,7 +455,7 @@ const Plans = props => {
           </div>
         </div>
       ) : (
-        <NoPlansOnlineDailog viewport={viewport} />
+        <NoPlansOnlineDialog viewport={viewport} />
       )}
     </div>
   ) : JSON.stringify(plansOnlineData) !== JSON.stringify({}) ? (
@@ -516,7 +516,7 @@ const Plans = props => {
       </div>
     </div>
   ) : (
-    <NoPlansOnlineDailog viewport={viewport} />
+    <NoPlansOnlineDialog viewport={viewport} />
   )
 }
 export default Plans
