@@ -150,14 +150,14 @@ const Dashboard = props => {
   const paymentStatuses = {
     UNPAID: {
       text: () =>
-        'Quizás nos estemos equivocando, pero parece que tienes un pago pendiente. Compruébalo pinchando a continuación en el botón',
+        'Quizás nos estemos equivocando, pero parece que tienes un pago pendiente. \nCompruébalo pinchando a continuación en el botón',
       link: '/dashboard/shopping',
     },
     VOUCHER_ALMOST_USED: {
       text: values =>
         `¡Muy pronto vas a finalizar tu bono! Solo te quedan ${values.item_sessions - values.item_used} de ${
           values.item_sessions
-        } sesiones. Consulta tus sesiones y renuévalo pinchando a continuación en el botón`,
+        } sesiones. \nConsulta tus sesiones y renuévalo pinchando a continuación en el botón`,
       link: '/dashboard/shopping',
     },
     SINGLE_SESSION_USED: {
