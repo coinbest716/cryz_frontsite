@@ -4,7 +4,6 @@ import React from 'react'
 import styles from 'components/components/ReadMoreButton.module.scss'
 
 const ReadMoreButton = props => {
-  console.log(props)
   const { currentState, onClick, type, viewport } = props
   const handleOnClick = () => {
     if (currentState === 'more') {

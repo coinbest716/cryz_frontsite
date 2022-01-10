@@ -43,11 +43,16 @@ const menuList = [
   },
   {
     num: '04',
+    label: 'Salud Baby',
+    nav: '/salud-baby',
+  },
+  {
+    num: '05',
     label: 'Servicios',
     nav: '/services',
   },
   {
-    num: '05',
+    num: '06',
     label: 'Contacto',
     nav: '/contact',
   },
@@ -57,17 +62,17 @@ const menuList = [
   //   nav: '/tienda',
   // },
   {
-    num: '06',
+    num: '07',
     label: 'Classland',
     nav: '/classland',
   },
   {
-    num: '07',
+    num: '08',
     label: 'News',
     nav: '/news',
   },
   {
-    num: '08',
+    num: '09',
     label: 'Academy',
     nav: '/academy',
   },

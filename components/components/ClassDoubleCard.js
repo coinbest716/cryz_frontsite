@@ -14,7 +14,7 @@ const ClassDoubleCard = props => {
             alt=""
             layout="responsive"
             width={244}
-            height={125}
+            height={200}
             className={styles.cardImage}
           />
           <div className={styles.cardPayment}>

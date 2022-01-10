@@ -17,15 +17,19 @@ const DownloadPDF = props => {
   return (
     <div>
       {type === 'plan' ? (
-        <button
-          className={'flex justify-between w-full items-center px-8 py-3 ' + styles.downloadPlan}
-          onClick={() => download(data.path, data.path.split('/').pop())}
-        >
-          <div className={styles.labelPlan}>{'Documentación'}&nbsp;&nbsp;</div>
-          <div className={'w-4 h-4 flex items-center'}>
-            <Image src={DownloadWhiteIcon} alt="" width={15} height={15} />
-          </div>
-        </button>
+        data !== undefined ? (
+          <button
+            className={'flex justify-between w-full items-center px-8 py-3 ' + styles.downloadPlan}
+            onClick={() => download(data.path, data.path.split('/').pop())}
+          >
+            <div className={styles.labelPlan}>{'Documentación'}&nbsp;&nbsp;</div>
+            <div className={'w-4 h-4 flex items-center'}>
+              <Image src={DownloadWhiteIcon} alt="" width={15} height={15} />
+            </div>
+          </button>
+        ) : (
+          <></>
+        )
       ) : (
         <a href={url} target="_blank" rel="noopener noreferrer">
           <button className={'flex justify-between w-full items-center ' + styles.download} onClick={onClick}>

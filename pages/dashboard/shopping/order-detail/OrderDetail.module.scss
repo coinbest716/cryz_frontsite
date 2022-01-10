@@ -34,3 +34,38 @@
   letter-spacing: 1.4px;
   line-height: 36px;
 }
+.header {
+  background-color: #818e8e;
+  box-shadow: 0 32px 44px 0 rgba(131, 146, 167, 0.2);
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top: 0px;
+  height: 130px;
+}
+.title {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+.backString {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.26px;
+}
+.SessionHeader {
+  padding: 3px 16px;
+  border: 1px solid #ededed;
+  background-color: #ffffff;
+}
+.SessionHeaderText {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  line-height: 24px;
+}

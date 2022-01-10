@@ -7,17 +7,18 @@ import { useRouter } from 'next/router'
 // third party components
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import toast from 'react-hot-toast'
 
 // custom components
-import MessageCard01 from 'components/components/dashboard/message/MessageCard01'
-import MessageCard02 from 'components/components/dashboard/message/MessageCard02'
-import MessageImage01 from 'components/components/dashboard/message/MessageImage01'
-import MessageImage02 from 'components/components/dashboard/message/MessageImage02'
-import MessageVideo01 from 'components/components/dashboard/message/MessageVideo01'
-import MessageVideo02 from 'components/components/dashboard/message/MessageVideo02'
-import MessageDownload01 from 'components/components/dashboard/message/MessageDownload01'
-import MessageDownload02 from 'components/components/dashboard/message/MessageDownload02'
-import MessageInput from 'components/components/dashboard/message/MessageInput'
+import MobileMessageCard01 from 'components/components/dashboard/message/MobileMessageCard01'
+import MobileMessageCard02 from 'components/components/dashboard/message/MobileMessageCard02'
+import MobileMessageImage01 from 'components/components/dashboard/message/MobileMessageImage01'
+import MobileMessageImage02 from 'components/components/dashboard/message/MobileMessageImage02'
+import MobileMessageVideo01 from 'components/components/dashboard/message/MobileMessageVideo01'
+import MobileMessageVideo02 from 'components/components/dashboard/message/MobileMessageVideo02'
+import MobileMessageDownload01 from 'components/components/dashboard/message/MobileMessageDownload01'
+import MobileMessageDownload02 from 'components/components/dashboard/message/MobileMessageDownload02'
+import MobileMessageInput from 'components/components/dashboard/message/MobileMessageInput'
 
 // images and icons
 import ArrowLeftBlackIcon from 'assets/images/arrow-left-black.svg'
@@ -33,20 +34,56 @@ import graphql from 'crysdiazGraphql'
 
 const MessageContent = props => {
   // variables
+  const { viewport } = props
   const router = useRouter()
+  const [newMessage, setNewMessage] = useState({
+    attachment: [],
+    content: '',
+    from_email: '',
+    from_id: 0,
+    from_name: '',
+    from_type: 'patient',
+    request_id: 0,
+    subject: '',
+    to_email: '',
+    to_id: 0,
+    to_name: '',
+    to_type: 'user',
+  })
+  const [newMessageBool, setNewMessageBool] = useState(false)
   const [
     getSubMessagesByDashboard,
     { data: subMessageListData, loading: subMessageListLoading, error: subMessageListError },
   ] = useLazyQuery(graphql.queries.getSubMessagesByDashboard)
   const [subMessageList, setSubMessageList] = useState([])
+  const [createMessageByDashboard] = useMutation(graphql.mutations.createMessageByDashboard)
+  const [deleteMessageByDashboard] = useMutation(graphql.mutations.deleteMessageByDashboard)
 
   const [scrollEl, setScrollEl] = useState()
 
   // handlers
+  useEffect(() => {
+    if (viewport !== 'mobile') {
+      router.push('/dashboard/message')
+    }
+  }, [viewport])
+
   const handleGoBack = () => {
     router.push('/dashboard/message')
   }
   useEffect(() => {
+    setNewMessageBool(Boolean(router.query.new_message_bool))
+    setNewMessage(newMessage => ({ ...newMessage, content: router.query.content }))
+    setNewMessage(newMessage => ({ ...newMessage, from_email: router.query.from_email }))
+    setNewMessage(newMessage => ({ ...newMessage, from_id: Number(router.query.from_id) }))
+    setNewMessage(newMessage => ({ ...newMessage, from_name: router.query.from_name }))
+    setNewMessage(newMessage => ({ ...newMessage, from_type: router.query.from_type }))
+    setNewMessage(newMessage => ({ ...newMessage, request_id: Number(router.query.request_id) }))
+    setNewMessage(newMessage => ({ ...newMessage, subject: router.query.subject }))
+    setNewMessage(newMessage => ({ ...newMessage, to_email: router.query.to_email }))
+    setNewMessage(newMessage => ({ ...newMessage, to_id: Number(router.query.to_id) }))
+    setNewMessage(newMessage => ({ ...newMessage, to_name: router.query.to_name }))
+    setNewMessage(newMessage => ({ ...newMessage, to_type: router.query.to_type }))
     if (router.query.message_id) {
       getSubMessagesByDashboard({
         variables: { message_id: Number(router.query.message_id) },
@@ -66,6 +103,46 @@ const MessageContent = props => {
     }
   }, [scrollEl, subMessageList])
 
+  const handleRemoveMessage = () => {
+    let array = []
+    array.push(Number(router.query.message_id))
+    deleteMessageByDashboard({
+      variables: { ids: array },
+    })
+      .then(response => {
+        if (response.data.deleteMessageByDashboard === true) {
+          toast.success('Selected message was deleted successfully!')
+          router.push('/dashboard/message')
+        }
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
+  }
+
+  const handleChangeSubject = event => {
+    setNewMessage(newMessage => ({ ...newMessage, subject: event.target.value }))
+  }
+
+  const handleSendMessage = (content, attachedFile) => {
+    let object = newMessage
+    object.content = content
+    if (attachedFile !== '') {
+      object.attachment.push(attachedFile)
+    }
+    createMessageByDashboard({
+      variables: object,
+    })
+      .then(response => {
+        getSubMessagesByDashboard({
+          variables: { message_id: response.data.createMessageByDashboard.request_id },
+        })
+      })
+      .catch(error => {
+        toast.error(error.message)
+      })
+  }
+
   return (
     <div className={styles.container}>
       <div className={'w-full flex justify-between items-center ' + styles.headerContainer}>
@@ -78,13 +155,31 @@ const MessageContent = props => {
             className={
               'w-8 h-8 duration-200 hover:bg-gray-200 border-2 border-gray-400 rounded-full flex justify-center items-center'
             }
-            onClick={id => handleRemoveMessage(id)}
+            onClick={() => handleRemoveMessage()}
           >
             <Image src={TrashIcon} alt={''} width={9} height={10} />
           </button>
         </div>
       </div>
       <div className={styles.cardContainer}>
+        {/* subject part */}
+        <div className={styles.subjectArea}>
+          <div className={styles.name}>{newMessageBool ? router.query.to_name : router.query.from_name}</div>
+          <div className={styles.subject}>
+            {router.query.subject !== '' ? (
+              router.query.subject
+            ) : (
+              <input
+                type="text"
+                autoComplete="new-password"
+                placeholder="Haz click aquí y escribe el título de tu mensaje"
+                className={'w-full h-full bg-transparent py-1 px-2 text-black ' + styles.input}
+                value={newMessage.subject}
+                onChange={event => handleChangeSubject(event)}
+              />
+            )}
+          </div>
+        </div>
         {/* chat area */}
         <div className={styles.chatArea}>
           <PerfectScrollbar
@@ -92,41 +187,36 @@ const MessageContent = props => {
               setScrollEl(ref)
             }}
           >
-            {/* {newMessageBool ? (
-              <></>
-            ) : ( */}
             <>
               {subMessageList.map((item, index) =>
                 item.to_type === 'user' ? (
                   item.content !== '' ? (
-                    <MessageCard01 key={index} message={item} />
+                    <MobileMessageCard01 key={index} message={item} />
                   ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'image' ? (
-                    <MessageImage01 key={index} message={item} />
+                    <MobileMessageImage01 key={index} message={item} />
                   ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'video' ? (
-                    <MessageVideo01 key={index} message={item} />
+                    <MobileMessageVideo01 key={index} message={item} />
                   ) : (
-                    item.attachment.length !== 0 && <MessageDownload01 key={index} message={item} />
+                    item.attachment.length !== 0 && <MobileMessageDownload01 key={index} message={item} />
                   )
                 ) : item.content !== '' ? (
-                  <MessageCard02 key={index} message={item} />
+                  <MobileMessageCard02 key={index} message={item} />
                 ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'image' ? (
-                  <MessageImage02 key={index} message={item} />
+                  <MobileMessageImage02 key={index} message={item} />
                 ) : item.attachment.length !== 0 && item.attachment[0].type.split('/')[0] === 'video' ? (
-                  <MessageVideo02 key={index} message={item} />
+                  <MobileMessageVideo02 key={index} message={item} />
                 ) : (
-                  item.attachment.length !== 0 && <MessageDownload02 key={index} message={item} />
+                  item.attachment.length !== 0 && <MobileMessageDownload02 key={index} message={item} />
                 )
               )}
             </>
             {/* )} */}
           </PerfectScrollbar>
         </div>
-        {/* message input area */}
-        <div className={styles.messageSendArea}>
-          <div className={'my-5 mx-7 flex justify-end'}>
-            <MessageInput sendMessage={(content, attachedFile) => handleSendMessage(content, attachedFile)} />
-          </div>
-        </div>
+      </div>
+      {/* message input area */}
+      <div className={styles.messageSendContainer}>
+        <MobileMessageInput sendMessage={(content, attachedFile) => handleSendMessage(content, attachedFile)} />
       </div>
     </div>
   )

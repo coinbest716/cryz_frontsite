@@ -1,0 +1,58 @@
+@import 'styles/variable.module.scss';
+
+.sub_container {
+  padding: 11px 26px;
+  border: 1px solid #bd5b54;
+  border-radius: 32.5px;
+  background-color: $white-color;
+  // cursor: pointer;
+}
+
+.sub_title {
+  color: #bd5b54;
+  font-family: Montserrat Light;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.sub_description {
+  color: #bd5b54;
+  font-family: Montserrat Light;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.pending_container {
+  padding: 11px 26px;
+  background-color: $white-color;
+  border: 1px solid #818e8e;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.pending_title {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 13px;
+}
+
+.new_container {
+  padding: 11px 26px;
+  border-radius: 20px;
+  background-color: #818e8e;
+  width: fit-content;
+}
+
+.new_title {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 13px;
+}

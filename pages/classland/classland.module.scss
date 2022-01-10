@@ -59,8 +59,8 @@
   letter-spacing: 0.62px;
   line-height: 28px;
   text-align: justify;
-  // margin-top: 48px;
-  // margin-bottom: 20px;
+  margin-top: 48px;
+  margin-bottom: 20px;
 }
 .topRightSection {
   display: flex;
@@ -142,6 +142,11 @@
   background-color: #e0ced3;
   display: flex;
   justify-content: center;
+}
+.faqsection {
+  display: flex;
+  justify-content: center;
+  padding-top: 53px;
 }
 .faqString {
   color: #ab8e96;

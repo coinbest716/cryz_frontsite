@@ -35,7 +35,8 @@ const MobileDashboardLayout = ({ title, children }) => {
       currentState[1] === 'health' ||
       currentState[1] === 'graphic' ||
       currentState[1] === 'personal' ||
-      otherState[2] === 'billing'
+      otherState[2] === 'billing' ||
+      otherState[2] === 'shopping'
     ) {
       setShowHeader(false)
     } else {

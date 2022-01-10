@@ -31,7 +31,6 @@
   line-height: 18px;
 }
 .materialSection {
-  width: 340px;
   border-radius: 10px;
   background-color: #ffffff;
 }
@@ -66,7 +65,7 @@
   }
 }
 .subVideoArea {
-  height: calc(100vh - 48px - 70px - 50px - 40px - 16px - 40px - 25px - 232px);
+  height: calc(100vh - 48px - 70px - 50px - 40px - 16px - 40px - 25px - 265px);
 }
 .videoMaterialTitle {
   color: #333333;
@@ -97,7 +96,6 @@
   letter-spacing: 0;
   line-height: 15px;
 }
-
 .label {
   color: #333333;
   font-family: Montserrat;
@@ -111,47 +109,4 @@
   font-size: 12px;
   letter-spacing: 0;
   line-height: 15px;
-}
-
-.imageContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-.title {
-  font-family: Montserrat;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 0.7px;
-  color: $blue-gray-400-color;
-  text-align: center;
-}
-.subTitle {
-  display: inline;
-  text-align: center;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 0.7px;
-  color: $blue-gray-400-color;
-}
-.outlineButton {
-  width: 331px;
-  height: 106px;
-  background-color: transparent;
-  border: 1px solid $gray-500-color;
-
-  font-family: Montserrat;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.7px;
-  color: $blue-gray-400-color;
-}
-.planonline_text {
-  color: #222222;
-  font-family: Montserrat;
-  font-size: 14px;
-  letter-spacing: 1.4px;
-  line-height: 36px;
 }

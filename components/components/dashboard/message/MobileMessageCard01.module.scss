@@ -1,0 +1,35 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  max-width: 80%;
+  min-height: 60px;
+  width: auto;
+  padding: 16px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background: linear-gradient(-21deg, #9eadad, #fffefe);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.content {
+  width: 100%;
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  text-align: right;
+}
+
+.time {
+  width: 100%;
+  color: $white-color;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 15px;
+}
