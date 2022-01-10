@@ -98,7 +98,6 @@ const OrderDetail = props => {
         tempArray.push(obj)
       })
       setOrderDetailList(tempArray)
-      console.log('##################', tempArray)
     }
   }, [orderDetailLoading, orderDetailData, orderDetailError])
 

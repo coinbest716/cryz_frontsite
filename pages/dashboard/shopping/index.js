@@ -152,7 +152,6 @@ const Shopping = props => {
         tempArray.push(obj)
       })
       setShoppingData(tempArray)
-      console.log(tempArray)
     } else {
       setShoppingData([])
     }
@@ -173,7 +172,6 @@ const Shopping = props => {
   }
 
   const handleGotoOrderDetail = (item, detail) => {
-    console.log(detail)
     router.push(
       '/dashboard/shopping/order-detail?bill_number=' +
         item.bill_number +
