@@ -19,7 +19,7 @@ import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import Chip from 'components/components/Chip'
 import ComprasItem from 'components/components/dashboard/compras/ComprasItem'
-import ComprasSubscriptionButton from 'components/components/dashboard/compras/ComprasSubscriptionButton'
+import ComprasButton from 'components/components/dashboard/compras/ComprasButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -152,7 +152,6 @@ const Shopping = props => {
         tempArray.push(obj)
       })
       setShoppingData(tempArray)
-      console.log(tempArray)
     } else {
       setShoppingData([])
     }
@@ -173,7 +172,6 @@ const Shopping = props => {
   }
 
   const handleGotoOrderDetail = (item, detail) => {
-    console.log(detail)
     router.push(
       '/dashboard/shopping/order-detail?bill_number=' +
         item.bill_number +
@@ -251,13 +249,14 @@ const Shopping = props => {
               ))}
             </div>
             <div className="mt-6">
-              <ComprasSubscriptionButton title={'Anular Subcripción: '} description={'Plan online menopausia'} />
+              <ComprasButton
+                title={'Anular Subcripción: '}
+                description={'Plan online menopausia'}
+                type={'subscription'}
+              />
             </div>
             <div className="mt-6">
-              <ComprasSubscriptionButton
-                title={'Anular Subcripción: '}
-                description={'Plan mantenimiento online nutrición'}
-              />
+              <ComprasButton title={'Anular Subcripción: '} description={'Plan mantenimiento online nutrición'} />
             </div>
           </div>
         </div>
