@@ -99,7 +99,7 @@ const Nutrition = props => {
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Asesoría del sueño infantil</div>
+              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Visita postparto</div>
               <div className={viewport === 'mobile' ? styles.m_topDash : styles.topDash} />
               <div className={styles.topDescription + (viewport === 'mobile' ? ' mt-5' : ' mt-10 pb-20')}>
                 <div
@@ -107,8 +107,9 @@ const Nutrition = props => {
                 >
                   <div className={globalStyles.tinyMCEClass}>
                     <div className={'tinymce-class'}>
-                      <p>Se trata de un método propio y respetuoso con los bebés y que se adapta a las diferentes maneras de criar.</p> 
-                      <p>Impartido por Olga Sesé, coach del sueño infantil, gracias a ella más de 1.300 familias han vuelto a dormir después de haber pasado por su consulta.</p>
+                      <p><strong>El posparto y la lactancia</strong> no son etapas fáciles de transitar para muchas mujeres. En ocasiones el apoyo profesional puede ser de gran ayuda.</p>
+                      <p>  </p>
+                      <p>Nuestra visita posparto dura, <strong>aproximadamente, 1h30 ́</strong> y, en ella realizamos asesoramiento de lactancia, valoración de madre y bebé y resolvemos dudas relacionadas con vuestros cuidados.</p>
                     </div>
                   </div>
                 </div>
@@ -141,6 +142,14 @@ const Nutrition = props => {
       </div>
       {viewport !== 'mobile' && (
         <div className={'flex justify-start'}>
+          <div className={'w-1/3'}>
+            <ArrowButton
+              label={'Compra presencial'}
+              onClick={handleClickBuyPersion}
+              type={'nutrition'}
+              viewport={viewport}
+            />
+          </div>
           <div className={'w-1/3'}>
             <ArrowButton
               label={'Compra 1 to 1 en streaming'}

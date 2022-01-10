@@ -99,7 +99,7 @@ const Nutrition = props => {
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Fisioterapia pediátrica</div>
+              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Puesta de pendientes</div>
               <div className={viewport === 'mobile' ? styles.m_topDash : styles.topDash} />
               <div className={styles.topDescription + (viewport === 'mobile' ? ' mt-5' : ' mt-10 pb-20')}>
                 <div
@@ -107,9 +107,15 @@ const Nutrition = props => {
                 >
                   <div className={globalStyles.tinyMCEClass}>
                     <div className={'tinymce-class'}>
-                      <p>En nuestra unidad contamos con profesionales especializados en el área, que además de acompañar en todo el proceso de embarazo, parto y postparto, hacen seguimiento a los bebés en los primeros meses de vida, favoreciendo y promocionando el desarrollo motor del neonato, además de apoyar y dar orientaciones a los padres y cuidadores del bebé. </p>
-				
-                      <p>Desde una primera consulta para prevenir alguna alteración en el desarrollo y ayudar a las familias con cualquier duda que pueda surgir en las primeras semanas de vida del bebé, a sesiones de fisioterapia dónde evaluamos aspectos fundamentales de su etapa de desarrollo, hasta tratamiento de cólico del lactante.</p> 	 	
+                      <p>Las familias que deciden poner pendientes a sus bebés buscan un lugar seguro y respetuoso.</p>
+						
+                      <p>La teoría de que a los bebés no les duele la puesta de pendientes no es cierta, pero podemos intentar minimizar al máximo esa sensación usando pomada anestésica y poniendo al bebé en brazos o al pecho.</p>
+                      <p>Puedes elegir entre varios modelos disponibles. Para la puesta utilizamos nuestros propios pendientes, que son pendientes hipoalergénicos, de acero quirúrgico, especiales para esta primera puesta y del tamaño adecuado a la oreja de la bebé.</p>
+                        
+                      <p>En el servicio están incluidos los pendientes, el uso de pomada anestésica, un antiséptico para el cuidado posterior y una visita de revisión en el centro, en ambos casos, a las 6 semanas y, si quieren, el cambio de pendientes.</p>
+                        
+                      <p>No hay recomendaciones oficiales que indiquen un momento concreto para realizar la técnica, pero aconsejamos que el bebé ya haya sido valorado por su pediatra en la primera revisión rutinaria. </p>
+            
                     </div>
                   </div>
                 </div>

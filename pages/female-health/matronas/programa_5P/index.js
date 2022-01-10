@@ -85,6 +85,7 @@ const Nutrition = props => {
       },
     })
   }
+  
 
   const handleReadMore = state => {
     setReadMoreCurrentState(state)
@@ -99,7 +100,7 @@ const Nutrition = props => {
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Asesoría de la lactancia</div>
+              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Programa 5P: Cerrando el círculo</div>
               <div className={viewport === 'mobile' ? styles.m_topDash : styles.topDash} />
               <div className={styles.topDescription + (viewport === 'mobile' ? ' mt-5' : ' mt-10 pb-20')}>
                 <div
@@ -107,11 +108,12 @@ const Nutrition = props => {
                 >
                   <div className={globalStyles.tinyMCEClass}>
                     <div className={'tinymce-class'}>
-                      <p>Ofrecemos la posibilidad de programas dirigidos al acompañamiento durante la lactancia.</p>
+                      <p>Hemos creado este programa para tí.</p>
 
-                      <p>En ellos, nos adecuamos a tí y a tus necesidades, ayudándote a dar respuestas a preguntas del tipo: cómo me preparo, cómo actuar en el primer encuentro, cómo enfrentar la vuelta a casa, cómo es la vida de una madre lactante, la vuelta al trabajo y qué hacer cuando las cosas no salen cómo esperabas. 	</p>
-				
-                      <p>Estas sesiones son impartidas por matronas. Recomendada entre las 32-34 semanas de gestación. </p>
+                      <p>Nuestro <strong>“Programa 5P: cerrando el círculo”</strong> nace como forma de <strong>acompañamiento personalizado</strong> durante el embarazo. Es un <strong>programa flexible</strong> que se adapta a tus <strong>necesidades.</strong></p>
+
+                      <p>Consta de <strong>cuatro sesiones</strong> de 1h30’ de duración cada una, en ellas tratamos de que conozcas herramientas y recursos; y descubras todos los que ya tienes. Todo el contenido está basado en la <strong>fisiología y la salud,</strong> tú estás en el centro para poder cerrar el círculo. </p>
+
 
                     </div>
                   </div>

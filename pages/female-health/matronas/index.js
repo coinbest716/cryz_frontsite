@@ -71,13 +71,13 @@ const Services = props => {
   const handleClick = type => {
     switch (type) {
       case 1:
-        router.push('/salud-baby/asesoria-del-sueno-infantil')
+        router.push('/female-health/matronas/programa_5P')
         break
       case 2:
-        router.push('/salud-baby/fisioterapia-pediatrica')
+        router.push('/female-health/matronas/visita_postparto')
         break
       case 3:
-        router.push('/salud-baby/asesoria-de-la-lactancia')
+        router.push('/female-health/matronas/puesta_pendientes')
         break
     }
   }
@@ -100,7 +100,7 @@ const Services = props => {
           <div className={viewport === 'mobile' ? styles.m_container : styles.container}>
             <div className={'grid grid-cols-12 gap-4'}>
               <div className={'col-span-12 md:col-span-6 sm:col-span-12 '}>
-                <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Salud Baby</div>
+                <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Matronas</div>
                 <div className={viewport === 'mobile' ? styles.m_topDash : styles.topDash} />
                 <div className={globalStyles.tinyMCEClass}>
                   <div
@@ -108,7 +108,10 @@ const Services = props => {
                       styles.topDescription + ' tinymce-class' + (viewport === 'mobile' ? ' mt-4 mb-1' : ' mt-11 mb-5')
                     }
                   >
-                    NO TENEMOS TEXTO
+                    <p><strong>Blomma</strong> es un proyecto que nace con la ilusión y el objetivo de acompañar a mujeres en su camino hacia la maternidad. Somos Marta, Maritxu y María, tres matronas apasionadas que pretenden acompañarte en la búsqueda de salud para tu embarazo, parto y posparto.</p>
+						
+                    <p>Queremos que te sientas segura y satisfecha en este camino, para ello te invitamos a que conozcas tus recursos y valores tus necesidades. Nosotras te ofrecemos información científica contrastada, respeto a la fisiología y una mirada integral totalmente individualizada. </p>
+            
                   </div>
                 </div>
               </div>
@@ -131,11 +134,11 @@ const Services = props => {
                     onClick={() => handleClick(1)}
                   >
                     <img
-                      src={mainService[0]?.image || placeholder1}
+                      src={'/images/Matrona_5p.png' || placeholder1}
                       alt=""
                       style={{ width: '100%', height: '150px', opacity: 0.4 }}
                     />
-                    <div className={styles.m_serverText}>Asesoría del sueño Infantil</div>
+                    <div className={styles.m_serverText}>Programa 5P</div>
                     <div className={styles.m_serverArrow}>
                       <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
                     </div>
@@ -147,11 +150,11 @@ const Services = props => {
                     onClick={() => handleClick(2)}
                   >
                     <img
-                      src={mainService[1]?.image || placeholder2}
+                      src={'/images/Matrona_postparto.png' || placeholder2}
                       alt=""
                       style={{ width: '100%', height: '150px', opacity: 0.4 }}
                     />
-                    <div className={styles.m_serverText}>Fisioterapia pediátrica</div>
+                    <div className={styles.m_serverText}>Visita postparto</div>
                     <div className={styles.m_serverArrow}>
                       <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
                     </div>
@@ -164,11 +167,11 @@ const Services = props => {
                     onClick={() => handleClick(3)}
                   >
                     <img
-                      src={mainService[2]?.image || placeholder3}
+                      src={'/images/Matrona_pendientes.png' || placeholder3}
                       alt=""
                       style={{ width: '100%', height: '150px', opacity: 0.4 }}
                     />
-                    <div className={styles.m_serverText}>Asesoría de la lactancia</div>
+                    <div className={styles.m_serverText}>Puesta de pendientes</div>
                     <div className={styles.m_serverArrow}>
                       <Image src={ArrowRightUpGrayIcon} alt="" width={35} height={28} />
                     </div>
@@ -185,12 +188,12 @@ const Services = props => {
                   onClick={() => handleClick(1)}
                 >
                   <img
-                    src={contactType.type1 ?'/images/baby_lactancia.png': placeholder1}
+                    src={contactType.type1 ?'/images/Matrona_5p.png': placeholder1}
                     alt=""
                     style={{ width: '100%', height: '288px', opacity: 0.4 }}
                   />
 
-                  <div className={styles.serverText}>Asesoría del sueño Infantil</div>
+                  <div className={styles.serverText}>Programa 5P: Cerrando el círculo</div>
                   {contactType.type1 ? (
                     <div className={styles.serverArrow}>
                       <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
@@ -210,11 +213,11 @@ const Services = props => {
                   onClick={() => handleClick(2)}
                 >
                   <img
-                    src={contactType.type2 ? mainService[1]?.image : placeholder2}
+                    src={contactType.type2 ? '/images/Matrona_postparto.png' : placeholder2}
                     alt=""
                     style={{ width: '100%', height: '288px', opacity: 0.4 }}
                   />
-                  <div className={styles.serverText}>Fisioterapia pediátrica</div>
+                  <div className={styles.serverText}>Visita postparto</div>
                   {contactType.type2 ? (
                     <div className={styles.serverArrow}>
                       <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
@@ -234,11 +237,11 @@ const Services = props => {
                   onClick={() => handleClick(3)}
                 >
                   <img
-                    src={contactType.type3 ? mainService[2]?.image : placeholder3}
+                    src={contactType.type3 ? '/images/Matrona_pendientes.png' : placeholder3}
                     alt=""
                     style={{ width: '100%', height: '288px', opacity: 0.4 }}
                   />
-                  <div className={styles.serverText}>Asesoría de la lactancia</div>
+                  <div className={styles.serverText}>Puesta de pendientes </div>
                   {contactType.type3 ? (
                     <div className={styles.serverArrow}>
                       <Image src={nextButtonPinkIcon} alt="" width={30} height={23} />
