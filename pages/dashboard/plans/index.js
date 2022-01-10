@@ -450,8 +450,35 @@ const Plans = props => {
         <NoPlansOnlineDailog viewport={viewport} />
       )}
     </div>
+  ) : JSON.stringify(plansOnlineData) !== JSON.stringify({}) ? (
+    <div className={globalStyles.container}>
+      <div className={'pt-6 ' + styles.mobileChapterTitle}>{plansOnlineData.name}</div>
+      <div className={'pt-6'}>
+        {selectedVideoLink !== '' ? (
+          <ReactPlayer
+            url={selectedVideoLink}
+            width="100%"
+            height="100%"
+            className={styles.reactPlayer}
+            controls={true}
+            loop={true}
+            muted={true}
+            playing={true}
+          />
+        ) : (
+          <></>
+        )}
+      </div>
+      <div className={'flex flex-wrap justify-between mt-8'}>
+        {feature.map((item, index) => (
+          <div key={index} className={'px-1'}>
+            <Feature data={item} />
+          </div>
+        ))}
+      </div>
+    </div>
   ) : (
-    <>mobile view</>
+    <NoPlansOnlineDailog viewport={viewport} />
   )
 }
 export default Plans
