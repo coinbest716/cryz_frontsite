@@ -88,6 +88,9 @@ const Plans = props => {
     { data: availablePlanDatesData, loading: availablePlanDatesLoading, error: availablePlanDatesError },
   ] = useLazyQuery(graphql.queries.getAvailablePlanDates)
 
+  // mobile part
+  const [activeTab, setActiveTab] = useState('material')
+
   // handlers
   useEffect(() => {
     setCurrentMonth(MonthListData[new Date().getMonth()].month)
@@ -310,6 +313,11 @@ const Plans = props => {
     return label.charAt(0).toUpperCase() + label.slice(1)
   }
 
+  // mobile part
+  const handleSelectTab = value => {
+    setActiveTab(value)
+  }
+
   return viewport !== 'mobile' ? (
     <div className={globalStyles.dashContainer}>
       <div className={'flex justify-between'}>
@@ -451,30 +459,60 @@ const Plans = props => {
       )}
     </div>
   ) : JSON.stringify(plansOnlineData) !== JSON.stringify({}) ? (
-    <div className={globalStyles.container}>
-      <div className={'pt-6 ' + styles.mobileChapterTitle}>{plansOnlineData.name}</div>
-      <div className={'pt-6'}>
-        {selectedVideoLink !== '' ? (
-          <ReactPlayer
-            url={selectedVideoLink}
-            width="100%"
-            height="100%"
-            className={styles.reactPlayer}
-            controls={true}
-            loop={true}
-            muted={true}
-            playing={true}
-          />
+    <div>
+      <div className={globalStyles.container}>
+        <div className={'pt-6 ' + styles.mobileChapterTitle}>{plansOnlineData.name}</div>
+        <div className={'pt-6'}>
+          {selectedVideoLink !== '' ? (
+            <ReactPlayer
+              url={selectedVideoLink}
+              width="100%"
+              height="100%"
+              className={styles.reactPlayer}
+              controls={true}
+              loop={true}
+              muted={true}
+              playing={true}
+            />
+          ) : (
+            <></>
+          )}
+        </div>
+        <div className={'flex flex-wrap justify-between mt-8'}>
+          {feature.map((item, index) => (
+            <div key={index} className={'px-1'}>
+              <Feature data={item} />
+            </div>
+          ))}
+        </div>
+        <div className={'mt-8 ' + styles.noteDescription}>{selectedDetails}</div>
+        {JSON.stringify(plansOnlineData?.routine?.document[0]) !== JSON.stringify({}) ? (
+          <div className={'mt-5 flex justify-center'}>
+            <DownloadPDF data={plansOnlineData?.routine?.document[0]} type={'plan'} />
+          </div>
         ) : (
           <></>
         )}
       </div>
-      <div className={'flex flex-wrap justify-between mt-8'}>
-        {feature.map((item, index) => (
-          <div key={index} className={'px-1'}>
-            <Feature data={item} />
+      <div className={'mt-8 ' + styles.mobileUnderline} />
+      <div className={globalStyles.container}>
+        {/* tab part */}
+        <div className={'mt-9 flex justify-between ' + styles.tabArea}>
+          <div
+            className={activeTab === 'material' ? styles.activeTab : styles.deactiveTab}
+            onClick={() => handleSelectTab('material')}
+          >
+            Material necesario
           </div>
-        ))}
+          <div
+            className={activeTab === 'Playlist' ? styles.activeTab : styles.deactiveTab}
+            onClick={() => handleSelectTab('Playlist')}
+          >
+            Playlist
+          </div>
+        </div>
+        {activeTab === 'material' ? <div>Material necesario</div> : <div>Playlist</div>}
+        <div></div>
       </div>
     </div>
   ) : (
