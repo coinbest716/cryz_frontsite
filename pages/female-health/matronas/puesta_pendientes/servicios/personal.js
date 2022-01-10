@@ -18,7 +18,7 @@ import styles from 'pages/buy/index.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import { Auth } from 'aws-amplify'
-import * as gtag from '../../../../utils/gtag'
+import * as gtag from '../../../../../utils/gtag'
 
 const BuyOneToOne = props => {
   // loading part ###########################
