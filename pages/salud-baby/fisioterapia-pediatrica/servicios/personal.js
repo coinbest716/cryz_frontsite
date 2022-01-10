@@ -41,7 +41,57 @@ const BuyOneToOne = props => {
   const { viewport } = props
   const router = useRouter()
   const [description, setDescription] = useState('')
-  const [sessionData, setSessionData] = useState([])
+  const sessionData = [
+    {
+      id: 124,
+      service_type: 'personal',
+      web_name: 'Sesión valoración con porteo 30 min',
+      description: 'En el centro',
+      price: '40',
+    },
+    {
+      id: 125,
+      service_type: 'personal',
+      web_name: 'Sesión cólico del lactante ',
+      description: 'En el centro. Recomendado, 5 sesiones ',
+      price: '55',
+    },
+    {
+      id: 123,
+      service_type: 'personal',
+      web_name: 'Sesión valoración sin porteo',
+      description: 'En el centro',
+      price: '65',
+    },
+    {
+      id: 126,
+      service_type: 'personal',
+      web_name: 'Pack valoración + porteo',
+      description: 'En el centro.',
+      price: '80',
+    },
+    {
+      id: 128,
+      service_type: 'personal',
+      web_name: 'Sesión cólico del lactante ',
+      description: 'A domicilio.',
+      price: '65',
+    },
+    {
+      id: 127,
+      service_type: 'personal',
+      web_name: 'Sesión valoración sin porteo ',
+      description: 'A domicilio.',
+      price: '85',
+    },
+    {
+      id: 129,
+      service_type: 'personal',
+      web_name: 'Pack valoración + porteo',
+      description: 'A domicilio.',
+      price: '100',
+    },
+  ]
 
   const handleClickBuy = (service_id, description, price) => {
     gtag.event({
@@ -86,7 +136,7 @@ const BuyOneToOne = props => {
             <div className={globalStyles.tinyMCEClass}>
               <div className={'tinymce-class'}>
                 <p>
-                Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
+                Si estás dudando cuáles de estos planes de fisioterapia pediátrica se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
                 </p>
               </div>
             </div>
@@ -99,7 +149,7 @@ const BuyOneToOne = props => {
               <div className={globalStyles.tinyMCEClass}>
                 <div className={'tinymce-class'}>
                 <p>
-                Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
+                Si estás dudando cuáles de estos planes de fisioterapia pediátrica se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
                 </p>
                 </div>
               </div>

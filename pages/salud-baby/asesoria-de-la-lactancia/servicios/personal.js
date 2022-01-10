@@ -102,7 +102,7 @@ const BuyOneToOne = props => {
             <div className={globalStyles.tinyMCEClass}>
               <div className={'tinymce-class'}>
                 <p>
-                  Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con
+                  Si estás dudando cuáles de estos planes de asesoría de la lactancia se ajustan más a tus necesidades, ponte en contacto con
                   nuestro equipo de especialistas para que te asesoren.
                 </p>
               </div>
@@ -116,8 +116,8 @@ const BuyOneToOne = props => {
               <div className={globalStyles.tinyMCEClass}>
                 <div className={'tinymce-class'}>
                   <p>
-                    Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con
-                    nuestro equipo de especialistas para que te asesoren.
+                  Si estás dudando cuáles de estos planes de asesoría de la lactancia se ajustan más a tus necesidades, ponte en contacto con
+                  nuestro equipo de especialistas para que te asesoren.
                   </p>
                 </div>
               </div>

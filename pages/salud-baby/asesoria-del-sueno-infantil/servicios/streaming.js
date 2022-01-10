@@ -41,7 +41,30 @@ const BuyOneToOne = props => {
   const { viewport } = props
   const router = useRouter()
   const [description, setDescription] = useState('')
-  const [sessionData, setSessionData] = useState([])
+  
+  const sessionData = [
+    {
+      id: 122,
+      service_type: 'streaming',
+      web_name: 'Consulta individual ',
+      description: '1 to 1 streaming',
+      price: '80',
+    },
+    {
+      id: 69,
+      service_type: 'streaming',
+      web_name: 'Asesoramiento + plan ',
+      description: '1 to 1 streaming',
+      price: '240',
+    },
+    {
+      id: 68,
+      service_type: 'streaming',
+      web_name: 'Asesoramiento + plan + seguimiento ',
+      description: '1 to 1 streaming',
+      price: '410',
+    },
+  ]
 
   const handleClickBuy = (service_id, description, price) => {
     gtag.event({
@@ -86,7 +109,7 @@ const BuyOneToOne = props => {
             <div className={globalStyles.tinyMCEClass}>
               <div className={'tinymce-class'}>
               <p>
-                Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
+              Si estás dudando cuáles de estos planes de asesoría del sueño infantil se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
               </p>
               </div>
             </div>
@@ -99,7 +122,7 @@ const BuyOneToOne = props => {
               <div className={globalStyles.tinyMCEClass}>
                 <div className={'tinymce-class'}>
                 <p>
-                  Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
+                Si estás dudando cuáles de estos planes de asesoría del sueño infantil se ajustan más a tus necesidades, ponte en contacto con nuestro equipo de especialistas para que te asesoren. 
                 </p>
                 </div>
               </div>

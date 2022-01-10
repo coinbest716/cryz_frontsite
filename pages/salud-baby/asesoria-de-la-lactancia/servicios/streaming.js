@@ -45,9 +45,9 @@ const BuyOneToOne = props => {
   const sessionData = [
     {
       id: 132,
-      service_type: 'personal',
+      service_type: 'streaming',
       web_name: '1 sesión ',
-      description: 'En el centro',
+      description: '1 to 1 streaming',
       price: '85,50',
     },
   ]
@@ -95,7 +95,7 @@ const BuyOneToOne = props => {
             <div className={globalStyles.tinyMCEClass}>
               <div className={'tinymce-class'}>
                 <p>
-                  Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con
+                  Si estás dudando cuáles de estos planes de asesoría de la lactancia se ajustan más a tus necesidades, ponte en contacto con
                   nuestro equipo de especialistas para que te asesoren.
                 </p>
               </div>
@@ -109,8 +109,8 @@ const BuyOneToOne = props => {
               <div className={globalStyles.tinyMCEClass}>
                 <div className={'tinymce-class'}>
                   <p>
-                    Si estás dudando cuáles de estos planes se ajustan más a tus necesidades, ponte en contacto con
-                    nuestro equipo de especialistas para que te asesoren.
+                  Si estás dudando cuáles de estos planes de asesoría de la lactancia se ajustan más a tus necesidades, ponte en contacto con
+                  nuestro equipo de especialistas para que te asesoren.
                   </p>
                 </div>
               </div>
