@@ -1,0 +1,15 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding: 11px 16px;
+  background-color: rgba(51, 51, 51, 0.06);
+  border-radius: 6px;
+}
+
+.letter {
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: 1px;
+  line-height: 33px;
+}

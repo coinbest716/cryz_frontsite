@@ -14,6 +14,8 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import CommonButton from 'components/components/dashboard/CommonButton'
 import Chip from 'components/components/Chip'
+import ComprasButton from 'components/components/dashboard/compras/ComprasButton'
+import ComprasDetailItem from 'components/components/dashboard/compras/ComprasDetailItem'
 
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
 // styles
@@ -134,6 +136,22 @@ const OrderDetail = props => {
               <div className={styles.backString + ' ml-2'}>#{billNumber}</div>
             </div>
             <div className={styles.title}>{title}</div>
+          </div>
+          <div className="mt-36 mb-32 p-4">
+            <div className="flex flex-wrap justify-between">
+              <ComprasButton title={'Pagar pedido pendiente'} type={'pending'} />
+              <ComprasButton title={'Nuevo bono'} type={'new'} />
+            </div>
+            <div className={styles.SessionHeader + ' flex  flex-wrap justify-between mt-4'}>
+              <div className={styles.SessionHeaderText}>SESIÓN</div>
+              <div className={styles.SessionHeaderText}>ENTRENADOR</div>
+              <div className={styles.SessionHeaderText}>FECHA</div>
+            </div>
+            {orderDetailList.map((item, index) => (
+              <div className="mt-1" key={index}>
+                <ComprasDetailItem item={item} />
+              </div>
+            ))}
           </div>
         </div>
       ) : (
