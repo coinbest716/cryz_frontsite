@@ -226,6 +226,7 @@ const Dashboard = props => {
       let num = count + 1
       setCount(num)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
@@ -242,22 +243,15 @@ const Dashboard = props => {
       toast.error('Please complete your profile.')
       router.push('dashboard/profile')
     }
-  }, [
-    patientID,
-    count,
-    getSessionsByDashboard,
-    getAnthropmetryByDashboard,
-    getPurchaseListByDashboard,
-    getWeekDaySessionsByDashboard,
-    getPatientMessageById,
-    getPaymentStatusForDashboard,
-  ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [patientID, count])
 
   useEffect(() => {
     if (!bonusError && bonusData && bonusData.getPurchaseListByDashboard) {
       const data = bonusData.getPurchaseListByDashboard
       setPurchaseData(data)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bonusLoading, bonusData, bonusError])
 
   useEffect(() => {
@@ -347,6 +341,7 @@ const Dashboard = props => {
     return () => {
       clearInterval(classInterval)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events])
 
   const setAvailableEvent = () => {

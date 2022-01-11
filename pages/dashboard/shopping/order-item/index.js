@@ -58,12 +58,14 @@ const OrderItem = props => {
         bill_number: Number(router.query.bill_number),
       },
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
 
   useEffect(() => {
     if (Number(router.query.bill_number) && viewport !== 'mobile') {
       router.push('/dashboard/shopping')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [viewport])
 
   useEffect(() => {

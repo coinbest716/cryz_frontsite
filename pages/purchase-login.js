@@ -88,6 +88,7 @@ const PurchaseLogin = props => {
       setEmail(localStorage.getItem('email') || '')
       setPassword(localStorage.getItem('password') || '')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -124,6 +125,7 @@ const PurchaseLogin = props => {
         },
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated])
 
   const handleSetRememberMe = () => {

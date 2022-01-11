@@ -47,6 +47,7 @@ const BillItem = props => {
     if (router.query.bill_id > -1) {
       getPatientBillByDashboardById({ variables: { bill_id: Number(router.query.bill_id) } })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // variables
@@ -77,6 +78,7 @@ const BillItem = props => {
         router.push('/dashboard/billing/bill-item')
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [viewport])
 
   useEffect(() => {

@@ -80,6 +80,7 @@ const Training = props => {
       }
       setSliderData(_sliderData)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
 
   const handleMouseMover = event => {

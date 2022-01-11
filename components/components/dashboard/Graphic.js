@@ -133,7 +133,7 @@ const Graphic = props => {
       plotOptions: {
         bar: {
           columnWidth: '30%',
-          borderRadius: 15,
+          borderRadius: 10,
           dataLabels: {
             position: 'top', // top, center, bottom
           },

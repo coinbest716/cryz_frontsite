@@ -63,6 +63,7 @@ const Menopause = props => {
     if (disciplineID) {
       getFemHealthService({ variables: { discipline_id: disciplineID } })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [disciplineID, setDisciplineID])
 
   useEffect(() => {

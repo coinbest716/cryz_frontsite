@@ -25,7 +25,6 @@ import ArrowLeftBlackIcon from 'assets/images/arrow-left-black.svg'
 import TrashIcon from 'assets/images/trash.svg'
 
 // styles
-import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './message-content.module.scss'
 
 // graphql
@@ -66,6 +65,7 @@ const MessageContent = props => {
     if (viewport !== 'mobile') {
       router.push('/dashboard/message')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [viewport])
 
   const handleGoBack = () => {
@@ -89,6 +89,7 @@ const MessageContent = props => {
         variables: { message_id: Number(router.query.message_id) },
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
 
   useEffect(() => {

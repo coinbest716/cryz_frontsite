@@ -167,6 +167,7 @@ const Plans = props => {
         setSelectedVideoLink(selectedVideo.link)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedVideo])
 
   useEffect(() => {

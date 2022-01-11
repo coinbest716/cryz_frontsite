@@ -3,8 +3,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 // third party components
-import toast from 'react-hot-toast'
-import { Auth } from 'aws-amplify'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
@@ -13,13 +11,10 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
-import router from 'next/router'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
-import Chip from 'components/components/Chip'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -27,16 +22,10 @@ import styles from '../cursos.module.scss'
 
 // images
 import FileViewIcon from 'assets/images/file-view.svg'
-import DownloadIcon from 'assets/images/download.svg'
-import DownloadDisableIcon from 'assets/images/download-disable.svg'
-
-// json data
-import OrderStateData from 'assets/data/OrderStateData.json'
 
 // graphql
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import moment from 'moment'
 
 const Curso = () => {
   const [course, setCourse] = useState([])
@@ -101,7 +90,6 @@ const Curso = () => {
       <div className={styles.yearArea}></div>
       {/* table part */}
       <div>
-        
         <PerfectScrollbar>
           <table className={'w-full table-auto'}>
             {course.lectures &&
@@ -122,7 +110,7 @@ const Curso = () => {
                       </tr>
                     </thead>
                     <tbody key={`body-${index}`} className={'mt-4 ' + styles.tbody}>
-                      <tr className={1 % 2 === 1 ? `bg-white ${styles.h150}` : `${styles.h150}`} >
+                      <tr className={1 % 2 === 1 ? `bg-white ${styles.h150}` : `${styles.h150}`}>
                         <td className={'h-full relative'}>
                           <div
                             className={
@@ -149,7 +137,7 @@ const Curso = () => {
                               styles.tableCellText
                             }
                           >
-                            <Link href={`/dashboard/cursos/${id}/${lecture.id}`} target={'_blank'}>
+                            <Link href={`/dashboard/cursos/${id}/${lecture.id}`} target={'_blank'} passHref>
                               <Image src={FileViewIcon} alt={''} width={29} height={29} />
                             </Link>
                           </div>

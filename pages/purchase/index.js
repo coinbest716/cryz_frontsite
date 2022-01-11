@@ -267,6 +267,7 @@ const Purchase = props => {
         //router.push('/purchase-login')
         setIsAuthenticated(false)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -296,6 +297,7 @@ const Purchase = props => {
         setTabIndex(0)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patientLoading, patientData, patientError])
 
   useEffect(() => {
@@ -345,6 +347,7 @@ const Purchase = props => {
       }
       setPersonalInfo(_personalInfo)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
