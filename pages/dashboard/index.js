@@ -451,7 +451,7 @@ const Dashboard = props => {
     return label.charAt(0).toUpperCase() + label.slice(1)
   }
 
-  let paymentStatusText = ""
+  let paymentStatusText = ''
   let paymentStatusLink = null
   if (paymentStatusData && paymentStatusData.getPaymentStatusForDashboard) {
     const values = paymentStatusData.getPaymentStatusForDashboard.values
@@ -460,7 +460,211 @@ const Dashboard = props => {
     paymentStatusLink = template.link
   }
 
-  return (
+  return viewport !== 'mobile' ? (
+    <div className={'w-full ' + styles.container}>
+      <div className={'grid grid-cols-12'}>
+        <div className={'col-span-12 lg:col-span-8 pb-0 lg:pb-16 py-4 lg:py-16 px-4 lg:px-9'}>
+          <div className={'flex justify-between items-center'}>
+            <div>
+              <div className={styles.highBoldLabel}>Dashboard</div>
+              <div className={'pt-2 ' + styles.today}>{today}</div>
+            </div>
+            <DashboardButton
+              handleClick={() => handleClickRedirect('startClass')}
+              label={'Comenzar clase'}
+              type={'startClass'}
+              visible={streamingEvent.toggle}
+            />
+          </div>
+          <div className={'w-full flex justify-between items-center mt-7 pl-9 pr-12 ' + styles.welcomeSection}>
+            <div className={'py-4 w-full'}>
+              <div className={styles.welcomeLabel}>Bienvenido</div>
+              <div className={styles.welcomeLabel}>
+                {personalInfo.name}&nbsp;{personalInfo.lastname}
+              </div>
+              <div className={'pt-2 w-full flex-wrap ' + styles.welcomeDescription}>{paymentStatusText}</div>
+              {paymentStatusLink && (
+                <div className={'pt-4'}>
+                  <DashboardButton
+                    handleClick={() => handleClickRedirect('view', paymentStatusLink)}
+                    label={'Ver'}
+                    type={'view'}
+                  />
+                </div>
+              )}
+            </div>
+            <div style={{ minWidth: '220px' }}>
+              <Image src={welcomeIcon} alt="" width={220} height={254} />
+            </div>
+          </div>
+          <div className={'flex justify-between items-center mt-7 px-9 pt-0 lg:pt-7 pb-1 ' + styles.welcomeSection}>
+            <div className={'w-full'}>
+              <div className={styles.highBoldLabel}>{'Actividad mensual'}</div>
+              <div>
+                <Chart
+                  chart={chartOptions.chart}
+                  options={chartOptions?.options}
+                  series={chartOptions?.series}
+                  type={'area'}
+                  height="200px"
+                />
+              </div>
+            </div>
+            <div className={'px-2 '}>
+              <div className={'text-center pb-5 ' + styles.estimateHours}>Este mes</div>
+              <DashboardButton
+                handleClick={() => handleClickRedirect('hour')}
+                label={(eventMins / 60).toString().replace('.', ',')}
+                type={'hour'}
+              />
+            </div>
+          </div>
+          {questionnaireData.length !== 0 ? (
+            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:mt-7 px-9 py-7 flex justify-between ' + styles.rememberSection}>
+              <div>
+                <div className={styles.remember}>Recuerda!!</div>
+                <div className={'pt-2 ' + styles.rememberDescription}>
+                  Tienes un cuestionario pendiente de completar…
+                </div>
+              </div>
+              <div>
+                <DashboardButton handleClick={() => handleClickQuestionnaire()} label={'Hacerlo'} type={'viewRed'} />
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+          <div className={'grid grid-cols-12 gap-7 '}>
+            <div className={'col-span-12 lg:col-span-6'}>
+              <div
+                className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
+                // onClick={() => handleClickRedirect('calendar')}
+              >
+                <Calendar
+                  className={styles.calendar}
+                  onChange={handleChangeDate}
+                  value={calendarValue}
+                  locale="es"
+                  tileClassName={({ date, view }) => {
+                    if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                      return 'highlight'
+                    }
+                  }}
+                  navigationLabel={({ label }) => updateCalendarLabel(label)}
+                ></Calendar>
+              </div>
+            </div>
+            <div className={'col-span-12 lg:col-span-6'}>
+              <div
+                className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
+                onClick={() => handleClickRedirect('bonos')}
+              >
+                <div className={'flex justify-between items-center'}>
+                  <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
+                  <div className={'text-center '}>
+                    <Image src={bonosIcon} alt="" width={50} height={50} />
+                  </div>
+                </div>
+                <div>
+                  {purchaseData.map((item, index) => (
+                    <div className={'py-3 h-full pt-6'} key={index}>
+                      <ProgressBar data={item} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={'col-span-12 lg:col-span-4 py-4 lg:py-16 px-4 lg:px-9'}>
+          <div className={'bg-white h-full px-9 py-10'}>
+            <div>
+              <div className={styles.highBoldLabel}>Perfil</div>
+              <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
+              <div className={'w-full flex justify-center flex-wrap py-8 text-center'}>
+                <div
+                  className={'flex justify-center items-center overflow-hidden p-1'}
+                  style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
+                >
+                  <Image
+                    src={personalInfo.avatar || '/images/default-avatar.svg'}
+                    alt=""
+                    width={140}
+                    height={140}
+                    objectFit="cover"
+                    objectPosition="center"
+                  />
+                </div>
+                <div className={'w-full pt-4 ' + styles.highBoldLabel}>
+                  {personalInfo.name}&nbsp;{personalInfo.lastname}
+                </div>
+                <div className={'w-full pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
+                <div className={'w-full pt-6 flex justify-center'}>
+                  <DashboardButton
+                    handleClick={() => handleClickRedirect('editProfile')}
+                    label={'Editar Perfil'}
+                    type={'editProfile'}
+                  />
+                </div>
+                <div className={'pt-14 flex justify-between'}>
+                  <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+                    <div className={'absolute -top-4'}>
+                      <DashboardButton
+                        handleClick={() => handleClickRedirect('iconWeight')}
+                        label={''}
+                        type={'iconWeight'}
+                      />
+                      <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
+                      <div className={'pt-3 ' + styles.mediumBoldLabel}>
+                        {personalInfo.weight && personalInfo.weight + ' kg'}
+                      </div>
+                    </div>
+                  </div>
+                  <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+                    <div className={'absolute -top-4'}>
+                      <DashboardButton
+                        handleClick={() => handleClickRedirect('iconWeight')}
+                        label={''}
+                        type={'iconHeight'}
+                      />
+                      <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
+                      <div className={'pt-3 ' + styles.mediumBoldLabel}>
+                        {personalInfo.height && personalInfo.height + ' cm'}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={'pt-20'}>
+                <div className={styles.highBoldLabel}>Mensajes</div>
+                {message.length !== 0 ? (
+                  <div>
+                    <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
+                    <div className={'pt-6'}>
+                      {message.map((item, index) => (
+                        <div className={'py-2 flex justify-center'} key={index}>
+                          <NewMessageBox
+                            handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
+                            name={item.from_name}
+                            content={item.subject}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className={'pt-7 text-center'}>
+                    <Image src={noPendingIcon} alt="" width={268} height={294} />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {showQuestionnaire && <Questionnaire onClick={() => handleDisableQuestionnarie()} viewport={viewport} />}
+    </div>
+  ) : (
     <div className={'w-full ' + styles.container}>
       <div className={'grid grid-cols-12'}>
         <div className={'col-span-12 lg:col-span-8 pb-0 lg:pb-16 py-4 lg:py-16 px-4 lg:px-9'}>
