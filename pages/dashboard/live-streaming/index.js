@@ -6,9 +6,6 @@ import { useDispatch } from 'react-redux'
 // next components
 import Image from 'next/image'
 
-// third party components1
-import ReactPlayer from 'react-player'
-
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
@@ -51,6 +48,7 @@ const LiveStreaming = props => {
       setEvent({ id: Number(router.query.id) })
     }
     setMaterial(LiveStreamingData)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
 
   const handleOnChangeRoom = room => {

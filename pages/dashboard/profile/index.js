@@ -183,13 +183,7 @@ const Profile = props => {
         email: _email,
       },
     })
-    // if (activeTab.health) {
-    //   if (personalInfo.id > 0) {
-    //     getAnthropmetryByDashboard({ variables: { patient_id: personalInfo.id } })
-    //   }
-    // } else if (activeTab.graphic) {
-    //   getAnthroDetailDataByDashboard({ variables: { patient_id: personalInfo.id } })
-    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const getProfilePercentage = (_personalInfo, _shippingInfo) => {
@@ -223,6 +217,7 @@ const Profile = props => {
     } else if (activeTab.graphic) {
       getAnthroDetailDataByDashboard({ variables: { patient_id: personalInfo.id } })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab])
 
   useEffect(() => {
@@ -301,10 +296,8 @@ const Profile = props => {
       getProfilePercentage(_personalInfo, _shippingInfo)
       getAnthropmetryByDashboard({ variables: { patient_id: data.id } })
       getAnthroDetailDataByDashboard({ variables: { patient_id: data.id } })
-      // if (activeTab.health) {
-      // } else if (activeTab.graphic) {
-      // }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [personalLoading, personalData, personalError])
 
   useEffect(() => {
