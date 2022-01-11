@@ -22,6 +22,7 @@ import moment from 'moment'
 import toast from 'react-hot-toast'
 
 // styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './dashboard.module.scss'
 
 // images and icons
@@ -665,101 +666,93 @@ const Dashboard = props => {
       {showQuestionnaire && <Questionnaire onClick={() => handleDisableQuestionnarie()} viewport={viewport} />}
     </div>
   ) : (
-    <div className={'w-full ' + styles.container}>
-      <div className={'grid grid-cols-12'}>
-        <div className={'col-span-12 lg:col-span-8 pb-0 lg:pb-16 py-4 lg:py-16 px-4 lg:px-9'}>
-          <div className={'flex justify-between items-center mt-7 pl-9 pr-12 ' + styles.welcomeSection}>
-            <div className={'py-4'}>
-              <div className={styles.welcomeLabel}>Bienvenido</div>
-              <div className={styles.welcomeLabel}>
-                {personalInfo.name}&nbsp;{personalInfo.lastname}
-              </div>
-              <div className="pt-4 flex justify-start items-center">
-                <DashboardButton
-                  handleClick={() => handleClickRedirect('startClass')}
-                  label={'Comenzar clase'}
-                  type={'startClass'}
-                  visible={streamingEvent.toggle}
-                />
-                <DashboardButton
-                  handleClick={() => handleClickRedirect('message')}
-                  label={''}
-                  type={'message'}
-                  count={message.length}
-                />
-              </div>
+    <div className={'w-full ' + globalStyles.container}>
+      <div className={'py-4'}>
+        <div className={'flex justify-between items-center mt-7 ' + styles.welcomeSection}>
+          <div className={'py-4'}>
+            <div className={styles.welcomeLabel}>Bienvenido</div>
+            <div className={styles.welcomeLabel}>
+              {personalInfo.name}&nbsp;{personalInfo.lastname}
             </div>
-          </div>
-          <div className={'flex justify-between items-center mt-7 px-9 pt-0 lg:pt-7 pb-1 ' + styles.welcomeSection}>
-            <div className={'w-full'}>
-              <div className={styles.highBoldLabel}>{'Porcentajes'}</div>
-              <div>
-                <Chart
-                  chart={chartOptions.chart}
-                  options={chartOptions?.options}
-                  series={chartOptions?.series}
-                  type={'bar'}
-                  height="200px"
-                />
-              </div>
-            </div>
-          </div>
-          {questionnaireData.length !== 0 ? (
-            <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:mt-7 px-9 py-7 flex justify-between ' + styles.rememberSection}>
-              <div>
-                <div className={styles.remember}>Recuerda!!</div>
-                <div className={'pt-2 ' + styles.rememberDescription}>
-                  Tienes un cuestionario pendiente de completar…
-                </div>
-              </div>
-              <div>
-                <DashboardButton handleClick={() => handleClickQuestionnaire()} label={'Hacerlo'} type={'viewRed'} />
-              </div>
-            </div>
-          ) : (
-            <></>
-          )}
-          <div className={'grid grid-cols-12 gap-7 '}>
-            <div className={'col-span-12 lg:col-span-6'}>
-              <div
-                className={'mt-7 px-9 py-7 w-full cursor-pointer ' + styles.welcomeSection}
-                onClick={() => handleClickRedirect('bonos')}
-              >
-                <div className={'flex justify-between items-center'}>
-                  <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
-                  <div className={'text-center '}>
-                    <Image src={bonosIcon} alt="" width={50} height={50} />
-                  </div>
-                </div>
-                <div>
-                  {purchaseData.map((item, index) => (
-                    <div className={'py-3 h-full pt-6'} key={index}>
-                      <ProgressBar data={item} />
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <div className="pt-4 flex justify-start items-center">
+              <DashboardButton
+                handleClick={() => handleClickRedirect('startClass')}
+                label={'Comenzar clase'}
+                type={'startClass'}
+                visible={streamingEvent.toggle}
+              />
+              <DashboardButton
+                handleClick={() => handleClickRedirect('message')}
+                label={''}
+                type={'message'}
+                count={message.length}
+              />
             </div>
           </div>
         </div>
-        <div className={'col-span-12 mb-40'}>
-          <div
-            className={'mt-7 px-9 py-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
-            // onClick={() => handleClickRedirect('calendar')}
-          >
-            <Calendar
-              className={styles.calendar}
-              onChange={handleChangeDate}
-              value={calendarValue}
-              locale="es"
-              tileClassName={({ date, view }) => {
-                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                  return 'highlight'
-                }
-              }}
-              navigationLabel={({ label }) => updateCalendarLabel(label)}
-            ></Calendar>
+        <div className={'flex justify-between items-center mt-7 pb-1 ' + styles.welcomeSection}>
+          <div className={'w-full'}>
+            <div className={styles.highBoldLabel}>{'Porcentajes'}</div>
+            <div>
+              <Chart
+                chart={chartOptions.chart}
+                options={chartOptions?.options}
+                series={chartOptions?.series}
+                type={'bar'}
+                height="200px"
+              />
+            </div>
           </div>
+        </div>
+        {questionnaireData.length !== 0 ? (
+          <div className={'mt-7 mx-9 lg:mx-0 my-7 lg:mt-7 px-9 py-7 flex justify-between ' + styles.rememberSection}>
+            <div>
+              <div className={styles.remember}>Recuerda!!</div>
+              <div className={'pt-2 ' + styles.rememberDescription}>Tienes un cuestionario pendiente de completar…</div>
+            </div>
+            <div>
+              <DashboardButton handleClick={() => handleClickQuestionnaire()} label={'Hacerlo'} type={'viewRed'} />
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+        <div
+          className={'mt-7 w-full cursor-pointer ' + styles.welcomeSection}
+          onClick={() => handleClickRedirect('bonos')}
+        >
+          <div className={'flex justify-between items-center'}>
+            <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
+            <div className={'text-center '}>
+              <Image src={bonosIcon} alt="" width={50} height={50} />
+            </div>
+          </div>
+          <div>
+            {purchaseData.map((item, index) => (
+              <div className={'py-3 h-full pt-6'} key={index}>
+                <ProgressBar data={item} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className={'mb-40'}>
+        <div
+          className={'mt-7 w-full ' + styles.welcomeSection + ' calendarWrapper'}
+          // onClick={() => handleClickRedirect('calendar')}
+        >
+          <Calendar
+            className={styles.calendar}
+            onChange={handleChangeDate}
+            value={calendarValue}
+            locale="es"
+            tileClassName={({ date, view }) => {
+              if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                return 'highlight'
+              }
+            }}
+            navigationLabel={({ label }) => updateCalendarLabel(label)}
+          ></Calendar>
         </div>
       </div>
       {showQuestionnaire && <Questionnaire onClick={() => handleDisableQuestionnarie()} viewport={viewport} />}
