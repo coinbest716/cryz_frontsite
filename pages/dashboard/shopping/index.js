@@ -248,16 +248,11 @@ const Shopping = props => {
                 <ComprasItem data={item} handleClickComprasItem={handleClickComprasItem} key={index} />
               ))}
             </div>
-            <div className="mt-6">
-              <ComprasButton
-                title={'Anular Subcripción: '}
-                description={'Plan online menopausia'}
-                type={'subscription'}
-              />
-            </div>
-            <div className="mt-6">
-              <ComprasButton title={'Anular Subcripción: '} description={'Plan mantenimiento online nutrición'} />
-            </div>
+            {onlinePlanList.map((item, index) => (
+              <div className="mt-6" key={index}>
+                <ComprasButton title={'Anular Subcripción: '} description={item.item_name} type={'subscription'} />
+              </div>
+            ))}
           </div>
         </div>
       ) : (
