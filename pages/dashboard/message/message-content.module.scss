@@ -51,7 +51,10 @@
 
 .chatArea {
   width: 100%;
-  height: calc(100% - 65px);
+  position: fixed;
+  top: 130px;
+  bottom: 100px;
+  left: 0;
 }
 
 .messageSendContainer {
