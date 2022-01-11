@@ -499,8 +499,8 @@ const Plans = props => {
             Material necesario
           </div>
           <div
-            className={activeTab === 'Playlist' ? styles.activeTab : styles.deactiveTab}
-            onClick={() => handleSelectTab('Playlist')}
+            className={activeTab === 'playlist' ? styles.activeTab : styles.deactiveTab}
+            onClick={() => handleSelectTab('playlist')}
           >
             Playlist
           </div>
@@ -515,6 +515,9 @@ const Plans = props => {
             ))}
           </div>
         ) : (
+          <></>
+        )}
+        {activeTab === 'playlist' ? (
           <div className={'rounded-xl bg-white py-4 px-6 pb-10 mt-7 relative'}>
             <div className={'flex justify-between items-center mb-2'}>
               <div className={styles.monthName}>
@@ -571,6 +574,8 @@ const Plans = props => {
               ))}
             </div>
           </div>
+        ) : (
+          <></>
         )}
         <div></div>
       </div>
