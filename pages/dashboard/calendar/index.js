@@ -81,6 +81,7 @@ const Calendar = props => {
     return () => {
       clearInterval(classInterval)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events])
 
   const setAvailableEvent = () => {

@@ -21,11 +21,10 @@ import styles from './cursos.module.scss'
 import FileViewIcon from 'assets/images/file-view.svg'
 
 // graphql
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import { Auth } from 'aws-amplify'
 import toast from 'react-hot-toast'
-import moment from 'moment'
 
 const Cursos = () => {
   const [courses, setCourses] = useState([])
@@ -108,7 +107,7 @@ const Cursos = () => {
                     </td>
                     <td className={'h-full relative'}>
                       <div className={styles.tableContentArea}>
-                        <Link href={`/dashboard/cursos/${course.id}`}>
+                        <Link href={`/dashboard/cursos/${course.id}`} passHref>
                           <Image src={FileViewIcon} alt={''} width={29} height={29} />
                         </Link>
                       </div>
