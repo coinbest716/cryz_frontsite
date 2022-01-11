@@ -577,7 +577,7 @@ const Plans = props => {
         ) : (
           <></>
         )}
-        <div className={'mb-20'}></div>
+        <div className={'mb-28'}></div>
       </div>
     </div>
   ) : (
