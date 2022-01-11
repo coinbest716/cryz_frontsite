@@ -85,6 +85,7 @@ const Register = props => {
       setEmail(localStorage.getItem('email'))
       setPassword(localStorage.getItem('password'))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
 
   const handleRemoveCart = index => {

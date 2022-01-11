@@ -74,6 +74,7 @@ const SelfVideo = props => {
     } else {
       videoTrack.detach()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cameraEnabled])
 
   useEffect(() => {
@@ -85,6 +86,7 @@ const SelfVideo = props => {
     } else {
       audioTrack.detach()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioEnabled])
 
   return (

@@ -12,7 +12,6 @@ import { useRouter } from 'next/router'
 import Menu from 'components/Menu/Menu'
 
 // images
-import CartIcon from 'assets/images/cart.svg'
 import AccountIcon from 'assets/images/account.svg'
 import MessageIcon from 'assets/images/message-box.svg'
 
@@ -107,12 +106,12 @@ const Header = props => {
 
   useEffect(() => {
     setCartData(shoppingCartData)
-
     if (viewport === 'mobile') {
       if (process.env.NEXT_PUBLIC_MOBILE_DASHBOARD === 'false') {
         setShowLogin(false)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -151,6 +150,7 @@ const Header = props => {
         window.removeEventListener('scroll', headerColorChange)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const headerColorChange = () => {

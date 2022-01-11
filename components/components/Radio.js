@@ -11,6 +11,7 @@ const Radio = props => {
     } else {
       setchecked('')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answer])
 
   return (

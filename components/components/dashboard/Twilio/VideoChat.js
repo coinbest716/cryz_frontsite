@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
-// import { useParams } from 'react-router-dom'
-// import { AppBaseAlert } from 'src/components/base'
+
 // next components
 import Image from 'next/image'
 import toast from 'react-hot-toast'
 
 import Video from 'twilio-video'
-import Room from './Room'
 import Participant from './Participant'
 import SelfVideo from './SelfVideo'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
@@ -106,6 +104,7 @@ const VideoChat = props => {
         room.off('participantDisconnected', participantDisconnected)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room])
 
   async function initTwilioConnet(room_name, user_name) {
