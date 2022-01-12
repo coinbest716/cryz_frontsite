@@ -50,6 +50,7 @@ const MessageContent = props => {
     to_name: '',
     to_type: 'user',
   })
+  const [requestID, setRequestID] = useState(0)
   const [newMessageBool, setNewMessageBool] = useState(false)
   const [
     getSubMessagesByDashboard,
@@ -126,6 +127,7 @@ const MessageContent = props => {
 
   const handleSendMessage = (content, attachedFile) => {
     let object = newMessage
+    object.request_id = requestID
     object.content = content
     if (attachedFile !== '') {
       object.attachment.push(attachedFile)
@@ -134,6 +136,7 @@ const MessageContent = props => {
       variables: object,
     })
       .then(response => {
+        setRequestID(response.data.createMessageByDashboard.id)
         getSubMessagesByDashboard({
           variables: { message_id: response.data.createMessageByDashboard.id },
         })
@@ -141,6 +144,7 @@ const MessageContent = props => {
       .catch(error => {
         toast.error(error.message)
       })
+    setNewMessageBool(false)
   }
 
   return (
