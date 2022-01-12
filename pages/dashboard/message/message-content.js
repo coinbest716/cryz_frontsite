@@ -112,7 +112,7 @@ const MessageContent = props => {
       .then(response => {
         if (response.data.deleteMessageByDashboard === true) {
           toast.success('Selected message was deleted successfully!')
-          router.push('/dashboard/message')
+          router.push('/dashboard/message#success')
         }
       })
       .catch(error => {
