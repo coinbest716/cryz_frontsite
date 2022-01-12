@@ -207,6 +207,7 @@ const Message = props => {
     } else {
       object.new_message_bool = newMessageBool
       object.message_id = data.id
+      object.success = true
       router.push({
         pathname: '/dashboard/message/message-content',
         query: object,
@@ -237,7 +238,7 @@ const Message = props => {
     setNewMessageBool(true)
     if (viewport === 'mobile') {
       object.new_message_bool = newMessageBool
-      // object.message_id = 0
+      object.success = true
       router.push({
         pathname: '/dashboard/message/message-content',
         query: object,
