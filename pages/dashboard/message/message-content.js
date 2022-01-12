@@ -136,7 +136,9 @@ const MessageContent = props => {
       variables: object,
     })
       .then(response => {
-        setRequestID(response.data.createMessageByDashboard.id)
+        if (requestID === 0) {
+          setRequestID(response.data.createMessageByDashboard.id)
+        }
         getSubMessagesByDashboard({
           variables: { message_id: response.data.createMessageByDashboard.id },
         })
