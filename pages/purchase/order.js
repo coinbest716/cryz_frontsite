@@ -143,10 +143,10 @@ const CreditSuccess = props => {
               <div
                 className={styles.goButton + ' cursor-pointer'}
                 onClick={() => {
-                  router.push('/')
+                  router.push('/dashboard/shopping')
                 }}
               >
-                Salir
+                Ver compra
               </div>
             </div>
           </div>
@@ -202,10 +202,10 @@ const CreditSuccess = props => {
                     <div
                       className={styles.goButton + ' cursor-pointer'}
                       onClick={() => {
-                        router.push('/')
+                        router.push('/dashboard/shopping')
                       }}
                     >
-                      Salir
+                      Ver compra
                     </div>
                   </div>
                 </div>
