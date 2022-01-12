@@ -50,6 +50,7 @@ const MessageContent = props => {
     to_type: 'user',
   })
   const [requestID, setRequestID] = useState(0)
+  const [messageID, setMessageID] = useState(0)
   const [newMessageBool, setNewMessageBool] = useState(false)
   const [
     getSubMessagesByDashboard,
@@ -73,6 +74,8 @@ const MessageContent = props => {
     router.push('/dashboard/message?success=true')
   }
   useEffect(() => {
+    setRequestID(Number(router.query.request_id))
+    setMessageID(Number(router.query.message_id))
     setNewMessageBool(Boolean(router.query.new_message_bool))
     setNewMessage(newMessage => ({ ...newMessage, content: router.query.content }))
     setNewMessage(newMessage => ({ ...newMessage, from_email: router.query.from_email }))
@@ -94,6 +97,19 @@ const MessageContent = props => {
   }, [router.query])
 
   useEffect(() => {
+    let object = newMessage
+    if (router.query.success === 'true') {
+      getSubMessagesByDashboard({
+        variables: { message_id: Number(router.query.message_id) },
+      })
+      router.push({
+        pathname: '/dashboard/message/message-content',
+        query: object,
+      })
+    }
+  }, [router.query, newMessage])
+
+  useEffect(() => {
     if (!subMessageListError && subMessageListData && subMessageListData.getSubMessagesByDashboard) {
       setSubMessageList(subMessageListData.getSubMessagesByDashboard)
     }
@@ -107,7 +123,7 @@ const MessageContent = props => {
 
   const handleRemoveMessage = () => {
     let array = []
-    array.push(Number(router.query.message_id))
+    array.push(messageID)
     deleteMessageByDashboard({
       variables: { ids: array },
     })
