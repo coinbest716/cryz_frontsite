@@ -288,7 +288,7 @@ const VideoChat = props => {
               </div>
             </div>
           ) : (
-            'No video streaming!'
+            'Tu entrenador llegará pronto'
           )}
         </>
       ) : (
