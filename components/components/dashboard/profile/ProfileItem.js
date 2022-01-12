@@ -4,7 +4,6 @@ import React from 'react'
 import Image from 'next/image'
 
 // images
-import User from 'assets/images/team-member-01.png'
 import RightGrayIcon from 'public/images/right_gray.svg'
 
 // styles
