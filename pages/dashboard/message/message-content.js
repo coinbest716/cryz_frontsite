@@ -69,7 +69,7 @@ const MessageContent = props => {
   }, [viewport])
 
   const handleGoBack = () => {
-    router.push('/dashboard/message')
+    router.push('/dashboard/message?success=true')
   }
   useEffect(() => {
     setNewMessageBool(Boolean(router.query.new_message_bool))
@@ -112,7 +112,7 @@ const MessageContent = props => {
       .then(response => {
         if (response.data.deleteMessageByDashboard === true) {
           toast.success('Selected message was deleted successfully!')
-          router.push('/dashboard/message#success')
+          router.push('/dashboard/message?success=true')
         }
       })
       .catch(error => {

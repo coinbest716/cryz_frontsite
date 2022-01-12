@@ -101,6 +101,15 @@ const Message = props => {
 
   // handlers
   useEffect(() => {
+    if (router.query.success === 'true') {
+      getPatientMessageById({
+        variables: { patient_id: currentPatient.id },
+      })
+      router.push('/dashboard/message')
+    }
+  }, [router.query, getPatientByEmail])
+
+  useEffect(() => {
     Auth.currentAuthenticatedUser()
       .then(response => {
         if (response?.attributes?.email) {
