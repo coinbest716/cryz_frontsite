@@ -236,6 +236,14 @@ const Message = props => {
     setMessageList([obj].concat(temp))
     setSelectedSubject({})
     setNewMessageBool(true)
+    if (viewport === 'mobile') {
+      object.new_message_bool = newMessageBool
+      // object.message_id = 0
+      router.push({
+        pathname: '/dashboard/message/message-content',
+        query: object,
+      })
+    }
   }
 
   const handleChangeSubject = value => {
