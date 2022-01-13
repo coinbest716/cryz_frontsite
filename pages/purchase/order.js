@@ -92,8 +92,8 @@ const CreditSuccess = props => {
     <>
       {viewport === 'mobile' ? (
         <div className={'flex flex-wrap justify-center'}>
-          <div className={styles.container}>
-            <div className="px-24 py-6">
+          <div className={styles.container} style={{ maxWidth: '500px' }}>
+            <div className="px-24 py-6 flex justify-center">
               <Image src={successLogo} alt={''} width={320} height={320} />
             </div>
             <div className="my-4">

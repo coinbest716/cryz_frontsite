@@ -50,7 +50,10 @@ const CreditSuccess = props => {
               <div className={'flex justify-center h-full'}>
                 <div className={styles.creditSection}>
                   <div className={'mt-14 ' + styles.m_title}>¡HA HABIDO UN PROBLEMA PROCESANDO TU PEDIDO! </div>
-                  <div className={'px-24 py-12 text-center cursor-pointer'} onClick={handleClickGoHome}>
+                  <div
+                    className={'px-24 py-12 text-center cursor-pointer flex justify-center'}
+                    onClick={handleClickGoHome}
+                  >
                     <Image src={failedLogo} alt="" width={270} height={245} />
                   </div>
                   <div className={styles.m_orderNumber}>INTÉNTALO DE NUEVO O PONTE EN CONTACTO CON NOSOTROS</div>

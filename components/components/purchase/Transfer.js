@@ -1,6 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
-import backGrayIcon from 'public/images/arrow-left-gray.svg'
 import styles from './Transfer.module.scss'
 import Radio from './Radio'
 

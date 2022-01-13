@@ -69,6 +69,7 @@ const Profile = props => {
 
   // variables
   const router = useRouter()
+  const [email, setEmail] = useState('')
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
   )
@@ -83,7 +84,6 @@ const Profile = props => {
   const [deletePatientByDashboard] = useMutation(graphql.mutations.deletePatientByDashboard)
   const [updateAnthropometry] = useMutation(graphql.mutations.updateAnthropometry)
 
-  const [email, setEmail] = useState('')
   const [profilePercentage, setProfilePercentage] = useState(0)
   const [activeTab, setActiveTab] = useState({ personal: true, health: false, graphic: false, main: true })
   const [uploadFile, setUploadFile] = useState(null)
@@ -103,7 +103,7 @@ const Profile = props => {
     avatar: '',
     name: '',
     surname: '',
-    email: email,
+    email: '',
     password: '',
     meet: 'INSTAGRAM',
     telephone: '',
@@ -177,6 +177,7 @@ const Profile = props => {
   // handlers
   useEffect(() => {
     const _email = localStorage.getItem('email')
+    setPersonalInfo({ ...personalInfo, email: _email })
     setEmail(_email)
     getPatientByEmail({
       variables: {
@@ -372,7 +373,7 @@ const Profile = props => {
     let _personalInfo = { ...personalInfo }
     _personalInfo = { ..._personalInfo, imageFile: uploadFile }
     const variables = {
-      email: email,
+      email: personalInfo.email,
       name: personalInfo.name,
       lastname: personalInfo.surname,
       dni: personalInfo.code,

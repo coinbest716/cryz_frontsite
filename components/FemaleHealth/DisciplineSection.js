@@ -15,7 +15,6 @@ import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
 import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
 import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
-import smileIcon from 'assets/images/smile.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
