@@ -252,6 +252,15 @@ const VideoChat = props => {
                     onClick={() => controlCamera()}
                   />
                 </div> */}
+                <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
+                  <Image
+                    src={'/images/full-screen.svg'}
+                    className="cursor-pointer"
+                    width={135}
+                    height={72}
+                    alt="Fullscreen"
+                  />
+                </div>
 
                 {showCloseBtn ? (
                   <div
