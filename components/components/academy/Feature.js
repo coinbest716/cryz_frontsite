@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './Feature.module.scss'
-import ArrowRightWhite from 'public/images/arrow-right-white.svg'
 
 const Feature = props => {
   const { data } = props

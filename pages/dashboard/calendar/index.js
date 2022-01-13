@@ -169,18 +169,20 @@ const Calendar = props => {
               visible={streamingEvent.toggle}
             />
           </div>
-          <div className={'calendarWrapper bg-white rounded-xl '}>
-            <MonthCalendar
-              className={styles.calendar}
-              onChange={handleChangeDate}
-              value={calendarValue}
-              locale="es-MX"
-              tileClassName={({ date, view }) => {
-                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                  return 'highlight'
-                }
-              }}
-            />
+          <div className="flex justify-center">
+            <div className={'calendarWrapper bg-white rounded-xl'} style={{ maxWidth: '350px' }}>
+              <MonthCalendar
+                className={styles.calendar}
+                onChange={handleChangeDate}
+                value={calendarValue}
+                locale="es-MX"
+                tileClassName={({ date, view }) => {
+                  if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                    return 'highlight'
+                  }
+                }}
+              />
+            </div>
           </div>
           <div>
             <div className={styles.nextClass + ' mt-8 mb-2'}>Siguiente clase</div>

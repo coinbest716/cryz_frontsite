@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import styles from './ServiceButton.module.scss'
 import RightGrayIcon from 'public/images/arrow-right-gray.svg'

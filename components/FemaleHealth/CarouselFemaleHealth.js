@@ -49,7 +49,7 @@ const CarouselFemaleHealth = props => {
               renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
                 hasPrev ? (
                   <button onClick={clickHandler} className={styles.previousButton}>
-                    <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
+                    <Image src={previousButtonPinkIcon} alt="" width={20} height={15} />
                   </button>
                 ) : (
                   <button onClick={clickHandler} className={styles.previousButton}>
@@ -60,7 +60,7 @@ const CarouselFemaleHealth = props => {
               renderArrowNext={(clickHandler, hasNext, labelNext) =>
                 hasNext ? (
                   <button onClick={clickHandler} className={styles.nextButton}>
-                    <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
+                    <Image onClick={clickHandler} src={nextButtonPinkIcon} alt="" width={20} height={15} />
                   </button>
                 ) : (
                   <button onClick={clickHandler} className={styles.nextButton}>
