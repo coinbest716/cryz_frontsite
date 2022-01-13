@@ -74,9 +74,6 @@ const MessageContent = props => {
     router.push('/dashboard/message?success=true')
   }
   useEffect(() => {
-    setRequestID(Number(router.query.request_id))
-    setMessageID(Number(router.query.message_id))
-    setNewMessageBool(Boolean(router.query.new_message_bool))
     setNewMessage(newMessage => ({ ...newMessage, content: router.query.content }))
     setNewMessage(newMessage => ({ ...newMessage, from_email: router.query.from_email }))
     setNewMessage(newMessage => ({ ...newMessage, from_id: Number(router.query.from_id) }))
@@ -99,6 +96,9 @@ const MessageContent = props => {
   useEffect(() => {
     let object = newMessage
     if (router.query.success === 'true') {
+      setRequestID(Number(router.query.request_id))
+      setMessageID(Number(router.query.message_id))
+      setNewMessageBool(Boolean(router.query.new_message_bool))
       getSubMessagesByDashboard({
         variables: { message_id: Number(router.query.message_id) },
       })
