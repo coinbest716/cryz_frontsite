@@ -6,15 +6,10 @@ import { useDispatch } from 'react-redux'
 // next components
 import Image from 'next/image'
 
-// third party components1
-import ReactPlayer from 'react-player'
-
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-// import NotificationButton from 'components/components/dashboard/NotificationButton'
 import VideoChat from 'components/components/dashboard/Twilio/VideoChat'
-// import Profile from 'components/components/dashboard/Profile'
 
 // styles
 import styles from './LiveStreaming.module.scss'
@@ -63,15 +58,10 @@ const LiveStreaming = props => {
         <div className={'col-span-12 lg:col-span-9'}>
           {viewport !== 'mobile' && <div className={styles.title}>1 to 1 Streaming</div>}
           <div className={'pt-4 lg:pt-14'}>
-            {/* <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} /> */}
             <VideoChat sessionId={event.id} viewport={viewport} onChangeRoom={room => handleOnChangeRoom(room)} />
           </div>
         </div>
         <div className={'col-span-12 md:col-span-3 sm:col-span-12'}>
-          {/* <div className={'flex justify-end items-center'}>
-            <NotificationButton />
-            <Profile />
-          </div> */}
           <div className={'rounded-xl bg-white py-8 px-8 pb-10 mt-10'}>
             <div className={styles.material}>Material necesario</div>
             <div className={'pt-7'}>
