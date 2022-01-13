@@ -167,9 +167,9 @@ const VideoChat = props => {
       })
   }
 
-  const remoteParticipants = participants.map(participant => (
-    <Participant key={participant.sid} participant={participant} viewport={viewport} />
-  ))
+  const remoteParticipants = room !== null && (
+    <Participant key={room.localParticipant.sid} participant={room.localParticipant} viewport={viewport} />
+  )
 
   const controlMic = () => {
     setMicStatus(!micStatus)
@@ -203,52 +203,39 @@ const VideoChat = props => {
       {viewport === 'mobile' ? (
         <>
           {room ? (
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                position: 'relative',
-                background: '#000',
-              }}
-            >
+            <div className={'w-full h-full relative bg-black'}>
               <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
-                <SelfVideo
-                  key={room.localParticipant.sid}
-                  participant={room.localParticipant}
-                  width={screenWidth - 32}
-                  height={(screenWidth - 32) * 0.56}
-                  cameraEnabled={cameraStatus}
-                  audioEnabled={micStatus}
-                />
+                {participants.length !== 0 && (
+                  <SelfVideo
+                    key={participants[0].sid}
+                    participant={participants[0]}
+                    width={screenWidth - 32}
+                    height={(screenWidth - 32) * 0.56}
+                    cameraEnabled={cameraStatus}
+                    audioEnabled={micStatus}
+                  />
+                )}
               </div>
 
               <div
+                className={'absolute right-1'}
                 style={{
-                  position: 'absolute',
                   width: '130px',
                   height: `${120 * remoteParticipants.length}px`,
                   bottom: 100,
-                  right: 4,
                 }}
               >
                 {remoteParticipants}
               </div>
 
               <div
+                className={'absolute bottom-0 w-full flex justify-between items-center px-5'}
                 style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  width: '100%',
                   height: '90px',
                   background: '#708393',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  paddingLeft: '20px',
-                  paddingRight: '20px',
                 }}
               >
-                <div className="flex justify-start">
+                {/* <div className="flex justify-start">
                   <Image
                     src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
                     className="cursor-pointer"
@@ -264,6 +251,15 @@ const VideoChat = props => {
                     height={50}
                     alt="Silence"
                     onClick={() => controlCamera()}
+                  />
+                </div> */}
+                <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
+                  <Image
+                    src={'/images/full-screen.svg'}
+                    className="cursor-pointer"
+                    width={135}
+                    height={72}
+                    alt="Fullscreen"
                   />
                 </div>
 
@@ -304,17 +300,15 @@ const VideoChat = props => {
               setMicChooseDlg(false)
             }}
           >
-            {room ? (
+            {room && participants.length !== 0 && (
               <SelfVideo
-                key={room.localParticipant.sid}
-                participant={room.localParticipant}
+                key={participants[0].sid}
+                participant={participants[0]}
                 width={videoWidth}
                 height={videoHeight}
                 cameraEnabled={cameraStatus}
                 audioEnabled={micStatus}
               />
-            ) : (
-              ''
             )}
             {connectStatus === 'disconnect' ? <div style={text_styles}>La retrasmisión ha terminado</div> : ''}
             {connectStatus === 'init' ? <div style={text_styles}>Uniéndose al evento...</div> : ''}
@@ -335,32 +329,22 @@ const VideoChat = props => {
             </div> */}
 
             <div
+              className={'absolute bottom-0.5 right-0.5'}
               style={{
-                position: 'absolute',
                 width: '360px',
                 height: `${232 * remoteParticipants.length}px`,
-                bottom: 2,
-                right: 2,
               }}
             >
               {remoteParticipants}
             </div>
           </div>
 
-          <div style={{ width: '100%', height: '95px', background: '#708393' }}>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                width: '100%',
-                height: '100%',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className={'w-full'} style={{ height: '95px', background: '#708393' }}>
+            <div className={'flex justify-between items-center w-full h-full'}>
+              <div className={'flex items-center'}>
                 <div
+                  className={'relative '}
                   style={{
-                    position: 'relative',
                     width: '103px',
                     height: '85px',
                     marginLeft: '45px',
@@ -368,15 +352,14 @@ const VideoChat = props => {
                 >
                   {micChooseDlg ? (
                     <div
+                      className={'absolute overflow-hidden'}
                       style={{
-                        position: 'absolute',
                         width: '400px',
                         height: '270px',
                         borderRadius: '5px',
                         left: '70px',
                         top: '-275px',
                         background: '#708393',
-                        overflow: 'hidden',
                       }}
                     >
                       <div
@@ -393,7 +376,7 @@ const VideoChat = props => {
                         Microfono
                       </div>
 
-                      <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <div className={'flex justify-center'}>
                         <div
                           style={{
                             width: '90%',
@@ -421,14 +404,14 @@ const VideoChat = props => {
                     <></>
                   )}
 
-                  <Image
+                  {/* <Image
                     src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
                     className="cursor-pointer"
                     width={103}
                     height={85}
                     alt="Silence"
                     onClick={() => controlMic()}
-                  />
+                  /> */}
                   {/* <Image
                 src="/mic-choose.svg"
                 className="cursor-pointer"
@@ -439,7 +422,7 @@ const VideoChat = props => {
               /> */}
                 </div>
 
-                <div className="app-streaming-camera-button">
+                {/* <div className="app-streaming-camera-button">
                   <Image
                     src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
                     className="cursor-pointer"
@@ -448,7 +431,7 @@ const VideoChat = props => {
                     alt="Silence"
                     onClick={() => controlCamera()}
                   />
-                </div>
+                </div> */}
 
                 <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
                   <Image
@@ -463,6 +446,7 @@ const VideoChat = props => {
 
               {showCloseBtn ? (
                 <div
+                  className={'text-center mx-5 cursor-pointer'}
                   style={{
                     width: '306px',
                     height: '59px',
@@ -470,10 +454,6 @@ const VideoChat = props => {
                     fontSize: '36px',
                     fontWeight: '600',
                     color: '#FFF',
-                    textAlign: 'center',
-                    marginLeft: '20px',
-                    marginRight: '20px',
-                    cursor: 'pointer',
                   }}
                   onClick={() => handleLogout()}
                 >
