@@ -62,7 +62,6 @@ const LiveStreaming = props => {
       <div className={'grid grid-cols-12 gap-6'}>
         <div className={'col-span-12 lg:col-span-9'}>
           {viewport !== 'mobile' && <div className={styles.title}>1 to 1 Streaming</div>}
-          {viewport === 'mobile' && <div className={styles.title + ' px-4'}>{room !== '' && room.name}</div>}
           <div className={'pt-4 lg:pt-14'}>
             {/* <ReactPlayer url={url} width="100%" height="100%" className={styles.reactPlayer} controls={true} /> */}
             <VideoChat sessionId={event.id} viewport={viewport} onChangeRoom={room => handleOnChangeRoom(room)} />
