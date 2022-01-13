@@ -8,8 +8,8 @@ query GetWeekDaySessionsByDashboard($patient_id: Int) {
 
 query GetPaymentStatusForDashboard($patient_id: Int) {
   getPaymentStatusForDashboard(patient_id: $patient_id) {
-    summary_type,
-    values,
+    summary_type
+    values
   }
 }
 
@@ -19,6 +19,13 @@ query GetPendingQuestionnaireByDashboard {
     name
     specialties
     questionnaire
+  }
+}
+
+query GetSessionMaterialByDashboard($session_id: Int) {
+  getSessionMaterialByDashboard(session_id: $session_id) {
+    name
+    details
   }
 }
 

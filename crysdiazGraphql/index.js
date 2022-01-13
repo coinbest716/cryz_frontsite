@@ -36,6 +36,7 @@ import {
   GetWeekDaySessionsByDashboard,
   GetPaymentStatusForDashboard,
   GetPendingQuestionnaireByDashboard,
+  GetSessionMaterialByDashboard,
   UpdateCompletedQuestionnaireByDashboard,
 } from './dashboard.gql'
 // shopping part
@@ -131,6 +132,7 @@ export default {
     getWeekDaySessionsByDashboard: GetWeekDaySessionsByDashboard,
     getPaymentStatusForDashboard: GetPaymentStatusForDashboard,
     getPendingQuestionnaireByDashboard: GetPendingQuestionnaireByDashboard,
+    getSessionMaterialByDashboard: GetSessionMaterialByDashboard,
 
     // shopping part
     getServicePurchaseByDashboard: GetServicePurchaseByDashboard,
