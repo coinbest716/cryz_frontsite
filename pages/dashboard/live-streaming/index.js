@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
+import router from 'next/router'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -14,9 +15,9 @@ import VideoChat from 'components/components/dashboard/Twilio/VideoChat'
 // styles
 import styles from './LiveStreaming.module.scss'
 
-// json data
-import LiveStreamingData from 'assets/data/LiveStreamingData.json'
-import router from 'next/router'
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const LiveStreaming = props => {
   // loading part ###########################
@@ -40,13 +41,37 @@ const LiveStreaming = props => {
   const [room, setRoom] = useState('')
   const [event, setEvent] = useState({ id: -1, start: '' })
   const [material, setMaterial] = useState([])
+  const [
+    getSessionMaterialByDashboard,
+    { data: sessionMaterialData, loading: sessionMaterialLoading, error: sessionMaterialError },
+  ] = useLazyQuery(graphql.queries.getSessionMaterialByDashboard)
 
+  // handlers
   useEffect(() => {
     if (router.query.id) {
       setEvent({ id: Number(router.query.id) })
     }
-    setMaterial(LiveStreamingData)
   }, [router.query])
+
+  useEffect(() => {
+    if (event.id !== -1) {
+      getSessionMaterialByDashboard({
+        variables: {
+          session_id: event.id,
+        },
+      })
+    }
+  }, [getSessionMaterialByDashboard, event])
+
+  useEffect(() => {
+    if (!sessionMaterialError && sessionMaterialData && sessionMaterialData.getSessionMaterialByDashboard) {
+      console.log(
+        'sessionMaterialData.getSessionMaterialByDashboard',
+        sessionMaterialData.getSessionMaterialByDashboard
+      )
+      setMaterial(sessionMaterialData.getSessionMaterialByDashboard)
+    }
+  }, [sessionMaterialLoading, sessionMaterialData, sessionMaterialError])
 
   const handleOnChangeRoom = room => {
     setRoom(room)
@@ -67,12 +92,12 @@ const LiveStreaming = props => {
             <div className={'pt-7'}>
               {material.map((item, index) => (
                 <div className={'flex justify-start py-2'} key={index}>
-                  <div className={styles.imageArea}>
+                  {/* <div className={styles.imageArea}>
                     <Image src={item.url} alt="" width={56} height={56} objectFit="cover" objectPosition="center" />
-                  </div>
+                  </div> */}
                   <div className={'pl-4 flex flex-col justify-around'}>
-                    <div className={styles.label}>{item.label}</div>
-                    <div className={styles.count}>{item.count}</div>
+                    <div className={styles.label}>{item.name}</div>
+                    <div className={styles.count}>{item.details}</div>
                   </div>
                 </div>
               ))}
