@@ -168,9 +168,9 @@ const VideoChat = props => {
       })
   }
 
-  const remoteParticipants = participants.map(participant => (
-    <Participant key={participant.sid} participant={participant} viewport={viewport} />
-  ))
+  const remoteParticipants = room !== null && (
+    <Participant key={room.localParticipant.sid} participant={room.localParticipant} viewport={viewport} />
+  )
 
   const controlMic = () => {
     setMicStatus(!micStatus)
@@ -206,14 +206,16 @@ const VideoChat = props => {
           {room ? (
             <div className={'w-full h-full relative bg-black'}>
               <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
-                <SelfVideo
-                  key={room.localParticipant.sid}
-                  participant={room.localParticipant}
-                  width={screenWidth - 32}
-                  height={(screenWidth - 32) * 0.56}
-                  cameraEnabled={cameraStatus}
-                  audioEnabled={micStatus}
-                />
+                {participants.length !== 0 && (
+                  <SelfVideo
+                    key={participants[0].sid}
+                    participant={participants[0]}
+                    width={screenWidth - 32}
+                    height={(screenWidth - 32) * 0.56}
+                    cameraEnabled={cameraStatus}
+                    audioEnabled={micStatus}
+                  />
+                )}
               </div>
 
               <div
@@ -299,17 +301,15 @@ const VideoChat = props => {
               setMicChooseDlg(false)
             }}
           >
-            {room ? (
+            {room && participants.length !== 0 && (
               <SelfVideo
-                key={room.localParticipant.sid}
-                participant={room.localParticipant}
+                key={participants[0].sid}
+                participant={participants[0]}
                 width={videoWidth}
                 height={videoHeight}
                 cameraEnabled={cameraStatus}
                 audioEnabled={micStatus}
               />
-            ) : (
-              ''
             )}
             {connectStatus === 'disconnect' ? <div style={text_styles}>La retrasmisión ha terminado</div> : ''}
             {connectStatus === 'init' ? <div style={text_styles}>Uniéndose al evento...</div> : ''}
