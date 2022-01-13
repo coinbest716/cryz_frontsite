@@ -1,12 +1,7 @@
-import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
-import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
-import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
-import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
 import styles from './CarouselAcademy.module.scss'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import Image from 'next/image'
-import { facebookSignInButton } from 'aws-amplify'
 
 const CarouselAcademy = props => {
   const { sliderData } = props

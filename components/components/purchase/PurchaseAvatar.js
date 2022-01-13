@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 // next components
 import Image from 'next/image'

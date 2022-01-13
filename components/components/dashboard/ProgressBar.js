@@ -16,13 +16,7 @@ const ProgressBar = props => {
         </div>
       </div>
       <div className={'h-2 w-full rounded bg-gray-100 mt-2'}>
-        <div
-          style={{ width: `${percentage}%` }}
-          // className={`h-full rounded ${
-          //   type === 'women' ? 'bg-gray-200' : type === 'nutrition' ? 'bg-gray-400' : 'bg-gray-300'
-          // }`}
-          className={'h-full rounded bg-gray-300'}
-        ></div>
+        <div style={{ width: `${percentage}%` }} className={'h-full rounded bg-gray-300'}></div>
       </div>
     </div>
   )
