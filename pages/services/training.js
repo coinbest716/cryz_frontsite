@@ -156,7 +156,7 @@ const Training = props => {
             <BackButton viewport={viewport} />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
-            <div className={'col-span-12 md:col-span-4 sm:col-span-12 '}>
+            <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
               <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>{title}</div>
               <div className={viewport === 'mobile' ? styles.m_topDash : styles.topDash} />
               <div className={globalStyles.tinyMCEClass}>
@@ -194,7 +194,7 @@ const Training = props => {
             ) : (
               <div className={'col-span-12 md:col-span-1 sm:col-span-12'} />
             )}
-            <div className={'col-span-12 md:col-span-7 sm:col-span-12 relative'}>
+            <div className={'col-span-12 md:col-span-6 sm:col-span-12 relative'}>
               {viewport === 'mobile' ? (
                 <div></div>
               ) : (
