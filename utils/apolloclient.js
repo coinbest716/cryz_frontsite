@@ -5,7 +5,7 @@ import { createUploadLink } from 'apollo-upload-client'
 import * as Sentry from '@sentry/nextjs'
 import { SentryLink } from 'apollo-link-sentry'
 import { Auth } from 'aws-amplify'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
 
 const uploadLink = createUploadLink({
@@ -37,6 +37,7 @@ const authLink = setContext(async (_, { headers }) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   Sentry.captureException(graphQLErrors)
+  const router = useRouter()
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) => {
       console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)

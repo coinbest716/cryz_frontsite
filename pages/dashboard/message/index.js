@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // next components
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // third party components
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -56,6 +56,7 @@ const Message = props => {
 
   // variables
   const { viewport } = props
+  const router = useRouter()
   const [currentPatient, setCurrentPatient] = useState({})
   const today = useSelector(state => state.today)
   const [userList, setUserList] = useState([])

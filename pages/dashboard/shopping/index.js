@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -42,7 +42,6 @@ const Shopping = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const { viewport } = props
 
   useEffect(() => {
     setIsMounted(true)
@@ -57,6 +56,8 @@ const Shopping = props => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
+  const router = useRouter()
   const [yearList, setYearList] = useState([])
 
   useEffect(() => {

@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify'
 
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // styles
 import styles from 'pages/forgot-password/ForgotPassword.module.scss'
@@ -39,6 +39,7 @@ const ForgotPassword = props => {
 
   // variables
   const { viewport } = props
+  const router = useRouter()
   const [progressStatus, setProgressStatus] = useState(false)
   const [userEmail, setUserEmail] = useState('')
 

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 
 // custom components
@@ -40,7 +40,6 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false })
 
 const Dashboard = props => {
-  const { viewport } = props
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -58,6 +57,8 @@ const Dashboard = props => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
+  const router = useRouter()
   const [getPatientByEmail, { data: personalData, loading: personalLoading, error: personalError }] = useLazyQuery(
     graphql.queries.getPatientByEmail
   )

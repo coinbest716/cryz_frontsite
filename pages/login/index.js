@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom components
 import CommonButton from 'components/components/purchaseLogin/CommonButton'
@@ -30,6 +30,7 @@ import * as Sentry from '@sentry/nextjs'
 const Login = props => {
   // variables
   const { viewport } = props
+  const router = useRouter()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [authUser, setAuthUser] = useState(null)
   const [authChallenge, setAuthChallenge] = useState('')

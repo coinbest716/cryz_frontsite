@@ -2,10 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 import styles from './CircularMark.module.scss'
 import CircularMarkIcon from 'assets/images/contact-mark.svg'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 const CircularMark = props => {
+  // variables
   const { viewport } = props
+  const router = useRouter()
   const handleGotoContact = () => {
     router.push('/contact')
   }

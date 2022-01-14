@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'
+
+// redux
+import { useDispatch } from 'react-redux'
+
+// next components
 import { useRouter } from 'next/router'
+
 // third party components
 import toast from 'react-hot-toast'
 import { Auth } from 'aws-amplify'
 import ReactPlayer from 'react-player'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-
-// redux
-import { useDispatch } from 'react-redux'
-
-// next components
-import Image from 'next/image'
-import router from 'next/router'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
