@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useDispatch } from 'react-redux'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import DocumentButton from 'components/components/dashboard/nutrition/DocumentButton'
+import NutritionItem from 'components/components/dashboard/nutrition/NutritionItem'
 
 import moment from 'moment'
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -66,6 +66,10 @@ const Nutrition = props => {
         },
         {
           title: 'Documentación 4',
+          url: '',
+        },
+        {
+          title: 'Documentación 5',
           url: '',
         },
       ],
@@ -134,7 +138,7 @@ const Nutrition = props => {
       ],
     },
   ]
-  const [nutritions, setNutritions] = useState(mockup_nutritions)
+  const [nutritions, setNutritions] = useState([])
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
@@ -143,9 +147,12 @@ const Nutrition = props => {
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard
   )
+  const [getNutritionsForDashboard, { data: nutritionData, loading: nutritionLoading, error: nutritionError }] =
+    useLazyQuery(graphql.queries.getNutritionsForDashboard)
 
   useEffect(() => {
     getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+    getNutritionsForDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -198,6 +205,13 @@ const Nutrition = props => {
       setMarkDate(_markDate)
     }
   }, [sessionLoading, sessionData, sessionError])
+
+  useEffect(() => {
+    if (!nutritionError && nutritionData && nutritionData.getNutritionsForDashboard) {
+      console.log('@@@@@@@@@@@@@', nutritionData.getNutritionsForDashboard)
+      // setNutritions(nutritionData.getNutritionsForDashboard)
+    }
+  }, [nutritionLoading, nutritionData, nutritionError])
 
   const handleClickStartClass = () => {
     router.push({
@@ -260,43 +274,13 @@ const Nutrition = props => {
                 <div style={{ height: 'calc(100vh - 300px)' }}>
                   <PerfectScrollbar>
                     {nutritions.map((item, index) => (
-                      <div key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
-                        <div className={'flex justify-evenly items-center ' + styles.tableContentHeadArea}>
-                          <div
-                            className={
-                              'w-1/5 text-center cursor-pointer flex justify-center items-center ' + styles.contentTitle
-                            }
-                            onClick={() => handleClickCollpase(index)}
-                          >
-                            {item.collapse ? (
-                              <Image src={plus} alt={''} width={15} height={15} />
-                            ) : (
-                              <Image src={minus} alt={''} width={15} height={15} />
-                            )}
-                          </div>
-                          <div className={'w-1/5 text-center ' + styles.contentFecha}>
-                            {moment(item.date).format('DD/MM')}
-                          </div>
-                          <div className={'w-3/5 ' + styles.contentTitle}>{item.name}</div>
-                        </div>
-                        {item.collapse ? (
-                          <></>
-                        ) : (
-                          <div className={'flex justify-evenly items-center ' + styles.tableContentArea}>
-                            <div className={'w-1/5 '}></div>
-                            <div className={'w-4/5 px-10 py-3 ' + styles.description}>
-                              {item.description}
-                              <div className="my-3 flex flex-wrap justify-center">
-                                {item.documentions.map((doc, index) => (
-                                  <div className="m-2" key={index}>
-                                    <DocumentButton doc={doc} onClickDownload={handleClickDocument} />
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
+                      <NutritionItem
+                        key={index}
+                        item={item}
+                        index={index}
+                        handleClickCollpase={handleClickCollpase}
+                        handleClickDocument={handleClickDocument}
+                      />
                     ))}
                   </PerfectScrollbar>
                 </div>
