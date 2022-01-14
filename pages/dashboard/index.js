@@ -427,7 +427,7 @@ const Dashboard = props => {
         router.push('/dashboard/calendar')
         break
       case 'bonos':
-        router.push('/dashboard/shopping/order-detail')
+        router.push('/dashboard/shopping')
         break
     }
   }
