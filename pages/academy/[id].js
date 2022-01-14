@@ -110,7 +110,7 @@ const Course = props => {
         )}
         <div className={globalStyles.container + ' z-10'}>
           <div className={'absolute top-24'}>
-            <BackButton />
+            <BackButton viewport={viewport} />
           </div>
           {mainData && viewport !== 'mobile' && (
             <div className={'grid grid-cols-12 gap-4'}>

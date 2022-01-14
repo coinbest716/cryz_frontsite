@@ -116,7 +116,7 @@ const Physiotherapy = props => {
       <div className={'flex flex-wrap justify-center ' + (viewport === 'mobile' ? ' pb-5' : ' pb-20')}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
-            <BackButton />
+            <BackButton viewport={viewport} />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>

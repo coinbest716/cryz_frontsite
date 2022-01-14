@@ -87,7 +87,7 @@ const Menopause = props => {
     <div className={'w-full flex flex-wrap justify-center'}>
       <div className={globalStyles.container}>
         <div className={styles.backButtonArea}>
-          <BackButton />
+          <BackButton viewport={viewport} />
         </div>
         {JSON.stringify(femHealthService) !== JSON.stringify({}) ? (
           <div className={'grid grid-cols-12 gap-4'} style={{ minHeight: '634px' }}>

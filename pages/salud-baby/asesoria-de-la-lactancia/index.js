@@ -95,11 +95,13 @@ const Nutrition = props => {
       <div className={'flex flex-wrap justify-center pb-20'}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
-            <BackButton />
+            <BackButton viewport={viewport} />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Asesoría de la lactancia</div>
+              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>
+                Asesoría de la lactancia
+              </div>
               <div className={viewport === 'mobile' ? styles.m_topDash : styles.topDash} />
               <div className={styles.topDescription + (viewport === 'mobile' ? ' mt-5' : ' mt-10 pb-20')}>
                 <div
@@ -109,10 +111,16 @@ const Nutrition = props => {
                     <div className={'tinymce-class'}>
                       <p>Ofrecemos la posibilidad de programas dirigidos al acompañamiento durante la lactancia.</p>
 
-                      <p>En ellos, nos adecuamos a tí y a tus necesidades, ayudándote a dar respuestas a preguntas del tipo: cómo me preparo, cómo actuar en el primer encuentro, cómo enfrentar la vuelta a casa, cómo es la vida de una madre lactante, la vuelta al trabajo y qué hacer cuando las cosas no salen cómo esperabas. 	</p>
-				
-                      <p>Estas sesiones son impartidas por matronas. Recomendada entre las 32-34 semanas de gestación. </p>
+                      <p>
+                        En ellos, nos adecuamos a tí y a tus necesidades, ayudándote a dar respuestas a preguntas del
+                        tipo: cómo me preparo, cómo actuar en el primer encuentro, cómo enfrentar la vuelta a casa, cómo
+                        es la vida de una madre lactante, la vuelta al trabajo y qué hacer cuando las cosas no salen
+                        cómo esperabas.{' '}
+                      </p>
 
+                      <p>
+                        Estas sesiones son impartidas por matronas. Recomendada entre las 32-34 semanas de gestación.{' '}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -141,7 +149,8 @@ const Nutrition = props => {
               )}
               <div className={viewport === 'mobile' ? styles.m_carouselSection : styles.carouselSection}>
                 <img
-                  src={'/images/baby_lactancia_1.png'} alt="Asesoría de la lactancia"
+                  src={'/images/baby_lactancia_1.png'}
+                  alt="Asesoría de la lactancia"
                   style={{ width: '100%', height: 'auto', opacity: 1 }}
                 />
               </div>
