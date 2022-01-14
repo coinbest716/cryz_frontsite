@@ -2,8 +2,17 @@
 
 .container {
   width: 100%;
-  display: flex;
-  justify-content: center;
   background-color: #f5f6fa;
-  height: 100vh;
+  min-height: 100vh;
+}
+.highBoldLabel {
+  color: #2a2c36;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 19px;
+}
+.calendar {
+  font-size: 13px;
 }
