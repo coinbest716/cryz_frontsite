@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 import { useDispatch } from 'react-redux'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -19,9 +18,6 @@ import NotificationButton from 'components/components/dashboard/NotificationButt
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-
-import plus from 'public/images/plus-gray.svg'
-import minus from 'public/images/minus-gray.svg'
 
 import styles from './nutrition.module.scss'
 
@@ -44,100 +40,6 @@ const Nutrition = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  let mockup_nutritions = [
-    {
-      collapse: true,
-      date: '2022-01-06T18:04:57.000Z',
-      name: 'Pierde peso en 7 dias con carbohidratos y grasas',
-      description:
-        'Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velitNam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi  ',
-      documentions: [
-        {
-          title: 'Documentación 1',
-          url: '',
-        },
-        {
-          title: 'Documentación 2',
-          url: '',
-        },
-        {
-          title: 'Documentación 3',
-          url: '',
-        },
-        {
-          title: 'Documentación 4',
-          url: '',
-        },
-        {
-          title: 'Documentación 5',
-          url: '',
-        },
-      ],
-    },
-    {
-      collapse: true,
-      date: '2022-01-06T18:04:57.000Z',
-      name: 'Pierde peso en 7 dias con carbohidratos y grasas',
-      description:
-        'Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velitNam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi  ',
-      documentions: [
-        {
-          title: 'Documentación 1',
-          url: '',
-        },
-        {
-          title: 'Documentación 2',
-          url: '',
-        },
-        {
-          title: 'Documentación 3',
-          url: '',
-        },
-      ],
-    },
-    {
-      collapse: true,
-      date: '2022-01-06T18:04:57.000Z',
-      name: 'Pierde peso en 7 dias con carbohidratos y grasas',
-      description:
-        'Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velitNam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi  ',
-      documentions: [
-        {
-          title: 'Documentación 1',
-          url: '',
-        },
-        {
-          title: 'Documentación 2',
-          url: '',
-        },
-        {
-          title: 'Documentación 3',
-          url: '',
-        },
-      ],
-    },
-    {
-      collapse: true,
-      date: '2022-01-06T18:04:57.000Z',
-      name: 'Pierde peso en 7 dias con carbohidratos y grasas',
-      description:
-        'Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velitNam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi  ',
-      documentions: [
-        {
-          title: 'Documentación 1',
-          url: '',
-        },
-        {
-          title: 'Documentación 2',
-          url: '',
-        },
-        {
-          title: 'Documentación 3',
-          url: '',
-        },
-      ],
-    },
-  ]
   const [nutritions, setNutritions] = useState([])
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
@@ -227,15 +129,17 @@ const Nutrition = props => {
 
   const handleChangeDate = value => {
     setCalendarValue(value)
-    if (viewport !== 'mobile') {
-      const styleDate = moment(value).format('YYYY-MM-DD')
-      markDate.map(item => {
-        if (item === moment(value).format('DD-MM-YYYY')) {
-          let calendarApi = calendarComponentRef.current.getApi()
-          calendarApi.gotoDate(styleDate) // call a method on the Calendar object
-        }
-      })
-    }
+    const eventDate = moment(value).format('YYYY-MM-DD')
+    markDate.map(item => {
+      if (item === moment(value).format('DD-MM-YYYY')) {
+        router.push({
+          pathname: '/dashboard/calendar',
+          query: {
+            eventDate: eventDate,
+          },
+        })
+      }
+    })
   }
 
   const handleClickDocument = fileUrl => {
