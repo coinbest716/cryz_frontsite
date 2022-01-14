@@ -23,6 +23,7 @@ import billingIcon from 'public/images/billing.svg'
 import calendarIcon from 'public/images/calendar.svg'
 import nutritionIcon from 'public/images/nutrition.svg'
 import plansIcon from 'public/images/plans.svg'
+import academyIcon from 'public/images/academy.svg'
 import logoutIcon from 'public/images/off.svg'
 import homeBlackIcon from 'public/images/home_black.svg'
 import dashboardBlackIcon from 'public/images/dashboard_black.svg'
@@ -33,6 +34,7 @@ import billingBlackIcon from 'public/images/billing_black.svg'
 import calendarBlackIcon from 'public/images/calendar_black.svg'
 import nutritionBlackIcon from 'public/images/nutrition_black.svg'
 import plansBlackIcon from 'public/images/plans_black.svg'
+import academyBlackIcon from 'public/images/academy_black.svg'
 
 // styles
 import styles from './navbar.module.scss'
@@ -89,12 +91,12 @@ const Navbar = () => {
       iconBlack: calendarBlackIcon,
       title: 'Calendario',
     },
-    // {
-    //   href: '/dashboard/nutrition',
-    //   icon: nutritionIcon,
-    //   iconBlack: nutritionBlackIcon,
-    //   title: 'Nutrición',
-    // },
+    {
+      href: '/dashboard/nutrition',
+      icon: nutritionIcon,
+      iconBlack: nutritionBlackIcon,
+      title: 'Nutrición',
+    },
     {
       href: '/dashboard/plans',
       icon: plansIcon,
@@ -106,6 +108,12 @@ const Navbar = () => {
       icon: plansIcon,
       iconBlack: plansBlackIcon,
       title: 'Cursos',
+    },
+    {
+      href: '/dashboard/academy',
+      icon: academyIcon,
+      iconBlack: academyBlackIcon,
+      title: 'Academy',
     },
   ]
 
