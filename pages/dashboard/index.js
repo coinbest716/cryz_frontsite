@@ -420,6 +420,9 @@ const Dashboard = props => {
       case 'messageBox':
         router.push('/dashboard/message?message_id=' + id)
         break
+      case 'message':
+        router.push('/dashboard/message')
+        break
       case 'calendar':
         router.push('/dashboard/calendar')
         break
