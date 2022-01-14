@@ -1,0 +1,17 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  padding: 10px 25px;
+  border-radius: 20px;
+  width: fit-content;
+  border: 1px solid #818e8e;
+  border-radius: 20px;
+}
+
+.title {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 9px;
+  letter-spacing: 0;
+  line-height: 11px;
+}
