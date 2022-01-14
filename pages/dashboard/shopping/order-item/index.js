@@ -132,14 +132,18 @@ const OrderItem = props => {
           </div>
           <div className={styles.date + ' mt-4'}>{moment(purchaseInfo.purchase_date).format('DD/MM/YYYY')}</div>
           <div className={styles.price + ' mt-4'}>{purchaseInfo.price}€</div>
-          <div className="flex justify-center mt-10">
-            <div
-              className={styles.saveButton}
-              onClick={() => handleClickDownload(purchaseInfo.download_url, billNumber)}
-            >
-              Descargar PDF
+          {purchaseInfo.download_url === '' ? (
+            <></>
+          ) : (
+            <div className="flex justify-center mt-10">
+              <div
+                className={styles.saveButton}
+                onClick={() => handleClickDownload(purchaseInfo.download_url, billNumber)}
+              >
+                Descargar PDF
+              </div>
             </div>
-          </div>
+          )}
           <div className="mt-10">
             {purchaseInfo.purchases?.map((item, index) => (
               <div key={index}>
