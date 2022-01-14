@@ -171,7 +171,7 @@ const Menu = props => {
               <div
                 key={menuItem.label}
                 className={`mb-6 ml-1 text-white text-lg flex items-center ${
-                  router.asPath === menuItem.nav && 'font-black'
+                  router.asPath === menuItem.nav && 'font-semibold'
                 }`}
                 onClick={() => handleGotoLink(menuItem.nav)}
               >

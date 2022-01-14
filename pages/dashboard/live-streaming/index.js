@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -38,6 +38,7 @@ const LiveStreaming = props => {
 
   // variable
   const { viewport } = props
+  const router = useRouter()
   const [room, setRoom] = useState('')
   const [event, setEvent] = useState({ id: -1, start: '' })
   const [material, setMaterial] = useState([])

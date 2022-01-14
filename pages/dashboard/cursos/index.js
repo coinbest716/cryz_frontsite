@@ -7,7 +7,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useDispatch } from 'react-redux'
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -44,10 +44,13 @@ const Cursos = () => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  // variables
+  const router = useRouter()
   const [getCourses, { data: coursesData, loading: coursesLoading, error: coursesError }] = useLazyQuery(
     graphql.queries.getCoursesDashboard
   )
 
+  // handlers
   useEffect(() => {
     if (courses.length === 0 && courses !== 'undefined') {
       getCourses()

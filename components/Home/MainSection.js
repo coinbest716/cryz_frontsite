@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // components
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
@@ -21,6 +21,7 @@ import styles from 'components/Home/MainSection.module.scss'
 const MainSection = props => {
   // varaibles
   const { mainImage, featuredServices, viewport } = props
+  const router = useRouter()
   const [sliderData, setSliderData] = useState([])
 
   // handlers

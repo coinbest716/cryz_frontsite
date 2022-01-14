@@ -1,0 +1,9 @@
+query GetNutritionsForDashboard($patient_id: Int) {
+  getNutritionsForDashboard(patient_id: $patient_id) {
+    name
+    detail
+    start_date
+    end_date
+    document
+  }
+}

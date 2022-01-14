@@ -48,7 +48,7 @@ const BuyOneToOne = props => {
       web_name: 'Puesta de pendientes ',
       description: 'En el centro.',
       price: '70',
-    }, 
+    },
     {
       id: 121,
       service_type: 'personal',
@@ -92,7 +92,7 @@ const BuyOneToOne = props => {
     <div className={viewport === 'mobile' ? styles.m_container : styles.container}>
       <div className={globalStyles.container}>
         <div className={viewport === 'mobile' ? styles.m_backButtonArea : styles.backButtonArea}>
-          <BackButton />
+          <BackButton viewport={viewport} />
         </div>
         {viewport === 'mobile' ? (
           <div>

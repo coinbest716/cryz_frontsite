@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // styles
 import styles from 'pages/confirm/Confirm.module.scss'
@@ -29,6 +29,9 @@ const Confirm = () => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
+
+  // variables
+  const router = useRouter()
 
   return (
     <div className={'w-full h-screen flex grid grid-cols-12'}>

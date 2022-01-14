@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 //next components
-// import router from 'next/router'
 import { useRouter } from 'next/router'
 
 // custom component
@@ -139,7 +138,7 @@ const BuyPerson = props => {
     <div className={viewport === 'mobile' ? styles.m_container : styles.container}>
       <div className={globalStyles.container}>
         <div className={viewport === 'mobile' ? styles.m_backButtonArea : styles.backButtonArea}>
-          <BackButton />
+          <BackButton viewport={viewport} />
         </div>
         {viewport === 'mobile' ? (
           <div>

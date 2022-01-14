@@ -95,11 +95,13 @@ const Nutrition = props => {
       <div className={'flex flex-wrap justify-center pb-20'}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
-            <BackButton />
+            <BackButton viewport={viewport} />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
-              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Asesoría del sueño infantil</div>
+              <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>
+                Asesoría del sueño infantil
+              </div>
               <div className={viewport === 'mobile' ? styles.m_topDash : styles.topDash} />
               <div className={styles.topDescription + (viewport === 'mobile' ? ' mt-5' : ' mt-10 pb-20')}>
                 <div
@@ -107,8 +109,14 @@ const Nutrition = props => {
                 >
                   <div className={globalStyles.tinyMCEClass}>
                     <div className={'tinymce-class'}>
-                      <p>Se trata de un método propio y respetuoso con los bebés y que se adapta a las diferentes maneras de criar.</p> 
-                      <p>Impartido por Olga Sesé, coach del sueño infantil, gracias a ella más de 1.300 familias han vuelto a dormir después de haber pasado por su consulta.</p>
+                      <p>
+                        Se trata de un método propio y respetuoso con los bebés y que se adapta a las diferentes maneras
+                        de criar.
+                      </p>
+                      <p>
+                        Impartido por Olga Sesé, coach del sueño infantil, gracias a ella más de 1.300 familias han
+                        vuelto a dormir después de haber pasado por su consulta.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -135,7 +143,8 @@ const Nutrition = props => {
               <div className={viewport === 'mobile'}>
                 <div className={'w-full mt-20 pb-20'}>
                   <img
-                    src={'/images/baby_sueno_1.png'} alt="Asesoría del sueño infantil"
+                    src={'/images/baby_sueno_1.png'}
+                    alt="Asesoría del sueño infantil"
                     style={{ width: '100%', height: 'auto', opacity: 1 }}
                   />
                 </div>

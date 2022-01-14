@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import dynamic from 'next/dynamic'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // third party components
 import FullCalendar, { formatDate } from '@fullcalendar/react'
@@ -48,7 +48,9 @@ const Calendar = props => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
+
   //variables
+  const router = useRouter()
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard

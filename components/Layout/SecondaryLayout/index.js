@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 // next components
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // third party components
 import ReactLoading from 'react-loading'
@@ -17,6 +17,7 @@ import { Auth } from 'aws-amplify'
 
 const SecondaryLayout = ({ children }) => {
   const isLoading = useSelector(state => state.isLoading)
+  const router = useRouter()
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 

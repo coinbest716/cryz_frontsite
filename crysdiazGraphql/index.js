@@ -65,6 +65,9 @@ import {
   GetAvailablePlanDates,
 } from './dashboard/plans-online.gql'
 
+// nutrition part
+import { GetNutritionsForDashboard } from './dashboard/nutrition.gql'
+
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
 
@@ -151,6 +154,9 @@ export default {
     getVideoLinkById: GetVideoLinkById,
     getVideoMaterial: GetVideoMaterial,
     getAvailablePlanDates: GetAvailablePlanDates,
+
+    // nutrition part
+    getNutritionsForDashboard: GetNutritionsForDashboard,
 
     //purchase
     checkoutVerify: CheckoutVerify,

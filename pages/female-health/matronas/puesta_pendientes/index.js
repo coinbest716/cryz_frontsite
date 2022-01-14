@@ -95,27 +95,39 @@ const Nutrition = props => {
       <div className={'flex flex-wrap justify-center pb-20'}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
-            <BackButton />
+            <BackButton viewport={viewport} />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
               <div className={viewport === 'mobile' ? styles.m_topTitle : styles.topTitle}>Puesta de pendientes</div>
               <div className={viewport === 'mobile' ? styles.m_topDash : styles.topDash} />
               <div className={styles.topDescription + (viewport === 'mobile' ? ' mt-5' : ' mt-10 pb-20')}>
-                <div
-                  
-                >
+                <div>
                   <div className={globalStyles.tinyMCEClass}>
                     <div className={'tinymce-class'}>
                       <p>Las familias que deciden poner pendientes a sus bebés buscan un lugar seguro y respetuoso.</p>
-						
-                      <p>La teoría de que a los bebés no les duele la puesta de pendientes no es cierta, pero podemos intentar minimizar al máximo esa sensación usando pomada anestésica y poniendo al bebé en brazos o al pecho.</p>
-                      <p>Puedes elegir entre varios modelos disponibles. Para la puesta utilizamos nuestros propios pendientes, que son pendientes hipoalergénicos, de acero quirúrgico, especiales para esta primera puesta y del tamaño adecuado a la oreja de la bebé.</p>
-                        
-                      <p>En el servicio están incluidos los pendientes, el uso de pomada anestésica, un antiséptico para el cuidado posterior y una visita de revisión en el centro, en ambos casos, a las 6 semanas y, si quieren, el cambio de pendientes.</p>
-                        
-                      <p>No hay recomendaciones oficiales que indiquen un momento concreto para realizar la técnica, pero aconsejamos que el bebé ya haya sido valorado por su pediatra en la primera revisión rutinaria. </p>
-            
+
+                      <p>
+                        La teoría de que a los bebés no les duele la puesta de pendientes no es cierta, pero podemos
+                        intentar minimizar al máximo esa sensación usando pomada anestésica y poniendo al bebé en brazos
+                        o al pecho.
+                      </p>
+                      <p>
+                        Puedes elegir entre varios modelos disponibles. Para la puesta utilizamos nuestros propios
+                        pendientes, que son pendientes hipoalergénicos, de acero quirúrgico, especiales para esta
+                        primera puesta y del tamaño adecuado a la oreja de la bebé.
+                      </p>
+
+                      <p>
+                        En el servicio están incluidos los pendientes, el uso de pomada anestésica, un antiséptico para
+                        el cuidado posterior y una visita de revisión en el centro, en ambos casos, a las 6 semanas y,
+                        si quieren, el cambio de pendientes.
+                      </p>
+
+                      <p>
+                        No hay recomendaciones oficiales que indiquen un momento concreto para realizar la técnica, pero
+                        aconsejamos que el bebé ya haya sido valorado por su pediatra en la primera revisión rutinaria.{' '}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -141,10 +153,10 @@ const Nutrition = props => {
               )}
               <div className={viewport === 'mobile' ? styles.m_carouselSection : styles.carouselSection}>
                 <img
-                      src={'/images/Matrona_pendientes_1.png'}
-                      alt=""
-                      style={{ width: '100%', height: 'auto', opacity: 1 }}
-                    />
+                  src={'/images/Matrona_pendientes_1.png'}
+                  alt=""
+                  style={{ width: '100%', height: 'auto', opacity: 1 }}
+                />
               </div>
             </div>
           </div>
