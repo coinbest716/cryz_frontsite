@@ -238,8 +238,12 @@ const Nutrition = props => {
     }
   }
 
-  const handleClickDocument = url => {
-    console.log('+++++++++++++', url)
+  const handleClickDocument = fileUrl => {
+    let fileName = fileUrl.includes('amazonaws') ? fileUrl.split('_')[1] : fileUrl
+    var a = document.createElement('a')
+    a.href = fileUrl
+    a.setAttribute('download', fileName)
+    a.click()
   }
 
   const handleClickCollpase = index => {
