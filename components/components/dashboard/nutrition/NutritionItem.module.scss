@@ -1,36 +1,5 @@
 @import 'styles/variable.module.scss';
 
-.container {
-  width: 100%;
-  background-color: #f5f6fa;
-  min-height: 100vh;
-}
-.highBoldLabel {
-  color: #2a2c36;
-  font-family: Montserrat;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 0;
-  line-height: 19px;
-}
-.calendar {
-  font-size: 13px;
-}
-// table part
-.tableHead {
-  border: 2px solid #ededed;
-  background-color: #ffffff;
-  height: 58px;
-  min-height: 58px;
-}
-.tableHeadTitle {
-  padding: 15px 30px;
-  color: #222222;
-  font-family: Montserrat;
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 24px;
-}
 .tableContentHeadArea {
   width: 100%;
   border: 1px solid #ededed;
