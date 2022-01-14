@@ -8,6 +8,8 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 
 import moment from 'moment'
+import 'react-perfect-scrollbar/dist/css/styles.css'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-calendar/dist/Calendar.css'
 const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 
@@ -18,6 +20,7 @@ import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 import styles from './nutrition.module.scss'
+import { setRequestMeta } from 'next/dist/server/request-meta'
 
 const Nutrition = props => {
   const { viewport } = props
@@ -38,6 +41,51 @@ const Nutrition = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  const nutritions = [
+    {
+      collapse: false,
+      date: '2022-01-06T18:04:57.000Z',
+      name: 'Pierde peso en 7 dias con carbohidratos y grasas',
+      description:
+        'Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velitNam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi  ',
+      documentions: [
+        {
+          title: 'Documentación 1',
+          url: '',
+        },
+        {
+          title: 'Documentación 2',
+          url: '',
+        },
+        {
+          title: 'Documentación 3',
+          url: '',
+        },
+      ],
+    },
+    {
+      collapse: false,
+      date: '2022-01-06T18:04:57.000Z',
+      name: 'Pierde peso en 7 dias con carbohidratos y grasas',
+      description:
+        'Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velitNam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi  ',
+      documentions: [
+        {
+          title: 'Documentación 1',
+          url: '',
+        },
+        {
+          title: 'Documentación 2',
+          url: '',
+        },
+        {
+          title: 'Documentación 3',
+          url: '',
+        },
+      ],
+    },
+  ]
+
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
@@ -46,6 +94,11 @@ const Nutrition = props => {
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard
   )
+
+  useEffect(() => {
+    getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     setAvailableEvent()
@@ -139,7 +192,14 @@ const Nutrition = props => {
           </div>
           <div className={'grid grid-cols-12 gap-12 pt-8'}>
             <div className={'col-span-12 md:col-span-8 sm:col-span-12 w-full'}>
-              <div className={''}>Left Content</div>
+              <div>
+                <div className={'flex justify-evenly items-center ' + styles.tableHead}>
+                  <div className={'w-1/5 text-center ' + styles.tableHeadTitle}>VISTA</div>
+                  <div className={'w-1/5 text-center ' + styles.tableHeadTitle}>FECHA</div>
+                  <div className={'w-3/5 ' + styles.tableHeadTitle}>NOMBRE</div>
+                </div>
+                <PerfectScrollbar></PerfectScrollbar>
+              </div>
             </div>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
               <div className={'calendarWrapper'}>
