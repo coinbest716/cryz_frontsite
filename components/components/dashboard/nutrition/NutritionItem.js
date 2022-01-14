@@ -6,6 +6,7 @@ import plus from 'public/images/plus-gray.svg'
 import minus from 'public/images/minus-gray.svg'
 import DocumentButton from './DocumentButton'
 // styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './NutritionItem.module.scss'
 
 const NutritionItem = props => {
@@ -23,7 +24,7 @@ const NutritionItem = props => {
             <Image src={minus} alt={''} width={15} height={15} />
           )}
         </div>
-        <div className={'w-1/5 text-center ' + styles.contentFecha}>{moment(item.date).format('DD/MM')}</div>
+        <div className={'w-1/5 text-center ' + styles.contentFecha}>{moment(item.start_date).format('DD/MM')}</div>
         <div className={'w-3/5 ' + styles.contentTitle}>{item.name}</div>
       </div>
       {item.collapse ? (
@@ -31,10 +32,15 @@ const NutritionItem = props => {
       ) : (
         <div className={'flex justify-evenly items-center ' + styles.tableContentArea}>
           <div className={'w-1/5 '}></div>
-          <div className={'w-4/5 px-10 py-3 ' + styles.description}>
-            {item.description}
-            <div className="my-3 flex flex-wrap justify-center">
-              {item.documentions.map((doc, index) => (
+          <div className={'w-4/5 px-10 py-3'}>
+            <div className={globalStyles.tinyMCEClass}>
+              <div
+                className={styles.description + ' tinymce-class'}
+                dangerouslySetInnerHTML={{ __html: item.detail }}
+              />
+            </div>
+            <div className="flex flex-wrap justify-center">
+              {item.document?.map((doc, index) => (
                 <div className="m-2" key={index}>
                   <DocumentButton doc={doc} onClickDownload={handleClickDocument} />
                 </div>

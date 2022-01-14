@@ -208,8 +208,13 @@ const Nutrition = props => {
 
   useEffect(() => {
     if (!nutritionError && nutritionData && nutritionData.getNutritionsForDashboard) {
-      console.log('@@@@@@@@@@@@@', nutritionData.getNutritionsForDashboard)
-      // setNutritions(nutritionData.getNutritionsForDashboard)
+      let _nutritions = nutritionData.getNutritionsForDashboard
+      let result = _nutritions.map(function (el) {
+        let obj = Object.assign({}, el)
+        obj.collapse = true
+        return obj
+      })
+      setNutritions(result)
     }
   }, [nutritionLoading, nutritionData, nutritionError])
 

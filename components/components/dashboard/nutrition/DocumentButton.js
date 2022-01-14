@@ -6,12 +6,13 @@ import DownloadPDFIcon from 'public/images/downloadPDF.svg'
 
 const DocumentButton = props => {
   const { doc, onClickDownload } = props
+  const title = doc.includes('amazonaws') ? doc.split('_')[1] : doc
   return (
     <div
-      className={styles.container + ' flex justify-center itmes-center cursor-pointer'}
-      onClick={() => onClickDownload(doc.url)}
+      className={styles.container + ' flex justify-center items-center cursor-pointer'}
+      onClick={() => onClickDownload(doc)}
     >
-      <div className={'mr-2 ' + styles.title}>{doc.title}</div>
+      <div className={'mr-2 ' + styles.title}>{title}</div>
       <Image src={DownloadPDFIcon} alt="" width={15} height={15} />
     </div>
   )
