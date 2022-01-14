@@ -18,12 +18,12 @@ import academyBlackIcon from 'public/images/academy_black.svg'
 import styles from 'components/Menu/HamburgMenu.module.scss'
 
 const menuList = [
-  // {
-  //   href: '/dashboard/nutrition',
-  //   icon: nutritionIcon,
-  //   iconBlack: nutritionBlackIcon,
-  //   title: 'Nutrición',
-  // },
+  {
+    href: '/dashboard/nutrition',
+    icon: nutritionIcon,
+    iconBlack: nutritionBlackIcon,
+    title: 'Nutrición',
+  },
   {
     href: '/dashboard/plans',
     icon: plansIcon,
@@ -74,7 +74,7 @@ const Menu = () => {
         {menuList.map(menuItem => (
           <div
             key={menuItem.title}
-            className={`my-3 ml-1 flex items-center ${router.asPath === menuItem.href && 'font-black'}`}
+            className={`my-3 ml-1 flex items-center ${router.asPath === menuItem.href && 'font-semibold'}`}
             onClick={() => handleGotoLink(menuItem.href)}
           >
             {router.pathname.split('/')[2] === menuItem.href.split('/')[2] && menuItem.href !== '/' ? (
