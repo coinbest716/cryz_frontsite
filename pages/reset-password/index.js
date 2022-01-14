@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
+
+// next components
 import Image from 'next/image'
-import router from 'next/router'
-import styles from './ResetPassword.module.scss'
-import globalStyles from 'styles/GlobalStyles.module.scss'
+import { useRouter } from 'next/router'
+
+// third party components
+import { Auth } from 'aws-amplify'
+
+// images and icons
 import LoginImage from 'assets/images/login.png'
 import CloseIcon from 'assets/images/close.svg'
 import KeyImage from 'assets/images/key.png'
@@ -13,11 +18,14 @@ import EyeIcon from 'assets/images/eye.svg'
 import EyeCrossGrayIcon from 'assets/images/eye-cross-gray.svg'
 import EyeGrayIcon from 'assets/images/eye-gray.svg'
 
-import { Auth } from 'aws-amplify'
+// styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
+import styles from './ResetPassword.module.scss'
 
 const ResetPassword = props => {
   // variables
   const { viewport } = props
+  const router = useRouter()
   const [progressStatus, setProgressStatus] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const [showRepeatPass, setShowRepeatPass] = useState(false)

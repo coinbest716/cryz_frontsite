@@ -2,7 +2,7 @@ import React from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
@@ -21,6 +21,7 @@ import styles from 'components/ContactFooter/ContactFooter.module.scss'
 const ContactFooter = props => {
   // variables
   const { viewport } = props
+  const router = useRouter()
 
   return (
     <div

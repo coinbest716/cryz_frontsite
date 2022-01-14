@@ -3,7 +3,7 @@ import React from 'react'
 // next components
 import Image from 'next/image'
 import Link from 'next/link'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // custom components
 import SocialButtonGroup from 'components/SocialButtonGroup'
@@ -22,6 +22,7 @@ import styles from 'components/Footer/Footer.module.scss'
 const Footer = props => {
   // variables
   const { viewport } = props
+  const router = useRouter()
 
   // handlers
   const handleClickWhatsapp = e => {
