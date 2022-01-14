@@ -95,7 +95,7 @@ const Nutrition = props => {
       <div className={'flex flex-wrap justify-center pb-20'}>
         <div className={globalStyles.container}>
           <div className={'mt-9'}>
-            <BackButton />
+            <BackButton viewport={viewport} />
           </div>
           <div className={'grid grid-cols-12 gap-4'}>
             <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
@@ -107,9 +107,19 @@ const Nutrition = props => {
                 >
                   <div className={globalStyles.tinyMCEClass}>
                     <div className={'tinymce-class'}>
-                      <p>En nuestra unidad contamos con profesionales especializados en el área, que además de acompañar en todo el proceso de embarazo, parto y postparto, hacen seguimiento a los bebés en los primeros meses de vida, favoreciendo y promocionando el desarrollo motor del neonato, además de apoyar y dar orientaciones a los padres y cuidadores del bebé. </p>
-				
-                      <p>Desde una primera consulta para prevenir alguna alteración en el desarrollo y ayudar a las familias con cualquier duda que pueda surgir en las primeras semanas de vida del bebé, a sesiones de fisioterapia dónde evaluamos aspectos fundamentales de su etapa de desarrollo, hasta tratamiento de cólico del lactante.</p> 	 	
+                      <p>
+                        En nuestra unidad contamos con profesionales especializados en el área, que además de acompañar
+                        en todo el proceso de embarazo, parto y postparto, hacen seguimiento a los bebés en los primeros
+                        meses de vida, favoreciendo y promocionando el desarrollo motor del neonato, además de apoyar y
+                        dar orientaciones a los padres y cuidadores del bebé.{' '}
+                      </p>
+
+                      <p>
+                        Desde una primera consulta para prevenir alguna alteración en el desarrollo y ayudar a las
+                        familias con cualquier duda que pueda surgir en las primeras semanas de vida del bebé, a
+                        sesiones de fisioterapia dónde evaluamos aspectos fundamentales de su etapa de desarrollo, hasta
+                        tratamiento de cólico del lactante.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -134,8 +144,9 @@ const Nutrition = props => {
                 </div>
               )}
               <div className={viewport === 'mobile' ? styles.m_carouselSection : styles.carouselSection}>
-              <img
-                  src={'/images/baby_fisio_1.png'} alt="Asesoría del sueño infantil"
+                <img
+                  src={'/images/baby_fisio_1.png'}
+                  alt="Asesoría del sueño infantil"
                   style={{ width: '100%', height: 'auto', opacity: 1 }}
                 />
               </div>

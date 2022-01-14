@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import Image from 'next/image'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 // images
 import backGrayIcon from 'assets/images/arrow-left-gray.svg'
@@ -14,7 +14,10 @@ import backBlackIcon from 'assets/images/arrow-left-black.svg'
 // styles
 import styles from 'components/components/BackButton.module.scss'
 
-const BackButton = () => {
+const BackButton = props => {
+  // variables
+  const { viewport } = props
+  const router = useRouter()
   // loading part
   const dispatch = useDispatch()
 
@@ -22,33 +25,6 @@ const BackButton = () => {
     dispatch({ type: 'set', isLoading: true })
     router.back()
   }
-
-  // variables
-  const [viewport, setViewport] = useState('desktop') // mobile, ipad, desktop
-
-  // handlers
-  useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setViewport('desktop')
-    } else if (window.innerWidth === 1024) {
-      setViewport('ipad')
-    } else {
-      setViewport('mobile')
-    }
-  }, [])
-
-  useEffect(() => {
-    const resizeFunction = () => {
-      if (window.innerWidth > 1024) {
-        setViewport('desktop')
-      } else if (window.innerWidth === 1024) {
-        setViewport('ipad')
-      } else {
-        setViewport('mobile')
-      }
-    }
-    window.addEventListener('resize', resizeFunction)
-  }, [])
 
   return (
     <button
