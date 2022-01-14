@@ -44,9 +44,34 @@ const Nutrition = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  const nutritions = [
+  let mockup_nutritions = [
     {
-      collapse: false,
+      collapse: true,
+      date: '2022-01-06T18:04:57.000Z',
+      name: 'Pierde peso en 7 dias con carbohidratos y grasas',
+      description:
+        'Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velitNam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi  ',
+      documentions: [
+        {
+          title: 'Documentación 1',
+          url: '',
+        },
+        {
+          title: 'Documentación 2',
+          url: '',
+        },
+        {
+          title: 'Documentación 3',
+          url: '',
+        },
+        {
+          title: 'Documentación 4',
+          url: '',
+        },
+      ],
+    },
+    {
+      collapse: true,
       date: '2022-01-06T18:04:57.000Z',
       name: 'Pierde peso en 7 dias con carbohidratos y grasas',
       description:
@@ -67,7 +92,28 @@ const Nutrition = props => {
       ],
     },
     {
-      collapse: false,
+      collapse: true,
+      date: '2022-01-06T18:04:57.000Z',
+      name: 'Pierde peso en 7 dias con carbohidratos y grasas',
+      description:
+        'Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi velitNam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor euismod, id commodo mi consectetur. Curabitur at vestibulum nisi. Nullam vehicula nisi  ',
+      documentions: [
+        {
+          title: 'Documentación 1',
+          url: '',
+        },
+        {
+          title: 'Documentación 2',
+          url: '',
+        },
+        {
+          title: 'Documentación 3',
+          url: '',
+        },
+      ],
+    },
+    {
+      collapse: true,
       date: '2022-01-06T18:04:57.000Z',
       name: 'Pierde peso en 7 dias con carbohidratos y grasas',
       description:
@@ -88,7 +134,7 @@ const Nutrition = props => {
       ],
     },
   ]
-
+  const [nutritions, setNutritions] = useState(mockup_nutritions)
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
@@ -177,6 +223,12 @@ const Nutrition = props => {
     console.log('+++++++++++++', url)
   }
 
+  const handleClickCollpase = index => {
+    let _nutritions = [...nutritions]
+    _nutritions[index].collapse = !_nutritions[index].collapse
+    setNutritions(_nutritions)
+  }
+
   return (
     <>
       {viewport === 'mobile' ? (
@@ -208,29 +260,42 @@ const Nutrition = props => {
                 <div style={{ height: 'calc(100vh - 300px)' }}>
                   <PerfectScrollbar>
                     {nutritions.map((item, index) => (
-                      <div key={index}>
-                        <div className={'flex justify-evenly items-center bg-white ' + styles.tableContentHeadArea}>
-                          <div className={'w-1/5 text-center flex justify-center items-center ' + styles.contentTitle}>
-                            <Image src={plus} alt={''} width={15} height={15} />
+                      <div key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
+                        <div className={'flex justify-evenly items-center ' + styles.tableContentHeadArea}>
+                          <div
+                            className={
+                              'w-1/5 text-center cursor-pointer flex justify-center items-center ' + styles.contentTitle
+                            }
+                            onClick={() => handleClickCollpase(index)}
+                          >
+                            {item.collapse ? (
+                              <Image src={plus} alt={''} width={15} height={15} />
+                            ) : (
+                              <Image src={minus} alt={''} width={15} height={15} />
+                            )}
                           </div>
                           <div className={'w-1/5 text-center ' + styles.contentFecha}>
                             {moment(item.date).format('DD/MM')}
                           </div>
                           <div className={'w-3/5 ' + styles.contentTitle}>{item.name}</div>
                         </div>
-                        <div className={'flex justify-evenly items-center bg-white ' + styles.tableContentArea}>
-                          <div className={'w-1/5 '}></div>
-                          <div className={'w-4/5 px-10 py-3 ' + styles.description}>
-                            {item.description}
-                            <div className="mt-3 flex flex-wrap justify-center">
-                              {item.documentions.map((doc, index) => (
-                                <div className="m-2">
-                                  <DocumentButton doc={doc} onClick={handleClickDocument()} />
-                                </div>
-                              ))}
+                        {item.collapse ? (
+                          <></>
+                        ) : (
+                          <div className={'flex justify-evenly items-center ' + styles.tableContentArea}>
+                            <div className={'w-1/5 '}></div>
+                            <div className={'w-4/5 px-10 py-3 ' + styles.description}>
+                              {item.description}
+                              <div className="my-3 flex flex-wrap justify-center">
+                                {item.documentions.map((doc, index) => (
+                                  <div className="m-2" key={index}>
+                                    <DocumentButton doc={doc} onClickDownload={handleClickDocument} />
+                                  </div>
+                                ))}
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     ))}
                   </PerfectScrollbar>
