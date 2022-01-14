@@ -23,25 +23,6 @@
   height: 58px;
   min-height: 58px;
 }
-.tableHeadArea {
-  width: 100%;
-  padding-left: 40px;
-  padding-right: 40px;
-  display: flex;
-  justify-content: flex-start;
-}
-.tableContentArea {
-  width: 100%;
-  padding: 8px 40px;
-  display: flex;
-  justify-content: flex-start;
-}
-.tbody {
-  td div {
-    /* div will now take up full 200px of parent's height */
-    height: 100%;
-  }
-}
 .tableHeadTitle {
   padding: 15px 30px;
   color: #222222;
@@ -50,10 +31,34 @@
   letter-spacing: 2px;
   line-height: 24px;
 }
-.tableCellText {
+.tableContentHeadArea {
+  width: 100%;
+  border: 1px solid #ededed;
+  // background-color: rgba(51, 51, 51, 0.03);
+}
+.contentTitle {
+  padding: 9px 30px;
   color: #222222;
   font-family: Montserrat;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 1.4px;
   line-height: 36px;
+}
+.contentFecha {
+  padding: 9px 30px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  line-height: 36px;
+  border: 1px solid #ededed;
+  border-bottom: none;
+  border-top: none;
+}
+.description {
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 18px;
 }

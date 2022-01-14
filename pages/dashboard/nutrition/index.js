@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-// redux
-import { useDispatch } from 'react-redux'
+import Image from 'next/image'
 
+import { useDispatch } from 'react-redux'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
+import DocumentButton from 'components/components/dashboard/nutrition/DocumentButton'
 
 import moment from 'moment'
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -19,8 +20,10 @@ import NotificationButton from 'components/components/dashboard/NotificationButt
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
+import plus from 'public/images/plus-gray.svg'
+import minus from 'public/images/minus-gray.svg'
+
 import styles from './nutrition.module.scss'
-import { setRequestMeta } from 'next/dist/server/request-meta'
 
 const Nutrition = props => {
   const { viewport } = props
@@ -170,6 +173,10 @@ const Nutrition = props => {
     }
   }
 
+  const handleClickDocument = url => {
+    console.log('+++++++++++++', url)
+  }
+
   return (
     <>
       {viewport === 'mobile' ? (
@@ -193,12 +200,41 @@ const Nutrition = props => {
           <div className={'grid grid-cols-12 gap-12 pt-8'}>
             <div className={'col-span-12 md:col-span-8 sm:col-span-12 w-full'}>
               <div>
-                <div className={'flex justify-evenly items-center ' + styles.tableHead}>
+                <div className={'flex justify-evenly items-center mb-4 ' + styles.tableHead}>
                   <div className={'w-1/5 text-center ' + styles.tableHeadTitle}>VISTA</div>
                   <div className={'w-1/5 text-center ' + styles.tableHeadTitle}>FECHA</div>
                   <div className={'w-3/5 ' + styles.tableHeadTitle}>NOMBRE</div>
                 </div>
-                <PerfectScrollbar></PerfectScrollbar>
+                <div style={{ height: 'calc(100vh - 300px)' }}>
+                  <PerfectScrollbar>
+                    {nutritions.map((item, index) => (
+                      <div key={index}>
+                        <div className={'flex justify-evenly items-center bg-white ' + styles.tableContentHeadArea}>
+                          <div className={'w-1/5 text-center flex justify-center items-center ' + styles.contentTitle}>
+                            <Image src={plus} alt={''} width={15} height={15} />
+                          </div>
+                          <div className={'w-1/5 text-center ' + styles.contentFecha}>
+                            {moment(item.date).format('DD/MM')}
+                          </div>
+                          <div className={'w-3/5 ' + styles.contentTitle}>{item.name}</div>
+                        </div>
+                        <div className={'flex justify-evenly items-center bg-white ' + styles.tableContentArea}>
+                          <div className={'w-1/5 '}></div>
+                          <div className={'w-4/5 px-10 py-3 ' + styles.description}>
+                            {item.description}
+                            <div className="mt-3 flex flex-wrap justify-center">
+                              {item.documentions.map((doc, index) => (
+                                <div className="m-2">
+                                  <DocumentButton doc={doc} onClick={handleClickDocument()} />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </PerfectScrollbar>
+                </div>
               </div>
             </div>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
