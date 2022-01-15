@@ -173,9 +173,20 @@ const Profile = props => {
     { name: 'muslo', key: 'thigh' },
     { name: 'gemelo', key: 'twin' },
   ]
+  const nowDate = new Date()
+  const month = ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic']
+  const [monthList, setMonthList] = useState([])
 
   // handlers
   useEffect(() => {
+    // bar chart option start
+    let _monthList = []
+    for (let i = 0; i < 12; i++) {
+      _monthList.push(month[(nowDate.getMonth() + 1 + i) % 12])
+    }
+    setMonthList(_monthList)
+    // bar chart option end
+
     const _email = localStorage.getItem('email')
     setPersonalInfo({ ...personalInfo, email: _email })
     setEmail(_email)
@@ -607,6 +618,8 @@ const Profile = props => {
               graphicInfo={graphicInfo}
               monthData={monthData}
               currentMonthIndex={currentMonthIndex}
+              monthList={monthList}
+              month={month}
             />
           )}
         </>
@@ -665,6 +678,8 @@ const Profile = props => {
                 graphicInfo={graphicInfo}
                 monthData={monthData}
                 currentMonthIndex={currentMonthIndex}
+                monthList={monthList}
+                month={month}
               />
             )}
           </div>

@@ -16,7 +16,7 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 import styles from './MobileGraphicProfile.module.scss'
 
 const MobileGraphicProfile = props => {
-  const { graphicInfo, monthData, currentMonthIndex } = props
+  const { graphicInfo, monthData, currentMonthIndex, monthList, month } = props
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -44,8 +44,7 @@ const MobileGraphicProfile = props => {
     router.push('/dashboard/profile#health', undefined, { shallow: true })
   }
 
-  const [monthIndex, setMonthIndex] = useState(currentMonthIndex)
-  const month = ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic']
+  const [monthIndex, setMonthIndex] = useState((currentMonthIndex + 11) % 12)
 
   const percentageSeries = {
     series: [
@@ -134,7 +133,7 @@ const MobileGraphicProfile = props => {
         width: 2,
       },
       xaxis: {
-        categories: ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic'],
+        categories: monthList,
       },
       yaxis: {
         show: true,

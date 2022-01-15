@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // next components
 import Image from 'next/image'
@@ -8,9 +8,47 @@ import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const Graphic = props => {
-  const { handleClickTab, graphicInfo, monthData, currentMonthIndex } = props
-  const [monthIndex, setMonthIndex] = useState(currentMonthIndex)
-  const month = ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic']
+  const { handleClickTab, graphicInfo, monthData, currentMonthIndex, monthList, month } = props
+  const [monthIndex, setMonthIndex] = useState((currentMonthIndex + 11) % 12)
+
+  let lineChartOptions = {
+    options: {
+      chart: {
+        toolbar: {
+          show: false,
+        },
+        background: 'transparent',
+        foreColor: '#939AAC',
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: 'smooth',
+        width: 2,
+      },
+      xaxis: {
+        categories: monthList,
+      },
+      yaxis: {
+        show: true,
+      },
+      legend: {
+        position: 'bottom',
+      },
+      grid: {
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+      },
+      legend: {
+        position: 'right',
+        horizontalAlign: 'center',
+      },
+    },
+  }
 
   const percentageSeries = {
     series: [
@@ -80,45 +118,6 @@ const Graphic = props => {
         data: graphicInfo.height,
       },
     ],
-  }
-
-  const lineChartOptions = {
-    options: {
-      chart: {
-        toolbar: {
-          show: false,
-        },
-        background: 'transparent',
-        foreColor: '#939AAC',
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: 'smooth',
-        width: 2,
-      },
-      xaxis: {
-        categories: ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic'],
-      },
-      yaxis: {
-        show: true,
-      },
-      legend: {
-        position: 'bottom',
-      },
-      grid: {
-        xaxis: {
-          lines: {
-            show: false,
-          },
-        },
-      },
-      legend: {
-        position: 'right',
-        horizontalAlign: 'center',
-      },
-    },
   }
 
   const barChartOptions = {
@@ -199,7 +198,7 @@ const Graphic = props => {
                   >
                     <Image src={'/images/message-left.svg'} alt={''} width={10} height={10} />
                   </div>
-                  <div className={'px-2 w-8 text-center ' + styles.month}>{month[monthIndex]}</div>
+                  <div className={'px-2 w-8 text-center ' + styles.month}>{monthList[monthIndex]}</div>
                   <div
                     className={'p-1 rounded-2xl bg-gray-200 cursor-pointer h-5 w-5 flex justify-center items-center'}
                     onClick={() => handleClickMonth('next')}
