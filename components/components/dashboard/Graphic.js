@@ -9,7 +9,7 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const Graphic = props => {
   const { handleClickTab, graphicInfo, monthData, currentMonthIndex, monthList, month } = props
-  const [monthIndex, setMonthIndex] = useState(currentMonthIndex)
+  const [monthIndex, setMonthIndex] = useState((currentMonthIndex + 11) % 12)
 
   let lineChartOptions = {
     options: {
@@ -198,7 +198,7 @@ const Graphic = props => {
                   >
                     <Image src={'/images/message-left.svg'} alt={''} width={10} height={10} />
                   </div>
-                  <div className={'px-2 w-8 text-center ' + styles.month}>{month[monthIndex]}</div>
+                  <div className={'px-2 w-8 text-center ' + styles.month}>{monthList[monthIndex]}</div>
                   <div
                     className={'p-1 rounded-2xl bg-gray-200 cursor-pointer h-5 w-5 flex justify-center items-center'}
                     onClick={() => handleClickMonth('next')}

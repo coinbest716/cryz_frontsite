@@ -44,7 +44,7 @@ const MobileGraphicProfile = props => {
     router.push('/dashboard/profile#health', undefined, { shallow: true })
   }
 
-  const [monthIndex, setMonthIndex] = useState(currentMonthIndex)
+  const [monthIndex, setMonthIndex] = useState((currentMonthIndex + 11) % 12)
 
   const percentageSeries = {
     series: [
