@@ -465,7 +465,7 @@ const Dashboard = props => {
       <div className={'flex flex-wrap flex-1 py-12 px-10'}>
         <div className={'flex justify-between items-center'}>
           <div>
-            <div className={styles.highBoldLabel}>Dashboard</div>
+            <div className={styles.title}>Dashboard</div>
             <div className={'pt-2 ' + styles.today}>{today}</div>
           </div>
           <DashboardButton
@@ -500,7 +500,7 @@ const Dashboard = props => {
           className={'w-full flex justify-between items-center mt-7 px-9 pt-0 lg:pt-7 pb-1 ' + styles.welcomeSection}
         >
           <div className={'w-full'}>
-            <div className={styles.highBoldLabel}>{'Actividad mensual'}</div>
+            <div className={styles.title}>Actividad mensual</div>
             <div>
               <Chart
                 chart={chartOptions.chart}
@@ -559,7 +559,7 @@ const Dashboard = props => {
               onClick={() => handleClickRedirect('bonos')}
             >
               <div className={'flex justify-between items-center'}>
-                <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
+                <div className={'text-center ' + styles.title}>Mis Bonos</div>
                 <div className={'text-center '}>
                   <Image src={bonosIcon} alt="" width={50} height={50} />
                 </div>
@@ -575,89 +575,77 @@ const Dashboard = props => {
           </div>
         </div>
       </div>
-      <div className={styles.profileArea}>
-        <div className={'bg-white h-full px-9 py-10'}>
-          <div>
-            <div className={styles.highBoldLabel}>Perfil</div>
-            <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
-            <div className={'w-full flex justify-center flex-wrap py-8 text-center'}>
-              <div
-                className={'flex justify-center items-center overflow-hidden p-1'}
-                style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
-              >
-                <Image
-                  src={personalInfo.avatar || '/images/default-avatar.svg'}
-                  alt=""
-                  width={140}
-                  height={140}
-                  objectFit="cover"
-                  objectPosition="center"
-                />
-              </div>
-              <div className={'w-full pt-4 ' + styles.highBoldLabel}>
-                {personalInfo.name}&nbsp;{personalInfo.lastname}
-              </div>
-              <div className={'w-full pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
-              <div className={'w-full pt-6 flex justify-center'}>
-                <DashboardButton
-                  handleClick={() => handleClickRedirect('editProfile')}
-                  label={'Editar Perfil'}
-                  type={'editProfile'}
-                />
-              </div>
-              <div className={'pt-14 flex justify-between'}>
-                <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
-                  <div className={'absolute -top-4'}>
-                    <DashboardButton
-                      handleClick={() => handleClickRedirect('iconWeight')}
-                      label={''}
-                      type={'iconWeight'}
-                    />
-                    <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
-                    <div className={'pt-3 ' + styles.mediumBoldLabel}>
-                      {personalInfo.weight && personalInfo.weight + ' kg'}
-                    </div>
-                  </div>
-                </div>
-                <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
-                  <div className={'absolute -top-4'}>
-                    <DashboardButton
-                      handleClick={() => handleClickRedirect('iconWeight')}
-                      label={''}
-                      type={'iconHeight'}
-                    />
-                    <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
-                    <div className={'pt-3 ' + styles.mediumBoldLabel}>
-                      {personalInfo.height && personalInfo.height + ' cm'}
-                    </div>
-                  </div>
+      <div className={styles.profileArea + ' bg-white h-full px-9 py-10'}>
+        <div className={styles.title}>Perfil</div>
+        <div className={'pt-2 ' + styles.mediumLabel}>{profilePercentage}% Perfil Completado</div>
+        <div className={'w-full flex justify-center flex-wrap py-8 text-center'}>
+          <div
+            className={'flex justify-center items-center overflow-hidden p-1'}
+            style={{ width: '140px', height: '140px', borderRadius: '50%', backgroundColor: '#c9cacd' }}
+          >
+            <Image
+              src={personalInfo.avatar || '/images/default-avatar.svg'}
+              alt=""
+              width={140}
+              height={140}
+              objectFit="cover"
+              objectPosition="center"
+            />
+          </div>
+          <div className={'w-full pt-4 ' + styles.title}>
+            {personalInfo.name}&nbsp;{personalInfo.lastname}
+          </div>
+          <div className={'w-full pt-2 ' + styles.mediumLabel}>{personalInfo.province}</div>
+          <div className={'w-full pt-6 flex justify-center'}>
+            <DashboardButton
+              handleClick={() => handleClickRedirect('editProfile')}
+              label={'Editar Perfil'}
+              type={'editProfile'}
+            />
+          </div>
+          <div className={'pt-14 flex justify-between'}>
+            <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+              <div className={'absolute -top-4'}>
+                <DashboardButton handleClick={() => handleClickRedirect('iconWeight')} label={''} type={'iconWeight'} />
+                <div className={'pt-2 ' + styles.smallLabel}>Peso</div>
+                <div className={'pt-3 ' + styles.mediumBoldLabel}>
+                  {personalInfo.weight && personalInfo.weight + ' kg'}
                 </div>
               </div>
             </div>
-            <div className={'pt-20'}>
-              <div className={styles.highBoldLabel}>Mensajes</div>
-              {message.length !== 0 ? (
-                <div>
-                  <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
-                  <div className={'pt-6'}>
-                    {message.map((item, index) => (
-                      <div className={'py-2 flex justify-center'} key={index}>
-                        <NewMessageBox
-                          handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
-                          name={item.from_name}
-                          content={item.subject}
-                        />
-                      </div>
-                    ))}
-                  </div>
+            <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
+              <div className={'absolute -top-4'}>
+                <DashboardButton handleClick={() => handleClickRedirect('iconWeight')} label={''} type={'iconHeight'} />
+                <div className={'pt-2 ' + styles.smallLabel}>Altura</div>
+                <div className={'pt-3 ' + styles.mediumBoldLabel}>
+                  {personalInfo.height && personalInfo.height + ' cm'}
                 </div>
-              ) : (
-                <div className={'pt-7 text-center'}>
-                  <Image src={noPendingIcon} alt="" width={268} height={294} />
-                </div>
-              )}
+              </div>
             </div>
           </div>
+        </div>
+        <div className={'pt-20'}>
+          <div className={styles.title}>Mensajes</div>
+          {message.length !== 0 ? (
+            <div>
+              <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
+              <div className={'pt-6'}>
+                {message.map((item, index) => (
+                  <div className={'py-2 flex justify-center'} key={index}>
+                    <NewMessageBox
+                      handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
+                      name={item.from_name}
+                      content={item.subject}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className={'pt-7 text-center'}>
+              <Image src={noPendingIcon} alt="" width={268} height={294} />
+            </div>
+          )}
         </div>
       </div>
       {showQuestionnaire && <Questionnaire onClick={() => handleDisableQuestionnarie()} viewport={viewport} />}
@@ -689,7 +677,7 @@ const Dashboard = props => {
         </div>
         <div className={'flex justify-between items-center mt-7 pb-1 ' + styles.welcomeSection}>
           <div className={'w-full'}>
-            <div className={styles.highBoldLabel}>{'Porcentajes'}</div>
+            <div className={styles.title}>Porcentajes</div>
             <div>
               <Chart
                 chart={chartOptions.chart}
@@ -719,7 +707,7 @@ const Dashboard = props => {
           onClick={() => handleClickRedirect('bonos')}
         >
           <div className={'flex justify-between items-center'}>
-            <div className={'text-center ' + styles.highBoldLabel}>Mis Bonos</div>
+            <div className={'text-center ' + styles.title}>Mis Bonos</div>
             <div className={'text-center '}>
               <Image src={bonosIcon} alt="" width={50} height={50} />
             </div>
