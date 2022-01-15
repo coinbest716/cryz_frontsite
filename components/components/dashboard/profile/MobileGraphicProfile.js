@@ -16,7 +16,7 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 import styles from './MobileGraphicProfile.module.scss'
 
 const MobileGraphicProfile = props => {
-  const { graphicInfo, monthData, currentMonthIndex } = props
+  const { graphicInfo, monthData, currentMonthIndex, monthList, month } = props
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -45,7 +45,6 @@ const MobileGraphicProfile = props => {
   }
 
   const [monthIndex, setMonthIndex] = useState(currentMonthIndex)
-  const month = ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic']
 
   const percentageSeries = {
     series: [
@@ -134,7 +133,7 @@ const MobileGraphicProfile = props => {
         width: 2,
       },
       xaxis: {
-        categories: ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic'],
+        categories: monthList,
       },
       yaxis: {
         show: true,

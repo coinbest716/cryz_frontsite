@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // next components
 import Image from 'next/image'
@@ -8,9 +8,47 @@ import dynamic from 'next/dynamic'
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const Graphic = props => {
-  const { handleClickTab, graphicInfo, monthData, currentMonthIndex } = props
+  const { handleClickTab, graphicInfo, monthData, currentMonthIndex, monthList, month } = props
   const [monthIndex, setMonthIndex] = useState(currentMonthIndex)
-  const month = ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic']
+
+  let lineChartOptions = {
+    options: {
+      chart: {
+        toolbar: {
+          show: false,
+        },
+        background: 'transparent',
+        foreColor: '#939AAC',
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: 'smooth',
+        width: 2,
+      },
+      xaxis: {
+        categories: monthList,
+      },
+      yaxis: {
+        show: true,
+      },
+      legend: {
+        position: 'bottom',
+      },
+      grid: {
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+      },
+      legend: {
+        position: 'right',
+        horizontalAlign: 'center',
+      },
+    },
+  }
 
   const percentageSeries = {
     series: [
@@ -80,45 +118,6 @@ const Graphic = props => {
         data: graphicInfo.height,
       },
     ],
-  }
-
-  const lineChartOptions = {
-    options: {
-      chart: {
-        toolbar: {
-          show: false,
-        },
-        background: 'transparent',
-        foreColor: '#939AAC',
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: 'smooth',
-        width: 2,
-      },
-      xaxis: {
-        categories: ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ag', 'Sep', 'Oct', 'Now', 'Dic'],
-      },
-      yaxis: {
-        show: true,
-      },
-      legend: {
-        position: 'bottom',
-      },
-      grid: {
-        xaxis: {
-          lines: {
-            show: false,
-          },
-        },
-      },
-      legend: {
-        position: 'right',
-        horizontalAlign: 'center',
-      },
-    },
   }
 
   const barChartOptions = {
