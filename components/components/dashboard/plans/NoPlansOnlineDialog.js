@@ -4,7 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 
 // images and icons
-import PlansImage from 'assets/images/plans.svg'
+import PlansImage from 'assets/images/plans_online.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
