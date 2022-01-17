@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NutritionItem from 'components/components/dashboard/nutrition/NutritionItem'
+import MobileNutritionItem from 'components/components/dashboard/nutrition/MobileNutritionItem'
 
 import moment from 'moment'
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -159,7 +160,7 @@ const Nutrition = props => {
   return (
     <>
       {viewport === 'mobile' ? (
-        <div className={'p-4 ' + styles.m_container}>
+        <div className={'p-4 mb-32 ' + styles.m_container}>
           <DashboardButton
             handleClick={handleClickStartClass}
             label={'Clase'}
@@ -181,12 +182,12 @@ const Nutrition = props => {
           </div>
           <div>
             <div className={'flex justify-evenly items-center mt-3'}>
-              <div className={'text-center ' + styles.tableHeadTitle}>DIA</div>
-              <div className={'text-center ' + styles.tableHeadTitle}>NOMBRE</div>
-              <div className={'text-center ' + styles.tableHeadTitle}>VISTA</div>
+              <div className={'w-1/5 text-center ' + styles.m_tableHeadTitle}>DIA</div>
+              <div className={'w-3/5 text-center ' + styles.m_tableHeadTitle}>NOMBRE</div>
+              <div className={'w-1/5 text-center ' + styles.m_tableHeadTitle}>VISTA</div>
             </div>
             {nutritions.map((item, index) => (
-              <NutritionItem
+              <MobileNutritionItem
                 key={index}
                 item={item}
                 index={index}

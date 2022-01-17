@@ -30,22 +30,16 @@ const MobileNutritionItem = props => {
       {item.collapse ? (
         <></>
       ) : (
-        <div className={'flex justify-evenly items-center ' + styles.tableContentArea}>
-          <div className={'w-1/5 '}></div>
-          <div className={'w-4/5 px-10 py-3'}>
-            <div className={globalStyles.tinyMCEClass}>
-              <div
-                className={styles.description + ' tinymce-class'}
-                dangerouslySetInnerHTML={{ __html: item.detail }}
-              />
-            </div>
-            <div className="flex flex-wrap justify-center">
-              {item.document?.map((doc, index) => (
-                <div className="m-2" key={index}>
-                  <DocumentButton doc={doc} onClickDownload={handleClickDocument} />
-                </div>
-              ))}
-            </div>
+        <div className={'p-4'}>
+          <div className={globalStyles.tinyMCEClass}>
+            <div className={styles.description + ' tinymce-class'} dangerouslySetInnerHTML={{ __html: item.detail }} />
+          </div>
+          <div className="flex flex-wrap justify-center">
+            {item.document?.map((doc, index) => (
+              <div className="m-2" key={index}>
+                <DocumentButton doc={doc} onClickDownload={handleClickDocument} />
+              </div>
+            ))}
           </div>
         </div>
       )}
