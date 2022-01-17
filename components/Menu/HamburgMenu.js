@@ -30,12 +30,12 @@ const menuList = [
     iconBlack: plansBlackIcon,
     title: 'Planes online',
   },
-  // {
-  //   href: '/dashboard/academy',
-  //   icon: academyIcon,
-  //   iconBlack: academyBlackIcon,
-  //   title: 'Academy',
-  // },
+  {
+    href: '/dashboard/academy',
+    icon: academyIcon,
+    iconBlack: academyBlackIcon,
+    title: 'Academy',
+  },
   {
     href: '/dashboard/cursos',
     icon: academyIcon,
