@@ -603,7 +603,7 @@ const Dashboard = props => {
               type={'editProfile'}
             />
           </div>
-          <div className={'pt-14 flex justify-between'}>
+          <div className={'w-full pt-14 flex justify-between'}>
             <div className={'relative flex justify-center w-24 h-24 rounded-xl ' + styles.bodyInfo}>
               <div className={'absolute -top-4'}>
                 <DashboardButton handleClick={() => handleClickRedirect('iconWeight')} label={''} type={'iconWeight'} />
