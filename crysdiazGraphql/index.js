@@ -22,7 +22,13 @@ import {
   UpdateAnthropometry,
   GetAnthroDetailDataByDashboard,
 } from './personal.gql'
-import { GetAcademy, GetAcademyById, GetAcademyWithPlazas, GetAcademyWithPlazasById } from './academy.gql'
+import {
+  GetAcademy,
+  GetAcademyById,
+  GetAcademyWithPlazas,
+  GetAcademyWithPlazasById,
+  GetPatientAcademy,
+} from './academy.gql'
 import {
   GetPatientBillByDashboard,
   GetPatientBillByDashboardById,
@@ -111,6 +117,7 @@ export default {
     getAcademyById: GetAcademyById,
     getAcademyWithPlazas: GetAcademyWithPlazas,
     getAcademyWithPlazasById: GetAcademyWithPlazasById,
+    getPatientAcademy: GetPatientAcademy,
 
     // contact part
     getContactInfo: GetContactInfo,
