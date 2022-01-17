@@ -1,0 +1,32 @@
+@import 'styles/variable.module.scss';
+
+.outlineButton {
+  border: 1.12px solid #e30018;
+  &:hover {
+    background-color: #e300171f;
+  }
+  @media (max-width: 1023px) {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+  @media (min-width: 1024px) {
+    border-radius: 10px;
+  }
+}
+.outlineLabel {
+  color: #e30018;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 15px;
+}
+.startClassButtonImage {
+  @media (max-width: 1023px) {
+    border-radius: 15px;
+  }
+  @media (min-width: 1024px) {
+  }
+}
