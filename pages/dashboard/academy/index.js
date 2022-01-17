@@ -11,7 +11,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 
-import AcademyCard from 'components/components/academy/AcademyCard'
+import AcademyDashboardCard from 'components/components/academy/AcademyDashboardCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -73,7 +73,12 @@ const Academy = props => {
       <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
         {cardData?.map((card, index) => (
           <div className={'flex justify-center col-span-6 md:col-span-4'} key={index}>
-            <AcademyCard data={card} index={index} handleClickPayment={handleClickPayment} viewport={viewport} />
+            <AcademyDashboardCard
+              data={card}
+              index={index}
+              handleClickPayment={handleClickPayment}
+              viewport={viewport}
+            />
           </div>
         ))}
       </div>
