@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NutritionItem from 'components/components/dashboard/nutrition/NutritionItem'
+import MobileNutritionItem from 'components/components/dashboard/nutrition/MobileNutritionItem'
 
 import moment from 'moment'
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -159,7 +160,43 @@ const Nutrition = props => {
   return (
     <>
       {viewport === 'mobile' ? (
-        <div>mobile nutrition</div>
+        <div className={'p-4 mb-32 ' + styles.m_container}>
+          <DashboardButton
+            handleClick={handleClickStartClass}
+            label={'Clase'}
+            type={'startClass'}
+            visible={streamingEvent.toggle}
+          />
+          <div className={'calendarWrapper mt-4'} style={{ maxWidth: '350px' }}>
+            <MonthCalendar
+              className={styles.calendar}
+              onChange={handleChangeDate}
+              value={calendarValue}
+              locale="es-MX"
+              tileClassName={({ date, view }) => {
+                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                  return 'highlight'
+                }
+              }}
+            />
+          </div>
+          <div>
+            <div className={'flex justify-evenly items-center mt-3'}>
+              <div className={'w-1/5 text-center ' + styles.m_tableHeadTitle}>DIA</div>
+              <div className={'w-3/5 text-center ' + styles.m_tableHeadTitle}>NOMBRE</div>
+              <div className={'w-1/5 text-center ' + styles.m_tableHeadTitle}>VISTA</div>
+            </div>
+            {nutritions.map((item, index) => (
+              <MobileNutritionItem
+                key={index}
+                item={item}
+                index={index}
+                handleClickCollpase={handleClickCollpase}
+                handleClickDocument={handleClickDocument}
+              />
+            ))}
+          </div>
+        </div>
       ) : (
         <div className={'p-10 ' + styles.container}>
           <div className={'grid grid-cols-12 gap-12'}>
@@ -200,7 +237,7 @@ const Nutrition = props => {
               </div>
             </div>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
-              <div className={'calendarWrapper'}>
+              <div className={'calendarWrapper'} style={{ maxWidth: '350px' }}>
                 <MonthCalendar
                   className={styles.calendar}
                   onChange={handleChangeDate}

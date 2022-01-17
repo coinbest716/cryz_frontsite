@@ -5,6 +5,10 @@
   background-color: #f5f6fa;
   min-height: 100vh;
 }
+.m_container {
+  background-color: hsl(228, 33%, 97%);
+  min-height: calc(100vh - 130px);
+}
 .highBoldLabel {
   color: #2a2c36;
   font-family: Montserrat;
@@ -25,6 +29,14 @@
 }
 .tableHeadTitle {
   padding: 15px 30px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 24px;
+}
+.m_tableHeadTitle {
+  padding: 8px 8px;
   color: #222222;
   font-family: Montserrat;
   font-size: 12px;
