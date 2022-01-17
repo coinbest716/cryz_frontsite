@@ -672,7 +672,7 @@ const Dashboard = props => {
                 handleClick={() => handleClickRedirect('message')}
                 label={''}
                 type={'message'}
-                count={messages.length}
+                count={unreadMessages.length}
               />
             </div>
           </div>
