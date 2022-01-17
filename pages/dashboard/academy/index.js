@@ -45,8 +45,8 @@ const Academy = props => {
   const { viewport } = props
   const router = useRouter()
 
-  const [getAcademyWithPlazas, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
-    graphql.queries.getAcademyWithPlazas
+  const [getPatientAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
+    graphql.queries.getPatientAcademy
   )
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard
@@ -58,11 +58,13 @@ const Academy = props => {
   // handlers
   useEffect(() => {
     getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
-  }, [])
+  }, [getSessionsByDashboard])
 
   useEffect(() => {
-    getAcademyWithPlazas()
-  }, [getAcademyWithPlazas])
+    getPatientAcademy({
+      variables: { patient_id: Number(localStorage.getItem('patient_id')) },
+    })
+  }, [getPatientAcademy])
 
   useEffect(() => {
     if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
@@ -117,8 +119,8 @@ const Academy = props => {
   }
 
   useEffect(() => {
-    if (!mainError && mainData && mainData.getAcademyWithPlazas) {
-      setCardData(mainData.getAcademyWithPlazas)
+    if (!mainError && mainData && mainData.getPatientAcademy) {
+      setCardData(mainData.getPatientAcademy)
     }
   }, [mainLoading, mainData, mainError])
 
@@ -131,7 +133,7 @@ const Academy = props => {
 
   const handleWatchNow = data => {
     dispatch({ type: 'set', isLoading: true })
-    router.push(`/academy/${data.id}`)
+    router.push(`/dashboard/academy/${data.id}`)
   }
 
   return viewport !== 'mobile' ? (
