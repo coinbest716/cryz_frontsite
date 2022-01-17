@@ -167,18 +167,20 @@ const Nutrition = props => {
             type={'startClass'}
             visible={streamingEvent.toggle}
           />
-          <div className={'calendarWrapper mt-4'} style={{ maxWidth: '350px' }}>
-            <MonthCalendar
-              className={styles.calendar}
-              onChange={handleChangeDate}
-              value={calendarValue}
-              locale="es-MX"
-              tileClassName={({ date, view }) => {
-                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                  return 'highlight'
-                }
-              }}
-            />
+          <div className="flex justify-center">
+            <div className={'calendarWrapper mt-4'} style={{ maxWidth: '350px' }}>
+              <MonthCalendar
+                className={styles.calendar}
+                onChange={handleChangeDate}
+                value={calendarValue}
+                locale="es-MX"
+                tileClassName={({ date, view }) => {
+                  if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                    return 'highlight'
+                  }
+                }}
+              />
+            </div>
           </div>
           <div>
             <div className={'flex justify-evenly items-center mt-3'}>
