@@ -1,0 +1,54 @@
+@import 'styles/variable.module.scss';
+
+.singleCard {
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  border: 1px solid #818e8e;
+  max-width: 355px;
+}
+.cardImage {
+  opacity: 0.6;
+  object-fit: cover;
+  object-position: center;
+}
+.cardTitle {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  @media (max-width: 1023px) {
+    font-size: 10px;
+    line-height: 14px;
+    padding: 18px 16px 0px 16px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 16px;
+    line-height: 19px;
+    padding: 23px 29px 0px 29px;
+  }
+}
+.cardDescripton {
+  @media (max-width: 1023px) {
+    padding: 5px 16px 0px 16px;
+  }
+  @media (min-width: 1024px) {
+    padding: 5px 29px 0px 29px;
+  }
+}
+.cardName {
+  color: #acb1b2;
+  font-family: Montserrat;
+  letter-spacing: 1px;
+  @media (max-width: 1023px) {
+    font-size: 10px;
+    line-height: 14px;
+    padding: 5px 16px 0px 16px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 16px;
+    line-height: 19px;
+    padding: 24px 29px 19px 29px;
+  }
+}
