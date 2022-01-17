@@ -18,12 +18,12 @@ import academyBlackIcon from 'public/images/academy_black.svg'
 import styles from 'components/Menu/HamburgMenu.module.scss'
 
 const menuList = [
-  // {
-  // href: '/dashboard/nutrition',
-  //  icon: nutritionIcon,
-  //  iconBlack: nutritionBlackIcon,
-  //  title: 'Nutrición',
-  // },
+  {
+    href: '/dashboard/nutrition',
+    icon: nutritionIcon,
+    iconBlack: nutritionBlackIcon,
+    title: 'Nutrición',
+  },
   {
     href: '/dashboard/plans',
     icon: plansIcon,
