@@ -167,7 +167,7 @@ const Course = props => {
                   {moment(mainData.end_date).format('MMMM YYYY')}
                 </div>
                 {mainData.plazas && (
-                  <div className={'mt-6'} style={{ width: '326px' }}>
+                  <div className={'mt-6'} >
                     <ArrowButton
                       plazas={mainData.plazas}
                       label={mainData.price + ' €'}
