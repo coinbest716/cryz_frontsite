@@ -4,14 +4,13 @@ import React from 'react'
 import Image from 'next/image'
 
 // custom components
-import ArrowButton from 'components/components/academy/ArrowButton'
-import ArrowOutlineButton from 'components/components/academy/ArrowOutlineButton'
+import ArrowWatchNowButton from 'components/components/academy/ArrowWatchNowButton'
 
 // styles
 import styles from './AcademyDashboardCard.module.scss'
 
 const AcademyDashboardCard = props => {
-  const { data, handleClickPayment, viewport } = props
+  const { data, handleWatchNow, viewport } = props
 
   return (
     <div className={styles.singleCard}>
@@ -21,22 +20,10 @@ const AcademyDashboardCard = props => {
         )}
       </div>
       <div className={styles.cardTitle}>{data?.name}</div>
-      <div className={styles.cardName}>{data?.category}</div>
-      {viewport === 'mobile' && (
-        <div className={'mt-2 mb-4 mx-4'}>
-          <ArrowOutlineButton plazas={data.plazas} label={data.price + ' €'} onClick={() => handleClickPayment(data)} />
-        </div>
-      )}
-      {viewport !== 'mobile' && (
-        <div className={'mt-2'}>
-          <ArrowButton
-            plazas={data.plazas}
-            label={data.price + ' €'}
-            onClick={() => handleClickPayment(data)}
-            viewport={viewport}
-          />
-        </div>
-      )}
+      <div className={styles.cardName + ' mb-16'}>{data?.category}</div>
+      <div className={'absolute bottom-0 left-0 right-0'}>
+        <ArrowWatchNowButton onClick={() => handleWatchNow(data)} />
+      </div>
     </div>
   )
 }
