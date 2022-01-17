@@ -5,6 +5,10 @@
   background-color: #f5f6fa;
   min-height: 100vh;
 }
+.m_container {
+  background-color: hsl(228, 33%, 97%);
+  min-height: calc(100vh - 130px);
+}
 .highBoldLabel {
   color: #2a2c36;
   font-family: Montserrat;

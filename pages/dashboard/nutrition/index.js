@@ -159,7 +159,43 @@ const Nutrition = props => {
   return (
     <>
       {viewport === 'mobile' ? (
-        <div>mobile nutrition</div>
+        <div className={'p-4 ' + styles.m_container}>
+          <DashboardButton
+            handleClick={handleClickStartClass}
+            label={'Clase'}
+            type={'startClass'}
+            visible={streamingEvent.toggle}
+          />
+          <div className={'calendarWrapper mt-4'} style={{ maxWidth: '350px' }}>
+            <MonthCalendar
+              className={styles.calendar}
+              onChange={handleChangeDate}
+              value={calendarValue}
+              locale="es-MX"
+              tileClassName={({ date, view }) => {
+                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                  return 'highlight'
+                }
+              }}
+            />
+          </div>
+          <div>
+            <div className={'flex justify-evenly items-center mt-3'}>
+              <div className={'text-center ' + styles.tableHeadTitle}>DIA</div>
+              <div className={'text-center ' + styles.tableHeadTitle}>NOMBRE</div>
+              <div className={'text-center ' + styles.tableHeadTitle}>VISTA</div>
+            </div>
+            {nutritions.map((item, index) => (
+              <NutritionItem
+                key={index}
+                item={item}
+                index={index}
+                handleClickCollpase={handleClickCollpase}
+                handleClickDocument={handleClickDocument}
+              />
+            ))}
+          </div>
+        </div>
       ) : (
         <div className={'p-10 ' + styles.container}>
           <div className={'grid grid-cols-12 gap-12'}>
