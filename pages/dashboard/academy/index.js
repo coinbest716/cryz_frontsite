@@ -149,7 +149,7 @@ const Academy = props => {
       </div>
       <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
         {cardData?.map((card, index) => (
-          <div className={'flex justify-center col-span-6 md:col-span-4'} key={index}>
+          <div className={'flex justify-center col-span-6 md:col-span-4 mt-9'} key={index}>
             <AcademyDashboardCard
               data={card}
               index={index}
