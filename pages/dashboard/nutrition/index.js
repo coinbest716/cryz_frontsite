@@ -200,7 +200,7 @@ const Nutrition = props => {
               </div>
             </div>
             <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
-              <div className={'calendarWrapper'}>
+              <div className={'calendarWrapper'} style={{ maxWidth: '350px' }}>
                 <MonthCalendar
                   className={styles.calendar}
                   onChange={handleChangeDate}
