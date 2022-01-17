@@ -100,7 +100,7 @@ const Dashboard = props => {
   const [calendarValue, setCalendarValue] = useState(new Date())
   const [purchaseData, setPurchaseData] = useState([])
   const today = useSelector(state => state.today)
-  const [message, setMessage] = useState([])
+  const [messages, setMessages] = useState([])
   const [chartOptions, setChartOptions] = useState({
     series: [
       {
@@ -290,7 +290,7 @@ const Dashboard = props => {
   useEffect(() => {
     if (!messageListError && messageListData && messageListData.getPatientMessageById) {
       const data = messageListData.getPatientMessageById
-      setMessage(data)
+      setMessages(data)
     }
   }, [messageListLoading, messageListData, messageListError])
 
@@ -460,6 +460,8 @@ const Dashboard = props => {
     paymentStatusLink = template.link
   }
 
+  let unreadMessages = messages.filter(item => item.notification && item.notification !== 'read')
+
   return viewport !== 'mobile' ? (
     <div className={'w-full flex ' + styles.container}>
       <div className={'flex flex-wrap flex-1 py-12 px-10'}>
@@ -626,11 +628,11 @@ const Dashboard = props => {
         </div>
         <div className={'pt-20'}>
           <div className={styles.title}>Mensajes</div>
-          {message.length !== 0 ? (
+          {unreadMessages.length !== 0 ? (
             <div>
-              <div className={'pt-2 ' + styles.mediumLabel}>Tienes {message.length} mensajes nuevos</div>
+              <div className={'pt-2 ' + styles.mediumLabel}>Tienes {unreadMessages.length} mensajes sin leer</div>
               <div className={'pt-6'}>
-                {message.map((item, index) => (
+                {unreadMessages.map((item, index) => (
                   <div className={'py-2 flex justify-center'} key={index}>
                     <NewMessageBox
                       handleClickMessage={() => handleClickRedirect('messageBox', item.id)}
@@ -670,7 +672,7 @@ const Dashboard = props => {
                 handleClick={() => handleClickRedirect('message')}
                 label={''}
                 type={'message'}
-                count={message.length}
+                count={messages.length}
               />
             </div>
           </div>
