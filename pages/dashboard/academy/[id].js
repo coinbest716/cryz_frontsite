@@ -169,7 +169,7 @@ const AcademyDetail = props => {
         <div className={'flex flex-1 w-full mr-8'}>
           {academyData.list !== undefined && <AcademyTable data={academyData.list} viewport={viewport} />}
         </div>
-        <div className={styles.calendarArea}>
+        <div className={styles.calendarArea + ' calendarWrapper'}>
           <MonthCalendar
             className={styles.calendar}
             onChange={handleChangeDate}
