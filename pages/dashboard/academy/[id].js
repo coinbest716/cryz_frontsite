@@ -92,6 +92,7 @@ const AcademyDetail = props => {
         _events.push(_eventItem)
       })
       setEvents(_events)
+      setMarkDate(_markDate)
     }
   }, [sessionLoading, sessionData, sessionError])
 
