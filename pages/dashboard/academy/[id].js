@@ -155,7 +155,7 @@ const AcademyDetail = props => {
 
   return viewport !== 'mobile' ? (
     <div className={globalStyles.dashContainer}>
-      <div className={'w-full flex flex-wrap justify-between items-center'}>
+      <div className={'w-full flex justify-between items-center'}>
         <div className={globalStyles.dashTitle}>{academyData.name}</div>
         <div className={'flex justify-end'}>
           <StartclassButton
@@ -165,6 +165,12 @@ const AcademyDetail = props => {
           />
           <NotificationButton />
         </div>
+      </div>
+      <div className={'flex mt-8'}>
+        <div
+          style={{ width: 'calc(100% - 340px - 32px)' }}
+          dangerouslySetInnerHTML={{ __html: academyData.description }}
+        />
       </div>
       <div className={'flex mt-8'}>
         <div className={'flex flex-1 w-full mr-8'}>
