@@ -132,7 +132,7 @@ const Nutrition = props => {
 
   useEffect(() => {
     if (!statusError && statusData && statusData.getNutritionPurchaseStatus) {
-      // setNutritionStatus(statusData.getNutritionPurchaseStatus)
+      setNutritionStatus(statusData.getNutritionPurchaseStatus)
     }
   }, [statusLoading, statusData, statusError])
 

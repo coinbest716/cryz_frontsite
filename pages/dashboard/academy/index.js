@@ -158,7 +158,18 @@ const Academy = props => {
       </div>
     </div>
   ) : (
-    <>Mobile View</>
+    <div className={'p-4 mb-32 ' + styles.m_container}>
+      <div className={'mt-1 mb-7 ' + styles.m_dashTitle}>Mis cursos Academy</div>
+      <div className={'grid grid-cols-12 gap-4'}>
+        {cardData?.map((card, index) => (
+          <div className={'col-span-6'} key={index}>
+            <div className={'flex justify-center col-span-6 md:col-span-4'}>
+              <AcademyDashboardCard data={card} index={index} handleWatchNow={handleWatchNow} viewport={viewport} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 

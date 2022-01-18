@@ -17,9 +17,28 @@
     // color: $blue-gray-400-color;
   }
 }
+.m_workWithUsButton {
+  padding: 3px 25px;
+  border: 1px solid #818e8e;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-around;
+  &:hover {
+    background-color: $blue-gray-300-color;
+    // color: $blue-gray-400-color;
+  }
+}
 .label {
   font-family: Montserrat;
   font-size: 16px;
   letter-spacing: 0.7px;
   line-height: 26px;
+}
+.m_label {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 7px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 9px;
 }
