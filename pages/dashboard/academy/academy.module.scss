@@ -7,3 +7,14 @@
   background-color: #f5f6fa;
   height: 100vh;
 }
+.m_container {
+  min-height: calc(100vh - 230px);
+}
+.m_dashTitle {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 20px;
+}
