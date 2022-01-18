@@ -132,7 +132,7 @@ const Nutrition = props => {
 
   useEffect(() => {
     if (!statusError && statusData && statusData.getNutritionPurchaseStatus) {
-      setNutritionStatus(statusData.getNutritionPurchaseStatus)
+      // setNutritionStatus(statusData.getNutritionPurchaseStatus)
     }
   }, [statusLoading, statusData, statusError])
 
@@ -175,45 +175,66 @@ const Nutrition = props => {
   return (
     <>
       {viewport === 'mobile' ? (
-        <div className={'p-4 mb-32 ' + styles.m_container}>
-          <DashboardButton
-            handleClick={handleClickStartClass}
-            label={'Clase'}
-            type={'startClass'}
-            visible={streamingEvent.toggle}
-          />
-          <div className="flex justify-center">
-            <div className={'calendarWrapper mt-4'} style={{ maxWidth: '350px' }}>
-              <MonthCalendar
-                className={styles.calendar}
-                onChange={handleChangeDate}
-                value={calendarValue}
-                locale="es-MX"
-                tileClassName={({ date, view }) => {
-                  if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                    return 'highlight'
-                  }
-                }}
+        <>
+          {nutritionStatus ? (
+            <div className={'p-4 mb-32 ' + styles.m_container}>
+              <DashboardButton
+                handleClick={handleClickStartClass}
+                label={'Clase'}
+                type={'startClass'}
+                visible={streamingEvent.toggle}
               />
+              <div className="flex justify-center">
+                <div className={'calendarWrapper mt-4'} style={{ maxWidth: '350px' }}>
+                  <MonthCalendar
+                    className={styles.calendar}
+                    onChange={handleChangeDate}
+                    value={calendarValue}
+                    locale="es-MX"
+                    tileClassName={({ date, view }) => {
+                      if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                        return 'highlight'
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className={'flex justify-evenly items-center mt-3'}>
+                  <div className={'w-1/5 text-center ' + styles.m_tableHeadTitle}>DIA</div>
+                  <div className={'w-3/5 text-center ' + styles.m_tableHeadTitle}>NOMBRE</div>
+                  <div className={'w-1/5 text-center ' + styles.m_tableHeadTitle}>VISTA</div>
+                </div>
+                {nutritions.map((item, index) => (
+                  <MobileNutritionItem
+                    key={index}
+                    item={item}
+                    index={index}
+                    handleClickCollpase={handleClickCollpase}
+                    handleClickDocument={handleClickDocument}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <div className={'flex justify-evenly items-center mt-3'}>
-              <div className={'w-1/5 text-center ' + styles.m_tableHeadTitle}>DIA</div>
-              <div className={'w-3/5 text-center ' + styles.m_tableHeadTitle}>NOMBRE</div>
-              <div className={'w-1/5 text-center ' + styles.m_tableHeadTitle}>VISTA</div>
+          ) : (
+            <div className={'p-4 mb-32 ' + styles.m_container}>
+              <div className="flex justify-center items-center" style={{ height: 'calc(100vh - 250px)' }}>
+                <div className="text-center">
+                  <Image src={plansIcon} alt={''} width={200} height={200} />
+                  <div className={'my-10 ' + styles.linkTitle}> Pero puedes contratarlo siguiendo este enlace</div>
+                  <div
+                    className={'flex justify-center cursor-pointer ' + styles.linkButton}
+                    onClick={() => {
+                      router.push('/services/nutrition')
+                    }}
+                  >
+                    Comprar bono
+                  </div>
+                </div>
+              </div>
             </div>
-            {nutritions.map((item, index) => (
-              <MobileNutritionItem
-                key={index}
-                item={item}
-                index={index}
-                handleClickCollpase={handleClickCollpase}
-                handleClickDocument={handleClickDocument}
-              />
-            ))}
-          </div>
-        </div>
+          )}
+        </>
       ) : (
         <>
           {nutritionStatus ? (
