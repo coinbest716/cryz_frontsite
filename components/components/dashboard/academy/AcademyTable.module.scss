@@ -3,11 +3,9 @@
 // table part
 .viewArea {
   width: 120px;
-  text-align: center;
 }
 .dayArea {
   width: 160px;
-  text-align: center;
 }
 .tableHead {
   border: 2px solid #ededed;
@@ -63,4 +61,20 @@
   font-size: 10px;
   letter-spacing: 0;
   line-height: 18px;
+}
+.onlineText {
+  color: #da4242;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 1.4px;
+}
+.hourText {
+  color: #c0c1c5;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 1.4px;
 }
