@@ -110,7 +110,7 @@ const OrderDetail = props => {
   }
 
   const handlePayButton = () => {
-    // router.push(`/purchase?tab=2&service_id=${purchaseID}&description=${title}&price=${price}`)
+    router.push(`/purchase?tab=2&service_id=${purchaseID}&description=${title}&price=${price}`)
   }
 
   const handleClickBack = () => {
@@ -166,17 +166,17 @@ const OrderDetail = props => {
           </div>
           {/* button part */}
           <div className={'w-full flex justify-start mt-11 mb-8'}>
-            {/* {status !== 'PAID' ? (
-          <div className={'mr-4'}>
-            <CommonButton
-              label={'Pagar pedido pendiente'}
-              bgColor={'#BD5B54'}
-              handleClickButton={() => handlePayButton()}
-            />
-          </div>
-        ) : (
-          <></>
-        )} */}
+            {status !== 'PAID' ? (
+              <div className={'mr-4'}>
+                <CommonButton
+                  label={'Pagar pedido pendiente'}
+                  bgColor={'#BD5B54'}
+                  handleClickButton={() => handlePayButton()}
+                />
+              </div>
+            ) : (
+              <></>
+            )}
             <div>
               <CommonButton
                 label={'Volver a comprar'}
