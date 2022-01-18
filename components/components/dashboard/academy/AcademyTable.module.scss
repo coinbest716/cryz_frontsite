@@ -1,0 +1,66 @@
+@import 'styles/variable.module.scss';
+
+// table part
+.viewArea {
+  width: 120px;
+  text-align: center;
+}
+.dayArea {
+  width: 160px;
+  text-align: center;
+}
+.tableHead {
+  border: 2px solid #ededed;
+  background-color: #ffffff;
+  height: 58px;
+  min-height: 58px;
+}
+.tableHeadTitle {
+  padding: 15px 30px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 24px;
+}
+.m_tableHeadTitle {
+  padding: 8px 8px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 24px;
+}
+
+// table item part
+.tableContentHeadArea {
+  width: 100%;
+  border: 1px solid #ededed;
+  // background-color: rgba(51, 51, 51, 0.03);
+}
+.contentTitle {
+  padding: 9px 30px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  line-height: 36px;
+}
+.contentFecha {
+  padding: 9px 30px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  line-height: 36px;
+  border: 1px solid #ededed;
+  border-bottom: none;
+  border-top: none;
+}
+.description {
+  color: #999999;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 18px;
+}

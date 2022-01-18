@@ -5,19 +5,23 @@ import { useDispatch } from 'react-redux'
 
 // next components
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import StartclassButton from 'components/components/StartClassButton'
+import AcademyTable from 'components/components/dashboard/academy/AcademyTable'
 
 // third party components
 import moment from 'moment'
+import 'react-calendar/dist/Calendar.css'
+const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './academydetail.module.scss'
+import styles from './id.module.scss'
 
 // graphql
 import { useLazyQuery } from '@apollo/client'
@@ -51,8 +55,11 @@ const AcademyDetail = props => {
     graphql.queries.getSessionsByDashboard
   )
   const [academyData, setAcademyData] = useState({})
-  const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
+  const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
+  const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
+
+  const [calendarValue, setCalendarValue] = useState(new Date())
 
   // handlers
   useEffect(() => {
@@ -85,6 +92,7 @@ const AcademyDetail = props => {
         _events.push(_eventItem)
       })
       setEvents(_events)
+      setMarkDate(_markDate)
     }
   }, [sessionLoading, sessionData, sessionError])
 
@@ -130,10 +138,25 @@ const AcademyDetail = props => {
     })
   }
 
+  const handleChangeDate = value => {
+    setCalendarValue(value)
+    const eventDate = moment(value).format('YYYY-MM-DD')
+    markDate.map(item => {
+      if (item === moment(value).format('DD-MM-YYYY')) {
+        router.push({
+          pathname: '/dashboard/calendar',
+          query: {
+            eventDate: eventDate,
+          },
+        })
+      }
+    })
+  }
+
   return viewport !== 'mobile' ? (
     <div className={globalStyles.dashContainer}>
-      <div className={'w-full flex flex-wrap justify-between items-center'}>
-        <div className={globalStyles.dashTitle}>Mis cursos Academy</div>
+      <div className={'w-full flex justify-between items-center'}>
+        <div className={globalStyles.dashTitle}>{academyData.name}</div>
         <div className={'flex justify-end'}>
           <StartclassButton
             handleClick={() => handleClickStartButton()}
@@ -143,7 +166,30 @@ const AcademyDetail = props => {
           <NotificationButton />
         </div>
       </div>
-      <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}></div>
+      <div className={'flex mt-8'}>
+        <div
+          style={{ width: 'calc(100% - 340px - 32px)' }}
+          dangerouslySetInnerHTML={{ __html: academyData.description }}
+        />
+      </div>
+      <div className={'flex mt-8'}>
+        <div className={'flex flex-1 w-full mr-8'}>
+          {academyData.list !== undefined && <AcademyTable data={academyData.list} viewport={viewport} />}
+        </div>
+        <div className={styles.calendarArea + ' calendarWrapper'}>
+          <MonthCalendar
+            className={styles.calendar}
+            onChange={handleChangeDate}
+            value={calendarValue}
+            locale="es-MX"
+            tileClassName={({ date, view }) => {
+              if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                return 'highlight'
+              }
+            }}
+          />
+        </div>
+      </div>
     </div>
   ) : (
     <>Mobile View</>
