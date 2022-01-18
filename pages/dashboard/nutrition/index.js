@@ -199,27 +199,31 @@ const Nutrition = props => {
         </div>
       ) : (
         <div className={'p-10 ' + styles.container}>
-          <div className={'grid grid-cols-12 gap-12'}>
-            <div className={'col-span-12 md:col-span-8 sm:col-span-12 flex justify-between'}>
+          <div className={'flex'}>
+            <div className={'flex flex-1 mr-10'}>
               <div className={styles.highBoldLabel}>Nutrición</div>
             </div>
-            <DashboardButton
-              handleClick={handleClickStartClass}
-              label={'Comenzar clase'}
-              type={'startClass'}
-              visible={streamingEvent.toggle}
-            />
-            <div className={'col-span-12 md:col-span-4 sm:col-span-12 flex justify-between items-center'}>
+            <div style={{ width: '350px' }} className="flex justify-between">
+              <DashboardButton
+                handleClick={handleClickStartClass}
+                label={'Comenzar clase'}
+                type={'startClass'}
+                visible={streamingEvent.toggle}
+              />
               <NotificationButton />
             </div>
           </div>
-          <div className={'grid grid-cols-12 gap-12 pt-8'}>
-            <div className={'col-span-12 md:col-span-8 sm:col-span-12 w-full'}>
-              <div>
+          <div className={'flex mt-10'}>
+            <div className={'flex flex-1'}>
+              <div className={'w-full mr-10'}>
                 <div className={'flex justify-evenly items-center mb-4 ' + styles.tableHead}>
-                  <div className={'w-1/5 text-center ' + styles.tableHeadTitle}>VISTA</div>
-                  <div className={'w-1/5 text-center ' + styles.tableHeadTitle}>FECHA</div>
-                  <div className={'w-3/5 ' + styles.tableHeadTitle}>NOMBRE</div>
+                  <div style={{ width: '90px' }} className={'text-center ' + styles.tableHeadTitle}>
+                    VISTA
+                  </div>
+                  <div style={{ width: '90px' }} className={'text-center ' + styles.tableHeadTitle}>
+                    FECHA
+                  </div>
+                  <div className={'flex-1 ' + styles.tableHeadTitle}>NOMBRE</div>
                 </div>
                 <div style={{ height: 'calc(100vh - 300px)' }}>
                   <PerfectScrollbar>
@@ -236,7 +240,7 @@ const Nutrition = props => {
                 </div>
               </div>
             </div>
-            <div className={'col-span-12 md:col-span-4 sm:col-span-12'}>
+            <div style={{ width: '350px' }}>
               <div className={'calendarWrapper'} style={{ maxWidth: '350px' }}>
                 <MonthCalendar
                   className={styles.calendar}
