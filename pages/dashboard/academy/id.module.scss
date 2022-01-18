@@ -21,13 +21,13 @@
 .descriptionArea {
   width: calc(100% - 340px - 32px);
 }
-
 .description {
-  color: #222;
-  font-family: montserrat;
+  color: #818e8e;
+  font-family: Montserrat, sans-serif;
   font-size: 14px;
-  padding: 0px 10px;
-  letter-spacing: 1.4px;
+  padding: 0px 10px 10px 10px;
+  line-height: 28px;
+  letter-spacing: 0.5px;
 }
 
 .calendarArea {
