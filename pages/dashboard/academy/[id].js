@@ -12,6 +12,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
 import StartclassButton from 'components/components/StartClassButton'
+import AcademyTable from 'components/components/dashboard/academy/AcademyTable'
 
 // third party components
 import moment from 'moment'
@@ -164,8 +165,10 @@ const AcademyDetail = props => {
           <NotificationButton />
         </div>
       </div>
-      <div className={'flex'}>
-        <div className={'flex flex-1 mr-8'}>description</div>
+      <div className={'flex mt-8'}>
+        <div className={'flex flex-1 w-full mr-8'}>
+          {academyData.list !== undefined && <AcademyTable data={academyData.list} viewport={viewport} />}
+        </div>
         <div className={styles.calendarArea}>
           <MonthCalendar
             className={styles.calendar}
