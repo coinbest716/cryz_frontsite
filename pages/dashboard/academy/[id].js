@@ -10,7 +10,6 @@ import { useRouter } from 'next/router'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/components/dashboard/NotificationButton'
-import AcademyDashboardCard from 'components/components/academy/AcademyDashboardCard'
 import StartclassButton from 'components/components/StartClassButton'
 
 // third party components
@@ -18,13 +17,13 @@ import moment from 'moment'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './academy.module.scss'
+import styles from './academydetail.module.scss'
 
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-const Academy = props => {
+const AcademyDetail = props => {
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -45,13 +44,13 @@ const Academy = props => {
   const { viewport } = props
   const router = useRouter()
 
-  const [getPatientAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
-    graphql.queries.getPatientAcademy
+  const [getAcademyWithPlazasById, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
+    graphql.queries.getAcademyWithPlazasById
   )
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard
   )
-  const [cardData, setCardData] = useState([])
+  const [academyData, setAcademyData] = useState({})
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
   const [events, setEvents] = useState([])
 
@@ -61,10 +60,10 @@ const Academy = props => {
   }, [getSessionsByDashboard])
 
   useEffect(() => {
-    getPatientAcademy({
-      variables: { patient_id: Number(localStorage.getItem('patient_id')) },
-    })
-  }, [getPatientAcademy])
+    if (router.query.id !== undefined) {
+      getAcademyWithPlazasById({ variables: { id: Number(router.query.id) } })
+    }
+  }, [getAcademyWithPlazasById, router.query])
 
   useEffect(() => {
     if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
@@ -119,21 +118,16 @@ const Academy = props => {
   }
 
   useEffect(() => {
-    if (!mainError && mainData && mainData.getPatientAcademy) {
-      setCardData(mainData.getPatientAcademy)
+    if (!courseError && courseData && courseData.getAcademyWithPlazasById) {
+      setAcademyData(courseData.getAcademyWithPlazasById)
     }
-  }, [mainLoading, mainData, mainError])
+  }, [courseLoading, courseData, courseError])
 
   const handleClickStartButton = () => {
     router.push({
       pathname: '/dashboard/live-streaming',
       query: { id: streamingEvent.id },
     })
-  }
-
-  const handleWatchNow = data => {
-    dispatch({ type: 'set', isLoading: true })
-    router.push(`/dashboard/academy/${data.id}`)
   }
 
   return viewport !== 'mobile' ? (
@@ -149,22 +143,16 @@ const Academy = props => {
           <NotificationButton />
         </div>
       </div>
-      <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
-        {cardData?.map((card, index) => (
-          <div className={'flex justify-center col-span-6 md:col-span-4 mt-9'} key={index}>
-            <AcademyDashboardCard data={card} index={index} handleWatchNow={handleWatchNow} viewport={viewport} />
-          </div>
-        ))}
-      </div>
+      <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}></div>
     </div>
   ) : (
     <>Mobile View</>
   )
 }
 
-export default Academy
+export default AcademyDetail
 
-Academy.getLayout = function getLayout(page) {
+AcademyDetail.getLayout = function getLayout(page) {
   return page.props.viewport === 'mobile' ? (
     <MobileDashboardLayout title="Academy">{page}</MobileDashboardLayout>
   ) : (

@@ -21,3 +21,21 @@ query GetAcademyWithPlazas {
 query GetAcademyWithPlazasById($id: Int) {
   getAcademyWithPlazasById(id: $id)
 }
+
+query GetPatientAcademy($patient_id: Int) {
+  getPatientAcademy(patient_id: $patient_id) {
+    id
+    name
+    start_date
+    end_date
+    duration
+    price
+    category
+    type
+    doc
+    images
+    description
+    training
+    list
+  }
+}
