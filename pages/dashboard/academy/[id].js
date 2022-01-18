@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 // next components
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
@@ -18,6 +19,11 @@ import AcademyTable from 'components/components/dashboard/academy/AcademyTable'
 import moment from 'moment'
 import 'react-calendar/dist/Calendar.css'
 const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
+
+// images and icons
+import MenubarIcon from 'assets/images/menubar.svg'
+import UserCircleIcon from 'assets/images/user-circle.svg'
+import TimerIcon from 'assets/images/timer.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -166,10 +172,32 @@ const AcademyDetail = props => {
           <NotificationButton />
         </div>
       </div>
+      <div className={'flex mt-3'}>
+        <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#D2DADA' }}>
+          <Image src={MenubarIcon} width={16} height={11} />
+        </div>
+        <div className={'mr-10'}>
+          <p className={styles.thinText}>Categoria</p>
+          <p className={styles.boldText}>{academyData.category}</p>
+        </div>
+        <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#DFDBD5' }}>
+          <Image src={UserCircleIcon} width={15} height={15} />
+        </div>
+        <div className={'mr-10'}>
+          <p className={styles.thinText}>Tipo</p>
+          <p className={styles.boldText}>{academyData.type}</p>
+        </div>
+        <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#E3BBAA' }}>
+          <Image src={TimerIcon} width={14} height={13} />
+        </div>
+        <div className={'mr-10'}>
+          <p className={styles.thinText}>Horas</p>
+          <p className={styles.boldText}>{Number(academyData.duration / 60).toFixed(2)}h</p>
+        </div>
+      </div>
       <div className={'flex mt-8'}>
-        <div 
-          style={{ width: 'calc(100% - 340px - 32px)'}}>
-          <p style={{ color:'#222', fontFamily:'montserrat', fontSize:'14px', padding:'0px 10px', letterSpacing:'1.4px'}} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
+        <div className={styles.descriptionArea}>
+          <p className={styles.description} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
         </div>
       </div>
       <div className={'flex mt-8'}>
