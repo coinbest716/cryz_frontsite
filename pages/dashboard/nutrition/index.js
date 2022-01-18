@@ -221,14 +221,14 @@ const Nutrition = props => {
               <div className="flex justify-center items-center" style={{ height: 'calc(100vh - 250px)' }}>
                 <div className="text-center">
                   <Image src={plansIcon} alt={''} width={200} height={200} />
-                  <div className={'my-10 ' + styles.linkTitle}> Pero puedes contratarlo siguiendo este enlace</div>
+                  <div className={'my-10 ' + styles.linkTitle}> No tienes planes online de nutrición activos</div>
                   <div
                     className={'flex justify-center cursor-pointer ' + styles.linkButton}
                     onClick={() => {
                       router.push('/services/nutrition')
                     }}
                   >
-                    Comprar bono
+                    Comprar Plan Online
                   </div>
                 </div>
               </div>
@@ -300,20 +300,20 @@ const Nutrition = props => {
           ) : (
             <div className={'p-10 ' + styles.container}>
               <div className={'flex justify-between'}>
-                <div className={styles.highBoldLabel}>NO TIENES PLANES ACTIVOS</div>
+                <div className={styles.highBoldLabel}></div>
                 <NotificationButton />
               </div>
               <div className="flex justify-center items-center" style={{ height: 'calc(100vh - 250px)' }}>
                 <div className="text-center">
                   <Image src={plansIcon} alt={''} width={200} height={200} />
-                  <div className={'my-10 ' + styles.linkTitle}> Pero puedes contratarlo siguiendo este enlace</div>
+                  <div className={'my-10 ' + styles.linkTitle}> No tienes planes online de nutrición activos</div>
                   <div
                     className={'flex justify-center cursor-pointer ' + styles.linkButton}
                     onClick={() => {
                       router.push('/services/nutrition')
                     }}
                   >
-                    Comprar bono
+                    Comprar Plan Online
                   </div>
                 </div>
               </div>
