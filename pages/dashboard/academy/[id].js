@@ -192,7 +192,7 @@ const AcademyDetail = props => {
         </div>
         <div className={'mr-10'}>
           <p className={styles.thinText}>Horas</p>
-          <p className={styles.boldText}>{Number(academyData.duration / 60).toFixed(2)}h</p>
+          <p className={styles.boldText}>{Number(academyData.duration / 60).toFixed(2)}</p>
         </div>
       </div>
       <div className={'flex mt-8'}>
@@ -202,7 +202,7 @@ const AcademyDetail = props => {
       </div>
       <div className={'flex mt-8'}>
         <div className={'flex flex-1 w-full mr-8'}>
-          {academyData.list !== undefined && <AcademyTable data={academyData.list} viewport={viewport} />}
+          {academyData.list !== undefined && <AcademyTable data={academyData.training} viewport={viewport} />}
         </div>
         <div className={styles.calendarArea + ' calendarWrapper'}>
           <MonthCalendar

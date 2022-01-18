@@ -61,7 +61,7 @@ const AcademyTable = props => {
           {academy !== undefined &&
             academy.map((item, index) => (
               <div key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
-                <div className={'flex justify-evenly items-center ' + styles.tableContentHeadArea}>
+                <div className={'flex justify-start items-center ' + styles.tableContentHeadArea}>
                   <div
                     className={
                       'cursor-pointer flex justify-center items-center ' + styles.viewArea + ' ' + styles.contentTitle
@@ -74,30 +74,30 @@ const AcademyTable = props => {
                       <Image src={minus} alt={''} width={15} height={15} />
                     )}
                   </div>
-                  <div className={styles.dayArea + ' ' + styles.contentFecha}>
-                    {moment(item.start_date).format('DD/MM')}
-                  </div>
-                  <div className={'flex flex-1 ' + styles.contentTitle}>{item.name}</div>
+                  <div className={styles.dayArea + ' ' + styles.contentFecha}>{moment(item.day).format('DD/MM')}</div>
+                  <div className={'flex flex-1 ' + styles.contentTitle}>{item.title}</div>
                 </div>
                 {item.collapse ? (
                   <></>
                 ) : (
-                  <div className={'flex justify-evenly items-center ' + styles.tableContentArea}>
-                    <div className={'w-1/5 '}></div>
-                    <div className={'w-4/5 px-10 py-3'}>
-                      <div className={globalStyles.tinyMCEClass}>
+                  <div className={'flex justify-start items-center'}>
+                    <div className={styles.viewArea}></div>
+                    <div className={styles.dayArea + ' ' + styles.contentFecha}>
+                      <div className={styles.onlineText}>ONLINE</div>
+                      <div className={styles.hourText}>{moment(item.hour).format('HH:MM')}</div>
+                    </div>
+                    <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
+                      <div className={'w-full ' + globalStyles.tinyMCEClass}>
                         <div
                           className={styles.description + ' tinymce-class'}
-                          dangerouslySetInnerHTML={{ __html: item.detail }}
+                          dangerouslySetInnerHTML={{ __html: item.description }}
                         />
                       </div>
-                      <div className="flex flex-wrap justify-center">
-                        {item.document?.map((doc, index) => (
-                          <div className="m-2" key={index}>
-                            <DocumentButton doc={doc} onClickDownload={handleClickDocument} />
-                          </div>
-                        ))}
-                      </div>
+                      {item.doc !== null && (
+                        <div className="m-2">
+                          <DocumentButton doc={item.doc} onClickDownload={handleClickDocument} />
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
