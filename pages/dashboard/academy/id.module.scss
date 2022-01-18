@@ -1,5 +1,35 @@
 @import 'styles/variable.module.scss';
 
+.thinText {
+  color: #a4a2a2;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 10px;
+  letter-spacing: -0.24px;
+}
+
+.boldText {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: -0.34px;
+}
+
+.descriptionArea {
+  width: calc(100% - 340px - 32px);
+}
+.description {
+  color: #818e8e;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  padding: 0px 10px 10px 10px;
+  line-height: 28px;
+  letter-spacing: 0.5px;
+}
+
 .calendarArea {
   width: 340px;
 }
