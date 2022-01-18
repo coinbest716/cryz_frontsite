@@ -72,7 +72,7 @@ import {
 } from './dashboard/plans-online.gql'
 
 // nutrition part
-import { GetNutritionsForDashboard } from './dashboard/nutrition.gql'
+import { GetNutritionsForDashboard, GetNutritionPurchaseStatus } from './dashboard/nutrition.gql'
 
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
@@ -164,6 +164,7 @@ export default {
 
     // nutrition part
     getNutritionsForDashboard: GetNutritionsForDashboard,
+    getNutritionPurchaseStatus: GetNutritionPurchaseStatus,
 
     //purchase
     checkoutVerify: CheckoutVerify,

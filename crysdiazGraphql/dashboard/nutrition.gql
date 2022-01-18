@@ -7,3 +7,7 @@ query GetNutritionsForDashboard($patient_id: Int) {
     document
   }
 }
+
+query GetNutritionPurchaseStatus($patient_id: Int) {
+  getNutritionPurchaseStatus(patient_id: $patient_id)
+}
