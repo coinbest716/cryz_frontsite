@@ -169,7 +169,7 @@ const AcademyDetail = props => {
       <div className={'flex mt-8'}>
         <div 
           style={{ width: 'calc(100% - 340px - 32px)'}}>
-          <p style={{ color:'#222', fontFamily:'montserrat', fontSize:'14px', padding:'0px 10px', letterSpacing:'1.4px'}} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
+          <p style={{ color:'#818e8e', fontFamily:'Montserrat,sans-serif', fontSize:'14px', padding:'0px 10px 10px 10px', lineHeight:'28px', letterSpacing:'0.5px' }} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
         </div>
       </div>
       <div className={'flex mt-8'}>
