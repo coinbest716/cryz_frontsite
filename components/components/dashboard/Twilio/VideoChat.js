@@ -10,6 +10,7 @@ import SelfVideo from './SelfVideo'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import fetch from 'isomorphic-unfetch'
 import { Auth } from 'aws-amplify'
+import handler from 'pages/api/hello'
 
 const text_styles = {
   position: 'absolute',
@@ -195,13 +196,15 @@ const VideoChat = props => {
   const fullScreenToggler = () => {
     if (!fullScreenMode) {
       handle.enter()
+    } else {
+      handle.exit()
     }
   }
 
   return (
     <>
       {viewport === 'mobile' ? (
-        <>
+        <FullScreen onChange={onFullScreenChange} handle={handle}>
           {room ? (
             <div className={'w-full h-full relative bg-black'}>
               <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
@@ -286,7 +289,7 @@ const VideoChat = props => {
           ) : (
             'Tu entrenador llegará pronto'
           )}
-        </>
+        </FullScreen>
       ) : (
         <FullScreen onChange={onFullScreenChange} handle={handle}>
           <div
