@@ -1,17 +1,17 @@
 import React from 'react'
 
 // custom components
-import MessageImage01 from 'components/components/dashboard/message/MessageImage01'
-import MessageVideo01 from 'components/components/dashboard/message/MessageVideo01'
-import MessageDownload01 from 'components/components/dashboard/message/MessageDownload01'
+import MessageImage02 from 'components/dashboard/message/MessageImage02'
+import MessageVideo02 from 'components/dashboard/message/MessageVideo02'
+import MessageDownload02 from 'components/dashboard/message/MessageDownload02'
 
 // styles
-import styles from 'components/components/dashboard/message/MessageCard01.module.scss'
+import styles from 'components/dashboard/message/MessageCard02.module.scss'
 
-const MessageCard01 = props => {
+const MessageCard02 = props => {
   const { message } = props
   return (
-    <div className={'w-full py-5 px-7 flex justify-end'}>
+    <div className={'w-full py-5 px-7 flex justify-start'}>
       <div className={styles.container}>
         <div className={styles.content}>{message.content}</div>
         <div className={'mt-4 flex justify-end items-center'}>
@@ -19,11 +19,11 @@ const MessageCard01 = props => {
         </div>
         {message.attachment.length !== 0 ? (
           message.attachment[0].type.split('/')[0] === 'image' ? (
-            <MessageImage01 message={message} />
+            <MessageImage02 message={message} />
           ) : message.attachment[0].type.split('/')[0] === 'video' ? (
-            <MessageVideo01 message={message} />
+            <MessageVideo02 message={message} />
           ) : (
-            <MessageDownload01 message={message} />
+            <MessageDownload02 message={message} />
           )
         ) : (
           <></>
@@ -34,4 +34,4 @@ const MessageCard01 = props => {
   )
 }
 
-export default MessageCard01
+export default MessageCard02

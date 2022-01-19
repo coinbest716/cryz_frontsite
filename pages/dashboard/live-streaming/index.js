@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import VideoChat from 'components/components/dashboard/Twilio/VideoChat'
+import VideoChat from 'components/dashboard/Twilio/VideoChat'
 
 // styles
 import styles from './LiveStreaming.module.scss'

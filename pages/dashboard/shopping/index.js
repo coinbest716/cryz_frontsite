@@ -16,10 +16,10 @@ import { useRouter } from 'next/router'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
+import NotificationButton from 'components/dashboard/NotificationButton'
 import Chip from 'components/components/Chip'
-import ComprasItem from 'components/components/dashboard/compras/ComprasItem'
-import ComprasButton from 'components/components/dashboard/compras/ComprasButton'
+import ComprasItem from 'components/dashboard/compras/ComprasItem'
+import ComprasButton from 'components/dashboard/compras/ComprasButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'

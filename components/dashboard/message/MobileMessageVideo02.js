@@ -1,7 +1,7 @@
 import React from 'react'
 
 // styles
-import styles from 'components/components/dashboard/message/MobileMessageVideo02.module.scss'
+import styles from 'components/dashboard/message/MobileMessageVideo02.module.scss'
 
 const MobileMessageVideo02 = props => {
   const { message } = props

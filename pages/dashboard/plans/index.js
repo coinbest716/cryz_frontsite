@@ -19,11 +19,11 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
-import Material from 'components/components/dashboard/Material'
+import NotificationButton from 'components/dashboard/NotificationButton'
+import Material from 'components/dashboard/Material'
 import Feature from 'components/academy/Feature'
 import DownloadPDF from 'components/academy/DownloadPDF'
-import NoPlansOnlineDialog from 'components/components/dashboard/plans/NoPlansOnlineDialog'
+import NoPlansOnlineDialog from 'components/dashboard/plans/NoPlansOnlineDialog'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'

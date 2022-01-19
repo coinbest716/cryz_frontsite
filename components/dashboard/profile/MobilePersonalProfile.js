@@ -9,7 +9,7 @@ import Image from 'next/image'
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
 
 // custom components
-import ProfileCommonText from 'components/components/dashboard/profile/ProfileCommonText'
+import ProfileCommonText from 'components/dashboard/profile/ProfileCommonText'
 
 import moment from 'moment'
 

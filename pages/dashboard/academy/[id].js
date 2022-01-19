@@ -11,9 +11,9 @@ import Image from 'next/image'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
+import NotificationButton from 'components/dashboard/NotificationButton'
 import StartclassButton from 'components/components/StartClassButton'
-import AcademyTable from 'components/components/dashboard/academy/AcademyTable'
+import AcademyTable from 'components/dashboard/academy/AcademyTable'
 
 // third party components
 import moment from 'moment'

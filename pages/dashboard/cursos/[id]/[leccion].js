@@ -16,7 +16,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
+import NotificationButton from 'components/dashboard/NotificationButton'
 import Chip from 'components/components/Chip'
 
 // styles
