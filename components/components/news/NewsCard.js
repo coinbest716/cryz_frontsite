@@ -30,7 +30,7 @@ const NewsCard = props => {
       </div>
       <div className={styles.textContainer + ' mt-2 py-3 px-5'}>
         <div className={styles.cardTitle}>{item.title}</div>
-        <div className={styles.cardDate + ' mt-3 mb-2'}>{moment(item.date).format('DD/MM/YYYY')}</div>
+        <div className={styles.cardDate + ' mt-3 mb-2 cursor-pointer'}>{moment(item.date).format('DD/MM/YYYY')}</div>
         <div className={styles.cardDescription}>{body}</div>
       </div>
     </div>

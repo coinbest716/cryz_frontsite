@@ -41,6 +41,29 @@ const News = props => {
         'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
       title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
       date: '2022-01-06T18:04:57.000Z',
+      description: 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ',
+    },
+    {
+      image:
+        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
+      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
+      date: '2022-01-06T18:04:57.000Z',
+      description:
+        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
+    },
+    {
+      image:
+        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
+      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
+      date: '2022-01-06T18:04:57.000Z',
+      description:
+        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
+    },
+    {
+      image:
+        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
+      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
+      date: '2022-01-06T18:04:57.000Z',
       description:
         'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
     },
@@ -70,7 +93,7 @@ const News = props => {
       {mockupData.length > 0 ? (
         <div className={'flex flex-wrap justify-center'}>
           <div className={styles.container}>
-            <div className={globalStyles.container + ' mx-20'}>
+            <div className={globalStyles.container + ' my-20'}>
               <div className="flex justify-between mt-24">
                 <div>
                   <div className={styles.newTopTitle}>News</div>
