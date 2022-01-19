@@ -8,7 +8,6 @@ import { useRouter } from 'next/router'
 import SocialButtonGroup from 'components/SocialButtonGroup'
 
 // images
-// import ArrowLeftIcon from 'assets/images/arrow-left.svg'
 import ArrowLeftIcon from 'assets/images/arrow-right-up.svg'
 
 // json data
@@ -16,7 +15,7 @@ import SocialURLData from 'assets/data/SocialURLData'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from 'components/ContactFooter/ContactFooter.module.scss'
+import styles from './ContactFooter.module.scss'
 
 const ContactFooter = props => {
   // variables
