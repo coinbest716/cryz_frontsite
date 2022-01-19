@@ -103,6 +103,19 @@ const News = props => {
               </div>
               <div>
                 <div className={styles.categoryTitle + ' mb-9'}>Novedades CrysDyaz & Co</div>
+                <div
+                  className={
+                    'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
+                  }
+                >
+                  {mockupData.map((item, index) => (
+                    <NewsCard item={item} key={index} />
+                  ))}
+                </div>
+                <div className={styles.seeAll + ' mt-10 mb-7 cursor-pointer text-right'}>Ver todas</div>
+              </div>
+              <div>
+                <div className={styles.categoryTitle + ' mb-9'}>Apariciones en prensa</div>
                 <div className={'grid grid-cols-12 gap-8'}>
                   {mockupData.map((item, index) => (
                     <div key={index} className={'col-span-4'}>
@@ -110,6 +123,7 @@ const News = props => {
                     </div>
                   ))}
                 </div>
+                <div className={styles.seeAll + ' mt-10 mb-7 cursor-pointer text-right'}>Ver todas</div>
               </div>
             </div>
           </div>
