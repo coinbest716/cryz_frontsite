@@ -19,7 +19,7 @@ import MobilePersonalProfile from 'components/dashboard/profile/MobilePersonalPr
 import MobileGraphicProfile from 'components/dashboard/profile/MobileGraphicProfile'
 import MobileHealthProfile from 'components/dashboard/profile/MobileHealthProfile'
 
-// import Profile from 'components/components/dashboard/Profile'
+// import Profile from 'components/dashboard/Profile'
 import Personal from 'components/dashboard/Personal'
 import Health from 'components/dashboard/Health'
 import Graphic from 'components/dashboard/Graphic'

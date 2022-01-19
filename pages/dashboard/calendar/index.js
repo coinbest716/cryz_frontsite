@@ -22,7 +22,7 @@ import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import DashboardButton from 'components/dashboard/DashboardButton'
 import NotificationButton from 'components/dashboard/NotificationButton'
 import ClassItem from 'components/dashboard/calendar/ClassItem'
-// import Profile from 'components/components/dashboard/Profile'
+// import Profile from 'components/dashboard/Profile'
 import CheckBoxImage from 'components/dashboard/CheckBoxImage'
 
 // styles

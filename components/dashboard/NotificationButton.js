@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 // styles
-import styles from 'components/components/dashboard/NotificationButton.module.scss'
+import styles from 'components/dashboard/NotificationButton.module.scss'
 
 // images
 import ChatIcon from 'assets/images/chat.svg'

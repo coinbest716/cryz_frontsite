@@ -4,7 +4,7 @@ import React, { createRef, useState } from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from 'components/components/dashboard/message/MessageInput.module.scss'
+import styles from 'components/dashboard/message/MessageInput.module.scss'
 
 // images
 import SendIcon from 'assets/images/send.svg'
@@ -95,7 +95,6 @@ const MessageInput = props => {
         </div>
 
         <div className={'w-full flex justify-end'}>
-          
           <button
             className={'duration-200 hover:bg-gray-300 rounded-full p-3 flex justify-center items-center'}
             onClick={onClickAttachFile}

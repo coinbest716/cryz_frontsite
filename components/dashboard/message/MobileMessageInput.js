@@ -9,7 +9,7 @@ import CloseIcon from 'assets/images/close-gray.svg'
 import AttachIcon from 'assets/images/attach.svg'
 
 // styles
-import styles from 'components/components/dashboard/message/MobileMessageInput.module.scss'
+import styles from 'components/dashboard/message/MobileMessageInput.module.scss'
 
 const MobileMessageInput = props => {
   const { sendMessage } = props

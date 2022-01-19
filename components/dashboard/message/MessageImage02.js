@@ -4,7 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from 'components/components/dashboard/message/MessageImage02.module.scss'
+import styles from 'components/dashboard/message/MessageImage02.module.scss'
 
 // images and icons
 import DownloadIcon from 'assets/images/download-gray.svg'

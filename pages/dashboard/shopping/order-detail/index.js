@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 // custom components
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
-// import Profile from 'components/components/dashboard/Profile'
+// import Profile from 'components/dashboard/Profile'
 import NotificationButton from 'components/dashboard/NotificationButton'
 import CommonButton from 'components/dashboard/CommonButton'
 import Chip from 'components/components/Chip'

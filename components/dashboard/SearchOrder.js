@@ -4,7 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from 'components/components/dashboard/SearchOrder.module.scss'
+import styles from 'components/dashboard/SearchOrder.module.scss'
 
 // images
 import SearchIcon from 'assets/images/search.svg'

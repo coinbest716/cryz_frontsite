@@ -6,7 +6,7 @@ import MobileMessageVideo01 from 'components/dashboard/message/MobileMessageVide
 import MobileMessageDownload01 from 'components/dashboard/message/MobileMessageDownload01'
 
 // styles
-import styles from 'components/components/dashboard/message/MobileMessageCard01.module.scss'
+import styles from 'components/dashboard/message/MobileMessageCard01.module.scss'
 
 const MobileMessageCard01 = props => {
   const { message } = props
