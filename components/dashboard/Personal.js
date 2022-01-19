@@ -1,7 +1,7 @@
 import React from 'react'
-import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
-import CommonButton from 'components/components/purchase/CommonButton'
-import CommonText from 'components/components/purchase/CommonText'
+import PurchaseAvatar from 'components/purchase/PurchaseAvatar'
+import CommonButton from 'components/purchase/CommonButton'
+import CommonText from 'components/purchase/CommonText'
 import styles from './Personal.module.scss'
 import moment from 'moment'
 

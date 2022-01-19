@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import CommonButton from 'components/components/purchase/CommonButton'
-import CommonText from 'components/components/purchase/CommonText'
+import CommonButton from 'components/purchase/CommonButton'
+import CommonText from 'components/purchase/CommonText'
 import styles from './Health.module.scss'
 import measureGraphic from 'public/images/measure-graphic.svg'
 

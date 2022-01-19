@@ -4,10 +4,10 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 
 // custom components
-import AcceptCommonButtom from 'components/components/purchase/CommonButton'
+import AcceptCommonButtom from 'components/purchase/CommonButton'
 // import CommonButton from './CommonButton'
 
-import Radio from 'components/components/purchase/Radio'
+import Radio from 'components/purchase/Radio'
 // styles
 import styles from './ShoppingCart.module.scss'
 
@@ -46,7 +46,7 @@ const ShoppingCart = props => {
                 <div className={'mr-4'} style={{ minWidth: '88px' }}>
                   <Image src={item.image} alt={''} width={88} height={88} />
                 </div>
-                  <div className={'flex flex-col justify-evenly'}>
+                <div className={'flex flex-col justify-evenly'}>
                   <div className={styles.listDescription}>{item.description}</div>
                   <div className={styles.listPrice}>€&nbsp;&nbsp;{item.price}</div>
                 </div>

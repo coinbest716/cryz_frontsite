@@ -2,7 +2,7 @@ import React from 'react'
 
 // next components
 import Image from 'next/image'
-import Radio from 'components/components/purchase/Radio'
+import Radio from 'components/purchase/Radio'
 
 // styles
 import styles from './ShoppingCart.module.scss'
