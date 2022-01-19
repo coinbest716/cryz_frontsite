@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
+
+// redux component
 import { useDispatch } from 'react-redux'
 
 // next components
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -17,7 +20,6 @@ import styles from './academy.module.scss'
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
-import { NextSeo } from 'next-seo'
 const Academy = props => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -38,10 +40,6 @@ const Academy = props => {
   // variables
   const { viewport } = props
   const router = useRouter()
-
-  // const [getAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
-  //   graphql.queries.getAcademy
-  // )
   const [getAcademyWithPlazas, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
     graphql.queries.getAcademyWithPlazas
   )

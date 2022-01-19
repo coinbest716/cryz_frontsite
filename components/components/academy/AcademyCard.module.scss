@@ -1,11 +1,13 @@
 @import 'styles/variable.module.scss';
 
 .singleCard {
+  position: relative;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
   border: 1px solid #818e8e;
   max-width: 355px;
+  height: 420px;
 }
 .cardImage {
   opacity: 0.6;
@@ -37,18 +39,39 @@
     padding: 5px 29px 0px 29px;
   }
 }
-.cardName {
+.cardType {
+  position: absolute;
+  bottom: 63px;
+  left: 29px;
+
+  color: #ffffff;
+  font-family: Montserrat;
+  font-weight: 700;
+  letter-spacing: 1px;
+  @media (max-width: 1023px) {
+    font-size: 10px;
+    line-height: 14px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 14px;
+    line-height: 19px;
+  }
+}
+
+.cardCategory {
+  position: absolute;
+  bottom: 16px;
+  left: 29px;
+
   color: #acb1b2;
   font-family: Montserrat;
   letter-spacing: 1px;
   @media (max-width: 1023px) {
     font-size: 10px;
     line-height: 14px;
-    padding: 5px 16px 0px 16px;
   }
   @media (min-width: 1024px) {
     font-size: 16px;
     line-height: 19px;
-    padding: 24px 29px 19px 29px;
   }
 }
