@@ -10,7 +10,7 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from 'pages/news/news.module.scss'
+import styles from './detail.module.scss'
 
 const Detail = props => {
   // loading part ###########################
