@@ -19,11 +19,11 @@ const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import DashboardButton from 'components/components/dashboard/DashboardButton'
-import NotificationButton from 'components/components/dashboard/NotificationButton'
-import ClassItem from 'components/components/dashboard/calendar/ClassItem'
+import DashboardButton from 'components/dashboard/DashboardButton'
+import NotificationButton from 'components/dashboard/NotificationButton'
+import ClassItem from 'components/dashboard/calendar/ClassItem'
 // import Profile from 'components/components/dashboard/Profile'
-import CheckBoxImage from 'components/components/dashboard/CheckBoxImage'
+import CheckBoxImage from 'components/dashboard/CheckBoxImage'
 
 // styles
 import styles from './calendar.module.scss'

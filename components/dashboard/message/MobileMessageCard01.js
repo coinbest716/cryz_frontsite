@@ -1,9 +1,9 @@
 import React from 'react'
 
 // custom components
-import MobileMessageImage01 from 'components/components/dashboard/message/MobileMessageImage01'
-import MobileMessageVideo01 from 'components/components/dashboard/message/MobileMessageVideo01'
-import MobileMessageDownload01 from 'components/components/dashboard/message/MobileMessageDownload01'
+import MobileMessageImage01 from 'components/dashboard/message/MobileMessageImage01'
+import MobileMessageVideo01 from 'components/dashboard/message/MobileMessageVideo01'
+import MobileMessageDownload01 from 'components/dashboard/message/MobileMessageDownload01'
 
 // styles
 import styles from 'components/components/dashboard/message/MobileMessageCard01.module.scss'

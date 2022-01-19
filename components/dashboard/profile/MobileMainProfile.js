@@ -1,7 +1,7 @@
 import React from 'react'
 import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
-import ProfileItem from 'components/components/dashboard/profile/ProfileItem'
-import ProfileMainButton from 'components/components/dashboard/profile/ProfileMainButton'
+import ProfileItem from 'components/dashboard/profile/ProfileItem'
+import ProfileMainButton from 'components/dashboard/profile/ProfileMainButton'
 
 import ProfileIcon from 'public/images/profile_icon.svg'
 import ProfileAntro from 'public/images/profile_antro.svg'

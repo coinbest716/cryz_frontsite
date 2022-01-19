@@ -11,10 +11,10 @@ import dynamic from 'next/dynamic'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import DashboardButton from 'components/components/dashboard/DashboardButton'
-import ProgressBar from 'components/components/dashboard/ProgressBar'
-import NewMessageBox from 'components/components/dashboard/NewMessageBox'
-import Questionnaire from 'components/components/dashboard/Questionnaire'
+import DashboardButton from 'components/dashboard/DashboardButton'
+import ProgressBar from 'components/dashboard/ProgressBar'
+import NewMessageBox from 'components/dashboard/NewMessageBox'
+import Questionnaire from 'components/dashboard/Questionnaire'
 
 // third party components
 import 'react-calendar/dist/Calendar.css'
