@@ -8,7 +8,7 @@ import moment from 'moment'
 import styles from './NewsCard.module.scss'
 
 const NewsCard = props => {
-  const { item } = props
+  const { item, handleClickDate } = props
 
   let body = ''
   body =
@@ -30,7 +30,11 @@ const NewsCard = props => {
       </div>
       <div className={styles.textContainer + ' mt-2 py-3 px-5'}>
         <div className={styles.cardTitle}>{item.title}</div>
-        <div className={styles.cardDate + ' mt-3 mb-2 cursor-pointer'}>{moment(item.date).format('DD/MM/YYYY')}</div>
+        <div className="flex justify-start">
+          <div className={styles.cardDate + ' mt-3 mb-2 cursor-pointer w-fit'} onClick={() => handleClickDate(item.id)}>
+            {moment(item.date).format('DD/MM/YYYY')}
+          </div>
+        </div>
         <div className={styles.cardDescription}>{body}</div>
       </div>
     </div>

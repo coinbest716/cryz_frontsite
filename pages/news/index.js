@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 // redux
 import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 
 // next components
 import Image from 'next/image'
@@ -17,8 +18,10 @@ import styles from 'pages/news/news.module.scss'
 
 // images
 import news from 'public/images/news.svg'
+import { Router } from 'next/router'
 
 const News = props => {
+  const router = useRouter()
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -37,6 +40,7 @@ const News = props => {
 
   const mockupData = [
     {
+      id: 0,
       image:
         'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
       title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
@@ -44,6 +48,7 @@ const News = props => {
       description: 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ',
     },
     {
+      id: 1,
       image:
         'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
       title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
@@ -52,6 +57,7 @@ const News = props => {
         'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
     },
     {
+      id: 2,
       image:
         'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
       title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
@@ -60,6 +66,7 @@ const News = props => {
         'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
     },
     {
+      id: 3,
       image:
         'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
       title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
@@ -68,6 +75,7 @@ const News = props => {
         'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
     },
     {
+      id: 4,
       image:
         'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
       title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
@@ -76,6 +84,7 @@ const News = props => {
         'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
     },
     {
+      id: 5,
       image:
         'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
       title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
@@ -84,6 +93,7 @@ const News = props => {
         'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
     },
     {
+      id: 6,
       image:
         'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
       title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
@@ -92,6 +102,7 @@ const News = props => {
         'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
     },
     {
+      id: 7,
       image:
         'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
       title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
@@ -112,6 +123,14 @@ const News = props => {
     setPressItems(newArr)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleClickMore = category => {
+    router.push({ pathname: '/news/categories', query: { category: category } })
+  }
+
+  const handleClickDate = id => {
+    router.push({ pathname: '/news/detail', query: { id: id } })
+  }
 
   return (
     <>
@@ -134,10 +153,17 @@ const News = props => {
                   }
                 >
                   {newsItems.map((item, index) => (
-                    <NewsCard item={item} key={index} />
+                    <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
                   ))}
                 </div>
-                <div className={styles.seeAll + ' mt-10 mb-7 cursor-pointer text-right'}>Ver todas</div>
+                <div className="flex justify-end">
+                  <div
+                    className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
+                    onClick={() => handleClickMore('news')}
+                  >
+                    Ver todas
+                  </div>
+                </div>
               </div>
               <div>
                 <div className={styles.categoryTitle + ' mb-9'}>Apariciones en prensa</div>
@@ -147,10 +173,17 @@ const News = props => {
                   }
                 >
                   {pressItems.map((item, index) => (
-                    <NewsCard item={item} key={index} />
+                    <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
                   ))}
                 </div>
-                <div className={styles.seeAll + ' mt-10 mb-7 cursor-pointer text-right'}>Ver todas</div>
+                <div className="flex justify-end">
+                  <div
+                    className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
+                    onClick={() => handleClickMore('press')}
+                  >
+                    Ver todas
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -1,1 +1,9 @@
 @import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f3f3e9;
+  min-height: calc(100vh - 150px);
+}

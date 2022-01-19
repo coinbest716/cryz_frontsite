@@ -8,6 +8,9 @@ import Image from 'next/image'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
+// styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
+import styles from 'pages/news/news.module.scss'
 
 const Categoris = props => {
   // loading part ###########################
@@ -29,7 +32,12 @@ const Categoris = props => {
   // variables
   const { viewport } = props
 
-  return <>Categoris Page</>
+  return
+  ;<div className={'flex flex-wrap justify-center'}>
+    <div className={styles.container}>
+      <div className={globalStyles.container + ' my-20'}>Categoris Page</div>
+    </div>
+  </div>
 }
 export default Categoris
 
