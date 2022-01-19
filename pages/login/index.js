@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 // custom components
-import CommonButton from 'components/components/purchaseLogin/CommonButton'
+import CommonButton from 'components/purchaseLogin/CommonButton'
 
 // styles
 import styles from 'pages/login/login.module.scss'
