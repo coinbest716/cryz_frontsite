@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="231px" height="190px" viewBox="0 0 231 190" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient x1="0.5" y1="0" x2="0.1699059" y2="1.4257203" id="gradient_1">
+      <stop offset="0" stop-color="#818E8E" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient x1="0.5" y1="0" x2="0.1699059" y2="1.4257203" id="gradient_2">
+      <stop offset="0" stop-color="#939E9E" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient x1="0.5" y1="0" x2="0.1699059" y2="1.4257203" id="gradient_3">
+      <stop offset="0" stop-color="#859191" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient x1="0.5" y1="0" x2="0.1699059" y2="1.4257203" id="gradient_4">
+      <stop offset="0" stop-color="#889494" />
+      <stop offset="1" stop-color="#FFFFFF" />
+    </linearGradient>
+    <filter filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB" id="filter_1">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+      <feMorphology radius="-1" operator="dilate" in="SourceAlpha" result="effect0_dropShadow" />
+      <feOffset dx="0" dy="16" />
+      <feGaussianBlur stdDeviation="8" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.039215688 0 0 0 0 0.08627451 0 0 0 0 0.27450982 0 0 0 0.101960786 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect0_dropShadow" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+      <feOffset dx="0" dy="0" />
+      <feGaussianBlur stdDeviation="0.5" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.039215688 0 0 0 0 0.08627451 0 0 0 0 0.27450982 0 0 0 0.05882353 0" />
+      <feBlend mode="normal" in2="effect0_dropShadow" result="effect1_dropShadow" />
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+    </filter>
+  </defs>
+  <g id="logo" transform="translate(2.5 2.5)">
+    <path d="M113.478 173.112C155.176 173.112 188.978 139.309 188.978 97.6118C188.978 55.9143 155.176 22.1118 113.478 22.1118C71.7805 22.1118 37.978 55.9143 37.978 97.6118C37.978 139.309 71.7805 173.112 113.478 173.112Z" id="Oval-4" fill="url(#gradient_1)" fill-rule="evenodd" stroke="none" filter="url(#filter_1)" />
+    <path d="M22.52 75.146C26.646 101.246 51.1085 119.054 77.1587 114.92C103.209 110.786 120.982 86.2761 116.856 60.1759C112.73 34.0756 88.2675 16.2683 62.2173 20.4022C36.1672 24.536 18.3941 49.0457 22.52 75.146Z" id="Oval-4" fill="url(#gradient_2)" fill-rule="evenodd" stroke="none" />
+    <path d="M1.58182 13.1435C2.4535 18.6577 7.62164 22.4198 13.1252 21.5464C18.6288 20.673 22.3836 15.495 21.512 9.98081C20.6403 4.46667 15.4721 0.704563 9.96858 1.57792C4.46502 2.45127 0.710138 7.62936 1.58182 13.1435Z" id="Oval-4" fill="url(#gradient_3)" fill-rule="evenodd" stroke="none" />
+    <path d="M212.153 32.0629C212.676 35.3713 215.777 37.6286 219.079 37.1046C222.381 36.5806 224.634 33.4737 224.111 30.1652C223.588 26.8568 220.487 24.5995 217.185 25.1235C213.883 25.6475 211.63 28.7544 212.153 32.0629Z" id="Oval-4" fill="url(#gradient_4)" fill-rule="evenodd" stroke="none" />
+  </g>
+  <g id="edit" transform="translate(80.47803 62.611816)">
+    <path d="M33.5 8L7.44444 8C3.33299 8 0 11.333 0 15.4444L0 67.5556C0 71.667 3.33299 75 7.44444 75L59.5556 75C63.667 75 67 71.667 67 67.5556L67 41.5" id="Path" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M61.4085 2.33193C64.5177 -0.777311 69.5588 -0.777311 72.6681 2.33193C75.7773 5.44118 75.7773 10.4823 72.6681 13.5915L37.0128 49.2468L22 53L25.7532 37.9872L61.4085 2.33193Z" id="Path" fill="none" fill-rule="evenodd" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>
