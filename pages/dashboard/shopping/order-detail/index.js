@@ -139,7 +139,11 @@ const OrderDetail = props => {
           </div>
           <div className="mt-36 mb-32 p-4">
             <div className="flex flex-wrap justify-between">
-              <ComprasButton title={'Pagar pedido pendiente'} type={'pending'} />
+              {status !== 'PAID' ? (
+                <ComprasButton title={'Pagar pedido pendiente'} type={'pending'} onClick={() => handlePayButton()} />
+              ) : (
+                <></>
+              )}
               <ComprasButton title={'Nuevo bono'} type={'new'} onClick={handleBuyAnotherButton} />
             </div>
             <div className={styles.SessionHeader + ' flex  flex-wrap justify-between mt-4'}>
