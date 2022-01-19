@@ -83,10 +83,35 @@ const News = props => {
       description:
         'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
     },
+    {
+      image:
+        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
+      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
+      date: '2022-01-06T18:04:57.000Z',
+      description:
+        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
+    },
+    {
+      image:
+        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
+      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
+      date: '2022-01-06T18:04:57.000Z',
+      description:
+        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
+    },
   ]
 
   // variables
   const { viewport } = props
+  const [newsItems, setNewItems] = useState([])
+  const [pressItems, setPressItems] = useState([])
+
+  useEffect(() => {
+    const newArr = mockupData.slice(0, 6)
+    setNewItems(newArr)
+    setPressItems(newArr)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
@@ -108,7 +133,7 @@ const News = props => {
                     'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
                   }
                 >
-                  {mockupData.map((item, index) => (
+                  {newsItems.map((item, index) => (
                     <NewsCard item={item} key={index} />
                   ))}
                 </div>
@@ -116,11 +141,13 @@ const News = props => {
               </div>
               <div>
                 <div className={styles.categoryTitle + ' mb-9'}>Apariciones en prensa</div>
-                <div className={'grid grid-cols-12 gap-8'}>
-                  {mockupData.map((item, index) => (
-                    <div key={index} className={'col-span-4'}>
-                      <NewsCard item={item} />
-                    </div>
+                <div
+                  className={
+                    'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
+                  }
+                >
+                  {pressItems.map((item, index) => (
+                    <NewsCard item={item} key={index} />
                   ))}
                 </div>
                 <div className={styles.seeAll + ' mt-10 mb-7 cursor-pointer text-right'}>Ver todas</div>
