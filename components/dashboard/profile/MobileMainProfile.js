@@ -1,5 +1,5 @@
 import React from 'react'
-import PurchaseAvatar from 'components/components/purchase/PurchaseAvatar'
+import PurchaseAvatar from 'components/purchase/PurchaseAvatar'
 import ProfileItem from 'components/dashboard/profile/ProfileItem'
 import ProfileMainButton from 'components/dashboard/profile/ProfileMainButton'
 
