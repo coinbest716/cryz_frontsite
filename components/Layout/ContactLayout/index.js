@@ -6,7 +6,7 @@ import ReactLoading from 'react-loading'
 
 // custom components
 import Header from 'components/Header'
-import ContactFooter from 'components/ContactFooter'
+import ContactFooter from 'components/Footer/ContactFooter'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'

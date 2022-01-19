@@ -10,10 +10,10 @@ import toast from 'react-hot-toast'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import ArrowButton from 'components/components/academy/ArrowButton'
-import Feature from 'components/components/academy/Feature'
-import DownloadPDF from 'components/components/academy/DownloadPDF'
-import CarouselAcademy from 'components/components/academy/CarouselAcademy'
+import ArrowButton from 'components/academy/ArrowButton'
+import Feature from 'components/academy/Feature'
+import DownloadPDF from 'components/academy/DownloadPDF'
+import CarouselAcademy from 'components/academy/CarouselAcademy'
 import BackButton from 'components/components/BackButton'
 
 // graphql
@@ -167,7 +167,7 @@ const Course = props => {
                   {moment(mainData.end_date).format('MMMM YYYY')}
                 </div>
                 {mainData.plazas && (
-                  <div className={'mt-6'} >
+                  <div className={'mt-6'}>
                     <ArrowButton
                       plazas={mainData.plazas}
                       label={mainData.price + ' €'}

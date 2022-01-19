@@ -9,7 +9,7 @@ import { NextSeo } from 'next-seo'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import AcademyCard from 'components/components/academy/AcademyCard'
+import AcademyCard from 'components/academy/AcademyCard'
 import CircularMark from 'components/components/CircularMark'
 
 // styles

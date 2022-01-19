@@ -4,7 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 
 // custom components
-import ArrowWatchNowButton from 'components/components/academy/ArrowWatchNowButton'
+import ArrowWatchNowButton from 'components/academy/ArrowWatchNowButton'
 
 // styles
 import styles from './AcademyDashboardCard.module.scss'
