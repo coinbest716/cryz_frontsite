@@ -18,3 +18,33 @@
   letter-spacing: 0;
   line-height: 20px;
 }
+
+.noAcademyArea {
+  height: calc(100vh - 48px - 70px - 50px);
+}
+.noAcademyContent {
+  height: 361px;
+}
+.actualmentText {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+  text-align: center;
+}
+.goAcademyButton {
+  height: 40px;
+  border-radius: 6px;
+  padding: 12px 30px;
+  background-color: #818e8e;
+
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  &:hover {
+    opacity: 0.6;
+  }
+}

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 // next components
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 // custom components
@@ -15,6 +16,9 @@ import StartclassButton from 'components/components/StartClassButton'
 
 // third party components
 import moment from 'moment'
+
+// images and icons
+import AcademyLogoIcon from 'assets/images/academy-logo.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -149,13 +153,27 @@ const Academy = props => {
           <NotificationButton />
         </div>
       </div>
-      <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
-        {cardData?.map((card, index) => (
-          <div className={'flex justify-center col-span-6 md:col-span-4 mt-9'} key={index}>
-            <AcademyDashboardCard data={card} index={index} handleWatchNow={handleWatchNow} viewport={viewport} />
+      {cardData.length !== 0 ? (
+        <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
+          {cardData?.map((card, index) => (
+            <div className={'flex justify-center col-span-6 md:col-span-4 mt-9'} key={index}>
+              <AcademyDashboardCard data={card} index={index} handleWatchNow={handleWatchNow} viewport={viewport} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyArea}>
+          <div className={'w-full flex flex-wrap justify-center ' + styles.noAcademyContent}>
+            <Image src={AcademyLogoIcon} alt="" width={231} height={190} />
+            <div className={'w-full mt-16 ' + styles.actualmentText}>
+              Actualmente, no tienes ninguna formación contratada
+            </div>
+            <button className={'mt-10 ' + styles.goAcademyButton} onClick={() => router.push('/academy')}>
+              Ver Academy
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   ) : (
     <div className={'p-4 mb-32 ' + styles.m_container}>
