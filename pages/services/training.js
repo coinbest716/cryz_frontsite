@@ -9,8 +9,8 @@ import { useRouter } from 'next/router'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
-import ServiceButton from 'components/components/service/ServiceButton'
-import CarouselService from 'components/components/service/CarouselService'
+import ServiceButton from 'components/service/ServiceButton'
+import CarouselService from 'components/service/CarouselService'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
