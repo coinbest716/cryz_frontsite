@@ -18,7 +18,6 @@ import styles from 'pages/news/news.module.scss'
 
 // images
 import news from 'public/images/news.svg'
-import { Router } from 'next/router'
 
 const News = props => {
   const router = useRouter()
