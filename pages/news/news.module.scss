@@ -5,7 +5,6 @@
   display: flex;
   justify-content: center;
   background-color: #f3f3e9;
-  max-height: calc(100vh - 150px);
   min-height: calc(100vh - 150px);
 }
 .topTitle {
@@ -49,4 +48,21 @@
     font-size: 14px;
     text-align: center;
   }
+}
+.newTopTitle {
+  font-family: DrukWideCyWeb-Bold;
+  font-size: 35px;
+  letter-spacing: 0px;
+  display: block;
+  background: linear-gradient(50.32deg, rgba(217, 218, 186, 0.78) 0%, #bebea3 100%);
+  background-image: -webkit-linear-gradient(50.32deg, rgba(217, 218, 186, 0.78) 0%, #bebea3 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  width: fit-content;
+}
+.newTopDash {
+  height: 7px;
+  width: 42px;
+  background-color: #d1d4b3;
 }
