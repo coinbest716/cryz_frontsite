@@ -32,12 +32,13 @@ const Categoris = props => {
   // variables
   const { viewport } = props
 
-  return
-  ;<div className={'flex flex-wrap justify-center'}>
-    <div className={styles.container}>
-      <div className={globalStyles.container + ' my-20'}>Categoris Page</div>
+  return (
+    <div className={'flex flex-wrap justify-center'}>
+      <div className={styles.container}>
+        <div className={globalStyles.container + ' my-20'}>Categoris Page</div>
+      </div>
     </div>
-  </div>
+  )
 }
 export default Categoris
 
