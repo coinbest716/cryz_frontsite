@@ -9,6 +9,7 @@ import Image from 'next/image'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
+import NewsCard from 'components/components/news/NewsCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -69,13 +70,23 @@ const News = props => {
       {mockupData.length > 0 ? (
         <div className={'flex flex-wrap justify-center'}>
           <div className={styles.container}>
-            <div className={globalStyles.container + ' mt-20'}>
+            <div className={globalStyles.container + ' mx-20'}>
               <div className="flex justify-between mt-24">
                 <div>
                   <div className={styles.newTopTitle}>News</div>
                   <div className={styles.newTopDash + ' mt-5'} />
                 </div>
                 <CircularMark />
+              </div>
+              <div>
+                <div className={styles.categoryTitle + ' mb-9'}>Novedades CrysDyaz & Co</div>
+                <div className={'grid grid-cols-12 gap-8'}>
+                  {mockupData.map((item, index) => (
+                    <div key={index} className={'col-span-4'}>
+                      <NewsCard item={item} />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
