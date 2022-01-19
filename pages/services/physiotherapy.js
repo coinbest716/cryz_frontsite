@@ -9,11 +9,11 @@ import { useRouter } from 'next/router'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
-import CarouselService from 'components/components/service/CarouselService'
-import ArrowButton from 'components/components/service/ArrowButton'
+import CarouselService from 'components/service/CarouselService'
+import ArrowButton from 'components/service/ArrowButton'
 import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
-import ServiceButton from 'components/components/service/ServiceButton'
+import ServiceButton from 'components/service/ServiceButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
