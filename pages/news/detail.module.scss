@@ -4,6 +4,38 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #f3f3e9;
-  min-height: calc(100vh - 150px);
+
+  // padding-top: 80px;
+  background: linear-gradient(90deg, #ffffff 68%, #d5d7ce 32%);
+  overflow: hidden;
+  min-height: calc(100vh - 177px);
+}
+.title {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: -0.38px;
+  line-height: 29px;
+}
+.date {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 18px;
+  letter-spacing: -0.29px;
+  line-height: 20px;
+}
+.expand {
+  max-height: 100% !important;
+}
+.text {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.62px;
+  line-height: 28px;
+  text-align: justify;
+  overflow: hidden;
+  padding-bottom: 50px;
+  max-height: 440px;
 }
