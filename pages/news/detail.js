@@ -10,7 +10,7 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
-import CarouselService from 'components/components/service/CarouselService'
+import CarouselService from 'components/service/CarouselService'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
