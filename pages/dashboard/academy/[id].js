@@ -24,6 +24,7 @@ const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 import MenubarIcon from 'assets/images/menubar.svg'
 import UserCircleIcon from 'assets/images/user-circle.svg'
 import TimerIcon from 'assets/images/timer.svg'
+import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -159,16 +160,23 @@ const AcademyDetail = props => {
     })
   }
 
+  // mobile part
+  const handleClickBack = () => {
+    router.push('/dashboard/academy')
+  }
+
   return viewport !== 'mobile' ? (
     <div className={globalStyles.dashContainer}>
       <div className={'w-full flex justify-between items-center'}>
         <div className={globalStyles.dashTitle}>{academyData.name}</div>
         <div className={'flex justify-end'}>
-          <StartclassButton
-            handleClick={() => handleClickStartButton()}
-            label={'Comenzar clase'}
-            visible={streamingEvent.toggle}
-          />
+          <div className="mr-16">
+            <StartclassButton
+              handleClick={() => handleClickStartButton()}
+              label={'Comenzar clase'}
+              visible={streamingEvent.toggle}
+            />
+          </div>
           <NotificationButton />
         </div>
       </div>
@@ -220,7 +228,22 @@ const AcademyDetail = props => {
       </div>
     </div>
   ) : (
-    <>Mobile View</>
+    <div>
+      <div className={styles.mobileHeader}>
+        <div className="w-full flex justify-between">
+          <div className="flex justify-start items-center cursor-pointer" onClick={() => handleClickBack()}>
+            <Image src={ArrowLeftWhite} width={18} height={15} alt="" />
+            <div className={styles.mobileBackString + ' ml-2'}>Academy</div>
+          </div>
+          <StartclassButton
+            handleClick={() => handleClickStartButton()}
+            label={'clase'}
+            visible={streamingEvent.toggle}
+          />
+        </div>
+        <div className={'mt-4 ' + styles.mobileTitle}>{academyData.name}</div>
+      </div>
+    </div>
   )
 }
 

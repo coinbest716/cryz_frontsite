@@ -37,3 +37,29 @@
 .calendar {
   font-size: 13px;
 }
+
+// mobile header part
+
+.mobileHeader {
+  background-color: #818e8e;
+  box-shadow: 0 32px 44px 0 rgba(131, 146, 167, 0.2);
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top: 0px;
+  padding: 16px;
+}
+.mobileBackString {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.26px;
+}
+.mobileTitle {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 30px;
+}
