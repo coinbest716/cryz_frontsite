@@ -126,7 +126,7 @@ const Nutrition = props => {
                         <a href="/images/Programa_5P_cerrando_el_circulo.pdf" target="_blank">
                           {' '}
                           {/* eslint-disable-next-line react/no-unescaped-entities */}
-                          >> Descargar dossier
+                          &gt;&gt; Descargar dossier
                         </a>
                       </p>
                     </div>

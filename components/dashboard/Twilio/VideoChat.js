@@ -204,7 +204,7 @@ const VideoChat = props => {
   return (
     <>
       {viewport === 'mobile' ? (
-        <FullScreen onChange={onFullScreenChange} handle={handle}>
+        <FullScreen onChange={event => onFullScreenChange(event)} handle={handle}>
           {room ? (
             <div className={'w-full h-full relative bg-black'}>
               <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
@@ -291,7 +291,7 @@ const VideoChat = props => {
           )}
         </FullScreen>
       ) : (
-        <FullScreen onChange={onFullScreenChange} handle={handle}>
+        <FullScreen onChange={event => onFullScreenChange(event)} handle={handle}>
           <div
             style={{
               position: 'relative',
