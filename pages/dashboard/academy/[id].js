@@ -192,7 +192,7 @@ const AcademyDetail = props => {
         </div>
         <div className={'mr-10'}>
           <p className={styles.thinText}>Horas</p>
-          <p className={styles.boldText}>{Number(academyData.duration / 60).toFixed(2)}</p>
+          <p className={styles.boldText}>{academyData.duration}</p>
         </div>
       </div>
       <div className={'flex mt-8'}>
