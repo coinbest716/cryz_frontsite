@@ -14,10 +14,7 @@ const StartClassButton = props => {
 
   return (
     visible === true && (
-      <button
-        className={'flex justify-between items-center px-4 py-2 mr-16 ' + styles.outlineButton}
-        onClick={handleClick}
-      >
+      <button className={'flex justify-between items-center px-4 py-2 ' + styles.outlineButton} onClick={handleClick}>
         <p className={'pr-3 ' + styles.outlineLabel}>{label}</p>
         <div className="w-8 h-8 flex justify-center items-center">
           <Image src={StartClassIcon} alt={''} width={30} height={30} className={styles.startClassButtonImage} />
