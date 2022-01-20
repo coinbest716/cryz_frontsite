@@ -478,7 +478,7 @@ const Dashboard = props => {
           />
         </div>
         <div className={'w-full flex justify-between items-center mt-7 pl-9 pr-12 ' + styles.welcomeSection}>
-          <div className={'py-4 w-full'}>
+          <div className={'py-4'}>
             <div className={styles.welcomeLabel}>Bienvenido</div>
             <div className={styles.welcomeLabel}>
               {personalInfo.name}&nbsp;{personalInfo.lastname}
@@ -494,7 +494,7 @@ const Dashboard = props => {
               </div>
             )}
           </div>
-          <div style={{ minWidth: '220px' }}>
+          <div>
             <Image src={welcomeIcon} alt="" width={220} height={254} />
           </div>
         </div>
