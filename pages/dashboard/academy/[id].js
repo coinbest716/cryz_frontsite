@@ -243,6 +243,7 @@ const AcademyDetail = props => {
         </div>
         <div className={'mt-4 ' + styles.mobileTitle}>{academyData.name}</div>
       </div>
+      <div className="mt-32 w-full"></div>
     </div>
   )
 }
