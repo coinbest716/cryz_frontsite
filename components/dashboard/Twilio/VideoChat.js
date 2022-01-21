@@ -52,7 +52,7 @@ const VideoChat = props => {
 
   // handlers
   useEffect(() => {
-    if (sessionId > 0) {
+    if (sessionId !== -1) {
       initTwilioConnet(`Crysdyaz_${sessionId}`, localStorage.getItem('email'))
     }
     // Auth.currentSession()
