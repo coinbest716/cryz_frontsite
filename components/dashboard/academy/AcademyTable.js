@@ -66,7 +66,7 @@ const AcademyTable = props => {
       </div>
       {academy !== undefined &&
         academy.map((item, index) => (
-          <div key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
+          <div key={index} className={index % 2 === 1 ? 'bg-white' : 'bg-gray-100'}>
             <div className={'flex justify-start items-center ' + styles.tableContentHeadArea}>
               <div
                 className={
