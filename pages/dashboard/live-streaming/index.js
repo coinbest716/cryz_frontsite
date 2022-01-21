@@ -56,11 +56,12 @@ const LiveStreaming = props => {
 
   useEffect(() => {
     if (event.id !== -1) {
-      getSessionMaterialByDashboard({
-        variables: {
-          session_id: event.id,
-        },
-      })
+      if (event.id.split('-')[0] !== 'academy')
+        getSessionMaterialByDashboard({
+          variables: {
+            session_id: Number(event.id),
+          },
+        })
     }
   }, [getSessionMaterialByDashboard, event])
 
