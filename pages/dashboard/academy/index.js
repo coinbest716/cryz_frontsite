@@ -145,11 +145,13 @@ const Academy = props => {
       <div className={'w-full flex flex-wrap justify-between items-center'}>
         <div className={globalStyles.dashTitle}>Mis cursos Academy</div>
         <div className={'flex justify-end'}>
-          <StartclassButton
-            handleClick={() => handleClickStartButton()}
-            label={'Comenzar clase'}
-            visible={streamingEvent.toggle}
-          />
+          <div className="mr-16">
+            <StartclassButton
+              handleClick={() => handleClickStartButton()}
+              label={'Comenzar clase'}
+              visible={streamingEvent.toggle}
+            />
+          </div>
           <NotificationButton />
         </div>
       </div>
