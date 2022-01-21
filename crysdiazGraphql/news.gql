@@ -1,0 +1,10 @@
+query GetNewsListForDashboard {
+  getNewsListForDashboard {
+    id
+    category_id
+    publish_date
+    title
+    description
+    images
+  }
+}
