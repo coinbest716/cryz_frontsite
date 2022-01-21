@@ -229,11 +229,12 @@ const AcademyDetail = props => {
     </div>
   ) : (
     <div>
+      {/* mobile header part */}
       <div className={styles.mobileHeader}>
         <div className="w-full flex justify-between">
           <div className="flex justify-start items-center cursor-pointer" onClick={() => handleClickBack()}>
             <Image src={ArrowLeftWhite} width={18} height={15} alt="" />
-            <div className={styles.mobileBackString + ' ml-2'}>Academy</div>
+            <div className={styles.mobileHeaderBackString + ' ml-2'}>Academy</div>
           </div>
           <StartclassButton
             handleClick={() => handleClickStartButton()}
@@ -241,9 +242,14 @@ const AcademyDetail = props => {
             visible={streamingEvent.toggle}
           />
         </div>
-        <div className={'mt-4 ' + styles.mobileTitle}>{academyData.name}</div>
+        <div className={'mt-4 ' + styles.mobileHeaderTitle}>{academyData.name}</div>
       </div>
-      <div className="mt-32 w-full"></div>
+      {/* mobile content part */}
+      <div className={'mt-32 w-full ' + globalStyles.container}>
+        <div className={'flex pt-4'}>
+          <p className={styles.mobileDescription} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
+        </div>
+      </div>
     </div>
   )
 }
