@@ -187,7 +187,8 @@ const AcademyDetail = props => {
         <div className={'mr-10'}>
           <p className={styles.thinText}>Categoria</p>
           <p className={styles.boldText}>
-            {academyData.category.charAt(0).toUpperCase() + academyData.category.slice(1)}
+            {academyData.category !== undefined &&
+              academyData.category.charAt(0).toUpperCase() + academyData.category.slice(1)}
           </p>
         </div>
         <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#DFDBD5' }}>
@@ -195,7 +196,9 @@ const AcademyDetail = props => {
         </div>
         <div className={'mr-10'}>
           <p className={styles.thinText}>Tipo</p>
-          <p className={styles.boldText}>{academyData.type.charAt(0).toUpperCase() + academyData.type.slice(1)}</p>
+          <p className={styles.boldText}>
+            {academyData.type !== undefined && academyData.type.charAt(0).toUpperCase() + academyData.type.slice(1)}
+          </p>
         </div>
         <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#E3BBAA' }}>
           <Image src={TimerIcon} width={14} height={13} />
