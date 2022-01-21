@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 // redux
 import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 
 // next components
 import Image from 'next/image'
@@ -22,6 +23,7 @@ import 'moment/locale/es'
 moment.locale('es')
 
 const Detail = props => {
+  const router = useRouter()
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -38,40 +40,31 @@ const Detail = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  const mockupData = {
-    id: 0,
-    title: 'Entrenamiento de influencers',
-    date: '2022-01-06T18:04:57.000Z',
-    description:
-      'Especialización dirigida a profesionales que quieran trabajar o que trabajen con embarazadas, post parto y hombres o mujeres con disfunción de suelo pélvico.',
-  }
-
   // variables
   const { viewport } = props
   const [readMoreCurrentState, setReadMoreCurrentState] = useState('less')
-  const [newsInfo, setNewInfo] = useState({})
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [sliderData, setSliderData] = useState([])
-  const [getCmsServiceSubject, { data: cmsSubjectData, loading: cmsSubjectLoading, error: cmsSubjectError }] =
-    useLazyQuery(graphql.queries.getCmsServiceSubject)
+  const [newsInfo, setNewsInfo] = useState({})
+  const [getNewsByIdForDashboard, { data: newsData, loading: newsDataLoading, error: newsDataError }] = useLazyQuery(
+    graphql.queries.getNewsByIdForDashboard
+  )
 
   useEffect(() => {
-    setNewInfo(mockupData)
-    getCmsServiceSubject({
-      variables: {
-        discipline_id: 2,
-      },
-    })
-  }, [])
-
-  useEffect(() => {
-    if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
-      setTitle(cmsSubjectData.getCmsServiceSubject.title_two)
-      setDescription(cmsSubjectData.getCmsServiceSubject.text)
-      setSliderData(cmsSubjectData.getCmsServiceSubject.carousel_image || [])
+    if (router.query.id) {
+      getNewsByIdForDashboard({
+        variables: {
+          id: Number(router.query.id),
+        },
+      })
     }
-  }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query])
+
+  useEffect(() => {
+    if (!newsDataError && newsData && newsData.getNewsByIdForDashboard) {
+      setNewsInfo(newsData.getNewsByIdForDashboard)
+      console.log('$$$$$$$$$$$$$$$$$$', newsData.getNewsByIdForDashboard)
+    }
+  }, [newsDataLoading, newsData, newsDataError])
 
   const handleReadMore = state => {
     setReadMoreCurrentState(state)
@@ -87,13 +80,13 @@ const Detail = props => {
                 <BackButton viewport={viewport} />
               </div>
               <div className={styles.title + ' mt-16'}>{newsInfo.title}</div>
-              <div className={styles.date + ' my-6'}>{moment(newsInfo.date).locale('es').format('LL')}</div>
+              <div className={styles.date + ' my-6'}>{moment(newsInfo.publish_date).locale('es').format('LL')}</div>
 
               <div
                 className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? ' ' : styles.expand)}
               >
                 <div className={globalStyles.tinyMCEClass}>
-                  <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: description }}></div>
+                  <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: newsInfo.description }}></div>
                 </div>
                 <ReadMoreButton
                   currentState={readMoreCurrentState}
@@ -105,7 +98,7 @@ const Detail = props => {
             </div>
             <div className="w-5/12 flex justify-center mt-32">
               <div>
-                <CarouselService sliderData={sliderData} viewport={viewport} type={'news'} />
+                <CarouselService sliderData={newsInfo.images} viewport={viewport} type={'news'} />
               </div>
             </div>
           </div>

@@ -8,3 +8,14 @@ query GetNewsListForDashboard {
     images
   }
 }
+
+query GetNewsByIdForDashboard($id: Int) {
+  getNewsByIdForDashboard(id: $id) {
+    id
+    category_id
+    publish_date
+    title
+    description
+    images
+  }
+}
