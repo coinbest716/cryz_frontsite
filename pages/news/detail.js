@@ -11,7 +11,7 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
-import CarouselService from 'components/service/CarouselService'
+import NewsCarousel from 'components/news/NewsCarousel'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
@@ -96,9 +96,9 @@ const Detail = props => {
                 />
               </div>
             </div>
-            <div className="w-5/12 flex justify-center mt-32">
+            <div className="w-5/12 flex justify-center mt-36">
               <div>
-                <CarouselService sliderData={newsInfo.images} viewport={viewport} type={'news'} />
+                <NewsCarousel sliderData={newsInfo.images} viewport={viewport} type={'news'} />
               </div>
             </div>
           </div>

@@ -52,8 +52,8 @@ const NewsCarousel = props => {
             <Image src={item.path} alt="" width={200} height={200} className={styles.slideImage} />
           </div>
         ) : (
-          <div key={index} style={{ height: '550px' }}>
-            <Image src={item.path} alt="" width={500} height={500} className={styles.slideImage} />
+          <div key={index} style={{ height: '430px' }}>
+            <Image src={item.path} alt="" width={500} height={400} className={styles.slideImage} />
           </div>
         )
       )}
