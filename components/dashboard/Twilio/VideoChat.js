@@ -287,7 +287,7 @@ const VideoChat = props => {
               </div>
             </div>
           ) : (
-            <div className="p-4">'Tu entrenador llegará pronto'</div>
+            <div className="p-4">Tu entrenador llegará pronto</div>
           )}
         </FullScreen>
       ) : (
