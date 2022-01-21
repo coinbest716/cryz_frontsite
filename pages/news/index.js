@@ -67,14 +67,13 @@ const News = props => {
           _pressItems.push(data)
         }
       })
-      console.log('+++++++++++++++ 1: ', _newsData)
       setNewItems(_newsItems.slice(0, 6))
       setPressItems(_pressItems.slice(0, 6))
     }
   }, [newsLoading, newsData, newsError])
 
-  const handleClickMore = category => {
-    router.push({ pathname: '/news/categories', query: { category: category } })
+  const handleClickMore = categoryId => {
+    router.push({ pathname: '/news/categories', query: { category_id: categoryId } })
   }
 
   const handleClickDate = id => {
@@ -110,7 +109,7 @@ const News = props => {
                     <div className="flex justify-end">
                       <div
                         className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
-                        onClick={() => handleClickMore('news')}
+                        onClick={() => handleClickMore(1)}
                       >
                         Ver todas
                       </div>
@@ -136,7 +135,7 @@ const News = props => {
                     <div className="flex justify-end">
                       <div
                         className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
-                        onClick={() => handleClickMore('press')}
+                        onClick={() => handleClickMore(2)}
                       >
                         Ver todas
                       </div>

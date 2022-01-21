@@ -62,7 +62,6 @@ const Detail = props => {
   useEffect(() => {
     if (!newsDataError && newsData && newsData.getNewsByIdForDashboard) {
       setNewsInfo(newsData.getNewsByIdForDashboard)
-      console.log('$$$$$$$$$$$$$$$$$$', newsData.getNewsByIdForDashboard)
     }
   }, [newsDataLoading, newsData, newsDataError])
 

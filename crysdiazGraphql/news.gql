@@ -19,3 +19,14 @@ query GetNewsByIdForDashboard($id: Int) {
     images
   }
 }
+
+query GetNewsListWithCategory($category_id: Int) {
+  getNewsListWithCategory(category_id: $category_id) {
+    id
+    category_id
+    publish_date
+    title
+    description
+    images
+  }
+}
