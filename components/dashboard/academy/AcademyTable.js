@@ -137,16 +137,16 @@ const AcademyTable = props => {
               <></>
             ) : (
               <div className={'flex justify-start items-center'}>
-                <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
-                  <div className={'w-full ' + globalStyles.tinyMCEClass}>
-                    <div
-                      className={styles.description + ' tinymce-class'}
-                      dangerouslySetInnerHTML={{ __html: item.description }}
-                    />
-                  </div>
+                <div className={'flex flex-1 flex-wrap ' + styles.mobileTableContent}>
+                  <div
+                    className={styles.description + ' tinymce-class'}
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  />
                   {item.doc !== null && (
-                    <div className="m-2">
-                      <DocumentButton doc={item.doc} onClickDownload={handleClickDocument} />
+                    <div className="flex justify-center">
+                      <div className="m-2">
+                        <DocumentButton doc={item.doc} onClickDownload={handleClickDocument} />
+                      </div>
                     </div>
                   )}
                 </div>
