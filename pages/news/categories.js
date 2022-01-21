@@ -20,6 +20,8 @@ import graphql from 'crysdiazGraphql'
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './categories.module.scss'
 
+import ReactPaginate from 'react-paginate'
+
 const Categoris = props => {
   const router = useRouter()
   // loading part ###########################
@@ -45,6 +47,10 @@ const Categoris = props => {
   )
   const [categoryId, setCategoryId] = useState(0)
   const [newsInfo, setNewsInfo] = useState([])
+  const [currentItems, setCurrentItems] = useState(null)
+  const [pageCount, setPageCount] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0)
+  const itemsPerPage = 3
 
   useEffect(() => {
     if (router.query.category_id) {
@@ -68,6 +74,19 @@ const Categoris = props => {
     router.push({ pathname: '/news/detail', query: { id: id } })
   }
 
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage
+    // console.log(`Loading items from ${itemOffset} to ${endOffset}`)
+    setCurrentItems(newsInfo.slice(itemOffset, endOffset))
+    setPageCount(Math.ceil(newsInfo.length / itemsPerPage))
+  }, [itemOffset, itemsPerPage, newsInfo])
+
+  const handlePageClick = event => {
+    const newOffset = (event.selected * itemsPerPage) % newsInfo.length
+    // console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`)
+    setItemOffset(newOffset)
+  }
+
   return (
     <div className={'flex flex-wrap justify-center'}>
       <div className={styles.container}>
@@ -82,8 +101,9 @@ const Categoris = props => {
             </div>
             <CircularMark />
           </div>
+
           <div>
-            {newsInfo.length > 0 ? (
+            {currentItems?.length > 0 ? (
               <>
                 <div className={styles.categoryTitle + ' mb-9'}>
                   {categoryId === 1 ? 'Novedades CrysDyaz & Co' : 'Apariciones en prensa'}
@@ -93,9 +113,30 @@ const Categoris = props => {
                     'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
                   }
                 >
-                  {newsInfo.map((item, index) => (
+                  {currentItems.map((item, index) => (
                     <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
                   ))}
+                </div>
+                <div className={'paginationWrapper mt-10'}>
+                  <ReactPaginate
+                    breakLabel="..."
+                    nextLabel=">"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel="<"
+                    renderOnZeroPageCount={null}
+                    breakClassName={'page-item'}
+                    breakLinkClassName={'page-link'}
+                    containerClassName={'pagination'}
+                    pageClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    previousClassName={'page-item'}
+                    previousLinkClassName={'page-link'}
+                    nextClassName={'next-button'}
+                    nextLinkClassName={'page-link'}
+                    activeClassName={'active'}
+                  />
                 </div>
               </>
             ) : (
