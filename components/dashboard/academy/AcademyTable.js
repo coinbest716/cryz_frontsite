@@ -49,62 +49,111 @@ const AcademyTable = props => {
     setAcademy(_academy)
   }
 
-  return (
+  return viewport !== 'mobile' ? (
     <div className={'w-full'}>
       <div className={'flex justify-evenly items-center mb-4 ' + styles.tableHead}>
         <div className={styles.viewArea + ' ' + styles.tableHeadTitle}>VISTA</div>
         <div className={styles.dayArea + ' ' + styles.tableHeadTitle}>FECHA</div>
         <div className={'flex flex-1 ' + styles.tableHeadTitle}>NOMBRE</div>
       </div>
-      <div style={{ height: 'calc(100vh - 300px)' }}>
-        <PerfectScrollbar>
-          {academy !== undefined &&
-            academy.map((item, index) => (
-              <div key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
-                <div className={'flex justify-start items-center ' + styles.tableContentHeadArea}>
-                  <div
-                    className={
-                      'cursor-pointer flex justify-center items-center ' + styles.viewArea + ' ' + styles.contentTitle
-                    }
-                    onClick={() => handleClickCollpase(index)}
-                  >
-                    {item.collapse ? (
-                      <Image src={plus} alt={''} width={15} height={15} />
-                    ) : (
-                      <Image src={minus} alt={''} width={15} height={15} />
-                    )}
-                  </div>
-                  <div className={styles.dayArea + ' ' + styles.contentFecha}>{moment(item.day).format('DD/MM')}</div>
-                  <div className={'flex flex-1 ' + styles.contentTitle}>{item.title}</div>
-                </div>
+      {academy !== undefined &&
+        academy.map((item, index) => (
+          <div key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
+            <div className={'flex justify-start items-center ' + styles.tableContentHeadArea}>
+              <div
+                className={
+                  'cursor-pointer flex justify-center items-center ' + styles.viewArea + ' ' + styles.contentTitle
+                }
+                onClick={() => handleClickCollpase(index)}
+              >
                 {item.collapse ? (
-                  <></>
+                  <Image src={plus} alt={''} width={15} height={15} />
                 ) : (
-                  <div className={'flex justify-start items-center'}>
-                    <div className={styles.viewArea}></div>
-                    <div className={styles.dayArea + ' ' + styles.contentFecha}>
-                      <div className={styles.onlineText}>ONLINE</div>
-                      <div className={styles.hourText}>{moment(item.hour).format('HH:MM')}</div>
-                    </div>
-                    <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
-                      <div className={'w-full ' + globalStyles.tinyMCEClass}>
-                        <div
-                          className={styles.description + ' tinymce-class'}
-                          dangerouslySetInnerHTML={{ __html: item.description }}
-                        />
-                      </div>
-                      {item.doc !== null && (
-                        <div className="m-2">
-                          <DocumentButton doc={item.doc} onClickDownload={handleClickDocument} />
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                  <Image src={minus} alt={''} width={15} height={15} />
                 )}
               </div>
-            ))}
-        </PerfectScrollbar>
+              <div className={styles.dayArea + ' ' + styles.contentFecha}>{moment(item.day).format('DD/MM')}</div>
+              <div className={'flex flex-1 ' + styles.contentTitle}>{item.title}</div>
+            </div>
+            {item.collapse ? (
+              <></>
+            ) : (
+              <div className={'flex justify-start items-center'}>
+                <div className={styles.viewArea}></div>
+                <div className={styles.dayArea + ' ' + styles.contentFecha}>
+                  <div className={styles.onlineText}>ONLINE</div>
+                  <div className={styles.hourText}>{moment(item.hour).format('HH:MM')}</div>
+                </div>
+                <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
+                  <div className={'w-full ' + globalStyles.tinyMCEClass}>
+                    <div
+                      className={styles.description + ' tinymce-class'}
+                      dangerouslySetInnerHTML={{ __html: item.description }}
+                    />
+                  </div>
+                  {item.doc !== null && (
+                    <div className="m-2">
+                      <DocumentButton doc={item.doc} onClickDownload={handleClickDocument} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+    </div>
+  ) : (
+    <div className={'w-full'}>
+      <div className={'flex justify-between items-center ' + styles.mobileTableHead}>
+        <div className={styles.mobileDayArea + ' ' + styles.mobileTableHeadTitle}>FECHA</div>
+        <div className={'flex flex-1 justify-center ' + styles.mobileTableHeadTitle}>NOMBRE</div>
+        <div className={styles.mobileViewArea + ' ' + styles.mobileTableHeadTitle}>VISTA</div>
       </div>
+      {academy !== undefined &&
+        academy.map((item, index) => (
+          <div key={index} className={'bg-gray-100'}>
+            <div className={'flex justify-start items-center mb-3'}>
+              <div className={styles.mobileDayArea + ' ' + styles.mobileContentFecha}>
+                {moment(item.day).format('DD/MM')}
+              </div>
+              <div className={'flex flex-1 ' + styles.mobileContentTitle}>{item.title}</div>
+              <div
+                className={
+                  'cursor-pointer flex justify-center items-center ' +
+                  styles.mobileViewArea +
+                  ' ' +
+                  styles.mobileContentTitle
+                }
+                onClick={() => handleClickCollpase(index)}
+              >
+                {item.collapse ? (
+                  <Image src={plus} alt={''} width={15} height={15} />
+                ) : (
+                  <Image src={minus} alt={''} width={15} height={15} />
+                )}
+              </div>
+            </div>
+            {item.collapse ? (
+              <></>
+            ) : (
+              <div className={'flex justify-start items-center'}>
+                <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
+                  <div className={'w-full ' + globalStyles.tinyMCEClass}>
+                    <div
+                      className={styles.description + ' tinymce-class'}
+                      dangerouslySetInnerHTML={{ __html: item.description }}
+                    />
+                  </div>
+                  {item.doc !== null && (
+                    <div className="m-2">
+                      <DocumentButton doc={item.doc} onClickDownload={handleClickDocument} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
     </div>
   )
 }

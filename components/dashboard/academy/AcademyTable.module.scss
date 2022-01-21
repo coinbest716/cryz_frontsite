@@ -4,14 +4,24 @@
 .viewArea {
   width: 120px;
 }
+.mobileViewArea {
+  width: 36px;
+}
 .dayArea {
   width: 160px;
+}
+.mobileDayArea {
+  width: 60px;
 }
 .tableHead {
   border: 2px solid #ededed;
   background-color: #ffffff;
   height: 58px;
   min-height: 58px;
+}
+.mobileTableHead {
+  background-color: #ffffff;
+  height: 36px;
 }
 .tableHeadTitle {
   padding: 15px 30px;
@@ -21,20 +31,19 @@
   letter-spacing: 2px;
   line-height: 24px;
 }
-.m_tableHeadTitle {
-  padding: 8px 8px;
-  color: #222222;
+.mobileTableHeadTitle {
+  color: #818e8e;
   font-family: Montserrat;
-  font-size: 12px;
-  letter-spacing: 2px;
+  font-size: 9px;
+  font-weight: 400;
   line-height: 24px;
+  letter-spacing: 1.5px;
 }
 
 // table item part
 .tableContentHeadArea {
   width: 100%;
   border: 1px solid #ededed;
-  // background-color: rgba(51, 51, 51, 0.03);
 }
 .contentTitle {
   padding: 9px 30px;
@@ -43,6 +52,16 @@
   font-size: 12px;
   letter-spacing: 1.4px;
   line-height: 36px;
+}
+.mobileContentTitle {
+  padding: 21px 12px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.9px;
 }
 .contentFecha {
   padding: 9px 30px;
@@ -54,6 +73,15 @@
   border: 1px solid #ededed;
   border-bottom: none;
   border-top: none;
+}
+.mobileContentFecha {
+  padding: 21px 12px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 1px;
 }
 .description {
   color: #999999;

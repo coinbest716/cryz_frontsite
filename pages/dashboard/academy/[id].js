@@ -245,9 +245,12 @@ const AcademyDetail = props => {
         <div className={'mt-4 ' + styles.mobileHeaderTitle}>{academyData.name}</div>
       </div>
       {/* mobile content part */}
-      <div className={'mt-32 w-full ' + globalStyles.container}>
+      <div className={'mt-32 mb-32 w-full ' + globalStyles.container}>
         <div className={'flex pt-4'}>
           <p className={styles.mobileDescription} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
+        </div>
+        <div className="mt-2">
+          {academyData.list !== undefined && <AcademyTable data={academyData.training} viewport={viewport} />}
         </div>
       </div>
     </div>
