@@ -86,7 +86,7 @@ const AcademyTable = props => {
             {item.collapse ? (
               <></>
             ) : (
-              <div className={'flex justify-start items-center'}>
+              <div className={'flex justify-start'}>
                 <div className={styles.viewArea}></div>
                 <div className={styles.dayArea + ' ' + styles.contentFecha}>
                   {item.stream_event}
@@ -151,7 +151,7 @@ const AcademyTable = props => {
             {item.collapse ? (
               <></>
             ) : (
-              <div className={'flex justify-start items-center'}>
+              <div className={'flex justify-start i '}>
                 <div className={'flex flex-1 flex-wrap ' + styles.mobileTableContent}>
                   <div
                     className={styles.description + ' tinymce-class'}
