@@ -50,7 +50,7 @@ const LiveStreaming = props => {
   // handlers
   useEffect(() => {
     if (router.query.id) {
-      setEvent({ id: Number(router.query.id) })
+      setEvent({ id: router.query.id })
     }
   }, [router.query])
 
