@@ -210,7 +210,9 @@ const AcademyDetail = props => {
       </div>
       <div className={'flex mt-8'}>
         <div className={'flex flex-1 w-full mr-8'}>
-          {academyData.list !== undefined && <AcademyTable data={academyData.training} viewport={viewport} />}
+          {academyData.list !== undefined && (
+            <AcademyTable academyID={academyData.id} data={academyData.training} viewport={viewport} />
+          )}
         </div>
         <div className={styles.calendarArea + ' calendarWrapper'}>
           <MonthCalendar
@@ -250,7 +252,9 @@ const AcademyDetail = props => {
           <p className={styles.mobileDescription} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
         </div>
         <div className="mt-2">
-          {academyData.list !== undefined && <AcademyTable data={academyData.training} viewport={viewport} />}
+          {academyData.list !== undefined && (
+            <AcademyTable academyID={academyData.id} data={academyData.training} viewport={viewport} />
+          )}
         </div>
       </div>
     </div>

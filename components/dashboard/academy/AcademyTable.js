@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 
 // next components
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 // third party components
 import moment from 'moment'
 import 'react-perfect-scrollbar/dist/css/styles.css'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // custom components
 import DocumentButton from './DocumentButton'
@@ -21,7 +21,8 @@ import styles from './AcademyTable.module.scss'
 
 const AcademyTable = props => {
   // variables
-  const { data, viewport } = props
+  const { academyID, data, viewport } = props
+  const router = useRouter()
   const [academy, setAcademy] = useState([])
 
   // handlers
@@ -47,6 +48,13 @@ const AcademyTable = props => {
     let _academy = [...academy]
     _academy[index].collapse = !_academy[index].collapse
     setAcademy(_academy)
+  }
+
+  const handleGotoOnlineStreaming = trainingID => {
+    router.push({
+      pathname: '/dashboard/live-streaming',
+      query: { id: 'academy-' + academyID + '-' + trainingID },
+    })
   }
 
   return viewport !== 'mobile' ? (
@@ -81,7 +89,13 @@ const AcademyTable = props => {
               <div className={'flex justify-start items-center'}>
                 <div className={styles.viewArea}></div>
                 <div className={styles.dayArea + ' ' + styles.contentFecha}>
-                  <div className={styles.onlineText}>ONLINE</div>
+                  {item.stream_event}
+                  {item.stream_event !== undefined && item.stream_event === true && (
+                    <div className={styles.onlineText} onClick={() => handleGotoOnlineStreaming(item.id)}>
+                      ONLINE
+                    </div>
+                  )}
+
                   <div className={styles.hourText}>{moment(item.hour).format('HH:mm')}h</div>
                 </div>
                 <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
