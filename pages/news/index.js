@@ -10,7 +10,10 @@ import Image from 'next/image'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
-import NewsCard from 'components/components/news/NewsCard'
+import NewsCard from 'components/news/NewsCard'
+
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -37,94 +40,40 @@ const News = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  const mockupData = [
-    {
-      id: 0,
-      image:
-        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
-      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
-      date: '2022-01-06T18:04:57.000Z',
-      description: 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ',
-    },
-    {
-      id: 1,
-      image:
-        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
-      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
-      date: '2022-01-06T18:04:57.000Z',
-      description:
-        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
-    },
-    {
-      id: 2,
-      image:
-        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
-      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
-      date: '2022-01-06T18:04:57.000Z',
-      description:
-        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
-    },
-    {
-      id: 3,
-      image:
-        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
-      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
-      date: '2022-01-06T18:04:57.000Z',
-      description:
-        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
-    },
-    {
-      id: 4,
-      image:
-        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
-      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
-      date: '2022-01-06T18:04:57.000Z',
-      description:
-        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
-    },
-    {
-      id: 5,
-      image:
-        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
-      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
-      date: '2022-01-06T18:04:57.000Z',
-      description:
-        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
-    },
-    {
-      id: 6,
-      image:
-        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
-      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
-      date: '2022-01-06T18:04:57.000Z',
-      description:
-        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
-    },
-    {
-      id: 7,
-      image:
-        'https://crysdiaz-public.s3.eu-west-1.amazonaws.com/attachment/ca1eaaac-9140-47a4-a580-290732e07834_1nutri.png',
-      title: 'LOREM IPSUM LOREM IPSUM LOREM IPSUM',
-      date: '2022-01-06T18:04:57.000Z',
-      description:
-        'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum',
-    },
-  ]
-
   // variables
   const { viewport } = props
+  const [getNewsListForDashboard, { data: newsData, loading: newsLoading, error: newsError }] = useLazyQuery(
+    graphql.queries.getNewsListForDashboard
+  )
+  const [newsInfo, setNewInfo] = useState([])
   const [newsItems, setNewItems] = useState([])
   const [pressItems, setPressItems] = useState([])
 
   useEffect(() => {
-    const newArr = mockupData.slice(0, 6)
-    setNewItems(newArr)
-    setPressItems(newArr)
+    getNewsListForDashboard()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleClickMore = category => {
-    router.push({ pathname: '/news/categories', query: { category: category } })
+  useEffect(() => {
+    if (!newsError && newsData && newsData.getNewsListForDashboard) {
+      let _newsItems = []
+      let _pressItems = []
+      const _newsData = newsData.getNewsListForDashboard
+      setNewInfo(_newsData)
+      _newsData.map(data => {
+        if (data.category_id === 1) {
+          _newsItems.push(data)
+        } else {
+          _pressItems.push(data)
+        }
+      })
+      setNewItems(_newsItems.slice(0, 6))
+      setPressItems(_pressItems.slice(0, 6))
+    }
+  }, [newsLoading, newsData, newsError])
+
+  const handleClickMore = categoryId => {
+    router.push({ pathname: '/news/categories', query: { category_id: categoryId } })
   }
 
   const handleClickDate = id => {
@@ -133,7 +82,7 @@ const News = props => {
 
   return (
     <>
-      {mockupData.length > 0 ? (
+      {newsInfo.length > 0 ? (
         <div className={'flex flex-wrap justify-center'}>
           <div className={styles.container}>
             <div className={globalStyles.container + ' my-20'}>
@@ -145,44 +94,56 @@ const News = props => {
                 <CircularMark />
               </div>
               <div>
-                <div className={styles.categoryTitle + ' mb-9'}>Novedades CrysDyaz & Co</div>
-                <div
-                  className={
-                    'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
-                  }
-                >
-                  {newsItems.map((item, index) => (
-                    <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
-                  ))}
-                </div>
-                <div className="flex justify-end">
-                  <div
-                    className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
-                    onClick={() => handleClickMore('news')}
-                  >
-                    Ver todas
-                  </div>
-                </div>
+                {newsItems.length > 0 ? (
+                  <>
+                    <div className={styles.categoryTitle + ' mb-9'}>Novedades CrysDyaz & Co</div>
+                    <div
+                      className={
+                        'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
+                      }
+                    >
+                      {newsItems.map((item, index) => (
+                        <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
+                      ))}
+                    </div>
+                    <div className="flex justify-end">
+                      <div
+                        className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
+                        onClick={() => handleClickMore(1)}
+                      >
+                        Ver todas
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
               <div>
-                <div className={styles.categoryTitle + ' mb-9'}>Apariciones en prensa</div>
-                <div
-                  className={
-                    'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
-                  }
-                >
-                  {pressItems.map((item, index) => (
-                    <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
-                  ))}
-                </div>
-                <div className="flex justify-end">
-                  <div
-                    className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
-                    onClick={() => handleClickMore('press')}
-                  >
-                    Ver todas
-                  </div>
-                </div>
+                {pressItems.length > 0 ? (
+                  <>
+                    <div className={styles.categoryTitle + ' mb-9'}>Apariciones en prensa</div>
+                    <div
+                      className={
+                        'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
+                      }
+                    >
+                      {pressItems.map((item, index) => (
+                        <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
+                      ))}
+                    </div>
+                    <div className="flex justify-end">
+                      <div
+                        className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
+                        onClick={() => handleClickMore(2)}
+                      >
+                        Ver todas
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>

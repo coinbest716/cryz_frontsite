@@ -29,6 +29,7 @@ import {
   GetAcademyWithPlazasById,
   GetPatientAcademy,
 } from './academy.gql'
+import { GetNewsListForDashboard, GetNewsByIdForDashboard, GetNewsListWithCategory } from './news.gql'
 import {
   GetPatientBillByDashboard,
   GetPatientBillByDashboardById,
@@ -118,6 +119,11 @@ export default {
     getAcademyWithPlazas: GetAcademyWithPlazas,
     getAcademyWithPlazasById: GetAcademyWithPlazasById,
     getPatientAcademy: GetPatientAcademy,
+
+    // news part
+    getNewsListForDashboard: GetNewsListForDashboard,
+    getNewsByIdForDashboard: GetNewsByIdForDashboard,
+    getNewsListWithCategory: GetNewsListWithCategory,
 
     // contact part
     getContactInfo: GetContactInfo,

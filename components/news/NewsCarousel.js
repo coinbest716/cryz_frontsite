@@ -2,12 +2,12 @@ import previousButtonPinkIcon from 'assets/images/arrow-left-pink.svg'
 import previousButtonGrayIcon from 'assets/images/arrow-left-gray.svg'
 import nextButtonPinkIcon from 'assets/images/arrow-right-pink.svg'
 import nextButtonGrayIcon from 'assets/images/arrow-right-gray.svg'
-import styles from './CarouselService.module.scss'
+import styles from './NewsCarousel.module.scss'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import Image from 'next/image'
 
-const CarouselService = props => {
+const NewsCarousel = props => {
   const { sliderData, viewport } = props
   sliderData?.slice(0, 5)
 
@@ -52,8 +52,8 @@ const CarouselService = props => {
             <Image src={item.path} alt="" width={200} height={200} className={styles.slideImage} />
           </div>
         ) : (
-          <div key={index} style={{ height: '550px' }}>
-            <Image src={item.path} alt="" width={500} height={500} className={styles.slideImage} />
+          <div key={index} style={{ height: '430px' }}>
+            <Image src={item.path} alt="" width={500} height={400} className={styles.slideImage} />
           </div>
         )
       )}
@@ -61,4 +61,4 @@ const CarouselService = props => {
   )
 }
 
-export default CarouselService
+export default NewsCarousel
