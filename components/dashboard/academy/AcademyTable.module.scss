@@ -4,24 +4,14 @@
 .viewArea {
   width: 120px;
 }
-.mobileViewArea {
-  width: 36px;
-}
 .dayArea {
   width: 160px;
-}
-.mobileDayArea {
-  width: 60px;
 }
 .tableHead {
   border: 2px solid #ededed;
   background-color: #ffffff;
   height: 58px;
   min-height: 58px;
-}
-.mobileTableHead {
-  background-color: #ffffff;
-  height: 36px;
 }
 .tableHeadTitle {
   padding: 15px 30px;
@@ -53,16 +43,6 @@
   letter-spacing: 1.4px;
   line-height: 36px;
 }
-.mobileContentTitle {
-  padding: 21px 12px;
-  color: #222222;
-  font-family: Montserrat;
-  font-size: 9px;
-  font-weight: 400;
-  line-height: 14px;
-  text-align: center;
-  letter-spacing: 0.9px;
-}
 .contentFecha {
   padding: 9px 30px;
   color: #222222;
@@ -73,15 +53,6 @@
   border: 1px solid #ededed;
   border-bottom: none;
   border-top: none;
-}
-.mobileContentFecha {
-  padding: 21px 12px;
-  color: #222222;
-  font-family: Montserrat;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 28px;
-  letter-spacing: 1px;
 }
 .description {
   color: #999999;
@@ -107,6 +78,44 @@
   letter-spacing: 1.4px;
 }
 
+// mobile part
+.mobileViewArea {
+  width: 36px;
+}
+.mobileDayArea {
+  width: 60px;
+}
+.mobileTableHead {
+  background-color: #ffffff;
+  height: 36px;
+}
+.mobileContentTitle {
+  padding: 21px 12px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.9px;
+}
+.mobileContentFecha {
+  padding: 21px 12px;
+  color: #222222;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 1px;
+}
+.mobileHourText {
+  color: #b3b1b1;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 1px;
+}
 .mobileTableContent {
   padding: 12px 14px;
   background: #ffffff;

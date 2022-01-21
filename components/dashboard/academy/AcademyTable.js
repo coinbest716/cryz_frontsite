@@ -82,7 +82,7 @@ const AcademyTable = props => {
                 <div className={styles.viewArea}></div>
                 <div className={styles.dayArea + ' ' + styles.contentFecha}>
                   <div className={styles.onlineText}>ONLINE</div>
-                  <div className={styles.hourText}>{moment(item.hour).format('HH:MM')}</div>
+                  <div className={styles.hourText}>{moment(item.hour).format('HH:mm')}h</div>
                 </div>
                 <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
                   <div className={'w-full ' + globalStyles.tinyMCEClass}>
@@ -115,6 +115,7 @@ const AcademyTable = props => {
             <div className={'flex justify-start items-center mb-3'}>
               <div className={styles.mobileDayArea + ' ' + styles.mobileContentFecha}>
                 {moment(item.day).format('DD/MM')}
+                <div className={styles.mobileHourText}>{moment(item.hour).format('HH:mm')}h</div>
               </div>
               <div className={'flex flex-1 ' + styles.mobileContentTitle}>{item.title}</div>
               <div
