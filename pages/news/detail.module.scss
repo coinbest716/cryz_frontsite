@@ -27,11 +27,26 @@
   letter-spacing: -0.38px;
   line-height: 29px;
 }
+.m_title {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: -0.22px;
+  line-height: 18px;
+}
 .date {
   color: #818e8e;
   font-family: Montserrat;
   font-size: 18px;
   letter-spacing: -0.29px;
+  line-height: 20px;
+}
+.m_date {
+  color: #bdb8b8;
+  font-family: Montserrat;
+  font-size: 10px;
+  letter-spacing: -0.16px;
   line-height: 20px;
 }
 .expand {
@@ -47,4 +62,12 @@
   overflow: hidden;
   padding-bottom: 50px;
   max-height: 440px;
+}
+.m_text {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.53px;
+  line-height: 26px;
+  text-align: justify;
 }
