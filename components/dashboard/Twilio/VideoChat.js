@@ -38,10 +38,19 @@ const VideoChat = props => {
   const [bgColor, setBGColor] = useState('#708393')
   const defaultWidth = 1138
   const defaultHeight = 640
-  const screenWidth = window.screen.width
-  const screenHeight = window.screen.height
+  const [isRotated, setIsRotated] = useState(false)
+  const [screenWidth, setScreenWidth] = useState(window.screen.width)
+  const [screenHeight, setScreenHeight] = useState(window.screen.height)
+
+  window.addEventListener('orientationchange', function (event) {
+    setIsRotated(!isRotated)
+  })
 
   // handlers
+  useEffect(() => {
+    setScreenWidth(window.screen.width)
+    setScreenHeight(window.screen.height)
+  }, [isRotated])
   useEffect(() => {
     if (sessionId !== -1) {
       initTwilioConnet(`Crysdyaz_${sessionId}`, localStorage.getItem('email'))
@@ -118,9 +127,7 @@ const VideoChat = props => {
         setShowCloseBtn(true)
         setRoom(room)
       })
-      .catch(err => {
-        console.error(err)
-      })
+      .catch(err => {})
   }
 
   const handleLogout = () => {
@@ -175,6 +182,7 @@ const VideoChat = props => {
   }
 
   const fullScreenToggler = () => {
+    setIsFullScreen(!isFullScreen)
     if (!fullScreenMode) {
       handle.enter()
     } else {
@@ -260,14 +268,26 @@ const VideoChat = props => {
         ) : (
           <>
             {room ? (
-              <div className={'w-full h-full relative bg-black'}>
-                <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
+              <div
+                className={
+                  isFullScreen
+                    ? 'absolute w-screen h-screen overflow-hidden top-0 bottom-0 left-0 right-0 bg-black'
+                    : 'w-full h-full relative bg-black'
+                }
+                style={{ zIndex: isFullScreen ? 100000 : 1 }}
+              >
+                <div
+                  style={{
+                    width: isFullScreen ? screenWidth : screenWidth - 32,
+                    height: isFullScreen ? screenHeight : (screenWidth - 32) * 0.56 + 90,
+                  }}
+                >
                   {participants.length !== 0 && (
                     <SelfVideo
                       key={participants[0].sid}
                       participant={participants[0]}
-                      width={screenWidth - 32}
-                      height={(screenWidth - 32) * 0.56}
+                      width={isFullScreen ? screenWidth : screenWidth - 32}
+                      height={isFullScreen ? screenHeight - 90 : (screenWidth - 32) * 0.56}
                       cameraEnabled={cameraStatus}
                       audioEnabled={micStatus}
                     />
