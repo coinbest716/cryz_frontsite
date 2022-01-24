@@ -183,6 +183,7 @@ const VideoChat = props => {
 
   return (
     <>
+      {console.log(isIOS)}
       {viewport === 'mobile' ? (
         isIOS === false ? (
           <FullScreen onChange={event => onFullScreenChange(event)} handle={handle}>
@@ -216,23 +217,23 @@ const VideoChat = props => {
                   className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
                 >
                   {/* <div className="flex justify-start">
-                <Image
-                  src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
-                  className="cursor-pointer"
-                  width={60}
-                  height={50}
-                  alt="Silence"
-                  onClick={() => controlMic()}
-                />
-                <Image
-                  src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
-                  className="cursor-pointer"
-                  width={60}
-                  height={50}
-                  alt="Silence"
-                  onClick={() => controlCamera()}
-                />
-              </div> */}
+                    <Image
+                      src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                      className="cursor-pointer"
+                      width={60}
+                      height={50}
+                      alt="Silence"
+                      onClick={() => controlMic()}
+                    />
+                    <Image
+                      src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                      className="cursor-pointer"
+                      width={60}
+                      height={50}
+                      alt="Silence"
+                      onClick={() => controlCamera()}
+                    />
+                  </div> */}
                   <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
                     <Image
                       src={'/images/full-screen.svg'}
@@ -288,23 +289,23 @@ const VideoChat = props => {
                   className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
                 >
                   {/* <div className="flex justify-start">
-                <Image
-                  src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
-                  className="cursor-pointer"
-                  width={60}
-                  height={50}
-                  alt="Silence"
-                  onClick={() => controlMic()}
-                />
-                <Image
-                  src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
-                  className="cursor-pointer"
-                  width={60}
-                  height={50}
-                  alt="Silence"
-                  onClick={() => controlCamera()}
-                />
-              </div> */}
+                    <Image
+                      src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                      className="cursor-pointer"
+                      width={60}
+                      height={50}
+                      alt="Silence"
+                      onClick={() => controlMic()}
+                    />
+                    <Image
+                      src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                      className="cursor-pointer"
+                      width={60}
+                      height={50}
+                      alt="Silence"
+                      onClick={() => controlCamera()}
+                    />
+                  </div> */}
                   <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
                     <Image
                       src={'/images/full-screen.svg'}
@@ -354,7 +355,7 @@ const VideoChat = props => {
             {connectStatus === 'disconnect' ? <div className={styles.text}>La retrasmisión ha terminado</div> : ''}
             {connectStatus === 'init' ? <div className={styles.text}>Uniéndose al evento...</div> : ''}
 
-            <div style={{ position: 'absolute', top: 4, right: 10 }}>
+            <div className="absolute top-1 right-2">
               <button className="app-twilio-chat-button" onClick={joinAudio}>
                 Join Audio
               </button>
@@ -371,17 +372,10 @@ const VideoChat = props => {
             </div>
           </div>
 
-          <div className={'w-full'} style={{ height: '95px', background: '#708393' }}>
+          <div className={'w-full ' + styles.style01}>
             <div className={'flex justify-between items-center w-full h-full'}>
               <div className={'flex items-center'}>
-                <div
-                  className={'relative '}
-                  style={{
-                    width: '103px',
-                    height: '85px',
-                    marginLeft: '45px',
-                  }}
-                >
+                <div className={'relative ' + styles.style02}>
                   {micChooseDlg ? (
                     <div className={'absolute overflow-hidden ' + styles.micChooseDlgArea}>
                       <div className={styles.micChooseDlg}>Microfono</div>
@@ -402,15 +396,15 @@ const VideoChat = props => {
                     height={85}
                     alt="Silence"
                     onClick={() => controlMic()}
+                  />
+                  <Image
+                    src="/mic-choose.svg"
+                    className="cursor-pointer"
+                    width={16}
+                    height={13}
+                    alt="choose"
+                    onClick={() => showMicList()}
                   /> */}
-                  {/* <Image
-                src="/mic-choose.svg"
-                className="cursor-pointer"
-                width={16}
-                height={13}
-                alt="choose"
-                onClick={() => showMicList()}
-              /> */}
                 </div>
 
                 {/* <div className="app-streaming-camera-button">
