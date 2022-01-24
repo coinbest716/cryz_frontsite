@@ -71,10 +71,8 @@ const Register = props => {
 
     await Auth.confirmSignUp(email, verifyCode)
       .then(response => {
-        console.log(response)
         toast.success('Successfully confirmed signed up')
         Auth.signIn(email, password).then(response => {
-          console.log('register : ', response)
           toast.success('Successfully Logged in')
           setProgressStatus(false)
           localStorage.setItem('email', email)
@@ -103,13 +101,11 @@ const Register = props => {
           action: 'sign_up',
           params: {},
         })
-        console.log(response)
         setProgressStatus(false)
         setUserConfirmed(response.userConfirmed)
         toast.success('Signup Successfully')
       })
       .catch(error => {
-        console.log('error signing up:', error)
         toast.error(error.message)
         if (error.code === 'UsernameExistsException') {
           setProgressStatus(false)

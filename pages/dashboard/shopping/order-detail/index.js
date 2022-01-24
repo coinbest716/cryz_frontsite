@@ -101,9 +101,7 @@ const OrderDetail = props => {
     }
   }, [orderDetailLoading, orderDetailData, orderDetailError])
 
-  const handleClickButton = () => {
-    console.log('clicked button')
-  }
+  const handleClickButton = () => {}
 
   const handleBuyAnotherButton = () => {
     router.push(`/purchase?tab=2&service_id=${serviceId}&description=${title}&price=${price}`)

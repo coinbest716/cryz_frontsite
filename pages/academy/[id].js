@@ -96,9 +96,7 @@ const Course = props => {
       },
     })
   }
-  const handleClickDownlodPDF = () => {
-    console.log('handleClickDownlodPDF')
-  }
+  const handleClickDownlodPDF = () => {}
 
   return (
     <div className={styles.container}>

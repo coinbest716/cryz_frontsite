@@ -52,8 +52,6 @@ const Curso = () => {
     graphql.queries.getCourseDashboard
   )
 
-  //console.log(Number(id))
-
   useEffect(() => {
     if (course.length === 0 && course !== 'undefined' && id) {
       getCourse({

@@ -10,7 +10,6 @@ import styles from 'components/dashboard/message/MobileMessageCard02.module.scss
 
 const MobileMessageCard02 = props => {
   const { message } = props
-  console.log(message)
   return (
     <div>
       <div className={'w-full pt-5 flex justify-start'}>

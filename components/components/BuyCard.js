@@ -13,7 +13,6 @@ import styles from 'components/components/BuyCard.module.scss'
 const BuyCard = props => {
   const { data, index, handleClickBuy } = props
 
-  console.log(data)
   return (
     <div className={'block'}>
       <div

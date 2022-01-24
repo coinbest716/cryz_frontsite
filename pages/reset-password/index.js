@@ -65,14 +65,12 @@ const ResetPassword = props => {
     setProgressStatus(true)
     Auth.forgotPasswordSubmit(email.trim(), verifyCode.trim(), confirmPassword.trim())
       .then(response => {
-        console.log(response)
         setProgressStatus(false)
         localStorage.removeItem('email')
         toast.success('Succesfully reset password!')
         router.push('/login')
       })
       .catch(error => {
-        console.log(error)
         setProgressStatus(false)
         toast.error(error.message)
       })

@@ -97,7 +97,6 @@ const Login = props => {
 
         Sentry.setUser({ email: email })
 
-        //console.log(response)
         setProgressStatus(false)
         setAuthUser(response)
         setAuthChallenge(response.challengeName)

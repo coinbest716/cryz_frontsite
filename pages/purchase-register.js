@@ -147,13 +147,11 @@ const Register = props => {
       password: password,
     })
       .then(response => {
-        console.log(response)
         dispatch({ type: 'set', isLoading: false })
         setUserConfirmed(response.userConfirmed)
         toast.success('Signup Successfully')
       })
       .catch(error => {
-        console.log('error signing up:', error)
         toast.error(error.message)
         dispatch({ type: 'set', isLoading: false })
         if (error.code === 'UsernameExistsException') {
@@ -191,10 +189,8 @@ const Register = props => {
 
     await Auth.confirmSignUp(email, verifyCode)
       .then(response => {
-        console.log(response)
         toast.success('Successfully confirmed signed up')
         Auth.signIn(email, password).then(response => {
-          console.log('register : ', response)
           toast.success('Successfully Logged in')
           localStorage.setItem('email', email)
           dispatch({ type: 'set', isLoading: false })

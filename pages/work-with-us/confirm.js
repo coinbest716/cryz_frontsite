@@ -37,9 +37,7 @@ const Confirm = () => {
   const fileRef = createRef()
 
   // handlers
-  const handleAttachFile = event => {
-    console.log(event.target.files[0])
-  }
+  const handleAttachFile = event => {}
 
   const onClickAttachFile = () => {
     fileRef.current.click()

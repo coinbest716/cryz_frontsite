@@ -76,7 +76,6 @@ const Header = props => {
         }
       })
       let menu = []
-      console.log(subMenus)
       menu.push({ title: 'Salud Fem', link: '/female-health', subMenus: subMenus })
       menu.push(
         {
