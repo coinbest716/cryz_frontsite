@@ -1,0 +1,73 @@
+.text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 48px;
+  letter-spacing: 0.21px;
+  color: white;
+}
+
+.micCameraArea {
+  height: 90px;
+  background: #708393;
+}
+
+.closeButton {
+  width: 120px;
+  height: 40px;
+  background: #f86c6b;
+  font-size: 24px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+}
+
+.micChooseDlgArea {
+  width: 400px;
+  height: 270px;
+  border-radius: 5px;
+  left: 70px;
+  top: -275px;
+  background: #708393;
+}
+
+.micChooseDlg {
+  margin-left: 22px;
+  margin-top: 22px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.21px;
+  color: #fff;
+}
+
+.micLine {
+  width: 90%;
+  height: 1px;
+  background-color: #fff;
+  margin-top: 5px;
+}
+
+.speakerText {
+  margin-left: 22px;
+  margin-top: 17px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.21px;
+  color: #fff;
+}
+
+.closeButtonWeb {
+  width: 306px;
+  height: 59px;
+  background: #f86c6b;
+  font-size: 36px;
+  font-weight: 600;
+  color: #fff;
+}
