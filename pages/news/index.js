@@ -69,8 +69,13 @@ const News = props => {
           _pressItems.push(data)
         }
       })
-      setNewItems(_newsItems.slice(0, 6))
-      setPressItems(_pressItems.slice(0, 6))
+      if (viewport === 'mobile') {
+        setNewItems(_newsItems.slice(0, 4))
+        setPressItems(_pressItems.slice(0, 4))
+      } else {
+        setNewItems(_newsItems.slice(0, 6))
+        setPressItems(_pressItems.slice(0, 6))
+      }
     }
   }, [newsLoading, newsData, newsError])
 
@@ -86,8 +91,8 @@ const News = props => {
     <>
       {newsInfo.length > 0 ? (
         viewport === 'mobile' ? (
-          <div className={styles.m_container + ' p-4'}>
-            <div className="text-left">
+          <div className={styles.m_container + ' p-4 mb-10'}>
+            <div className="text-left mt-5 w-full">
               <div className={styles.m_newTopTitle}>News</div>
               <div className={styles.m_newTopDash + ' mt-2'} />
             </div>
@@ -106,6 +111,31 @@ const News = props => {
                         styles.moreContainer + ' mt-6 mb-4 flex justify-center items-center cursor-pointer w-fit'
                       }
                       onClick={() => handleClickMore(1)}
+                    >
+                      <div className={styles.m_seeAll + ' mr-5'}>Ver todas</div>
+                      <Image src={ArrowRightGray} alt="" width={10} height={8} />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div>
+              {pressItems.length > 0 ? (
+                <>
+                  <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>Apariciones en prensa</div>
+                  <div className={'grid grid-cols-2 gap-4 flex justify-center'}>
+                    {pressItems.map((item, index) => (
+                      <MobileNewsCard item={item} key={index} handleClickDate={handleClickDate} />
+                    ))}
+                  </div>
+                  <div className="flex justify-end">
+                    <div
+                      className={
+                        styles.moreContainer + ' mt-6 mb-4 flex justify-center items-center cursor-pointer w-fit'
+                      }
+                      onClick={() => handleClickMore(2)}
                     >
                       <div className={styles.m_seeAll + ' mr-5'}>Ver todas</div>
                       <Image src={ArrowRightGray} alt="" width={10} height={8} />
