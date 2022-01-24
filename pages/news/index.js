@@ -11,16 +11,18 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
 import NewsCard from 'components/news/NewsCard'
+import MobileNewsCard from 'components/news/MobileNewsCard'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from 'pages/news/news.module.scss'
+import styles from './news.module.scss'
 
 // images
 import news from 'public/images/news.svg'
+import ArrowRightGray from 'public/images/arrow-right-gray.svg'
 
 const News = props => {
   const router = useRouter()
@@ -83,71 +85,105 @@ const News = props => {
   return (
     <>
       {newsInfo.length > 0 ? (
-        <div className={'flex flex-wrap justify-center'}>
-          <div className={styles.container}>
-            <div className={globalStyles.container + ' my-20'}>
-              <div className="flex justify-between mt-24">
-                <div>
-                  <div className={styles.newTopTitle}>News</div>
-                  <div className={styles.newTopDash + ' mt-5'} />
+        viewport === 'mobile' ? (
+          <div className={styles.m_container + ' p-4'}>
+            <div className="text-left">
+              <div className={styles.m_newTopTitle}>News</div>
+              <div className={styles.m_newTopDash + ' mt-2'} />
+            </div>
+            <div>
+              {newsItems.length > 0 ? (
+                <>
+                  <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>Novedades CrysDyaz & Co</div>
+                  <div className={'grid grid-cols-2 gap-3 flex justify-center'}>
+                    {newsItems.map((item, index) => (
+                      <MobileNewsCard item={item} key={index} handleClickDate={handleClickDate} />
+                    ))}
+                  </div>
+                  <div className="flex justify-end">
+                    <div
+                      className={
+                        styles.moreContainer + ' mt-6 mb-4 flex justify-center items-center cursor-pointer w-fit'
+                      }
+                      onClick={() => handleClickMore(1)}
+                    >
+                      <div className={styles.m_seeAll + ' mr-5'}>Ver todas</div>
+                      <Image src={ArrowRightGray} alt="" width={10} height={8} />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className={'flex flex-wrap justify-center'}>
+            <div className={styles.container}>
+              <div className={globalStyles.container + ' my-20'}>
+                <div className="flex justify-between mt-24">
+                  <div>
+                    <div className={styles.newTopTitle}>News</div>
+                    <div className={styles.newTopDash + ' mt-5'} />
+                  </div>
+                  <CircularMark />
                 </div>
-                <CircularMark />
-              </div>
-              <div>
-                {newsItems.length > 0 ? (
-                  <>
-                    <div className={styles.categoryTitle + ' mb-9'}>Novedades CrysDyaz & Co</div>
-                    <div
-                      className={
-                        'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
-                      }
-                    >
-                      {newsItems.map((item, index) => (
-                        <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
-                      ))}
-                    </div>
-                    <div className="flex justify-end">
+                <div>
+                  {newsItems.length > 0 ? (
+                    <>
+                      <div className={styles.categoryTitle + ' mb-9'}>Novedades CrysDyaz & Co</div>
                       <div
-                        className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
-                        onClick={() => handleClickMore(1)}
+                        className={
+                          'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
+                        }
                       >
-                        Ver todas
+                        {newsItems.map((item, index) => (
+                          <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
+                        ))}
                       </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-              <div>
-                {pressItems.length > 0 ? (
-                  <>
-                    <div className={styles.categoryTitle + ' mb-9'}>Apariciones en prensa</div>
-                    <div
-                      className={
-                        'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
-                      }
-                    >
-                      {pressItems.map((item, index) => (
-                        <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
-                      ))}
-                    </div>
-                    <div className="flex justify-end">
+                      <div className="flex justify-end">
+                        <div
+                          className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
+                          onClick={() => handleClickMore(1)}
+                        >
+                          Ver todas
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <div>
+                  {pressItems.length > 0 ? (
+                    <>
+                      <div className={styles.categoryTitle + ' mb-9'}>Apariciones en prensa</div>
                       <div
-                        className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
-                        onClick={() => handleClickMore(2)}
+                        className={
+                          'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
+                        }
                       >
-                        Ver todas
+                        {pressItems.map((item, index) => (
+                          <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
+                        ))}
                       </div>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
+                      <div className="flex justify-end">
+                        <div
+                          className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
+                          onClick={() => handleClickMore(2)}
+                        >
+                          Ver todas
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )
       ) : (
         <div className={'flex flex-wrap justify-center'}>
           <div className={styles.container}>
