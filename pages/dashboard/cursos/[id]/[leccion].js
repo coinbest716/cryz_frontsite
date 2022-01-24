@@ -62,7 +62,6 @@ const Lecture = () => {
   )
 
   useEffect(() => {
-    console.log(lecture)
     if (lecture === null && id && leccion) {
       getLecture({
         variables: {
@@ -77,7 +76,6 @@ const Lecture = () => {
     if (!lectureError && lectureData) {
       if (lectureData === null) {
       } else {
-        console.log(lectureData)
         setLecture(lectureData.getCourseLectureDashboard)
       }
     }

@@ -114,9 +114,7 @@ const Classland = props => {
   }
 
   const handleClickSelectFilter = event => {
-    console.log(event.target.value)
     setFilterValue(event.target.value)
-    // setFilterKey(index)
     getClasslandCategory({ variables: { category: event.target.value } })
   }
 

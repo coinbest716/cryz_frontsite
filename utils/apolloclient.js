@@ -56,7 +56,6 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     })
 
   if (networkError) {
-    console.log(networkError)
     console.log(`[Network error]: ${networkError}`)
     Sentry.captureException(networkError)
     if (networkError.statusCode === 401) {

@@ -143,7 +143,7 @@ const VideoChat = props => {
         toast.success('Puedes usar tu micrófono!')
       })
       .catch(function (err) {
-        console.log('No mic for you!')
+        toast.error('No mic for you!')
       })
   }
 

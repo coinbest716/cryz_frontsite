@@ -67,10 +67,6 @@ const LiveStreaming = props => {
 
   useEffect(() => {
     if (!sessionMaterialError && sessionMaterialData && sessionMaterialData.getSessionMaterialByDashboard) {
-      console.log(
-        'sessionMaterialData.getSessionMaterialByDashboard',
-        sessionMaterialData.getSessionMaterialByDashboard
-      )
       setMaterial(sessionMaterialData.getSessionMaterialByDashboard)
     }
   }, [sessionMaterialLoading, sessionMaterialData, sessionMaterialError])

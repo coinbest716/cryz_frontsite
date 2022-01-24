@@ -48,14 +48,12 @@ const ForgotPassword = props => {
     setProgressStatus(true)
     await Auth.forgotPassword(userEmail)
       .then(response => {
-        console.log(response)
         setProgressStatus(false)
         toast.success('Successfully send email.')
         localStorage.setItem('email', userEmail)
         router.push('/reset-password')
       })
       .catch(error => {
-        console.log(error)
         setProgressStatus(false)
         toast.error(error.message)
         router.push('/login')

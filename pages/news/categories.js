@@ -76,14 +76,12 @@ const Categoris = props => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage
-    // console.log(`Loading items from ${itemOffset} to ${endOffset}`)
     setCurrentItems(newsInfo.slice(itemOffset, endOffset))
     setPageCount(Math.ceil(newsInfo.length / itemsPerPage))
   }, [itemOffset, itemsPerPage, newsInfo])
 
   const handlePageClick = event => {
     const newOffset = (event.selected * itemsPerPage) % newsInfo.length
-    // console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`)
     setItemOffset(newOffset)
   }
 
