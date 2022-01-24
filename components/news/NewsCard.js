@@ -19,7 +19,9 @@ const NewsCard = props => {
     <div className={styles.cardContainer}>
       <div className={styles.imageBorder}>
         <Image
-          src={(item.images && item.images[0]?.path) || 'https://via.placeholder.com/365x253?text=Placeholder'}
+          src={
+            (item.images.length > 0 && item.images[0]?.path) || 'https://via.placeholder.com/365x253?text=Placeholder'
+          }
           width={365}
           height={253}
           alt=""
