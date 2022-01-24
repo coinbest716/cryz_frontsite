@@ -10,6 +10,15 @@
   overflow: hidden;
   min-height: calc(100vh - 177px);
 }
+.m_container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 80px;
+  background: #e4e5de;
+  min-height: calc(100vh - 177px);
+}
 .title {
   color: #818e8e;
   font-family: Montserrat;

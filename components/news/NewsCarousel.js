@@ -6,10 +6,10 @@ import styles from './NewsCarousel.module.scss'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import Image from 'next/image'
+import { useState } from 'react'
 
 const NewsCarousel = props => {
   const { sliderData, viewport } = props
-  sliderData?.slice(0, 5)
 
   return (
     <Carousel
@@ -49,7 +49,7 @@ const NewsCarousel = props => {
       {sliderData?.map((item, index) =>
         viewport === 'mobile' ? (
           <div key={index} style={{ height: '250px' }}>
-            <Image src={item.path} alt="" width={200} height={200} className={styles.slideImage} />
+            <Image src={item.path} alt="" width={350} height={200} className={styles.slideImage} />
           </div>
         ) : (
           <div key={index} style={{ height: '430px' }}>
