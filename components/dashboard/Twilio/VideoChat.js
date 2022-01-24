@@ -25,6 +25,7 @@ const VideoChat = props => {
   const [participants, setParticipants] = useState([])
   const [connectStatus, setConnectStatus] = useState('init')
   const [room, setRoom] = useState(null)
+  const [isFullScreen, setIsFullScreen] = useState(false)
   const [userName, setUsername] = useState('')
   const [roomName, setRoomName] = useState('')
   const [micStatus, setMicStatus] = useState(true)
@@ -183,12 +184,11 @@ const VideoChat = props => {
 
   return (
     <>
-      {console.log(isIOS)}
       {viewport === 'mobile' ? (
         isIOS === false ? (
           <FullScreen onChange={event => onFullScreenChange(event)} handle={handle}>
             {room ? (
-              <div className={'w-full h-full relative bg-black'}>
+              <div className={'w-full h-full relative flex justify-center items-center bg-black'}>
                 <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
                   {participants.length !== 0 && (
                     <SelfVideo
@@ -234,7 +234,7 @@ const VideoChat = props => {
                       onClick={() => controlCamera()}
                     />
                   </div> */}
-                  <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
+                  <div onClick={() => fullScreenToggler()}>
                     <Image
                       src={'/images/full-screen.svg'}
                       className="cursor-pointer"
@@ -306,7 +306,7 @@ const VideoChat = props => {
                       onClick={() => controlCamera()}
                     />
                   </div> */}
-                  <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
+                  <div onClick={() => fullScreenToggler()}>
                     <Image
                       src={'/images/full-screen.svg'}
                       className="cursor-pointer"
@@ -356,7 +356,7 @@ const VideoChat = props => {
             {connectStatus === 'init' ? <div className={styles.text}>Uniéndose al evento...</div> : ''}
 
             <div className="absolute top-1 right-2">
-              <button className="app-twilio-chat-button" onClick={joinAudio}>
+              <button className="app-twilio-chat-button" onClick={() => joinAudio()}>
                 Join Audio
               </button>
             </div>
@@ -418,7 +418,7 @@ const VideoChat = props => {
                   />
                 </div> */}
 
-                <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
+                <div onClick={() => fullScreenToggler()}>
                   <Image
                     src={'/images/full-screen.svg'}
                     className="cursor-pointer"

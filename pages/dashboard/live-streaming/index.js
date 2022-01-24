@@ -76,7 +76,7 @@ const LiveStreaming = props => {
   }
 
   return (
-    <div className={'pt-7 lg:pl-14 lg:pr-8 h-screen ' + styles.container}>
+    <div className={'pt-7 lg:pl-14 lg:pr-8 ' + styles.container}>
       <div className={'grid grid-cols-12 gap-6'}>
         <div className={'col-span-12 lg:col-span-9'}>
           {viewport !== 'mobile' && <div className={styles.title}>1 to 1 Streaming</div>}
@@ -90,9 +90,6 @@ const LiveStreaming = props => {
             <div className={'pt-7'}>
               {material.map((item, index) => (
                 <div className={'flex justify-start py-2'} key={index}>
-                  {/* <div className={styles.imageArea}>
-                    <Image src={item.url} alt="" width={56} height={56} objectFit="cover" objectPosition="center" />
-                  </div> */}
                   <div className={'pl-4 flex flex-col justify-around'}>
                     <div className={styles.label}>{item.name}</div>
                     <div className={styles.count}>{item.details}</div>
