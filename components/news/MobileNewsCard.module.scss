@@ -1,0 +1,35 @@
+@import 'styles/variable.module.scss';
+
+.cardContainer {
+  max-width: 180px;
+  border: 1px solid #818e8e;
+}
+.imageBorder {
+  opacity: 0.46;
+}
+.textContainer {
+  height: 110px;
+}
+.cardTitle {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  line-height: 24px;
+}
+.cardDate {
+  color: #acb1b2;
+  font-family: Montserrat;
+  font-size: 9px;
+  letter-spacing: 0.56px;
+  line-height: 19px;
+}
+.cardDescription {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: -0.06px;
+  line-height: 14px;
+}
