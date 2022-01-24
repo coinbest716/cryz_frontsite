@@ -8,6 +8,7 @@ import toast from 'react-hot-toast'
 import Video from 'twilio-video'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import fetch from 'isomorphic-unfetch'
+import { isIOS } from 'react-device-detect'
 
 // custom components
 import Participant from './Participant'
@@ -183,77 +184,151 @@ const VideoChat = props => {
   return (
     <>
       {viewport === 'mobile' ? (
-        <FullScreen onChange={event => onFullScreenChange(event)} handle={handle}>
-          {room ? (
-            <div className={'w-full h-full relative bg-black'}>
-              <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
-                {participants.length !== 0 && (
-                  <SelfVideo
-                    key={participants[0].sid}
-                    participant={participants[0]}
-                    width={screenWidth - 32}
-                    height={(screenWidth - 32) * 0.56}
-                    cameraEnabled={cameraStatus}
-                    audioEnabled={micStatus}
-                  />
-                )}
-              </div>
-
-              <div
-                className={'absolute right-1'}
-                style={{
-                  width: '130px',
-                  height: `${120 * remoteParticipants.length}px`,
-                  bottom: 100,
-                }}
-              >
-                {remoteParticipants}
-              </div>
-
-              <div
-                className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
-              >
-                {/* <div className="flex justify-start">
-                  <Image
-                    src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
-                    className="cursor-pointer"
-                    width={60}
-                    height={50}
-                    alt="Silence"
-                    onClick={() => controlMic()}
-                  />
-                  <Image
-                    src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
-                    className="cursor-pointer"
-                    width={60}
-                    height={50}
-                    alt="Silence"
-                    onClick={() => controlCamera()}
-                  />
-                </div> */}
-                <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
-                  <Image
-                    src={'/images/full-screen.svg'}
-                    className="cursor-pointer"
-                    width={135}
-                    height={72}
-                    alt="Fullscreen"
-                  />
+        isIOS === false ? (
+          <FullScreen onChange={event => onFullScreenChange(event)} handle={handle}>
+            {room ? (
+              <div className={'w-full h-full relative bg-black'}>
+                <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
+                  {participants.length !== 0 && (
+                    <SelfVideo
+                      key={participants[0].sid}
+                      participant={participants[0]}
+                      width={screenWidth - 32}
+                      height={(screenWidth - 32) * 0.56}
+                      cameraEnabled={cameraStatus}
+                      audioEnabled={micStatus}
+                    />
+                  )}
                 </div>
 
-                {showCloseBtn ? (
-                  <div className={styles.closeButton} onClick={() => handleLogout()}>
-                    Fin
+                <div
+                  className={'absolute right-1'}
+                  style={{
+                    width: '130px',
+                    height: `${120 * remoteParticipants.length}px`,
+                    bottom: 100,
+                  }}
+                >
+                  {remoteParticipants}
+                </div>
+
+                <div
+                  className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
+                >
+                  {/* <div className="flex justify-start">
+                <Image
+                  src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                  className="cursor-pointer"
+                  width={60}
+                  height={50}
+                  alt="Silence"
+                  onClick={() => controlMic()}
+                />
+                <Image
+                  src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                  className="cursor-pointer"
+                  width={60}
+                  height={50}
+                  alt="Silence"
+                  onClick={() => controlCamera()}
+                />
+              </div> */}
+                  <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
+                    <Image
+                      src={'/images/full-screen.svg'}
+                      className="cursor-pointer"
+                      width={135}
+                      height={72}
+                      alt="Fullscreen"
+                    />
                   </div>
-                ) : (
-                  <></>
-                )}
+
+                  {showCloseBtn ? (
+                    <div className={styles.closeButton} onClick={() => handleLogout()}>
+                      Fin
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="p-4">Tu entrenador llegará pronto</div>
-          )}
-        </FullScreen>
+            ) : (
+              <div className="p-4">Tu entrenador llegará pronto</div>
+            )}
+          </FullScreen>
+        ) : (
+          <>
+            {room ? (
+              <div className={'w-full h-full relative bg-black'}>
+                <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
+                  {participants.length !== 0 && (
+                    <SelfVideo
+                      key={participants[0].sid}
+                      participant={participants[0]}
+                      width={screenWidth - 32}
+                      height={(screenWidth - 32) * 0.56}
+                      cameraEnabled={cameraStatus}
+                      audioEnabled={micStatus}
+                    />
+                  )}
+                </div>
+
+                <div
+                  className={'absolute right-1'}
+                  style={{
+                    width: '130px',
+                    height: `${120 * remoteParticipants.length}px`,
+                    bottom: 100,
+                  }}
+                >
+                  {remoteParticipants}
+                </div>
+
+                <div
+                  className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
+                >
+                  {/* <div className="flex justify-start">
+                <Image
+                  src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                  className="cursor-pointer"
+                  width={60}
+                  height={50}
+                  alt="Silence"
+                  onClick={() => controlMic()}
+                />
+                <Image
+                  src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                  className="cursor-pointer"
+                  width={60}
+                  height={50}
+                  alt="Silence"
+                  onClick={() => controlCamera()}
+                />
+              </div> */}
+                  <div className="app-streaming-full-screen" onClick={fullScreenToggler}>
+                    <Image
+                      src={'/images/full-screen.svg'}
+                      className="cursor-pointer"
+                      width={135}
+                      height={72}
+                      alt="Fullscreen"
+                    />
+                  </div>
+
+                  {showCloseBtn ? (
+                    <div className={styles.closeButton} onClick={() => handleLogout()}>
+                      Fin
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="p-4">Tu entrenador llegará pronto</div>
+            )}
+          </>
+        )
       ) : (
         <FullScreen onChange={event => onFullScreenChange(event)} handle={handle}>
           <div
