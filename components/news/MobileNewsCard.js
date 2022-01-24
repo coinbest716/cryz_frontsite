@@ -12,8 +12,8 @@ const MobileNewsCard = props => {
 
   let body = ''
   body =
-    item.description.replace(/(<([^>]+)>)/gi, '').slice(0, 90) +
-    (item.description.replace(/(<([^>]+)>)/gi, '').length > 90 ? '...' : '')
+    item.title.replace(/(<([^>]+)>)/gi, '').slice(0, 50) +
+    (item.title.replace(/(<([^>]+)>)/gi, '').length > 50 ? '...' : '')
 
   return (
     <div className={styles.cardContainer}>
