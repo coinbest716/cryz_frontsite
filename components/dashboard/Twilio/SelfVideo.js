@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
-// import PropTypes from 'prop-types'
 
 const SelfVideo = props => {
-  const { participant, width, height, cameraEnabled, audioEnabled } = props
+  // variables
+  const { participant, cameraEnabled, audioEnabled } = props
 
   const [videoTracks, setVideoTracks] = useState([])
   const [audioTracks, setAudioTracks] = useState([])
@@ -15,6 +15,7 @@ const SelfVideo = props => {
       .map(publication => publication.track)
       .filter(track => track !== null)
 
+  // handlers
   useEffect(() => {
     setVideoTracks(trackpubsToTracks(participant.videoTracks))
     setAudioTracks(trackpubsToTracks(participant.audioTracks))
@@ -90,24 +91,12 @@ const SelfVideo = props => {
   }, [audioEnabled])
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      {cameraEnabled ? (
-        <video style={{ width: `${width}px`, height: `${height}px` }} ref={videoRef} autoPlay={true} />
-      ) : (
-        <></>
-      )}
+    <div className="w-full h-full flex justify-center">
+      {cameraEnabled ? <video className="w-full h-full" ref={videoRef} autoPlay={true} /> : <></>}
 
       {audioEnabled ? <audio ref={audioRef} autoPlay={true} muted={false} /> : <></>}
     </div>
   )
 }
-
-// SelfVideo.propTypes = {
-//   participant: PropTypes.object,
-//   width: PropTypes.number,
-//   height: PropTypes.number,
-//   cameraEnabled: PropTypes.bool,
-//   audioEnabled: PropTypes.bool,
-// }
 
 export default SelfVideo
