@@ -1,0 +1,32 @@
+@import 'styles/variable.module.scss';
+
+.textContainer {
+  border: 1px solid #818e8e;
+  background-color: rgba(0, 0, 0, 0);
+}
+.title {
+  color: #7e8f8e;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.9px;
+  line-height: 22px;
+}
+.description {
+  color: #acb1b2;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 19px;
+  text-align: justify;
+}
+.btContainer {
+  background-color: #7e8f8e;
+}
+.btTitle {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 18px;
+  letter-spacing: 0.9px;
+  line-height: 22px;
+}
