@@ -51,7 +51,7 @@ const Categoris = props => {
   const [currentItems, setCurrentItems] = useState(null)
   const [pageCount, setPageCount] = useState(0)
   const [itemOffset, setItemOffset] = useState(0)
-  const itemsPerPage = viewport ? 8 : 12
+  const itemsPerPage = viewport === 'mobile' ? 8 : 12
 
   useEffect(() => {
     if (router.query.category_id) {
