@@ -212,11 +212,12 @@ const VideoChat = props => {
   return (
     <>
       {viewport === 'mobile' ? (
+        // android
         isIOS === false ? (
           <FullScreen onChange={event => onFullScreenChange(event)} handle={handle}>
             {room ? (
               <div className={'w-full h-full relative flex justify-center items-center bg-black'}>
-                <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
+                <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90, paddingBottom: '90px' }}>
                   {participants.length !== 0 && (
                     <SelfVideo
                       key={participants[0].sid}
@@ -227,7 +228,7 @@ const VideoChat = props => {
                   )}
                 </div>
 
-                <div className={'absolute top-4 bottom-4 right-4'} style={{ width: '120px' }}>
+                <div className={'absolute top-4 bottom-4 right-4'} style={{ width: '120px', paddingBottom: '90px' }}>
                   <PerfectScrollbar>
                     {localParticipantElem}
                     {remoteParticipants}
@@ -279,6 +280,7 @@ const VideoChat = props => {
             )}
           </FullScreen>
         ) : (
+          // iphone
           <>
             {room ? (
               <div
@@ -293,6 +295,7 @@ const VideoChat = props => {
                   style={{
                     width: isFullScreen ? screenWidth : screenWidth - 32,
                     height: isFullScreen ? screenHeight : (screenWidth - 32) * 0.56 + 90,
+                    paddingBottom: '90px',
                   }}
                 >
                   {selectedParticipant !== '{}' && (
@@ -305,7 +308,7 @@ const VideoChat = props => {
                   )}
                 </div>
 
-                <div className={'absolute top-4 bottom-4 right-4'} style={{ width: '120px' }}>
+                <div className={'absolute top-4 bottom-4 right-4'} style={{ width: '120px', paddingBottom: '90px' }}>
                   <PerfectScrollbar>
                     {localParticipantElem}
                     {remoteParticipants}
