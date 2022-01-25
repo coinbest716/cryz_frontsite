@@ -6,6 +6,7 @@ query GetNewsListForDashboard {
     title
     description
     images
+    content
   }
 }
 
@@ -17,6 +18,7 @@ query GetNewsByIdForDashboard($id: Int) {
     title
     description
     images
+    content
   }
 }
 
@@ -28,5 +30,6 @@ query GetNewsListWithCategory($category_id: Int) {
     title
     description
     images
+    content
   }
 }

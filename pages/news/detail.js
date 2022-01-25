@@ -84,7 +84,7 @@ const Detail = props => {
             <div className={styles.m_date + ' my-2'}>{moment(newsInfo.publish_date).locale('es').format('LL')}</div>
             <div className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? ' ' : styles.expand)}>
               <div className={globalStyles.tinyMCEClass}>
-                <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: newsInfo.description }}></div>
+                <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: newsInfo.content }}></div>
               </div>
               <ReadMoreButton
                 currentState={readMoreCurrentState}
@@ -113,7 +113,7 @@ const Detail = props => {
                     }
                   >
                     <div className={globalStyles.tinyMCEClass}>
-                      <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: newsInfo.description }}></div>
+                      <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: newsInfo.content }}></div>
                     </div>
                     <ReadMoreButton
                       currentState={readMoreCurrentState}
