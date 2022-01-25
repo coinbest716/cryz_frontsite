@@ -87,7 +87,6 @@ const VideoChat = props => {
 
   useEffect(() => {
     if (room) {
-      console.log('roooooooooooooooooooom', room)
       setLocalParticipant(room.localParticipant)
       let count = 0
       const participantConnected = participant => {
@@ -218,10 +217,10 @@ const VideoChat = props => {
             {room ? (
               <div className={'w-full h-full relative flex justify-center items-center bg-black'}>
                 <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90, paddingBottom: '90px' }}>
-                  {participants.length !== 0 && (
+                  {selectedParticipant !== '{}' && (
                     <SelfVideo
-                      key={participants[0].sid}
-                      participant={participants[0]}
+                      key={selectedParticipant.sid}
+                      participant={selectedParticipant}
                       cameraEnabled={cameraStatus}
                       audioEnabled={micStatus}
                     />
