@@ -31,11 +31,11 @@ const NewsCard = props => {
         />
       </div>
       <div className={styles.textContainer + ' mt-2 py-3 px-5'}>
-        <div className={styles.cardTitle}>{item.title}</div>
+        <div className={styles.cardTitle + ' cursor-pointer'} onClick={() => handleClickDate(item.id)}>
+          {item.title}
+        </div>
         <div className="flex justify-start">
-          <div className={styles.cardDate + ' mt-3 mb-2 cursor-pointer w-fit'} onClick={() => handleClickDate(item.id)}>
-            {moment(item.publish_date).format('DD/MM/YYYY')}
-          </div>
+          <div className={styles.cardDate + ' mt-3 mb-2 w-fit'}>{moment(item.publish_date).format('DD/MM/YYYY')}</div>
         </div>
         <div className={styles.cardDescription}>{body}</div>
       </div>
