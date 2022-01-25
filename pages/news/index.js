@@ -58,26 +58,36 @@ const News = props => {
 
   useEffect(() => {
     if (!newsError && newsData && newsData.getNewsListForDashboard) {
-      let _newsItems = []
-      let _pressItems = []
       const _newsData = newsData.getNewsListForDashboard
       setNewInfo(_newsData)
-      _newsData.map(data => {
-        if (data.category_id === 1) {
-          _newsItems.push(data)
-        } else {
-          _pressItems.push(data)
-        }
-      })
-      if (viewport === 'mobile') {
-        setNewItems(_newsItems.slice(0, 4))
-        setPressItems(_pressItems.slice(0, 4))
-      } else {
-        setNewItems(_newsItems.slice(0, 6))
-        setPressItems(_pressItems.slice(0, 6))
-      }
+      sortItems(_newsData)
     }
   }, [newsLoading, newsData, newsError])
+
+  useEffect(() => {
+    sortItems()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [viewport])
+
+  const sortItems = _newsData => {
+    let _newsItems = []
+    let _pressItems = []
+    const newArr = _newsData ? _newsData : newsInfo
+    newArr.map(data => {
+      if (data.category_id === 1 && _newsItems.length <= 6) {
+        _newsItems.push(data)
+      } else if (data.category_id === 2 && _pressItems.length <= 6) {
+        _pressItems.push(data)
+      }
+    })
+    if (viewport === 'mobile') {
+      setNewItems(_newsItems.slice(0, 4))
+      setPressItems(_pressItems.slice(0, 4))
+    } else {
+      setNewItems(_newsItems.slice(0, 6))
+      setPressItems(_pressItems.slice(0, 6))
+    }
+  }
 
   const handleClickMore = categoryId => {
     router.push({ pathname: '/news/categories', query: { category_id: categoryId } })
@@ -96,7 +106,7 @@ const News = props => {
               <div className={styles.m_newTopTitle}>News</div>
               <div className={styles.m_newTopDash + ' mt-2'} />
             </div>
-            <div>
+            <div className="w-full">
               {newsItems.length > 0 ? (
                 <>
                   <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>Novedades CrysDyaz & Co</div>
@@ -121,7 +131,7 @@ const News = props => {
                 <></>
               )}
             </div>
-            <div>
+            <div className="w-full">
               {pressItems.length > 0 ? (
                 <>
                   <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>Apariciones en prensa</div>
