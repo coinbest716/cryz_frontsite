@@ -3,9 +3,6 @@ import React, { createRef, useEffect, useState } from 'react'
 // redux
 import { useDispatch } from 'react-redux'
 
-// next components
-import Image from 'next/image'
-
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
@@ -16,9 +13,6 @@ import WorkWithUsButton from 'components/workwithus/WorkWithUsButton'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './detail.module.scss'
-
-// images
-import ConfirmImage from 'assets/images/confirm.png'
 
 const Detail = props => {
   // loading part ###########################
@@ -38,16 +32,6 @@ const Detail = props => {
   // loading part end #######################
 
   // variables
-  const { viewport } = props
-  const [personalInfo, setPersonalInfo] = useState({
-    name: '',
-    surname: '',
-    email: '',
-    url: '',
-  })
-  const fileRef = createRef()
-
-  // handlers
   const mockupData = {
     id: 5,
     title: 'Nutricionista deportivo y entrenador personal',
@@ -56,25 +40,56 @@ const Detail = props => {
     content:
       'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.agittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.',
   }
-  const handleAttachFile = event => {}
+  const { viewport } = props
+  const fileRef = createRef()
+  const [attachedFile, setAttachedFile] = useState({})
+  const [personalInfo, setPersonalInfo] = useState({
+    name: '',
+    surname: '',
+    email: '',
+    url: '',
+  })
+  const [mainInfo, setMainInfo] = useState({})
 
-  const onClickAttachFile = () => {
-    fileRef.current.click()
-  }
-
+  // handlers
   const handleChangePersonal = (event, key) => {
     setPersonalInfo({ ...personalInfo, [key]: event.target.value })
   }
-  const [mainInfo, setMainInfo] = useState({})
 
   useEffect(() => {
     setMainInfo(mockupData)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleUploadPDF = () => {}
+  const handleClickCV = () => {
+    if (!personalInfo.email || !personalInfo.name || !personalInfo.surname || !attachedFile) {
+      toast.error('todos los campos son obligatorios')
+    } else {
+      sendCV({
+        variables: {
+          email: personalInfo.email,
+          firstName: personalInfo.name,
+          lastName: personalInfo.surname,
+          body: '',
+          phone: '',
+          attachment: fileRef.current.files[0],
+        },
+      })
+      router.push(`/work-with-us/confirm`)
+    }
+  }
 
-  const handleClickCV = () => {}
+  const onClickAttachFile = () => {
+    fileRef.current.click()
+  }
+
+  const handleAttachFile = event => {
+    const file = event.target.files[0]
+    if (file) {
+      setAttachedFile(file)
+      setPersonalInfo({ ...personalInfo, url: file.name })
+    }
+  }
 
   return (
     <div className={'flex flex-wrap justify-center'}>
@@ -131,10 +146,17 @@ const Detail = props => {
                   label={''}
                   placeholder={''}
                   type={'text'}
-                  value={personalInfo.name}
+                  value={personalInfo.url}
+                  disabled={true}
                 />
-                <div className="">
-                  <WorkWithUsButton label={'Adjuntar pdf'} handleClick={handleUploadPDF} type={'pdf'} />
+                <div>
+                  <WorkWithUsButton
+                    label={'Adjuntar pdf'}
+                    type={'pdf'}
+                    fileRef={fileRef}
+                    onClickAttachFile={onClickAttachFile}
+                    handleAttachFile={handleAttachFile}
+                  />
                 </div>
               </div>
             </div>

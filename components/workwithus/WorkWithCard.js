@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 // next components
 import Image from 'next/image'
-import moment from 'moment'
 
 import ArrowRightWhite from 'public/images/arrow-right-white.svg'
 // styles
@@ -25,7 +24,10 @@ const WorkWithCard = props => {
         <div className={styles.title}>{title}</div>
         <div className={styles.description + ' mt-9'}>{body}</div>
       </div>
-      <div className={styles.btContainer + ' flex justify-between items-center cursor-pointer mt-2 w-full px-7 py-3'} onClick={() => handleClickOffer(item.id)}>
+      <div
+        className={styles.btContainer + ' flex justify-between items-center cursor-pointer mt-2 w-full px-7 py-3'}
+        onClick={() => handleClickOffer(item.id)}
+      >
         <div className={styles.btTitle + ' mr-2'}>Ver detalle de oferta</div>
         <Image src={ArrowRightWhite} width={23} height={22} alt="" />
       </div>

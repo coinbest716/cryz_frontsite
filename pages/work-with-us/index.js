@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState, useReducer } from 'react'
+import React, { useEffect, useState, useReducer } from 'react'
 import { useRouter } from 'next/router'
 
 // redux
@@ -94,10 +94,13 @@ const WorkWithUs = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleClickOffer = (id) => {
-    router.push({pathname: '/work-with-us/detail', query: {
-      id: id
-    }})
+  const handleClickOffer = id => {
+    router.push({
+      pathname: '/work-with-us/detail',
+      query: {
+        id: id,
+      },
+    })
   }
 
   return (

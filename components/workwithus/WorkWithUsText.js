@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './WorkWithUsText.module.scss'
 
 const WorkWithUsText = props => {
-  const { handleChange, value, label, placeholder } = props
+  const { handleChange, value, label, placeholder, disabled } = props
   return (
     <div className={'max-w-sm'}>
       {label && (
@@ -17,6 +17,7 @@ const WorkWithUsText = props => {
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
+        disabled={disabled}
       />
     </div>
   )
