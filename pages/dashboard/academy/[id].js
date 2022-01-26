@@ -59,20 +59,12 @@ const AcademyDetail = props => {
   const [getAcademyWithPlazasById, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
     graphql.queries.getAcademyWithPlazasById
   )
-  const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
-    graphql.queries.getSessionsByDashboard
-  )
 
   const [showCalendar, setShowCalendar] = useState(true)
-  const [academyData, setAcademyData] = useState({})
+  const [academyData, setAcademyData] = useState('{}')
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
-
-  // handlers
-  useEffect(() => {
-    getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
-  }, [getSessionsByDashboard])
 
   useEffect(() => {
     if (router.query.id !== undefined) {
@@ -81,28 +73,24 @@ const AcademyDetail = props => {
   }, [getAcademyWithPlazasById, router.query])
 
   useEffect(() => {
-    if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
-      const sessionArr = sessionData.getSessionsByDashboard
+    if (academyData !== '{}' && academyData.training.length !== 0) {
+      const sessionArr = academyData.training
       const _events = []
       const _markDate = []
       sessionArr.map(item => {
         const _eventItem = {
           id: item.id,
-          title: item.purchase.item_web_name,
-          start: item.start_time,
-          end: item.end_time,
-          backgroundColor: item.location.color,
-          textColor: '#ffffff',
-          label: item.location.name,
+          title: item.title,
+          start: item.hour,
           streaming: item.stream_event,
         }
-        _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
+        _markDate.push(moment(item.day).format('DD-MM-YYYY'))
         _events.push(_eventItem)
       })
       setEvents(_events)
       setMarkDate(_markDate)
     }
-  }, [sessionLoading, sessionData, sessionError])
+  }, [academyData])
 
   useEffect(() => {
     setAvailableEvent()
