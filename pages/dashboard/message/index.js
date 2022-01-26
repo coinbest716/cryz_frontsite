@@ -108,7 +108,7 @@ const Message = props => {
       })
       router.push('/dashboard/message')
     }
-  }, [router.query, getPatientByEmail])
+  }, [router.query, router, getPatientMessageById, currentPatient])
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
@@ -123,9 +123,9 @@ const Message = props => {
       })
       .catch(error => {
         toast.error(error.message)
-        router.push('/')
+        router.push('/login')
       })
-  }, [getPatientByEmail])
+  }, [router, getPatientByEmail])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -141,7 +141,7 @@ const Message = props => {
         })
       }
     }
-  }, [getUserForMessage, personalLoading, personalData, personalError])
+  }, [router, getUserForMessage, personalLoading, personalData, personalError])
 
   useEffect(() => {
     if (JSON.stringify(currentPatient) !== JSON.stringify({})) {
@@ -286,9 +286,11 @@ const Message = props => {
       variables: object,
     })
       .then(response => {
-        getPatientMessageById({
-          variables: { patient_id: currentPatient.id },
-        })
+        if (newMessageBool === true) {
+          getPatientMessageById({
+            variables: { patient_id: currentPatient.id },
+          })
+        }
         getSubMessagesByDashboard({
           variables: { message_id: response.data.createMessageByDashboard.id },
         })

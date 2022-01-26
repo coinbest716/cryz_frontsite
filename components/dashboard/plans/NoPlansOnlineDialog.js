@@ -16,7 +16,7 @@ const NoPlansOnlineDailog = props => {
   return (
     <div className={styles.imageContainer}>
       <div className={''}>
-        <Image src={PlansImage} width={274} height={226} />
+        <Image src={PlansImage} alt={''} width={274} height={226} />
       </div>
       <div className={styles.title + ' mt-20'}>ESTAMOS PREPARANDO TU PLAN ONLINE PERSONALIZADO</div>
       <div className={'flex justify-center planonline_text'}>

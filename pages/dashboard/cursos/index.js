@@ -73,7 +73,7 @@ const Cursos = () => {
         toast.error(error.message)
         router.push('/')
       })
-  }, [])
+  }, [router])
 
   return (
     <div className={globalStyles.dashContainer}>

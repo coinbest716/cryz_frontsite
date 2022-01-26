@@ -107,7 +107,7 @@ const MessageContent = props => {
         query: object,
       })
     }
-  }, [router.query, newMessage])
+  }, [router.query, router, newMessage, getSubMessagesByDashboard])
 
   useEffect(() => {
     if (!subMessageListError && subMessageListData && subMessageListData.getSubMessagesByDashboard) {
