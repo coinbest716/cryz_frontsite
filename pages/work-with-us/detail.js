@@ -48,6 +48,14 @@ const Detail = props => {
   const fileRef = createRef()
 
   // handlers
+  const mockupData = {
+    id: 5,
+    title: 'Nutricionista deportivo y entrenador personal',
+    description:
+      'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.agittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.',
+    content:
+      'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.agittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.',
+  }
   const handleAttachFile = event => {}
 
   const onClickAttachFile = () => {
@@ -57,6 +65,12 @@ const Detail = props => {
   const handleChangePersonal = (event, key) => {
     setPersonalInfo({ ...personalInfo, [key]: event.target.value })
   }
+  const [mainInfo, setMainInfo] = useState({})
+
+  useEffect(() => {
+    setMainInfo(mockupData)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleUploadPDF = () => {}
 
@@ -127,6 +141,10 @@ const Detail = props => {
             <div className="flex justify-end mt-16">
               <WorkWithUsButton label={'ENVIAR CV'} handleClick={handleClickCV} type={'cv'} />
             </div>
+          </div>
+          <div className={styles.contentContainer + ' mt-16 px-7 py-12'}>
+            <div className={styles.withTitle + ' mb-12'}>{mainInfo.title}</div>
+            <div className={styles.withContent}>{mainInfo.content}</div>
           </div>
         </div>
       </div>

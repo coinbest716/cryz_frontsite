@@ -40,3 +40,22 @@
   line-height: 28px;
   text-align: justify;
 }
+.contentContainer {
+  border: 1px solid #818e8e;
+  background-color: rgba(0, 0, 0, 0);
+}
+.withTitle {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 1.25px;
+  line-height: 30px;
+}
+.withContent {
+  color: #acb1b2;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 29px;
+}
