@@ -16,7 +16,7 @@
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 80px;
-  background: #e4e5de;
+  // background: #e4e5de;
   min-height: calc(100vh - 177px);
 }
 .title {
@@ -70,4 +70,8 @@
   letter-spacing: 0.53px;
   line-height: 26px;
   text-align: justify;
+}
+.textContainer {
+  border: 1px solid #71918e;
+  background-color: #ffffff;
 }

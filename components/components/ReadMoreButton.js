@@ -14,7 +14,15 @@ const ReadMoreButton = props => {
   }
   return viewport === 'mobile' ? (
     <div>
-      {type === 'physiotherapy' ? (
+      {type === 'news' ? (
+        <p
+          onClick={() => handleOnClick()}
+          className={styles.m_news_readMore + ' ' + (currentState === 'less' ? ' ' : styles.expand)}
+        >
+          {currentState === 'less' ? '[leer mas…]' : '[Leer menos...]'}
+          <span className={styles.p_bgArea} />
+        </p>
+      ) : type === 'physiotherapy' ? (
         <p
           onClick={() => handleOnClick()}
           className={styles.m_p_readMore + ' ' + (currentState === 'less' ? ' ' : styles.expand)}
@@ -42,7 +50,15 @@ const ReadMoreButton = props => {
     </div>
   ) : (
     <div>
-      {type === 'physiotherapy' ? (
+      {type === 'news' ? (
+        <p
+          onClick={() => handleOnClick()}
+          className={styles.p_news_readMore + ' ' + (currentState === 'less' ? ' ' : styles.expand)}
+        >
+          {currentState === 'less' ? '[leer mas…]' : '[Leer menos...]'}
+          <span className={styles.p_bgArea} />
+        </p>
+      ) : type === 'physiotherapy' ? (
         <p
           onClick={() => handleOnClick()}
           className={styles.p_readMore + ' ' + (currentState === 'less' ? ' ' : styles.expand)}

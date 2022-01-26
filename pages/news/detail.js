@@ -80,18 +80,22 @@ const Detail = props => {
             <div className="mt-5">
               <NewsCarousel sliderData={newsInfo.images} viewport={viewport} />
             </div>
-            <div className={styles.m_title + ' mt-5'}>{newsInfo.title}</div>
-            <div className={styles.m_date + ' my-2'}>{moment(newsInfo.publish_date).locale('es').format('LL')}</div>
-            <div className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? ' ' : styles.expand)}>
-              <div className={globalStyles.tinyMCEClass}>
-                <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: newsInfo.content }}></div>
+            <div className={styles.textContainer + ' mt-5 py-6 px-4'}>
+              <div className={styles.m_title}>{newsInfo.title}</div>
+              <div className={styles.m_date + ' my-2'}>{moment(newsInfo.publish_date).locale('es').format('LL')}</div>
+              <div
+                className={'relative ' + styles.text + ' ' + (readMoreCurrentState === 'less' ? ' ' : styles.expand)}
+              >
+                <div className={globalStyles.tinyMCEClass}>
+                  <div className={'tinymce-class'} dangerouslySetInnerHTML={{ __html: newsInfo.content }}></div>
+                </div>
+                <ReadMoreButton
+                  currentState={readMoreCurrentState}
+                  onClick={state => handleReadMore(state)}
+                  type={'news'}
+                  viewport={viewport}
+                />
               </div>
-              <ReadMoreButton
-                currentState={readMoreCurrentState}
-                onClick={state => handleReadMore(state)}
-                type={'physiotherapy'}
-                viewport={viewport}
-              />
             </div>
           </div>
         </div>
@@ -118,7 +122,7 @@ const Detail = props => {
                     <ReadMoreButton
                       currentState={readMoreCurrentState}
                       onClick={state => handleReadMore(state)}
-                      type={'physiotherapy'}
+                      type={'news'}
                       viewport={viewport}
                     />
                   </div>

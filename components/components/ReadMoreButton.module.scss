@@ -63,6 +63,24 @@
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), $white-color);
   z-index: 1;
 }
+.p_news_readMore {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.62px;
+  color: #56181c;
+  cursor: pointer;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 30px 0 0 0;
+  width: 100%;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), $white-color);
+  z-index: 1;
+}
 .m_p_readMore {
   font-family: Montserrat;
   font-size: 14px;
@@ -79,6 +97,24 @@
   padding: 30px 0 0 0;
   width: 100%;
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #e4e5de);
+  z-index: 1;
+}
+.m_news_readMore {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.62px;
+  color: #56181c;
+  cursor: pointer;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 30px 0 0 0;
+  width: 100%;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), $white-color);
   z-index: 1;
 }
 .p_bgArea {

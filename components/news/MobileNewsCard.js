@@ -30,8 +30,8 @@ const MobileNewsCard = props => {
           objectPosition="center"
         />
       </div>
-      <div className={styles.textContainer + ' mt-2 py-3 px-5'} onClick={() => handleClickDate(item.id)}>
-        <div className={styles.cardDescription + ' cursor-pointer'}>{body}</div>
+      <div className={styles.textContainer + ' mt-2 py-3 px-5 cursor-pointer'} onClick={() => handleClickDate(item.id)}>
+        <div className={styles.cardDescription}>{body}</div>
         <div className="flex justify-start">
           <div className={styles.cardDate + ' mt-3 mb-2 w-fit'}>{moment(item.publish_date).format('DD/MM/YYYY')}</div>
         </div>
