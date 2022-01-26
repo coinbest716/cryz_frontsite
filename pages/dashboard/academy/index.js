@@ -52,18 +52,11 @@ const Academy = props => {
   const [getPatientAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
     graphql.queries.getPatientAcademy
   )
-  const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
-    graphql.queries.getSessionsByDashboard
-  )
   const [cardData, setCardData] = useState([])
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
   const [events, setEvents] = useState([])
 
   // handlers
-  useEffect(() => {
-    getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
-  }, [getSessionsByDashboard])
-
   useEffect(() => {
     getPatientAcademy({
       variables: { patient_id: Number(localStorage.getItem('patient_id')) },
@@ -71,27 +64,26 @@ const Academy = props => {
   }, [getPatientAcademy])
 
   useEffect(() => {
-    if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
-      const sessionArr = sessionData.getSessionsByDashboard
+    if (cardData.length !== 0) {
+      let sessionArr = []
+      cardData.map(item =>
+        item.training.map(elem => {
+          sessionArr.push(elem)
+        })
+      )
       const _events = []
-      const _markDate = []
       sessionArr.map(item => {
         const _eventItem = {
           id: item.id,
-          title: item.purchase.item_web_name,
-          start: item.start_time,
-          end: item.end_time,
-          backgroundColor: item.location.color,
-          textColor: '#ffffff',
-          label: item.location.name,
+          title: item.title,
+          start: item.hour,
           streaming: item.stream_event,
         }
-        _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
         _events.push(_eventItem)
       })
       setEvents(_events)
     }
-  }, [sessionLoading, sessionData, sessionError])
+  }, [cardData])
 
   useEffect(() => {
     setAvailableEvent()
