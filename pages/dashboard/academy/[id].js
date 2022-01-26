@@ -25,6 +25,7 @@ import MenubarIcon from 'assets/images/menubar.svg'
 import UserCircleIcon from 'assets/images/user-circle.svg'
 import TimerIcon from 'assets/images/timer.svg'
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
+import DownIcon from 'public/images/down.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -61,12 +62,12 @@ const AcademyDetail = props => {
   const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
     graphql.queries.getSessionsByDashboard
   )
+
+  const [showCalendar, setShowCalendar] = useState(true)
   const [academyData, setAcademyData] = useState({})
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
-
-  const [calendarValue, setCalendarValue] = useState(new Date())
 
   // handlers
   useEffect(() => {
@@ -145,24 +146,13 @@ const AcademyDetail = props => {
     })
   }
 
-  const handleChangeDate = value => {
-    setCalendarValue(value)
-    const eventDate = moment(value).format('YYYY-MM-DD')
-    markDate.map(item => {
-      if (item === moment(value).format('DD-MM-YYYY')) {
-        router.push({
-          pathname: '/dashboard/calendar',
-          query: {
-            eventDate: eventDate,
-          },
-        })
-      }
-    })
-  }
-
   // mobile part
   const handleClickBack = () => {
     router.push('/dashboard/academy')
+  }
+
+  const handleClickMonth = () => {
+    setShowCalendar(!showCalendar)
   }
 
   return viewport !== 'mobile' ? (
@@ -222,8 +212,7 @@ const AcademyDetail = props => {
         <div className={styles.calendarArea + ' calendarWrapper'}>
           <MonthCalendar
             className={styles.calendar}
-            onChange={handleChangeDate}
-            value={calendarValue}
+            value={new Date()}
             locale="es-MX"
             tileClassName={({ date, view }) => {
               if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
@@ -253,6 +242,70 @@ const AcademyDetail = props => {
       </div>
       {/* mobile content part */}
       <div className={'mt-32 mb-32 w-full ' + globalStyles.container}>
+        {/* calendar part */}
+        <div className={'rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative'}>
+          <div className={'flex justify-between items-center'}>
+            <div className={styles.monthName}></div>
+            <div
+              className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}
+              onClick={handleClickMonth}
+            >
+              <div className={styles.monthSelect + ' pr-3'}>Mes</div>
+              <Image src={DownIcon} alt="" width={7} height={7} />
+            </div>
+          </div>
+          <div className={styles.calendarArea + ' calendarWrapper'}>
+            <MonthCalendar
+              className={showCalendar ? '' : 'hidden'}
+              value={new Date()}
+              locale="es-MX"
+              tileClassName={({ date, view }) => {
+                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                  return 'highlight'
+                }
+              }}
+            />
+          </div>
+        </div>
+        {/* category part */}
+        <div className={'flex justify-between pt-4'}>
+          <div
+            className={'w-7 h-7 flex justify-center items-center mr-2 rounded-full'}
+            style={{ backgroundColor: '#D2DADA' }}
+          >
+            <Image src={MenubarIcon} alt={''} width={16} height={11} />
+          </div>
+          <div>
+            <p className={styles.thinText}>Categoria</p>
+            <p className={styles.boldText}>
+              {academyData.category !== undefined &&
+                academyData.category.charAt(0).toUpperCase() + academyData.category.slice(1)}
+            </p>
+          </div>
+          <div
+            className={'w-7 h-7 flex justify-center items-center mr-2 rounded-full'}
+            style={{ backgroundColor: '#DFDBD5' }}
+          >
+            <Image src={UserCircleIcon} alt={''} width={15} height={15} />
+          </div>
+          <div>
+            <p className={styles.thinText}>Tipo</p>
+            <p className={styles.boldText}>
+              {academyData.type !== undefined && academyData.type.charAt(0).toUpperCase() + academyData.type.slice(1)}
+            </p>
+          </div>
+          <div
+            className={'w-7 h-7 flex justify-center items-center mr-2 rounded-full'}
+            style={{ backgroundColor: '#E3BBAA' }}
+          >
+            <Image src={TimerIcon} alt={''} width={14} height={13} />
+          </div>
+          <div>
+            <p className={styles.thinText}>Horas</p>
+            <p className={styles.boldText}>{academyData.duration}</p>
+          </div>
+        </div>
+        {/* description part */}
         <div className={'flex pt-4'}>
           <p className={styles.mobileDescription} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
         </div>

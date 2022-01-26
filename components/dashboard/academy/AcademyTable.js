@@ -131,7 +131,7 @@ const AcademyTable = props => {
                 {moment(item.day).format('DD/MM')}
                 <div className={styles.mobileHourText}>{moment(item.hour).format('HH:mm')}h</div>
               </div>
-              <div className={'flex flex-1 ' + styles.mobileContentTitle}>{item.title}</div>
+              <div className={'flex flex-1 justify-center ' + styles.mobileContentTitle}>{item.title}</div>
               <div
                 className={
                   'cursor-pointer flex justify-center items-center ' +
@@ -153,6 +153,14 @@ const AcademyTable = props => {
             ) : (
               <div className={'flex justify-start i '}>
                 <div className={'flex flex-1 flex-wrap ' + styles.mobileTableContent}>
+                  {item.stream_event !== undefined && item.stream_event === true && (
+                    <div
+                      className={'w-full flex justify-center ' + styles.onlineText}
+                      onClick={() => handleGotoOnlineStreaming(item.id)}
+                    >
+                      ONLINE
+                    </div>
+                  )}
                   <div
                     className={styles.description + ' tinymce-class'}
                     dangerouslySetInnerHTML={{ __html: item.description }}
