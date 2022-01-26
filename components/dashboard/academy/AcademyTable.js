@@ -96,6 +96,10 @@ const AcademyTable = props => {
                     </div>
                   )}
 
+                  {item.stream_event !== undefined && item.stream_event === false && (
+                    <div className={styles.onlineText}>PRESENCIAL</div>
+                  )}
+
                   <div className={styles.hourText}>{moment(item.hour).format('HH:mm')}h</div>
                 </div>
                 <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
@@ -160,6 +164,9 @@ const AcademyTable = props => {
                     >
                       ONLINE
                     </div>
+                  )}
+                  {item.stream_event !== undefined && item.stream_event === false && (
+                    <div className={'w-full flex justify-center ' + styles.onlineText}>PRESENCIAL</div>
                   )}
                   <div
                     className={styles.description + ' tinymce-class'}
