@@ -112,7 +112,7 @@ const Shopping = props => {
         toast.error(error.message)
         router.push('/')
       })
-  }, [getPatientByEmail])
+  }, [router, getPatientByEmail])
 
   useEffect(() => {
     if (!personalError && personalData && personalData.getPatientByEmail) {
@@ -134,6 +134,7 @@ const Shopping = props => {
       }
     }
   }, [
+    router,
     selectedYear,
     getServicePurchaseByDashboard,
     getPurchasedOnlinePlanList,

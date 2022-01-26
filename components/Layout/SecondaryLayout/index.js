@@ -30,7 +30,7 @@ const SecondaryLayout = ({ children }) => {
         router.push('/')
         setIsAuthenticated(false)
       })
-  }, [])
+  }, [router])
 
   return isAuthenticated === true ? (
     <>

@@ -182,7 +182,7 @@ const AcademyDetail = props => {
       </div>
       <div className={'flex mt-3'}>
         <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#D2DADA' }}>
-          <Image src={MenubarIcon} width={16} height={11} />
+          <Image src={MenubarIcon} alt={''} width={16} height={11} />
         </div>
         <div className={'mr-10'}>
           <p className={styles.thinText}>Categoria</p>
@@ -192,7 +192,7 @@ const AcademyDetail = props => {
           </p>
         </div>
         <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#DFDBD5' }}>
-          <Image src={UserCircleIcon} width={15} height={15} />
+          <Image src={UserCircleIcon} alt={''} width={15} height={15} />
         </div>
         <div className={'mr-10'}>
           <p className={styles.thinText}>Tipo</p>
@@ -201,7 +201,7 @@ const AcademyDetail = props => {
           </p>
         </div>
         <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#E3BBAA' }}>
-          <Image src={TimerIcon} width={14} height={13} />
+          <Image src={TimerIcon} alt={''} width={14} height={13} />
         </div>
         <div className={'mr-10'}>
           <p className={styles.thinText}>Horas</p>
