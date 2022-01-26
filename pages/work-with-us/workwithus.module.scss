@@ -1,0 +1,23 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 177px);
+}
+
+.topTitle {
+  color: #7e8f8e;
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 44px;
+}
+
+.topDash {
+  height: 7px;
+  width: 42px;
+  background-color: #7e8f8e;
+}
