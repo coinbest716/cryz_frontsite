@@ -9,7 +9,7 @@ import ArrowRightWhite from 'public/images/arrow-right-white.svg'
 import styles from './WorkWithCard.module.scss'
 
 const WorkWithCard = props => {
-  const { item, handleClickDate } = props
+  const { item, handleClickOffer } = props
   let title = ''
   let body = ''
   title =
@@ -25,7 +25,7 @@ const WorkWithCard = props => {
         <div className={styles.title}>{title}</div>
         <div className={styles.description + ' mt-9'}>{body}</div>
       </div>
-      <div className={styles.btContainer + ' flex justify-between items-center cursor-pointer mt-2 w-full px-7 py-3'}>
+      <div className={styles.btContainer + ' flex justify-between items-center cursor-pointer mt-2 w-full px-7 py-3'} onClick={() => handleClickOffer(item.id)}>
         <div className={styles.btTitle + ' mr-2'}>Ver detalle de oferta</div>
         <Image src={ArrowRightWhite} width={23} height={22} alt="" />
       </div>
