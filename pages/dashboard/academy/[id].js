@@ -253,6 +253,43 @@ const AcademyDetail = props => {
       </div>
       {/* mobile content part */}
       <div className={'mt-32 mb-32 w-full ' + globalStyles.container}>
+        <div className={'flex justify-between pt-4'}>
+          <div
+            className={'w-7 h-7 flex justify-center items-center mr-2 rounded-full'}
+            style={{ backgroundColor: '#D2DADA' }}
+          >
+            <Image src={MenubarIcon} alt={''} width={16} height={11} />
+          </div>
+          <div>
+            <p className={styles.thinText}>Categoria</p>
+            <p className={styles.boldText}>
+              {academyData.category !== undefined &&
+                academyData.category.charAt(0).toUpperCase() + academyData.category.slice(1)}
+            </p>
+          </div>
+          <div
+            className={'w-7 h-7 flex justify-center items-center mr-2 rounded-full'}
+            style={{ backgroundColor: '#DFDBD5' }}
+          >
+            <Image src={UserCircleIcon} alt={''} width={15} height={15} />
+          </div>
+          <div>
+            <p className={styles.thinText}>Tipo</p>
+            <p className={styles.boldText}>
+              {academyData.type !== undefined && academyData.type.charAt(0).toUpperCase() + academyData.type.slice(1)}
+            </p>
+          </div>
+          <div
+            className={'w-7 h-7 flex justify-center items-center mr-2 rounded-full'}
+            style={{ backgroundColor: '#E3BBAA' }}
+          >
+            <Image src={TimerIcon} alt={''} width={14} height={13} />
+          </div>
+          <div>
+            <p className={styles.thinText}>Horas</p>
+            <p className={styles.boldText}>{academyData.duration}</p>
+          </div>
+        </div>
         <div className={'flex pt-4'}>
           <p className={styles.mobileDescription} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
         </div>
