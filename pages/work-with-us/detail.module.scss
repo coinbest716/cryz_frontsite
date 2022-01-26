@@ -1,0 +1,42 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  min-height: calc(100vh - 177px);
+}
+.topTitle {
+  font-size: 54px;
+  color: #818e8e;
+  font-family: 'DrukWideCyWeb-Bold';
+  letter-spacing: 0;
+  line-height: 44px;
+  @media (max-width: 576px) {
+    font-size: 18px;
+  }
+  @media (min-width: 577px) {
+    font-size: 36px;
+    font-weight: bold;
+  }
+}
+.topDash {
+  background-color: #818e8e;
+  @media (max-width: 576px) {
+    width: 15px;
+    height: 4px;
+  }
+  @media (min-width: 577px) {
+    width: 42px;
+    height: 7px;
+  }
+}
+.shortText {
+  color: #99a7a9;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  line-height: 28px;
+  text-align: justify;
+}
