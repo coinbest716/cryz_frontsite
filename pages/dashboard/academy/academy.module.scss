@@ -50,6 +50,25 @@
   }
 }
 
+.mobileGoAcademyButton {
+  height: 40px;
+  border-radius: 20px;
+  padding: 12px 30px;
+  background-color: #ffffff;
+  border: 1px solid #71918e;
+
+  color: #78908e;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 15px;
+  text-align: center;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
 .preparingTitle {
   color: #7a908e;
   font-family: Montserrat;
