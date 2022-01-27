@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
 import WorkWithCard from 'components/workwithus/WorkWithCard'
+import MobileWorkWithCard from 'components/workwithus/MobileWorkWithCard'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './workwithus.module.scss'
@@ -45,11 +46,12 @@ const WorkWithUs = props => {
 
     {
       id: 2,
-      title: 'Nutricionista deportivo y entrenador personal',
+      title:
+        'Nutricionista deportivo y entrenador personal Nutricionista deportivo y entrenador personal Nutricionista deportivo y entrenador personal',
       description:
         'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.agittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.',
       content:
-        'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.agittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.',
+        'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.agittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.',
     },
     {
       id: 3,
@@ -104,34 +106,56 @@ const WorkWithUs = props => {
   }
 
   return (
-    <div className={'flex flex-wrap justify-center'}>
-      <div className={styles.container}>
-        <div className={globalStyles.container + ' my-20'}>
-          <div className="flex justify-between mt-24 mb-8">
-            <div>
-              <div className={styles.topTitle}>Trabaja con nosotros</div>
-              <div className={styles.topDash + ' mt-5'} />
-            </div>
-            <CircularMark />
-          </div>
-          <div>
+    <>
+      {viewport === 'mobile' ? (
+        <div className={styles.m_container}>
+          <div className="w-full p-4 my-5">
             {mainInfo.length > 0 ? (
-              <div
-                className={
-                  'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
-                }
-              >
-                {mainInfo.map((item, index) => (
-                  <WorkWithCard item={item} key={index} handleClickOffer={handleClickOffer} />
-                ))}
-              </div>
+              <>
+                <div className={styles.m_topTitle}>Trabaja con nosotros</div>
+                <div className={styles.m_topDash + ' mt-2 mb-10'} />
+                <div className={'grid grid-cols-2 gap-3 flex justify-center'}>
+                  {mainInfo.map((item, index) => (
+                    <MobileWorkWithCard item={item} key={index} handleClickOffer={handleClickOffer} />
+                  ))}
+                </div>
+              </>
             ) : (
               <></>
             )}
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className={'flex flex-wrap justify-center'}>
+          <div className={styles.container}>
+            <div className={globalStyles.container + ' my-20'}>
+              <div className="flex justify-between mt-24 mb-8">
+                <div>
+                  <div className={styles.topTitle}>Trabaja con nosotros</div>
+                  <div className={styles.topDash + ' mt-5'} />
+                </div>
+                <CircularMark />
+              </div>
+              <div>
+                {mainInfo.length > 0 ? (
+                  <div
+                    className={
+                      'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
+                    }
+                  >
+                    {mainInfo.map((item, index) => (
+                      <WorkWithCard item={item} key={index} handleClickOffer={handleClickOffer} />
+                    ))}
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 

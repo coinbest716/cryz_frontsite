@@ -1,15 +1,16 @@
 @import 'styles/variable.module.scss';
 
 .container {
-  padding-top: 80px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: calc(100vh - 177px);
+  padding-bottom: 50px;
 }
 
 .title {
-  margin-top: 158px;
-  margin-bottom: 70px;
+  margin-top: 138px;
+  margin-bottom: 50px;
   color: #7a908e;
   font-family: Montserrat;
   font-size: 26px;
@@ -18,10 +19,18 @@
   line-height: 32px;
 }
 
-.text {
-  max-width: 470px;
-  margin-top: 70px;
-  margin-bottom: 158px;
+.textOne {
+  margin-top: 50px;
+  color: #818e8e;
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 34px;
+  text-align: center;
+}
+.textTwo {
+  margin-top: 20px;
   color: #818e8e;
   font-family: Montserrat;
   font-size: 20px;
