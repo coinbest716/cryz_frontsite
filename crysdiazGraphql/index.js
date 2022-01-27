@@ -28,6 +28,7 @@ import {
   GetAcademyWithPlazas,
   GetAcademyWithPlazasById,
   GetPatientAcademy,
+  GetAcademyPurchaseStatus,
 } from './academy.gql'
 import { GetNewsListForDashboard, GetNewsByIdForDashboard, GetNewsListWithCategory } from './news.gql'
 import {
@@ -119,6 +120,7 @@ export default {
     getAcademyWithPlazas: GetAcademyWithPlazas,
     getAcademyWithPlazasById: GetAcademyWithPlazasById,
     getPatientAcademy: GetPatientAcademy,
+    getAcademyPurchaseStatus: GetAcademyPurchaseStatus,
 
     // news part
     getNewsListForDashboard: GetNewsListForDashboard,
