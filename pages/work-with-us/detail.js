@@ -2,6 +2,7 @@ import React, { createRef, useEffect, useState } from 'react'
 
 // redux
 import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -10,11 +11,16 @@ import CircularMark from 'components/components/CircularMark'
 import WorkWithUsText from 'components/workwithus/WorkWithUsText'
 import WorkWithUsButton from 'components/workwithus/WorkWithUsButton'
 
+import { useMutation, useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+import toast from 'react-hot-toast'
+
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './detail.module.scss'
 
 const Detail = props => {
+  const router = useRouter()
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -32,6 +38,7 @@ const Detail = props => {
   // loading part end #######################
 
   // variables
+  const [sendCV] = useMutation(graphql.mutations.SendCV)
   const mockupData = {
     id: 5,
     title: 'Nutricionista deportivo y entrenador personal',
@@ -46,7 +53,9 @@ const Detail = props => {
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
     surname: '',
+    phone: '',
     email: '',
+    body: '',
     url: '',
   })
   const [mainInfo, setMainInfo] = useState({})
@@ -62,21 +71,39 @@ const Detail = props => {
   }, [])
 
   const handleClickCV = () => {
-    if (!personalInfo.email || !personalInfo.name || !personalInfo.surname || !attachedFile) {
+    if (
+      !personalInfo.email ||
+      !personalInfo.name ||
+      !personalInfo.surname ||
+      !personalInfo.body ||
+      !personalInfo.phone ||
+      !attachedFile
+    ) {
       toast.error('todos los campos son obligatorios')
-    } else {
-      sendCV({
-        variables: {
-          email: personalInfo.email,
-          firstName: personalInfo.name,
-          lastName: personalInfo.surname,
-          body: '',
-          phone: '',
-          attachment: fileRef.current.files[0],
-        },
-      })
-      router.push(`/work-with-us/confirm`)
+      return
     }
+    dispatch({ type: 'set', isLoading: true })
+    sendCV({
+      variables: {
+        email: personalInfo.email,
+        firstName: personalInfo.name,
+        lastName: personalInfo.surname,
+        body: personalInfo.body,
+        phone: personalInfo.phone,
+        attachment: fileRef.current.files[0],
+      },
+    })
+      .then(response => {
+        if (response.data.sendCV) {
+          router.push(`/work-with-us/confirm`)
+          toast.success('Successfully register!')
+          dispatch({ type: 'set', isLoading: false })
+        }
+      })
+      .catch(error => {
+        dispatch({ type: 'set', isLoading: false })
+        toast.error(error.message)
+      })
   }
 
   const onClickAttachFile = () => {
@@ -122,11 +149,11 @@ const Detail = props => {
               </div>
               <div className="w-4/12">
                 <WorkWithUsText
-                  handleChange={e => handleChangePersonal(e, 'email')}
-                  label={'Email'}
+                  handleChange={e => handleChangePersonal(e, 'phone')}
+                  label={'Teléfono'}
                   placeholder={''}
                   type={'text'}
-                  value={personalInfo.email}
+                  value={personalInfo.phone}
                 />
               </div>
             </div>
@@ -140,7 +167,27 @@ const Detail = props => {
                   value={personalInfo.surname}
                 />
               </div>
-              <div className="w-4/12 flex justify-start items-center" style={{ marginTop: '26px' }}>
+              <div className="w-4/12">
+                <WorkWithUsText
+                  handleChange={e => handleChangePersonal(e, 'email')}
+                  label={'Email'}
+                  placeholder={''}
+                  type={'text'}
+                  value={personalInfo.email}
+                />
+              </div>
+            </div>
+            <div className="flex flex-wrap justify-between mt-5">
+              <div className="w-6/12">
+                <WorkWithUsText
+                  handleChange={e => handleChangePersonal(e, 'body')}
+                  label={'Porqué quiero trabajar en Crys Dyaz & Co'}
+                  placeholder={''}
+                  type={'textarea'}
+                  value={personalInfo.body}
+                />
+              </div>
+              <div className="w-4/12 flex justify-start" style={{ marginTop: '26px' }}>
                 <WorkWithUsText
                   handleChange={e => handleChangePersonal(e, 'url')}
                   label={''}
@@ -160,7 +207,7 @@ const Detail = props => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-end mt-16">
+            <div className="flex justify-end">
               <WorkWithUsButton label={'ENVIAR CV'} handleClick={handleClickCV} type={'cv'} />
             </div>
           </div>
