@@ -6,7 +6,15 @@
   justify-content: center;
   min-height: calc(100vh - 177px);
 }
-
+.m_container {
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 80px;
+  min-height: calc(100vh - 177px);
+}
 .topTitle {
   color: #7e8f8e;
   font-family: 'DrukWideCyWeb-Bold';
@@ -15,9 +23,21 @@
   letter-spacing: 0;
   line-height: 44px;
 }
-
+.m_topTitle {
+  color: #818e8e;
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 22px;
+}
 .topDash {
   height: 7px;
   width: 42px;
   background-color: #7e8f8e;
+}
+.m_topDash {
+  height: 6px;
+  width: 16px;
+  background-color: #e3bbaa;
 }
