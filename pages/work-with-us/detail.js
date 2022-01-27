@@ -1,6 +1,7 @@
 import React, { createRef, useEffect, useState } from 'react'
 
 // redux
+import Image from 'next/image'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 
@@ -15,6 +16,7 @@ import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import toast from 'react-hot-toast'
 
+import backBlackIcon from 'assets/images/arrow-left-black.svg'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './detail.module.scss'
@@ -119,23 +121,63 @@ const Detail = props => {
   }
 
   const handleClickRegister = () => {
-    console.log('++++++++++++++')
+    router.push(
+      {
+        pathname: '/work-with-us/detail',
+        query: {
+          id: router.query.id,
+          type: 'register',
+        },
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
+
+  const handleClickMobileBack = () => {
+    router.push(
+      {
+        pathname: '/work-with-us/detail',
+        query: {
+          id: router.query.id,
+          type: 'main',
+        },
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
+
+  const handleClickBack = () => {
+    router.push('/work-with-us')
   }
 
   return (
     <>
       {viewport === 'mobile' ? (
         <div className={styles.m_container}>
-          <div className="w-full p-4 my-5">
-            <BackButton viewport={viewport} />
-            <div className={styles.contentContainer + ' mt-5 mb-7 px-4 py-7'}>
-              <div className={styles.m_withTitle + ' mb-6'}>{mainInfo.title}</div>
-              <div className={styles.m_withContent}>{mainInfo.content}</div>
+          {router.query.type === 'register' ? (
+            <div className="w-full p-4 my-5">
+              <div className="flex justify-start items-center w-fit" onClick={handleClickMobileBack}>
+                <Image src={backBlackIcon} alt="" width={15} height={10} />
+                <p className={styles.backToMain + ' ml-2'}>Trabaja con nosotros</p>
+              </div>
+              Register
             </div>
-            <div className={styles.register + ' mt-5'} onClick={handleClickRegister}>
-              <p className={styles.m_registerText}>INSCRIBIRSE</p>
+          ) : (
+            <div className="w-full p-4 my-5">
+              <div onClick={handleClickBack}>
+                <Image src={backBlackIcon} alt="" width={20} height={15} />
+              </div>
+              <div className={styles.contentContainer + ' mt-5 mb-7 px-4 py-7'}>
+                <div className={styles.m_withTitle + ' mb-6'}>{mainInfo.title}</div>
+                <div className={styles.m_withContent}>{mainInfo.content}</div>
+              </div>
+              <div className={styles.register + ' mt-5'} onClick={handleClickRegister}>
+                <p className={styles.m_registerText}>INSCRIBIRSE</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       ) : (
         <div className={'flex flex-wrap justify-center'}>
