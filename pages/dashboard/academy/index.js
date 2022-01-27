@@ -179,14 +179,21 @@ const Academy = props => {
           </div>
         ) : (
           <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyArea}>
-            <div className={'w-full flex flex-wrap justify-center ' + styles.noAcademyContent}>
-              <Image src={AcademyLogoIcon} alt="" width={231} height={190} />
-              <div className={'w-full mt-16 ' + styles.actualmentText}>
-                Actualmente, no tienes ninguna formación contratada
+            <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
+              <div className={'w-full flex justify-center ' + styles.preparingTitle}>
+                ¡Gracias por inscribirte en nuestro curso de Academy!
               </div>
-              <button className={'mt-10 ' + styles.goAcademyButton} onClick={() => router.push('/academy')}>
-                Ver Academy
-              </button>
+              <div className="mt-16 mb-20">
+                <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
+              </div>
+              <div className={'w-full flex flex-wrap justify-center ' + styles.preparingText}>
+                <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
+                <br />
+                <br />
+                <p className="w-full">
+                  Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
+                </p>
+              </div>
             </div>
           </div>
         )}
@@ -206,17 +213,21 @@ const Academy = props => {
           </div>
         ) : (
           <div className={'w-full flex flex-wrap justify-center items-center mt-20'}>
-            <div className={'w-full flex flex-wrap justify-center ' + styles.noAcademyContent}>
-              <Image src={AcademyLogoIcon} alt="" width={231} height={190} />
-              <div className={'w-full mt-16 ' + styles.actualmentText}>
-                Actualmente, no tienes ninguna formación contratada
+            <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
+              <div className={'w-full flex justify-center ' + styles.m_preparingTitle}>
+                ¡Gracias por inscribirte en nuestro curso de Academy!
               </div>
-              <button
-                className={'mt-10 rounded-full ' + styles.mobileGoAcademyButton}
-                onClick={() => router.push('/academy')}
-              >
-                Ver Academy
-              </button>
+              <div className="my-10">
+                <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
+              </div>
+              <div className={'w-full flex flex-wrap justify-center ' + styles.m_preparingText}>
+                <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
+                <br />
+                <br />
+                <p className="w-full">
+                  Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
+                </p>
+              </div>
             </div>
           </div>
         )}
@@ -231,21 +242,14 @@ const Academy = props => {
         </div>
       </div>
       <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyArea}>
-        <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
-          <div className={'w-full flex justify-center ' + styles.preparingTitle}>
-            ¡Gracias por inscribirte en nuestro curso de Academy!
+        <div className={'w-full flex flex-wrap justify-center ' + styles.noAcademyContent}>
+          <Image src={AcademyLogoIcon} alt="" width={231} height={190} />
+          <div className={'w-full mt-16 ' + styles.actualmentText}>
+            Actualmente, no tienes ninguna formación contratada
           </div>
-          <div className="mt-16 mb-20">
-            <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
-          </div>
-          <div className={'w-full flex flex-wrap justify-center ' + styles.preparingText}>
-            <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
-            <br />
-            <br />
-            <p className="w-full">
-              Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
-            </p>
-          </div>
+          <button className={'mt-10 ' + styles.goAcademyButton} onClick={() => router.push('/academy')}>
+            Ver Academy
+          </button>
         </div>
       </div>
     </div>
@@ -258,21 +262,17 @@ const Academy = props => {
         </div>
       </div>
       <div className={'w-full flex flex-wrap justify-center items-center mt-20'}>
-        <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
-          <div className={'w-full flex justify-center ' + styles.m_preparingTitle}>
-            ¡Gracias por inscribirte en nuestro curso de Academy!
+        <div className={'w-full flex flex-wrap justify-center ' + styles.noAcademyContent}>
+          <Image src={AcademyLogoIcon} alt="" width={231} height={190} />
+          <div className={'w-full mt-16 ' + styles.actualmentText}>
+            Actualmente, no tienes ninguna formación contratada
           </div>
-          <div className="my-10">
-            <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
-          </div>
-          <div className={'w-full flex flex-wrap justify-center ' + styles.m_preparingText}>
-            <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
-            <br />
-            <br />
-            <p className="w-full">
-              Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
-            </p>
-          </div>
+          <button
+            className={'mt-10 rounded-full ' + styles.mobileGoAcademyButton}
+            onClick={() => router.push('/academy')}
+          >
+            Ver Academy
+          </button>
         </div>
       </div>
     </div>
