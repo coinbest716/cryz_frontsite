@@ -118,106 +118,127 @@ const Detail = props => {
     }
   }
 
+  const handleClickRegister = () => {
+    console.log('++++++++++++++')
+  }
+
   return (
-    <div className={'flex flex-wrap justify-center'}>
-      <div className={styles.container}>
-        <div className={globalStyles.container + ' my-20'}>
-          <div className={'mt-9'}>
+    <>
+      {viewport === 'mobile' ? (
+        <div className={styles.m_container}>
+          <div className="w-full p-4 my-5">
             <BackButton viewport={viewport} />
-          </div>
-          <div className="flex flex-wrap justify-between mt-10">
-            <div>
-              <div className={styles.topTitle}>Inscribirse</div>
-              <div className={styles.topDash + ' mt-5 mb-6'} />
-              <div className={styles.shortText}>
-                Estás mas cerca de formar parte de la familia de CrysDyaz&Co, rellena este <br />
-                formulario y adjunta tu CV..
-              </div>
+            <div className={styles.contentContainer + ' mt-5 mb-7 px-4 py-7'}>
+              <div className={styles.m_withTitle + ' mb-6'}>{mainInfo.title}</div>
+              <div className={styles.m_withContent}>{mainInfo.content}</div>
             </div>
-            <CircularMark />
-          </div>
-          <div className="mt-5 w-3/4">
-            <div className="flex flex-wrap justify-between items-center">
-              <div className="w-6/12">
-                <WorkWithUsText
-                  handleChange={e => handleChangePersonal(e, 'name')}
-                  label={'Nombre'}
-                  placeholder={''}
-                  type={'text'}
-                  value={personalInfo.name}
-                />
-              </div>
-              <div className="w-4/12">
-                <WorkWithUsText
-                  handleChange={e => handleChangePersonal(e, 'phone')}
-                  label={'Teléfono'}
-                  placeholder={''}
-                  type={'text'}
-                  value={personalInfo.phone}
-                />
-              </div>
+            <div className={styles.register + ' mt-5'} onClick={handleClickRegister}>
+              <p className={styles.m_registerText}>INSCRIBIRSE</p>
             </div>
-            <div className="flex flex-wrap justify-between items-center mt-5">
-              <div className="w-6/12">
-                <WorkWithUsText
-                  handleChange={e => handleChangePersonal(e, 'surname')}
-                  label={'Apellidos'}
-                  placeholder={''}
-                  type={'text'}
-                  value={personalInfo.surname}
-                />
-              </div>
-              <div className="w-4/12">
-                <WorkWithUsText
-                  handleChange={e => handleChangePersonal(e, 'email')}
-                  label={'Email'}
-                  placeholder={''}
-                  type={'text'}
-                  value={personalInfo.email}
-                />
-              </div>
-            </div>
-            <div className="flex flex-wrap justify-between mt-5">
-              <div className="w-6/12">
-                <WorkWithUsText
-                  handleChange={e => handleChangePersonal(e, 'body')}
-                  label={'Porqué quiero trabajar en Crys Dyaz & Co'}
-                  placeholder={''}
-                  type={'textarea'}
-                  value={personalInfo.body}
-                />
-              </div>
-              <div className="w-4/12 flex justify-start" style={{ marginTop: '26px' }}>
-                <WorkWithUsText
-                  handleChange={e => handleChangePersonal(e, 'url')}
-                  label={''}
-                  placeholder={''}
-                  type={'text'}
-                  value={personalInfo.url}
-                  disabled={true}
-                />
-                <div>
-                  <WorkWithUsButton
-                    label={'Adjuntar pdf'}
-                    type={'pdf'}
-                    fileRef={fileRef}
-                    onClickAttachFile={onClickAttachFile}
-                    handleAttachFile={handleAttachFile}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end">
-              <WorkWithUsButton label={'ENVIAR CV'} handleClick={handleClickCV} type={'cv'} />
-            </div>
-          </div>
-          <div className={styles.contentContainer + ' mt-16 px-7 py-12'}>
-            <div className={styles.withTitle + ' mb-12'}>{mainInfo.title}</div>
-            <div className={styles.withContent}>{mainInfo.content}</div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className={'flex flex-wrap justify-center'}>
+          <div className={styles.container}>
+            <div className={globalStyles.container + ' my-20'}>
+              <div className={'mt-9'}>
+                <BackButton viewport={viewport} />
+              </div>
+              <div className="flex flex-wrap justify-between mt-10">
+                <div>
+                  <div className={styles.topTitle}>Inscribirse</div>
+                  <div className={styles.topDash + ' mt-5 mb-6'} />
+                  <div className={styles.shortText}>
+                    Estás mas cerca de formar parte de la familia de CrysDyaz&Co, rellena este <br />
+                    formulario y adjunta tu CV..
+                  </div>
+                </div>
+                <CircularMark />
+              </div>
+              <div className="mt-5 w-3/4">
+                <div className="flex flex-wrap justify-between items-center">
+                  <div className="w-6/12">
+                    <WorkWithUsText
+                      handleChange={e => handleChangePersonal(e, 'name')}
+                      label={'Nombre'}
+                      placeholder={''}
+                      type={'text'}
+                      value={personalInfo.name}
+                    />
+                  </div>
+                  <div className="w-4/12">
+                    <WorkWithUsText
+                      handleChange={e => handleChangePersonal(e, 'phone')}
+                      label={'Teléfono'}
+                      placeholder={''}
+                      type={'text'}
+                      value={personalInfo.phone}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap justify-between items-center mt-5">
+                  <div className="w-6/12">
+                    <WorkWithUsText
+                      handleChange={e => handleChangePersonal(e, 'surname')}
+                      label={'Apellidos'}
+                      placeholder={''}
+                      type={'text'}
+                      value={personalInfo.surname}
+                    />
+                  </div>
+                  <div className="w-4/12">
+                    <WorkWithUsText
+                      handleChange={e => handleChangePersonal(e, 'email')}
+                      label={'Email'}
+                      placeholder={''}
+                      type={'text'}
+                      value={personalInfo.email}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap justify-between mt-5">
+                  <div className="w-6/12">
+                    <WorkWithUsText
+                      handleChange={e => handleChangePersonal(e, 'body')}
+                      label={'Porqué quiero trabajar en Crys Dyaz & Co'}
+                      placeholder={''}
+                      type={'textarea'}
+                      value={personalInfo.body}
+                    />
+                  </div>
+                  <div className="w-4/12 flex justify-start" style={{ marginTop: '26px' }}>
+                    <WorkWithUsText
+                      handleChange={e => handleChangePersonal(e, 'url')}
+                      label={''}
+                      placeholder={''}
+                      type={'text'}
+                      value={personalInfo.url}
+                      disabled={true}
+                    />
+                    <div>
+                      <WorkWithUsButton
+                        label={'Adjuntar pdf'}
+                        type={'pdf'}
+                        fileRef={fileRef}
+                        onClickAttachFile={onClickAttachFile}
+                        handleAttachFile={handleAttachFile}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-end">
+                  <WorkWithUsButton label={'ENVIAR CV'} handleClick={handleClickCV} type={'cv'} />
+                </div>
+              </div>
+              <div className={styles.contentContainer + ' mt-16 px-7 py-12'}>
+                <div className={styles.withTitle + ' mb-12'}>{mainInfo.title}</div>
+                <div className={styles.withContent}>{mainInfo.content}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 
