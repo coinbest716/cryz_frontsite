@@ -19,3 +19,14 @@ query GetJobListForDashboard {
     content
   }
 }
+
+query GetJobByIdForDashboard($id: Int) {
+  getJobByIdForDashboard(id: $id) {
+    id
+    publish_date
+    time
+    title
+    description
+    content
+  }
+}

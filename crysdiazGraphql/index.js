@@ -79,7 +79,7 @@ import { GetNutritionsForDashboard, GetNutritionPurchaseStatus } from './dashboa
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
 
-import { SendCV, GetJobListForDashboard } from './workwithus.gql'
+import { SendCV, GetJobListForDashboard, GetJobByIdForDashboard } from './workwithus.gql'
 
 // courses
 
@@ -179,6 +179,7 @@ export default {
 
     // work with us
     getJobListForDashboard: GetJobListForDashboard,
+    getJobByIdForDashboard: GetJobByIdForDashboard,
   },
   mutations: {
     createUser: CreateUser,

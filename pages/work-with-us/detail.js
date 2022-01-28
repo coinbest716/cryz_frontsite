@@ -41,6 +41,9 @@ const Detail = props => {
 
   // variables
   const [sendCV] = useMutation(graphql.mutations.SendCV)
+  const [getJobByIdForDashboard, { data: withData, loading: withLoading, error: withError }] = useLazyQuery(
+    graphql.queries.getJobByIdForDashboard
+  )
   const mockupData = {
     id: 5,
     title: 'Nutricionista deportivo y entrenador personal',
@@ -60,7 +63,7 @@ const Detail = props => {
     body: '',
     url: '',
   })
-  const [mainInfo, setMainInfo] = useState({})
+  const [mainInfo, setMainInfo] = useState(null)
 
   // handlers
   const handleChangePersonal = (event, key) => {
@@ -68,9 +71,18 @@ const Detail = props => {
   }
 
   useEffect(() => {
-    setMainInfo(mockupData)
+    if (router.query.id) {
+      getJobByIdForDashboard({ variables: { id: Number(router.query.id) } })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [router.query])
+
+  useEffect(() => {
+    dispatch({ type: 'set', isLoading: withLoading })
+    if (!withError && withData && withData.getJobByIdForDashboard) {
+      setMainInfo(withData.getJobByIdForDashboard)
+    }
+  }, [withLoading, withData, withError])
 
   const handleClickCV = () => {
     if (
@@ -169,10 +181,12 @@ const Detail = props => {
               <div onClick={handleClickBack}>
                 <Image src={backBlackIcon} alt="" width={20} height={15} />
               </div>
-              <div className={styles.contentContainer + ' mt-5 mb-7 px-4 py-7'}>
-                <div className={styles.m_withTitle + ' mb-6'}>{mainInfo.title}</div>
-                <div className={styles.m_withContent}>{mainInfo.content}</div>
-              </div>
+              {mainInfo && (
+                <div className={styles.contentContainer + ' mt-5 mb-7 px-4 py-7'}>
+                  <div className={styles.m_withTitle + ' mb-6'}>{mainInfo.title}</div>
+                  <div className={styles.m_withContent}>{mainInfo.content}</div>
+                </div>
+              )}
               <div className={styles.register + ' mt-5'} onClick={handleClickRegister}>
                 <p className={styles.m_registerText}>INSCRIBIRSE</p>
               </div>
@@ -272,10 +286,12 @@ const Detail = props => {
                   <WorkWithUsButton label={'ENVIAR CV'} handleClick={handleClickCV} type={'cv'} />
                 </div>
               </div>
-              <div className={styles.contentContainer + ' mt-16 px-7 py-12'}>
-                <div className={styles.withTitle + ' mb-12'}>{mainInfo.title}</div>
-                <div className={styles.withContent}>{mainInfo.content}</div>
-              </div>
+              {mainInfo && (
+                <div className={styles.contentContainer + ' mt-16 px-7 py-12'}>
+                  <div className={styles.withTitle + ' mb-12'}>{mainInfo.title}</div>
+                  <div className={styles.withContent}>{mainInfo.content}</div>
+                </div>
+              )}
             </div>
           </div>
         </div>
