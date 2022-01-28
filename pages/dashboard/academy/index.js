@@ -68,7 +68,7 @@ const Academy = props => {
     getAcademyPurchaseStatus({
       variables: { patient_id: Number(localStorage.getItem('patient_id')) },
     })
-  }, [])
+  }, [getAcademyPurchaseStatus])
 
   useEffect(() => {
     if (academyPurchaseStatus === true) {
