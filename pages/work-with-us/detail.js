@@ -351,7 +351,12 @@ const Detail = props => {
               {mainInfo && (
                 <div className={styles.contentContainer + ' mt-16 px-7 py-12'}>
                   <div className={styles.withTitle + ' mb-12'}>{mainInfo.title}</div>
-                  <div className={styles.withContent}>{mainInfo.content}</div>
+                  <div className={'w-full ' + globalStyles.tinyMCEClass}>
+                    <div
+                      className={styles.withContent + ' tinymce-class'}
+                      dangerouslySetInnerHTML={{ __html: mainInfo.content }}
+                    />
+                  </div>
                 </div>
               )}
             </div>
