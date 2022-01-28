@@ -30,6 +30,19 @@
     font-weight: bold;
   }
 }
+.m_topTitle {
+  color: #818e8e;
+  font-family: 'DrukWideCyWeb-Bold';
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+.m_topDash {
+  height: 6px;
+  width: 16px;
+  background-color: #e3bbaa;
+}
 .topDash {
   background-color: #818e8e;
   @media (max-width: 576px) {
@@ -47,6 +60,14 @@
   font-size: 14px;
   letter-spacing: 0.7px;
   line-height: 28px;
+  text-align: justify;
+}
+.m_textContainer {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.53px;
+  line-height: 26px;
   text-align: justify;
 }
 .contentContainer {
@@ -105,4 +126,12 @@
   letter-spacing: -0.24px;
   line-height: 22px;
   text-align: center;
+}
+.filePath {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 20px;
 }
