@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
+
+// redux
 import { Provider } from 'react-redux'
+
+// next components
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
@@ -112,7 +117,7 @@ const MyApp = ({ Component, pageProps }) => {
         ) : (
           <div className={'w-full flex flex-wrap'}>
             <div className="-z-10 w-full h-full">
-              <img src={MainImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <Image src={MainImage} alt="" width={375} height={575} layout="responsive" objectFit="cover" />
             </div>
             <div className={'w-full flex flex-wrap -mt-8 pt-12 pb-32 px-4 justify-center z-10 bottomStyle'}>
               <div className="w-full title">¡Seguimos poniéndonos en forma!</div>
