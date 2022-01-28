@@ -88,13 +88,23 @@ const WorkWithUs = props => {
   ]
   // variables
   const { viewport } = props
+  const [getJobListForDashboard, { data: withData, loading: withLoading, error: withError }] = useLazyQuery(
+    graphql.queries.getJobListForDashboard
+  )
   const [mainInfo, setMainInfo] = useState([])
 
   // handlers
   useEffect(() => {
-    setMainInfo(mockupData)
+    getJobListForDashboard()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    dispatch({ type: 'set', isLoading: withLoading })
+    if (!withError && withData && withData.getJobListForDashboard) {
+      setMainInfo(withData.getJobListForDashboard)
+    }
+  }, [withLoading, withData, withError])
 
   const handleClickOffer = id => {
     router.push({
