@@ -166,10 +166,6 @@ const Detail = props => {
     router.push('/work-with-us')
   }
 
-  const handleClick = () => {
-    console.log('++++++++++++++++++')
-  }
-
   return (
     <>
       {viewport === 'mobile' ? (
