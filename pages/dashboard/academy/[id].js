@@ -75,7 +75,7 @@ const AcademyDetail = props => {
   }, [getAcademyWithPlazasById, router.query])
 
   useEffect(() => {
-    if (academyData !== '{}' && academyData.training.length !== 0) {
+    if (academyData !== '{}') {
       if (academyData.training.length !== 0) {
         setTrainerExist(true)
         const sessionArr = academyData.training
