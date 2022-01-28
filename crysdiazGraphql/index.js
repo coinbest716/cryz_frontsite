@@ -79,7 +79,7 @@ import { GetNutritionsForDashboard, GetNutritionPurchaseStatus } from './dashboa
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
 
-import { SendCV } from './other.gql'
+import { SendCV } from './workwithus.gql'
 
 // courses
 
