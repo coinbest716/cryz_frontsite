@@ -42,19 +42,11 @@ const Detail = props => {
   // loading part end #######################
 
   // variables
+  const { viewport } = props
   const [sendCV] = useMutation(graphql.mutations.SendCV)
   const [getJobByIdForDashboard, { data: withData, loading: withLoading, error: withError }] = useLazyQuery(
     graphql.queries.getJobByIdForDashboard
   )
-  const mockupData = {
-    id: 5,
-    title: 'Nutricionista deportivo y entrenador personal',
-    description:
-      'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.agittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.',
-    content:
-      'Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis. Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.agittis orci. Donec id dignissim nunc. Donec elit ante, eleifend a dolor et, venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis molestie faucibus.',
-  }
-  const { viewport } = props
   const fileRef = createRef()
   const [attachedFile, setAttachedFile] = useState({})
   const [personalInfo, setPersonalInfo] = useState({
@@ -164,10 +156,6 @@ const Detail = props => {
 
   const handleClickBack = () => {
     router.push('/work-with-us')
-  }
-
-  const handleClick = () => {
-    console.log('++++++++++++++++++')
   }
 
   return (
@@ -363,7 +351,12 @@ const Detail = props => {
               {mainInfo && (
                 <div className={styles.contentContainer + ' mt-16 px-7 py-12'}>
                   <div className={styles.withTitle + ' mb-12'}>{mainInfo.title}</div>
-                  <div className={styles.withContent}>{mainInfo.content}</div>
+                  <div className={'w-full ' + globalStyles.tinyMCEClass}>
+                    <div
+                      className={styles.withContent + ' tinymce-class'}
+                      dangerouslySetInnerHTML={{ __html: mainInfo.content }}
+                    />
+                  </div>
                 </div>
               )}
             </div>
