@@ -26,6 +26,7 @@ import UserCircleIcon from 'assets/images/user-circle.svg'
 import TimerIcon from 'assets/images/timer.svg'
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
 import DownIcon from 'public/images/down.svg'
+import AcademyPreparingLogoIcon from 'assets/images/academy-preparing-logo.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -62,6 +63,7 @@ const AcademyDetail = props => {
 
   const [showCalendar, setShowCalendar] = useState(true)
   const [academyData, setAcademyData] = useState('{}')
+  const [trainerExist, setTrainerExist] = useState(false)
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
@@ -74,21 +76,26 @@ const AcademyDetail = props => {
 
   useEffect(() => {
     if (academyData !== '{}' && academyData.training.length !== 0) {
-      const sessionArr = academyData.training
-      const _events = []
-      const _markDate = []
-      sessionArr.map(item => {
-        const _eventItem = {
-          id: item.id,
-          title: item.title,
-          start: item.hour,
-          streaming: item.stream_event,
-        }
-        _markDate.push(moment(item.day).format('DD-MM-YYYY'))
-        _events.push(_eventItem)
-      })
-      setEvents(_events)
-      setMarkDate(_markDate)
+      if (academyData.training.length !== 0) {
+        setTrainerExist(true)
+        const sessionArr = academyData.training
+        const _events = []
+        const _markDate = []
+        sessionArr.map(item => {
+          const _eventItem = {
+            id: item.id,
+            title: item.title,
+            start: item.hour,
+            streaming: item.stream_event,
+          }
+          _markDate.push(moment(item.day).format('DD-MM-YYYY'))
+          _events.push(_eventItem)
+        })
+        setEvents(_events)
+        setMarkDate(_markDate)
+      } else {
+        setTrainerExist(false)
+      }
     }
   }, [academyData])
 
@@ -144,74 +151,95 @@ const AcademyDetail = props => {
   }
 
   return viewport !== 'mobile' ? (
-    <div className={globalStyles.dashContainer}>
-      <div className={'w-full flex justify-between items-center'}>
-        <div className={globalStyles.dashTitle}>{academyData.name}</div>
-        <div className={'flex justify-end'}>
-          <div className="mr-16">
-            <StartclassButton
-              handleClick={() => handleClickStartButton()}
-              label={'Comenzar clase'}
-              visible={streamingEvent.toggle}
+    trainerExist === true ? (
+      <div className={globalStyles.dashContainer}>
+        <div className={'w-full flex justify-between items-center'}>
+          <div className={globalStyles.dashTitle}>{academyData.name}</div>
+          <div className={'flex justify-end'}>
+            <div className="mr-16">
+              <StartclassButton
+                handleClick={() => handleClickStartButton()}
+                label={'Comenzar clase'}
+                visible={streamingEvent.toggle}
+              />
+            </div>
+            <NotificationButton />
+          </div>
+        </div>
+        <div className={'flex mt-3'}>
+          <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#D2DADA' }}>
+            <Image src={MenubarIcon} alt={''} width={16} height={11} />
+          </div>
+          <div className={'mr-10'}>
+            <p className={styles.thinText}>Categoria</p>
+            <p className={styles.boldText}>
+              {academyData.category !== undefined &&
+                academyData.category.charAt(0).toUpperCase() + academyData.category.slice(1)}
+            </p>
+          </div>
+          <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#DFDBD5' }}>
+            <Image src={UserCircleIcon} alt={''} width={15} height={15} />
+          </div>
+          <div className={'mr-10'}>
+            <p className={styles.thinText}>Tipo</p>
+            <p className={styles.boldText}>
+              {academyData.type !== undefined && academyData.type.charAt(0).toUpperCase() + academyData.type.slice(1)}
+            </p>
+          </div>
+          <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#E3BBAA' }}>
+            <Image src={TimerIcon} alt={''} width={14} height={13} />
+          </div>
+          <div className={'mr-10'}>
+            <p className={styles.thinText}>Horas</p>
+            <p className={styles.boldText}>{academyData.duration}</p>
+          </div>
+        </div>
+        <div className={'flex mt-8'}>
+          <div className={styles.descriptionArea}>
+            <p className={styles.description} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
+          </div>
+        </div>
+        <div className={'flex mt-8'}>
+          <div className={'flex flex-1 w-full mr-8'}>
+            {academyData.list !== undefined && (
+              <AcademyTable academyID={academyData.id} data={academyData.training} viewport={viewport} />
+            )}
+          </div>
+          <div className={styles.calendarArea + ' calendarWrapper'}>
+            <MonthCalendar
+              className={styles.calendar}
+              value={new Date()}
+              locale="es-MX"
+              tileClassName={({ date, view }) => {
+                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                  return 'highlight'
+                }
+              }}
             />
           </div>
-          <NotificationButton />
         </div>
       </div>
-      <div className={'flex mt-3'}>
-        <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#D2DADA' }}>
-          <Image src={MenubarIcon} alt={''} width={16} height={11} />
-        </div>
-        <div className={'mr-10'}>
-          <p className={styles.thinText}>Categoria</p>
-          <p className={styles.boldText}>
-            {academyData.category !== undefined &&
-              academyData.category.charAt(0).toUpperCase() + academyData.category.slice(1)}
-          </p>
-        </div>
-        <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#DFDBD5' }}>
-          <Image src={UserCircleIcon} alt={''} width={15} height={15} />
-        </div>
-        <div className={'mr-10'}>
-          <p className={styles.thinText}>Tipo</p>
-          <p className={styles.boldText}>
-            {academyData.type !== undefined && academyData.type.charAt(0).toUpperCase() + academyData.type.slice(1)}
-          </p>
-        </div>
-        <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#E3BBAA' }}>
-          <Image src={TimerIcon} alt={''} width={14} height={13} />
-        </div>
-        <div className={'mr-10'}>
-          <p className={styles.thinText}>Horas</p>
-          <p className={styles.boldText}>{academyData.duration}</p>
+    ) : (
+      <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyArea}>
+        <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
+          <div className={'w-full flex justify-center ' + styles.preparingTitle}>
+            ¡Gracias por inscribirte en nuestro curso de Academy!
+          </div>
+          <div className="mt-16 mb-20">
+            <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
+          </div>
+          <div className={'w-full flex flex-wrap justify-center ' + styles.preparingText}>
+            <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
+            <br />
+            <br />
+            <p className="w-full">
+              Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
+            </p>
+          </div>
         </div>
       </div>
-      <div className={'flex mt-8'}>
-        <div className={styles.descriptionArea}>
-          <p className={styles.description} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
-        </div>
-      </div>
-      <div className={'flex mt-8'}>
-        <div className={'flex flex-1 w-full mr-8'}>
-          {academyData.list !== undefined && (
-            <AcademyTable academyID={academyData.id} data={academyData.training} viewport={viewport} />
-          )}
-        </div>
-        <div className={styles.calendarArea + ' calendarWrapper'}>
-          <MonthCalendar
-            className={styles.calendar}
-            value={new Date()}
-            locale="es-MX"
-            tileClassName={({ date, view }) => {
-              if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                return 'highlight'
-              }
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  ) : (
+    )
+  ) : trainerExist === true ? (
     <div>
       {/* mobile header part */}
       <div className={styles.mobileHeader}>
@@ -301,6 +329,25 @@ const AcademyDetail = props => {
           {academyData.list !== undefined && (
             <AcademyTable academyID={academyData.id} data={academyData.training} viewport={viewport} />
           )}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className={'w-full flex flex-wrap justify-center items-center mt-20'}>
+      <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
+        <div className={'w-full flex justify-center ' + styles.m_preparingTitle}>
+          ¡Gracias por inscribirte en nuestro curso de Academy!
+        </div>
+        <div className="my-10">
+          <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
+        </div>
+        <div className={'w-full flex flex-wrap justify-center ' + styles.m_preparingText}>
+          <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
+          <br />
+          <br />
+          <p className="w-full">
+            Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
+          </p>
         </div>
       </div>
     </div>
