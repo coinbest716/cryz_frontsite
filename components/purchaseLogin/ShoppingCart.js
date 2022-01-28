@@ -4,6 +4,9 @@ import React from 'react'
 import Image from 'next/image'
 import Radio from 'components/purchase/Radio'
 
+// images
+import mainImage from 'assets/images/main-mobile.png'
+
 // styles
 import styles from './ShoppingCart.module.scss'
 
@@ -21,7 +24,7 @@ const ShoppingCart = props => {
           <div className={'flex justify-between items-center my-3'}>
             <div className={'flex justify-between'}>
               <div className={'mr-4'} style={{ minWidth: '88px' }}>
-                <Image src={shoppingInfo?.image || '/images/main-mobile.png'} alt={''} width={88} height={88} />
+                <Image src={shoppingInfo?.image || mainImage} alt={''} width={88} height={88} />
               </div>
               <div className={'flex flex-col justify-evenly'}>
                 <div className={styles.listDescription}>{shoppingInfo?.description}</div>
