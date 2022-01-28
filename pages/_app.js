@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { DefaultSeo } from 'next-seo'
 
 import * as gtag from '../utils/gtag'
 
@@ -32,13 +33,13 @@ import store from 'store.js'
 // styles
 import 'styles/style.scss'
 
-import { DefaultSeo } from 'next-seo'
+// images
+import mainImage from 'assets/images/main-mobile.png'
 
 Amplify.configure({ ...awsconfig, ssr: true })
 Auth.configure(awsconfig)
 
 const MyApp = ({ Component, pageProps }) => {
-  const MainImage = '/images/main-mobile.png'
   const router = useRouter()
   const getLayout = Component.getLayout || (page => page)
 
@@ -117,7 +118,7 @@ const MyApp = ({ Component, pageProps }) => {
         ) : (
           <div className={'w-full flex flex-wrap'}>
             <div className="-z-10 w-full h-full">
-              <Image src={MainImage} alt="" width={375} height={575} layout="responsive" objectFit="cover" />
+              <Image src={mainImage} alt="" width={375} height={575} layout="responsive" objectFit="cover" />
             </div>
             <div className={'w-full flex flex-wrap -mt-8 pt-12 pb-32 px-4 justify-center z-10 bottomStyle'}>
               <div className="w-full title">¡Seguimos poniéndonos en forma!</div>
