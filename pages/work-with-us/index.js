@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 // redux
@@ -14,9 +14,8 @@ import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './workwithus.module.scss'
 
 // graphql
-import { useMutation, useLazyQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import toast from 'react-hot-toast'
 
 const WorkWithUs = props => {
   const router = useRouter()
