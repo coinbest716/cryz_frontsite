@@ -7,6 +7,15 @@
   min-height: calc(100vh - 177px);
   padding-bottom: 50px;
 }
+.m_container {
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 80px;
+  min-height: calc(100vh - 177px);
+}
 
 .title {
   margin-top: 138px;
@@ -18,7 +27,14 @@
   letter-spacing: -0.42px;
   line-height: 32px;
 }
-
+.m_title {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 26px;
+  text-align: center;
+}
 .textOne {
   margin-top: 50px;
   color: #818e8e;
@@ -27,6 +43,14 @@
   font-size: 20px;
   letter-spacing: 0;
   line-height: 34px;
+  text-align: center;
+}
+.m_textOne {
+  color: #8a94a6;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 24px;
   text-align: center;
 }
 .textTwo {

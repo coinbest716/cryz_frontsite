@@ -20,6 +20,12 @@
   background-color: #7e8f8e;
   box-shadow: 0 2px 7px 0 rgba(120, 137, 149, 0.25);
 }
+.m_cvButton {
+  padding: 10px 45px;
+  border-radius: 20px;
+  background-color: #7e8f8e;
+  box-shadow: 0 2px 7px 0 rgba(120, 137, 149, 0.25);
+}
 .cvLabel {
   color: #ffffff;
   font-family: Montserrat;
@@ -27,5 +33,37 @@
   font-weight: 600;
   letter-spacing: 0;
   line-height: 18px;
+  text-align: center;
+}
+.m_cvLabel {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
+}
+.saveButton {
+  border: 1px solid #979797;
+  border-radius: 22px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 10px 0 rgba(120, 144, 142, 0.15);
+  padding: 8px 20px;
+  width: fit-content;
+}
+.plusSection {
+  background-color: #818e8e;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+}
+.saveLabel {
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 13px;
   text-align: center;
 }

@@ -11,12 +11,14 @@ import BackButton from 'components/components/BackButton'
 import CircularMark from 'components/components/CircularMark'
 import WorkWithUsText from 'components/workwithus/WorkWithUsText'
 import WorkWithUsButton from 'components/workwithus/WorkWithUsButton'
+import MobileWorkWithUsText from 'components/workwithus/MobileWorkWithUsText'
 
 import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
 import toast from 'react-hot-toast'
 
 import backBlackIcon from 'assets/images/arrow-left-black.svg'
+
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './detail.module.scss'
@@ -41,6 +43,9 @@ const Detail = props => {
 
   // variables
   const [sendCV] = useMutation(graphql.mutations.SendCV)
+  const [getJobByIdForDashboard, { data: withData, loading: withLoading, error: withError }] = useLazyQuery(
+    graphql.queries.getJobByIdForDashboard
+  )
   const mockupData = {
     id: 5,
     title: 'Nutricionista deportivo y entrenador personal',
@@ -60,7 +65,7 @@ const Detail = props => {
     body: '',
     url: '',
   })
-  const [mainInfo, setMainInfo] = useState({})
+  const [mainInfo, setMainInfo] = useState(null)
 
   // handlers
   const handleChangePersonal = (event, key) => {
@@ -68,9 +73,18 @@ const Detail = props => {
   }
 
   useEffect(() => {
-    setMainInfo(mockupData)
+    if (router.query.id) {
+      getJobByIdForDashboard({ variables: { id: Number(router.query.id) } })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [router.query])
+
+  useEffect(() => {
+    dispatch({ type: 'set', isLoading: withLoading })
+    if (!withError && withData && withData.getJobByIdForDashboard) {
+      setMainInfo(withData.getJobByIdForDashboard)
+    }
+  }, [withLoading, withData, withError])
 
   const handleClickCV = () => {
     if (
@@ -152,27 +166,101 @@ const Detail = props => {
     router.push('/work-with-us')
   }
 
+  const handleClick = () => {
+    console.log('++++++++++++++++++')
+  }
+
   return (
     <>
       {viewport === 'mobile' ? (
         <div className={styles.m_container}>
           {router.query.type === 'register' ? (
-            <div className="w-full p-4 my-5">
+            <div className="w-full p-4 mb-5">
               <div className="flex justify-start items-center w-fit" onClick={handleClickMobileBack}>
                 <Image src={backBlackIcon} alt="" width={15} height={10} />
                 <p className={styles.backToMain + ' ml-2'}>Trabaja con nosotros</p>
               </div>
-              Register
+              <div className="text-left mt-3 w-full">
+                <div className={styles.m_topTitle}>Inscribirse</div>
+                <div className={styles.m_topDash + ' mt-2'} />
+              </div>
+              <div className={styles.m_textContainer + ' mt-6'}>
+                Estás mas cerca de formar parte de la familia de CrysDyaz&Co, rellena este formulario y adjunta tu CV..
+              </div>
+              <div className="mt-8">
+                <div className={'pt-1 py-3'}>
+                  <MobileWorkWithUsText
+                    handleChange={e => handleChangePersonal(e, 'name')}
+                    label={'Nombre'}
+                    placeholder={''}
+                    type={'text'}
+                    value={personalInfo.name}
+                  />
+                </div>
+                <div className={'pt-1 py-3'}>
+                  <MobileWorkWithUsText
+                    handleChange={e => handleChangePersonal(e, 'surname')}
+                    label={'Apellidos'}
+                    placeholder={''}
+                    type={'text'}
+                    value={personalInfo.surname}
+                  />
+                </div>
+                <div className={'pt-1 py-3'}>
+                  <MobileWorkWithUsText
+                    handleChange={e => handleChangePersonal(e, 'email')}
+                    label={'Email'}
+                    placeholder={''}
+                    type={'text'}
+                    value={personalInfo.email}
+                  />
+                </div>
+                <div className={'pt-1 py-3'}>
+                  <MobileWorkWithUsText
+                    handleChange={e => handleChangePersonal(e, 'phone')}
+                    label={'Teléfono'}
+                    placeholder={''}
+                    type={'text'}
+                    value={personalInfo.phone}
+                  />
+                </div>
+                <div className={'pt-1 py-3'}>
+                  <MobileWorkWithUsText
+                    handleChange={e => handleChangePersonal(e, 'body')}
+                    label={'Porqué quiero trabajar en Crys Dyaz & Co'}
+                    placeholder={''}
+                    type={'textarea'}
+                    value={personalInfo.body}
+                  />
+                </div>
+              </div>
+              <div>
+                <WorkWithUsButton
+                  label={'Adjuntar pdf'}
+                  type={'pdf'}
+                  viewport={viewport}
+                  fileRef={fileRef}
+                  onClickAttachFile={onClickAttachFile}
+                  handleAttachFile={handleAttachFile}
+                />
+
+                <p className={styles.filePath + ' ml-8 mt-1'}>{personalInfo.url}</p>
+              </div>
+              <div className="flex justify-center mt-7">
+                <WorkWithUsButton label={'ENVIAR CV'} handleClick={handleClickCV} type={'cv'} viewport={viewport} />
+              </div>
             </div>
           ) : (
             <div className="w-full p-4 my-5">
               <div onClick={handleClickBack}>
                 <Image src={backBlackIcon} alt="" width={20} height={15} />
               </div>
-              <div className={styles.contentContainer + ' mt-5 mb-7 px-4 py-7'}>
-                <div className={styles.m_withTitle + ' mb-6'}>{mainInfo.title}</div>
-                <div className={styles.m_withContent}>{mainInfo.content}</div>
-              </div>
+              {mainInfo && (
+                <div className={styles.contentContainer + ' mt-5 mb-7 px-4 py-7'}>
+                  <div className={styles.m_withTitle + ' mb-6'}>{mainInfo.title}</div>
+                  <div className={styles.m_withContent}>{mainInfo.content}</div>
+                </div>
+              )}
               <div className={styles.register + ' mt-5'} onClick={handleClickRegister}>
                 <p className={styles.m_registerText}>INSCRIBIRSE</p>
               </div>
@@ -272,10 +360,12 @@ const Detail = props => {
                   <WorkWithUsButton label={'ENVIAR CV'} handleClick={handleClickCV} type={'cv'} />
                 </div>
               </div>
-              <div className={styles.contentContainer + ' mt-16 px-7 py-12'}>
-                <div className={styles.withTitle + ' mb-12'}>{mainInfo.title}</div>
-                <div className={styles.withContent}>{mainInfo.content}</div>
-              </div>
+              {mainInfo && (
+                <div className={styles.contentContainer + ' mt-16 px-7 py-12'}>
+                  <div className={styles.withTitle + ' mb-12'}>{mainInfo.title}</div>
+                  <div className={styles.withContent}>{mainInfo.content}</div>
+                </div>
+              )}
             </div>
           </div>
         </div>
