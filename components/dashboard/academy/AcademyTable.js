@@ -109,6 +109,14 @@ const AcademyTable = props => {
                       dangerouslySetInnerHTML={{ __html: item.description }}
                     />
                   </div>
+                  <div className="my-4">
+                    {category === 'video' && item.video_url !== undefined && (
+                      <video width={1024} controls>
+                        <source src={item.video_url} type="video/ogg" />
+                        Your browser does not support HTML5 video.
+                      </video>
+                    )}
+                  </div>
                   {item.doc !== null && (
                     <div className="m-2">
                       <DocumentButton doc={item.doc} onClickDownload={handleClickDocument} />
@@ -173,6 +181,14 @@ const AcademyTable = props => {
                     className={styles.description + ' tinymce-class'}
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   />
+                  <div className="my-4">
+                    {category === 'video' && item.video_url !== undefined && (
+                      <video width={1024} controls>
+                        <source src={item.video_url} type="video/ogg" />
+                        Your browser does not support HTML5 video.
+                      </video>
+                    )}
+                  </div>
                   {item.doc !== null && (
                     <div className="flex justify-center">
                       <div className="m-2">
