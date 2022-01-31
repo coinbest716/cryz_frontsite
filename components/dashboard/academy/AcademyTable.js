@@ -21,7 +21,7 @@ import styles from './AcademyTable.module.scss'
 
 const AcademyTable = props => {
   // variables
-  const { academyID, data, viewport } = props
+  const { academyID, data, category, viewport } = props
   const router = useRouter()
   const [academy, setAcademy] = useState([])
 
@@ -89,7 +89,7 @@ const AcademyTable = props => {
               <div className={'flex justify-start'}>
                 <div className={styles.viewArea}></div>
                 <div className={styles.dayArea + ' ' + styles.contentFecha}>
-                  {item.stream_event}
+                  {category === 'video' && <div className={styles.onlineText}>{category.toUpperCase()}</div>}
                   {item.stream_event !== undefined && item.stream_event === true && (
                     <div className={styles.onlineText} onClick={() => handleGotoOnlineStreaming(item.id)}>
                       ONLINE
@@ -100,7 +100,7 @@ const AcademyTable = props => {
                     <div className={styles.onlineText}>PRESENCIAL</div>
                   )}
 
-                  <div className={styles.hourText}>{moment(item.hour).format('HH:mm')}h</div>
+                  {category !== 'video' && <div className={styles.hourText}>{moment(item.hour).format('HH:mm')}h</div>}
                 </div>
                 <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
                   <div className={'w-full ' + globalStyles.tinyMCEClass}>
@@ -157,6 +157,7 @@ const AcademyTable = props => {
             ) : (
               <div className={'flex justify-start i '}>
                 <div className={'flex flex-1 flex-wrap ' + styles.mobileTableContent}>
+                  {category === 'video' && <div className={styles.onlineText}>{category.toUpperCase()}</div>}
                   {item.stream_event !== undefined && item.stream_event === true && (
                     <div
                       className={'w-full flex justify-center ' + styles.onlineText}
