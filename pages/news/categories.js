@@ -66,6 +66,7 @@ const Categoris = props => {
   }, [router.query])
 
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: newsDataLoading })
     if (!newsDataError && newsData && newsData.getNewsListWithCategory) {
       setNewsInfo(newsData.getNewsListWithCategory)
     }
@@ -91,8 +92,9 @@ const Categoris = props => {
       {viewport === 'mobile' ? (
         <div className={styles.m_container + ' p-4 pb-10'}>
           <div className="w-full">
-            <div className={'mt-5'}>
+            <div className={'mt-5 flex justify-start items-center'}>
               <BackButton viewport={viewport} />
+              <div className={styles.backString}>News</div>
             </div>
             <div className="text-left mt-5 w-full">
               <div className={styles.m_newTopTitle}>News</div>

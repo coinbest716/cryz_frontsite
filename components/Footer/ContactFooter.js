@@ -37,7 +37,7 @@ const ContactFooter = props => {
               <div className={'w-full flex justify-center'}>
                 <button
                   className={styles.workWithUsButton + ' flex justify-between'}
-                  onClick={() => router.push('work-with-us')}
+                  onClick={() => router.push('/work-with-us')}
                 >
                   <p className={'mr-4'}>Trabaja con nosotros</p>
                   <Image src={ArrowLeftIcon} alt="" width={23} height={22} />
@@ -48,7 +48,7 @@ const ContactFooter = props => {
             <div className={'w-full flex justify-between items-center'}>
               <button
                 className={styles.workWithUsButton + ' flex justify-between'}
-                onClick={() => router.push('work-with-us')}
+                onClick={() => router.push('/work-with-us')}
               >
                 <p className={'mr-4'}>Trabaja con nosotros</p>
                 <Image src={ArrowLeftIcon} alt="" width={23} height={22} />

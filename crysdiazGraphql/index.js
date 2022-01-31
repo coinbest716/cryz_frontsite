@@ -28,6 +28,7 @@ import {
   GetAcademyWithPlazas,
   GetAcademyWithPlazasById,
   GetPatientAcademy,
+  GetAcademyPurchaseStatus,
 } from './academy.gql'
 import { GetNewsListForDashboard, GetNewsByIdForDashboard, GetNewsListWithCategory } from './news.gql'
 import {
@@ -78,7 +79,7 @@ import { GetNutritionsForDashboard, GetNutritionPurchaseStatus } from './dashboa
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
 
-import { SendCV } from './other.gql'
+import { SendCV, GetJobListForDashboard, GetJobByIdForDashboard } from './workwithus.gql'
 
 // courses
 
@@ -119,6 +120,7 @@ export default {
     getAcademyWithPlazas: GetAcademyWithPlazas,
     getAcademyWithPlazasById: GetAcademyWithPlazasById,
     getPatientAcademy: GetPatientAcademy,
+    getAcademyPurchaseStatus: GetAcademyPurchaseStatus,
 
     // news part
     getNewsListForDashboard: GetNewsListForDashboard,
@@ -174,6 +176,10 @@ export default {
 
     //purchase
     checkoutVerify: CheckoutVerify,
+
+    // work with us
+    getJobListForDashboard: GetJobListForDashboard,
+    getJobByIdForDashboard: GetJobByIdForDashboard,
   },
   mutations: {
     createUser: CreateUser,

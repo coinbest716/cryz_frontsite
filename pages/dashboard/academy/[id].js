@@ -25,6 +25,8 @@ import MenubarIcon from 'assets/images/menubar.svg'
 import UserCircleIcon from 'assets/images/user-circle.svg'
 import TimerIcon from 'assets/images/timer.svg'
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
+import DownIcon from 'public/images/down.svg'
+import AcademyPreparingLogoIcon from 'assets/images/academy-preparing-logo.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -58,20 +60,13 @@ const AcademyDetail = props => {
   const [getAcademyWithPlazasById, { data: courseData, loading: courseLoading, error: courseError }] = useLazyQuery(
     graphql.queries.getAcademyWithPlazasById
   )
-  const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
-    graphql.queries.getSessionsByDashboard
-  )
-  const [academyData, setAcademyData] = useState({})
+
+  const [showCalendar, setShowCalendar] = useState(true)
+  const [academyData, setAcademyData] = useState('{}')
+  const [trainerExist, setTrainerExist] = useState(false)
   const [markDate, setMarkDate] = useState([])
   const [events, setEvents] = useState([])
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
-
-  const [calendarValue, setCalendarValue] = useState(new Date())
-
-  // handlers
-  useEffect(() => {
-    getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
-  }, [getSessionsByDashboard])
 
   useEffect(() => {
     if (router.query.id !== undefined) {
@@ -80,28 +75,29 @@ const AcademyDetail = props => {
   }, [getAcademyWithPlazasById, router.query])
 
   useEffect(() => {
-    if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
-      const sessionArr = sessionData.getSessionsByDashboard
-      const _events = []
-      const _markDate = []
-      sessionArr.map(item => {
-        const _eventItem = {
-          id: item.id,
-          title: item.purchase.item_web_name,
-          start: item.start_time,
-          end: item.end_time,
-          backgroundColor: item.location.color,
-          textColor: '#ffffff',
-          label: item.location.name,
-          streaming: item.stream_event,
-        }
-        _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
-        _events.push(_eventItem)
-      })
-      setEvents(_events)
-      setMarkDate(_markDate)
+    if (academyData !== '{}') {
+      if (academyData.training.length !== 0) {
+        setTrainerExist(true)
+        const sessionArr = academyData.training
+        const _events = []
+        const _markDate = []
+        sessionArr.map(item => {
+          const _eventItem = {
+            id: item.id,
+            title: item.title,
+            start: item.hour,
+            streaming: item.stream_event,
+          }
+          _markDate.push(moment(item.day).format('DD-MM-YYYY'))
+          _events.push(_eventItem)
+        })
+        setEvents(_events)
+        setMarkDate(_markDate)
+      } else {
+        setTrainerExist(false)
+      }
     }
-  }, [sessionLoading, sessionData, sessionError])
+  }, [academyData])
 
   useEffect(() => {
     setAvailableEvent()
@@ -145,96 +141,110 @@ const AcademyDetail = props => {
     })
   }
 
-  const handleChangeDate = value => {
-    setCalendarValue(value)
-    const eventDate = moment(value).format('YYYY-MM-DD')
-    markDate.map(item => {
-      if (item === moment(value).format('DD-MM-YYYY')) {
-        router.push({
-          pathname: '/dashboard/calendar',
-          query: {
-            eventDate: eventDate,
-          },
-        })
-      }
-    })
-  }
-
   // mobile part
   const handleClickBack = () => {
     router.push('/dashboard/academy')
   }
 
+  const handleClickMonth = () => {
+    setShowCalendar(!showCalendar)
+  }
+
   return viewport !== 'mobile' ? (
-    <div className={globalStyles.dashContainer}>
-      <div className={'w-full flex justify-between items-center'}>
-        <div className={globalStyles.dashTitle}>{academyData.name}</div>
-        <div className={'flex justify-end'}>
-          <div className="mr-16">
-            <StartclassButton
-              handleClick={() => handleClickStartButton()}
-              label={'Comenzar clase'}
-              visible={streamingEvent.toggle}
+    trainerExist === true ? (
+      <div className={globalStyles.dashContainer}>
+        <div className={'w-full flex justify-between items-center'}>
+          <div className={globalStyles.dashTitle}>{academyData.name}</div>
+          <div className={'flex justify-end'}>
+            <div className="mr-16">
+              <StartclassButton
+                handleClick={() => handleClickStartButton()}
+                label={'Comenzar clase'}
+                visible={streamingEvent.toggle}
+              />
+            </div>
+            <NotificationButton />
+          </div>
+        </div>
+        <div className={'flex mt-3'}>
+          <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#D2DADA' }}>
+            <Image src={MenubarIcon} alt={''} width={16} height={11} />
+          </div>
+          <div className={'mr-10'}>
+            <p className={styles.thinText}>Categoria</p>
+            <p className={styles.boldText}>
+              {academyData.category !== undefined &&
+                academyData.category.charAt(0).toUpperCase() + academyData.category.slice(1)}
+            </p>
+          </div>
+          <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#DFDBD5' }}>
+            <Image src={UserCircleIcon} alt={''} width={15} height={15} />
+          </div>
+          <div className={'mr-10'}>
+            <p className={styles.thinText}>Tipo</p>
+            <p className={styles.boldText}>
+              {academyData.type !== undefined && academyData.type.charAt(0).toUpperCase() + academyData.type.slice(1)}
+            </p>
+          </div>
+          <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#E3BBAA' }}>
+            <Image src={TimerIcon} alt={''} width={14} height={13} />
+          </div>
+          <div className={'mr-10'}>
+            <p className={styles.thinText}>Horas</p>
+            <p className={styles.boldText}>{academyData.duration}</p>
+          </div>
+        </div>
+        <div className={'flex mt-8'}>
+          <div className={styles.descriptionArea}>
+            <p className={styles.description} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
+          </div>
+        </div>
+        <div className={'flex mt-8'}>
+          <div className={'flex flex-1 w-full mr-8'}>
+            {academyData.list !== undefined && (
+              <AcademyTable
+                academyID={academyData.id}
+                data={academyData.training}
+                category={academyData.category}
+                viewport={viewport}
+              />
+            )}
+          </div>
+          <div className={styles.calendarArea + ' calendarWrapper'}>
+            <MonthCalendar
+              className={styles.calendar}
+              value={new Date()}
+              locale="es-MX"
+              tileClassName={({ date, view }) => {
+                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                  return 'highlight'
+                }
+              }}
             />
           </div>
-          <NotificationButton />
         </div>
       </div>
-      <div className={'flex mt-3'}>
-        <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#D2DADA' }}>
-          <Image src={MenubarIcon} width={16} height={11} />
-        </div>
-        <div className={'mr-10'}>
-          <p className={styles.thinText}>Categoria</p>
-          <p className={styles.boldText}>
-            {academyData.category !== undefined &&
-              academyData.category.charAt(0).toUpperCase() + academyData.category.slice(1)}
-          </p>
-        </div>
-        <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#DFDBD5' }}>
-          <Image src={UserCircleIcon} width={15} height={15} />
-        </div>
-        <div className={'mr-10'}>
-          <p className={styles.thinText}>Tipo</p>
-          <p className={styles.boldText}>
-            {academyData.type !== undefined && academyData.type.charAt(0).toUpperCase() + academyData.type.slice(1)}
-          </p>
-        </div>
-        <div className={'w-7 h-7 flex justify-center items-center mr-2 '} style={{ backgroundColor: '#E3BBAA' }}>
-          <Image src={TimerIcon} width={14} height={13} />
-        </div>
-        <div className={'mr-10'}>
-          <p className={styles.thinText}>Horas</p>
-          <p className={styles.boldText}>{academyData.duration}</p>
+    ) : (
+      <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyArea}>
+        <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
+          <div className={'w-full flex justify-center ' + styles.preparingTitle}>
+            ¡Gracias por inscribirte en nuestro curso de Academy!
+          </div>
+          <div className="mt-16 mb-20">
+            <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
+          </div>
+          <div className={'w-full flex flex-wrap justify-center ' + styles.preparingText}>
+            <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
+            <br />
+            <br />
+            <p className="w-full">
+              Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
+            </p>
+          </div>
         </div>
       </div>
-      <div className={'flex mt-8'}>
-        <div className={styles.descriptionArea}>
-          <p className={styles.description} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
-        </div>
-      </div>
-      <div className={'flex mt-8'}>
-        <div className={'flex flex-1 w-full mr-8'}>
-          {academyData.list !== undefined && (
-            <AcademyTable academyID={academyData.id} data={academyData.training} viewport={viewport} />
-          )}
-        </div>
-        <div className={styles.calendarArea + ' calendarWrapper'}>
-          <MonthCalendar
-            className={styles.calendar}
-            onChange={handleChangeDate}
-            value={calendarValue}
-            locale="es-MX"
-            tileClassName={({ date, view }) => {
-              if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
-                return 'highlight'
-              }
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  ) : (
+    )
+  ) : trainerExist === true ? (
     <div>
       {/* mobile header part */}
       <div className={styles.mobileHeader}>
@@ -253,13 +263,101 @@ const AcademyDetail = props => {
       </div>
       {/* mobile content part */}
       <div className={'mt-32 mb-32 w-full ' + globalStyles.container}>
+        {/* calendar part */}
+        <div className={'rounded-xl bg-white py-4 px-6 pb-10 mt-10 relative'}>
+          <div className={'flex justify-between items-center'}>
+            <div className={styles.monthName}></div>
+            <div
+              className={'flex items-center pl-4 pr-2 py-1 cursor-pointer ' + styles.monthPickerSection}
+              onClick={handleClickMonth}
+            >
+              <div className={styles.monthSelect + ' pr-3'}>Mes</div>
+              <Image src={DownIcon} alt="" width={7} height={7} />
+            </div>
+          </div>
+          <div className={styles.calendarArea + ' calendarWrapper'}>
+            <MonthCalendar
+              className={showCalendar ? '' : 'hidden'}
+              value={new Date()}
+              locale="es-MX"
+              tileClassName={({ date, view }) => {
+                if (markDate.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+                  return 'highlight'
+                }
+              }}
+            />
+          </div>
+        </div>
+        {/* category part */}
+        <div className={'flex justify-between pt-4'}>
+          <div
+            className={'w-7 h-7 flex justify-center items-center mr-2 rounded-full'}
+            style={{ backgroundColor: '#D2DADA' }}
+          >
+            <Image src={MenubarIcon} alt={''} width={16} height={11} />
+          </div>
+          <div>
+            <p className={styles.thinText}>Categoria</p>
+            <p className={styles.boldText}>
+              {academyData.category !== undefined &&
+                academyData.category.charAt(0).toUpperCase() + academyData.category.slice(1)}
+            </p>
+          </div>
+          <div
+            className={'w-7 h-7 flex justify-center items-center mr-2 rounded-full'}
+            style={{ backgroundColor: '#DFDBD5' }}
+          >
+            <Image src={UserCircleIcon} alt={''} width={15} height={15} />
+          </div>
+          <div>
+            <p className={styles.thinText}>Tipo</p>
+            <p className={styles.boldText}>
+              {academyData.type !== undefined && academyData.type.charAt(0).toUpperCase() + academyData.type.slice(1)}
+            </p>
+          </div>
+          <div
+            className={'w-7 h-7 flex justify-center items-center mr-2 rounded-full'}
+            style={{ backgroundColor: '#E3BBAA' }}
+          >
+            <Image src={TimerIcon} alt={''} width={14} height={13} />
+          </div>
+          <div>
+            <p className={styles.thinText}>Horas</p>
+            <p className={styles.boldText}>{academyData.duration}</p>
+          </div>
+        </div>
+        {/* description part */}
         <div className={'flex pt-4'}>
           <p className={styles.mobileDescription} dangerouslySetInnerHTML={{ __html: academyData.description }}></p>
         </div>
         <div className="mt-2">
           {academyData.list !== undefined && (
-            <AcademyTable academyID={academyData.id} data={academyData.training} viewport={viewport} />
+            <AcademyTable
+              academyID={academyData.id}
+              data={academyData.training}
+              category={academyData.category}
+              viewport={viewport}
+            />
           )}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className={'w-full flex flex-wrap justify-center items-center mt-20'}>
+      <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
+        <div className={'w-full flex justify-center ' + styles.m_preparingTitle}>
+          ¡Gracias por inscribirte en nuestro curso de Academy!
+        </div>
+        <div className="my-10">
+          <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
+        </div>
+        <div className={'w-full flex flex-wrap justify-center ' + styles.m_preparingText}>
+          <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
+          <br />
+          <br />
+          <p className="w-full">
+            Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
+          </p>
         </div>
       </div>
     </div>

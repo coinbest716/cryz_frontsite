@@ -54,9 +54,10 @@
     "sass": "^1.42.1",
     "sharp": "^0.29.2",
     "twilio-video": "^2.18.1",
-    "yarn": "^1.22.17"
+    "postcss-opacity-percentage": "^1.1.2"
   },
   "devDependencies": {
+    "yarn": "^1.22.17",
     "@babel/core": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
     "autoprefixer": "^10.3.2",
@@ -72,5 +73,8 @@
     "precss": "^4.0.0",
     "prettier": "^2.4.1",
     "tailwindcss": "^2.2.15"
+  },
+  "resolutions": {
+    "postcss-opacity-percentage": "^1.1.2"
   }
 }

@@ -62,6 +62,7 @@ const Training = props => {
   }, [getCmsServiceSubject])
 
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: cmsSubjectLoading })
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
       let _sliderData = [...sliderData]
       setTitle(cmsSubjectData.getCmsServiceSubject.title_two)

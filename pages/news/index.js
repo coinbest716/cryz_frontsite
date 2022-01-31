@@ -57,6 +57,7 @@ const News = props => {
   }, [])
 
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: newsLoading })
     if (!newsError && newsData && newsData.getNewsListForDashboard) {
       const _newsData = newsData.getNewsListForDashboard
       setNewInfo(_newsData)
@@ -101,7 +102,7 @@ const News = props => {
     <>
       {newsInfo.length > 0 ? (
         viewport === 'mobile' ? (
-          <div className={styles.m_container + ' p-4 mb-10'}>
+          <div className={styles.m_container + ' p-4 pb-10'}>
             <div className="text-left mt-5 w-full">
               <div className={styles.m_newTopTitle}>News</div>
               <div className={styles.m_newTopDash + ' mt-2'} />

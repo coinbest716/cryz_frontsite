@@ -17,31 +17,43 @@ const NewsCarousel = props => {
       autoPlay={true}
       stopOnHover={true}
       showStatus={false}
-      showIndicators={true}
+      showIndicators={sliderData?.length > 1 ? true : false}
       // infiniteLoop={true}
       centerMode={true}
       centerSlidePercentage={100}
       interval={2500}
       renderArrowPrev={(clickHandler, hasPrev, labelPrev) =>
         hasPrev ? (
-          <button onClick={clickHandler} className={styles.previousButton}>
-            <Image src={previousButtonPinkIcon} alt="" width={20} height={15} />
-          </button>
-        ) : (
+          sliderData?.length > 1 ? (
+            <button onClick={clickHandler} className={styles.previousButton}>
+              <Image src={previousButtonPinkIcon} alt="" width={20} height={15} />
+            </button>
+          ) : (
+            <></>
+          )
+        ) : sliderData?.length > 1 ? (
           <button onClick={clickHandler} className={styles.previousButton}>
             <Image src={previousButtonGrayIcon} alt="" width={20} height={15} />
           </button>
+        ) : (
+          <></>
         )
       }
       renderArrowNext={(clickHandler, hasNext, labelNext) =>
         hasNext ? (
-          <button onClick={clickHandler} className={styles.nextButton}>
-            <Image onClick={clickHandler} src={nextButtonPinkIcon} alt="" width={20} height={15} />
-          </button>
-        ) : (
+          sliderData?.length > 1 ? (
+            <button onClick={clickHandler} className={styles.nextButton}>
+              <Image onClick={clickHandler} src={nextButtonPinkIcon} alt="" width={20} height={15} />
+            </button>
+          ) : (
+            <></>
+          )
+        ) : sliderData?.length > 1 ? (
           <button onClick={clickHandler} className={styles.nextButton}>
             <Image onClick={clickHandler} src={nextButtonGrayIcon} alt="" width={20} height={15} />
           </button>
+        ) : (
+          <></>
         )
       }
     >

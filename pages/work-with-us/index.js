@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState, useReducer } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 // redux
@@ -6,31 +6,22 @@ import { useDispatch } from 'react-redux'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-
+import CircularMark from 'components/components/CircularMark'
+import WorkWithCard from 'components/workwithus/WorkWithCard'
+import MobileWorkWithCard from 'components/workwithus/MobileWorkWithCard'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './index.module.scss'
+import styles from './workwithus.module.scss'
 
 // graphql
-import { useMutation, useLazyQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import toast from 'react-hot-toast'
-
-const formReducer = (state, event) => {
-  return {
-    ...state,
-    [event.name]: event.value,
-  }
-}
 
 const WorkWithUs = props => {
+  const router = useRouter()
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
-  const [formData, setFormData] = useReducer(formReducer, {})
-  const router = useRouter()
-
-  const [sendCV] = useMutation(graphql.mutations.SendCV)
 
   useEffect(() => {
     setIsMounted(true)
@@ -46,158 +37,85 @@ const WorkWithUs = props => {
 
   // variables
   const { viewport } = props
-  const fileRef = createRef()
+  const [getJobListForDashboard, { data: withData, loading: withLoading, error: withError }] = useLazyQuery(
+    graphql.queries.getJobListForDashboard
+  )
+  const [mainInfo, setMainInfo] = useState([])
 
   // handlers
-  const handleAttachFile = event => {}
+  useEffect(() => {
+    getJobListForDashboard()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  const onClickAttachFile = () => {
-    event.preventDefault()
-    fileRef.current.click()
-  }
-
-  const handleSubmit = event => {
-    event.preventDefault()
-
-    if (
-      !formData.email ||
-      !formData.firstName ||
-      !formData.lastName ||
-      !formData.body ||
-      !formData.phone ||
-      !fileRef.current.files[0]
-    ) {
-      toast.error('todos los campos son obligatorios')
-    } else {
-      sendCV({
-        variables: {
-          email: formData.email,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          body: formData.body,
-          phone: formData.phone,
-          attachment: fileRef.current.files[0],
-        },
-      })
-      router.push(`/work-with-us/confirm`)
+  useEffect(() => {
+    dispatch({ type: 'set', isLoading: withLoading })
+    if (!withError && withData && withData.getJobListForDashboard) {
+      setMainInfo(withData.getJobListForDashboard)
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [withLoading, withData, withError])
 
-  const handleChange = event => {
-    setFormData({
-      name: event.target.name,
-      value: event.target.value,
+  const handleClickOffer = id => {
+    router.push({
+      pathname: '/work-with-us/detail',
+      query: {
+        id: id,
+      },
     })
   }
 
   return (
-    <div className={'flex flex-wrap justify-center'}>
-      <div className={globalStyles.container}>
-        <div className={styles.container}>
-          <div className={viewport === 'mobile' ? styles.mobileTitle : styles.title}>Trabaja con nosotros</div>
-          <div className={viewport === 'mobile' ? styles.mobileDivider : styles.divider} />
-          <div className={'w-full md:w-2/3 ' + styles.text}>
-            Si quieres formar parte de la familia de Crys Dyaz & CO, rellena este formulario, adjunta tu CV y cuéntanos
-            un poco más sobre ti
+    <>
+      {viewport === 'mobile' ? (
+        <div className={styles.m_container}>
+          <div className="w-full p-4 my-5">
+            {mainInfo.length > 0 ? (
+              <>
+                <div className={styles.m_topTitle}>Trabaja con nosotros</div>
+                <div className={styles.m_topDash + ' mt-2 mb-10'} />
+                <div className={'grid grid-cols-2 gap-3 flex justify-center'}>
+                  {mainInfo.map((item, index) => (
+                    <MobileWorkWithCard item={item} key={index} handleClickOffer={handleClickOffer} />
+                  ))}
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
-          {/* form part */}
-          <form onSubmit={handleSubmit}>
-            <div className={'mt-14 '}>
-              <div className={'grid grid-cols-12 gap-4'}>
-                <div className={'col-span-12 md:col-span-7 mr-0 md:mr-24'}>
-                  <div className={styles.label}>Nombre</div>
-                  <input
-                    className={
-                      'appearance-none bg-transparent border rounded w-full h-10 text-gray-700 mr-3 py-1 px-5 mb-4 leading-tight focus:outline-none ' +
-                      styles.input
-                    }
-                    name="firstName"
-                    type="text"
-                    placeholder="Nombre"
-                    aria-label="Nombre"
-                    onChange={handleChange}
-                  />
-                  <div className={styles.label}>Apellidos</div>
-                  <input
-                    className={
-                      'appearance-none bg-transparent border rounded w-full h-10 text-gray-700 mr-3 py-1 px-5 mb-4 leading-tight focus:outline-none ' +
-                      styles.input
-                    }
-                    type="text"
-                    name="lastName"
-                    placeholder="Apellidos"
-                    aria-label="Apellidos"
-                    onChange={handleChange}
-                  />
-                  <div className={styles.label}>Breve descripción</div>
-                  <textarea
-                    className={
-                      'appearance-none bg-transparent border rounded w-full h-40 text-gray-700 mr-3 py-2 px-5 mb-4 leading-tight focus:outline-none ' +
-                      styles.input
-                    }
-                    name="body"
-                    type="text"
-                    placeholder="Breve descripción"
-                    aria-label="Breve descripción"
-                    onChange={handleChange}
-                  />
+        </div>
+      ) : (
+        <div className={'flex flex-wrap justify-center'}>
+          <div className={styles.container}>
+            <div className={globalStyles.container + ' my-20'}>
+              <div className="flex justify-between mt-24 mb-8">
+                <div>
+                  <div className={styles.topTitle}>Trabaja con nosotros</div>
+                  <div className={styles.topDash + ' mt-5'} />
                 </div>
-                <div className={'col-span-12 md:col-span-3'}>
-                  <div className={styles.label}>Teléfono</div>
-                  <input
+                <CircularMark />
+              </div>
+              <div>
+                {mainInfo.length > 0 ? (
+                  <div
                     className={
-                      'appearance-none bg-transparent border rounded w-full h-10 text-gray-700 py-1 px-5 mb-4 leading-tight focus:outline-none ' +
-                      styles.input
+                      'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
                     }
-                    name="phone"
-                    type="text"
-                    placeholder="Teléfono"
-                    aria-label="Teléfono"
-                    onChange={handleChange}
-                  />
-                  <div className={styles.label}>Email</div>
-                  <input
-                    className={
-                      'appearance-none bg-transparent border rounded w-full h-10 text-gray-700 py-1 px-5 mb-4 leading-tight focus:outline-none ' +
-                      styles.input
-                    }
-                    name="email"
-                    type="text"
-                    placeholder="Email"
-                    aria-label="Email"
-                    onChange={handleChange}
-                  />
-                  <div className={'relative'}>
-                    <div className={'hidden md:flex ' + styles.label}>&nbsp;</div>
-                    <input className={'hidden'} type="file" id="img_frontr" onChange={handleAttachFile} ref={fileRef} />
-                    <input
-                      className={
-                        'appearance-none bg-transparent border rounded w-full h-10 text-gray-700 py-1 pl-5 pr-36 mb-4 leading-tight focus:outline-none ' +
-                        styles.input
-                      }
-                      type="text"
-                      placeholder="Attach File"
-                      aria-label="Attach File"
-                    />
-                    <button
-                      className={'absolute bottom-0 right-0 h-10 mb-4 px-4 rounded ' + styles.button}
-                      onClick={onClickAttachFile}
-                    >
-                      Adjuntar pdf
-                    </button>
+                  >
+                    {mainInfo.map((item, index) => (
+                      <WorkWithCard item={item} key={index} handleClickOffer={handleClickOffer} />
+                    ))}
                   </div>
-                  <div className={'w-full flex justify-end'}>
-                    <button className={'mt-10 md:mt-48 h-10 w-full md:w-2/3 ' + styles.button} type="submit">
-                      ENVIAR CV
-                    </button>
-                  </div>
-                </div>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 

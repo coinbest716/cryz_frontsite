@@ -19,6 +19,7 @@ import moment from 'moment'
 
 // images and icons
 import AcademyLogoIcon from 'assets/images/academy-logo.svg'
+import AcademyPreparingLogoIcon from 'assets/images/academy-preparing-logo.svg'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -49,49 +50,55 @@ const Academy = props => {
   const { viewport } = props
   const router = useRouter()
 
-  const [getPatientAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
-    graphql.queries.getPatientAcademy
-  )
-  const [getSessionsByDashboard, { data: sessionData, loading: sessionLoading, error: sessionError }] = useLazyQuery(
-    graphql.queries.getSessionsByDashboard
-  )
+  const [academyPurchaseStatus, setAcademyPurchaseStatus] = useState(false)
   const [cardData, setCardData] = useState([])
   const [streamingEvent, setStreamingEvent] = useState({ id: -1, start: '', toggle: false })
   const [events, setEvents] = useState([])
 
+  const [getPatientAcademy, { data: mainData, loading: mainLoading, error: mainError }] = useLazyQuery(
+    graphql.queries.getPatientAcademy
+  )
+  const [
+    getAcademyPurchaseStatus,
+    { data: academyPurchaseStatusData, loading: academyPurchaseStatusLoading, error: academyPurchaseStatusError },
+  ] = useLazyQuery(graphql.queries.getAcademyPurchaseStatus)
+
   // handlers
   useEffect(() => {
-    getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
-  }, [getSessionsByDashboard])
-
-  useEffect(() => {
-    getPatientAcademy({
+    getAcademyPurchaseStatus({
       variables: { patient_id: Number(localStorage.getItem('patient_id')) },
     })
-  }, [getPatientAcademy])
+  }, [getAcademyPurchaseStatus])
 
   useEffect(() => {
-    if (!sessionError && sessionData && sessionData.getSessionsByDashboard) {
-      const sessionArr = sessionData.getSessionsByDashboard
+    if (academyPurchaseStatus === true) {
+      getPatientAcademy({
+        variables: { patient_id: Number(localStorage.getItem('patient_id')) },
+      })
+    }
+  }, [getPatientAcademy, academyPurchaseStatus])
+
+  useEffect(() => {
+    if (cardData.length !== 0) {
+      let sessionArr = []
+      cardData.map(item =>
+        item.training.map(elem => {
+          sessionArr.push(elem)
+        })
+      )
       const _events = []
-      const _markDate = []
       sessionArr.map(item => {
         const _eventItem = {
           id: item.id,
-          title: item.purchase.item_web_name,
-          start: item.start_time,
-          end: item.end_time,
-          backgroundColor: item.location.color,
-          textColor: '#ffffff',
-          label: item.location.name,
+          title: item.title,
+          start: item.hour,
           streaming: item.stream_event,
         }
-        _markDate.push(moment(item.start_time).format('DD-MM-YYYY'))
         _events.push(_eventItem)
       })
       setEvents(_events)
     }
-  }, [sessionLoading, sessionData, sessionError])
+  }, [cardData])
 
   useEffect(() => {
     setAvailableEvent()
@@ -123,6 +130,12 @@ const Academy = props => {
   }
 
   useEffect(() => {
+    if (!academyPurchaseStatusError && academyPurchaseStatusData) {
+      setAcademyPurchaseStatus(academyPurchaseStatusData.getAcademyPurchaseStatus)
+    }
+  }, [academyPurchaseStatusLoading, academyPurchaseStatusData, academyPurchaseStatusError])
+
+  useEffect(() => {
     if (!mainError && mainData && mainData.getPatientAcademy) {
       setCardData(mainData.getPatientAcademy)
     }
@@ -131,7 +144,7 @@ const Academy = props => {
   const handleClickStartButton = () => {
     router.push({
       pathname: '/dashboard/live-streaming',
-      query: { id: streamingEvent.id },
+      query: { id: streamingEvent.id, type: 'academy' },
     })
   }
 
@@ -140,54 +153,127 @@ const Academy = props => {
     router.push(`/dashboard/academy/${data.id}`)
   }
 
-  return viewport !== 'mobile' ? (
+  return academyPurchaseStatus === true ? (
+    viewport !== 'mobile' ? (
+      <div className={globalStyles.dashContainer}>
+        <div className={'w-full flex flex-wrap justify-between items-center'}>
+          <div className={globalStyles.dashTitle}>Mis cursos Academy</div>
+          <div className={'flex justify-end'}>
+            <div className="mr-16">
+              <StartclassButton
+                handleClick={() => handleClickStartButton()}
+                label={'Comenzar clase'}
+                visible={streamingEvent.toggle}
+              />
+            </div>
+            <NotificationButton />
+          </div>
+        </div>
+        {cardData.length !== 0 ? (
+          <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
+            {cardData?.map((card, index) => (
+              <div className={'flex justify-center col-span-6 md:col-span-4 mt-9'} key={index}>
+                <AcademyDashboardCard data={card} index={index} handleWatchNow={handleWatchNow} viewport={viewport} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyArea}>
+            <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
+              <div className={'w-full flex justify-center ' + styles.preparingTitle}>
+                ¡Gracias por inscribirte en nuestro curso de Academy!
+              </div>
+              <div className="mt-16 mb-20">
+                <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
+              </div>
+              <div className={'w-full flex flex-wrap justify-center ' + styles.preparingText}>
+                <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
+                <br />
+                <br />
+                <p className="w-full">
+                  Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    ) : (
+      <div className={'p-4 mb-32 ' + styles.m_container}>
+        <div className={'mt-1 mb-7 ' + styles.m_dashTitle}>Mis cursos Academy</div>
+        {cardData.length !== 0 ? (
+          <div className={'grid grid-cols-12 gap-4'}>
+            {cardData?.map((card, index) => (
+              <div className={'col-span-6'} key={index}>
+                <div className={'flex justify-center col-span-6 md:col-span-4'}>
+                  <AcademyDashboardCard data={card} index={index} handleWatchNow={handleWatchNow} viewport={viewport} />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className={'w-full flex flex-wrap justify-center items-center mt-20'}>
+            <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyContent}>
+              <div className={'w-full flex justify-center ' + styles.m_preparingTitle}>
+                ¡Gracias por inscribirte en nuestro curso de Academy!
+              </div>
+              <div className="my-10">
+                <Image src={AcademyPreparingLogoIcon} alt="" width={231} height={190} />
+              </div>
+              <div className={'w-full flex flex-wrap justify-center ' + styles.m_preparingText}>
+                <p className="w-full">Unos días antes de comenzar, nos pondremos en contacto contigo.</p>
+                <br />
+                <br />
+                <p className="w-full">
+                  Si tienes alguna duda, nos puedes mandar un email a <b>info@crysdyazandco.com</b>
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  ) : viewport !== 'mobile' ? (
     <div className={globalStyles.dashContainer}>
       <div className={'w-full flex flex-wrap justify-between items-center'}>
         <div className={globalStyles.dashTitle}>Mis cursos Academy</div>
         <div className={'flex justify-end'}>
-          <div className="mr-16">
-            <StartclassButton
-              handleClick={() => handleClickStartButton()}
-              label={'Comenzar clase'}
-              visible={streamingEvent.toggle}
-            />
-          </div>
           <NotificationButton />
         </div>
       </div>
-      {cardData.length !== 0 ? (
-        <div className={'grid grid-cols-12 gap-4 lg:gap-8 mb-24'}>
-          {cardData?.map((card, index) => (
-            <div className={'flex justify-center col-span-6 md:col-span-4 mt-9'} key={index}>
-              <AcademyDashboardCard data={card} index={index} handleWatchNow={handleWatchNow} viewport={viewport} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyArea}>
-          <div className={'w-full flex flex-wrap justify-center ' + styles.noAcademyContent}>
-            <Image src={AcademyLogoIcon} alt="" width={231} height={190} />
-            <div className={'w-full mt-16 ' + styles.actualmentText}>
-              Actualmente, no tienes ninguna formación contratada
-            </div>
-            <button className={'mt-10 ' + styles.goAcademyButton} onClick={() => router.push('/academy')}>
-              Ver Academy
-            </button>
+      <div className={'w-full flex flex-wrap justify-center items-center ' + styles.noAcademyArea}>
+        <div className={'w-full flex flex-wrap justify-center ' + styles.noAcademyContent}>
+          <Image src={AcademyLogoIcon} alt="" width={231} height={190} />
+          <div className={'w-full mt-16 ' + styles.actualmentText}>
+            Actualmente, no tienes ninguna formación contratada
           </div>
+          <button className={'mt-10 ' + styles.goAcademyButton} onClick={() => router.push('/academy')}>
+            Ver Academy
+          </button>
         </div>
-      )}
+      </div>
     </div>
   ) : (
-    <div className={'p-4 mb-32 ' + styles.m_container}>
-      <div className={'mt-1 mb-7 ' + styles.m_dashTitle}>Mis cursos Academy</div>
-      <div className={'grid grid-cols-12 gap-4'}>
-        {cardData?.map((card, index) => (
-          <div className={'col-span-6'} key={index}>
-            <div className={'flex justify-center col-span-6 md:col-span-4'}>
-              <AcademyDashboardCard data={card} index={index} handleWatchNow={handleWatchNow} viewport={viewport} />
-            </div>
+    <div className={globalStyles.container}>
+      <div className={'w-full flex flex-wrap justify-between items-center'}>
+        <div className={globalStyles.dashTitle}>Mis cursos Academy</div>
+        <div className={'flex justify-end'}>
+          <NotificationButton />
+        </div>
+      </div>
+      <div className={'w-full flex flex-wrap justify-center items-center mt-20'}>
+        <div className={'w-full flex flex-wrap justify-center ' + styles.noAcademyContent}>
+          <Image src={AcademyLogoIcon} alt="" width={231} height={190} />
+          <div className={'w-full mt-16 ' + styles.actualmentText}>
+            Actualmente, no tienes ninguna formación contratada
           </div>
-        ))}
+          <button
+            className={'mt-10 rounded-full ' + styles.mobileGoAcademyButton}
+            onClick={() => router.push('/academy')}
+          >
+            Ver Academy
+          </button>
+        </div>
       </div>
     </div>
   )

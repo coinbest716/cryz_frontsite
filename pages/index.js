@@ -9,9 +9,6 @@ import MainSection from 'components/Home/MainSection'
 import TeamSection from 'components/Home/TeamSection'
 import COSection from 'components/Home/COSection'
 
-// styles
-import styles from 'styles/Home.module.scss'
-
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
@@ -98,7 +95,7 @@ const Home = props => {
   }, [usersByPatientLoading, usersByPatientData, usersByPatientError])
 
   return (
-    <div className={styles.container}>
+    <div className={'flex flex-col justify-center items-center'}>
       {featuredServices !== '' && (
         <MainSection mainImage={mainImage} featuredServices={featuredServices} viewport={viewport} />
       )}

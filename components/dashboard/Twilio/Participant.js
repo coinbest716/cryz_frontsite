@@ -67,16 +67,13 @@ const Participant = props => {
 
   return (
     <div
+      className="flex justify-center mt-1 bg-black"
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        background: '#000',
         border: '1px solid #C4C4C4',
-        marginTop: '4px',
       }}
     >
       <video
-        style={{ width: viewport === 'mobile' ? '120px' : '360px', height: viewport === 'mobile' ? '120px' : '227px' }}
+        style={{ width: viewport === 'mobile' ? '120px' : '240px', height: viewport === 'mobile' ? '67px' : '134px' }}
         ref={videoRef}
         autoPlay={true}
       />
@@ -84,9 +81,5 @@ const Participant = props => {
     </div>
   )
 }
-
-// Participant.propTypes = {
-//   participant: PropTypes.object,
-// }
 
 export default Participant

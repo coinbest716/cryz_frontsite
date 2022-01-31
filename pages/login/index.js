@@ -59,13 +59,13 @@ const Login = props => {
       setEmail(localStorage.getItem('email') || '')
       setPassword(localStorage.getItem('password') || '')
     }
-  }, [])
+  }, [router])
 
   useEffect(() => {
     if (isAuthenticated) {
       router.push('/dashboard')
     }
-  }, [isAuthenticated])
+  }, [router, isAuthenticated])
 
   const handleChangeEmail = event => {
     setEmail(event.target.value)

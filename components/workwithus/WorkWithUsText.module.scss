@@ -1,0 +1,50 @@
+@import 'styles/variable.module.scss';
+
+.input {
+  border: 1px solid #7e8f8e;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 12px 14px;
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.23px;
+  line-height: 15px;
+}
+.textarea {
+  border: 1px solid #7e8f8e;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 12px 14px;
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.23px;
+  line-height: 20px;
+}
+.label {
+  color: #72918e;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.26px;
+  line-height: 18px;
+}
+.select {
+  width: 100%;
+  border: 1px solid #d0dae9;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 12px 14px;
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 0.23px;
+  line-height: 35px;
+}
+
+.option {
+  color: #011632;
+  font-family: Montserrat;
+  font-size: 14px;
+}

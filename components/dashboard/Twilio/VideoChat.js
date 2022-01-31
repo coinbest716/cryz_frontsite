@@ -9,12 +9,15 @@ import Video from 'twilio-video'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import fetch from 'isomorphic-unfetch'
 import { isIOS } from 'react-device-detect'
+import 'react-perfect-scrollbar/dist/css/styles.css'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // custom components
 import Participant from './Participant'
 import SelfVideo from './SelfVideo'
 
 // styles
+import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './VideoChat.module.scss'
 
 const VideoChat = props => {
@@ -22,7 +25,9 @@ const VideoChat = props => {
   const { sessionId, viewport, onChangeRoom } = props
   const handle = useFullScreenHandle()
 
+  const [localParticipant, setLocalParticipant] = useState('{}')
   const [participants, setParticipants] = useState([])
+  const [selectedParticipant, setSelectedParticipant] = useState('{}')
   const [connectStatus, setConnectStatus] = useState('init')
   const [room, setRoom] = useState(null)
   const [isFullScreen, setIsFullScreen] = useState(false)
@@ -82,8 +87,15 @@ const VideoChat = props => {
 
   useEffect(() => {
     if (room) {
+      setLocalParticipant(room.localParticipant)
+      let count = 0
       const participantConnected = participant => {
-        setParticipants(prevParticipants => [...prevParticipants, participant])
+        if (count === 0) {
+          setSelectedParticipant(participant)
+        } else {
+          setParticipants(prevParticipants => [...prevParticipants, participant])
+        }
+        count++
       }
 
       const participantDisconnected = participant => {
@@ -127,7 +139,9 @@ const VideoChat = props => {
         setShowCloseBtn(true)
         setRoom(room)
       })
-      .catch(err => {})
+      .catch(err => {
+        console.log('get room error', err)
+      })
   }
 
   const handleLogout = () => {
@@ -156,9 +170,13 @@ const VideoChat = props => {
       })
   }
 
-  const remoteParticipants = room !== null && (
-    <Participant key={room.localParticipant.sid} participant={room.localParticipant} viewport={viewport} />
+  const localParticipantElem = localParticipant !== '{}' && (
+    <Participant key={localParticipant.sid} participant={localParticipant} viewport={viewport} />
   )
+
+  const remoteParticipants =
+    participants !== null &&
+    participants.map((item, index) => <Participant key={index} participant={item} viewport={viewport} />)
 
   const controlMic = () => {
     setMicStatus(!micStatus)
@@ -193,32 +211,27 @@ const VideoChat = props => {
   return (
     <>
       {viewport === 'mobile' ? (
+        // android
         isIOS === false ? (
           <FullScreen onChange={event => onFullScreenChange(event)} handle={handle}>
             {room ? (
               <div className={'w-full h-full relative flex justify-center items-center bg-black'}>
-                <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90 }}>
-                  {participants.length !== 0 && (
+                <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90, paddingBottom: '90px' }}>
+                  {selectedParticipant !== '{}' && (
                     <SelfVideo
-                      key={participants[0].sid}
-                      participant={participants[0]}
-                      width={screenWidth - 32}
-                      height={(screenWidth - 32) * 0.56}
+                      key={selectedParticipant.sid}
+                      participant={selectedParticipant}
                       cameraEnabled={cameraStatus}
                       audioEnabled={micStatus}
                     />
                   )}
                 </div>
 
-                <div
-                  className={'absolute right-1'}
-                  style={{
-                    width: '130px',
-                    height: `${120 * remoteParticipants.length}px`,
-                    bottom: 100,
-                  }}
-                >
-                  {remoteParticipants}
+                <div className={'absolute top-4 bottom-4 right-4'} style={{ width: '120px', paddingBottom: '90px' }}>
+                  <PerfectScrollbar>
+                    {localParticipantElem}
+                    {remoteParticipants}
+                  </PerfectScrollbar>
                 </div>
 
                 <div
@@ -266,6 +279,7 @@ const VideoChat = props => {
             )}
           </FullScreen>
         ) : (
+          // iphone
           <>
             {room ? (
               <div
@@ -280,29 +294,24 @@ const VideoChat = props => {
                   style={{
                     width: isFullScreen ? screenWidth : screenWidth - 32,
                     height: isFullScreen ? screenHeight : (screenWidth - 32) * 0.56 + 90,
+                    paddingBottom: '90px',
                   }}
                 >
-                  {participants.length !== 0 && (
+                  {selectedParticipant !== '{}' && (
                     <SelfVideo
-                      key={participants[0].sid}
-                      participant={participants[0]}
-                      width={isFullScreen ? screenWidth : screenWidth - 32}
-                      height={isFullScreen ? screenHeight - 90 : (screenWidth - 32) * 0.56}
+                      key={selectedParticipant.sid}
+                      participant={selectedParticipant}
                       cameraEnabled={cameraStatus}
                       audioEnabled={micStatus}
                     />
                   )}
                 </div>
 
-                <div
-                  className={'absolute right-1'}
-                  style={{
-                    width: '130px',
-                    height: `${120 * remoteParticipants.length}px`,
-                    bottom: 100,
-                  }}
-                >
-                  {remoteParticipants}
+                <div className={'absolute top-4 bottom-4 right-4'} style={{ width: '120px', paddingBottom: '90px' }}>
+                  <PerfectScrollbar>
+                    {localParticipantElem}
+                    {remoteParticipants}
+                  </PerfectScrollbar>
                 </div>
 
                 <div
@@ -362,12 +371,10 @@ const VideoChat = props => {
               setMicChooseDlg(false)
             }}
           >
-            {room && participants.length !== 0 && (
+            {selectedParticipant !== '{}' && (
               <SelfVideo
-                key={participants[0].sid}
-                participant={participants[0]}
-                width={videoWidth}
-                height={videoHeight}
+                key={selectedParticipant.sid}
+                participant={selectedParticipant}
                 cameraEnabled={cameraStatus}
                 audioEnabled={micStatus}
               />
@@ -376,19 +383,16 @@ const VideoChat = props => {
             {connectStatus === 'init' ? <div className={styles.text}>Uniéndose al evento...</div> : ''}
 
             <div className="absolute top-1 right-2">
-              <button className="app-twilio-chat-button" onClick={() => joinAudio()}>
+              <button className={globalStyles.appTwilioChatButton} onClick={() => joinAudio()}>
                 Join Audio
               </button>
             </div>
 
-            <div
-              className={'absolute bottom-0.5 right-0.5'}
-              style={{
-                width: '360px',
-                height: `${232 * remoteParticipants.length}px`,
-              }}
-            >
-              {remoteParticipants}
+            <div className={'absolute top-16 bottom-4 right-4'} style={{ width: '240px' }}>
+              <PerfectScrollbar>
+                {localParticipantElem}
+                {remoteParticipants}
+              </PerfectScrollbar>
             </div>
           </div>
 

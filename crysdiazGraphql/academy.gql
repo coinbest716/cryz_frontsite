@@ -39,3 +39,7 @@ query GetPatientAcademy($patient_id: Int) {
     list
   }
 }
+
+query GetAcademyPurchaseStatus($patient_id: Int) {
+  getAcademyPurchaseStatus(patient_id: $patient_id)
+}

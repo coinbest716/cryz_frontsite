@@ -43,7 +43,7 @@
 .textocurso {
   padding: 3% 1%;
 }
-.textocurso p{
+.textocurso p {
   font-size: 14px;
   font-weight: 400;
   color: #2a2c36;
@@ -77,52 +77,65 @@
   top: calc(50vh - 32px);
 }
 
-.tinyMCEClass{
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    color: #818e8e;
-    line-height: 28px;
-    padding-bottom: 10px;
-  
-    :global(.tinymce-class) {
-      ol {
-        list-style-type: decimal;
-        padding-left: 20px !important;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 14px;
-        color: #818e8e;
-        line-height: 28px;
-        padding-bottom: 5px;
+.tinyMCEClass {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #818e8e;
+  line-height: 28px;
+  padding-bottom: 10px;
+
+  :global(.tinymce-class) {
+    ol {
+      list-style-type: decimal;
+      padding-left: 20px !important;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #818e8e;
+      line-height: 28px;
+      padding-bottom: 5px;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 20px !important;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #818e8e;
+      line-height: 28px;
+      padding-bottom: 15px;
+      font-weight: 400;
+    }
+    p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #818e8e;
+      line-height: 28px;
+      padding-bottom: 10px;
+      span {
+        font-weight: 600;
       }
-      ul {
-        list-style-type: disc;
-        padding-left: 20px !important;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 14px;
-        color: #818e8e;
-        line-height: 28px;
-        padding-bottom: 15px;
-        font-weight: 400;
+      a {
+        font-weight: 600;
+        color: #bda27b;
       }
-      p {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 14px;
-        color: #818e8e;
-        line-height: 28px;
-        padding-bottom: 10px;
-        span{
-            font-weight: 600;
-          }
-        a{
+    }
+    ul {
+      li {
+        span {
           font-weight: 600;
-          color: #bda27b;
-        }
-        }
-      ul{
-        li{
-          span{font-weight: 600; }
-          
         }
       }
     }
   }
+}
+
+.appTwilioChatButton {
+  background: #333e5a;
+  color: #fff;
+  font-size: 16px;
+  padding: 0.4em;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+.appTwilioChatButton:hover {
+  filter: brightness(150%);
+}
