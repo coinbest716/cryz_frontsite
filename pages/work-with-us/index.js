@@ -53,6 +53,7 @@ const WorkWithUs = props => {
     if (!withError && withData && withData.getJobListForDashboard) {
       setMainInfo(withData.getJobListForDashboard)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [withLoading, withData, withError])
 
   const handleClickOffer = id => {

@@ -72,6 +72,7 @@ const Nutrition = props => {
       setOnlineButton(cmsSubjectData.getCmsServiceSubject.online_button || false)
       setStreamButton(cmsSubjectData.getCmsServiceSubject.stream_button || false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cmsSubjectLoading, cmsSubjectData, cmsSubjectError])
 
   const handleClickBuyPersion = () => {

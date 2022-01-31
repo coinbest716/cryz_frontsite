@@ -76,6 +76,7 @@ const Detail = props => {
     if (!withError && withData && withData.getJobByIdForDashboard) {
       setMainInfo(withData.getJobByIdForDashboard)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [withLoading, withData, withError])
 
   const handleClickCV = () => {
