@@ -144,7 +144,7 @@ const Academy = props => {
   const handleClickStartButton = () => {
     router.push({
       pathname: '/dashboard/live-streaming',
-      query: { id: streamingEvent.id },
+      query: { id: streamingEvent.id, type: 'academy' },
     })
   }
 
