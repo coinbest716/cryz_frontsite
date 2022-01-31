@@ -60,6 +60,7 @@ const Detail = props => {
   }, [router.query])
 
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: newsDataLoading })
     if (!newsDataError && newsData && newsData.getNewsByIdForDashboard) {
       setNewsInfo(newsData.getNewsByIdForDashboard)
     }
