@@ -66,6 +66,7 @@ const Services = props => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: cmsServiceLoading })
     if (!cmsServiceError && cmsServiceData && cmsServiceData.getCmsServiceDisciplineList) {
       setMainService(cmsServiceData.getCmsServiceDisciplineList)
     }

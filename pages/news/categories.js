@@ -66,6 +66,7 @@ const Categoris = props => {
   }, [router.query])
 
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: newsDataLoading })
     if (!newsDataError && newsData && newsData.getNewsListWithCategory) {
       setNewsInfo(newsData.getNewsListWithCategory)
     }

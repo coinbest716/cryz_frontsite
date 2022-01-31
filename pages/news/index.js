@@ -57,6 +57,7 @@ const News = props => {
   }, [])
 
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: newsLoading })
     if (!newsError && newsData && newsData.getNewsListForDashboard) {
       const _newsData = newsData.getNewsListForDashboard
       setNewInfo(_newsData)

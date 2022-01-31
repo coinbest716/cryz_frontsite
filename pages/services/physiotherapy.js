@@ -63,6 +63,7 @@ const Physiotherapy = props => {
   }, [getCmsServiceSubject])
 
   useEffect(() => {
+    dispatch({ type: 'set', isLoading: cmsSubjectLoading })
     if (!cmsSubjectError && cmsSubjectData && cmsSubjectData.getCmsServiceSubject) {
       setTitle(cmsSubjectData.getCmsServiceSubject.title_two)
       setDescription(cmsSubjectData.getCmsServiceSubject.text)
