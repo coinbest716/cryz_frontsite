@@ -89,10 +89,9 @@ const AcademyTable = props => {
               <div className={'flex justify-start'}>
                 <div className={styles.viewArea}></div>
                 <div className={styles.dayArea + ' ' + styles.contentFecha}>
-                  {category === 'video' && <div className={styles.onlineText}>{category.toUpperCase()}</div>}
                   {item.stream_event !== undefined && item.stream_event === true && (
                     <div className={styles.onlineText} onClick={() => handleGotoOnlineStreaming(item.id)}>
-                      VIDEO
+                      {category.toUpperCase()}
                     </div>
                   )}
 
@@ -170,13 +169,12 @@ const AcademyTable = props => {
             ) : (
               <div className={'flex justify-start i '}>
                 <div className={'flex flex-1 flex-wrap ' + styles.mobileTableContent}>
-                  {category === 'video' && <div className={styles.onlineText}>{category.toUpperCase()}</div>}
                   {item.stream_event !== undefined && item.stream_event === true && (
                     <div
                       className={'w-full flex justify-center ' + styles.onlineText}
                       onClick={() => handleGotoOnlineStreaming(item.id)}
                     >
-                      VIDEO
+                      {category.toUpperCase()}
                     </div>
                   )}
                   {item.stream_event !== undefined && item.stream_event === false && (
