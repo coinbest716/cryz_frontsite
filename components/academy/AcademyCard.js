@@ -18,9 +18,13 @@ const AcademyCard = props => {
     <div>
       <div className={styles.singleCard}>
         <div className={'relative'}>
-          {data.images.length > 0 && (
-            <Image src={data?.images[0]?.path || ''} alt="" width={365} height={253} className={styles.cardImage} />
-          )}
+          <Image
+            src={data.images.length > 0 ? data?.images[0]?.path : 'https://via.placeholder.com/576x288?text=No%20Image'}
+            alt=""
+            width={365}
+            height={253}
+            className={styles.cardImage}
+          />
         </div>
         <div className={styles.cardTitle}>{data?.name}</div>
         <div className={styles.cardType}>{data?.type.toUpperCase()}</div>
