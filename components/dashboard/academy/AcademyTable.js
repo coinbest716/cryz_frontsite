@@ -53,7 +53,7 @@ const AcademyTable = props => {
   const handleGotoOnlineStreaming = trainingID => {
     router.push({
       pathname: '/dashboard/live-streaming',
-      query: { id: 'academy-' + academyID + '-' + trainingID },
+      query: { id: 'academy-' + academyID + '-' + trainingID, type: 'academy' },
     })
   }
 

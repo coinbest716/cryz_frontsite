@@ -79,7 +79,6 @@ const LiveStreaming = props => {
 
   return (
     <div className={'pt-7 lg:pl-14 lg:pr-8 ' + styles.container}>
-      {console.log('========type', type)}
       <div className={'grid grid-cols-12 gap-6'}>
         <div className={type !== 'academy' ? 'col-span-12 lg:col-span-9' : 'col-span-12'}>
           {viewport !== 'mobile' && <div className={styles.title}>1 to 1 Streaming</div>}
