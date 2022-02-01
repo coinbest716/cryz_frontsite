@@ -92,7 +92,7 @@ const AcademyTable = props => {
                   {category === 'video' && <div className={styles.onlineText}>{category.toUpperCase()}</div>}
                   {item.stream_event !== undefined && item.stream_event === true && (
                     <div className={styles.onlineText} onClick={() => handleGotoOnlineStreaming(item.id)}>
-                      ONLINE
+                      VIDEO
                     </div>
                   )}
 
@@ -171,7 +171,7 @@ const AcademyTable = props => {
                       className={'w-full flex justify-center ' + styles.onlineText}
                       onClick={() => handleGotoOnlineStreaming(item.id)}
                     >
-                      ONLINE
+                      VIDEO
                     </div>
                   )}
                   {item.stream_event !== undefined && item.stream_event === false && (
