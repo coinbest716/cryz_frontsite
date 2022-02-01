@@ -61,7 +61,9 @@ const AcademyTable = props => {
     <div className={'w-full'}>
       <div className={'flex justify-evenly items-center mb-4 ' + styles.tableHead}>
         <div className={styles.viewArea + ' ' + styles.tableHeadTitle}>VISTA</div>
-        <div className={styles.dayArea + ' ' + styles.tableHeadTitle}>FECHA</div>
+        <div className={styles.dayArea + ' ' + styles.tableHeadTitle}>
+          {category === 'video' ? 'FORMACIÓN' : 'FECHA'}
+        </div>
         <div className={'flex flex-1 ' + styles.tableHeadTitle}>NOMBRE</div>
       </div>
       {academy !== undefined &&
@@ -80,7 +82,9 @@ const AcademyTable = props => {
                   <Image src={minus} alt={''} width={15} height={15} />
                 )}
               </div>
-              <div className={styles.dayArea + ' ' + styles.contentFecha}>{moment(item.day).format('DD/MM')}</div>
+              <div className={styles.dayArea + ' ' + styles.contentFecha}>
+                {category === 'video' ? index + 1 : moment(item.day).format('DD/MM')}
+              </div>
               <div className={'flex flex-1 ' + styles.contentTitle}>{item.title}</div>
             </div>
             {item.collapse ? (
@@ -135,7 +139,9 @@ const AcademyTable = props => {
   ) : (
     <div className={'w-full'}>
       <div className={'flex justify-between items-center ' + styles.mobileTableHead}>
-        <div className={styles.mobileDayArea + ' ' + styles.mobileTableHeadTitle}>FECHA</div>
+        <div className={styles.mobileDayArea + ' ' + styles.mobileTableHeadTitle}>
+          {category === 'video' ? 'FORMACIÓN' : 'FECHA'}
+        </div>
         <div className={'flex flex-1 justify-center ' + styles.mobileTableHeadTitle}>NOMBRE</div>
         <div className={styles.mobileViewArea + ' ' + styles.mobileTableHeadTitle}>VISTA</div>
       </div>
@@ -144,8 +150,10 @@ const AcademyTable = props => {
           <div key={index} className={'bg-gray-100'}>
             <div className={'flex justify-start items-center mb-3'}>
               <div className={styles.mobileDayArea + ' ' + styles.mobileContentFecha}>
-                {moment(item.day).format('DD/MM')}
-                <div className={styles.mobileHourText}>{moment(item.hour).format('HH:mm')}h</div>
+                {category === 'video' ? index + 1 : moment(item.day).format('DD/MM')}
+                {category !== 'video' && (
+                  <div className={styles.mobileHourText}>{moment(item.hour).format('HH:mm')}h</div>
+                )}
               </div>
               <div className={'flex flex-1 justify-center ' + styles.mobileContentTitle}>{item.title}</div>
               <div
