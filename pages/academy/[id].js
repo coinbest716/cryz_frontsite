@@ -6,7 +6,6 @@ import Image from 'next/image'
 
 // third party components
 import { useDispatch } from 'react-redux'
-import toast from 'react-hot-toast'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
@@ -114,10 +113,12 @@ const Course = props => {
             <div className={'grid grid-cols-12 gap-4'}>
               <div className={'col-span-12 md:col-span-5 sm:col-span-12 '}>
                 <div className={'pt-32 ' + styles.topTitle}>{mainData.name}</div>
-                <div className={styles.duration + ' pt-7'}>
-                  Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
-                  {moment(mainData.end_date).format('MMMM YYYY')}
-                </div>
+                {mainData.category !== 'video' && (
+                  <div className={styles.duration + ' pt-7'}>
+                    Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
+                    {moment(mainData.end_date).format('MMMM YYYY')}
+                  </div>
+                )}
                 {mainData.plazas && (
                   <div className={'mt-6'} style={{ width: '326px' }}>
                     <ArrowButton
@@ -139,13 +140,15 @@ const Course = props => {
                 <div>
                   <div className={'flex justify-between pt-10'}>
                     {feature.map((item, index) => (
-                      <div key={index}>
+                      <div key={index} className="mx-2">
                         <Feature data={item} />
                       </div>
                     ))}
-                    <div>
-                      <DownloadPDF onClick={handleClickDownlodPDF} url={mainData.doc} />
-                    </div>
+                    {mainData.category !== 'video' && (
+                      <div>
+                        <DownloadPDF onClick={handleClickDownlodPDF} url={mainData.doc} />
+                      </div>
+                    )}
                   </div>
                   {mainData.images.length > 0 && (
                     <div className={'pt-10'}>
@@ -157,13 +160,15 @@ const Course = props => {
             </div>
           )}
           {mainData && viewport === 'mobile' && (
-            <div className={'grid grid-cols-12 gap-4 mx-2 p-4 pb-6 -mt-10 z-10 bg-white'}>
+            <div className={'grid grid-cols-12 gap-4 mx-2 p-4 pb-6 -mt-10 z-10'}>
               <div className={'col-span-12'}>
-                <div className={styles.topTitle}>{mainData.name}</div>
-                <div className={styles.duration + ' pt-7'}>
-                  Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
-                  {moment(mainData.end_date).format('MMMM YYYY')}
-                </div>
+                <div className={'pt-16 ' + styles.topTitle}>{mainData.name}</div>
+                {mainData.category !== 'video' && (
+                  <div className={styles.duration + ' pt-7'}>
+                    Duración: {moment(mainData.start_date).format('MMMM')} a{' '}
+                    {moment(mainData.end_date).format('MMMM YYYY')}
+                  </div>
+                )}
                 {mainData.plazas && (
                   <div className={'mt-6'}>
                     <ArrowButton
@@ -184,14 +189,16 @@ const Course = props => {
               <div className={'col-span-12 flex flex-wrap justify-center'}>
                 <div className={'w-full flex justify-between pt-10'}>
                   {feature.map((item, index) => (
-                    <div key={index}>
+                    <div key={index} className="mx-2">
                       <Feature data={item} />
                     </div>
                   ))}
                 </div>
-                <div className="mt-11">
-                  <DownloadPDF onClick={handleClickDownlodPDF} url={mainData.doc} />
-                </div>
+                {mainData.category !== 'video' && (
+                  <div className="mt-11">
+                    <DownloadPDF onClick={handleClickDownlodPDF} url={mainData.doc} />
+                  </div>
+                )}
               </div>
             </div>
           )}
