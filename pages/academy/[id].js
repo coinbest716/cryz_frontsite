@@ -144,7 +144,7 @@ const Course = props => {
                         <Feature data={item} />
                       </div>
                     ))}
-                    {mainData.category !== 'video' && (
+                    {mainData.doc !== '' && mainData.doc !== null && (
                       <div>
                         <DownloadPDF onClick={handleClickDownlodPDF} url={mainData.doc} />
                       </div>
@@ -194,7 +194,7 @@ const Course = props => {
                     </div>
                   ))}
                 </div>
-                {mainData.category !== 'video' && (
+                {mainData.doc !== '' && mainData.doc !== null && (
                   <div className="mt-11">
                     <DownloadPDF onClick={handleClickDownlodPDF} url={mainData.doc} />
                   </div>
