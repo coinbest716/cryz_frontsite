@@ -89,7 +89,7 @@ const Course = props => {
       query: {
         service_id: mainData.list[0].id,
         tab: 0,
-        image: mainData.images[0].path,
+        image: mainData.images.length !== 0 ? mainData.images[0].path : '',
         description: mainData.list[0].description,
         price: mainData.list[0].price,
       },

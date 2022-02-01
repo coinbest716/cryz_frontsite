@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 // third party components
 import moment from 'moment'
-import 'react-perfect-scrollbar/dist/css/styles.css'
+import ReactPlayer from 'react-player'
 
 // custom components
 import DocumentButton from './DocumentButton'
@@ -92,7 +92,7 @@ const AcademyTable = props => {
                   {category === 'video' && <div className={styles.onlineText}>{category.toUpperCase()}</div>}
                   {item.stream_event !== undefined && item.stream_event === true && (
                     <div className={styles.onlineText} onClick={() => handleGotoOnlineStreaming(item.id)}>
-                      ONLINE
+                      VIDEO
                     </div>
                   )}
 
@@ -109,12 +109,17 @@ const AcademyTable = props => {
                       dangerouslySetInnerHTML={{ __html: item.description }}
                     />
                   </div>
-                  <div className="my-4">
+                  <div className="w-full my-4">
                     {category === 'video' && item.video_url !== undefined && (
-                      <video width={1024} controls>
-                        <source src={item.video_url} type="video/ogg" />
-                        Your browser does not support HTML5 video.
-                      </video>
+                      <ReactPlayer
+                        url={item.video_url}
+                        width="100%"
+                        height="100%"
+                        controls={true}
+                        loop={true}
+                        muted={true}
+                        playing={true}
+                      />
                     )}
                   </div>
                   {item.doc !== null && (
@@ -171,7 +176,7 @@ const AcademyTable = props => {
                       className={'w-full flex justify-center ' + styles.onlineText}
                       onClick={() => handleGotoOnlineStreaming(item.id)}
                     >
-                      ONLINE
+                      VIDEO
                     </div>
                   )}
                   {item.stream_event !== undefined && item.stream_event === false && (
@@ -181,12 +186,17 @@ const AcademyTable = props => {
                     className={styles.description + ' tinymce-class'}
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   />
-                  <div className="my-4">
+                  <div className="w-full my-4">
                     {category === 'video' && item.video_url !== undefined && (
-                      <video width={1024} controls>
-                        <source src={item.video_url} type="video/ogg" />
-                        Your browser does not support HTML5 video.
-                      </video>
+                      <ReactPlayer
+                        url={item.video_url}
+                        width="100%"
+                        height="100%"
+                        controls={true}
+                        loop={true}
+                        muted={true}
+                        playing={true}
+                      />
                     )}
                   </div>
                   {item.doc !== null && (
