@@ -50,11 +50,13 @@ const AcademyTable = props => {
     setAcademy(_academy)
   }
 
-  const handleGotoOnlineStreaming = trainingID => {
-    router.push({
-      pathname: '/dashboard/live-streaming',
-      query: { id: 'academy-' + academyID + '-' + trainingID, type: 'academy' },
-    })
+  const handleGotoOnlineStreaming = (trainingID, category) => {
+    if (category !== 'video') {
+      router.push({
+        pathname: '/dashboard/live-streaming',
+        query: { id: 'academy-' + academyID + '-' + trainingID, type: 'academy' },
+      })
+    }
   }
 
   return viewport !== 'mobile' ? (
@@ -94,7 +96,7 @@ const AcademyTable = props => {
                 <div className={styles.viewArea}></div>
                 <div className={styles.dayArea + ' ' + styles.contentFecha}>
                   {item.stream_event !== undefined && item.stream_event === true && (
-                    <div className={styles.onlineText} onClick={() => handleGotoOnlineStreaming(item.id)}>
+                    <div className={styles.onlineText} onClick={() => handleGotoOnlineStreaming(item.id, category)}>
                       {category.toUpperCase()}
                     </div>
                   )}
@@ -180,7 +182,7 @@ const AcademyTable = props => {
                   {item.stream_event !== undefined && item.stream_event === true && (
                     <div
                       className={'w-full flex justify-center ' + styles.onlineText}
-                      onClick={() => handleGotoOnlineStreaming(item.id)}
+                      onClick={() => handleGotoOnlineStreaming(item.id, category)}
                     >
                       {category.toUpperCase()}
                     </div>
