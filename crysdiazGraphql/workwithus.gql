@@ -5,8 +5,17 @@ mutation SendCV(
   $body: String!
   $phone: String!
   $attachment: Upload
+  $job_id: Int
 ) {
-  sendCV(email: $email, firstName: $firstName, lastName: $lastName, body: $body, phone: $phone, attachment: $attachment)
+  sendCV(
+    email: $email
+    firstName: $firstName
+    lastName: $lastName
+    body: $body
+    phone: $phone
+    attachment: $attachment
+    job_id: $job_id
+  )
 }
 
 query GetJobListForDashboard {
