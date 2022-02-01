@@ -100,6 +100,7 @@ const Detail = props => {
         body: personalInfo.body,
         phone: personalInfo.phone,
         attachment: fileRef.current.files[0],
+        job_id: Number(router.query.id),
       },
     })
       .then(response => {
