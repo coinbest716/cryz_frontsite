@@ -80,14 +80,7 @@ const Detail = props => {
   }, [withLoading, withData, withError])
 
   const handleClickCV = () => {
-    if (
-      !personalInfo.email ||
-      !personalInfo.name ||
-      !personalInfo.surname ||
-      !personalInfo.body ||
-      !personalInfo.phone ||
-      !attachedFile
-    ) {
+    if (!personalInfo.email || !personalInfo.name || !personalInfo.surname || !personalInfo.phone || !attachedFile) {
       toast.error('todos los campos son obligatorios')
       return
     }
