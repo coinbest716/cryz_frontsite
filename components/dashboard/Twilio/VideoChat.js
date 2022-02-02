@@ -14,6 +14,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // custom components
 import Participant from './Participant'
+import LocalParticipant from './LocalParticipant'
 import SelfVideo from './SelfVideo'
 
 // styles
@@ -171,7 +172,13 @@ const VideoChat = props => {
   }
 
   const localParticipantElem = localParticipant !== '{}' && (
-    <Participant key={localParticipant.sid} participant={localParticipant} viewport={viewport} />
+    <LocalParticipant
+      key={localParticipant.sid}
+      participant={localParticipant}
+      viewport={viewport}
+      cameraEnabled={cameraStatus}
+      audioEnabled={micStatus}
+    />
   )
 
   const remoteParticipants =
@@ -218,12 +225,7 @@ const VideoChat = props => {
               <div className={'w-full h-full relative flex justify-center items-center bg-black'}>
                 <div style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.56 + 90, paddingBottom: '90px' }}>
                   {selectedParticipant !== '{}' && (
-                    <SelfVideo
-                      key={selectedParticipant.sid}
-                      participant={selectedParticipant}
-                      cameraEnabled={cameraStatus}
-                      audioEnabled={micStatus}
-                    />
+                    <SelfVideo key={selectedParticipant.sid} participant={selectedParticipant} />
                   )}
                 </div>
 
@@ -237,7 +239,7 @@ const VideoChat = props => {
                 <div
                   className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
                 >
-                  {/* <div className="flex justify-start">
+                  <div className="flex justify-start">
                     <Image
                       src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
                       className="cursor-pointer"
@@ -254,7 +256,7 @@ const VideoChat = props => {
                       alt="Silence"
                       onClick={() => controlCamera()}
                     />
-                  </div> */}
+                  </div>
                   <div onClick={() => fullScreenToggler()}>
                     <Image
                       src={'/images/full-screen.svg'}
@@ -298,12 +300,7 @@ const VideoChat = props => {
                   }}
                 >
                   {selectedParticipant !== '{}' && (
-                    <SelfVideo
-                      key={selectedParticipant.sid}
-                      participant={selectedParticipant}
-                      cameraEnabled={cameraStatus}
-                      audioEnabled={micStatus}
-                    />
+                    <SelfVideo key={selectedParticipant.sid} participant={selectedParticipant} />
                   )}
                 </div>
 
@@ -317,7 +314,7 @@ const VideoChat = props => {
                 <div
                   className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
                 >
-                  {/* <div className="flex justify-start">
+                  <div className="flex justify-start">
                     <Image
                       src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
                       className="cursor-pointer"
@@ -334,7 +331,7 @@ const VideoChat = props => {
                       alt="Silence"
                       onClick={() => controlCamera()}
                     />
-                  </div> */}
+                  </div>
                   <div onClick={() => fullScreenToggler()}>
                     <Image
                       src={'/images/full-screen.svg'}
@@ -372,12 +369,7 @@ const VideoChat = props => {
             }}
           >
             {selectedParticipant !== '{}' && (
-              <SelfVideo
-                key={selectedParticipant.sid}
-                participant={selectedParticipant}
-                cameraEnabled={cameraStatus}
-                audioEnabled={micStatus}
-              />
+              <SelfVideo key={selectedParticipant.sid} participant={selectedParticipant} />
             )}
             {connectStatus === 'disconnect' ? <div className={styles.text}>La retrasmisión ha terminado</div> : ''}
             {connectStatus === 'init' ? <div className={styles.text}>Uniéndose al evento...</div> : ''}
@@ -413,7 +405,7 @@ const VideoChat = props => {
                     <></>
                   )}
 
-                  {/* <Image
+                  <Image
                     src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
                     className="cursor-pointer"
                     width={103}
@@ -428,10 +420,10 @@ const VideoChat = props => {
                     height={13}
                     alt="choose"
                     onClick={() => showMicList()}
-                  /> */}
+                  />
                 </div>
 
-                {/* <div className="app-streaming-camera-button">
+                <div className="app-streaming-camera-button">
                   <Image
                     src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
                     className="cursor-pointer"
@@ -440,7 +432,7 @@ const VideoChat = props => {
                     alt="Silence"
                     onClick={() => controlCamera()}
                   />
-                </div> */}
+                </div>
 
                 <div onClick={() => fullScreenToggler()}>
                   <Image
