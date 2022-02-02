@@ -241,7 +241,12 @@ const Detail = props => {
               {mainInfo && (
                 <div className={styles.contentContainer + ' mt-5 mb-7 px-4 py-7'}>
                   <div className={styles.m_withTitle + ' mb-6'}>{mainInfo.title}</div>
-                  <div className={styles.m_withContent}>{mainInfo.content}</div>
+                  <div className={globalStyles.tinyMCEClass}>
+                    <div
+                      className={styles.m_withContent + ' tinymce-class'}
+                      dangerouslySetInnerHTML={{ __html: mainInfo.content }}
+                    />
+                  </div>
                 </div>
               )}
               <div className={styles.register + ' mt-5'} onClick={handleClickRegister}>
