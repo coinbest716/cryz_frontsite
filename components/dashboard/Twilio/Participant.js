@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 const Participant = props => {
   // variables
-  const { participant, viewport } = props
+  const { participant, viewport, selectParticipant } = props
   const [videoTracks, setVideoTracks] = useState([])
   const [audioTracks, setAudioTracks] = useState([])
 
@@ -67,10 +67,11 @@ const Participant = props => {
 
   return (
     <div
-      className="flex justify-center mt-1 bg-black"
+      className="flex justify-center mt-1 bg-black cursor-pointer"
       style={{
         border: '1px solid #C4C4C4',
       }}
+      onClick={() => selectParticipant(participant)}
     >
       <video
         style={{ width: viewport === 'mobile' ? '120px' : '240px', height: viewport === 'mobile' ? '67px' : '134px' }}

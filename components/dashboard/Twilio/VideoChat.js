@@ -89,14 +89,8 @@ const VideoChat = props => {
   useEffect(() => {
     if (room) {
       setLocalParticipant(room.localParticipant)
-      let count = 0
       const participantConnected = participant => {
-        if (count === 0) {
-          setSelectedParticipant(participant)
-        } else {
-          setParticipants(prevParticipants => [...prevParticipants, participant])
-        }
-        count++
+        setParticipants(prevParticipants => [...prevParticipants, participant])
       }
 
       const participantDisconnected = participant => {
@@ -114,6 +108,12 @@ const VideoChat = props => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room])
+
+  useEffect(() => {
+    if (participants.length !== 0) {
+      setSelectedParticipant(participants[0])
+    }
+  }, [participants])
 
   async function initTwilioConnet(room_name, user_name) {
     setRoomName(room_name)
@@ -178,12 +178,20 @@ const VideoChat = props => {
       viewport={viewport}
       cameraEnabled={cameraStatus}
       audioEnabled={micStatus}
+      selectParticipant={item => setSelectedParticipant(item)}
     />
   )
 
   const remoteParticipants =
     participants !== null &&
-    participants.map((item, index) => <Participant key={index} participant={item} viewport={viewport} />)
+    participants.map((item, index) => (
+      <Participant
+        key={index}
+        participant={item}
+        viewport={viewport}
+        selectParticipant={item => setSelectedParticipant(item)}
+      />
+    ))
 
   const controlMic = () => {
     setMicStatus(!micStatus)
@@ -243,8 +251,8 @@ const VideoChat = props => {
                     <Image
                       src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
                       className="cursor-pointer"
-                      width={60}
-                      height={50}
+                      width={103}
+                      height={85}
                       alt="Silence"
                       onClick={() => controlMic()}
                     />
