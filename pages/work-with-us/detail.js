@@ -80,14 +80,7 @@ const Detail = props => {
   }, [withLoading, withData, withError])
 
   const handleClickCV = () => {
-    if (
-      !personalInfo.email ||
-      !personalInfo.name ||
-      !personalInfo.surname ||
-      !personalInfo.body ||
-      !personalInfo.phone ||
-      !attachedFile
-    ) {
+    if (!personalInfo.email || !personalInfo.name || !personalInfo.surname || !personalInfo.phone || !attachedFile) {
       toast.error('todos los campos son obligatorios')
       return
     }
@@ -248,7 +241,12 @@ const Detail = props => {
               {mainInfo && (
                 <div className={styles.contentContainer + ' mt-5 mb-7 px-4 py-7'}>
                   <div className={styles.m_withTitle + ' mb-6'}>{mainInfo.title}</div>
-                  <div className={styles.m_withContent}>{mainInfo.content}</div>
+                  <div className={globalStyles.tinyMCEClass}>
+                    <div
+                      className={styles.m_withContent + ' tinymce-class'}
+                      dangerouslySetInnerHTML={{ __html: mainInfo.content }}
+                    />
+                  </div>
                 </div>
               )}
               <div className={styles.register + ' mt-5'} onClick={handleClickRegister}>
