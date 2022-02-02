@@ -1,0 +1,17 @@
+@import 'styles/variable.module.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 177px);
+}
+.m_container {
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 80px;
+  min-height: calc(100vh - 177px);
+}
