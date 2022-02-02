@@ -56,8 +56,8 @@ const Confirm = props => {
               <Image src={ConfirmImage} alt="" width={200} height={160} />
             </div>
             <div className={'w-full text-cetner ' + styles.m_textOne}>
-              ¡Tu solicitud ha sido recibida con éxito! <br />
-              Si queda libre una vacante y nos encaja tu perfil, nos pondremos en contacto contigo
+              <p className="font-bold">¡Tu solicitud ha sido recibida con éxito! </p>
+              Si nos encaja tu perfil, nos pondremos en contacto contigo
             </div>
           </div>
         </div>

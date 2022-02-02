@@ -97,6 +97,10 @@ const Header = props => {
         {
           title: 'Contacto',
           link: '/contact',
+        },
+        {
+          title: 'Tienda',
+          link: '/store',
         }
       )
       setMenus(menu)
