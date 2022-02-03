@@ -116,15 +116,20 @@ const AcademyTable = props => {
                   </div>
                   <div className="w-full my-4">
                     {category === 'video' && item.video_url !== undefined && (
-                      <ReactPlayer
-                        url={item.video_url}
-                        width="100%"
-                        height="100%"
-                        controls={true}
-                        loop={true}
-                        muted={true}
-                        playing={true}
-                      />
+                      <div className={styles.videoArea}>
+                        <div className={styles.playerWrapper}>
+                          <ReactPlayer
+                            url={item.video_url}
+                            width="100%"
+                            height="100%"
+                            controls={true}
+                            loop={true}
+                            muted={true}
+                            playing={true}
+                            className={styles.reactPlayer}
+                          />
+                        </div>
+                      </div>
                     )}
                   </div>
                   {item.doc !== null && (
@@ -196,15 +201,20 @@ const AcademyTable = props => {
                   />
                   <div className="w-full my-4">
                     {category === 'video' && item.video_url !== undefined && (
-                      <ReactPlayer
-                        url={item.video_url}
-                        width="100%"
-                        height="100%"
-                        controls={true}
-                        loop={true}
-                        muted={true}
-                        playing={true}
-                      />
+                      <div className={styles.videoArea}>
+                        <div className={styles.playerWrapper}>
+                          <ReactPlayer
+                            url={item.video_url}
+                            width="100%"
+                            height="100%"
+                            controls={true}
+                            loop={true}
+                            muted={true}
+                            playing={true}
+                            className={styles.reactPlayer}
+                          />
+                        </div>
+                      </div>
                     )}
                   </div>
                   {item.doc !== null && (
