@@ -164,6 +164,15 @@ const Store = props => {
                   ))}
                 </div>
               </div>
+              <div className="mt-20 mb-10">
+                <div className={styles.brandTitle}>Nuestras Marcas</div>
+                <div className="flex flex-wrap justify-around items-center my-6">
+                  <Image src={'/images/brand4.svg'} alt="" width={100} height={40} />
+                  <Image src={'/images/brand3.svg'} alt="" width={100} height={40} />
+                  <Image src={'/images/brand2.svg'} alt="" width={100} height={40} />
+                  <Image src={'/images/brand1.svg'} alt="" width={100} height={40} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
