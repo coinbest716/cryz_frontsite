@@ -135,6 +135,7 @@ const VideoChat = props => {
 
     Video.connect(data.token, {
       name: room_name,
+      video: { height: 480, frameRate: 24, width: 640 },
     })
       .then(room => {
         setShowCloseBtn(true)
@@ -184,14 +185,17 @@ const VideoChat = props => {
 
   const remoteParticipants =
     participants !== null &&
-    participants.map((item, index) => (
-      <Participant
-        key={index}
-        participant={item}
-        viewport={viewport}
-        selectParticipant={item => setSelectedParticipant(item)}
-      />
-    ))
+    participants.map(
+      (item, index) =>
+        item.identity !== selectedParticipant.identity && (
+          <Participant
+            key={index}
+            participant={item}
+            viewport={viewport}
+            selectParticipant={item => setSelectedParticipant(item)}
+          />
+        )
+    )
 
   const controlMic = () => {
     setMicStatus(!micStatus)
