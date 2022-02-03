@@ -107,7 +107,7 @@ const AcademyTable = props => {
 
                   {category !== 'video' && <div className={styles.hourText}>{moment(item.hour).format('HH:mm')}h</div>}
                 </div>
-                <div className={'flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
+                <div className={'w-full flex flex-1 flex-wrap ' + styles.tableHeadTitle}>
                   <div className={'w-full ' + globalStyles.tinyMCEClass}>
                     <div
                       className={styles.description + ' tinymce-class'}
@@ -191,7 +191,7 @@ const AcademyTable = props => {
                     <div className={'w-full flex justify-center ' + styles.onlineText}>PRESENCIAL</div>
                   )}
                   <div
-                    className={styles.description + ' tinymce-class'}
+                    className={styles.description + ' tinymce-class w-full'}
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   />
                   <div className="w-full my-4">

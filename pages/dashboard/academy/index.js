@@ -83,7 +83,9 @@ const Academy = props => {
       let sessionArr = []
       cardData.map(item =>
         item.training.map(elem => {
-          sessionArr.push(elem)
+          let obj = { ...elem }
+          obj.category = item.category
+          sessionArr.push(obj)
         })
       )
       const _events = []
@@ -93,6 +95,7 @@ const Academy = props => {
           title: item.title,
           start: item.hour,
           streaming: item.stream_event,
+          category: item.category,
         }
         _events.push(_eventItem)
       })
@@ -118,12 +121,14 @@ const Academy = props => {
       const startTime = moment(item.start)
       const endTime = moment(item.end)
       const diffTime = startTime.diff(endTime, 'minutes')
-      if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 30) {
-        setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
-        count++
-      } else {
-        if (count === 0) {
-          setStreamingEvent({ id: -1, start: '', toggle: false })
+      if (item.cateogry !== 'video') {
+        if (startTime.diff(currentTime, 'minutes') >= diffTime && startTime.diff(currentTime, 'minutes') <= 30) {
+          setStreamingEvent({ id: item.id, start: item.start, toggle: item.streaming })
+          count++
+        } else {
+          if (count === 0) {
+            setStreamingEvent({ id: -1, start: '', toggle: false })
+          }
         }
       }
     })
