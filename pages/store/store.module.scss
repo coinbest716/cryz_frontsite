@@ -33,3 +33,27 @@
   line-height: 18px;
   text-align: center;
 }
+.mainImageTitle {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 33px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 40px;
+  max-width: 355px;
+}
+.select {
+  width: 300px;
+  position: absolute;
+  bottom: -15px;
+  left: calc(50% - 150px);
+  background-color: #7d8f8e;
+  padding: 12px 4px;
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0px;
+  line-height: 30px;
+  border: none;
+  outline: none;
+}

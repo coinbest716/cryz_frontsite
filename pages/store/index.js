@@ -59,6 +59,18 @@ const Store = props => {
     })
   }
 
+  const [category, setCategory] = useState(0)
+  const handleChangeCategory = event => {
+    setCategory(Number(event.target.value))
+  }
+
+  const accessoriesList = [
+    { id: 0, label: 'Material Deportivo' },
+    { id: 1, label: 'Accessorios' },
+    { id: 2, label: 'Salud y Belleza' },
+    { id: 3, label: 'Productos Bio' },
+  ]
+
   return (
     <>
       {viewport === 'mobile' ? (
@@ -72,15 +84,15 @@ const Store = props => {
               <div className={globalStyles.container}>
                 <div className="flex flex-wrap justify-between items-center">
                   <div className="flex justify-start items-center">
-                    <Image src={ProductOne} alt="" width={23} height={20} />
+                    <Image src={'/images/product-2.svg'} alt="" width={23} height={20} />
                     <div className={styles.headerTitle + ' ml-3'}>Calidad garantizada</div>
                   </div>
                   <div className="flex justify-start items-center">
-                    <Image src={ProductTwo} alt="" width={23} height={20} />
+                    <Image src={'/images/product-2.svg'} alt="" width={23} height={20} />
                     <div className={styles.headerTitle + ' ml-3'}>Envio 48 / 72 horas</div>
                   </div>
                   <div className="flex justify-start items-center">
-                    <Image src={ProductThree} alt="" width={23} height={20} />
+                    <Image src={'/images/product-3.svg'} alt="" width={23} height={20} />
                     <div className={styles.headerTitle + ' ml-3'}>Devolución 30 dias</div>
                   </div>
                 </div>
@@ -89,7 +101,22 @@ const Store = props => {
           </div>
           <div className={styles.container}>
             <div className={globalStyles.container + ' mt-8 mb-20'}>
-              <div>Desktop Store Page</div>
+              <div className="relative">
+                <Image src={'/images/team-03.png'} alt="" width={1108} height={310} />
+                <div className={'absolute top-11 left-8 ' + styles.mainImageTitle}>Descubre nuestras categorias</div>
+                <select
+                  name="select"
+                  onChange={handleChangeCategory}
+                  value={category}
+                  className={'cursor-pointer flex justify-start items-center ' + styles.select}
+                >
+                  {accessoriesList.map((item, index) => (
+                    <option key={index} value={item.id}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
         </div>
