@@ -156,13 +156,15 @@ const AcademyDetail = props => {
         <div className={'w-full flex justify-between items-center'}>
           <div className={globalStyles.dashTitle}>{academyData.name}</div>
           <div className={'flex justify-end'}>
-            <div className="mr-16">
-              <StartclassButton
-                handleClick={() => handleClickStartButton()}
-                label={'Comenzar clase'}
-                visible={streamingEvent.toggle}
-              />
-            </div>
+            {academyData.category !== 'video' && (
+              <div className="mr-16">
+                <StartclassButton
+                  handleClick={() => handleClickStartButton()}
+                  label={'Comenzar clase'}
+                  visible={streamingEvent.toggle}
+                />
+              </div>
+            )}
             <NotificationButton />
           </div>
         </div>
@@ -253,11 +255,13 @@ const AcademyDetail = props => {
             <Image src={ArrowLeftWhite} width={18} height={15} alt="" />
             <div className={styles.mobileHeaderBackString + ' ml-2'}>Academy</div>
           </div>
-          <StartclassButton
-            handleClick={() => handleClickStartButton()}
-            label={'clase'}
-            visible={streamingEvent.toggle}
-          />
+          {academyData.category !== 'video' && (
+            <StartclassButton
+              handleClick={() => handleClickStartButton()}
+              label={'clase'}
+              visible={streamingEvent.toggle}
+            />
+          )}
         </div>
         <div className={'mt-4 ' + styles.mobileHeaderTitle}>{academyData.name}</div>
       </div>
