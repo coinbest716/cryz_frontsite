@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-
+import Image from 'next/image'
 // redux
 import { useDispatch } from 'react-redux'
 
@@ -15,6 +15,10 @@ import styles from './store.module.scss'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
+
+import ProductOne from 'public/images/product-2.svg'
+import ProductTwo from 'public/images/product-2.svg'
+import ProductThree from 'public/images/product-3.svg'
 
 const Store = props => {
   const router = useRouter()
@@ -62,9 +66,29 @@ const Store = props => {
           <div className="w-full p-4 my-5">Mobile Store Page</div>
         </div>
       ) : (
-        <div className={'flex flex-wrap justify-center'}>
+        <div className="pt-20">
+          <div className={styles.header + ' mt-11 py-7'}>
+            <div className={styles.subContainer}>
+              <div className={globalStyles.container}>
+                <div className="flex flex-wrap justify-between items-center">
+                  <div className="flex justify-start items-center">
+                    <Image src={ProductOne} alt="" width={23} height={20} />
+                    <div className={styles.headerTitle + ' ml-3'}>Calidad garantizada</div>
+                  </div>
+                  <div className="flex justify-start items-center">
+                    <Image src={ProductTwo} alt="" width={23} height={20} />
+                    <div className={styles.headerTitle + ' ml-3'}>Envio 48 / 72 horas</div>
+                  </div>
+                  <div className="flex justify-start items-center">
+                    <Image src={ProductThree} alt="" width={23} height={20} />
+                    <div className={styles.headerTitle + ' ml-3'}>Devolución 30 dias</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className={styles.container}>
-            <div className={globalStyles.container + ' my-20'}>
+            <div className={globalStyles.container + ' mt-8 mb-20'}>
               <div>Desktop Store Page</div>
             </div>
           </div>

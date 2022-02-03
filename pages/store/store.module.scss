@@ -6,6 +6,12 @@
   justify-content: center;
   min-height: calc(100vh - 177px);
 }
+.subContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .m_container {
   width: 100%;
   background-color: #ffffff;
@@ -14,4 +20,16 @@
   justify-content: center;
   padding-top: 80px;
   min-height: calc(100vh - 177px);
+}
+.header {
+  border: 1px solid #7d8f8e;
+  background-color: #7d8f8e;
+}
+.headerTitle {
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
 }
