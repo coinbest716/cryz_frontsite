@@ -10,7 +10,7 @@ import SocialButtonGroup from 'components/SocialButtonGroup'
 
 // images
 import ArrowLeftIcon from 'assets/images/arrow-left.svg'
-import whatsapp from 'public/images/whatsapp.svg'º
+import whatsapp from 'public/images/whatsapp.svg'
 
 // json data
 import SocialURLData from 'assets/data/SocialURLData'
