@@ -108,6 +108,12 @@ const Store = props => {
 
   const handleChangeCategory = event => {
     setCategory(Number(event.target.value))
+    router.push({
+      pathname: '/store/category',
+      query: {
+        category: Number(event.target.value),
+      },
+    })
   }
 
   return (
