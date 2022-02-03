@@ -68,7 +68,7 @@ const Calendar = props => {
     getSessionsByDashboard({ variables: { patient_id: Number(localStorage.getItem('patient_id')) } })
     getLocationByDashboard()
     const eventDate = router.query.eventDate
-    if (eventDate) {
+    if (eventDate && viewport !== 'mobile') {
       let calendarApi = calendarComponentRef.current.getApi()
       calendarApi.gotoDate(eventDate) // call a method on the Calendar object
     }
@@ -189,7 +189,9 @@ const Calendar = props => {
           <div>
             <div className={styles.nextClass + ' mt-8 mb-2'}>Siguiente clase</div>
             {events.map((event, index) => (
-              <ClassItem event={event} key={index} />
+              <div key={index} className="my-2">
+                <ClassItem event={event} />
+              </div>
             ))}
           </div>
         </div>
