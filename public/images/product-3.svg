@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.946 22">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-size: 10px;
+        font-family: SegoeUI, Segoe UI;
+      }
+    </style>
+  </defs>
+  <g id="Group_6" data-name="Group 6" transform="translate(0.5 0.5)">
+    <path id="Oval" class="cls-1" d="M10.5,21A10.5,10.5,0,1,0,0,10.5" transform="translate(21 21) rotate(-180)"/>
+    <text id="_30" data-name="30" class="cls-2" transform="translate(11 15)"><tspan x="-5.391" y="0">30</tspan></text>
+    <path id="Path_6" data-name="Path 6" class="cls-1" d="M0,1.612,2.327,0,4.472,1.612" transform="translate(18.673 10.5)"/>
+  </g>
+</svg>
