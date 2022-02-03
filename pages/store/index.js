@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import CircularMark from 'components/components/CircularMark'
+import StoreProductCard from 'components/store/StoreProductCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -15,10 +15,6 @@ import styles from './store.module.scss'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-
-import ProductOne from 'public/images/product-2.svg'
-import ProductTwo from 'public/images/product-2.svg'
-import ProductThree from 'public/images/product-3.svg'
 
 const Store = props => {
   const router = useRouter()
@@ -38,38 +34,81 @@ const Store = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  // variables
-  const { viewport } = props
-
-  // handlers
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const handleClickOffer = id => {
-    router.push({
-      pathname: '/work-with-us/detail',
-      query: {
-        id: id,
-      },
-    })
-  }
-
-  const [category, setCategory] = useState(0)
-  const handleChangeCategory = event => {
-    setCategory(Number(event.target.value))
-  }
-
   const accessoriesList = [
     { id: 0, label: 'Material Deportivo' },
     { id: 1, label: 'Accessorios' },
     { id: 2, label: 'Salud y Belleza' },
     { id: 3, label: 'Productos Bio' },
   ]
+
+  const newProduct = [
+    {
+      id: 0,
+      url: '/images/accessory.svg',
+      name: 'Poke flannel marfa swag slow-carb narwhal',
+      price: '265',
+      discountPrice: '154',
+    },
+    {
+      id: 1,
+      url: '/images/accessory.svg',
+      name: 'Poke flannel marfa swag slow-carb narwhal',
+      price: '265',
+      discountPrice: '',
+    },
+    {
+      id: 2,
+      url: '/images/accessory.svg',
+      name: 'Poke flannel marfa swag slow-carb narwhal',
+      price: '265',
+      discountPrice: '154',
+    },
+    {
+      id: 3,
+      url: '/images/accessory.svg',
+      name: 'Poke flannel marfa swag slow-carb narwhal',
+      price: '265',
+      discountPrice: '',
+    },
+    {
+      id: 4,
+      url: '/images/accessory.svg',
+      name: 'Poke flannel marfa swag slow-carb narwhal',
+      price: '265',
+      discountPrice: '154',
+    },
+    {
+      id: 5,
+      url: '/images/accessory.svg',
+      name: 'Poke flannel marfa swag slow-carb narwhal',
+      price: '265',
+      discountPrice: '',
+    },
+  ]
+
+  // variables
+  const { viewport } = props
+  const [category, setCategory] = useState(0)
+  const [products, setProducts] = useState([])
+
+  // handlers
+  useEffect(() => {
+    setProducts(newProduct)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleClickProduct = id => {
+    router.push({
+      pathname: '/store/detail',
+      query: {
+        id: id,
+      },
+    })
+  }
+
+  const handleChangeCategory = event => {
+    setCategory(Number(event.target.value))
+  }
 
   return (
     <>
@@ -116,6 +155,14 @@ const Store = props => {
                     </option>
                   ))}
                 </select>
+              </div>
+              <div className="mt-12">
+                <div className={styles.newLabel + ' mb-3'}>Novedades</div>
+                <div className={'grid grid-cols-3 gap-8 flex justify-center'}>
+                  {products.map((item, index) => (
+                    <StoreProductCard item={item} key={index} handleClickProduct={handleClickProduct} />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
