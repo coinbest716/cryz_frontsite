@@ -35,13 +35,24 @@ const Category = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
+  const categoryList = [
+    { id: 0, label: 'Material Deportivo' },
+    { id: 1, label: 'Accessorios' },
+    { id: 2, label: 'Salud y Belleza' },
+    { id: 3, label: 'Productos Bio' },
+  ]
   // variables
   const { viewport } = props
+  const [categoryId, setCategoryId] = useState(-1)
 
   // handlers
   useEffect(() => {
     if (router.query.id) {
       // getJobByIdForDashboard({ variables: { id: Number(router.query.id) } })
+    }
+    if (router.query.category) {
+      setCategoryId(router.query.category)
+      console.log(categoryList[router.query.category].label)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
@@ -58,10 +69,11 @@ const Category = props => {
         <div className={'flex flex-wrap justify-center'}>
           <div className={styles.container}>
             <div className={globalStyles.container + ' my-20'}>
-              <div className={'mt-9'}>
-                <BackButton viewport={viewport} />
+              <div className={'flex mt-9'}>
+                <p className={styles.homePath + ' cursor-pointer'}>home</p>
+                <p className={styles.homePath}>&nbsp;{'>'}&nbsp;</p>
+                <p className={styles.categoryPath + ' cursor-pointer'}>{categoryList[categoryId]?.label}</p>
               </div>
-              Desktop Category Page
             </div>
           </div>
         </div>

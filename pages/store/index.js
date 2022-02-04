@@ -34,7 +34,7 @@ const Store = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  const accessoriesList = [
+  const categoryList = [
     { id: 0, label: 'Material Deportivo' },
     { id: 1, label: 'Accessorios' },
     { id: 2, label: 'Salud y Belleza' },
@@ -158,7 +158,7 @@ const Store = props => {
                   <option value="" style={{ display: 'none' }}>
                     Material Deportivo
                   </option>
-                  {accessoriesList.map((item, index) => (
+                  {categoryList.map((item, index) => (
                     <option key={index} value={item.id}>
                       {item.label}
                     </option>
