@@ -1,0 +1,17 @@
+@import 'styles/variable.module.scss';
+
+.processBackground {
+  background-color: #bdbdbd;
+}
+.progress {
+  background-color: #707070;
+}
+.homePath {
+  max-width: 400px;
+  width: 400px;
+  color: #757575;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  line-height: 28px;
+}
