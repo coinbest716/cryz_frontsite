@@ -88,7 +88,7 @@ const Store = props => {
 
   // variables
   const { viewport } = props
-  const [category, setCategory] = useState(0)
+  const [category, setCategory] = useState(-1)
   const [products, setProducts] = useState([])
 
   // handlers
@@ -155,6 +155,9 @@ const Store = props => {
                   value={category}
                   className={'cursor-pointer flex justify-start items-center ' + styles.select}
                 >
+                  <option value="" style={{ display: 'none' }}>
+                    Material Deportivo
+                  </option>
                   {accessoriesList.map((item, index) => (
                     <option key={index} value={item.id}>
                       {item.label}
