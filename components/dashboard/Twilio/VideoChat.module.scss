@@ -20,11 +20,17 @@
 .closeButton {
   width: 120px;
   height: 40px;
-  background: #f86c6b;
-  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  font-family: Montserrat;
+  font-size: 10px;
   font-weight: 400;
-  color: #fff;
+  line-height: 12px;
   text-align: center;
+  letter-spacing: -0.256px;
+  color: #7a908e;
 }
 
 .style01 {
@@ -75,10 +81,17 @@
 }
 
 .closeButtonWeb {
-  width: 306px;
-  height: 59px;
-  background: #f86c6b;
-  font-size: 36px;
-  font-weight: 600;
-  color: #fff;
+  width: 220px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.256px;
+  color: #7a908e;
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="103px" height="85px" viewBox="0 0 103 85" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>chat</title>
+    <g id="chat" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="Chat" font-family="Montserrat-Regular, Montserrat" font-size="12" font-weight="normal" fill="#FFFFFF">
+            <tspan x="37" y="71">Chat</tspan>
+        </text>
+        <g id="Group-15" transform="translate(40.000000, 21.000000)">
+            <g id="Group-9" transform="translate(0.496610, 0.831021)">
+                <path d="M11,0 C4.92465217,0 0,4.92465217 0,11 C0,13.2396957 0.671,15.3215652 1.82026087,17.059087 L0,22 L4.84286957,20.1166087 C6.6,21.3055652 8.71869565,22 11,22 C17.0753478,22 22,17.0753478 22,11 C22,4.92465217 17.0753478,0 11,0 Z" id="Stroke-1" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M7,13 C7,14.65675 8.7908,16 11,16 C13.2092,16 15,14.65675 15,13" id="Stroke-3" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M9,7.5 C9,8.3285 8.552,9 8,9 C7.448,9 7,8.3285 7,7.5 C7,6.6715 7.448,6 8,6 C8.552,6 9,6.6715 9,7.5" id="Fill-5" fill="#FFFFFF"></path>
+                <path d="M15,7.5 C15,8.3285 14.552,9 14,9 C13.448,9 13,8.3285 13,7.5 C13,6.6715 13.448,6 14,6 C14.552,6 15,6.6715 15,7.5" id="Fill-7" fill="#FFFFFF"></path>
+            </g>
+        </g>
+        <circle id="Background" stroke="#FFFFFF" cx="49.5" cy="33" r="22"></circle>
+    </g>
+</svg>

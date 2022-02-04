@@ -17,6 +17,14 @@ import Participant from './Participant'
 import LocalParticipant from './LocalParticipant'
 import SelfVideo from './SelfVideo'
 
+// images and icons
+import CameraOffIcon from 'assets/images/live-streaming-icons/camera-off.svg'
+import CameraOnIcon from 'assets/images/live-streaming-icons/camera-on.svg'
+import ChatIcon from 'assets/images/live-streaming-icons/chat.svg'
+import FullScreenIcon from 'assets/images/live-streaming-icons/full-screen.svg'
+import MicOffIcon from 'assets/images/live-streaming-icons/mic-off.svg'
+import MicOnIcon from 'assets/images/live-streaming-icons/mic-on.svg'
+
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './VideoChat.module.scss'
@@ -253,35 +261,32 @@ const VideoChat = props => {
                 >
                   <div className="flex justify-start">
                     <Image
-                      src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                      src={micStatus ? MicOnIcon : MicOffIcon}
                       className="cursor-pointer"
-                      width={103}
-                      height={85}
+                      width={50}
+                      height={50}
                       alt="Silence"
                       onClick={() => controlMic()}
                     />
                     <Image
-                      src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                      src={cameraStatus ? CameraOnIcon : CameraOffIcon}
                       className="cursor-pointer"
-                      width={60}
+                      width={50}
                       height={50}
                       alt="Silence"
                       onClick={() => controlCamera()}
                     />
                   </div>
                   <div onClick={() => fullScreenToggler()}>
-                    <Image
-                      src={'/images/full-screen.svg'}
-                      className="cursor-pointer"
-                      width={135}
-                      height={72}
-                      alt="Fullscreen"
-                    />
+                    <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
+                  </div>
+                  <div>
+                    <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
                   </div>
 
                   {showCloseBtn ? (
                     <div className={styles.closeButton} onClick={() => handleLogout()}>
-                      Fin
+                      Finalizar meet
                     </div>
                   ) : (
                     <></>
@@ -328,35 +333,32 @@ const VideoChat = props => {
                 >
                   <div className="flex justify-start">
                     <Image
-                      src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                      src={micStatus ? MicOnIcon : MicOffIcon}
                       className="cursor-pointer"
-                      width={60}
+                      width={50}
                       height={50}
                       alt="Silence"
                       onClick={() => controlMic()}
                     />
                     <Image
-                      src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                      src={cameraStatus ? CameraOnIcon : CameraOffIcon}
                       className="cursor-pointer"
-                      width={60}
+                      width={50}
                       height={50}
                       alt="Silence"
                       onClick={() => controlCamera()}
                     />
                   </div>
                   <div onClick={() => fullScreenToggler()}>
-                    <Image
-                      src={'/images/full-screen.svg'}
-                      className="cursor-pointer"
-                      width={135}
-                      height={72}
-                      alt="Fullscreen"
-                    />
+                    <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
+                  </div>
+                  <div>
+                    <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
                   </div>
 
                   {showCloseBtn ? (
                     <div className={styles.closeButton} onClick={() => handleLogout()}>
-                      Fin
+                      Finalizar meet
                     </div>
                   ) : (
                     <></>
@@ -418,7 +420,7 @@ const VideoChat = props => {
                   )}
 
                   <Image
-                    src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                    src={micStatus ? MicOnIcon : MicOffIcon}
                     className="cursor-pointer"
                     width={103}
                     height={85}
@@ -437,7 +439,7 @@ const VideoChat = props => {
 
                 <div className="app-streaming-camera-button">
                   <Image
-                    src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                    src={cameraStatus ? CameraOnIcon : CameraOffIcon}
                     className="cursor-pointer"
                     width={103}
                     height={85}
@@ -447,13 +449,10 @@ const VideoChat = props => {
                 </div>
 
                 <div onClick={() => fullScreenToggler()}>
-                  <Image
-                    src={'/images/full-screen.svg'}
-                    className="cursor-pointer"
-                    width={135}
-                    height={72}
-                    alt="Fullscreen"
-                  />
+                  <Image src={FullScreenIcon} className="cursor-pointer" width={140} height={85} alt="Fullscreen" />
+                </div>
+                <div>
+                  <Image src={ChatIcon} className="cursor-pointer" width={103} height={85} alt="" />
                 </div>
               </div>
 
@@ -462,7 +461,7 @@ const VideoChat = props => {
                   className={'text-center mx-5 cursor-pointer ' + styles.closeButtonWeb}
                   onClick={() => handleLogout()}
                 >
-                  Fin
+                  Finalizar meet
                 </div>
               ) : (
                 <></>
