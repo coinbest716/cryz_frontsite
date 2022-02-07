@@ -45,7 +45,7 @@ const VideoChat = props => {
   const [micStatus, setMicStatus] = useState(true)
   const [cameraStatus, setCameraStatus] = useState(true)
   const [showCloseBtn, setShowCloseBtn] = useState(true)
-  const [micChooseDlg, setMicChooseDlg] = useState(false)
+  // const [micChooseDlg, setMicChooseDlg] = useState(false)
   const [fullScreenMode, setFullScreenMode] = useState(false)
   const [videoWidth, setVideoWidth] = useState(1138)
   const [videoHeight, setVideoHeight] = useState(640)
@@ -257,7 +257,9 @@ const VideoChat = props => {
                 </div>
 
                 <div
-                  className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
+                  className={
+                    'absolute bottom-0 w-full flex flex-wrap justify-between items-center px-5 ' + styles.micCameraArea
+                  }
                 >
                   <div className="flex justify-start">
                     <Image
@@ -276,21 +278,26 @@ const VideoChat = props => {
                       alt="Silence"
                       onClick={() => controlCamera()}
                     />
-                  </div>
-                  <div onClick={() => fullScreenToggler()}>
-                    <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
-                  </div>
-                  <div>
-                    <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
+                    <div onClick={() => fullScreenToggler()}>
+                      <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
+                    </div>
+                    <div>
+                      <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
+                    </div>
                   </div>
 
-                  {showCloseBtn ? (
-                    <div className={styles.closeButton} onClick={() => handleLogout()}>
-                      Finalizar meet
+                  <div className="flex justify-start items-center">
+                    <div className={'flex justify-center items-center ' + styles.mobileParticipants}>
+                      {participants.length + 1} participantes
                     </div>
-                  ) : (
-                    <></>
-                  )}
+                    {/* {showCloseBtn ? (
+                      <div className={styles.closeButton} onClick={() => handleLogout()}>
+                        Finalizar meet
+                      </div>
+                    ) : (
+                      <></>
+                    )} */}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -329,7 +336,9 @@ const VideoChat = props => {
                 </div>
 
                 <div
-                  className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
+                  className={
+                    'absolute bottom-0 w-full flex flex-wrap justify-between items-center px-5 ' + styles.micCameraArea
+                  }
                 >
                   <div className="flex justify-start">
                     <Image
@@ -348,21 +357,26 @@ const VideoChat = props => {
                       alt="Silence"
                       onClick={() => controlCamera()}
                     />
-                  </div>
-                  <div onClick={() => fullScreenToggler()}>
-                    <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
-                  </div>
-                  <div>
-                    <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
+                    <div onClick={() => fullScreenToggler()}>
+                      <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
+                    </div>
+                    <div>
+                      <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
+                    </div>
                   </div>
 
-                  {showCloseBtn ? (
-                    <div className={styles.closeButton} onClick={() => handleLogout()}>
-                      Finalizar meet
+                  <div className="flex justify-start items-center">
+                    <div className={'flex justify-center items-center ' + styles.mobileParticipants}>
+                      {participants.length + 1} participantes
                     </div>
-                  ) : (
-                    <></>
-                  )}
+                    {/* {showCloseBtn ? (
+                      <div className={styles.closeButton} onClick={() => handleLogout()}>
+                        Finalizar meet
+                      </div>
+                    ) : (
+                      <></>
+                    )} */}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -378,9 +392,9 @@ const VideoChat = props => {
               background: `${bgColor}`,
               height: fullScreenMode ? `calc(100% - 95px)` : '640px',
             }}
-            onClick={() => {
-              setMicChooseDlg(false)
-            }}
+            // onClick={() => {
+            //   setMicChooseDlg(false)
+            // }}
           >
             {selectedParticipant !== '{}' && (
               <SelfVideo key={selectedParticipant.sid} participant={selectedParticipant} />
@@ -405,8 +419,8 @@ const VideoChat = props => {
           <div className={'w-full ' + styles.style01}>
             <div className={'flex justify-between items-center w-full h-full'}>
               <div className={'flex items-center'}>
-                <div className={'relative ' + styles.style02}>
-                  {micChooseDlg ? (
+                <div className={'relative flex items-center ' + styles.style02}>
+                  {/* {micChooseDlg ? (
                     <div className={'absolute overflow-hidden ' + styles.micChooseDlgArea}>
                       <div className={styles.micChooseDlg}>Microfono</div>
 
@@ -417,7 +431,7 @@ const VideoChat = props => {
                     </div>
                   ) : (
                     <></>
-                  )}
+                  )} */}
 
                   <Image
                     src={micStatus ? MicOnIcon : MicOffIcon}
@@ -427,14 +441,14 @@ const VideoChat = props => {
                     alt="Silence"
                     onClick={() => controlMic()}
                   />
-                  <Image
+                  {/* <Image
                     src="/mic-choose.svg"
                     className="cursor-pointer"
                     width={16}
                     height={13}
                     alt="choose"
                     onClick={() => showMicList()}
-                  />
+                  /> */}
                 </div>
 
                 <div className="app-streaming-camera-button">
@@ -456,16 +470,21 @@ const VideoChat = props => {
                 </div>
               </div>
 
-              {showCloseBtn ? (
-                <div
-                  className={'text-center mx-5 cursor-pointer ' + styles.closeButtonWeb}
-                  onClick={() => handleLogout()}
-                >
-                  Finalizar meet
+              <div className="flex justify-start items-center">
+                <div className={'flex justify-center items-center mx-4 ' + styles.participants}>
+                  {participants.length + 1} participantes
                 </div>
-              ) : (
-                <></>
-              )}
+                {showCloseBtn ? (
+                  <div
+                    className={'text-center mx-5 cursor-pointer ' + styles.closeButtonWeb}
+                    onClick={() => handleLogout()}
+                  >
+                    Finalizar meet
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           </div>
         </FullScreen>
