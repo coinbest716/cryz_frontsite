@@ -83,7 +83,12 @@ const LiveStreaming = props => {
         <div className={type !== 'academy' ? 'col-span-12 lg:col-span-9' : 'col-span-12'}>
           {viewport !== 'mobile' && <div className={styles.title}>1 to 1 Streaming</div>}
           <div className={'pt-4 lg:pt-14'}>
-            <VideoChat sessionId={event.id} viewport={viewport} onChangeRoom={room => handleOnChangeRoom(room)} />
+            <VideoChat
+              sessionId={event.id}
+              viewport={viewport}
+              onChangeRoom={room => handleOnChangeRoom(room)}
+              type={type}
+            />
           </div>
         </div>
         {type !== 'academy' && (

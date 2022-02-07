@@ -31,7 +31,7 @@ import styles from './VideoChat.module.scss'
 
 const VideoChat = props => {
   // variables
-  const { sessionId, viewport, onChangeRoom } = props
+  const { sessionId, viewport, onChangeRoom, type } = props
   const handle = useFullScreenHandle()
 
   const [localParticipant, setLocalParticipant] = useState('{}')
@@ -281,9 +281,11 @@ const VideoChat = props => {
                     <div onClick={() => fullScreenToggler()}>
                       <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
                     </div>
-                    <div>
-                      <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
-                    </div>
+                    {type === 'academy' && (
+                      <div>
+                        <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex justify-start items-center">
@@ -360,9 +362,11 @@ const VideoChat = props => {
                     <div onClick={() => fullScreenToggler()}>
                       <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
                     </div>
-                    <div>
-                      <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
-                    </div>
+                    {type === 'academy' && (
+                      <div>
+                        <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex justify-start items-center">
@@ -465,9 +469,11 @@ const VideoChat = props => {
                 <div onClick={() => fullScreenToggler()}>
                   <Image src={FullScreenIcon} className="cursor-pointer" width={140} height={85} alt="Fullscreen" />
                 </div>
-                <div>
-                  <Image src={ChatIcon} className="cursor-pointer" width={103} height={85} alt="" />
-                </div>
+                {type === 'academy' && (
+                  <div>
+                    <Image src={ChatIcon} className="cursor-pointer" width={103} height={85} alt="" />
+                  </div>
+                )}
               </div>
 
               <div className="flex justify-start items-center">
