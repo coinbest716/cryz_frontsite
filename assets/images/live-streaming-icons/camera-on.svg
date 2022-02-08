@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="103px" height="85px" viewBox="0 0 103 85" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>camera-on</title>
+    <g id="camera-on" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-10" transform="translate(29.000000, 11.000000)">
+            <circle id="Background" stroke="#FFFFFF" cx="22" cy="22" r="22"></circle>
+            <text id="Apagar" font-family="Montserrat-Regular, Montserrat" font-size="12" font-weight="normal" fill="#FFFFFF">
+                <tspan x="0.5" y="60">Apagar</tspan>
+            </text>
+            <g id="Group-7" transform="translate(10.500000, 15.000000)" stroke="#FFFFFF">
+                <path d="M23.4291441,1.75197922 C23.0041368,1.45974489 22.4317991,1.42463459 21.9699735,1.66283875 L17.4227322,4.01057651 L17.4227322,1.92951576 C17.4227322,0.865599194 16.6273184,0 15.6498644,0 L1.77281082,0 C0.795299862,0 0,0.865599194 0,1.92951576 L0,14.0704842 C0,15.1344008 0.795299862,16 1.77281082,16 L15.6498644,16 C16.6273184,16 17.4227322,15.1344008 17.4227322,14.0704842 L17.4227322,11.9894235 L21.9702014,14.3372853 C22.1738994,14.4424921 22.3992553,14.4943512 22.6242692,14.4943512 C22.9085002,14.4943512 23.1918764,14.4112899 23.4291441,14.2480828 C23.786613,14.0018765 24,13.5950684 24,13.1595394 L24,2.84052262 C24,2.40493157 23.786613,1.99812352 23.4291441,1.75197922 Z" id="Stroke-5"></path>
+            </g>
+        </g>
+    </g>
+</svg>
