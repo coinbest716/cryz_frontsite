@@ -143,6 +143,8 @@ const VideoChat = props => {
 
     Video.connect(data.token, {
       name: room_name,
+      audio: true,
+      maxAudioBitrate: 16000, //For music remove this line
       video: { height: 480, frameRate: 24, width: 640 },
     })
       .then(room => {
@@ -405,12 +407,6 @@ const VideoChat = props => {
             )}
             {connectStatus === 'disconnect' ? <div className={styles.text}>La retrasmisión ha terminado</div> : ''}
             {connectStatus === 'init' ? <div className={styles.text}>Uniéndose al evento...</div> : ''}
-
-            <div className="absolute top-1 right-2">
-              <button className={globalStyles.appTwilioChatButton} onClick={() => joinAudio()}>
-                Join Audio
-              </button>
-            </div>
 
             <div className={'absolute top-16 bottom-4 right-4'} style={{ width: '240px' }}>
               <PerfectScrollbar>
