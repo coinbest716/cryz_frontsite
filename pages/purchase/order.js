@@ -20,7 +20,7 @@ import successLogo from 'public/images/order-success.svg'
 // graphql
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import ShoppingCart from 'components/purchase/ShoppingCart'
+import ShoppingCart from 'components/Purchase/ShoppingCart'
 
 import * as gtag from '../../utils/gtag'
 
