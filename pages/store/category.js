@@ -1,26 +1,26 @@
-import React, { createRef, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+// next components
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 // redux
-import Image from 'next/image'
 import { useDispatch } from 'react-redux'
-import { useRouter } from 'next/router'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import StoreProductCard from 'components/store/StoreProductCard'
 import StorePregress from 'components/store/StorePregress'
 
+// graphql
 import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'
-import toast from 'react-hot-toast'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './category.module.scss'
-import { setHubOnCarrier } from '@sentry/hub'
 
 const Category = props => {
-  const router = useRouter()
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -36,6 +36,15 @@ const Category = props => {
     }
   }, [isMounted, dispatch])
   // loading part end #######################
+
+  // variables
+  const { viewport } = props
+  const router = useRouter()
+  const [products, setProducts] = useState([])
+  const [someProducts, setSomeProducts] = useState([])
+  const [categoryId, setCategoryId] = useState(-1)
+  const [showCount, setShowCount] = useState(0)
+  const [moreToggle, setMoreToggle] = useState(false)
 
   const categoryList = [
     { id: 0, label: 'Material Deportivo' },
@@ -124,19 +133,8 @@ const Category = props => {
     },
   ]
 
-  // variables
-  const { viewport } = props
-  const [products, setProducts] = useState([])
-  const [someProducts, setSomeProducts] = useState([])
-  const [categoryId, setCategoryId] = useState(-1)
-  const [showCount, setShowCount] = useState(0)
-  const [moreToggle, setMoreToggle] = useState(false)
-
   // handlers
   useEffect(() => {
-    if (router.query.id) {
-      // getJobByIdForDashboard({ variables: { id: Number(router.query.id) } })
-    }
     if (router.query.category) {
       setCategoryId(router.query.category)
     }
@@ -145,7 +143,6 @@ const Category = props => {
 
   useEffect(() => {
     setProducts(newProduct)
-    console.log('#############', newProduct)
     if (newProduct.length > 9) {
       setShowCount(9)
       setMoreToggle(true)
@@ -176,8 +173,8 @@ const Category = props => {
         <div className={styles.m_container}>Mobile Category Page</div>
       ) : (
         <div className={'flex flex-wrap justify-center'}>
-          <div className={styles.container}>
-            <div className={globalStyles.container + ' my-20'}>
+          <div className={globalStyles.container + ' my-20'}>
+            <div className={styles.container}>
               <div className={'flex mt-9'}>
                 <p className={styles.homePath + ' cursor-pointer'}>home</p>
                 <p className={styles.homePath}>&nbsp;{'>'}&nbsp;</p>
