@@ -10,8 +10,8 @@ import Image from 'next/image'
 // custom components
 import BackButton from 'components/components/BackButton'
 import CircularMark from 'components/components/CircularMark'
-import NewsCard from 'components/news/NewsCard'
-import MobileNewsCard from 'components/news/MobileNewsCard'
+import NewsCard from 'components/News/NewsCard'
+import MobileNewsCard from 'components/News/MobileNewsCard'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 // styles
 

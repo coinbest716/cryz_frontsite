@@ -11,7 +11,7 @@ import Image from 'next/image'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 import ReadMoreButton from 'components/components/ReadMoreButton'
-import NewsCarousel from 'components/news/NewsCarousel'
+import NewsCarousel from 'components/News/NewsCarousel'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'

@@ -4,8 +4,8 @@ import React from 'react'
 import Image from 'next/image'
 
 // custom components
-import ArrowButton from 'components/academy/ArrowButton'
-import ArrowOutlineButton from 'components/academy/ArrowOutlineButton'
+import ArrowButton from 'components/Academy/ArrowButton'
+import ArrowOutlineButton from 'components/Academy/ArrowOutlineButton'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'

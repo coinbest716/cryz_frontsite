@@ -21,8 +21,8 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/dashboard/NotificationButton'
 import Material from 'components/dashboard/Material'
-import Feature from 'components/academy/Feature'
-import DownloadPDF from 'components/academy/DownloadPDF'
+import Feature from 'components/Academy/Feature'
+import DownloadPDF from 'components/Academy/DownloadPDF'
 import NoPlansOnlineDialog from 'components/dashboard/plans/NoPlansOnlineDialog'
 
 // styles
