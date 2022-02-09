@@ -13,7 +13,7 @@ import { Carousel } from 'react-responsive-carousel'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import StoreProductCard from 'components/store/StoreProductCard'
+import StoreProductCard from 'components/Store/StoreProductCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'

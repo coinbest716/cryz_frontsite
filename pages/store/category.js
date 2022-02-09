@@ -9,8 +9,8 @@ import { useDispatch } from 'react-redux'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import StoreProductCard from 'components/store/StoreProductCard'
-import StorePregress from 'components/store/StorePregress'
+import StoreProductCard from 'components/Store/StoreProductCard'
+import StorePregress from 'components/Store/StorePregress'
 
 // graphql
 import { useMutation, useLazyQuery } from '@apollo/client'
