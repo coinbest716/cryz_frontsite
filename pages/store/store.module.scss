@@ -47,15 +47,19 @@
   position: absolute;
   bottom: -15px;
   left: calc(50% - 150px);
-  background-color: #7d8f8e;
   padding: 12px 4px;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #7d8f8e;
   font-family: Montserrat;
   font-size: 14px;
   letter-spacing: 0px;
   line-height: 30px;
   border: none;
   outline: none;
+  &:hover {
+    background-color: #7d8f8e;
+    color: #ffffff;
+  }
 }
 .newLabel {
   color: #7d8f8e;
