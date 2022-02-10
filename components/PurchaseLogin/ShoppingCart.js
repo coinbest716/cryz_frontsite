@@ -2,7 +2,7 @@ import React from 'react'
 
 // next components
 import Image from 'next/image'
-import Radio from 'components/purchase/Radio'
+import Radio from 'components/Purchase/Radio'
 
 // images
 import mainImage from 'assets/images/main-mobile.png'

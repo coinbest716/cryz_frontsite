@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
-import WorkWithCard from 'components/workwithus/WorkWithCard'
-import MobileWorkWithCard from 'components/workwithus/MobileWorkWithCard'
+import WorkWithCard from 'components/Workwithus/WorkWithCard'
+import MobileWorkWithCard from 'components/Workwithus/MobileWorkWithCard'
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './workwithus.module.scss'

@@ -13,7 +13,7 @@ import Image from 'next/image'
 // custom components
 import ContactLayout from 'components/Layout/ContactLayout'
 import CircularMark from 'components/components/CircularMark'
-import MapContainer from 'components/contact/MapContainer'
+import MapContainer from 'components/Contact/MapContainer'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'

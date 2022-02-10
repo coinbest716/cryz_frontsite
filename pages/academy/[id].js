@@ -9,10 +9,10 @@ import { useDispatch } from 'react-redux'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import ArrowButton from 'components/academy/ArrowButton'
-import Feature from 'components/academy/Feature'
-import DownloadPDF from 'components/academy/DownloadPDF'
-import CarouselAcademy from 'components/academy/CarouselAcademy'
+import ArrowButton from 'components/Academy/ArrowButton'
+import Feature from 'components/Academy/Feature'
+import DownloadPDF from 'components/Academy/DownloadPDF'
+import CarouselAcademy from 'components/Academy/CarouselAcademy'
 import BackButton from 'components/components/BackButton'
 
 // graphql

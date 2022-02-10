@@ -17,13 +17,21 @@ import Participant from './Participant'
 import LocalParticipant from './LocalParticipant'
 import SelfVideo from './SelfVideo'
 
+// images and icons
+import CameraOffIcon from 'assets/images/live-streaming-icons/camera-off.svg'
+import CameraOnIcon from 'assets/images/live-streaming-icons/camera-on.svg'
+import ChatIcon from 'assets/images/live-streaming-icons/chat.svg'
+import FullScreenIcon from 'assets/images/live-streaming-icons/full-screen.svg'
+import MicOffIcon from 'assets/images/live-streaming-icons/mic-off.svg'
+import MicOnIcon from 'assets/images/live-streaming-icons/mic-on.svg'
+
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './VideoChat.module.scss'
 
 const VideoChat = props => {
   // variables
-  const { sessionId, viewport, onChangeRoom } = props
+  const { sessionId, viewport, onChangeRoom, type } = props
   const handle = useFullScreenHandle()
 
   const [localParticipant, setLocalParticipant] = useState('{}')
@@ -37,7 +45,7 @@ const VideoChat = props => {
   const [micStatus, setMicStatus] = useState(true)
   const [cameraStatus, setCameraStatus] = useState(true)
   const [showCloseBtn, setShowCloseBtn] = useState(true)
-  const [micChooseDlg, setMicChooseDlg] = useState(false)
+  // const [micChooseDlg, setMicChooseDlg] = useState(false)
   const [fullScreenMode, setFullScreenMode] = useState(false)
   const [videoWidth, setVideoWidth] = useState(1138)
   const [videoHeight, setVideoHeight] = useState(640)
@@ -135,6 +143,8 @@ const VideoChat = props => {
 
     Video.connect(data.token, {
       name: room_name,
+      audio: true,
+      maxAudioBitrate: 16000, //For music remove this line
       video: { height: 480, frameRate: 24, width: 640 },
     })
       .then(room => {
@@ -249,43 +259,49 @@ const VideoChat = props => {
                 </div>
 
                 <div
-                  className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
+                  className={
+                    'absolute bottom-0 w-full flex flex-wrap justify-between items-center px-5 ' + styles.micCameraArea
+                  }
                 >
                   <div className="flex justify-start">
                     <Image
-                      src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                      src={micStatus ? MicOnIcon : MicOffIcon}
                       className="cursor-pointer"
-                      width={103}
-                      height={85}
+                      width={50}
+                      height={50}
                       alt="Silence"
                       onClick={() => controlMic()}
                     />
                     <Image
-                      src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                      src={cameraStatus ? CameraOnIcon : CameraOffIcon}
                       className="cursor-pointer"
-                      width={60}
+                      width={50}
                       height={50}
                       alt="Silence"
                       onClick={() => controlCamera()}
                     />
-                  </div>
-                  <div onClick={() => fullScreenToggler()}>
-                    <Image
-                      src={'/images/full-screen.svg'}
-                      className="cursor-pointer"
-                      width={135}
-                      height={72}
-                      alt="Fullscreen"
-                    />
+                    <div onClick={() => fullScreenToggler()}>
+                      <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
+                    </div>
+                    {type === 'academy' && (
+                      <div>
+                        <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
+                      </div>
+                    )}
                   </div>
 
-                  {showCloseBtn ? (
-                    <div className={styles.closeButton} onClick={() => handleLogout()}>
-                      Fin
+                  <div className="flex justify-start items-center">
+                    <div className={'flex justify-center items-center ' + styles.mobileParticipants}>
+                      {participants.length + 1} participantes
                     </div>
-                  ) : (
-                    <></>
-                  )}
+                    {/* {showCloseBtn ? (
+                      <div className={styles.closeButton} onClick={() => handleLogout()}>
+                        Finalizar meet
+                      </div>
+                    ) : (
+                      <></>
+                    )} */}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -324,43 +340,49 @@ const VideoChat = props => {
                 </div>
 
                 <div
-                  className={'absolute bottom-0 w-full flex justify-between items-center px-5 ' + styles.micCameraArea}
+                  className={
+                    'absolute bottom-0 w-full flex flex-wrap justify-between items-center px-5 ' + styles.micCameraArea
+                  }
                 >
                   <div className="flex justify-start">
                     <Image
-                      src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                      src={micStatus ? MicOnIcon : MicOffIcon}
                       className="cursor-pointer"
-                      width={60}
+                      width={50}
                       height={50}
                       alt="Silence"
                       onClick={() => controlMic()}
                     />
                     <Image
-                      src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                      src={cameraStatus ? CameraOnIcon : CameraOffIcon}
                       className="cursor-pointer"
-                      width={60}
+                      width={50}
                       height={50}
                       alt="Silence"
                       onClick={() => controlCamera()}
                     />
-                  </div>
-                  <div onClick={() => fullScreenToggler()}>
-                    <Image
-                      src={'/images/full-screen.svg'}
-                      className="cursor-pointer"
-                      width={135}
-                      height={72}
-                      alt="Fullscreen"
-                    />
+                    <div onClick={() => fullScreenToggler()}>
+                      <Image src={FullScreenIcon} className="cursor-pointer" width={80} height={50} alt="Fullscreen" />
+                    </div>
+                    {type === 'academy' && (
+                      <div>
+                        <Image src={ChatIcon} className="cursor-pointer" width={50} height={50} alt="" />
+                      </div>
+                    )}
                   </div>
 
-                  {showCloseBtn ? (
-                    <div className={styles.closeButton} onClick={() => handleLogout()}>
-                      Fin
+                  <div className="flex justify-start items-center">
+                    <div className={'flex justify-center items-center ' + styles.mobileParticipants}>
+                      {participants.length + 1} participantes
                     </div>
-                  ) : (
-                    <></>
-                  )}
+                    {/* {showCloseBtn ? (
+                      <div className={styles.closeButton} onClick={() => handleLogout()}>
+                        Finalizar meet
+                      </div>
+                    ) : (
+                      <></>
+                    )} */}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -376,21 +398,15 @@ const VideoChat = props => {
               background: `${bgColor}`,
               height: fullScreenMode ? `calc(100% - 95px)` : '640px',
             }}
-            onClick={() => {
-              setMicChooseDlg(false)
-            }}
+            // onClick={() => {
+            //   setMicChooseDlg(false)
+            // }}
           >
             {selectedParticipant !== '{}' && (
               <SelfVideo key={selectedParticipant.sid} participant={selectedParticipant} />
             )}
             {connectStatus === 'disconnect' ? <div className={styles.text}>La retrasmisión ha terminado</div> : ''}
             {connectStatus === 'init' ? <div className={styles.text}>Uniéndose al evento...</div> : ''}
-
-            <div className="absolute top-1 right-2">
-              <button className={globalStyles.appTwilioChatButton} onClick={() => joinAudio()}>
-                Join Audio
-              </button>
-            </div>
 
             <div className={'absolute top-16 bottom-4 right-4'} style={{ width: '240px' }}>
               <PerfectScrollbar>
@@ -403,8 +419,8 @@ const VideoChat = props => {
           <div className={'w-full ' + styles.style01}>
             <div className={'flex justify-between items-center w-full h-full'}>
               <div className={'flex items-center'}>
-                <div className={'relative ' + styles.style02}>
-                  {micChooseDlg ? (
+                <div className={'relative flex items-center ' + styles.style02}>
+                  {/* {micChooseDlg ? (
                     <div className={'absolute overflow-hidden ' + styles.micChooseDlgArea}>
                       <div className={styles.micChooseDlg}>Microfono</div>
 
@@ -415,29 +431,29 @@ const VideoChat = props => {
                     </div>
                   ) : (
                     <></>
-                  )}
+                  )} */}
 
                   <Image
-                    src={micStatus ? '/images/mic-on.svg' : '/images/mic-off.svg'}
+                    src={micStatus ? MicOnIcon : MicOffIcon}
                     className="cursor-pointer"
                     width={103}
                     height={85}
                     alt="Silence"
                     onClick={() => controlMic()}
                   />
-                  <Image
+                  {/* <Image
                     src="/mic-choose.svg"
                     className="cursor-pointer"
                     width={16}
                     height={13}
                     alt="choose"
                     onClick={() => showMicList()}
-                  />
+                  /> */}
                 </div>
 
                 <div className="app-streaming-camera-button">
                   <Image
-                    src={cameraStatus ? '/images/camera-on.svg' : '/images/camera-off.svg'}
+                    src={cameraStatus ? CameraOnIcon : CameraOffIcon}
                     className="cursor-pointer"
                     width={103}
                     height={85}
@@ -447,26 +463,30 @@ const VideoChat = props => {
                 </div>
 
                 <div onClick={() => fullScreenToggler()}>
-                  <Image
-                    src={'/images/full-screen.svg'}
-                    className="cursor-pointer"
-                    width={135}
-                    height={72}
-                    alt="Fullscreen"
-                  />
+                  <Image src={FullScreenIcon} className="cursor-pointer" width={140} height={85} alt="Fullscreen" />
                 </div>
+                {type === 'academy' && (
+                  <div>
+                    <Image src={ChatIcon} className="cursor-pointer" width={103} height={85} alt="" />
+                  </div>
+                )}
               </div>
 
-              {showCloseBtn ? (
-                <div
-                  className={'text-center mx-5 cursor-pointer ' + styles.closeButtonWeb}
-                  onClick={() => handleLogout()}
-                >
-                  Fin
+              <div className="flex justify-start items-center">
+                <div className={'flex justify-center items-center mx-4 ' + styles.participants}>
+                  {participants.length + 1} participantes
                 </div>
-              ) : (
-                <></>
-              )}
+                {showCloseBtn ? (
+                  <div
+                    className={'text-center mx-5 cursor-pointer ' + styles.closeButtonWeb}
+                    onClick={() => handleLogout()}
+                  >
+                    Finalizar meet
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           </div>
         </FullScreen>

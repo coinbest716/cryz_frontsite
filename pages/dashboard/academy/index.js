@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/dashboard/NotificationButton'
-import AcademyDashboardCard from 'components/academy/AcademyDashboardCard'
+import AcademyDashboardCard from 'components/Academy/AcademyDashboardCard'
 import StartclassButton from 'components/components/StartClassButton'
 
 // third party components

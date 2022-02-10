@@ -4,10 +4,10 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 
 // custom components
-import AcceptCommonButtom from 'components/purchase/CommonButton'
+import AcceptCommonButtom from 'components/Purchase/CommonButton'
 // import CommonButton from './CommonButton'
 
-import Radio from 'components/purchase/Radio'
+import Radio from 'components/Purchase/Radio'
 // styles
 import styles from './ShoppingCart.module.scss'
 

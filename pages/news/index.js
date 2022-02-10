@@ -10,8 +10,8 @@ import Image from 'next/image'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import CircularMark from 'components/components/CircularMark'
-import NewsCard from 'components/news/NewsCard'
-import MobileNewsCard from 'components/news/MobileNewsCard'
+import NewsCard from 'components/News/NewsCard'
+import MobileNewsCard from 'components/News/MobileNewsCard'
 
 import { useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'

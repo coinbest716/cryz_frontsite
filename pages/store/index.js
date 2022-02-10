@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from 'react'
+
+// next components
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+
 // redux
 import { useDispatch } from 'react-redux'
 
+// third party components
+import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
+import { Carousel } from 'react-responsive-carousel'
+
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import StoreProductCard from 'components/store/StoreProductCard'
+import StoreProductCard from 'components/Store/StoreProductCard'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
 import styles from './store.module.scss'
 
-// graphql
-import { useLazyQuery } from '@apollo/client'
-import graphql from 'crysdiazGraphql'
+// images and icons
+import Brand01 from 'assets/images/brand1.svg'
+import Brand02 from 'assets/images/brand2.svg'
+import Brand03 from 'assets/images/brand3.svg'
+import Brand04 from 'assets/images/brand4.svg'
 
 const Store = props => {
-  const router = useRouter()
   // loading part ###########################
   const dispatch = useDispatch()
   const [isMounted, setIsMounted] = useState(false)
@@ -34,14 +42,20 @@ const Store = props => {
   }, [isMounted, dispatch])
   // loading part end #######################
 
-  const accessoriesList = [
+  // variables
+  const router = useRouter()
+  const { viewport } = props
+  const [category, setCategory] = useState(-1)
+  const [products, setProducts] = useState([])
+  const categoryList = [
     { id: 0, label: 'Material Deportivo' },
     { id: 1, label: 'Accessorios' },
     { id: 2, label: 'Salud y Belleza' },
     { id: 3, label: 'Productos Bio' },
   ]
+  const [brandsList, setBrandsList] = useState([])
 
-  const newProduct = [
+  const newProductList = [
     {
       id: 0,
       url: '/images/accessory.svg',
@@ -86,14 +100,10 @@ const Store = props => {
     },
   ]
 
-  // variables
-  const { viewport } = props
-  const [category, setCategory] = useState(0)
-  const [products, setProducts] = useState([])
-
   // handlers
   useEffect(() => {
-    setProducts(newProduct)
+    setProducts(newProductList)
+    setBrandsList([Brand01, Brand02, Brand03, Brand04])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -151,11 +161,14 @@ const Store = props => {
                 <div className={'absolute top-11 left-8 ' + styles.mainImageTitle}>Descubre nuestras categorias</div>
                 <select
                   name="select"
-                  onChange={handleChangeCategory}
+                  onChange={event => handleChangeCategory(event)}
                   value={category}
                   className={'cursor-pointer flex justify-start items-center ' + styles.select}
                 >
-                  {accessoriesList.map((item, index) => (
+                  <option value="" style={{ display: 'none' }}>
+                    Material Deportivo
+                  </option>
+                  {categoryList.map((item, index) => (
                     <option key={index} value={item.id}>
                       {item.label}
                     </option>
@@ -166,17 +179,32 @@ const Store = props => {
                 <div className={styles.newLabel + ' mb-3'}>Novedades</div>
                 <div className={'grid grid-cols-3 gap-8 flex justify-center'}>
                   {products.map((item, index) => (
-                    <StoreProductCard item={item} key={index} handleClickProduct={handleClickProduct} />
+                    <StoreProductCard item={item} key={index} handleClickProduct={id => handleClickProduct(id)} />
                   ))}
                 </div>
               </div>
               <div className="mt-20 mb-10">
                 <div className={styles.brandTitle}>Nuestras Marcas</div>
-                <div className="flex flex-wrap justify-around items-center my-6">
-                  <Image src={'/images/brand4.svg'} alt="" width={100} height={40} />
-                  <Image src={'/images/brand3.svg'} alt="" width={100} height={40} />
-                  <Image src={'/images/brand2.svg'} alt="" width={100} height={40} />
-                  <Image src={'/images/brand1.svg'} alt="" width={100} height={40} />
+                <div className="w-full flex flex-wrap justify-around items-center my-6">
+                  <Carousel
+                    showArrows={true}
+                    showThumbs={false}
+                    autoPlay={true}
+                    stopOnHover={true}
+                    showStatus={false}
+                    showIndicators={true}
+                    infiniteLoop={true}
+                    centerMode={true}
+                    centerSlidePercentage={20}
+                    interval={2500}
+                    className={'w-full'}
+                  >
+                    {brandsList?.map((item, index) => (
+                      <div key={index}>
+                        <Image src={item} alt="" width={100} height={40} />
+                      </div>
+                    ))}
+                  </Carousel>
                 </div>
               </div>
             </div>

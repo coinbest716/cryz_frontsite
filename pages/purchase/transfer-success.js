@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
-import ShoppingCart from 'components/purchase/ShoppingCart'
+import ShoppingCart from 'components/Purchase/ShoppingCart'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
