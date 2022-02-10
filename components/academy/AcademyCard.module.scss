@@ -40,13 +40,11 @@
   }
 }
 .cardType {
-  position: absolute;
-  bottom: 63px;
-  left: 29px;
   color: #ffffff;
   font-family: Montserrat;
   font-weight: 700;
   letter-spacing: 1px;
+  padding: 10px 29px 0px 29px;
   @media (max-width: 1023px) {
     font-size: 10px;
     line-height: 14px;
