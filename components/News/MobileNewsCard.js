@@ -10,11 +10,6 @@ import styles from './MobileNewsCard.module.scss'
 const MobileNewsCard = props => {
   const { item, handleClickDate } = props
 
-  let body = ''
-  body =
-    item.title.replace(/(<([^>]+)>)/gi, '').slice(0, 50) +
-    (item.title.replace(/(<([^>]+)>)/gi, '').length > 50 ? '...' : '')
-
   return (
     <div className={styles.cardContainer}>
       <div className={styles.imageBorder}>
@@ -31,7 +26,10 @@ const MobileNewsCard = props => {
         />
       </div>
       <div className={styles.textContainer + ' mt-2 py-3 px-5 cursor-pointer'} onClick={() => handleClickDate(item.id)}>
-        <div className={styles.cardDescription}>{body}</div>
+        <div
+          className={styles.cardDescription + ' tinymce-class'}
+          dangerouslySetInnerHTML={{ __html: item.description }}
+        />
         <div className="flex justify-start">
           <div className={styles.cardDate + ' mt-3 mb-2 w-fit'}>{moment(item.publish_date).format('DD/MM/YYYY')}</div>
         </div>

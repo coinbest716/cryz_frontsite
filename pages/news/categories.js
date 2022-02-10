@@ -53,6 +53,7 @@ const Categoris = props => {
   const [itemOffset, setItemOffset] = useState(0)
   const itemsPerPage = viewport === 'mobile' ? 8 : 12
 
+  // handlers
   useEffect(() => {
     if (router.query.category_id) {
       setCategoryId(Number(router.query.category_id))

@@ -10,11 +10,6 @@ import styles from './NewsCard.module.scss'
 const NewsCard = props => {
   const { item, handleClickDate } = props
 
-  let body = ''
-  body =
-    item.description.replace(/(<([^>]+)>)/gi, '').slice(0, 100) +
-    (item.description.replace(/(<([^>]+)>)/gi, '').length > 100 ? '...' : '')
-
   return (
     <div className={styles.cardContainer}>
       <div className={styles.imageBorder}>
@@ -35,7 +30,10 @@ const NewsCard = props => {
         <div className="flex justify-start">
           <div className={styles.cardDate + ' mt-3 mb-2 w-fit'}>{moment(item.publish_date).format('DD/MM/YYYY')}</div>
         </div>
-        <div className={styles.cardDescription}>{body}</div>
+        <div
+          className={styles.cardDescription + ' tinymce-class'}
+          dangerouslySetInnerHTML={{ __html: item.description }}
+        />
       </div>
     </div>
   )
