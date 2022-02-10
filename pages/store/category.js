@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import StoreProductCard from 'components/Store/StoreProductCard'
 import StorePregress from 'components/Store/StorePregress'
+import CategoryFilter from 'components/Store/CategoryFilter'
 
 // graphql
 import { useMutation, useLazyQuery } from '@apollo/client'
@@ -46,12 +47,18 @@ const Category = props => {
   const [showCount, setShowCount] = useState(0)
   const [moreToggle, setMoreToggle] = useState(false)
 
-  const categoryList = [
+  const [categoryList, setCategoryList] = useState([
     { id: 0, label: 'Material Deportivo' },
     { id: 1, label: 'Accessorios' },
     { id: 2, label: 'Salud y Belleza' },
     { id: 3, label: 'Productos Bio' },
-  ]
+  ])
+  const [brandList, setBrandList] = useState([
+    { id: 0, label: 'Material Deportivo' },
+    { id: 1, label: 'Accessorios' },
+    { id: 2, label: 'Salud y Belleza' },
+    { id: 3, label: 'Productos Bio' },
+  ])
 
   const newProduct = [
     {
@@ -153,6 +160,10 @@ const Category = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const onSelectCategory = id => {
+    console.log('Selected id', id)
+  }
+
   const handleClickProduct = id => {
     router.push({
       pathname: '/store/detail',
@@ -181,10 +192,11 @@ const Category = props => {
                 <p className={styles.categoryPath + ' cursor-pointer'}>{categoryList[categoryId]?.label}</p>
               </div>
               <div className="flex justify-end mt-10">
-                <div className={'flex justify-between items-center ' + styles.filterContainer}>
-                  <p className={styles.filter}>Filtrar por</p>
-                  <Image src={'/images/filter-gray.svg'} alt="" width={17} height={14} />
-                </div>
+                <CategoryFilter
+                  categoryList={categoryList}
+                  brandList={brandList}
+                  onClick={id => onSelectCategory(id)}
+                />
               </div>
               <div className={'grid grid-cols-3 gap-8 flex justify-center mt-10'}>
                 {moreToggle ? (
