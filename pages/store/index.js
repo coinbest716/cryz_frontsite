@@ -14,6 +14,7 @@ import { Carousel } from 'react-responsive-carousel'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import StoreProductCard from 'components/Store/StoreProductCard'
+import Selecter from 'components/Store/Selecter'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -159,21 +160,12 @@ const Store = props => {
               <div className="relative">
                 <Image src={'/images/team-03.png'} alt="" width={1108} height={310} />
                 <div className={'absolute top-11 left-8 ' + styles.mainImageTitle}>Descubre nuestras categorias</div>
-                <select
-                  name="select"
-                  onChange={event => handleChangeCategory(event)}
+                <Selecter
+                  title="Material Deportivo"
+                  list={categoryList}
                   value={category}
-                  className={'cursor-pointer flex justify-start items-center ' + styles.select}
-                >
-                  <option value="" style={{ display: 'none' }}>
-                    Material Deportivo
-                  </option>
-                  {categoryList.map((item, index) => (
-                    <option key={index} value={item.id}>
-                      {item.label}
-                    </option>
-                  ))}
-                </select>
+                  onChange={event => handleChangeCategory(event)}
+                />
               </div>
               <div className="mt-12">
                 <div className={styles.newLabel + ' mb-3'}>Novedades</div>
