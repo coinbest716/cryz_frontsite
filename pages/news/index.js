@@ -111,7 +111,7 @@ const News = props => {
             <div className="w-full">
               {newsItems.length > 0 ? (
                 <>
-                  <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>{NewsCategories[2].value}</div>
+                  <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>{NewsCategories[1].value}</div>
                   <div className={'grid grid-cols-2 gap-3 flex justify-center'}>
                     {newsItems.map((item, index) => (
                       <MobileNewsCard item={item} key={index} handleClickDate={handleClickDate} />
@@ -136,7 +136,7 @@ const News = props => {
             <div className="w-full">
               {pressItems.length > 0 ? (
                 <>
-                  <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>{NewsCategories[1].value}</div>
+                  <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>{NewsCategories[2].value}</div>
                   <div className={'grid grid-cols-2 gap-4 flex justify-center'}>
                     {pressItems.map((item, index) => (
                       <MobileNewsCard item={item} key={index} handleClickDate={handleClickDate} />
@@ -173,7 +173,7 @@ const News = props => {
                 <div>
                   {newsItems.length > 0 ? (
                     <>
-                      <div className={styles.categoryTitle + ' mb-9'}>{NewsCategories[2].value}</div>
+                      <div className={styles.categoryTitle + ' mb-9'}>{NewsCategories[1].value}</div>
                       <div
                         className={
                           'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
@@ -199,7 +199,7 @@ const News = props => {
                 <div>
                   {pressItems.length > 0 ? (
                     <>
-                      <div className={styles.categoryTitle + ' mb-9'}>{NewsCategories[1].value}</div>
+                      <div className={styles.categoryTitle + ' mb-9'}>{NewsCategories[2].value}</div>
                       <div
                         className={
                           'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'

@@ -160,7 +160,7 @@ const Store = props => {
               <div className="relative flex justify-center">
                 <Image src={'/images/team-03.png'} alt="" width={1108} height={310} />
                 <div className={'absolute top-11 left-8 ' + styles.mainImageTitle}>Descubre nuestras categorias</div>
-                <div className="absolute -bottom-4">
+                <div className="absolute -bottom-4" style={{ width: '300px' }}>
                   <Selecter
                     title="Material Deportivo"
                     list={categoryList}

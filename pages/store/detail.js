@@ -108,13 +108,18 @@ const Detail = props => {
                     ultrices sem tincidunt euismod. Fusce rhoncus porttitor velit, eu bibendum nibh aliquet vel. Fusce
                     lorem leo, vehicula at nibh quis, facilisis accumsan turpis.
                   </div>
-                  <div className="mt-4">
+                  <div className="w-full mt-4">
                     <Selecter
                       title="Material Deportivo"
                       list={variantList}
                       value={variant}
                       onChange={event => handleChangeVariant(event)}
                     />
+                  </div>
+                  <div className="w-full mt-8">
+                    <button className={'p-2 px-7 ' + styles.button} onClick={() => {}}>
+                      Comprar
+                    </button>
                   </div>
                 </div>
               </div>
