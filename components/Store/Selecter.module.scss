@@ -1,0 +1,15 @@
+.select {
+  width: 300px;
+  padding: 12px 4px;
+  background-color: #ffffff;
+  color: #7d8f8e;
+  font-family: Montserrat;
+  font-size: 14px;
+  letter-spacing: 0px;
+  line-height: 30px;
+  border: 1px solid #7d8f8e;
+  &:hover {
+    background-color: #7d8f8e;
+    color: #ffffff;
+  }
+}

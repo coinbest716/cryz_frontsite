@@ -14,6 +14,7 @@ import { Carousel } from 'react-responsive-carousel'
 // custom components
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import StoreProductCard from 'components/Store/StoreProductCard'
+import Selecter from 'components/Store/Selecter'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
@@ -156,24 +157,17 @@ const Store = props => {
           </div>
           <div className={styles.container}>
             <div className={globalStyles.container + ' mt-8 mb-20'}>
-              <div className="relative">
+              <div className="relative flex justify-center">
                 <Image src={'/images/team-03.png'} alt="" width={1108} height={310} />
                 <div className={'absolute top-11 left-8 ' + styles.mainImageTitle}>Descubre nuestras categorias</div>
-                <select
-                  name="select"
-                  onChange={event => handleChangeCategory(event)}
-                  value={category}
-                  className={'cursor-pointer flex justify-start items-center ' + styles.select}
-                >
-                  <option value="" style={{ display: 'none' }}>
-                    Material Deportivo
-                  </option>
-                  {categoryList.map((item, index) => (
-                    <option key={index} value={item.id}>
-                      {item.label}
-                    </option>
-                  ))}
-                </select>
+                <div className="absolute -bottom-4">
+                  <Selecter
+                    title="Material Deportivo"
+                    list={categoryList}
+                    value={category}
+                    onChange={event => handleChangeCategory(event)}
+                  />
+                </div>
               </div>
               <div className="mt-12">
                 <div className={styles.newLabel + ' mb-3'}>Novedades</div>
