@@ -109,31 +109,6 @@ const News = props => {
               <div className={styles.m_newTopDash + ' mt-2'} />
             </div>
             <div className="w-full">
-              {newsItems.length > 0 ? (
-                <>
-                  <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>{NewsCategories[1].value}</div>
-                  <div className={'grid grid-cols-2 gap-3 flex justify-center'}>
-                    {newsItems.map((item, index) => (
-                      <MobileNewsCard item={item} key={index} handleClickDate={handleClickDate} />
-                    ))}
-                  </div>
-                  <div className="flex justify-end">
-                    <div
-                      className={
-                        styles.moreContainer + ' mt-6 mb-4 flex justify-center items-center cursor-pointer w-fit'
-                      }
-                      onClick={() => handleClickMore(1)}
-                    >
-                      <div className={styles.m_seeAll + ' mr-5'}>Ver todas</div>
-                      <Image src={ArrowRightGray} alt="" width={10} height={8} />
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <></>
-              )}
-            </div>
-            <div className="w-full">
               {pressItems.length > 0 ? (
                 <>
                   <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>{NewsCategories[2].value}</div>
@@ -158,6 +133,32 @@ const News = props => {
                 <></>
               )}
             </div>
+            <div className="w-full">
+              {newsItems.length > 0 ? (
+                <>
+                  <div className={styles.m_categoryTitle + ' mt-9 mb-6'}>{NewsCategories[1].value}</div>
+                  <div className={'grid grid-cols-2 gap-3 flex justify-center'}>
+                    {newsItems.map((item, index) => (
+                      <MobileNewsCard item={item} key={index} handleClickDate={handleClickDate} />
+                    ))}
+                  </div>
+                  <div className="flex justify-end">
+                    <div
+                      className={
+                        styles.moreContainer + ' mt-6 mb-4 flex justify-center items-center cursor-pointer w-fit'
+                      }
+                      onClick={() => handleClickMore(1)}
+                    >
+                      <div className={styles.m_seeAll + ' mr-5'}>Ver todas</div>
+                      <Image src={ArrowRightGray} alt="" width={10} height={8} />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+            
           </div>
         ) : (
           <div className={'flex flex-wrap justify-center'}>
@@ -169,32 +170,6 @@ const News = props => {
                     <div className={styles.newTopDash + ' mt-5'} />
                   </div>
                   <CircularMark />
-                </div>
-                <div>
-                  {newsItems.length > 0 ? (
-                    <>
-                      <div className={styles.categoryTitle + ' mb-9'}>{NewsCategories[1].value}</div>
-                      <div
-                        className={
-                          'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
-                        }
-                      >
-                        {newsItems.map((item, index) => (
-                          <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
-                        ))}
-                      </div>
-                      <div className="flex justify-end">
-                        <div
-                          className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
-                          onClick={() => handleClickMore(1)}
-                        >
-                          Ver todas
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <></>
-                  )}
                 </div>
                 <div>
                   {pressItems.length > 0 ? (
@@ -213,6 +188,32 @@ const News = props => {
                         <div
                           className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
                           onClick={() => handleClickMore(2)}
+                        >
+                          Ver todas
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <div>
+                  {newsItems.length > 0 ? (
+                    <>
+                      <div className={styles.categoryTitle + ' mb-9'}>{NewsCategories[1].value}</div>
+                      <div
+                        className={
+                          'grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:sm:grid-cols-1 gap-8 flex justify-center'
+                        }
+                      >
+                        {newsItems.map((item, index) => (
+                          <NewsCard item={item} key={index} handleClickDate={handleClickDate} />
+                        ))}
+                      </div>
+                      <div className="flex justify-end">
+                        <div
+                          className={styles.seeAll + ' mt-10 mb-7 cursor-pointer w-fit'}
+                          onClick={() => handleClickMore(1)}
                         >
                           Ver todas
                         </div>
