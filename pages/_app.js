@@ -36,6 +36,9 @@ import 'styles/style.scss'
 // images
 import mainImage from 'assets/images/main-mobile.png'
 
+import posthog from 'posthog-js'
+posthog.init('phc_PGJjfzBRGpoRHZZnQt29B25TmzHsXZL9aaIv0qYWNEl', { api_host: 'https://posthog.gosuac.com' })
+
 Amplify.configure({ ...awsconfig, ssr: true })
 Auth.configure(awsconfig)
 
