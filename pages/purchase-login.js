@@ -27,6 +27,8 @@ import toast from 'react-hot-toast'
 import * as Sentry from '@sentry/nextjs'
 import * as gtag from '../utils/gtag'
 
+import posthog from 'posthog-js'
+
 const PurchaseLogin = props => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -212,6 +214,9 @@ const PurchaseLogin = props => {
           params: {},
         })
         Sentry.setUser({ email: email })
+        posthog.identify(email, {
+          email: email,
+        })
         setAuthUser(response)
         setAuthChallenge(response.challengeName)
         if (rememberMe) {
