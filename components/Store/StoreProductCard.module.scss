@@ -27,3 +27,27 @@
   letter-spacing: 0;
   line-height: 24px;
 }
+
+// mobile part
+.mobileNewName {
+  color: #818e8e;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+}
+.mobileOrgPrice {
+  color: #757575;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  text-decoration: line-through;
+}
+.mobileDisPrice {
+  color: #fe5335;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
