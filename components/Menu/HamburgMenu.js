@@ -36,12 +36,12 @@ const menuList = [
     iconBlack: academyBlackIcon,
     title: 'Academy',
   },
-  {
-    href: '/dashboard/cursos',
-    icon: academyIcon,
-    iconBlack: academyBlackIcon,
-    title: 'Cursos',
-  },
+  //{
+   // href: '/dashboard/cursos',
+  //  icon: academyIcon,
+   // iconBlack: academyBlackIcon,
+   // title: 'Cursos',
+  //},
 ]
 
 const BurgerIcon = ({ visibilty, setVisibility, router }) => {

@@ -7,7 +7,7 @@
   box-sizing: border-box;
   border: 1px solid #818e8e;
   max-width: 355px;
-  height: 420px;
+  height: 450px;
 }
 .cardImage {
   opacity: 0.6;
@@ -55,12 +55,12 @@
   }
 }
 .cardCategory {
-  position: absolute;
   bottom: 16px;
   left: 29px;
   color: #acb1b2;
   font-family: Montserrat;
   letter-spacing: 1px;
+  padding: 10px 29px 20px 29px;
   @media (max-width: 1023px) {
     font-size: 10px;
     line-height: 14px;

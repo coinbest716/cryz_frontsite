@@ -103,12 +103,12 @@ const Navbar = () => {
       iconBlack: plansBlackIcon,
       title: 'Planes online',
     },
-    {
-      href: '/dashboard/cursos',
-      icon: plansIcon,
-      iconBlack: plansBlackIcon,
-      title: 'Cursos',
-    },
+   // {
+   //   href: '/dashboard/cursos',
+   //   icon: plansIcon,
+   //   iconBlack: plansBlackIcon,
+   //   title: 'Cursos',
+   // },
     {
       href: '/dashboard/academy',
       icon: academyIcon,

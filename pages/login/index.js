@@ -27,6 +27,8 @@ import * as gtag from '../../utils/gtag'
 
 import * as Sentry from '@sentry/nextjs'
 
+import posthog from 'posthog-js'
+
 const Login = props => {
   // variables
   const { viewport } = props
@@ -96,6 +98,10 @@ const Login = props => {
         })
 
         Sentry.setUser({ email: email })
+
+        posthog.identify(email, {
+          email: email,
+        })
 
         setProgressStatus(false)
         setAuthUser(response)
