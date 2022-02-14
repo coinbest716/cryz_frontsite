@@ -151,9 +151,7 @@ const VideoChat = props => {
         setShowCloseBtn(true)
         setRoom(room)
       })
-      .catch(err => {
-        console.log('get room error', err)
-      })
+      .catch(err => {})
   }
 
   const handleLogout = () => {

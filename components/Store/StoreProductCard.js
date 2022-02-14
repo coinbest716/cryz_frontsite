@@ -8,7 +8,6 @@ import styles from './StoreProductCard.module.scss'
 
 const StoreProductCard = props => {
   const { item, handleClickProduct, viewport } = props
-  console.log('viewport', viewport)
 
   return viewport !== 'mobile' ? (
     <div className="cursor-pointer" style={{ maxWidth: '370px' }} onClick={() => handleClickProduct(item.id)}>

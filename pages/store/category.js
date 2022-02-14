@@ -160,9 +160,7 @@ const Category = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onSelectCategory = id => {
-    console.log('Selected id', id)
-  }
+  const onSelectCategory = id => {}
 
   const handleClickProduct = id => {
     router.push({
