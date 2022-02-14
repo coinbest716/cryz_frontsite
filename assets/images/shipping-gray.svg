@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.114 21">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #7D8F8E;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <g id="Group_3" data-name="Group 3" transform="translate(0 0.5)">
+    <path id="Path" class="cls-1" d="M0,0H15.583V17.143H0V12.154" transform="translate(2.916)" />
+    <path id="Path_3" data-name="Path 3" class="cls-1" d="M0,.476H8.646" transform="translate(0 8.571)" />
+    <path id="Path_3_Copy" data-name="Path 3 Copy" class="cls-1" d="M0,.476H8.646" transform="translate(2.857 3.81)" />
+    <path id="Path_4" data-name="Path 4" class="cls-1" d="M0,0H6.344L8.091,4.762h3.023v8.1H0" transform="translate(18.5 4.286)" />
+    <path id="Path_5" data-name="Path 5" class="cls-1" d="M0,0V4.762H4.863" transform="translate(21.728 4.286)" />
+    <circle id="Oval" class="cls-1" cx="2.857" cy="2.857" r="2.857" transform="translate(7.619 14.286)" />
+    <circle id="Oval_Copy" data-name="Oval Copy" class="cls-1" cx="2.857" cy="2.857" r="2.857" transform="translate(20.952 14.286)" />
+  </g>
+</svg>
