@@ -15,9 +15,9 @@ import ImageGallery from 'react-image-gallery'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './detail.module.scss'
+import styles from './mobile-detail.module.scss'
 
-const Detail = props => {
+const MobileDetail = props => {
   const router = useRouter()
   // loading part ###########################
   const dispatch = useDispatch()
@@ -63,7 +63,7 @@ const Detail = props => {
 
   // handlers
   useEffect(() => {
-    if (viewport !== 'desktop') {
+    if (viewport !== 'mobile') {
       router.push('/store')
     }
   }, [viewport])
@@ -82,7 +82,7 @@ const Detail = props => {
 
   return (
     <>
-      {viewport === 'desktop' && (
+      {viewport === 'mobile' && (
         <div className={'flex flex-wrap justify-center'}>
           <div className={styles.container}>
             <div className={globalStyles.container + ' my-20'}>
@@ -135,8 +135,8 @@ const Detail = props => {
   )
 }
 
-export default Detail
+export default MobileDetail
 
-Detail.getLayout = function getLayout(page) {
+MobileDetail.getLayout = function getLayout(page) {
   return <PrimaryLayout>{page}</PrimaryLayout>
 }

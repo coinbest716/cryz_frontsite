@@ -111,7 +111,7 @@ const Store = props => {
 
   const handleClickProduct = id => {
     router.push({
-      pathname: '/store/detail',
+      pathname: viewport === 'mobile' ? '/store/mobile-detail' : '/store/detail',
       query: {
         id: id,
       },
