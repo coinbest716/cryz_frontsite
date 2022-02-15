@@ -54,8 +54,53 @@
 }
 
 .mobileCategoryArea {
-  width: 100%;
-  height: auto;
-  border: 1px solid #7d8f8e;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f3f3f3;
+  z-index: 9999;
+}
+.mobileTitleArea {
   background-color: #ffffff;
+  padding: 50px 16px 16px 16px;
+}
+
+.mobileTitle {
+  font-family: Montserrat;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: -0.41px;
+}
+
+.mobileChip {
+  border-radius: 23.5px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
+
+  color: #7e7d7d;
+  font-family: Montserrat;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: -0.08px;
+  margin: 10px 4px;
+  padding: 4px 16px;
+  cursor: pointer;
+  &:hover {
+    background-color: #7d8f8e;
+    color: #ffffff;
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: -0.08px;
+  }
 }

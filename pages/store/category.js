@@ -198,13 +198,23 @@ const Category = props => {
               {moreToggle ? (
                 <>
                   {someProducts.map((item, index) => (
-                    <StoreProductCard item={item} key={index} handleClickProduct={handleClickProduct} />
+                    <StoreProductCard
+                      item={item}
+                      key={index}
+                      handleClickProduct={handleClickProduct}
+                      viewport={viewport}
+                    />
                   ))}
                 </>
               ) : (
                 <>
                   {products.map((item, index) => (
-                    <StoreProductCard item={item} key={index} handleClickProduct={handleClickProduct} />
+                    <StoreProductCard
+                      item={item}
+                      key={index}
+                      handleClickProduct={handleClickProduct}
+                      viewport={viewport}
+                    />
                   ))}
                 </>
               )}
@@ -243,13 +253,23 @@ const Category = props => {
                 {moreToggle ? (
                   <>
                     {someProducts.map((item, index) => (
-                      <StoreProductCard item={item} key={index} handleClickProduct={handleClickProduct} />
+                      <StoreProductCard
+                        item={item}
+                        key={index}
+                        handleClickProduct={handleClickProduct}
+                        viewport={viewport}
+                      />
                     ))}
                   </>
                 ) : (
                   <>
                     {products.map((item, index) => (
-                      <StoreProductCard item={item} key={index} handleClickProduct={handleClickProduct} />
+                      <StoreProductCard
+                        item={item}
+                        key={index}
+                        handleClickProduct={handleClickProduct}
+                        viewport={viewport}
+                      />
                     ))}
                   </>
                 )}
