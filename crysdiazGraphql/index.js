@@ -76,6 +76,9 @@ import {
 // nutrition part
 import { GetNutritionsForDashboard, GetNutritionPurchaseStatus } from './dashboard/nutrition.gql'
 
+// store part
+import { GetProductById, FilterProducts, CreateProduct, UpdateProduct, DeleteProduct } from './Products.gql'
+
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
 
@@ -174,6 +177,10 @@ export default {
     getNutritionsForDashboard: GetNutritionsForDashboard,
     getNutritionPurchaseStatus: GetNutritionPurchaseStatus,
 
+    // store part
+    getProductById: GetProductById,
+    filterProducts: FilterProducts,
+
     //purchase
     checkoutVerify: CheckoutVerify,
 
@@ -196,6 +203,11 @@ export default {
     // message part
     createMessageByDashboard: CreateMessageByDashboard,
     deleteMessageByDashboard: DeleteMessageByDashboard,
+
+    // store part
+    createProduct: CreateProduct,
+    updateProduct: UpdateProduct,
+    deleteProduct: DeleteProduct,
 
     // purchase
     Checkout: Checkout,
