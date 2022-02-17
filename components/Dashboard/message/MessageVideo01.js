@@ -1,12 +1,12 @@
 import React from 'react'
 
 // styles
-import styles from 'components/dashboard/message/MessageVideo02.module.scss'
+import styles from 'components/Dashboard/message/MessageVideo01.module.scss'
 
-const MessageVideo02 = props => {
+const MessageVideo01 = props => {
   const { message } = props
   return (
-    <div className={'w-full py-5 px-7 flex justify-start'}>
+    <div className={'w-full py-5 px-7 flex justify-end'}>
       <div className={styles.container}>
         <video width={167} controls>
           <source src={message.attachment[0].path} type="video/mp4" />
@@ -18,4 +18,4 @@ const MessageVideo02 = props => {
   )
 }
 
-export default MessageVideo02
+export default MessageVideo01

@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 // custom components
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NotificationButton from 'components/dashboard/NotificationButton'
+import NotificationButton from 'components/Dashboard/NotificationButton'
 import AcademyDashboardCard from 'components/Academy/AcademyDashboardCard'
 import StartclassButton from 'components/components/StartClassButton'
 

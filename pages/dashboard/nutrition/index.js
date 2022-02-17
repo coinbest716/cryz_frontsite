@@ -6,8 +6,8 @@ import Image from 'next/image'
 import { useDispatch } from 'react-redux'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
-import NutritionItem from 'components/dashboard/nutrition/NutritionItem'
-import MobileNutritionItem from 'components/dashboard/nutrition/MobileNutritionItem'
+import NutritionItem from 'components/Dashboard/nutrition/NutritionItem'
+import MobileNutritionItem from 'components/Dashboard/nutrition/MobileNutritionItem'
 
 import moment from 'moment'
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -15,8 +15,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-calendar/dist/Calendar.css'
 const MonthCalendar = dynamic(() => import('react-calendar'), { ssr: false })
 
-import DashboardButton from 'components/dashboard/DashboardButton'
-import NotificationButton from 'components/dashboard/NotificationButton'
+import DashboardButton from 'components/Dashboard/DashboardButton'
+import NotificationButton from 'components/Dashboard/NotificationButton'
 
 import plansIcon from 'assets/images/plans.svg'
 
