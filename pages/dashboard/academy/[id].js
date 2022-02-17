@@ -13,7 +13,7 @@ import SecondaryLayout from 'components/Layout/SecondaryLayout'
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import NotificationButton from 'components/Dashboard/NotificationButton'
 import StartclassButton from 'components/components/StartClassButton'
-import AcademyTable from 'components/Dashboard/academy/AcademyTable'
+import AcademyTable from 'components/Dashboard/Academy/AcademyTable'
 
 // third party components
 import moment from 'moment'
