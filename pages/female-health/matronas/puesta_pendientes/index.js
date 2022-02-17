@@ -54,7 +54,7 @@ const Nutrition = props => {
 
   const handleClickBuyPersion = () => {
     router.push({
-      pathname: '/female-health/matronas/visita_postparto/servicios/personal',
+      pathname: '/female-health/matronas/puesta_pendientes/servicios/personal',
       query: {
         discipline_id: 3,
         service_type: 'personal',
@@ -65,7 +65,7 @@ const Nutrition = props => {
   }
   const handleClickBuyPlan = () => {
     router.push({
-      pathname: '/female-health/matronas/visita_postparto/servicios/online',
+      pathname: '/female-health/matronas/puesta_pendientes/servicios/online',
       query: {
         discipline_id: 3,
         service_type: 'online',
@@ -76,7 +76,7 @@ const Nutrition = props => {
   }
   const handleClickBuyStreaming = () => {
     router.push({
-      pathname: '/female-health/matronas/visita_postparto/servicios/streaming',
+      pathname: '/female-health/matronas/puesta_pendientes/servicios/streaming',
       query: {
         discipline_id: 3,
         service_type: 'streaming',
