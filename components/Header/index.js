@@ -97,11 +97,11 @@ const Header = props => {
         {
           title: 'Contacto',
           link: '/contact',
-        }
-        //{
-        //  title: 'Tienda',
-        //  link: '/store',
+        },
         //}
+        //  link: '/store',
+        //  title: 'Tienda',
+        //{
       )
       setMenus(menu)
     }

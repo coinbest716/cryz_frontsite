@@ -54,7 +54,7 @@ const BuyOneToOne = props => {
       service_type: 'personal',
       web_name: '2 Sesiones de lactancia ',
       description: 'Sesión 1,30 h antes del parto + 1 hora después del parto en el centro',
-      price: '99',
+      price: '200',
     },
     {
       id: 107,
@@ -89,7 +89,7 @@ const BuyOneToOne = props => {
       service_type: 'personal',
       web_name: '2 sesiones de lactancia ',
       description: 'A domicilio. Sesión 1,30 h antes del parto + sesión 1 hora después del parto ',
-      price: '120',
+      price: '240',
     },
     {
       id: 109,

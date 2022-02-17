@@ -53,6 +53,9 @@ const Store = props => {
   const { viewport } = props
   const [category, setCategory] = useState(-1)
   const [products, setProducts] = useState([])
+  const [getStoreConfiguration, { data: storeConfigurationData, loading: storeConfigurationDataLoading }] =
+    useLazyQuery(graphql.queries.getStoreConfiguration)
+  const [storeConfiguration, setStoreConfiguration] = useState({})
   const [getFilterStoreCategories, { data: categoryData, loading: cateogryDataLoading }] = useLazyQuery(
     graphql.queries.filterStoreCategories
   )
@@ -106,19 +109,26 @@ const Store = props => {
 
   // handlers
   useEffect(() => {
+    getStoreConfiguration()
     getFilterStoreCategories({
       variables: {
         name: '',
         activate: 'ALL',
       },
     })
-  }, [getFilterStoreCategories])
+  }, [getStoreConfiguration, getFilterStoreCategories])
 
   useEffect(() => {
     setProducts(newProductList)
     setBrandsList([Brand01, Brand02, Brand03, Brand04])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (storeConfigurationData && storeConfigurationData.getStoreConfiguration) {
+      setStoreConfiguration(storeConfigurationData.getStoreConfiguration)
+    }
+  }, [storeConfigurationData, storeConfigurationDataLoading])
 
   useEffect(() => {
     if (categoryData && categoryData.filterStoreCategories) {
@@ -205,7 +215,7 @@ const Store = props => {
               </div>
             </div>
             <div className="flex flex-wrap justify-between items-center mb-12">
-              <DeliveryInfo viewport={viewport} />
+              <DeliveryInfo data={storeConfiguration} viewport={viewport} />
             </div>
           </div>
         </div>
@@ -215,7 +225,7 @@ const Store = props => {
             <div className={styles.subContainer}>
               <div className={globalStyles.container}>
                 <div className="flex flex-wrap justify-between items-center">
-                  <DeliveryInfo viewport={viewport} />
+                  <DeliveryInfo data={storeConfiguration} viewport={viewport} />
                 </div>
               </div>
             </div>
@@ -223,8 +233,10 @@ const Store = props => {
           <div className={styles.container}>
             <div className={globalStyles.container + ' mt-8 mb-20'}>
               <div className="relative flex justify-center">
-                <Image src={'/images/team-03.png'} alt="" width={1108} height={310} />
-                <div className={'absolute top-11 left-8 ' + styles.mainImageTitle}>Descubre nuestras categorias</div>
+                {JSON.stringify(storeConfiguration) !== JSON.stringify({}) && (
+                  <Image src={storeConfiguration.image} alt="" width={1108} height={310} objectFit="cover" />
+                )}
+                <div className={'absolute top-11 left-8 ' + styles.mainImageTitle}>{storeConfiguration.title}</div>
                 <div className="absolute -bottom-4" style={{ width: '300px' }}>
                   <Selecter
                     title="Material Deportivo"

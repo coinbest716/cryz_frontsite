@@ -61,7 +61,7 @@ const BuyOneToOne = props => {
       service_type: 'streaming',
       web_name: '2 sesiones de lactancia ',
       description: 'Sesión 1,30 h antes del parto + 1 hora después del parto en streaming',
-      price: '85,50',
+      price: '170',
     },
     {
       id: 113,
