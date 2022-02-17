@@ -48,14 +48,14 @@ const BuyOneToOne = props => {
       service_type: 'personal',
       web_name: '1 sesión ',
       description: 'En el centro',
-      price: '99',
+      price: '110',
     },
     {
       id: 131,
       service_type: 'personal',
       web_name: '1 sesión',
       description: 'A domicilio ',
-      price: '120',
+      price: '150',
     },
   ]
 
