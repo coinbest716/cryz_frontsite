@@ -12,9 +12,6 @@ const Selecter = props => {
       value={value}
       className={'cursor-pointer flex justify-start items-center ' + styles.select}
     >
-      <option value="" style={{ display: 'none' }}>
-        {title}
-      </option>
       {list.map((item, index) => (
         <option key={index} value={item.id}>
           {item.label}
