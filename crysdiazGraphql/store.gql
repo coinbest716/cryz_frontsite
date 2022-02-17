@@ -9,6 +9,17 @@ query FilterStoreCategories($name: String, $activate: String) {
   }
 }
 
+query GetStoreConfiguration {
+  getStoreConfiguration {
+    id
+    ship_type
+    ship_hour
+    ship_data
+    title
+    image
+  }
+}
+
 query GetProductById($product_id: Int) {
   getProductById(product_id: $product_id) {
     id

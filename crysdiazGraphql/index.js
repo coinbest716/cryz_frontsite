@@ -78,13 +78,14 @@ import { GetNutritionsForDashboard, GetNutritionPurchaseStatus } from './dashboa
 
 // store part
 import {
+  GetStoreConfiguration,
   FilterStoreCategories,
   GetProductById,
   FilterProducts,
   CreateProduct,
   UpdateProduct,
   DeleteProduct,
-} from './products.gql'
+} from './store.gql'
 
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
@@ -185,6 +186,7 @@ export default {
     getNutritionPurchaseStatus: GetNutritionPurchaseStatus,
 
     // store part
+    getStoreConfiguration: GetStoreConfiguration,
     filterStoreCategories: FilterStoreCategories,
     getProductById: GetProductById,
     filterProducts: FilterProducts,
