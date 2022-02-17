@@ -47,7 +47,7 @@ const BuyOneToOne = props => {
       service_type: 'streaming',
       web_name: '1 sesión ',
       description: 'Duración: 1,30h ',
-      price: '80',
+      price: '90',
     },
   ]
 
