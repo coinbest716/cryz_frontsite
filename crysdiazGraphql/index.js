@@ -77,7 +77,14 @@ import {
 import { GetNutritionsForDashboard, GetNutritionPurchaseStatus } from './dashboard/nutrition.gql'
 
 // store part
-import { GetProductById, FilterProducts, CreateProduct, UpdateProduct, DeleteProduct } from './Products.gql'
+import {
+  FilterStoreCategories,
+  GetProductById,
+  FilterProducts,
+  CreateProduct,
+  UpdateProduct,
+  DeleteProduct,
+} from './products.gql'
 
 // purchase
 import { Checkout, CheckoutVerify } from './purchase.gql'
@@ -178,6 +185,7 @@ export default {
     getNutritionPurchaseStatus: GetNutritionPurchaseStatus,
 
     // store part
+    filterStoreCategories: FilterStoreCategories,
     getProductById: GetProductById,
     filterProducts: FilterProducts,
 

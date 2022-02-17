@@ -1,3 +1,14 @@
+query FilterStoreCategories($name: String, $activate: String) {
+  filterStoreCategories(name: $name, activate: $activate) {
+    id
+    name
+    logo
+    products
+    date
+    activate
+  }
+}
+
 query GetProductById($product_id: Int) {
   getProductById(product_id: $product_id) {
     id
