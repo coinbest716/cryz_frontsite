@@ -27,6 +27,10 @@ import Brand02 from 'assets/images/brand2.svg'
 import Brand03 from 'assets/images/brand3.svg'
 import Brand04 from 'assets/images/brand4.svg'
 
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
+
 const Store = props => {
   // loading part ###########################
   const dispatch = useDispatch()
@@ -49,12 +53,10 @@ const Store = props => {
   const { viewport } = props
   const [category, setCategory] = useState(-1)
   const [products, setProducts] = useState([])
-  const categoryList = [
-    { id: 0, label: 'Material Deportivo' },
-    { id: 1, label: 'Accessorios' },
-    { id: 2, label: 'Salud y Belleza' },
-    { id: 3, label: 'Productos Bio' },
-  ]
+  const [getFilterStoreCategories, { data: categoryData, loading: cateogryDataLoading }] = useLazyQuery(
+    graphql.queries.filterStoreCategories
+  )
+  const [categoryList, setCategoryList] = useState([])
   const [brandsList, setBrandsList] = useState([])
 
   const newProductList = [
@@ -104,10 +106,36 @@ const Store = props => {
 
   // handlers
   useEffect(() => {
+    getFilterStoreCategories({
+      variables: {
+        name: '',
+        activate: 'ALL',
+      },
+    })
+  }, [getFilterStoreCategories])
+
+  useEffect(() => {
     setProducts(newProductList)
     setBrandsList([Brand01, Brand02, Brand03, Brand04])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (categoryData && categoryData.filterStoreCategories) {
+      let temp = []
+      temp = JSON.parse(JSON.stringify(categoryData.filterStoreCategories))
+      let array = []
+      temp.map((item, index) => {
+        let object = {}
+        if (item.activate === true) {
+          object.id = item.id
+          object.label = item.name
+          array.push(object)
+        }
+      })
+      setCategoryList(array)
+    }
+  }, [categoryData, cateogryDataLoading])
 
   const handleClickProduct = id => {
     router.push({
