@@ -47,7 +47,7 @@ const BuyOneToOne = props => {
       service_type: 'personal',
       web_name: '1 Sesión fisioterapia ',
       description: 'En el centro ',
-      price: '55',
+      price: '65',
     },
     {
       id: 108,
