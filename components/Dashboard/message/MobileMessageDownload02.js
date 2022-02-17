@@ -4,12 +4,12 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from 'components/dashboard/message/MessageDownload02.module.scss'
+import styles from 'components/Dashboard/message/MobileMessageDownload02.module.scss'
 
 // images and icons
 import DownloadIcon from 'assets/images/download-gray.svg'
 
-const MessageDownload02 = props => {
+const MobileMessageDownload02 = props => {
   const { message } = props
 
   const download = (fileUrl, fileName) => {
@@ -36,4 +36,4 @@ const MessageDownload02 = props => {
   )
 }
 
-export default MessageDownload02
+export default MobileMessageDownload02

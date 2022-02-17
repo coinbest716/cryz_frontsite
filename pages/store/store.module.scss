@@ -11,27 +11,9 @@
   display: flex;
   justify-content: center;
 }
-
-.m_container {
-  width: 100%;
-  background-color: #ffffff;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-top: 80px;
-  min-height: calc(100vh - 177px);
-}
 .header {
   border: 1px solid #7d8f8e;
   background-color: #7d8f8e;
-}
-.headerTitle {
-  color: #ffffff;
-  font-family: Montserrat;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 18px;
-  text-align: center;
 }
 .mainImageTitle {
   color: #ffffff;
@@ -77,4 +59,13 @@
   letter-spacing: 0;
   line-height: 52px;
   text-align: center;
+}
+
+// mobile part
+.mobileTitle {
+  color: #78908e;
+  font-family: Montserrat;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 22px;
 }

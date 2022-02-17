@@ -10,12 +10,12 @@ import { useRouter } from 'next/router'
 // custom components
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 import SecondaryLayout from 'components/Layout/SecondaryLayout'
-// import Profile from 'components/dashboard/Profile'
-import NotificationButton from 'components/dashboard/NotificationButton'
-import CommonButton from 'components/dashboard/CommonButton'
+// import Profile from 'components/Dashboard/Profile'
+import NotificationButton from 'components/Dashboard/NotificationButton'
+import CommonButton from 'components/Dashboard/CommonButton'
 import Chip from 'components/components/Chip'
-import ComprasButton from 'components/dashboard/compras/ComprasButton'
-import ComprasDetailItem from 'components/dashboard/compras/ComprasDetailItem'
+import ComprasButton from 'components/Dashboard/compras/ComprasButton'
+import ComprasDetailItem from 'components/Dashboard/compras/ComprasDetailItem'
 
 import ArrowLeftWhite from 'public/images/arrow-left-white.svg'
 // styles

@@ -12,6 +12,7 @@ import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import StoreProductCard from 'components/Store/StoreProductCard'
 import StorePregress from 'components/Store/StorePregress'
 import CategoryFilter from 'components/Store/CategoryFilter'
+import BackButton from 'components/components/BackButton'
 
 // graphql
 import { useMutation, useLazyQuery } from '@apollo/client'
@@ -150,23 +151,21 @@ const Category = props => {
 
   useEffect(() => {
     setProducts(newProduct)
-    if (newProduct.length > 9) {
-      setShowCount(9)
+    if (newProduct.length > (viewport === 'mobile' ? 6 : 9)) {
+      setShowCount(viewport === 'mobile' ? 6 : 9)
       setMoreToggle(true)
-      setSomeProducts(newProduct.slice(0, 9))
+      setSomeProducts(newProduct.slice(0, viewport === 'mobile' ? 6 : 9))
     } else if (newProduct.length >= 0) {
       setShowCount(newProduct.length)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onSelectCategory = id => {
-    console.log('Selected id', id)
-  }
+  const onSelectCategory = id => {}
 
   const handleClickProduct = id => {
     router.push({
-      pathname: '/store/detail',
+      pathname: viewport === 'mobile' ? '/store/mobile-detail' : '/store/detail',
       query: {
         id: id,
       },
@@ -181,7 +180,59 @@ const Category = props => {
   return (
     <>
       {viewport === 'mobile' ? (
-        <div className={styles.m_container}>Mobile Category Page</div>
+        <div className="pt-20">
+          <div className={globalStyles.container}>
+            <div className="mt-4">
+              <BackButton viewport={viewport} />
+            </div>
+            <div className={'mt-4 ' + styles.mobileTitle}>Material deportivo</div>
+            <div className="w-full flex justify-center mt-4">
+              <CategoryFilter
+                categoryList={categoryList}
+                brandList={brandList}
+                onClick={id => onSelectCategory(id)}
+                viewport={viewport}
+              />
+            </div>
+            <div className={'grid grid-cols-2 gap-4 flex justify-center mt-4'}>
+              {moreToggle ? (
+                <>
+                  {someProducts.map((item, index) => (
+                    <StoreProductCard
+                      item={item}
+                      key={index}
+                      handleClickProduct={handleClickProduct}
+                      viewport={viewport}
+                    />
+                  ))}
+                </>
+              ) : (
+                <>
+                  {products.map((item, index) => (
+                    <StoreProductCard
+                      item={item}
+                      key={index}
+                      handleClickProduct={handleClickProduct}
+                      viewport={viewport}
+                    />
+                  ))}
+                </>
+              )}
+            </div>
+            <div className="flex justify-center mt-8">
+              <StorePregress currentCount={showCount} allCount={products.length} />
+            </div>
+            {moreToggle ? (
+              <div className="flex justify-center my-4 cursor-pointer">
+                <div className={styles.moreButton} onClick={handleClickMore}>
+                  Cargar mas
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
       ) : (
         <div className={'flex flex-wrap justify-center'}>
           <div className={globalStyles.container + ' my-20'}>
@@ -202,13 +253,23 @@ const Category = props => {
                 {moreToggle ? (
                   <>
                     {someProducts.map((item, index) => (
-                      <StoreProductCard item={item} key={index} handleClickProduct={handleClickProduct} />
+                      <StoreProductCard
+                        item={item}
+                        key={index}
+                        handleClickProduct={handleClickProduct}
+                        viewport={viewport}
+                      />
                     ))}
                   </>
                 ) : (
                   <>
                     {products.map((item, index) => (
-                      <StoreProductCard item={item} key={index} handleClickProduct={handleClickProduct} />
+                      <StoreProductCard
+                        item={item}
+                        key={index}
+                        handleClickProduct={handleClickProduct}
+                        viewport={viewport}
+                      />
                     ))}
                   </>
                 )}

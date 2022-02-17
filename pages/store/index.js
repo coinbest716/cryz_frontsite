@@ -12,6 +12,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loa
 import { Carousel } from 'react-responsive-carousel'
 
 // custom components
+import DeliveryInfo from 'components/Store/DeliveryInfo'
 import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import StoreProductCard from 'components/Store/StoreProductCard'
 import Selecter from 'components/Store/Selecter'
@@ -25,6 +26,10 @@ import Brand01 from 'assets/images/brand1.svg'
 import Brand02 from 'assets/images/brand2.svg'
 import Brand03 from 'assets/images/brand3.svg'
 import Brand04 from 'assets/images/brand4.svg'
+
+// graphql
+import { useLazyQuery } from '@apollo/client'
+import graphql from 'crysdiazGraphql'
 
 const Store = props => {
   // loading part ###########################
@@ -48,12 +53,10 @@ const Store = props => {
   const { viewport } = props
   const [category, setCategory] = useState(-1)
   const [products, setProducts] = useState([])
-  const categoryList = [
-    { id: 0, label: 'Material Deportivo' },
-    { id: 1, label: 'Accessorios' },
-    { id: 2, label: 'Salud y Belleza' },
-    { id: 3, label: 'Productos Bio' },
-  ]
+  const [getFilterStoreCategories, { data: categoryData, loading: cateogryDataLoading }] = useLazyQuery(
+    graphql.queries.filterStoreCategories
+  )
+  const [categoryList, setCategoryList] = useState([])
   const [brandsList, setBrandsList] = useState([])
 
   const newProductList = [
@@ -103,14 +106,40 @@ const Store = props => {
 
   // handlers
   useEffect(() => {
+    getFilterStoreCategories({
+      variables: {
+        name: '',
+        activate: 'ALL',
+      },
+    })
+  }, [getFilterStoreCategories])
+
+  useEffect(() => {
     setProducts(newProductList)
     setBrandsList([Brand01, Brand02, Brand03, Brand04])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    if (categoryData && categoryData.filterStoreCategories) {
+      let temp = []
+      temp = JSON.parse(JSON.stringify(categoryData.filterStoreCategories))
+      let array = []
+      temp.map((item, index) => {
+        let object = {}
+        if (item.activate === true) {
+          object.id = item.id
+          object.label = item.name
+          array.push(object)
+        }
+      })
+      setCategoryList(array)
+    }
+  }, [categoryData, cateogryDataLoading])
+
   const handleClickProduct = id => {
     router.push({
-      pathname: '/store/detail',
+      pathname: viewport === 'mobile' ? '/store/mobile-detail' : '/store/detail',
       query: {
         id: id,
       },
@@ -130,8 +159,55 @@ const Store = props => {
   return (
     <>
       {viewport === 'mobile' ? (
-        <div className={styles.m_container}>
-          <div className="w-full p-4 my-5">Mobile Store Page</div>
+        <div className="pt-20">
+          <div className={globalStyles.container}>
+            <div className="mt-8">
+              <Selecter
+                title="Material Deportivo"
+                list={categoryList}
+                value={category}
+                onChange={event => handleChangeCategory(event)}
+              />
+            </div>
+            <div className={'mt-7 ' + styles.mobileTitle}>Novedades</div>
+            <div className={'grid grid-cols-2 gap-8 flex justify-center mt-8'}>
+              {products.map((item, index) => (
+                <StoreProductCard
+                  item={item}
+                  key={index}
+                  handleClickProduct={id => handleClickProduct(id)}
+                  viewport={viewport}
+                />
+              ))}
+            </div>
+            <div className="mt-16 mb-10">
+              <div className={styles.brandTitle}>Nuestras Marcas</div>
+              <div className="w-full flex flex-wrap justify-around items-center my-6">
+                <Carousel
+                  showArrows={true}
+                  showThumbs={false}
+                  autoPlay={true}
+                  stopOnHover={true}
+                  showStatus={false}
+                  showIndicators={true}
+                  infiniteLoop={true}
+                  centerMode={true}
+                  centerSlidePercentage={20}
+                  interval={2500}
+                  className={'w-full'}
+                >
+                  {brandsList?.map((item, index) => (
+                    <div key={index}>
+                      <Image src={item} alt="" width={100} height={40} />
+                    </div>
+                  ))}
+                </Carousel>
+              </div>
+            </div>
+            <div className="flex flex-wrap justify-between items-center mb-12">
+              <DeliveryInfo viewport={viewport} />
+            </div>
+          </div>
         </div>
       ) : (
         <div className="pt-20">
@@ -139,18 +215,7 @@ const Store = props => {
             <div className={styles.subContainer}>
               <div className={globalStyles.container}>
                 <div className="flex flex-wrap justify-between items-center">
-                  <div className="flex justify-start items-center">
-                    <Image src={'/images/product-2.svg'} alt="" width={23} height={20} />
-                    <div className={styles.headerTitle + ' ml-3'}>Calidad garantizada</div>
-                  </div>
-                  <div className="flex justify-start items-center">
-                    <Image src={'/images/product-2.svg'} alt="" width={23} height={20} />
-                    <div className={styles.headerTitle + ' ml-3'}>Envio 48 / 72 horas</div>
-                  </div>
-                  <div className="flex justify-start items-center">
-                    <Image src={'/images/product-3.svg'} alt="" width={23} height={20} />
-                    <div className={styles.headerTitle + ' ml-3'}>Devolución 30 dias</div>
-                  </div>
+                  <DeliveryInfo viewport={viewport} />
                 </div>
               </div>
             </div>

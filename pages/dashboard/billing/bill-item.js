@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 // custom components
 import MobileDashboardLayout from 'components/Layout/MobileDashboardLayout'
 
-import ProfileCommonText from 'components/dashboard/profile/ProfileCommonText'
+import ProfileCommonText from 'components/Dashboard/profile/ProfileCommonText'
 
 import { useMutation, useLazyQuery } from '@apollo/client'
 import graphql from 'crysdiazGraphql'

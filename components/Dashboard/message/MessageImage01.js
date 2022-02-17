@@ -4,12 +4,12 @@ import React from 'react'
 import Image from 'next/image'
 
 // styles
-import styles from 'components/dashboard/message/MobileMessageImage02.module.scss'
+import styles from 'components/Dashboard/message/MessageImage01.module.scss'
 
 // images and icons
 import DownloadIcon from 'assets/images/download-gray.svg'
 
-const MobileMessageImage02 = props => {
+const MessageImage01 = props => {
   const { message } = props
 
   const download = (fileUrl, fileName) => {
@@ -20,7 +20,7 @@ const MobileMessageImage02 = props => {
   }
 
   return (
-    <div className={'w-full py-5 px-7 flex justify-start'}>
+    <div className={'w-full py-5 px-7 flex justify-end'}>
       <div className={'relative inline-grid'}>
         <Image src={message.attachment[0].path} alt={''} width={125} height={101} className={styles.container} />
         <div className={styles.download}>
@@ -36,4 +36,4 @@ const MobileMessageImage02 = props => {
   )
 }
 
-export default MobileMessageImage02
+export default MessageImage01

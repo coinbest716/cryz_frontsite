@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 
 // custom components
-import PrimaryLayout from 'components/Layout/PrimaryLayout'
 import BackButton from 'components/components/BackButton'
 import ProductCounter from 'components/Store/ProductCounter'
 import Selecter from 'components/Store/Selecter'
@@ -15,9 +14,9 @@ import ImageGallery from 'react-image-gallery'
 
 // styles
 import globalStyles from 'styles/GlobalStyles.module.scss'
-import styles from './detail.module.scss'
+import styles from './mobile-detail.module.scss'
 
-const Detail = props => {
+const MobileDetail = props => {
   const router = useRouter()
   // loading part ###########################
   const dispatch = useDispatch()
@@ -63,7 +62,7 @@ const Detail = props => {
 
   // handlers
   useEffect(() => {
-    if (viewport !== 'desktop') {
+    if (viewport !== 'mobile') {
       router.push('/store')
     }
   }, [viewport])
@@ -82,27 +81,26 @@ const Detail = props => {
 
   return (
     <>
-      {viewport === 'desktop' && (
+      {viewport === 'mobile' && (
         <div className={'flex flex-wrap justify-center'}>
           <div className={styles.container}>
-            <div className={globalStyles.container + ' my-20'}>
-              <div className={'mt-9'}>
+            <div className={'relative ' + globalStyles.container}>
+              <div className={'absolute top-4 z-10'}>
                 <BackButton viewport={viewport} />
               </div>
-              <div className={'grid grid-cols-12 gap-8'}>
-                <div className={'col-span-12 sm:col-span-12 md:col-span-7 lg:col-span-7 pt-8'}>
+              <div>
+                <div className="-ml-4 -mr-4">
                   <ImageGallery items={images} />
                 </div>
-                <div className={'col-span-12 sm:col-span-12 md:col-span-5 lg:col-span-5 pt-8'}>
-                  <div className={styles.productRef}>Ref. 34790686</div>
+                <div className={styles.contentContainer}>
+                  <div className="flex justify-between">
+                    <div className={styles.productRef}>Ref. 34790686</div>
+                    <div className={styles.productRef}>NIKE</div>
+                  </div>
                   <div className={'mt-4 ' + styles.productName}>
                     Fashion axe vegan single-origin cotton keffiyeh shoe
                   </div>
-                  <div className="mt-6 flex flex-wrap ">
-                    <div className={'line-through mr-3 ' + styles.orgPrice}>200€</div>
-                    <div className={styles.disPrice}>120€</div>
-                  </div>
-                  <div className={'mt-4 ' + styles.productCompanyName}>NIKE</div>
+
                   <div className="mt-4">
                     <ProductCounter count={productCount} onChange={count => handleChangeCount(count)} />
                   </div>
@@ -112,7 +110,7 @@ const Detail = props => {
                     ultrices sem tincidunt euismod. Fusce rhoncus porttitor velit, eu bibendum nibh aliquet vel. Fusce
                     lorem leo, vehicula at nibh quis, facilisis accumsan turpis.
                   </div>
-                  <div className="w-full mt-4">
+                  <div className="w-full my-8">
                     <Selecter
                       title="Material Deportivo"
                       list={variantList}
@@ -120,14 +118,18 @@ const Detail = props => {
                       onChange={event => handleChangeVariant(event)}
                     />
                   </div>
-                  <div className="w-full mt-8">
-                    <button className={'p-2 px-7 ' + styles.button} onClick={() => {}}>
-                      Comprar
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div className={'w-full h-20 flex justify-between items-center ' + styles.bottomArea}>
+            <div className="flex">
+              <div className={'line-through mr-3 ' + styles.orgPrice}>200€</div>
+              <div className={styles.disPrice}>120€</div>
+            </div>
+            <button className={'p-2 px-7 ' + styles.button} onClick={() => {}}>
+              Comprar
+            </button>
           </div>
         </div>
       )}
@@ -135,8 +137,4 @@ const Detail = props => {
   )
 }
 
-export default Detail
-
-Detail.getLayout = function getLayout(page) {
-  return <PrimaryLayout>{page}</PrimaryLayout>
-}
+export default MobileDetail

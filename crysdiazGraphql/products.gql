@@ -1,0 +1,208 @@
+query FilterStoreCategories($name: String, $activate: String) {
+  filterStoreCategories(name: $name, activate: $activate) {
+    id
+    name
+    logo
+    products
+    date
+    activate
+  }
+}
+
+query GetProductById($product_id: Int) {
+  getProductById(product_id: $product_id) {
+    id
+    name
+    reference
+    sku
+    description
+    variants {
+      variant {
+        id
+        name
+        values {
+          value {
+            id
+            name
+          }
+        }
+      }
+    }
+    categories {
+      category {
+        id
+        name
+      }
+    }
+    labels {
+      label {
+        id
+        name
+      }
+    }
+  }
+}
+
+query FilterProducts($name: String, $reference: String, $category_ids: [Int]) {
+  filterProducts(name: $name, reference: $reference, category_ids: $category_ids) {
+    id
+    name
+    reference
+    sku
+    description
+    variants {
+      variant {
+        id
+        name
+        values {
+          value {
+            id
+            name
+          }
+        }
+      }
+    }
+    categories {
+      category {
+        id
+        name
+      }
+    }
+    labels {
+      label {
+        id
+        name
+      }
+    }
+    brand {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateProduct(
+  $name: String
+  $reference: String
+  $sku: String
+  $description: String
+  $slug: String
+  $weight: String
+  $long: String
+  $width: String
+  $height: String
+  $cost_sin: Int
+  $cost_iva: Int
+  $cost_con: Int
+  $benefit_sin: Int
+  $benefit_iva: Int
+  $benefit_con: Int
+  $shipping_sin: Int
+  $shipping_iva: Int
+  $shipping_con: Int
+  $discount: Int
+  $variant_ids: [Int]
+  $category_ids: [Int]
+  $label_ids: [Int]
+  $brand_id: Int
+) {
+  createProduct(
+    name: $name
+    reference: $reference
+    sku: $sku
+    description: $description
+    slug: $slug
+    weight: $weight
+    long: $long
+    width: $width
+    height: $height
+    cost_sin: $cost_sin
+    cost_iva: $cost_iva
+    cost_con: $cost_con
+    benefit_sin: $benefit_sin
+    benefit_iva: $benefit_iva
+    benefit_con: $benefit_con
+    shipping_sin: $shipping_sin
+    shipping_iva: $shipping_iva
+    shipping_con: $shipping_con
+    discount: $discount
+    variant_ids: $variant_ids
+    category_ids: $category_ids
+    label_ids: $label_ids
+    brand_id: $brand_id
+  ) {
+    id
+    name
+    reference
+    sku
+    description
+  }
+}
+
+mutation UpdateProduct(
+  $name: String
+  $reference: String
+  $sku: String
+  $description: String
+  $slug: String
+  $weight: String
+  $long: String
+  $width: String
+  $height: String
+  $cost_sin: Int
+  $cost_iva: Int
+  $cost_con: Int
+  $benefit_sin: Int
+  $benefit_iva: Int
+  $benefit_con: Int
+  $shipping_sin: Int
+  $shipping_iva: Int
+  $shipping_con: Int
+  $discount: Int
+  $variant_ids: [Int]
+  $category_ids: [Int]
+  $label_ids: [Int]
+  $brand_id: Int
+) {
+  updateProduct(
+    name: $name
+    reference: $reference
+    sku: $sku
+    description: $description
+    slug: $slug
+    weight: $weight
+    long: $long
+    width: $width
+    height: $height
+    cost_sin: $cost_sin
+    cost_iva: $cost_iva
+    cost_con: $cost_con
+    benefit_sin: $benefit_sin
+    benefit_iva: $benefit_iva
+    benefit_con: $benefit_con
+    shipping_sin: $shipping_sin
+    shipping_iva: $shipping_iva
+    shipping_con: $shipping_con
+    discount: $discount
+    variant_ids: $variant_ids
+    category_ids: $category_ids
+    label_ids: $label_ids
+    brand_id: $brand_id
+  ) {
+    id
+    name
+    reference
+    sku
+    description
+  }
+}
+
+mutation DeleteProduct($id: Int) {
+  deleteProduct(id: $id) {
+    id
+    name
+    reference
+    sku
+    description
+  }
+}
